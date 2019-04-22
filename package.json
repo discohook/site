@@ -18,21 +18,21 @@
   },
   "homepage": "https://github.com/jaylineko/discohook#readme",
   "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-transform-runtime": "^7.4.0",
-    "@babel/runtime-corejs2": "^7.4.0",
-    "@types/node": "^11.11.4",
-    "@types/react": "^16.8.8",
-    "@types/react-dom": "^16.8.3",
-    "@types/styled-components": "^4.1.13",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/runtime-corejs2": "^7.4.3",
+    "@types/node": "^11.13.6",
+    "@types/react": "^16.8.14",
+    "@types/react-dom": "^16.8.4",
+    "@types/styled-components": "^4.1.14",
     "babel-plugin-styled-components": "^1.10.0",
     "node-sass": "^4.11.0",
     "parcel-bundler": "^1.12.3",
-    "typescript": "^3.3.4000"
+    "typescript": "^3.4.4"
   }
 }
