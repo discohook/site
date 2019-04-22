@@ -1,0 +1,38 @@
+{
+  "name": "discohook",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel public/index.html",
+    "build": "parcel build public/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaylineko/discohook.git"
+  },
+  "author": "Jay <jaylineko@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaylineko/discohook/issues"
+  },
+  "homepage": "https://github.com/jaylineko/discohook#readme",
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "styled-components": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/runtime-corejs2": "^7.4.0",
+    "@types/node": "^11.11.4",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.3",
+    "@types/styled-components": "^4.1.13",
+    "babel-plugin-styled-components": "^1.10.0",
+    "node-sass": "^4.11.0",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.3.4000"
+  }
+}
