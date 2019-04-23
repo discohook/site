@@ -1,6 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
-import { parseMessage, stringifyMessage } from "../helpers/json"
 import { Message } from "../message/Message"
 import { JsonInput } from "./JsonInput"
 
@@ -15,21 +14,10 @@ const Container = styled.div`
 `
 
 export const Editor = (props: Props) => {
-  const [json, setJson] = useState(stringifyMessage(props.message))
-
   return (
     <Container>
       Editor
-      <JsonInput
-        value={json}
-        onChange={(json) => {
-          setJson(json)
-          try {
-            const parsed = parseMessage(json)
-            props.onChange(parsed)
-          } catch (e) {}
-        }}
-      />
+      <JsonInput message={props.message} onChange={props.onChange} />
     </Container>
   )
 }
