@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Message } from "../message/Message"
+import { Message } from "./Message"
 
 interface Props {
   message: Message
