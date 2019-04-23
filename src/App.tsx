@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Editor } from "./editor/Editor"
 import { GlobalStyle } from "./GlobalStyle"
 import { Message } from "./message/Message"
-import { Preview } from "./preview/Preview"
+import { Preview } from "./message/Preview"
 import { Whitney } from "./Whitney"
 
 const Container = styled.div`
