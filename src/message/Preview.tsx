@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Message } from "./Message"
+import { MessagePreview } from "./MessagePreview"
 
 interface Props {
   message: Message
@@ -14,6 +15,6 @@ const Container = styled.div`
 export const Preview = (props: Props) => (
   <Container>
     Preview
-    <pre>{JSON.stringify(props.message)}</pre>
+    <MessagePreview message={props.message} />
   </Container>
 )
