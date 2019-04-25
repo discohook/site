@@ -34,7 +34,7 @@ const UserName = styled.span`
 
 const BotTag = styled.span`
   position: relative;
-  top: -2px;
+  top: -1px;
 
   padding: 1px 2px;
   border-radius: 3px;
@@ -48,8 +48,6 @@ const BotTag = styled.span`
 `
 
 const Timestamp = styled.span`
-  position: relative;
-  top: -2px;
   margin: 0 0 0 4.8px;
 
   color: rgba(255, 255, 255, 0.2);
