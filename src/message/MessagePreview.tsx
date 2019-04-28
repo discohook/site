@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { Markup } from "./Markup"
 import { Message } from "./Message"
 import { MessageHeader } from "./MessageHeader"
-import console = require("console")
 
 interface Props {
   message: Message
@@ -23,16 +22,11 @@ const MessageBody = styled.div`
   font-size: 15px;
 `
 
-export const MessagePreview = (props: Props) => {
-  console.time("render message")
-  const message = (
-    <Container>
-      <MessageHeader message={props.message} />
-      <MessageBody>
-        {props.message.content && <Markup content={props.message.content} />}
-      </MessageBody>
-    </Container>
-  )
-  console.timeEnd("render message")
-  return message
-}
+export const MessagePreview = (props: Props) => (
+  <Container>
+    <MessageHeader message={props.message} />
+    <MessageBody>
+      {props.message.content && <Markup content={props.message.content} />}
+    </MessageBody>
+  </Container>
+)

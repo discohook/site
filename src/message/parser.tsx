@@ -136,11 +136,15 @@ const rules: Rules = {
   },
 }
 
-const parseMarkdown = parserFor(rules)
+const parseMarkup = parserFor(rules)
 const inlineOutput = outputFor(rules, "react", { inline: true })
 const blockOutput = outputFor(rules, "react", { inline: false })
 
-export const parse = (content: string, inline?: boolean) =>
-  inline
-    ? inlineOutput(parseMarkdown(content))
-    : blockOutput(parseMarkdown(content))
+export const parse = (content: string, inline?: boolean) => {
+  console.time("render markup")
+  const ast = parseMarkup(content)
+  console.timeLog("render markup", "parsed markup", { ast })
+  const output = inline ? inlineOutput(ast) : blockOutput(ast)
+  console.timeEnd("render markup")
+  return output
+}
