@@ -1,14 +1,18 @@
 import React from "react"
-import SimpleMarkdown from "simple-markdown"
+import styled from "styled-components"
+import { parse } from "./parser"
 
 interface Props {
   content: string
+  inline?: boolean
 }
 
+const MarkupContainer = styled.div`
+  a {
+    color: #0096cf;
+  }
+`
+
 export const Markup = (props: Props) => (
-  <div>
-    {SimpleMarkdown.defaultReactOutput(
-      SimpleMarkdown.defaultImplicitParse(props.content),
-    )}
-  </div>
+  <MarkupContainer>{parse(props.content, props.inline)}</MarkupContainer>
 )
