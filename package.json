@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jaylineko/discohook#readme",
   "dependencies": {
+    "highlight.js": "^9.15.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "simple-markdown": "^0.4.4",
@@ -27,6 +28,7 @@
     "@babel/core": "^7.4.3",
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/runtime-corejs2": "^7.4.3",
+    "@types/highlight.js": "^9.12.3",
     "@types/node": "^11.13.6",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",

@@ -12,6 +12,7 @@ import {
   State,
 } from "simple-markdown"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
+import { highlightCode } from "./highlightCode"
 
 type Rules = Record<
   string,
@@ -130,14 +131,13 @@ const blockRules: Rules = {
   },
   codeBlock: {
     order: defaultRules.codeBlock.order,
-    match: anyScopeRegex(/^```(([a-z0-9\-]+?)\n+)?\n*([^]+?)\n*```/),
+    match: anyScopeRegex(/^```([a-z0-9\-]+?\n+)?\n*([^]+?)\n*```/),
     parse: (capture) => ({
-      lang: (capture[2] || "").trim(),
-      content: capture[3] || "",
+      language: (capture[1] || "").trim(),
+      content: capture[2] || "",
     }),
-    react: (node: SingleASTNode, output: Output<any>, state: State) => (
-      <pre key={state.key}>{node.content}</pre>
-    ),
+    react: (node: SingleASTNode, output: Output<any>, state: State) =>
+      highlightCode(node.language, node.content, state.key),
   },
 }
 
