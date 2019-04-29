@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { parse } from "./parser"
+import { parseMarkup } from "./parseMarkup"
 
 interface Props {
   content: string
@@ -47,5 +47,5 @@ const MarkupContainer = styled.div`
 `
 
 export const Markup = (props: Props) => (
-  <MarkupContainer>{parse(props.content, props.inline)}</MarkupContainer>
+  <MarkupContainer>{parseMarkup(props.content, props.inline)}</MarkupContainer>
 )

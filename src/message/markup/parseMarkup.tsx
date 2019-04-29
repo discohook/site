@@ -145,7 +145,7 @@ const parseInline = parserFor(inlineRules, { inline: true })
 const parseBlock = parserFor(blockRules, { inline: true })
 const reactOutput = outputFor({ ...inlineRules, ...blockRules }, "react")
 
-export const parse = (content: string, inline?: boolean) => {
+export const parseMarkup = (content: string, inline?: boolean) => {
   console.time("render markup")
   const ast = inline ? parseInline(content) : parseBlock(content)
   console.timeLog("render markup", "parsed markup", { ast })
