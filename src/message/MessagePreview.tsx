@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Markup } from "./Markup"
+import { Markup } from "./markup/Markup"
 import { Message } from "./Message"
 import { MessageHeader } from "./MessageHeader"
 

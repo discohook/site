@@ -11,7 +11,7 @@ import {
   SingleASTNode,
   State,
 } from "simple-markdown"
-import { emojiToName, getEmojiUrl, nameToEmoji } from "../helpers/emoji"
+import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 
 type Rules = Record<
   string,
