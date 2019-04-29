@@ -102,13 +102,13 @@ const baseRules: Rules = {
   },
   text: {
     ...defaultRules.text,
-    parse: (capture, recurseParse, state) =>
+    parse: (capture, parse, state) =>
       state.nested
         ? { content: capture[0] }
-        : recurseParse(
+        : parse(
             capture[0].replace(
               emojiRegex,
-              (match) => `:${emojiToName[match[0]]}:`,
+              (match) => `:${emojiToName[match]}:`,
             ),
             { ...state, nested: true },
           ),
