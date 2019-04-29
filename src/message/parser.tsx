@@ -1,7 +1,6 @@
 import React, { ReactElement, ReactNode } from "react"
 import {
   anyScopeRegex,
-  blockRegex,
   defaultRules,
   inlineRegex,
   NodeOutput,
@@ -36,9 +35,7 @@ const emojiRegex = new RegExp(
   "g",
 )
 
-const rules: Rules = {
-  newline: defaultRules.newline,
-  paragraph: defaultRules.paragraph,
+const baseRules: Rules = {
   escape: defaultRules.escape,
   link: defaultRules.link,
   autolink: {
@@ -49,26 +46,11 @@ const rules: Rules = {
   strong: defaultRules.strong,
   em: defaultRules.em,
   u: defaultRules.u,
-  br: {
-    ...defaultRules.br,
-    match: anyScopeRegex(/^ *\n/),
-  },
   inlineCode: defaultRules.inlineCode,
   emoticon: {
     order: defaultRules.text.order,
     match: (source) => /^(¯\\_\(ツ\)_\/¯)/.exec(source),
     parse: (capture) => ({ type: "text", content: capture[1] }),
-  },
-  codeBlock: {
-    order: defaultRules.codeBlock.order,
-    match: blockRegex(/^```(([a-z0-9\-]+?)\n+)?\n*([^]+?)\n*```/),
-    parse: (capture) => ({
-      lang: (capture[2] || "").trim(),
-      content: capture[3] || "",
-    }),
-    react: (node: SingleASTNode, output: Output<any>, state: State) => (
-      <pre key={state.key}>{node.content}</pre>
-    ),
   },
   emoji: {
     order: defaultRules.text.order,
@@ -136,15 +118,38 @@ const rules: Rules = {
   },
 }
 
-const parseMarkup = parserFor(rules)
-const inlineOutput = outputFor(rules, "react", { inline: true })
-const blockOutput = outputFor(rules, "react", { inline: false })
+const inlineRules: Rules = { ...baseRules }
+
+const blockRules: Rules = {
+  ...baseRules,
+  newline: defaultRules.newline,
+  paragraph: defaultRules.paragraph,
+  br: {
+    ...defaultRules.br,
+    match: anyScopeRegex(/^ *\n/),
+  },
+  codeBlock: {
+    order: defaultRules.codeBlock.order,
+    match: anyScopeRegex(/^```(([a-z0-9\-]+?)\n+)?\n*([^]+?)\n*```/),
+    parse: (capture) => ({
+      lang: (capture[2] || "").trim(),
+      content: capture[3] || "",
+    }),
+    react: (node: SingleASTNode, output: Output<any>, state: State) => (
+      <pre key={state.key}>{node.content}</pre>
+    ),
+  },
+}
+
+const parseInline = parserFor(inlineRules, { inline: true })
+const parseBlock = parserFor(blockRules, { inline: true })
+const reactOutput = outputFor({ ...inlineRules, ...blockRules }, "react")
 
 export const parse = (content: string, inline?: boolean) => {
   console.time("render markup")
-  const ast = parseMarkup(content)
+  const ast = inline ? parseInline(content) : parseBlock(content)
   console.timeLog("render markup", "parsed markup", { ast })
-  const output = inline ? inlineOutput(ast) : blockOutput(ast)
+  const output = reactOutput(ast)
   console.timeEnd("render markup")
   return output
 }
