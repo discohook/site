@@ -85,8 +85,7 @@ const baseRules: Rules = {
     order: defaultRules.text.order,
     match: anyScopeRegex(/^<:(\w+):(\d+)>/),
     parse: (capture) => ({
-      emojiId: capture[2],
-      name: capture[1],
+      name: `:${capture[1]}:`,
       src: `https://cdn.discordapp.com/emojis/${capture[2]}`,
     }),
     react: (node: SingleASTNode, output: Output<any>, state: State) => (
