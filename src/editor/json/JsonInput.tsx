@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { parseMessage, stringifyMessage } from "../helpers/json"
-import { Message } from "../message/Message"
+import { Message } from "../../message/Message"
+import { parseMessage, stringifyMessage } from "./json"
 
 interface Props {
   message: Message

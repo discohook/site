@@ -1,4 +1,4 @@
-import { Message } from "../message/Message"
+import { Message } from "../../message/Message"
 import { toCamelCase, toSnakeCase } from "./casing"
 
 export const stringifyMessage = (message: Message) => {

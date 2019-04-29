@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Message } from "../message/Message"
-import { JsonInput } from "./JsonInput"
+import { JsonInput } from "./json/JsonInput"
 
 interface Props {
   message: Message

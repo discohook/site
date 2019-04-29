@@ -1,8 +1,8 @@
-import { Author } from "./author/Author"
-import { Field } from "./field/Field"
-import { Footer } from "./footer/Footer"
-import { Image } from "./image/Image"
-import { Thumbnail } from "./thumbnail/Thumbnail"
+import { Author } from "./Author"
+import { Field } from "./Field"
+import { Footer } from "./Footer"
+import { Image } from "./Image"
+import { Thumbnail } from "./Thumbnail"
 
 export interface Embed {
   title?: string
