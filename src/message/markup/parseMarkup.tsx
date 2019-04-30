@@ -154,9 +154,17 @@ export const jumbo = (ast: ASTNode): ASTNode => {
 
   const tree = Array.from(ast)
 
-  if (tree.length > 27) return tree
-  if (tree.some((node) => !["emoji", "customEmoji"].includes(node.type)))
-    return tree
+  const emojiNodes = tree.filter(
+    (node) => !["emoji", "customEmoji"].includes(node.type),
+  )
+
+  const hasText = tree.some(
+    (node) =>
+      !["emoji", "customEmoji"].includes(node.type) &&
+      (typeof node.content !== "string" || node.content.trim() !== ""),
+  )
+
+  if (emojiNodes.length > 27 || hasText) return tree
 
   for (const node of tree) node.jumboable = true
   return tree
