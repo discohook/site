@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { MessageEmbed } from "./embed/MessageEmbed"
 import { Markup } from "./markup/Markup"
 import { Message } from "./Message"
 import { MessageHeader } from "./MessageHeader"
@@ -20,6 +21,7 @@ const MessageBody = styled.div`
 
   color: #dcddde;
   font-size: 15px;
+  line-height: 1.3;
 `
 
 export const MessagePreview = (props: Props) => (
@@ -27,6 +29,10 @@ export const MessagePreview = (props: Props) => (
     <MessageHeader message={props.message} />
     <MessageBody>
       {props.message.content && <Markup content={props.message.content} />}
+      {props.message.embeds &&
+        props.message.embeds.map((embed, index) => (
+          <MessageEmbed embed={embed} key={index} />
+        ))}
     </MessageBody>
   </Container>
 )

@@ -8,9 +8,6 @@ interface Props {
 }
 
 const MarkupContainer = styled.div`
-  font-size: 15px;
-  line-height: 1.3;
-
   white-space: pre-wrap;
 
   a {
