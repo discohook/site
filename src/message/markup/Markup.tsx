@@ -44,6 +44,20 @@ const MarkupContainer = styled.div`
     font-size: 14px;
     color: #839496;
   }
+
+  img.emoji {
+    width: 21.75px;
+    height: 21.75px;
+    object-fit: contain;
+
+    vertical-align: -6px;
+    margin: 0 1.5px 0 0.75px;
+
+    &.jumboable {
+      width: 32px;
+      height: 32px;
+    }
+  }
 `
 
 export const Markup = (props: Props) => (

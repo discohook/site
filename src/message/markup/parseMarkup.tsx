@@ -1,6 +1,7 @@
 import React, { ReactElement, ReactNode } from "react"
 import {
   anyScopeRegex,
+  ASTNode,
   defaultRules,
   inlineRegex,
   NodeOutput,
@@ -144,11 +145,28 @@ const parseInline = parserFor(inlineRules, { inline: true })
 const parseBlock = parserFor(blockRules, { inline: true })
 const reactOutput = outputFor({ ...inlineRules, ...blockRules }, "react")
 
+export const jumbo = (ast: ASTNode): ASTNode => {
+  if (!Array.isArray(ast)) {
+    const node = { ...ast }
+    if (["emoji", "customEmoji"].includes(ast.type)) node.jumboable = true
+    return node
+  }
+
+  const tree = Array.from(ast)
+
+  if (tree.length > 27) return tree
+  if (tree.some((node) => !["emoji", "customEmoji"].includes(node.type)))
+    return tree
+
+  for (const node of tree) node.jumboable = true
+  return tree
+}
+
 export const parseMarkup = (content: string, inline?: boolean) => {
   console.time("render markup")
   const ast = inline ? parseInline(content) : parseBlock(content)
   console.timeLog("render markup", "parsed markup", { ast })
-  const output = reactOutput(ast)
+  const output = reactOutput(jumbo(ast))
   console.timeEnd("render markup")
   return output
 }
