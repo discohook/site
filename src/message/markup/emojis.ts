@@ -5683,4 +5683,24 @@ export const emojis: Emoji[] = [
     names: ["gay_pride_flag", "rainbow_flag"],
     surrogates: "🏳️‍🌈",
   },
+  {
+    names: ["skin-tone-1"],
+    surrogates: "🏻",
+  },
+  {
+    names: ["skin-tone-2"],
+    surrogates: "🏼",
+  },
+  {
+    names: ["skin-tone-3"],
+    surrogates: "🏽",
+  },
+  {
+    names: ["skin-tone-4"],
+    surrogates: "🏾",
+  },
+  {
+    names: ["skin-tone-5"],
+    surrogates: "🏿",
+  },
 ]
