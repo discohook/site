@@ -14,7 +14,13 @@ const Container = styled.div<{ inline?: boolean }>`
   flex-basis: auto;
 `
 
-const FieldTitle = styled.div``
+const FieldTitle = styled.div`
+  margin: 0 0 4px;
+
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+`
 
 export const EmbedField = (props: Props) => (
   <Container inline={props.field.inline}>
