@@ -4,6 +4,7 @@ import { Markup } from "../markup/Markup"
 import { Embed } from "./Embed"
 import { EmbedAuthor } from "./EmbedAuthor"
 import { EmbedField } from "./EmbedField"
+import { EmbedFooter } from "./EmbedFooter"
 
 interface Props {
   embed: Embed
@@ -89,6 +90,12 @@ export const MessageEmbed = (props: Props) => (
               <EmbedField field={field} key={index} />
             ))}
           </EmbedFields>
+        )}
+        {(props.embed.footer || props.embed.timestamp) && (
+          <EmbedFooter
+            footer={props.embed.footer}
+            timestamp={props.embed.timestamp}
+          />
         )}
       </InnerEmbedContent>
     </EmbedContent>
