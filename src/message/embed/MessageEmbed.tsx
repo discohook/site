@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Markup } from "../markup/Markup"
 import { Embed } from "./Embed"
+import { EmbedField } from "./EmbedField"
 
 interface Props {
   embed: Embed
@@ -58,6 +59,11 @@ const EmbedDescription = styled.div`
   line-height: 16px;
 `
 
+const EmbedFields = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
 export const MessageEmbed = (props: Props) => (
   <Container>
     <Pill fill={props.embed.color} />
@@ -72,6 +78,13 @@ export const MessageEmbed = (props: Props) => (
           <EmbedDescription>
             <Markup content={props.embed.description} />
           </EmbedDescription>
+        )}
+        {props.embed.fields && (
+          <EmbedFields>
+            {props.embed.fields.map((field, index) => (
+              <EmbedField field={field} key={index} />
+            ))}
+          </EmbedFields>
         )}
       </InnerEmbedContent>
     </EmbedContent>
