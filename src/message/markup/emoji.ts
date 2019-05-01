@@ -44,5 +44,5 @@ export const getEmojiUrl = (surrogate: string) => {
     }
   }
 
-  return `https://twemoji.maxcdn.com/2/svg/${result.join("-")}.svg`
+  return `https://jaylineko.com/twemoji/${result.join("-")}.svg`
 }
