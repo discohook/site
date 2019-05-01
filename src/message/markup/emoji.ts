@@ -11,15 +11,17 @@ for (const emoji of emojis) {
 
     if (emoji.hasDiversity)
       for (const [index, diversity] of Object.entries(diversities)) {
+        const nameWithDiversity = `${name}::skin-tone-${Number(index) + 1}`
         const surrogates = `${emoji.surrogates}${diversity}`
-        nameToEmoji[`${name}::skin-tone-${index + 1}`] = surrogates
+        nameToEmoji[nameWithDiversity] = surrogates
       }
   }
 
   if (emoji.hasDiversity)
     for (const [index, diversity] of Object.entries(diversities)) {
+      const name = `${emoji.names[0]}::skin-tone-${Number(index) + 1}`
       const surrogates = `${emoji.surrogates}${diversity}`
-      emojiToName[surrogates] = `${emoji.names[0]}::skin-tone-${index + 1}`
+      emojiToName[surrogates] = name
     }
 }
 
