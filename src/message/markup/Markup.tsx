@@ -14,7 +14,7 @@ const MarkupContainer = styled.div`
     color: #0096cf;
     text-decoration: none;
 
-    &:hover {
+    :hover {
       text-decoration: underline;
     }
   }

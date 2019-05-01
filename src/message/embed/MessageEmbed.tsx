@@ -48,7 +48,7 @@ const EmbedTitle = styled.a`
   color: ${(props) => (props.href ? "#0096cf;" : "#ffffff")};
   text-decoration: none;
 
-  &:hover {
+  :hover {
     text-decoration: underline;
   }
 `
