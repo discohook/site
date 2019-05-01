@@ -52,7 +52,7 @@ const EmbedTitle = styled.a`
   text-decoration: none;
 
   :hover {
-    text-decoration: underline;
+    text-decoration: ${(props) => (props.href ? "underline" : "none")};
   }
 `
 
