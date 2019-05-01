@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Markup } from "../markup/Markup"
 import { Embed } from "./Embed"
+import { EmbedAuthor } from "./EmbedAuthor"
 import { EmbedField } from "./EmbedField"
 
 interface Props {
@@ -43,6 +44,8 @@ const InnerEmbedContent = styled.div`
 `
 
 const EmbedTitle = styled.a`
+  display: inline-block;
+
   font-size: 14px;
   font-weight: 500;
   color: ${(props) => (props.href ? "#0096cf;" : "#ffffff")};
@@ -69,6 +72,7 @@ export const MessageEmbed = (props: Props) => (
     <Pill fill={props.embed.color} />
     <EmbedContent>
       <InnerEmbedContent>
+        {props.embed.author && <EmbedAuthor author={props.embed.author} />}
         {props.embed.title && (
           <EmbedTitle href={props.embed.url}>
             <Markup content={props.embed.title} inline={true} />
