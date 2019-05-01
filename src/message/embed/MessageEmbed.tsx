@@ -27,6 +27,8 @@ const Pill = styled.div<{ fill?: number }>`
 `
 
 const EmbedContent = styled.div`
+  display: flex;
+
   border: 1px solid rgba(46, 48, 54, 0.6);
 
   background: rgba(46, 48, 54, 0.3);
@@ -68,6 +70,31 @@ const EmbedFields = styled.div`
   flex-wrap: wrap;
 `
 
+const EmbedImage = styled.img`
+  max-width: 256px;
+  max-height: 256px;
+
+  border-radius: 3px;
+
+  cursor: pointer;
+
+  && {
+    margin: 8px 0 0;
+  }
+`
+
+const EmbedThumbnail = styled.img`
+  max-width: 80px;
+  max-height: 80px;
+  flex-shrink: 0;
+
+  margin: 0 0 0 16px;
+
+  border-radius: 3px;
+
+  cursor: pointer;
+`
+
 export const MessageEmbed = (props: Props) => (
   <Container>
     <Pill fill={props.embed.color} />
@@ -91,6 +118,7 @@ export const MessageEmbed = (props: Props) => (
             ))}
           </EmbedFields>
         )}
+        {props.embed.image && <EmbedImage src={props.embed.image.url} />}
         {(props.embed.footer || props.embed.timestamp) && (
           <EmbedFooter
             footer={props.embed.footer}
@@ -98,6 +126,9 @@ export const MessageEmbed = (props: Props) => (
           />
         )}
       </InnerEmbedContent>
+      {props.embed.thumbnail && (
+        <EmbedThumbnail src={props.embed.thumbnail.url} />
+      )}
     </EmbedContent>
   </Container>
 )
