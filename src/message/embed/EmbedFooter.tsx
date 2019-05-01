@@ -1,3 +1,4 @@
+import moment from "moment"
 import React from "react"
 import styled from "styled-components"
 import { Footer } from "./Footer"
@@ -48,7 +49,7 @@ export const EmbedFooter = (props: Props) => (
     <FooterText>
       {props.footer && props.footer.text}
       {props.footer && props.timestamp && <FooterSeparator>•</FooterSeparator>}
-      {props.timestamp && props.timestamp.toDateString()}
+      {props.timestamp && moment(props.timestamp).calendar()}
     </FooterText>
   </Container>
 )
