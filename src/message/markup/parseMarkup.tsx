@@ -172,9 +172,9 @@ export const jumbo = (ast: ASTNode): ASTNode => {
 
 export const parseMarkup = (content: string, inline?: boolean) => {
   console.time("render markup")
-  const ast = inline ? parseInline(content) : parseBlock(content)
+  const ast = inline ? parseInline(content) : jumbo(parseBlock(content))
   console.timeLog("render markup", "parsed markup", { ast })
-  const output = reactOutput(jumbo(ast))
+  const output = reactOutput(ast)
   console.timeEnd("render markup")
   return output
 }
