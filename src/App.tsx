@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { Editor } from "./editor/Editor"
 import { GlobalStyle } from "./GlobalStyle"
@@ -13,6 +13,7 @@ const Container = styled.div`
 
 export const App = () => {
   const [message, setMessage] = useState(initialMessage)
+  useEffect(() => console.log("message updated", message), [message])
 
   return (
     <>
