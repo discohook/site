@@ -87,15 +87,15 @@ const baseRules: Rules = {
     match: anyScopeRegex(/^<:(\w+):(\d+)>/),
     parse: (capture) => ({
       id: capture[2],
-      name: capture[1],
+      name: `${capture[1]}`,
       src: `https://cdn.discordapp.com/emojis/${capture[2]}`,
     }),
     react: (node: SingleASTNode, output: Output<any>, state: State) => (
       <img
         draggable={false}
         className={`emoji ${node.jumboable ? "jumboable" : ""}`}
-        alt={`<:${node.name}:${node.id}>`}
-        title={`:${node.name}:`}
+        alt={`<${node.name}${node.id}>`}
+        title={node.name}
         src={node.src}
         key={state.key}
       />
