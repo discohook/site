@@ -7,6 +7,10 @@ export const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    background: #36393f;
+
+    color: rgba(255, 255, 255, 0.7);
   }
 
   code {

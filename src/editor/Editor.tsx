@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { Message } from "../message/Message"
+import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
 
@@ -25,11 +26,11 @@ export const Editor = (props: Props) => {
   return (
     <Container>
       Editor
-      <textarea
+      <InputField
         value={props.message.content || ""}
-        onChange={(event) =>
-          handleChange({ ...props.message, content: event.target.value })
-        }
+        onChange={(content) => handleChange({ ...props.message, content })}
+        label="Message content"
+        multiline
       />
       <JsonInput
         json={json}
