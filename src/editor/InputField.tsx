@@ -19,14 +19,15 @@ export const InputLabel = styled.span`
   margin: 8px 8px 0;
 `
 
-const Input = styled.input`
-  min-height: 80px;
+const Input = styled.input<{ as?: string }>`
+  min-height: ${(props) => (props.as === "textarea" ? "80px" : "20px")};
   padding: 10px;
   margin: 8px;
 
   background: #484c52;
   border: 0;
   border-radius: 3px;
+  outline: none;
 
   resize: vertical;
 
@@ -42,7 +43,7 @@ export const InputField = (props: Props) => (
     {props.label && <InputLabel>{props.label}</InputLabel>}
     <Input
       className={props.className}
-      as={props.multiline && ("textarea" as "textarea")}
+      as={props.multiline && "textarea"}
       value={props.value}
       onChange={(event) => props.onChange(event.target.value)}
     />
