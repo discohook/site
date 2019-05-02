@@ -23,6 +23,10 @@ const Avatar = styled.div<{ url: string }>`
   background-size: cover;
   background-position: center;
   background-image: ${(props) => `url(${props.url})`};
+
+  :hover {
+    opacity: 0.8;
+  }
 `
 
 const HeaderInfo = styled.div``

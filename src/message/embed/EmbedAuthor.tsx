@@ -22,7 +22,7 @@ const AuthorImage = styled.img`
 `
 
 const AuthorName = styled.a`
-  color: ${(props) => (props.href ? "#0096cf" : "#ffffff")};
+  color: #ffffff;
   font-size: 14px;
   font-weight: 500;
 
