@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 interface Props {
   value: string
-  onChange: (value: string) => void
+  onChange: (value: string | undefined) => void
   label?: string
   multiline?: true
   className?: string
@@ -45,7 +45,7 @@ export const InputField = (props: Props) => (
       className={props.className}
       as={props.multiline && "textarea"}
       value={props.value}
-      onChange={(event) => props.onChange(event.target.value)}
+      onChange={(event) => props.onChange(event.target.value || undefined)}
     />
   </Container>
 )
