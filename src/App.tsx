@@ -13,6 +13,7 @@ const Container = styled.div`
 
 export const App = () => {
   const [message, setMessage] = useState(initialMessage)
+
   useEffect(() => console.log("message updated", message), [message])
 
   return (

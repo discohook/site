@@ -1,11 +1,9 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
-import { Message } from "../../message/Message"
-import { parseMessage, stringifyMessage } from "./json"
 
 interface Props {
-  message: Message
-  onChange: (message: Message) => void
+  json: string
+  onChange: (json: string) => void
 }
 
 const Input = styled.textarea`
@@ -13,19 +11,9 @@ const Input = styled.textarea`
   resize: vertical;
 `
 
-export const JsonInput = (props: Props) => {
-  const [json, setJson] = useState(stringifyMessage(props.message))
-
-  return (
-    <Input
-      value={json}
-      onChange={(event) => {
-        setJson(event.target.value)
-        try {
-          const parsed = parseMessage(event.target.value)
-          props.onChange(parsed)
-        } catch (e) {}
-      }}
-    />
-  )
-}
+export const JsonInput = (props: Props) => (
+  <Input
+    value={props.json}
+    onChange={(event) => props.onChange(event.target.value)}
+  />
+)
