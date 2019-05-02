@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { Markup } from "../markup/Markup";
-import { Embed } from "./Embed";
-import { EmbedAuthor } from "./EmbedAuthor";
-import { EmbedField } from "./EmbedField";
-import { EmbedFooter } from "./EmbedFooter";
+import React from "react"
+import styled from "styled-components"
+import { Markup } from "../markup/Markup"
+import { Embed } from "./Embed"
+import { EmbedAuthor } from "./EmbedAuthor"
+import { EmbedField } from "./EmbedField"
+import { EmbedFooter } from "./EmbedFooter"
 
 interface Props {
   embed: Embed
