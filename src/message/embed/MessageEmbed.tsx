@@ -1,10 +1,10 @@
-import React from "react"
-import styled from "styled-components"
-import { Markup } from "../markup/Markup"
-import { Embed } from "./Embed"
-import { EmbedAuthor } from "./EmbedAuthor"
-import { EmbedField } from "./EmbedField"
-import { EmbedFooter } from "./EmbedFooter"
+import React from "react";
+import styled from "styled-components";
+import { Markup } from "../markup/Markup";
+import { Embed } from "./Embed";
+import { EmbedAuthor } from "./EmbedAuthor";
+import { EmbedField } from "./EmbedField";
+import { EmbedFooter } from "./EmbedFooter";
 
 interface Props {
   embed: Embed
@@ -91,6 +91,7 @@ const EmbedThumbnail = styled.img`
   margin: 0 0 0 16px;
 
   border-radius: 3px;
+  object-fit: contain;
 
   cursor: pointer;
 `
