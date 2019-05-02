@@ -25,7 +25,6 @@ export const Editor = (props: Props) => {
 
   return (
     <Container>
-      Editor
       <InputField
         value={props.message.content || ""}
         onChange={(content) => handleChange({ ...props.message, content })}

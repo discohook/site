@@ -14,7 +14,6 @@ const Container = styled.div`
 
 export const Preview = (props: Props) => (
   <Container>
-    Preview
     <MessagePreview message={props.message} />
   </Container>
 )
