@@ -13,7 +13,7 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-export const InputLabel = styled.span`
+const InputLabel = styled.span`
   display: inline-block;
   margin: 8px 8px 0;
 `
