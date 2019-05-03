@@ -6,7 +6,6 @@ import { Thumbnail } from "./Thumbnail"
 
 export interface Embed {
   title?: string
-  type?: string
   description?: string
   url?: string
   timestamp?: string
