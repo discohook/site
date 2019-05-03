@@ -84,17 +84,18 @@ const baseRules: Rules = {
   },
   customEmoji: {
     order: defaultRules.text.order,
-    match: anyScopeRegex(/^<:(\w+):(\d+)>/),
+    match: anyScopeRegex(/^<(a?):(\w+):(\d+)>/),
     parse: (capture) => ({
-      id: capture[2],
-      name: `${capture[1]}`,
-      src: `https://cdn.discordapp.com/emojis/${capture[2]}`,
+      id: capture[3],
+      name: `${capture[2]}`,
+      src: `https://cdn.discordapp.com/emojis/${capture[3]}`,
+      animated: !!capture[1],
     }),
     react: (node: SingleASTNode, output: Output<any>, state: State) => (
       <img
         draggable={false}
         className={`emoji ${node.jumboable ? "jumboable" : ""}`}
-        alt={`<${node.name}${node.id}>`}
+        alt={`<${node.animated ? "a" : ""}${node.name}${node.id}>`}
         title={node.name}
         src={node.src}
         key={state.key}
