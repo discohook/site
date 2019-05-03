@@ -5,7 +5,6 @@ import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
 import { WebhookInput } from "./WebhookInput"
-import console = require("console")
 
 interface Props {
   message: Message
@@ -33,7 +32,7 @@ export const Editor = (props: Props) => {
       <WebhookInput
         url={webhookUrl}
         onChange={(url) => setWebhookUrl(url)}
-        disabled={!!errors.length || sending}
+        disabled={!webhookUrl || !!errors.length || sending}
         onSubmit={async () => {
           setSending(true)
           const response = await fetch(webhookUrl + "?wait=true", {
@@ -44,7 +43,7 @@ export const Editor = (props: Props) => {
             body: json,
           })
           setSending(false)
-          console.log(await response.json())
+          console.log("execute webhook response", await response.json())
         }}
       />
       <InputField
