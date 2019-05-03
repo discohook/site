@@ -22,11 +22,18 @@ const FieldTitle = styled.div`
   font-weight: 500;
 `
 
+const FieldValue = styled.div`
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+`
+
 export const EmbedField = (props: Props) => (
   <Container inline={props.field.inline}>
     <FieldTitle>
       <Markup content={props.field.name} inline={true} />
     </FieldTitle>
-    <Markup content={props.field.value} />
+    <FieldValue>
+      <Markup content={props.field.value} />
+    </FieldValue>
   </Container>
 )
