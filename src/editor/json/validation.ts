@@ -87,8 +87,8 @@ const length = (min: number, max: number): Validator =>
 
 const between = (min: number, max: number): Validator =>
   first(isNumber, (value, key) =>
-    min <= (value as number) && (value as number) >= max
-      ? [`${key}: Must be between ${min} and ${max}`]
+    min <= (value as number) && (value as number) > max
+      ? [`${key}: Must be between ${min} and ${max} inclusive`]
       : [],
   )
 

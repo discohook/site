@@ -9,6 +9,7 @@ interface Props {
 
 const MarkupContainer = styled.div`
   white-space: pre-wrap;
+  word-wrap: break-word;
 
   a {
     color: #0096cf;

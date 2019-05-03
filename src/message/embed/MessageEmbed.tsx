@@ -27,6 +27,7 @@ const Pill = styled.div<{ fill?: number }>`
 `
 
 const EmbedContent = styled.div`
+  max-width: 520px;
   display: flex;
 
   border: 1px solid rgba(46, 48, 54, 0.6);
@@ -39,6 +40,8 @@ const EmbedContent = styled.div`
 
 const InnerEmbedContent = styled.div`
   flex: 1;
+  overflow: hidden;
+
   color: #dcddde;
 
   > * + * {
