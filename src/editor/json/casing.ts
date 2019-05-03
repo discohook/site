@@ -2,10 +2,7 @@ const mapKeys = (obj: Record<string, any>, fn: (key: string) => string) => {
   const result: Record<string, any> = Array.isArray(obj) ? [] : {}
 
   for (const key in obj) {
-    const isObject =
-      typeof obj[key] === "object" &&
-      obj[key] !== null &&
-      !(obj[key] instanceof Date)
+    const isObject = typeof obj[key] === "object" && obj[key] !== null
 
     result[fn(key)] = isObject ? mapKeys(obj[key], fn) : obj[key]
   }

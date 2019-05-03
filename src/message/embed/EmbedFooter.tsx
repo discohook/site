@@ -5,7 +5,7 @@ import { Footer } from "./Footer"
 
 interface Props {
   footer?: Footer
-  timestamp?: Date
+  timestamp?: string
 }
 
 const Container = styled.div`

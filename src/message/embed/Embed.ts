@@ -9,7 +9,7 @@ export interface Embed {
   type?: string
   description?: string
   url?: string
-  timestamp?: Date
+  timestamp?: string
   color?: number
   footer?: Footer
   image?: Image

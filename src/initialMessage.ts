@@ -10,7 +10,7 @@ export const initialMessage: Message = {
         "this supports [named links](https://discordapp.com) on top of the previously shown subset of markdown. ```\nyes, even code blocks```",
       url: "https://discordapp.com",
       color: 3846305,
-      timestamp: new Date("2019-04-26T09:55:01.803Z"),
+      timestamp: "2019-04-26T09:55:01.803Z",
       footer: {
         iconUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
         text: "footer text",
