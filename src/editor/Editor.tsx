@@ -17,6 +17,7 @@ const Container = styled.div`
 
 export const Editor = (props: Props) => {
   const [json, setJson] = useState(stringifyMessage(props.message))
+  const [errors, setErrors] = useState<string[]>([])
 
   const handleChange = (message: Message) => {
     props.onChange(message)
@@ -35,11 +36,18 @@ export const Editor = (props: Props) => {
         json={json}
         onChange={(json) => {
           setJson(json)
-          try {
-            const parsedMessage = parseMessage(json)
-            props.onChange(parsedMessage)
-          } catch (e) {}
+
+          const message = parseMessage(json)
+          if (Array.isArray(message)) {
+            setErrors(message)
+            console.log("json errors", message)
+            return
+          }
+
+          setErrors([])
+          props.onChange(message)
         }}
+        errors={errors}
       />
     </Container>
   )

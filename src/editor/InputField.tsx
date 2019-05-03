@@ -6,7 +6,6 @@ interface Props {
   onChange: (value: string | undefined) => void
   label?: string
   multiline?: true
-  className?: string
 }
 
 const Container = styled.div`
@@ -42,7 +41,6 @@ export const InputField = (props: Props) => (
   <Container>
     {props.label && <InputLabel>{props.label}</InputLabel>}
     <Input
-      className={props.className}
       as={props.multiline && "textarea"}
       value={props.value}
       onChange={(event) => props.onChange(event.target.value || undefined)}
