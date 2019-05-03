@@ -4,6 +4,8 @@ import { Message } from "../message/Message"
 import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
+import { WebhookInput } from "./WebhookInput"
+import console = require("console")
 
 interface Props {
   message: Message
@@ -16,8 +18,10 @@ const Container = styled.div`
 `
 
 export const Editor = (props: Props) => {
+  const [webhookUrl, setWebhookUrl] = useState("")
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])
+  const [sending, setSending] = useState(false)
 
   const handleChange = (message: Message) => {
     props.onChange(message)
@@ -26,6 +30,23 @@ export const Editor = (props: Props) => {
 
   return (
     <Container>
+      <WebhookInput
+        url={webhookUrl}
+        onChange={(url) => setWebhookUrl(url)}
+        disabled={!!errors.length || sending}
+        onSubmit={async () => {
+          setSending(true)
+          const response = await fetch(webhookUrl + "?wait=true", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: json,
+          })
+          setSending(false)
+          console.log(await response.json())
+        }}
+      />
       <InputField
         value={props.message.content || ""}
         onChange={(content) => handleChange({ ...props.message, content })}
