@@ -1,4 +1,4 @@
 export interface Footer {
-  text: string
+  text?: string
   iconUrl?: string
 }

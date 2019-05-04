@@ -1,3 +1,3 @@
 export interface Thumbnail {
-  url: string
+  url?: string
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { Message } from "../message/Message"
+import { EmbedEditor } from "./EmbedEditor"
 import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
@@ -24,7 +25,21 @@ export const Editor = (props: Props) => {
 
   const handleChange = (message: Message) => {
     props.onChange(message)
-    setJson(stringifyMessage(message))
+    const json = stringifyMessage(message)
+    setJson(json)
+    checkErrors(json)
+  }
+
+  const checkErrors = (json: string) => {
+    const message = parseMessage(json)
+    if (Array.isArray(message)) {
+      setErrors(message)
+      console.log("json errors", message)
+      return
+    }
+
+    setErrors([])
+    return message
   }
 
   return (
@@ -52,20 +67,23 @@ export const Editor = (props: Props) => {
         label="Message content"
         multiline
       />
+      {(props.message.embeds || []).map((embed, index) => (
+        <EmbedEditor
+          key={index}
+          embed={embed}
+          onChange={(embed) => {
+            const embeds = Array.from(props.message.embeds || [])
+            embeds[index] = embed
+            handleChange({ ...props.message, embeds })
+          }}
+        />
+      ))}
       <JsonInput
         json={json}
         onChange={(json) => {
           setJson(json)
-
-          const message = parseMessage(json)
-          if (Array.isArray(message)) {
-            setErrors(message)
-            console.log("json errors", message)
-            return
-          }
-
-          setErrors([])
-          props.onChange(message)
+          const message = checkErrors(json)
+          if (message) props.onChange(message)
         }}
         errors={errors}
       />

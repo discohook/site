@@ -1,3 +1,3 @@
 export interface Image {
-  url: string
+  url?: string
 }
