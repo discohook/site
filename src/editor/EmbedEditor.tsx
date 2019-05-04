@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Embed } from "../message/embed/Embed"
+import { AuthorEditor } from "./AuthorEditor"
 import { FieldEditor } from "./FieldEditor"
 import { InputField } from "./InputField"
 
@@ -43,38 +44,10 @@ export const EmbedEditor = (props: Props) => (
       label="Embed description"
       multiline
     />
-    <HorizontalContainer>
-      <InputField
-        value={(props.embed.author || {}).name || ""}
-        onChange={(name) =>
-          props.onChange({
-            ...props.embed,
-            author: { ...props.embed.author, name },
-          })
-        }
-        label="Embed author name"
-      />
-      <InputField
-        value={(props.embed.author || {}).url || ""}
-        onChange={(url) =>
-          props.onChange({
-            ...props.embed,
-            author: { ...props.embed.author, url },
-          })
-        }
-        label="Embed author link"
-      />
-      <InputField
-        value={(props.embed.author || {}).iconUrl || ""}
-        onChange={(iconUrl) =>
-          props.onChange({
-            ...props.embed,
-            author: { ...props.embed.author, iconUrl },
-          })
-        }
-        label="Embed author icon"
-      />
-    </HorizontalContainer>
+    <AuthorEditor
+      author={props.embed.author}
+      onChange={(author) => props.onChange({ ...props.embed, author })}
+    />
     {(props.embed.fields || []).map((field, index) => (
       <FieldEditor
         key={index}
