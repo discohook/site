@@ -60,6 +60,6 @@ const MarkupContainer = styled.div`
 
 export const Markup = (props: Props) => (
   <MarkupContainer>
-    {parseMarkup(props.content.trim(), props.inline)}
+    {parseMarkup((props.content || "").trim(), props.inline)}
   </MarkupContainer>
 )
