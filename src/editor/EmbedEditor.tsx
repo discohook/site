@@ -119,7 +119,7 @@ export const EmbedEditor = (props: Props) => (
         onChange={(url) =>
           props.onChange({
             ...props.embed,
-            image: { url },
+            image: url ? { url } : undefined,
           })
         }
         label="Embed image"
@@ -129,7 +129,7 @@ export const EmbedEditor = (props: Props) => (
         onChange={(url) =>
           props.onChange({
             ...props.embed,
-            thumbnail: { url },
+            thumbnail: url ? { url } : undefined,
           })
         }
         label="Embed thumbnail"
