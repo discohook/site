@@ -18,8 +18,8 @@ const InputLabel = styled.span`
   margin: 8px 8px 0;
 `
 
-const Input = styled.input<{ as?: string }>`
-  min-height: ${(props) => (props.as === "textarea" ? "80px" : "20px")};
+const Input = styled.input`
+  min-height: 20px;
   padding: 10px;
   margin: 8px;
 
