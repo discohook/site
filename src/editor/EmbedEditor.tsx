@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { Embed } from "../message/embed/Embed"
 import { AuthorEditor } from "./AuthorEditor"
 import { FieldEditor } from "./FieldEditor"
+import { FooterEditor } from "./FooterEditor"
 import { InputField } from "./InputField"
 
 interface Props {
@@ -59,33 +60,13 @@ export const EmbedEditor = (props: Props) => (
         }}
       />
     ))}
-    <HorizontalContainer>
-      <InputField
-        value={(props.embed.footer || {}).text || ""}
-        onChange={(text) =>
-          props.onChange({
-            ...props.embed,
-            footer: { ...props.embed.footer, text },
-          })
-        }
-        label="Embed footer text"
-      />
-      <InputField
-        value={props.embed.timestamp || ""}
-        onChange={(timestamp) => props.onChange({ ...props.embed, timestamp })}
-        label="Embed footer timestamp"
-      />
-      <InputField
-        value={(props.embed.footer || {}).iconUrl || ""}
-        onChange={(iconUrl) =>
-          props.onChange({
-            ...props.embed,
-            footer: { ...props.embed.footer, iconUrl },
-          })
-        }
-        label="Embed footer icon"
-      />
-    </HorizontalContainer>
+    <FooterEditor
+      footer={props.embed.footer}
+      timestamp={props.embed.timestamp}
+      onChange={(partialEmbed) =>
+        props.onChange({ ...props.embed, ...partialEmbed })
+      }
+    />
     <HorizontalContainer>
       <InputField
         value={(props.embed.image || {}).url || ""}
