@@ -81,14 +81,14 @@ const EmbedImage = styled.img`
 
   cursor: pointer;
 
-  && {
+  * + & {
     margin: 8px 0 0;
   }
 `
 
 const EmbedThumbnail = styled.img`
-  max-width: 80px;
-  max-height: 80px;
+  width: 80px;
+  height: 80px;
   flex-shrink: 0;
 
   margin: 0 0 0 16px;
