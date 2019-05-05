@@ -103,7 +103,13 @@ export const Editor = (props: Props) => {
       <WebhookInput
         url={webhookUrl}
         onChange={(url) => setWebhookUrl(url)}
-        disabled={!webhookUrl || !!errors.length || sending}
+        disabled={
+          sending ||
+          !webhookUrl ||
+          (Object.values(props.message).filter((value) => !!value).length > 0
+            ? errors.length > 0
+            : !!props.message.content || (!!files && files.length === 0))
+        }
         onSubmit={executeWebhook}
       />
       <InputField
