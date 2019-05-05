@@ -1,10 +1,18 @@
 import React from "react"
-import styled from "styled-components"
 import { Embed } from "../message/embed/Embed"
 import { AuthorEditor } from "./AuthorEditor"
 import { FieldEditor } from "./FieldEditor"
 import { FooterEditor } from "./FooterEditor"
 import { InputField } from "./InputField"
+import {
+  Action,
+  ActionsContainer,
+  ActionsHeader,
+  BoxContainer,
+  Button,
+  Container,
+  InputGroup,
+} from "./styles"
 
 interface Props {
   embed: Embed
@@ -16,90 +24,10 @@ interface Props {
   onMoveDown: () => void
 }
 
-const Container = styled.div`
-  margin: 8px;
-`
-
-const ActionsContainer = styled.div`
-  display: flex;
-  margin: 0 0 4px;
-`
-
-const EmbedName = styled.span`
-  flex: 1;
-`
-
-const Action = styled.button`
-  padding: 0;
-  margin: 0 0 0 12px;
-
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  color: #ffffff;
-  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: -0.4px;
-
-  :hover {
-    text-decoration: underline;
-  }
-`
-
-const AddFieldButton = styled.button`
-  min-height: 40px;
-  margin: 8px;
-  padding: 0 16px;
-
-  background: transparent;
-  border: 1px solid #7289da;
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-
-  color: #ffffff;
-  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: -0.4px;
-
-  transition: 300ms;
-
-  :hover:not(:disabled) {
-    background: #7289da;
-  }
-
-  :disabled {
-    color: rgba(255, 255, 255, 0.6);
-    cursor: not-allowed;
-  }
-`
-
-const InnerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding: 8px;
-
-  border: 1px solid #1e1f23;
-  border-radius: 3px;
-`
-
-const HorizontalContainer = styled.div`
-  display: flex;
-
-  > * {
-    flex-grow: 1;
-  }
-`
-
 export const EmbedEditor = (props: Props) => (
   <Container>
     <ActionsContainer>
-      <EmbedName>Embed {props.embedIndex + 1}</EmbedName>
+      <ActionsHeader>Embed {props.embedIndex + 1}</ActionsHeader>
       <Action onClick={props.onDelete}>Delete</Action>
       {props.embedIndex > 0 && (
         <Action onClick={props.onMoveUp}>Move up</Action>
@@ -108,7 +36,7 @@ export const EmbedEditor = (props: Props) => (
         <Action onClick={props.onMoveDown}>Move down</Action>
       )}
     </ActionsContainer>
-    <InnerContainer>
+    <BoxContainer>
       <InputField
         value={props.embed.title || ""}
         onChange={(title) => props.onChange({ ...props.embed, title })}
@@ -157,7 +85,8 @@ export const EmbedEditor = (props: Props) => (
           }}
         />
       ))}
-      <AddFieldButton
+      <Button
+        fullWidth
         disabled={props.embed.fields ? props.embed.fields.length >= 25 : false}
         onClick={() =>
           props.onChange({
@@ -167,7 +96,7 @@ export const EmbedEditor = (props: Props) => (
         }
       >
         Add field
-      </AddFieldButton>
+      </Button>
       <FooterEditor
         footer={props.embed.footer}
         timestamp={props.embed.timestamp}
@@ -175,7 +104,7 @@ export const EmbedEditor = (props: Props) => (
           props.onChange({ ...props.embed, ...partialEmbed })
         }
       />
-      <HorizontalContainer>
+      <InputGroup>
         <InputField
           value={(props.embed.image || {}).url || ""}
           onChange={(url) =>
@@ -196,7 +125,7 @@ export const EmbedEditor = (props: Props) => (
           }
           label="Embed thumbnail"
         />
-      </HorizontalContainer>
-    </InnerContainer>
+      </InputGroup>
+    </BoxContainer>
   </Container>
 )

@@ -1,51 +1,17 @@
 import React, { useState } from "react"
-import styled from "styled-components"
 import { Message } from "../message/Message"
 import { EmbedEditor } from "./EmbedEditor"
 import { FileInput } from "./FileInput"
 import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
+import { Button, Container } from "./styles"
 import { WebhookInput } from "./WebhookInput"
 
 interface Props {
   message: Message
   onChange: (message: Message) => void
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const AddEmbedButton = styled.button`
-  min-height: 40px;
-  margin: 8px;
-  padding: 0 16px;
-
-  background: transparent;
-  border: 1px solid #7289da;
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-
-  color: #ffffff;
-  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: -0.4px;
-
-  transition: 300ms;
-
-  :hover:not(:disabled) {
-    background: #7289da;
-  }
-
-  :disabled {
-    color: rgba(255, 255, 255, 0.6);
-    cursor: not-allowed;
-  }
-`
 
 export const Editor = (props: Props) => {
   const [webhookUrl, setWebhookUrl] = useState("")
@@ -149,7 +115,8 @@ export const Editor = (props: Props) => {
           }}
         />
       ))}
-      <AddEmbedButton
+      <Button
+        fullWidth
         disabled={
           props.message.embeds ? props.message.embeds.length >= 10 : false
         }
@@ -161,7 +128,7 @@ export const Editor = (props: Props) => {
         }
       >
         Add embed
-      </AddEmbedButton>
+      </Button>
       <FileInput onChange={setFiles} />
       <JsonInput
         json={json}

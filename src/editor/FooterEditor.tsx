@@ -1,8 +1,8 @@
 import React from "react"
-import styled from "styled-components"
 import { Embed } from "../message/embed/Embed"
 import { Footer } from "../message/embed/Footer"
 import { InputField } from "./InputField"
+import { InputGroup } from "./styles"
 
 type PartialEmbed = Pick<Embed, "footer" | "timestamp">
 
@@ -11,14 +11,6 @@ interface Props {
   timestamp: string | undefined
   onChange: (partialEmbed: PartialEmbed) => void
 }
-
-const Container = styled.div`
-  display: flex;
-
-  > * {
-    flex-grow: 1;
-  }
-`
 
 export const FooterEditor = (props: Props) => {
   const handleChange = (embed: PartialEmbed) => {
@@ -33,7 +25,7 @@ export const FooterEditor = (props: Props) => {
   }
 
   return (
-    <Container>
+    <InputGroup>
       <InputField
         value={(props.footer || { text: "" }).text || ""}
         onChange={(text) =>
@@ -61,6 +53,6 @@ export const FooterEditor = (props: Props) => {
         }
         label="Embed footer icon"
       />
-    </Container>
+    </InputGroup>
   )
 }

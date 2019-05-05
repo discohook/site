@@ -1,20 +1,12 @@
 import React from "react"
-import styled from "styled-components"
 import { Author } from "../message/embed/Author"
 import { InputField } from "./InputField"
+import { Container } from "./styles"
 
 interface Props {
   author: Author | undefined
   onChange: (author: Author | undefined) => void
 }
-
-const Container = styled.div`
-  display: flex;
-
-  > * {
-    flex-grow: 1;
-  }
-`
 
 export const AuthorEditor = (props: Props) => {
   const handleChange = (author: Author) =>
