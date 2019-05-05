@@ -155,7 +155,7 @@ export const EmbedEditor = (props: Props) => (
         />
       ))}
       <AddFieldButton
-        disabled={props.embed.fields ? props.embed.fields.length >= 10 : false}
+        disabled={props.embed.fields ? props.embed.fields.length >= 25 : false}
         onClick={() =>
           props.onChange({
             ...props.embed,
