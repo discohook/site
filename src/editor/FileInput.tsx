@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 interface Props {
-  onChange: (files: File | undefined) => void
+  onChange: (files: FileList | undefined) => void
 }
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const InputLabel = styled.span`
   margin: 8px 8px 0;
 `
 
-const Input = styled.input.attrs(() => ({ type: "file" }))`
+const Input = styled.input.attrs(() => ({ type: "file", multiple: true }))`
   min-height: 20px;
   padding: 10px;
   margin: 8px;
@@ -36,11 +36,7 @@ export const FileInput = (props: Props) => (
   <Container>
     <InputLabel>Files</InputLabel>
     <Input
-      onChange={(event) =>
-        props.onChange(
-          (event.target.files && event.target.files.item(0)) || undefined,
-        )
-      }
+      onChange={(event) => props.onChange(event.target.files || undefined)}
     />
   </Container>
 )

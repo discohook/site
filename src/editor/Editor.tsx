@@ -23,7 +23,7 @@ export const Editor = (props: Props) => {
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])
   const [sending, setSending] = useState(false)
-  const [file, setFile] = useState<File | undefined>()
+  const [files, setFiles] = useState<FileList | undefined>()
 
   const handleChange = (message: Message) => {
     props.onChange(message)
@@ -49,7 +49,9 @@ export const Editor = (props: Props) => {
 
     const formData = new FormData()
     formData.append("payload_json", json)
-    if (file) formData.append("file", file, file.name)
+    if (files)
+      for (const [index, file] of Object.entries(files))
+        formData.append(`file[${index}]`, file, file.name)
 
     const response = await fetch(webhookUrl + "?wait=true", {
       method: "POST",
@@ -86,7 +88,7 @@ export const Editor = (props: Props) => {
           }}
         />
       ))}
-      <FileInput onChange={setFile} />
+      <FileInput onChange={setFiles} />
       <JsonInput
         json={json}
         onChange={(json) => {
