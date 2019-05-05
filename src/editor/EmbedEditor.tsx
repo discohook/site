@@ -140,17 +140,20 @@ export const EmbedEditor = (props: Props) => (
           onDelete={() => {
             const newFields = Array.from(fields)
             newFields.splice(index, 1)
-            return props.onChange({ ...props.embed, fields: newFields })
+            props.onChange({
+              ...props.embed,
+              fields: newFields.length === 0 ? undefined : newFields,
+            })
           }}
           onMoveUp={() => {
             const newFields = Array.from(fields)
             newFields.splice(index - 1, 0, ...newFields.splice(index, 1))
-            return props.onChange({ ...props.embed, fields: newFields })
+            props.onChange({ ...props.embed, fields: newFields })
           }}
           onMoveDown={() => {
             const newFields = Array.from(fields)
             newFields.splice(index + 1, 0, ...newFields.splice(index, 1))
-            return props.onChange({ ...props.embed, fields: newFields })
+            props.onChange({ ...props.embed, fields: newFields })
           }}
         />
       ))}

@@ -77,7 +77,13 @@ export const Editor = (props: Props) => {
     setSending(true)
 
     const formData = new FormData()
-    formData.append("payload_json", json)
+    if (
+      props.message.content &&
+      props.message.embeds &&
+      props.message.embeds.length > 0
+    )
+      formData.append("payload_json", json)
+
     if (files)
       for (const [index, file] of Object.entries(files))
         formData.append(`file[${index}]`, file, file.name)
@@ -120,17 +126,20 @@ export const Editor = (props: Props) => {
           onDelete={() => {
             const newEmbeds = Array.from(embeds)
             newEmbeds.splice(index, 1)
-            return props.onChange({ ...props.message, embeds: newEmbeds })
+            handleChange({
+              ...props.message,
+              embeds: newEmbeds.length === 0 ? undefined : newEmbeds,
+            })
           }}
           onMoveUp={() => {
             const newEmbeds = Array.from(embeds)
             newEmbeds.splice(index - 1, 0, ...newEmbeds.splice(index, 1))
-            return props.onChange({ ...props.message, embeds: newEmbeds })
+            handleChange({ ...props.message, embeds: newEmbeds })
           }}
           onMoveDown={() => {
             const newEmbeds = Array.from(embeds)
             newEmbeds.splice(index + 1, 0, ...newEmbeds.splice(index, 1))
-            return props.onChange({ ...props.message, embeds: newEmbeds })
+            handleChange({ ...props.message, embeds: newEmbeds })
           }}
         />
       ))}
@@ -139,7 +148,7 @@ export const Editor = (props: Props) => {
           props.message.embeds ? props.message.embeds.length >= 10 : false
         }
         onClick={() =>
-          props.onChange({
+          handleChange({
             ...props.message,
             embeds: [...(props.message.embeds || []), {}],
           })
