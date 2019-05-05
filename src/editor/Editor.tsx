@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { Message } from "../message/Message"
 import { EmbedEditor } from "./EmbedEditor"
+import { FileInput } from "./FileInput"
 import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
@@ -22,6 +23,7 @@ export const Editor = (props: Props) => {
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])
   const [sending, setSending] = useState(false)
+  const [file, setFile] = useState<File | undefined>()
 
   const handleChange = (message: Message) => {
     props.onChange(message)
@@ -42,24 +44,30 @@ export const Editor = (props: Props) => {
     return message
   }
 
+  const executeWebhook = async () => {
+    setSending(true)
+
+    const formData = new FormData()
+    formData.append("payload_json", json)
+    if (file) formData.append("file", file, file.name)
+
+    const response = await fetch(webhookUrl + "?wait=true", {
+      method: "POST",
+      body: formData,
+    })
+
+    setSending(false)
+
+    console.log("execute webhook response", await response.json())
+  }
+
   return (
     <Container>
       <WebhookInput
         url={webhookUrl}
         onChange={(url) => setWebhookUrl(url)}
         disabled={!webhookUrl || !!errors.length || sending}
-        onSubmit={async () => {
-          setSending(true)
-          const response = await fetch(webhookUrl + "?wait=true", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: json,
-          })
-          setSending(false)
-          console.log("execute webhook response", await response.json())
-        }}
+        onSubmit={executeWebhook}
       />
       <InputField
         value={props.message.content || ""}
@@ -78,6 +86,7 @@ export const Editor = (props: Props) => {
           }}
         />
       ))}
+      <FileInput onChange={setFile} />
       <JsonInput
         json={json}
         onChange={(json) => {
