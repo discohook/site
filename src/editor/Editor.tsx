@@ -37,7 +37,7 @@ const AddEmbedButton = styled.button`
 
   transition: 300ms;
 
-  :hover {
+  :hover:not(:disabled) {
     background: #7289da;
   }
 

@@ -60,7 +60,7 @@ const SendButton = styled.button`
 
   transition: 300ms;
 
-  :hover {
+  :hover:not(:disabled) {
     opacity: 0.8;
   }
 
