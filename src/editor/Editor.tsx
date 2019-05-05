@@ -18,6 +18,35 @@ const Container = styled.div`
   flex-direction: column;
 `
 
+const AddEmbedButton = styled.button`
+  min-height: 40px;
+  margin: 8px;
+  padding: 0 16px;
+
+  background: transparent;
+  border: 1px solid #7289da;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+
+  color: #ffffff;
+  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.4px;
+
+  transition: 300ms;
+
+  :hover {
+    background: #7289da;
+  }
+
+  :disabled {
+    color: rgba(255, 255, 255, 0.6);
+    cursor: not-allowed;
+  }
+`
+
 export const Editor = (props: Props) => {
   const [webhookUrl, setWebhookUrl] = useState("")
   const [json, setJson] = useState(stringifyMessage(props.message))
@@ -77,17 +106,47 @@ export const Editor = (props: Props) => {
         label="Message content"
         multiline
       />
-      {(props.message.embeds || []).map((embed, index) => (
+      {(props.message.embeds || []).map((embed, index, embeds) => (
         <EmbedEditor
           key={index}
           embed={embed}
+          embedIndex={index}
+          embedCount={embeds.length}
           onChange={(embed) => {
             const embeds = Array.from(props.message.embeds || [])
             embeds[index] = embed
             handleChange({ ...props.message, embeds })
           }}
+          onDelete={() => {
+            const newEmbeds = Array.from(embeds)
+            newEmbeds.splice(index, 1)
+            return props.onChange({ ...props.message, embeds: newEmbeds })
+          }}
+          onMoveUp={() => {
+            const newEmbeds = Array.from(embeds)
+            newEmbeds.splice(index - 1, 0, ...newEmbeds.splice(index, 1))
+            return props.onChange({ ...props.message, embeds: newEmbeds })
+          }}
+          onMoveDown={() => {
+            const newEmbeds = Array.from(embeds)
+            newEmbeds.splice(index + 1, 0, ...newEmbeds.splice(index, 1))
+            return props.onChange({ ...props.message, embeds: newEmbeds })
+          }}
         />
       ))}
+      <AddEmbedButton
+        disabled={
+          props.message.embeds ? props.message.embeds.length >= 10 : false
+        }
+        onClick={() =>
+          props.onChange({
+            ...props.message,
+            embeds: [...(props.message.embeds || []), {}],
+          })
+        }
+      >
+        Add embed
+      </AddEmbedButton>
       <FileInput onChange={setFiles} />
       <JsonInput
         json={json}

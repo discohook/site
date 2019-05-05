@@ -5,14 +5,51 @@ import { InputField } from "./InputField"
 
 interface Props {
   field: Field
+  fieldIndex: number
+  fieldCount: number
   onChange: (field: Field) => void
+  onDelete: () => void
+  onMoveUp: () => void
+  onMoveDown: () => void
 }
 
 const Container = styled.div`
+  margin: 8px;
+`
+
+const ActionsContainer = styled.div`
+  display: flex;
+  margin: 0 0 4px;
+`
+
+const FieldName = styled.span`
+  flex: 1;
+`
+
+const Action = styled.button`
+  padding: 0;
+  margin: 0 0 0 12px;
+
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  color: #ffffff;
+  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.4px;
+
+  :hover {
+    text-decoration: underline;
+  }
+`
+
+const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 8px;
   padding: 8px;
 
   border: 1px solid #1e1f23;
@@ -55,29 +92,41 @@ const HorizontalContainer = styled.div`
 
 export const FieldEditor = (props: Props) => (
   <Container>
-    <HorizontalContainer>
+    <ActionsContainer>
+      <FieldName>Field {props.fieldIndex + 1}</FieldName>
+      <Action onClick={props.onDelete}>Delete</Action>
+      {props.fieldIndex > 0 && (
+        <Action onClick={props.onMoveUp}>Move up</Action>
+      )}
+      {props.fieldCount - props.fieldIndex > 1 && (
+        <Action onClick={props.onMoveDown}>Move down</Action>
+      )}
+    </ActionsContainer>
+    <InnerContainer>
+      <HorizontalContainer>
+        <InputField
+          value={props.field.name || ""}
+          onChange={(name) => props.onChange({ ...props.field, name })}
+          label="Field name"
+        />
+        <InlineButton
+          inline={props.field.inline || false}
+          onClick={() =>
+            props.onChange({
+              ...props.field,
+              inline: !props.field.inline || undefined,
+            })
+          }
+        >
+          Inline
+        </InlineButton>
+      </HorizontalContainer>
       <InputField
-        value={props.field.name || ""}
-        onChange={(name) => props.onChange({ ...props.field, name })}
-        label="Field name"
+        value={props.field.value || ""}
+        onChange={(value) => props.onChange({ ...props.field, value })}
+        label="Field value"
+        multiline
       />
-      <InlineButton
-        inline={props.field.inline || false}
-        onClick={() =>
-          props.onChange({
-            ...props.field,
-            inline: !props.field.inline || undefined,
-          })
-        }
-      >
-        Inline
-      </InlineButton>
-    </HorizontalContainer>
-    <InputField
-      value={props.field.value || ""}
-      onChange={(value) => props.onChange({ ...props.field, value })}
-      label="Field value"
-      multiline
-    />
+    </InnerContainer>
   </Container>
 )
