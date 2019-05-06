@@ -61,7 +61,8 @@ export const TextInput = styled.input.attrs((props) => ({
 export const Button = styled.button<{ fullWidth?: boolean }>`
   min-height: 40px;
   max-height: 40px;
-  max-width: ${(props) => (props.fullWidth ? "100%" : "80px")};
+  min-width: ${(props) => (props.fullWidth ? "calc(100% - 16px)" : "80px")};
+  max-width: ${(props) => (props.fullWidth ? "calc(100% - 16px)" : "80px")};
   margin: 8px;
   padding: 0 16px;
 
