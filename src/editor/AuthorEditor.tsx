@@ -1,7 +1,7 @@
 import React from "react"
 import { Author } from "../message/embed/Author"
 import { InputField } from "./InputField"
-import { Container } from "./styles"
+import { InputGroup } from "./styles"
 
 interface Props {
   author: Author | undefined
@@ -17,7 +17,7 @@ export const AuthorEditor = (props: Props) => {
   const author = props.author || { name: "" }
 
   return (
-    <Container>
+    <InputGroup>
       <InputField
         value={author.name || ""}
         onChange={(name) => handleChange({ ...author, name: name || "" })}
@@ -33,6 +33,6 @@ export const AuthorEditor = (props: Props) => {
         onChange={(iconUrl) => handleChange({ ...author, iconUrl })}
         label="Embed author icon"
       />
-    </Container>
+    </InputGroup>
   )
 }
