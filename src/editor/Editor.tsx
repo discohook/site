@@ -64,18 +64,25 @@ export const Editor = (props: Props) => {
     console.log("execute webhook response", await response.json())
   }
 
+  const isDisabled = (() => {
+    if (sending) return true
+    if (webhookUrl.trim().length === 0) return true
+
+    const { content, embeds } = props.message
+    if ((typeof content === "string" || embeds) && errors.length > 0)
+      return true
+
+    if (files && files.length === 0) return true
+
+    return false
+  })()
+
   return (
     <Container>
       <WebhookInput
         url={webhookUrl}
         onChange={(url) => setWebhookUrl(url)}
-        disabled={
-          sending ||
-          !webhookUrl ||
-          (Object.values(props.message).filter((value) => !!value).length > 0
-            ? errors.length > 0
-            : !!props.message.content || (!!files && files.length === 0))
-        }
+        disabled={isDisabled}
         onSubmit={executeWebhook}
       />
       <InputField
