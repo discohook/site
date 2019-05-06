@@ -9,83 +9,104 @@ import {
   ActionsContainer,
   ActionsHeader,
   BoxContainer,
+  Button,
   Container,
   InputGroup,
 } from "./styles"
 
 interface Props {
-  embed: Embed
-  embedIndex: number
-  embedCount: number
-  onChange: (embed: Embed) => void
-  onDelete: () => void
-  onMoveUp: () => void
-  onMoveDown: () => void
+  embeds: Embed[]
+  onChange: (embeds: Embed[] | undefined) => void
 }
 
-export const EmbedEditor = (props: Props) => (
-  <Container>
-    <ActionsContainer>
-      <ActionsHeader>Embed {props.embedIndex + 1}</ActionsHeader>
-      <Action onClick={props.onDelete}>Delete</Action>
-      {props.embedIndex > 0 && (
-        <Action onClick={props.onMoveUp}>Move up</Action>
-      )}
-      {props.embedCount - props.embedIndex > 1 && (
-        <Action onClick={props.onMoveDown}>Move down</Action>
-      )}
-    </ActionsContainer>
-    <BoxContainer>
-      <InputField
-        value={props.embed.title || ""}
-        onChange={(title) => props.onChange({ ...props.embed, title })}
-        label="Embed title"
-      />
-      <InputField
-        value={props.embed.description || ""}
-        onChange={(description) =>
-          props.onChange({ ...props.embed, description })
-        }
-        label="Embed description"
-        multiline
-      />
-      <AuthorEditor
-        author={props.embed.author}
-        onChange={(author) => props.onChange({ ...props.embed, author })}
-      />
-      <FieldEditor
-        fields={props.embed.fields || []}
-        onChange={(fields) => props.onChange({ ...props.embed, fields })}
-      />
-      <FooterEditor
-        footer={props.embed.footer}
-        timestamp={props.embed.timestamp}
-        onChange={(partialEmbed) =>
-          props.onChange({ ...props.embed, ...partialEmbed })
-        }
-      />
-      <InputGroup>
+export const EmbedEditor = (props: Props) => {
+  const addEmbed = () => {
+    const newEmbeds = Array.from(props.embeds)
+    newEmbeds.push({})
+    props.onChange(newEmbeds)
+  }
+
+  const modifyEmbed = (index: number, partialEmbed: Partial<Embed>) => {
+    const newEmbeds = Array.from(props.embeds)
+    newEmbeds[index] = { ...newEmbeds[index], ...partialEmbed }
+    props.onChange(newEmbeds)
+  }
+
+  const deleteEmbed = (index: number) => {
+    const newEmbeds = Array.from(props.embeds)
+    newEmbeds.splice(index, 1)
+    props.onChange(newEmbeds.length === 0 ? undefined : newEmbeds)
+  }
+
+  const moveEmbed = (from: number, to: number) => {
+    const newEmbeds = Array.from(props.embeds)
+    newEmbeds.splice(to, 0, ...newEmbeds.splice(from, 1))
+    props.onChange(newEmbeds)
+  }
+
+  const editors = (props.embeds || []).map((embed, index) => (
+    <Container key={index}>
+      <ActionsContainer>
+        <ActionsHeader>Embed {index + 1}</ActionsHeader>
+        <Action onClick={() => deleteEmbed(index)}>Delete</Action>
+        {index > 0 && (
+          <Action onClick={() => moveEmbed(index, index - 1)}>Move up</Action>
+        )}
+        {props.embeds.length - index > 1 && (
+          <Action onClick={() => moveEmbed(index, index + 1)}>Move down</Action>
+        )}
+      </ActionsContainer>
+      <BoxContainer>
         <InputField
-          value={(props.embed.image || {}).url || ""}
-          onChange={(url) =>
-            props.onChange({
-              ...props.embed,
-              image: url ? { url } : undefined,
-            })
-          }
-          label="Embed image"
+          value={embed.title || ""}
+          onChange={(title) => modifyEmbed(index, { title })}
+          label="Embed title"
         />
         <InputField
-          value={(props.embed.thumbnail || {}).url || ""}
-          onChange={(url) =>
-            props.onChange({
-              ...props.embed,
-              thumbnail: url ? { url } : undefined,
-            })
-          }
-          label="Embed thumbnail"
+          value={embed.description || ""}
+          onChange={(description) => modifyEmbed(index, { description })}
+          label="Embed description"
+          multiline
         />
-      </InputGroup>
-    </BoxContainer>
-  </Container>
-)
+        <AuthorEditor
+          author={embed.author}
+          onChange={(author) => modifyEmbed(index, { author })}
+        />
+        <FieldEditor
+          fields={embed.fields || []}
+          onChange={(fields) => modifyEmbed(index, { fields })}
+        />
+        <FooterEditor
+          footer={embed.footer}
+          timestamp={embed.timestamp}
+          onChange={(partial) => modifyEmbed(index, partial)}
+        />
+        <InputGroup>
+          <InputField
+            value={(embed.image || {}).url || ""}
+            onChange={(url) =>
+              modifyEmbed(index, { image: url ? { url } : undefined })
+            }
+            label="Embed image"
+          />
+          <InputField
+            value={(embed.thumbnail || {}).url || ""}
+            onChange={(url) =>
+              modifyEmbed(index, { thumbnail: url ? { url } : undefined })
+            }
+            label="Embed thumbnail"
+          />
+        </InputGroup>
+      </BoxContainer>
+    </Container>
+  ))
+
+  return (
+    <Container>
+      {editors}
+      <Button fullWidth disabled={props.embeds.length >= 10} onClick={addEmbed}>
+        Add embed
+      </Button>
+    </Container>
+  )
+}

@@ -5,7 +5,7 @@ import { FileInput } from "./FileInput"
 import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
-import { Button, Container } from "./styles"
+import { Container } from "./styles"
 import { WebhookInput } from "./WebhookInput"
 
 interface Props {
@@ -84,51 +84,10 @@ export const Editor = (props: Props) => {
         label="Message content"
         multiline
       />
-      {(props.message.embeds || []).map((embed, index, embeds) => (
-        <EmbedEditor
-          key={index}
-          embed={embed}
-          embedIndex={index}
-          embedCount={embeds.length}
-          onChange={(embed) => {
-            const embeds = Array.from(props.message.embeds || [])
-            embeds[index] = embed
-            handleChange({ ...props.message, embeds })
-          }}
-          onDelete={() => {
-            const newEmbeds = Array.from(embeds)
-            newEmbeds.splice(index, 1)
-            handleChange({
-              ...props.message,
-              embeds: newEmbeds.length === 0 ? undefined : newEmbeds,
-            })
-          }}
-          onMoveUp={() => {
-            const newEmbeds = Array.from(embeds)
-            newEmbeds.splice(index - 1, 0, ...newEmbeds.splice(index, 1))
-            handleChange({ ...props.message, embeds: newEmbeds })
-          }}
-          onMoveDown={() => {
-            const newEmbeds = Array.from(embeds)
-            newEmbeds.splice(index + 1, 0, ...newEmbeds.splice(index, 1))
-            handleChange({ ...props.message, embeds: newEmbeds })
-          }}
-        />
-      ))}
-      <Button
-        fullWidth
-        disabled={
-          props.message.embeds ? props.message.embeds.length >= 10 : false
-        }
-        onClick={() =>
-          handleChange({
-            ...props.message,
-            embeds: [...(props.message.embeds || []), {}],
-          })
-        }
-      >
-        Add embed
-      </Button>
+      <EmbedEditor
+        embeds={props.message.embeds || []}
+        onChange={(embeds) => handleChange({ ...props.message, embeds })}
+      />
       <FileInput onChange={setFiles} />
       <JsonInput
         json={json}
