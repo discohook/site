@@ -9,7 +9,6 @@ import {
   ActionsContainer,
   ActionsHeader,
   BoxContainer,
-  Button,
   Container,
   InputGroup,
 } from "./styles"
@@ -54,49 +53,10 @@ export const EmbedEditor = (props: Props) => (
         author={props.embed.author}
         onChange={(author) => props.onChange({ ...props.embed, author })}
       />
-      {(props.embed.fields || []).map((field, index, fields) => (
-        <FieldEditor
-          key={index}
-          field={field}
-          fieldIndex={index}
-          fieldCount={fields.length}
-          onChange={(field) => {
-            const fields = Array.from(props.embed.fields || [])
-            fields[index] = field
-            props.onChange({ ...props.embed, fields })
-          }}
-          onDelete={() => {
-            const newFields = Array.from(fields)
-            newFields.splice(index, 1)
-            props.onChange({
-              ...props.embed,
-              fields: newFields.length === 0 ? undefined : newFields,
-            })
-          }}
-          onMoveUp={() => {
-            const newFields = Array.from(fields)
-            newFields.splice(index - 1, 0, ...newFields.splice(index, 1))
-            props.onChange({ ...props.embed, fields: newFields })
-          }}
-          onMoveDown={() => {
-            const newFields = Array.from(fields)
-            newFields.splice(index + 1, 0, ...newFields.splice(index, 1))
-            props.onChange({ ...props.embed, fields: newFields })
-          }}
-        />
-      ))}
-      <Button
-        fullWidth
-        disabled={props.embed.fields ? props.embed.fields.length >= 25 : false}
-        onClick={() =>
-          props.onChange({
-            ...props.embed,
-            fields: [...(props.embed.fields || []), {}],
-          })
-        }
-      >
-        Add field
-      </Button>
+      <FieldEditor
+        fields={props.embed.fields || []}
+        onChange={(fields) => props.onChange({ ...props.embed, fields })}
+      />
       <FooterEditor
         footer={props.embed.footer}
         timestamp={props.embed.timestamp}
