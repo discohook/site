@@ -11,6 +11,7 @@ import { WebhookInput } from "./WebhookInput"
 interface Props {
   message: Message
   onChange: (message: Message) => void
+  onToggleTheme: () => void
 }
 
 export const Editor = (props: Props) => {
@@ -76,6 +77,7 @@ export const Editor = (props: Props) => {
     <Container>
       <ActionsContainer style={{ margin: "8px 8px 4px" }}>
         <ActionsHeader>Message editor</ActionsHeader>
+        <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
         <Action onClick={() => handleChange({})}>Clear all</Action>
       </ActionsContainer>
       <WebhookInput

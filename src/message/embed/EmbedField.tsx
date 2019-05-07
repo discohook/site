@@ -14,26 +14,26 @@ const Container = styled.div<{ inline?: boolean }>`
   flex-basis: auto;
 `
 
-const FieldTitle = styled.div`
+const FieldName = styled.div`
   margin: 0 0 4px;
 
-  color: #ffffff;
+  color: ${(props) => props.theme.embed.field.name};
   font-size: 14px;
   font-weight: 500;
 `
 
 const FieldValue = styled.div`
-  color: rgba(255, 255, 255, 0.6);
+  color: ${(props) => props.theme.embed.field.value};
   font-size: 14px;
 `
 
 export const EmbedField = (props: Props) => (
   <Container inline={props.field.inline}>
-    <FieldTitle>
-      <Markup content={props.field.name} inline={true} />
-    </FieldTitle>
+    <FieldName>
+      <Markup content={props.field.name || ""} inline={true} />
+    </FieldName>
     <FieldValue>
-      <Markup content={props.field.value} />
+      <Markup content={props.field.value || ""} />
     </FieldValue>
   </Container>
 )

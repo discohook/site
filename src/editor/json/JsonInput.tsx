@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { TextInput } from "../styles"
 
 interface Props {
   json: string
@@ -23,6 +24,8 @@ const ErrorContainer = styled.div`
 
   background: #f04747;
   border-radius: 3px;
+
+  color: #ffffff;
 `
 
 const Error = styled.div`
@@ -31,23 +34,10 @@ const Error = styled.div`
   line-height: 16px;
 `
 
-const Input = styled.textarea`
+const CodeInput = styled(TextInput).attrs(() => ({ as: "textarea" }))`
   min-height: 240px;
-  padding: 10px;
-  margin: 8px;
-
-  background: #484c52;
-  border: 0;
-  border-radius: 3px;
-  outline: none;
-
-  resize: vertical;
-
-  color: rgba(255, 255, 255, 0.7);
+  margin: 8px 8px;
   font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: -0.4px;
 `
 
 export const JsonInput = (props: Props) => (
@@ -60,7 +50,7 @@ export const JsonInput = (props: Props) => (
         ))}
       </ErrorContainer>
     )}
-    <Input
+    <CodeInput
       value={props.json}
       onChange={(event) => props.onChange(event.target.value)}
     />

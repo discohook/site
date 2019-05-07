@@ -8,9 +8,8 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background: #36393f;
-
-    color: rgba(255, 255, 255, 0.7);
+    background: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
   }
 
   code {

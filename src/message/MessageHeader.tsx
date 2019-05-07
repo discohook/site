@@ -11,7 +11,7 @@ const Container = styled.div`
   display: flex;
 `
 
-const Avatar = styled.div<{ url: string }>`
+const Avatar = styled.div`
   width: 40px;
   height: 40px;
 
@@ -22,7 +22,6 @@ const Avatar = styled.div<{ url: string }>`
 
   background-size: cover;
   background-position: center;
-  background-image: ${(props) => `url(${props.url})`};
 
   :hover {
     opacity: 0.8;
@@ -32,7 +31,7 @@ const Avatar = styled.div<{ url: string }>`
 const HeaderInfo = styled.div``
 
 const UserName = styled.span`
-  color: #ffffff;
+  color: ${(props) => props.theme.message.username};
   font-weight: 500;
 `
 
@@ -44,7 +43,7 @@ const BotTag = styled.span`
   border-radius: 3px;
   margin: 0 0 0 4.8px;
 
-  background: #7289da;
+  background: ${(props) => props.theme.accent};
 
   color: #ffffff;
   font-size: 10px;
@@ -54,17 +53,17 @@ const BotTag = styled.span`
 const Timestamp = styled.span`
   margin: 0 0 0 4.8px;
 
-  color: rgba(255, 255, 255, 0.2);
+  color: ${(props) => props.theme.message.timestamp};
   font-size: 12px;
 `
 
 export const MessageHeader = (props: Props) => (
   <Container>
     <Avatar
-      url={
-        props.message.avatarUrl ||
-        "https://cdn.discordapp.com/embed/avatars/0.png"
-      }
+      style={{
+        backgroundImage: `url(${props.message.avatarUrl ||
+          "https://cdn.discordapp.com/embed/avatars/0.png"})`,
+      }}
     />
     <HeaderInfo>
       <UserName>{props.message.username || "Captain Hook"}</UserName>

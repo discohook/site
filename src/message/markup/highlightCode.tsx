@@ -3,15 +3,12 @@ import React from "react"
 import styled from "styled-components"
 
 const CodeBlock = styled.pre`
-  /* display: block; */
-  /* overflow-x: auto; */
-  /* padding: 0.5em; */
-  background: #2f3136; /* #002b36; */
-  color: #839496;
+  background: ${(props) => props.theme.code.background};
+  color: ${(props) => props.theme.code.text};
 
   .hljs-comment,
   .hljs-quote {
-    color: #586e75;
+    color: ${(props) => props.theme.code.comment};
   }
 
   /* Solarized Green */
@@ -69,7 +66,7 @@ const CodeBlock = styled.pre`
   }
 
   .hljs-formula {
-    background: #073642;
+    background: ${(props) => props.theme.code.formula};
   }
 
   .hljs-emphasis {

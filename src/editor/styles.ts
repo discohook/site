@@ -21,7 +21,7 @@ export const BoxContainer = styled.div`
   margin: 8px;
   padding: 8px;
 
-  border: 1px solid #1e1f23;
+  border: 1px solid ${(props) => props.theme.border};
   border-radius: 3px;
 `
 
@@ -47,14 +47,14 @@ export const TextInput = styled.input.attrs((props) => ({
   padding: 10px;
   margin: 8px 0;
 
-  background: #484c52;
+  background: ${(props) => props.theme.input};
   border: 0;
   border-radius: 3px;
   outline: none;
 
   resize: vertical;
 
-  color: rgba(255, 255, 255, 0.7);
+  color: ${(props) => props.theme.text};
   font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 15px;
   line-height: 20px;
@@ -68,25 +68,25 @@ export const Button = styled.button`
   padding: 0 16px;
 
   background: transparent;
-  border: 1px solid #7289da;
+  border: 1px solid ${(props) => props.theme.accent};
   border-radius: 3px;
   outline: none;
   cursor: pointer;
 
-  color: #ffffff;
+  color: ${(props) => props.theme.button.enabled};
   font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.4px;
 
-  transition: 300ms;
+  transition: background-color 300ms;
 
   :hover:not(:disabled) {
-    background: #7289da;
+    background: ${(props) => props.theme.accent};
   }
 
   :disabled {
-    color: rgba(255, 255, 255, 0.6);
+    color: ${(props) => props.theme.button.disabled};
     cursor: not-allowed;
   }
 `
@@ -94,7 +94,10 @@ export const Button = styled.button`
 export const ToggleButton = styled(Button)<{ filled: boolean }>`
   &,
   :hover:not(:disabled) {
-    background: ${(props) => (props.filled ? "#7289da" : "transparent")};
+    background: ${(props) =>
+      props.filled ? props.theme.accent : "transparent"};
+    color: ${(props) =>
+      props.filled ? props.theme.button.filled : props.theme.button.enabled};
   }
 `
 
@@ -116,9 +119,10 @@ export const Action = styled.button`
   outline: none;
   cursor: pointer;
 
-  color: #ffffff;
+  color: ${(props) => props.theme.action};
   font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 15px;
+  font-weight: 500;
   line-height: 20px;
   letter-spacing: -0.4px;
 

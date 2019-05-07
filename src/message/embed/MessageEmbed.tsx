@@ -20,7 +20,8 @@ const colorToRgb = (color: number) =>
   `rgb(${(color >> 16) & 255}, ${(color >> 8) & 255}, ${color & 255})`
 
 const Pill = styled.div<{ fill?: number }>`
-  background-color: ${(props) => colorToRgb(props.fill || 5198940)};
+  background: ${(props) =>
+    props.fill ? colorToRgb(props.fill) : props.theme.embed.pillDefaultFill};
   border-radius: 3px 0 0 3px;
   flex-shrink: 0;
   width: 4px;
@@ -30,9 +31,9 @@ const EmbedContent = styled.div`
   max-width: 520px;
   display: flex;
 
-  border: 1px solid rgba(46, 48, 54, 0.6);
+  border: 1px solid ${(props) => props.theme.embed.border};
 
-  background: rgba(46, 48, 54, 0.3);
+  background: ${(props) => props.theme.embed.background};
   border-radius: 0 3px 3px 0;
 
   padding: 8px 10px;
@@ -41,8 +42,6 @@ const EmbedContent = styled.div`
 const InnerEmbedContent = styled.div`
   flex: 1;
   overflow: hidden;
-
-  color: #dcddde;
 
   > * + * {
     margin: 4px 0 0;
@@ -54,7 +53,7 @@ const EmbedTitle = styled.a`
 
   font-size: 14px;
   font-weight: 500;
-  color: ${(props) => (props.href ? "#0096cf;" : "#ffffff")};
+  color: ${(props) => props.theme.embed.title[props.href ? "link" : "normal"]};
   text-decoration: none;
 
   :hover {
@@ -63,7 +62,7 @@ const EmbedTitle = styled.a`
 `
 
 const EmbedDescription = styled.div`
-  color: #aeafb1;
+  color: ${(props) => props.theme.embed.description};
   font-size: 14px;
   line-height: 16px;
 `

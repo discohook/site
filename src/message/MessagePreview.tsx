@@ -11,15 +11,12 @@ interface Props {
 
 const Container = styled.div`
   padding: 20px 0;
-
-  background-color: #36393f;
 `
 
 const MessageBody = styled.div`
   margin: 1px 0 0 80px;
   padding: 0 10px 0 0;
 
-  color: #dcddde;
   font-size: 15px;
   line-height: 1.3;
 `

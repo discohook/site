@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
-import styled from "styled-components"
+import styled, { ThemeProvider } from "styled-components"
 import { Editor } from "./editor/Editor"
 import { GlobalStyle } from "./GlobalStyle"
 import { initialMessage } from "./initialMessage"
 import { Preview } from "./message/Preview"
+import { darkTheme, lightTheme } from "./themes"
 import { Whitney } from "./Whitney"
 
 const Container = styled.div`
@@ -13,17 +14,24 @@ const Container = styled.div`
 
 export const App = () => {
   const [message, setMessage] = useState(initialMessage)
+  const [theme, setTheme] = useState<"dark" | "light">("dark")
 
   useEffect(() => console.log("message updated", message), [message])
 
   return (
-    <>
-      <Whitney />
-      <GlobalStyle />
-      <Container>
-        <Editor message={message} onChange={setMessage} />
-        <Preview message={message} />
-      </Container>
-    </>
+    <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
+      <>
+        <Whitney />
+        <GlobalStyle />
+        <Container>
+          <Editor
+            message={message}
+            onChange={setMessage}
+            onToggleTheme={() => setTheme(theme === "dark" ? "light" : "dark")}
+          />
+          <Preview message={message} />
+        </Container>
+      </>
+    </ThemeProvider>
   )
 }

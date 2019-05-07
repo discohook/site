@@ -22,7 +22,7 @@ const AuthorImage = styled.img`
 `
 
 const AuthorName = styled.a`
-  color: #ffffff;
+  color: ${(props) => props.theme.embed.author.name};
   font-size: 14px;
   font-weight: 500;
 

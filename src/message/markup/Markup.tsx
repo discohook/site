@@ -12,7 +12,7 @@ const MarkupContainer = styled.div`
   word-wrap: break-word;
 
   a {
-    color: #0096cf;
+    color: ${(props) => props.theme.link};
     text-decoration: none;
 
     :hover {
@@ -25,7 +25,7 @@ const MarkupContainer = styled.div`
     margin: -2.55px 0;
 
     border-radius: 3px;
-    background: #2f3136;
+    background: ${(props) => props.theme.code.background};
 
     font-size: 12.75px;
   }
@@ -35,8 +35,8 @@ const MarkupContainer = styled.div`
     margin: 6px 0 0;
     padding: 7px;
 
-    border: 2px solid rgba(32, 34, 37, 0.3);
-    background: #2f3136;
+    border: 2px solid ${(props) => props.theme.code.border};
+    background: ${(props) => props.theme.code.background};
     border-radius: 5px;
 
     font-size: 14px;
