@@ -32,8 +32,9 @@ export const InputGroup = styled.div`
   }
 `
 
-export const InputLabel = styled.span`
-  display: inline-block;
+export const InputLabel = styled.label`
+  display: flex;
+  flex-direction: column;
   margin: 8px 8px 0;
 `
 
@@ -42,7 +43,7 @@ export const TextInput = styled.input.attrs((props) => ({
 }))`
   min-height: 20px;
   padding: 10px;
-  margin: 8px;
+  margin: 8px 0;
 
   background: #484c52;
   border: 0;
