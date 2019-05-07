@@ -43,12 +43,7 @@ export const Editor = (props: Props) => {
     setSending(true)
 
     const formData = new FormData()
-    if (
-      props.message.content &&
-      props.message.embeds &&
-      props.message.embeds.length > 0
-    )
-      formData.append("payload_json", json)
+    formData.append("payload_json", json)
 
     if (files)
       for (const [index, file] of Object.entries(files))
