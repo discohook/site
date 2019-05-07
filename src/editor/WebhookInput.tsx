@@ -9,17 +9,17 @@ interface Props {
 }
 
 export const WebhookInput = (props: Props) => (
-  <Container>
-    <InputLabel>Webhook URL</InputLabel>
-    <Container direction="row">
+  <Container direction="row">
+    <InputLabel>
+      Webhook URL
       <TextInput
         value={props.url}
         onChange={(event) => props.onChange(event.target.value)}
         placeholder="https://discordapp.com/api/webhooks/..."
       />
-      <Button disabled={props.disabled} onClick={props.onSubmit}>
-        Send
-      </Button>
-    </Container>
+    </InputLabel>
+    <Button disabled={props.disabled} onClick={props.onSubmit}>
+      Send
+    </Button>
   </Container>
 )
