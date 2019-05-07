@@ -57,11 +57,18 @@ export const EmbedEditor = (props: Props) => {
         )}
       </ActionsContainer>
       <BoxContainer>
-        <InputField
-          value={embed.title || ""}
-          onChange={(title) => modifyEmbed(index, { title })}
-          label="Embed title"
-        />
+        <InputGroup>
+          <InputField
+            value={embed.title || ""}
+            onChange={(title) => modifyEmbed(index, { title })}
+            label="Embed title"
+          />
+          <InputField
+            value={embed.url || ""}
+            onChange={(url) => modifyEmbed(index, { url })}
+            label="Embed title link"
+          />
+        </InputGroup>
         <InputField
           value={embed.description || ""}
           onChange={(description) => modifyEmbed(index, { description })}
