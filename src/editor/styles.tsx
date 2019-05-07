@@ -108,7 +108,7 @@ export const ActionsHeader = styled.span`
 
 export const Action = styled.button`
   padding: 0;
-  margin: 0 0 0 12px;
+  margin: 0 4px 0 8px;
 
   background: none;
   border: none;
