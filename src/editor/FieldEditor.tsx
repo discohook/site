@@ -82,7 +82,7 @@ export const FieldEditor = (props: Props) => {
   return (
     <Container>
       {editors}
-      <Button fullWidth disabled={props.fields.length >= 25} onClick={addField}>
+      <Button disabled={props.fields.length >= 25} onClick={addField}>
         Add field
       </Button>
     </Container>

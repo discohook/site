@@ -104,7 +104,7 @@ export const EmbedEditor = (props: Props) => {
   return (
     <Container>
       {editors}
-      <Button fullWidth disabled={props.embeds.length >= 10} onClick={addEmbed}>
+      <Button disabled={props.embeds.length >= 10} onClick={addEmbed}>
         Add embed
       </Button>
     </Container>

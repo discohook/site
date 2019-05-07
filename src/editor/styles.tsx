@@ -3,8 +3,9 @@ import styled from "styled-components"
 export const Container = styled.div<{ direction?: "column" | "row" }>`
   display: flex;
   flex-direction: ${(props) => props.direction || "column"};
+  flex-wrap: ${(props) => (props.direction === "row" ? "wrap" : "nowrap")};
 
-  > * {
+  > *:not(button) {
     flex-grow: 1;
   }
 
@@ -26,6 +27,7 @@ export const BoxContainer = styled.div`
 
 export const InputGroup = styled.div`
   display: flex;
+  flex-wrap: wrap;
 
   > * {
     flex-grow: 1;
@@ -59,11 +61,9 @@ export const TextInput = styled.input.attrs((props) => ({
   letter-spacing: -0.4px;
 `
 
-export const Button = styled.button<{ fullWidth?: boolean }>`
+export const Button = styled.button`
   min-height: 40px;
   max-height: 40px;
-  min-width: ${(props) => (props.fullWidth ? "calc(100% - 16px)" : "80px")};
-  max-width: ${(props) => (props.fullWidth ? "calc(100% - 16px)" : "80px")};
   margin: 8px;
   padding: 0 16px;
 
