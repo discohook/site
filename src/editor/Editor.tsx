@@ -5,7 +5,7 @@ import { FileInput } from "./FileInput"
 import { InputField } from "./InputField"
 import { parseMessage, stringifyMessage } from "./json/json"
 import { JsonInput } from "./json/JsonInput"
-import { Container } from "./styles"
+import { Action, ActionsContainer, ActionsHeader, Container } from "./styles"
 import { WebhookInput } from "./WebhookInput"
 
 interface Props {
@@ -74,6 +74,10 @@ export const Editor = (props: Props) => {
 
   return (
     <Container>
+      <ActionsContainer style={{ margin: "8px 8px 4px" }}>
+        <ActionsHeader>Message editor</ActionsHeader>
+        <Action onClick={() => handleChange({})}>Clear all</Action>
+      </ActionsContainer>
       <WebhookInput
         url={webhookUrl}
         onChange={(url) => setWebhookUrl(url)}
