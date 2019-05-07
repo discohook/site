@@ -84,7 +84,7 @@ export const lightTheme: DefaultTheme = {
     },
     footer: {
       text: "#94979c",
-      separator: "#4f545c",
+      separator: "#cacbce",
     },
   },
   code: {
