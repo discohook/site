@@ -12,7 +12,7 @@ const Container = styled.div`
   grid-template-columns: repeat(2, 50%);
 `
 
-export const App = () => {
+export function App() {
   const [message, setMessage] = useState(initialMessage)
   const [theme, setTheme] = useState<"dark" | "light">("dark")
 

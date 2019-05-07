@@ -8,18 +8,20 @@ interface Props {
   onSubmit: () => void
 }
 
-export const WebhookInput = (props: Props) => (
-  <Container direction="row">
-    <InputLabel>
-      Webhook URL
-      <TextInput
-        value={props.url}
-        onChange={(event) => props.onChange(event.target.value)}
-        placeholder="https://discordapp.com/api/webhooks/..."
-      />
-    </InputLabel>
-    <Button disabled={props.disabled} onClick={props.onSubmit}>
-      Send
-    </Button>
-  </Container>
-)
+export function WebhookInput(props: Props) {
+  return (
+    <Container direction="row">
+      <InputLabel>
+        Webhook URL
+        <TextInput
+          value={props.url}
+          onChange={(event) => props.onChange(event.target.value)}
+          placeholder="https://discordapp.com/api/webhooks/..."
+        />
+      </InputLabel>
+      <Button disabled={props.disabled} onClick={props.onSubmit}>
+        Send
+      </Button>
+    </Container>
+  )
+}

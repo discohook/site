@@ -14,7 +14,7 @@ interface Props {
   onToggleTheme: () => void
 }
 
-export const Editor = (props: Props) => {
+export function Editor(props: Props) {
   const [webhookUrl, setWebhookUrl] = useState("")
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])

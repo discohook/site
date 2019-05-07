@@ -21,15 +21,17 @@ const MessageBody = styled.div`
   line-height: 1.3;
 `
 
-export const MessagePreview = (props: Props) => (
-  <Container>
-    <MessageHeader message={props.message} />
-    <MessageBody>
-      {props.message.content && <Markup content={props.message.content} />}
-      {props.message.embeds &&
-        props.message.embeds.map((embed, index) => (
-          <MessageEmbed embed={embed} key={index} />
-        ))}
-    </MessageBody>
-  </Container>
-)
+export function MessagePreview(props: Props) {
+  return (
+    <Container>
+      <MessageHeader message={props.message} />
+      <MessageBody>
+        {props.message.content && <Markup content={props.message.content} />}
+        {props.message.embeds &&
+          props.message.embeds.map((embed, index) => (
+            <MessageEmbed embed={embed} key={index} />
+          ))}
+      </MessageBody>
+    </Container>
+  )
+}

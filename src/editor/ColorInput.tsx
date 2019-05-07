@@ -9,14 +9,16 @@ interface Props {
 const numToHex = (num: number) => `#${num.toString(16).padStart(6, "0")}`
 const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
 
-export const ColorInput = (props: Props) => (
-  <InputLabel>
-    Embed color
-    <TextInput
-      value={numToHex(props.value)}
-      onChange={(event) =>
-        props.onChange(hexToNum(event.target.value || "#000000"))
-      }
-    />
-  </InputLabel>
-)
+export function ColorInput(props: Props) {
+  return (
+    <InputLabel>
+      Embed color
+      <TextInput
+        value={numToHex(props.value)}
+        onChange={(event) =>
+          props.onChange(hexToNum(event.target.value || "#000000"))
+        }
+      />
+    </InputLabel>
+  )
+}

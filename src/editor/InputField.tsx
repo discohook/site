@@ -8,13 +8,15 @@ interface Props {
   multiline?: true
 }
 
-export const InputField = (props: Props) => (
-  <InputLabel>
-    {props.label}
-    <TextInput
-      as={props.multiline && "textarea"}
-      value={props.value}
-      onChange={(event) => props.onChange(event.target.value || undefined)}
-    />
-  </InputLabel>
-)
+export function InputField(props: Props) {
+  return (
+    <InputLabel>
+      {props.label}
+      <TextInput
+        as={props.multiline && "textarea"}
+        value={props.value}
+        onChange={(event) => props.onChange(event.target.value || undefined)}
+      />
+    </InputLabel>
+  )
+}

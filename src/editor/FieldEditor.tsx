@@ -16,7 +16,7 @@ interface Props {
   onChange: (fields: Field[] | undefined) => void
 }
 
-export const FieldEditor = (props: Props) => {
+export function FieldEditor(props: Props) {
   const addField = () => {
     const newFields = Array.from(props.fields)
     newFields.push({})

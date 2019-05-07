@@ -41,15 +41,19 @@ const FooterSeparator = styled.span`
   font-weight: 700;
 `
 
-export const EmbedFooter = (props: Props) => (
-  <Container>
-    {props.footer && props.footer.iconUrl && (
-      <FooterImage src={props.footer.iconUrl} />
-    )}
-    <FooterText>
-      {props.footer && props.footer.text}
-      {props.footer && props.timestamp && <FooterSeparator>•</FooterSeparator>}
-      {props.timestamp && moment(props.timestamp).calendar()}
-    </FooterText>
-  </Container>
-)
+export function EmbedFooter(props: Props) {
+  return (
+    <Container>
+      {props.footer && props.footer.iconUrl && (
+        <FooterImage src={props.footer.iconUrl} />
+      )}
+      <FooterText>
+        {props.footer && props.footer.text}
+        {props.footer && props.timestamp && (
+          <FooterSeparator>•</FooterSeparator>
+        )}
+        {props.timestamp && moment(props.timestamp).calendar()}
+      </FooterText>
+    </Container>
+  )
+}

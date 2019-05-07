@@ -12,7 +12,7 @@ interface Props {
   onChange: (partialEmbed: PartialEmbed) => void
 }
 
-export const FooterEditor = (props: Props) => {
+export function FooterEditor(props: Props) {
   const handleChange = (embed: PartialEmbed) => {
     const footer =
       embed.footer &&

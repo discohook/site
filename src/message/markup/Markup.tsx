@@ -58,8 +58,10 @@ const MarkupContainer = styled.div`
   }
 `
 
-export const Markup = (props: Props) => (
-  <MarkupContainer>
-    {parseMarkup((props.content || "").trim(), props.inline)}
-  </MarkupContainer>
-)
+export function Markup(props: Props) {
+  return (
+    <MarkupContainer>
+      {parseMarkup((props.content || "").trim(), props.inline)}
+    </MarkupContainer>
+  )
+}

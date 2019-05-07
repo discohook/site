@@ -12,8 +12,10 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-export const Preview = (props: Props) => (
-  <Container>
-    <MessagePreview message={props.message} />
-  </Container>
-)
+export function Preview(props: Props) {
+  return (
+    <Container>
+      <MessagePreview message={props.message} />
+    </Container>
+  )
+}

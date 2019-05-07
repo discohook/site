@@ -98,40 +98,42 @@ const EmbedThumbnail = styled.img`
   cursor: pointer;
 `
 
-export const MessageEmbed = (props: Props) => (
-  <Container>
-    <Pill fill={props.embed.color} />
-    <EmbedContent>
-      <InnerEmbedContent>
-        {props.embed.author && <EmbedAuthor author={props.embed.author} />}
-        {props.embed.title && (
-          <EmbedTitle href={props.embed.url}>
-            <Markup content={props.embed.title} inline={true} />
-          </EmbedTitle>
+export function MessageEmbed(props: Props) {
+  return (
+    <Container>
+      <Pill fill={props.embed.color} />
+      <EmbedContent>
+        <InnerEmbedContent>
+          {props.embed.author && <EmbedAuthor author={props.embed.author} />}
+          {props.embed.title && (
+            <EmbedTitle href={props.embed.url}>
+              <Markup content={props.embed.title} inline={true} />
+            </EmbedTitle>
+          )}
+          {props.embed.description && (
+            <EmbedDescription>
+              <Markup content={props.embed.description} />
+            </EmbedDescription>
+          )}
+          {props.embed.fields && (
+            <EmbedFields>
+              {props.embed.fields.map((field, index) => (
+                <EmbedField field={field} key={index} />
+              ))}
+            </EmbedFields>
+          )}
+          {props.embed.image && <EmbedImage src={props.embed.image.url} />}
+          {(props.embed.footer || props.embed.timestamp) && (
+            <EmbedFooter
+              footer={props.embed.footer}
+              timestamp={props.embed.timestamp}
+            />
+          )}
+        </InnerEmbedContent>
+        {props.embed.thumbnail && (
+          <EmbedThumbnail src={props.embed.thumbnail.url} />
         )}
-        {props.embed.description && (
-          <EmbedDescription>
-            <Markup content={props.embed.description} />
-          </EmbedDescription>
-        )}
-        {props.embed.fields && (
-          <EmbedFields>
-            {props.embed.fields.map((field, index) => (
-              <EmbedField field={field} key={index} />
-            ))}
-          </EmbedFields>
-        )}
-        {props.embed.image && <EmbedImage src={props.embed.image.url} />}
-        {(props.embed.footer || props.embed.timestamp) && (
-          <EmbedFooter
-            footer={props.embed.footer}
-            timestamp={props.embed.timestamp}
-          />
-        )}
-      </InnerEmbedContent>
-      {props.embed.thumbnail && (
-        <EmbedThumbnail src={props.embed.thumbnail.url} />
-      )}
-    </EmbedContent>
-  </Container>
-)
+      </EmbedContent>
+    </Container>
+  )
+}

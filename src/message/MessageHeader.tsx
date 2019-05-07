@@ -57,18 +57,20 @@ const Timestamp = styled.span`
   font-size: 12px;
 `
 
-export const MessageHeader = (props: Props) => (
-  <Container>
-    <Avatar
-      style={{
-        backgroundImage: `url(${props.message.avatarUrl ||
-          "https://cdn.discordapp.com/embed/avatars/0.png"})`,
-      }}
-    />
-    <HeaderInfo>
-      <UserName>{props.message.username || "Captain Hook"}</UserName>
-      <BotTag>BOT</BotTag>
-      <Timestamp>Today at 13:37</Timestamp>
-    </HeaderInfo>
-  </Container>
-)
+export function MessageHeader(props: Props) {
+  return (
+    <Container>
+      <Avatar
+        style={{
+          backgroundImage: `url(${props.message.avatarUrl ||
+            "https://cdn.discordapp.com/embed/avatars/0.png"})`,
+        }}
+      />
+      <HeaderInfo>
+        <UserName>{props.message.username || "Captain Hook"}</UserName>
+        <BotTag>BOT</BotTag>
+        <Timestamp>Today at 13:37</Timestamp>
+      </HeaderInfo>
+    </Container>
+  )
+}

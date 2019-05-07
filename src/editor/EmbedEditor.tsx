@@ -20,7 +20,7 @@ interface Props {
   onChange: (embeds: Embed[] | undefined) => void
 }
 
-export const EmbedEditor = (props: Props) => {
+export function EmbedEditor(props: Props) {
   const addEmbed = () => {
     const newEmbeds = Array.from(props.embeds)
     newEmbeds.push({})

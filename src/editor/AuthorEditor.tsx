@@ -8,7 +8,7 @@ interface Props {
   onChange: (author: Author | undefined) => void
 }
 
-export const AuthorEditor = (props: Props) => {
+export function AuthorEditor(props: Props) {
   const handleChange = (author: Author) =>
     Object.values(author).filter((value) => !!value).length === 0
       ? props.onChange(undefined)

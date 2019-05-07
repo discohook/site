@@ -27,13 +27,15 @@ const FieldValue = styled.div`
   font-size: 14px;
 `
 
-export const EmbedField = (props: Props) => (
-  <Container inline={props.field.inline}>
-    <FieldName>
-      <Markup content={props.field.name || ""} inline={true} />
-    </FieldName>
-    <FieldValue>
-      <Markup content={props.field.value || ""} />
-    </FieldValue>
-  </Container>
-)
+export function EmbedField(props: Props) {
+  return (
+    <Container inline={props.field.inline}>
+      <FieldName>
+        <Markup content={props.field.name || ""} inline={true} />
+      </FieldName>
+      <FieldValue>
+        <Markup content={props.field.value || ""} />
+      </FieldValue>
+    </Container>
+  )
+}

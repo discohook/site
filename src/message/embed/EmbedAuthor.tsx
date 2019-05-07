@@ -33,11 +33,13 @@ const AuthorName = styled.a`
   }
 `
 
-export const EmbedAuthor = (props: Props) => (
-  <Container>
-    {props.author.iconUrl && <AuthorImage src={props.author.iconUrl} />}
-    {props.author.name && (
-      <AuthorName href={props.author.url}>{props.author.name}</AuthorName>
-    )}
-  </Container>
-)
+export function EmbedAuthor(props: Props) {
+  return (
+    <Container>
+      {props.author.iconUrl && <AuthorImage src={props.author.iconUrl} />}
+      {props.author.name && (
+        <AuthorName href={props.author.url}>{props.author.name}</AuthorName>
+      )}
+    </Container>
+  )
+}

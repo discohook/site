@@ -40,19 +40,21 @@ const CodeInput = styled(TextInput).attrs(() => ({ as: "textarea" }))`
   font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
 `
 
-export const JsonInput = (props: Props) => (
-  <Container>
-    <InputLabel>JSON data</InputLabel>
-    {props.errors.length > 0 && (
-      <ErrorContainer>
-        {props.errors.map((error, index) => (
-          <Error key={index}>{error}</Error>
-        ))}
-      </ErrorContainer>
-    )}
-    <CodeInput
-      value={props.json}
-      onChange={(event) => props.onChange(event.target.value)}
-    />
-  </Container>
-)
+export function JsonInput(props: Props) {
+  return (
+    <Container>
+      <InputLabel>JSON data</InputLabel>
+      {props.errors.length > 0 && (
+        <ErrorContainer>
+          {props.errors.map((error, index) => (
+            <Error key={index}>{error}</Error>
+          ))}
+        </ErrorContainer>
+      )}
+      <CodeInput
+        value={props.json}
+        onChange={(event) => props.onChange(event.target.value)}
+      />
+    </Container>
+  )
+}
