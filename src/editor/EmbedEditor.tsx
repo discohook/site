@@ -1,6 +1,7 @@
 import React from "react"
 import { Embed } from "../message/embed/Embed"
 import { AuthorEditor } from "./AuthorEditor"
+import { ColorInput } from "./ColorInput"
 import { FieldEditor } from "./FieldEditor"
 import { FooterEditor } from "./FooterEditor"
 import { InputField } from "./InputField"
@@ -102,6 +103,10 @@ export const EmbedEditor = (props: Props) => {
               modifyEmbed(index, { thumbnail: url ? { url } : undefined })
             }
             label="Embed thumbnail"
+          />
+          <ColorInput
+            value={embed.color || 0}
+            onChange={(color) => modifyEmbed(index, { color })}
           />
         </InputGroup>
       </BoxContainer>
