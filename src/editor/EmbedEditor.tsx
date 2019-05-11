@@ -105,7 +105,7 @@ export function EmbedEditor(props: Props) {
             label="Embed thumbnail"
           />
           <ColorInput
-            value={embed.color || 0}
+            value={embed.color}
             onChange={(color) => modifyEmbed(index, { color })}
           />
         </InputGroup>
