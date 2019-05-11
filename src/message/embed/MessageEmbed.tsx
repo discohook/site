@@ -16,12 +16,8 @@ const Container = styled.div`
   display: flex;
 `
 
-const colorToRgb = (color: number) =>
-  `rgb(${(color >> 16) & 255}, ${(color >> 8) & 255}, ${color & 255})`
-
-const Pill = styled.div<{ fill?: number }>`
-  background: ${(props) =>
-    props.fill ? colorToRgb(props.fill) : props.theme.embed.pillDefaultFill};
+const Pill = styled.div`
+  background: ${(props) => props.theme.embed.pillDefaultFill};
   border-radius: 3px 0 0 3px;
   flex-shrink: 0;
   width: 4px;
@@ -101,7 +97,14 @@ const EmbedThumbnail = styled.img`
 export function MessageEmbed(props: Props) {
   return (
     <Container>
-      <Pill fill={props.embed.color} />
+      <Pill
+        style={{
+          background:
+            props.embed.color === undefined
+              ? undefined
+              : `#${props.embed.color.toString(16).padStart(6, "0")}`,
+        }}
+      />
       <EmbedContent>
         <InnerEmbedContent>
           {props.embed.author && <EmbedAuthor author={props.embed.author} />}
