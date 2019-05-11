@@ -11,7 +11,7 @@ const Container = styled.div`
   display: flex;
 `
 
-const Avatar = styled.div`
+const Avatar = styled.img`
   width: 40px;
   height: 40px;
 
@@ -20,8 +20,7 @@ const Avatar = styled.div`
 
   cursor: pointer;
 
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
 
   :hover {
     opacity: 0.8;
@@ -61,10 +60,10 @@ export function MessageHeader(props: Props) {
   return (
     <Container>
       <Avatar
-        style={{
-          backgroundImage: `url(${props.message.avatarUrl ||
-            "https://cdn.discordapp.com/embed/avatars/0.png"})`,
-        }}
+        src={
+          props.message.avatarUrl ||
+          "https://cdn.discordapp.com/embed/avatars/0.png"
+        }
       />
       <HeaderInfo>
         <UserName>{props.message.username || "Captain Hook"}</UserName>
