@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { Message } from "./Message"
+import moment = require("moment")
 
 interface Props {
   message: Message
@@ -56,7 +57,16 @@ const Timestamp = styled.span`
   font-size: 12px;
 `
 
+const getTimestamp = () => moment().format("hh:mm A")
+
 export function MessageHeader(props: Props) {
+  const [timestamp, setTimestamp] = useState(getTimestamp)
+
+  useEffect(() => {
+    const interval = setInterval(() => setTimestamp(getTimestamp()), 1000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <Container>
       <Avatar
@@ -68,7 +78,7 @@ export function MessageHeader(props: Props) {
       <HeaderInfo>
         <UserName>{props.message.username || "Captain Hook"}</UserName>
         <BotTag>BOT</BotTag>
-        <Timestamp>Today at 13:37</Timestamp>
+        <Timestamp>Today at {timestamp}</Timestamp>
       </HeaderInfo>
     </Container>
   )
