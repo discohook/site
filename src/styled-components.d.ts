@@ -9,6 +9,8 @@ declare module "styled-components" {
     link: string
     input: string
     action: string
+    mention: string
+    spoiler: string
     button: {
       enabled: string
       disabled: string

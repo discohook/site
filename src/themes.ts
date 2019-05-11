@@ -8,6 +8,8 @@ export const darkTheme: DefaultTheme = {
   link: "#0096cf",
   input: "#484c52",
   action: "#ffffff",
+  mention: "#3d414f",
+  spoiler: "#4b4d53",
   button: {
     enabled: "#ffffff",
     disabled: "rgba(255, 255, 255, 0.6)",
@@ -56,6 +58,8 @@ export const lightTheme: DefaultTheme = {
   link: "#00b0f4",
   input: "#f6f6f7",
   action: "#4f545c",
+  mention: "#f1f3fb",
+  spoiler: "#e5e5e5",
   button: {
     enabled: "#4f545c",
     disabled: "rgba(79, 84, 92, 0.6)",

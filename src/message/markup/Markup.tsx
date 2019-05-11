@@ -56,6 +56,20 @@ const MarkupContainer = styled.div`
       height: 32px;
     }
   }
+
+  span.spoiler {
+    background: ${(props) => props.theme.spoiler};
+    border-radius: 3px;
+  }
+
+  span.mention {
+    padding: 0 2px;
+    cursor: pointer;
+
+    background: ${(props) => props.theme.mention};
+    color: ${(props) => props.theme.accent};
+    font-weight: 500;
+  }
 `
 
 export function Markup(props: Props) {

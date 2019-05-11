@@ -119,6 +119,37 @@ const baseRules: Rules = {
     ...defaultRules.del,
     match: inlineRegex(/^~~([\s\S]+?)~~(?!_)/),
   },
+  mention: {
+    order: defaultRules.text.order,
+    match: inlineRegex(/^<@!?\d+>|^@(everyone|here)/),
+    parse: (capture) =>
+      capture[1] ? { content: `@${capture[1]}` } : { content: "@unknown-user" },
+    react: (node: SingleASTNode, output: Output<any>, state: State) => (
+      <span className="mention" key={state.key}>
+        {node.content}
+      </span>
+    ),
+  },
+  roleMention: {
+    order: defaultRules.text.order,
+    match: inlineRegex(/^<@&\d+>/),
+    parse: () => ({ type: "mention", content: "@unknown-role" }),
+  },
+  channelMention: {
+    order: defaultRules.text.order,
+    match: inlineRegex(/^<#\d+>/),
+    parse: () => ({ type: "mention", content: "#unknown-channel" }),
+  },
+  spoiler: {
+    order: defaultRules.text.order,
+    match: inlineRegex(/^\|\|([\s\S]+?)\|\|/),
+    parse: (capture, parse, state) => ({ content: parse(capture[1], state) }),
+    react: (node: SingleASTNode, output: Output<any>, state: State) => (
+      <span className="spoiler" key={state.key}>
+        {output(node.content, state)}
+      </span>
+    ),
+  },
 }
 
 const inlineRules: Rules = { ...baseRules }
