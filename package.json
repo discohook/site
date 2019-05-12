@@ -27,8 +27,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@babel/plugin-transform-runtime": "^7.4.3",
-    "@babel/runtime-corejs2": "^7.4.3",
     "@types/highlight.js": "^9.12.3",
     "@types/node": "^11.13.6",
     "@types/react": "^16.8.14",
