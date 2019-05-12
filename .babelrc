@@ -1,6 +1,3 @@
 {
-  "plugins": [
-    ["@babel/plugin-transform-runtime", { "corejs": 2 }],
-    ["babel-plugin-styled-components"]
-  ]
+  "plugins": ["babel-plugin-styled-components"]
 }

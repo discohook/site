@@ -37,5 +37,8 @@
     "babel-plugin-styled-components": "^1.10.0",
     "parcel-bundler": "^1.12.3",
     "typescript": "^3.3.4000"
-  }
+  },
+  "browserslist": [
+    "> 0.5% and last 1 years"
+  ]
 }
