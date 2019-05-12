@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import styled, { ThemeProvider } from "styled-components"
+import styled, { DefaultTheme, ThemeProvider } from "styled-components"
 import { Editor } from "./editor/Editor"
 import { GlobalStyle } from "./GlobalStyle"
 import { initialMessage } from "./initialMessage"
@@ -14,12 +14,19 @@ const Container = styled.div`
 
 export function App() {
   const [message, setMessage] = useState(initialMessage)
-  const [theme, setTheme] = useState<"dark" | "light">("dark")
-
   useEffect(() => console.log("message updated", message), [message])
 
+  const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
+  const [displayTheme, setDisplayTheme] = useState<"cozy" | "compact">("cozy")
+  useEffect(() => console.log("theme updated", colorTheme, displayTheme))
+
+  const theme: DefaultTheme = {
+    ...(colorTheme === "dark" ? darkTheme : lightTheme),
+    display: displayTheme,
+  }
+
   return (
-    <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme}>
       <>
         <Whitney />
         <GlobalStyle />
@@ -27,7 +34,12 @@ export function App() {
           <Editor
             message={message}
             onChange={setMessage}
-            onToggleTheme={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onToggleTheme={() =>
+              setColorTheme(colorTheme === "dark" ? "light" : "dark")
+            }
+            onToggleDisplay={() =>
+              setDisplayTheme(displayTheme === "cozy" ? "compact" : "cozy")
+            }
           />
           <Preview message={message} />
         </Container>

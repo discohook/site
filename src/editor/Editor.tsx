@@ -12,6 +12,7 @@ interface Props {
   message: Message
   onChange: (message: Message) => void
   onToggleTheme: () => void
+  onToggleDisplay: () => void
 }
 
 export function Editor(props: Props) {
@@ -78,6 +79,7 @@ export function Editor(props: Props) {
       <ActionsContainer style={{ margin: "8px 8px 4px" }}>
         <ActionsHeader>Message editor</ActionsHeader>
         <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
+        <Action onClick={() => props.onToggleDisplay()}>Toggle display</Action>
         <Action onClick={() => handleChange({})}>Clear all</Action>
       </ActionsContainer>
       <WebhookInput

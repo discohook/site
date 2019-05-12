@@ -72,7 +72,7 @@ const baseRules: Rules = {
       node.src ? (
         <img
           draggable={false}
-          className={`emoji ${node.jumboable ? "jumboable" : ""}`}
+          className={`emoji${node.jumboable ? " jumboable" : ""}`}
           alt={node.surrogate}
           title={node.name}
           src={node.src}
@@ -94,7 +94,7 @@ const baseRules: Rules = {
     react: (node: SingleASTNode, output: Output<any>, state: State) => (
       <img
         draggable={false}
-        className={`emoji ${node.jumboable ? "jumboable" : ""}`}
+        className={`emoji${node.jumboable ? " jumboable" : ""}`}
         alt={`<${node.animated ? "a" : ""}${node.name}${node.id}>`}
         title={node.name}
         src={node.src}

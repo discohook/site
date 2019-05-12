@@ -1,23 +1,28 @@
+import moment from "moment"
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { Message } from "./Message"
-import moment = require("moment")
 
 interface Props {
   message: Message
 }
 
 const Container = styled.div`
-  height: 20.8px;
-  display: flex;
+  height: ${(props) => (props.theme.display === "cozy" ? "20.8px" : "auto")};
+  display: ${(props) =>
+    props.theme.display === "cozy" ? "flex" : "inline-flex"};
+  margin: ${(props) =>
+    props.theme.display === "cozy" ? "0 0 0 -80px" : "0 0 0 -9ch"};
 `
 
 const Avatar = styled.img`
+  display: ${(props) => (props.theme.display === "cozy" ? "block" : "none")};
+
   width: 40px;
   height: 40px;
 
   border-radius: 50%;
-  margin: -2px 20px;
+  margin: 0 20px;
 
   cursor: pointer;
 
@@ -28,7 +33,13 @@ const Avatar = styled.img`
   }
 `
 
-const HeaderInfo = styled.div``
+const HeaderInfo = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: ${(props) =>
+    props.theme.display === "cozy" ? "row" : "row-reverse"};
+  margin: 0;
+`
 
 const UserName = styled.span`
   color: ${(props) => props.theme.message.username};
@@ -37,24 +48,41 @@ const UserName = styled.span`
 
 const BotTag = styled.span`
   position: relative;
-  top: -1px;
+  top: 1px;
 
-  padding: 1px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: ${(props) => (props.theme.display === "cozy" ? "23px" : "21px")};
+  height: 14px;
+  padding: ${(props) => (props.theme.display === "cozy" ? "1px 0 0" : "0")};
+
   border-radius: 3px;
-  margin: 0 0 0 4.8px;
+  margin: 0 4.8px;
 
   background: ${(props) => props.theme.accent};
 
   color: #ffffff;
-  font-size: 10px;
+  font-size: ${(props) =>
+    props.theme.display === "cozy" ? "10px" : "9.375px"};
   font-weight: 500;
 `
 
 const Timestamp = styled.span`
-  margin: 0 0 0 4.8px;
+  width: ${(props) => (props.theme.display === "cozy" ? "auto" : "74px")};
+
+  margin: ${(props) => (props.theme.display === "cozy" ? "1px 0 0" : "0")};
 
   color: ${(props) => props.theme.message.timestamp};
   font-size: 12px;
+
+  text-align: right;
+
+  ::before {
+    content: ${(props) =>
+      props.theme.display === "cozy" ? "'Today at '" : ""};
+  }
 `
 
 const getTimestamp = () => moment().format("hh:mm A")
@@ -78,7 +106,7 @@ export function MessageHeader(props: Props) {
       <HeaderInfo>
         <UserName>{props.message.username || "Captain Hook"}</UserName>
         <BotTag>BOT</BotTag>
-        <Timestamp>Today at {timestamp}</Timestamp>
+        <Timestamp>{timestamp}</Timestamp>
       </HeaderInfo>
     </Container>
   )

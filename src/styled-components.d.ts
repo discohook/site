@@ -2,6 +2,7 @@ import "styled-components"
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    display: "cozy" | "compact"
     accent: string
     background: string
     border: string

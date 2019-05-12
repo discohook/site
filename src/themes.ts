@@ -1,6 +1,8 @@
 import { DefaultTheme } from "styled-components"
 
-export const darkTheme: DefaultTheme = {
+type Theme = Pick<DefaultTheme, Exclude<keyof DefaultTheme, "display">>
+
+export const darkTheme: Theme = {
   accent: "#7289da",
   background: "#36393f",
   border: "#1e1f23",
@@ -50,7 +52,7 @@ export const darkTheme: DefaultTheme = {
   },
 }
 
-export const lightTheme: DefaultTheme = {
+export const lightTheme: Theme = {
   accent: "#7289da",
   background: "#ffffff",
   border: "#c5c6c9",
