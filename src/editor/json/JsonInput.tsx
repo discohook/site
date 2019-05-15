@@ -40,7 +40,7 @@ const CodeInput = styled(TextInput).attrs(() => ({ as: "textarea" }))`
   font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
 `
 
-export function JsonInput(props: Props) {
+export default function JsonInput(props: Props) {
   return (
     <Container>
       <InputLabel>JSON data</InputLabel>

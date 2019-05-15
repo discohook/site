@@ -1,6 +1,6 @@
-import { Message } from "../../message/Message"
-import { toCamelCase, toSnakeCase } from "./casing"
-import { isMessage } from "./validation"
+import { Message } from "../../message/Message";
+import { toCamelCase, toSnakeCase } from "./casing";
+import { isMessage } from "./validation";
 
 export const stringifyMessage = (message: Message) => {
   return JSON.stringify(toSnakeCase(message), undefined, 2)

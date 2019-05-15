@@ -5,7 +5,7 @@ interface Props {
   onChange: (files: FileList | undefined) => void
 }
 
-export function FileInput(props: Props) {
+export default function FileInput(props: Props) {
   return (
     <InputLabel>
       Files

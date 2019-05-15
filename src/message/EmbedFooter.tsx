@@ -1,7 +1,7 @@
 import moment from "moment"
 import React from "react"
 import styled from "styled-components"
-import { Footer } from "./Footer"
+import { Footer } from "./Message"
 
 interface Props {
   footer?: Footer

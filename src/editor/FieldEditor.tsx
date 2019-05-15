@@ -1,6 +1,6 @@
 import React from "react"
-import { Field } from "../message/embed/Field"
-import { InputField } from "./InputField"
+import { Field } from "../message/Message"
+import InputField from "./InputField"
 import {
   Action,
   ActionsContainer,
@@ -16,10 +16,10 @@ interface Props {
   onChange: (fields: Field[] | undefined) => void
 }
 
-export function FieldEditor(props: Props) {
+export default function FieldEditor(props: Props) {
   const addField = () => {
     const newFields = Array.from(props.fields)
-    newFields.push({})
+    newFields.push({} as Field)
     props.onChange(newFields)
   }
 

@@ -13,7 +13,7 @@ const Container = styled.div`
   overflow-y: scroll;
 `
 
-export function Preview(props: Props) {
+export default function Preview(props: Props) {
   return (
     <Container>
       <MessagePreview message={props.message} />

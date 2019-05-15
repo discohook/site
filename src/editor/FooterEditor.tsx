@@ -1,7 +1,6 @@
 import React from "react"
-import { Embed } from "../message/embed/Embed"
-import { Footer } from "../message/embed/Footer"
-import { InputField } from "./InputField"
+import { Embed, Footer } from "../message/Message"
+import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
 type PartialEmbed = Pick<Embed, "footer" | "timestamp">
@@ -12,7 +11,7 @@ interface Props {
   onChange: (partialEmbed: PartialEmbed) => void
 }
 
-export function FooterEditor(props: Props) {
+export default function FooterEditor(props: Props) {
   const handleChange = (embed: PartialEmbed) => {
     const footer =
       embed.footer &&

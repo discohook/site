@@ -1,13 +1,20 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { Message } from "../message/Message"
-import { EmbedEditor } from "./EmbedEditor"
-import { FileInput } from "./FileInput"
-import { InputField } from "./InputField"
-import { parseMessage, stringifyMessage } from "./json/json"
-import { JsonInput } from "./json/JsonInput"
-import { Action, ActionsContainer, ActionsHeader, Container } from "./styles"
-import { WebhookInput } from "./WebhookInput"
+import EmbedEditor from "./EmbedEditor"
+import FileInput from "./FileInput"
+import InputField from "./InputField"
+import { parseMessage, stringifyMessage } from "./json/convert"
+import JsonInput from "./json/JsonInput"
+import {
+  Action,
+  ActionsContainer,
+  ActionsHeader,
+  Button,
+  Container,
+  InputLabel,
+  TextInput,
+} from "./styles"
 
 interface Props {
   message: Message
@@ -21,7 +28,7 @@ const EditorContainer = styled(Container)`
   overflow-y: scroll;
 `
 
-export function Editor(props: Props) {
+export default function Editor(props: Props) {
   const [webhookUrl, setWebhookUrl] = useState("")
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])
@@ -88,12 +95,19 @@ export function Editor(props: Props) {
         <Action onClick={() => props.onToggleDisplay()}>Toggle display</Action>
         <Action onClick={() => handleChange({})}>Clear all</Action>
       </ActionsContainer>
-      <WebhookInput
-        url={webhookUrl}
-        onChange={(url) => setWebhookUrl(url)}
-        disabled={isDisabled}
-        onSubmit={executeWebhook}
-      />
+      <Container direction="row">
+        <InputLabel>
+          Webhook URL
+          <TextInput
+            value={webhookUrl}
+            onChange={(event) => setWebhookUrl(event.target.value)}
+            placeholder="https://discordapp.com/api/webhooks/..."
+          />
+        </InputLabel>
+        <Button disabled={isDisabled} onClick={executeWebhook}>
+          Send
+        </Button>
+      </Container>
       <InputField
         value={props.message.content || ""}
         onChange={(content) => handleChange({ ...props.message, content })}

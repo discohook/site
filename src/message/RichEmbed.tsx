@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import { Markup } from "../markup/Markup"
-import { Embed } from "./Embed"
 import { EmbedAuthor } from "./EmbedAuthor"
 import { EmbedField } from "./EmbedField"
 import { EmbedFooter } from "./EmbedFooter"
+import { Markup } from "./markup/Markup"
+import { Embed } from "./Message"
 
 interface Props {
   embed: Embed
@@ -94,7 +94,7 @@ const EmbedThumbnail = styled.img`
   cursor: pointer;
 `
 
-export function MessageEmbed(props: Props) {
+export function RichEmbed(props: Props) {
   return (
     <Container>
       <Pill

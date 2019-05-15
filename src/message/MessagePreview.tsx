@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { MessageEmbed } from "./embed/MessageEmbed"
 import { Markup } from "./markup/Markup"
 import { Message } from "./Message"
 import { MessageHeader } from "./MessageHeader"
+import { RichEmbed } from "./RichEmbed"
 
 interface Props {
   message: Message
@@ -35,7 +35,7 @@ export function MessagePreview(props: Props) {
       {props.message.content && <Markup content={props.message.content} />}
       {props.message.embeds &&
         props.message.embeds.map((embed, index) => (
-          <MessageEmbed embed={embed} key={index} />
+          <RichEmbed embed={embed} key={index} />
         ))}
     </Container>
   )

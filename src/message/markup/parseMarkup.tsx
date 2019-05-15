@@ -1,30 +1,18 @@
-import React, { ReactElement, ReactNode } from "react"
+import React from "react"
 import {
   anyScopeRegex,
   ASTNode,
   defaultRules,
   inlineRegex,
   NodeOutput,
-  Output,
   outputFor,
   parserFor,
   ParserRule,
-  SingleASTNode,
-  State,
 } from "simple-markdown"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 import { highlightCode } from "./highlightCode"
 
-type Rules = Record<
-  string,
-  ParserRule & {
-    react?:
-      | NodeOutput<ReactElement>
-      | NodeOutput<ReactNode>
-      | NodeOutput<string>
-      | null
-  }
->
+type Rules = Record<string, ParserRule & { react?: NodeOutput<any> | null }>
 
 const escape = (s: string) =>
   s.replace(/[\-\[\]\/\{}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
@@ -49,7 +37,9 @@ const baseRules: Rules = {
   em: defaultRules.em,
   u: defaultRules.u,
   inlineCode: defaultRules.inlineCode,
-  emoticon: {
+  shrug: {
+    // Exception for left arm disappearing because of the underscore getting
+    // escaped, and the right arm being a part of an italic node.
     order: defaultRules.text.order,
     match: (source) => /^(¯\\_\(ツ\)_\/¯)/.exec(source),
     parse: (capture) => ({ type: "text", content: capture[1] }),
@@ -68,11 +58,11 @@ const baseRules: Rules = {
             type: "text",
             content: capture[0],
           },
-    react: (node: SingleASTNode, output: Output<any>, state: State) =>
+    react: (node, _, state) =>
       node.src ? (
         <img
           draggable={false}
-          className={`emoji${node.jumboable ? " jumboable" : ""}`}
+          className={`emoji ${node.jumboable ? "jumboable" : ""}`.trim()}
           alt={node.surrogate}
           title={node.name}
           src={node.src}
@@ -91,11 +81,11 @@ const baseRules: Rules = {
       src: `https://cdn.discordapp.com/emojis/${capture[3]}`,
       animated: !!capture[1],
     }),
-    react: (node: SingleASTNode, output: Output<any>, state: State) => (
+    react: (node, _, state) => (
       <img
         draggable={false}
-        className={`emoji${node.jumboable ? " jumboable" : ""}`}
-        alt={`<${node.animated ? "a" : ""}${node.name}${node.id}>`}
+        className={`emoji ${node.jumboable ? "jumboable" : ""}`.trim()}
+        alt={node.name}
         title={node.name}
         src={node.src}
         key={state.key}
@@ -124,7 +114,7 @@ const baseRules: Rules = {
     match: inlineRegex(/^<@!?\d+>|^@(everyone|here)/),
     parse: (capture) =>
       capture[1] ? { content: `@${capture[1]}` } : { content: "@unknown-user" },
-    react: (node: SingleASTNode, output: Output<any>, state: State) => (
+    react: (node, _, state) => (
       <span className="mention" key={state.key}>
         {node.content}
       </span>
@@ -144,7 +134,7 @@ const baseRules: Rules = {
     order: defaultRules.text.order,
     match: inlineRegex(/^\|\|([\s\S]+?)\|\|/),
     parse: (capture, parse, state) => ({ content: parse(capture[1], state) }),
-    react: (node: SingleASTNode, output: Output<any>, state: State) => (
+    react: (node, output, state) => (
       <span className="spoiler" key={state.key}>
         {output(node.content, state)}
       </span>
@@ -169,8 +159,8 @@ const blockRules: Rules = {
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
     }),
-    react: (node: SingleASTNode, output: Output<any>, state: State) =>
-      highlightCode(node.language, node.content, state.key),
+    react: (node, _, state) =>
+      highlightCode(node.language, node.content, { key: state.key }),
   },
 }
 
@@ -179,28 +169,28 @@ const parseBlock = parserFor(blockRules, { inline: true })
 const reactOutput = outputFor({ ...inlineRules, ...blockRules }, "react")
 
 export const jumbo = (ast: ASTNode): ASTNode => {
-  if (!Array.isArray(ast)) {
-    const node = { ...ast }
-    if (["emoji", "customEmoji"].includes(ast.type)) node.jumboable = true
-    return node
-  }
+  if (!Array.isArray(ast))
+    return { ...ast, jumboable: ["emoji", "customEmoji"].includes(ast.type) }
 
-  const tree = Array.from(ast)
-
-  const emojiNodes = tree.filter(
+  // Gets all nodes of type 'emoji' or 'customEmoji'
+  const emojiNodes = ast.filter(
     (node) => !["emoji", "customEmoji"].includes(node.type),
   )
+  // If there's more than 26 (limit of jumbosized emojis), return the tree as is
+  if (emojiNodes.length >= 26) return ast
 
-  const hasText = tree.some(
+  // Check if the tree has any amount of nodes that aren't emojis,
+  // or nodes containing whitespace only
+  const hasText = ast.some(
     (node) =>
       !["emoji", "customEmoji"].includes(node.type) &&
       (typeof node.content !== "string" || node.content.trim() !== ""),
   )
+  if (hasText) return ast
 
-  if (emojiNodes.length > 27 || hasText) return tree
-
-  for (const node of tree) node.jumboable = true
-  return tree
+  // If the message passed all checks, return a copy of the tree where all nodes
+  // have the 'jumboable' property set to true
+  return ast.map((node) => ({ ...node, jumboable: true }))
 }
 
 export const parseMarkup = (content: string, inline?: boolean) => {

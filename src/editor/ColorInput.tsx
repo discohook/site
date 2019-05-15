@@ -11,7 +11,7 @@ const numToHex = (num: number | undefined) =>
 
 const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
 
-export function ColorInput(props: Props) {
+export default function ColorInput(props: Props) {
   const [hex, setHex] = useState(numToHex(props.value))
 
   useEffect(() => {

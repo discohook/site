@@ -8,7 +8,7 @@ interface Props {
   multiline?: true
 }
 
-export function InputField(props: Props) {
+export default function InputField(props: Props) {
   return (
     <InputLabel>
       {props.label}

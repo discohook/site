@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { Markup } from "../markup/Markup"
-import { Field } from "./Field"
+import { Markup } from "./markup/Markup"
+import { Field } from "./Message"
 
 interface Props {
   field: Field

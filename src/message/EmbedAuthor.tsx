@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Author } from "./Author"
+import { Author } from "./Message"
 
 interface Props {
   author: Author

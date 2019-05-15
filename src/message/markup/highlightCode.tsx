@@ -1,5 +1,5 @@
 import { getLanguage, highlight } from "highlight.js"
-import React from "react"
+import React, { ComponentPropsWithoutRef } from "react"
 import styled from "styled-components"
 
 const CodeBlock = styled.pre`
@@ -81,10 +81,13 @@ const CodeBlock = styled.pre`
 export const highlightCode = (
   language: string,
   content: string,
-  key: number,
+  attributes: ComponentPropsWithoutRef<"pre">,
 ) => {
-  if (!getLanguage(language)) return <CodeBlock key={key}>{content}</CodeBlock>
+  if (!getLanguage(language))
+    return <CodeBlock {...attributes}>{content}</CodeBlock>
 
   const { value: html } = highlight(language, content, true)
-  return <CodeBlock key={key} dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <CodeBlock {...attributes} dangerouslySetInnerHTML={{ __html: html }} />
+  )
 }

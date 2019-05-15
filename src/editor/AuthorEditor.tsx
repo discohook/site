@@ -1,6 +1,6 @@
 import React from "react"
-import { Author } from "../message/embed/Author"
-import { InputField } from "./InputField"
+import { Author } from "../message/Message"
+import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   onChange: (author: Author | undefined) => void
 }
 
-export function AuthorEditor(props: Props) {
+export default function AuthorEditor(props: Props) {
   const handleChange = (author: Author) =>
     Object.values(author).filter((value) => !!value).length === 0
       ? props.onChange(undefined)

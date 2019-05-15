@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components"
 
-export const Whitney = createGlobalStyle`
+export default createGlobalStyle`
   @font-face {
     font-family: Whitney;
     font-weight: 300;

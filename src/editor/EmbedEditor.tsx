@@ -1,10 +1,10 @@
 import React from "react"
-import { Embed } from "../message/embed/Embed"
-import { AuthorEditor } from "./AuthorEditor"
-import { ColorInput } from "./ColorInput"
-import { FieldEditor } from "./FieldEditor"
-import { FooterEditor } from "./FooterEditor"
-import { InputField } from "./InputField"
+import { Embed, Image } from "../message/Message"
+import AuthorEditor from "./AuthorEditor"
+import ColorInput from "./ColorInput"
+import FieldEditor from "./FieldEditor"
+import FooterEditor from "./FooterEditor"
+import InputField from "./InputField"
 import {
   Action,
   ActionsContainer,
@@ -20,7 +20,7 @@ interface Props {
   onChange: (embeds: Embed[] | undefined) => void
 }
 
-export function EmbedEditor(props: Props) {
+export default function EmbedEditor(props: Props) {
   const addEmbed = () => {
     const newEmbeds = Array.from(props.embeds)
     newEmbeds.push({})
@@ -91,14 +91,14 @@ export function EmbedEditor(props: Props) {
         />
         <InputGroup>
           <InputField
-            value={(embed.image || {}).url || ""}
+            value={(embed.image || ({} as Image)).url || ""}
             onChange={(url) =>
               modifyEmbed(index, { image: url ? { url } : undefined })
             }
             label="Embed image"
           />
           <InputField
-            value={(embed.thumbnail || {}).url || ""}
+            value={(embed.thumbnail || ({} as Image)).url || ""}
             onChange={(url) =>
               modifyEmbed(index, { thumbnail: url ? { url } : undefined })
             }

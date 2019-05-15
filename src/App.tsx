@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 import styled, { DefaultTheme, ThemeProvider } from "styled-components"
-import { Editor } from "./editor/Editor"
-import { GlobalStyle } from "./GlobalStyle"
+import Editor from "./editor/Editor"
+import GlobalStyle from "./GlobalStyle"
 import { initialMessage } from "./initialMessage"
-import { Preview } from "./message/Preview"
+import Preview from "./message/Preview"
 import { darkTheme, lightTheme } from "./themes"
-import { Whitney } from "./Whitney"
+import Whitney from "./Whitney"
 
 const Container = styled.div`
   display: grid;
@@ -14,7 +14,7 @@ const Container = styled.div`
   overflow: hidden;
 `
 
-export function App() {
+export default function App() {
   const [message, setMessage] = useState(initialMessage)
   useEffect(() => console.log("message updated", message), [message])
 
