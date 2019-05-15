@@ -12,6 +12,8 @@ export const darkTheme: Theme = {
   action: "#ffffff",
   mention: "#3d414f",
   spoiler: "#4b4d53",
+  scrollThumb: "#202225",
+  scrollTrack: "#2f3136",
   button: {
     enabled: "#ffffff",
     disabled: "rgba(255, 255, 255, 0.6)",
@@ -62,6 +64,8 @@ export const lightTheme: Theme = {
   action: "#4f545c",
   mention: "#f1f3fb",
   spoiler: "#e5e5e5",
+  scrollThumb: "#7289da",
+  scrollTrack: "#f6f6f7",
   button: {
     enabled: "#4f545c",
     disabled: "rgba(79, 84, 92, 0.6)",

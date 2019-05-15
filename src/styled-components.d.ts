@@ -12,6 +12,8 @@ declare module "styled-components" {
     action: string
     mention: string
     spoiler: string
+    scrollThumb: string
+    scrollTrack: string
     button: {
       enabled: string
       disabled: string
