@@ -10,6 +10,8 @@ import { Whitney } from "./Whitney"
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 50%);
+  height: 100vh;
+  overflow: hidden;
 `
 
 export function App() {

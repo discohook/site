@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import styled from "styled-components"
 import { Message } from "../message/Message"
 import { EmbedEditor } from "./EmbedEditor"
 import { FileInput } from "./FileInput"
@@ -14,6 +15,11 @@ interface Props {
   onToggleTheme: () => void
   onToggleDisplay: () => void
 }
+
+const EditorContainer = styled(Container)`
+  padding: 8px;
+  overflow-y: scroll;
+`
 
 export function Editor(props: Props) {
   const [webhookUrl, setWebhookUrl] = useState("")
@@ -75,8 +81,8 @@ export function Editor(props: Props) {
   })()
 
   return (
-    <Container>
-      <ActionsContainer style={{ margin: "8px 8px 4px" }}>
+    <EditorContainer>
+      <ActionsContainer style={{ margin: "8px 8px 24px" }}>
         <ActionsHeader>Message editor</ActionsHeader>
         <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
         <Action onClick={() => props.onToggleDisplay()}>Toggle display</Action>
@@ -108,6 +114,6 @@ export function Editor(props: Props) {
         }}
         errors={errors}
       />
-    </Container>
+    </EditorContainer>
   )
 }

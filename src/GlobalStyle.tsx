@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
   body {
+    margin: 0;
     font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     line-height: 1;
     text-rendering: optimizeLegibility;
