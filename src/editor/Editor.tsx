@@ -26,6 +26,16 @@ interface Props {
 const EditorContainer = styled(Container)`
   padding: 8px;
   overflow-y: scroll;
+
+  > *:not(button) {
+    flex-grow: 0;
+  }
+`
+
+const EditorActionsWrapper = styled.div``
+
+const EditorActionsContainer = styled(ActionsContainer)`
+  margin: 8px 8px 4px;
 `
 
 export default function Editor(props: Props) {
@@ -89,12 +99,16 @@ export default function Editor(props: Props) {
 
   return (
     <EditorContainer>
-      <ActionsContainer style={{ margin: "8px 8px 24px" }}>
-        <ActionsHeader>Message editor</ActionsHeader>
-        <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
-        <Action onClick={() => props.onToggleDisplay()}>Toggle display</Action>
-        <Action onClick={() => handleChange({})}>Clear all</Action>
-      </ActionsContainer>
+      <EditorActionsWrapper>
+        <EditorActionsContainer>
+          <ActionsHeader>Message editor</ActionsHeader>
+          <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
+          <Action onClick={() => props.onToggleDisplay()}>
+            Toggle display
+          </Action>
+          <Action onClick={() => handleChange({})}>Clear all</Action>
+        </EditorActionsContainer>
+      </EditorActionsWrapper>
       <Container direction="row">
         <InputLabel>
           Webhook URL
