@@ -20,7 +20,10 @@ export default function App() {
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const [displayTheme, setDisplayTheme] = useState<"cozy" | "compact">("cozy")
-  useEffect(() => console.log("theme updated", colorTheme, displayTheme))
+  useEffect(() => console.log("theme updated", colorTheme, displayTheme), [
+    colorTheme,
+    displayTheme,
+  ])
 
   const theme: DefaultTheme = {
     ...(colorTheme === "dark" ? darkTheme : lightTheme),
