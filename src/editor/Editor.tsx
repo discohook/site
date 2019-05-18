@@ -158,7 +158,23 @@ export default function Editor(props: Props) {
         <EmbedEditor
           embeds={props.message.embeds || []}
           onChange={(embeds) => handleChange({ ...props.message, embeds })}
-        />
+        />{" "}
+        <Container direction="row">
+          <InputField
+            value={props.message.username || ""}
+            onChange={(username) =>
+              handleChange({ ...props.message, username })
+            }
+            label="Override username"
+          />
+          <InputField
+            value={props.message.avatarUrl || ""}
+            onChange={(avatarUrl) =>
+              handleChange({ ...props.message, avatarUrl })
+            }
+            label="Override avatar"
+          />
+        </Container>
       </ErrorBoundary>
       <FileInput onChange={setFiles} />
       <JsonInput
