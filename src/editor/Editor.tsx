@@ -158,7 +158,7 @@ export default function Editor(props: Props) {
         <EmbedEditor
           embeds={props.message.embeds || []}
           onChange={(embeds) => handleChange({ ...props.message, embeds })}
-        />{" "}
+        />
         <Container direction="row">
           <InputField
             value={props.message.username || ""}
