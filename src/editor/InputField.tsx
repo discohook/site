@@ -6,6 +6,7 @@ interface Props {
   onChange: (value: string | undefined) => void
   label: string
   multiline?: true
+  placeholder?: string
 }
 
 export default function InputField(props: Props) {
@@ -16,6 +17,7 @@ export default function InputField(props: Props) {
         as={props.multiline && "textarea"}
         value={props.value}
         onChange={(event) => props.onChange(event.target.value || undefined)}
+        placeholder={props.placeholder}
       />
     </InputLabel>
   )

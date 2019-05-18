@@ -13,8 +13,6 @@ import {
   ActionsHeader,
   Button,
   Container,
-  InputLabel,
-  TextInput,
 } from "./styles"
 
 interface Props {
@@ -140,14 +138,12 @@ export default function Editor(props: Props) {
         </EditorActionsContainer>
       </EditorActionsWrapper>
       <Container direction="row">
-        <InputLabel>
-          Webhook URL
-          <TextInput
-            value={webhookUrl}
-            onChange={(event) => setWebhookUrl(event.target.value)}
-            placeholder="https://discordapp.com/api/webhooks/..."
-          />
-        </InputLabel>
+        <InputField
+          value={webhookUrl}
+          onChange={(url) => setWebhookUrl(url || "")}
+          label="Webhook URL"
+          placeholder="https://discordapp.com/api/webhooks/..."
+        />
         <Button disabled={isDisabled} onClick={executeWebhook}>
           Send
         </Button>
