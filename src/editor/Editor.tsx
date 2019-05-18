@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
@@ -38,6 +39,38 @@ const EditorActionsContainer = styled(ActionsContainer)`
   margin: 8px 8px 4px;
 `
 
+const ErrorContainer = styled.div`
+  margin: 8px;
+  padding: 16px;
+  border: 1px solid #a54043;
+  border-radius: 3px;
+`
+
+const ErrorHeader = styled.p`
+  margin: 0;
+  color: ${(props) => props.theme.action};
+  font-weight: 500;
+`
+
+const ErrorParagraph = styled.p`
+  margin: 8px 0 0;
+`
+
+function EditorError() {
+  return (
+    <ErrorContainer>
+      <ErrorHeader>Oops.</ErrorHeader>
+      <ErrorParagraph>It looks like an error occurred.</ErrorParagraph>
+      <ErrorParagraph>
+        If you manually edited the JSON data below, try double checking it.
+      </ErrorParagraph>
+      <ErrorParagraph>
+        If that doesn't work out, reload the page.
+      </ErrorParagraph>
+    </ErrorContainer>
+  )
+}
+
 export default function Editor(props: Props) {
   const [webhookUrl, setWebhookUrl] = useState("")
   const [json, setJson] = useState(stringifyMessage(props.message))
@@ -53,14 +86,11 @@ export default function Editor(props: Props) {
   }
 
   const checkErrors = (json: string) => {
-    const message = parseMessage(json)
-    if (Array.isArray(message)) {
-      setErrors(message)
-      console.log("json errors", message)
-      return
-    }
+    const { message, errors } = parseMessage(json)
 
-    setErrors([])
+    setErrors(errors)
+    if (errors.length > 0) console.log("json errors", message)
+
     return message
   }
 
@@ -122,16 +152,18 @@ export default function Editor(props: Props) {
           Send
         </Button>
       </Container>
-      <InputField
-        value={props.message.content || ""}
-        onChange={(content) => handleChange({ ...props.message, content })}
-        label="Message content"
-        multiline
-      />
-      <EmbedEditor
-        embeds={props.message.embeds || []}
-        onChange={(embeds) => handleChange({ ...props.message, embeds })}
-      />
+      <ErrorBoundary onError={() => <EditorError />}>
+        <InputField
+          value={props.message.content || ""}
+          onChange={(content) => handleChange({ ...props.message, content })}
+          label="Message content"
+          multiline
+        />
+        <EmbedEditor
+          embeds={props.message.embeds || []}
+          onChange={(embeds) => handleChange({ ...props.message, embeds })}
+        />
+      </ErrorBoundary>
       <FileInput onChange={setFiles} />
       <JsonInput
         json={json}

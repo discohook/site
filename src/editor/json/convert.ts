@@ -1,6 +1,6 @@
-import { Message } from "../../message/Message";
-import { toCamelCase, toSnakeCase } from "./casing";
-import { isMessage } from "./validation";
+import { Message } from "../../message/Message"
+import { toCamelCase, toSnakeCase } from "./casing"
+import { isMessage } from "./validation"
 
 export const stringifyMessage = (message: Message) => {
   return JSON.stringify(toSnakeCase(message), undefined, 2)
@@ -17,10 +17,9 @@ export const parseMessage = (json: string) => {
         ...message,
       ].join(": ")
     })
-    if (errors.length > 0) return errors
 
-    return object as Message
+    return { message: object as Message, errors }
   } catch (error) {
-    return [`message: ${error.message}`]
+    return { errors: [`message: ${error.message}`] }
   }
 }
