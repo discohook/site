@@ -193,11 +193,25 @@ export const jumbo = (ast: ASTNode): ASTNode => {
   return ast.map((node) => ({ ...node, jumboable: true }))
 }
 
+const ellipsize = (text: string, length: number) =>
+  text.length <= length
+    ? text.replace(/[\r\n]/g, "")
+    : text.replace(/[\r\n]/g, "").substring(0, length) + "…"
+
 export const parseMarkup = (content: string, inline?: boolean) => {
-  console.time("render markup")
+  const startTime = performance.now()
+
   const ast = inline ? parseInline(content) : jumbo(parseBlock(content))
-  console.timeLog("render markup", "parsed markup", { ast })
+  const parseTime = performance.now() - startTime
+
   const output = reactOutput(ast)
-  console.timeEnd("render markup")
+  const outputTime = performance.now() - startTime - parseTime
+
+  console.log("render markup", `(${ellipsize(content, 12)})`, {
+    tree: ast,
+    content,
+    inline: inline || false,
+    timing: `parse: ${parseTime}ms, output: ${outputTime}ms`,
+  })
   return output
 }
