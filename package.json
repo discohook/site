@@ -26,13 +26,11 @@
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
     "@types/highlight.js": "^9.12.3",
     "@types/node": "^11.13.6",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/styled-components": "^4.1.14",
-    "babel-plugin-styled-components": "^1.10.0",
     "parcel-bundler": "^1.12.3",
     "typescript": "^3.3.4000"
   },
