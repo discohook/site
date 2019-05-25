@@ -1,7 +1,7 @@
-import moment from "moment"
-import React from "react"
-import styled from "styled-components"
-import { Footer } from "./Message"
+import moment from "moment";
+import React from "react";
+import styled from "styled-components";
+import { Footer } from "./Message";
 
 interface Props {
   footer?: Footer
@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
 
-  * + & {
+  * + && {
     margin: 8px 0 0;
   }
 `
