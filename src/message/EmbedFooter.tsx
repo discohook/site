@@ -1,4 +1,3 @@
-import moment from "moment"
 import React from "react"
 import styled from "styled-components"
 import { Footer } from "./Message"
@@ -41,6 +40,51 @@ const FooterSeparator = styled.span`
   font-weight: 700;
 `
 
+const getFormat = (date: Date) => {
+  const now = new Date()
+
+  const difference = (now.getTime() - date.getTime()) / 86400000
+
+  if (difference < -6) return "full"
+  if (difference < -1) return "last-week"
+  if (difference < 0) return "yesterday"
+  if (difference < 1) return "today"
+  if (difference < 2) return "tomorrow"
+  if (difference < 7) return "next-week"
+
+  return "full"
+}
+
+const formatTimestamp = (timestamp: string) => {
+  const iso8601 = /^(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}\.\d{3}?Z$/
+  const match = iso8601.exec(timestamp)
+  if (!match) return "Invalid date"
+
+  const date = new Date(timestamp)
+  const [, year, month, day] = match
+  const weekday = date.toLocaleString("en-US", { weekday: "long" })
+  const time = date.toLocaleString("en-US", {
+    hour: "2-digit",
+    minute: "numeric",
+    hour12: false,
+  })
+
+  switch (getFormat(date)) {
+    case "last-week":
+      return `Last ${weekday} at ${time}`
+    case "yesterday":
+      return `Yesterday at ${time}`
+    case "today":
+      return `Today at ${time}`
+    case "tomorrow":
+      return `Tomorrow at ${time}`
+    case "next-week":
+      return `${weekday} at ${time}`
+    default:
+      return `${day}/${month}/${year}`
+  }
+}
+
 export function EmbedFooter(props: Props) {
   return (
     <Container>
@@ -52,7 +96,7 @@ export function EmbedFooter(props: Props) {
         {props.footer && props.timestamp && (
           <FooterSeparator>•</FooterSeparator>
         )}
-        {props.timestamp && moment(props.timestamp).calendar()}
+        {props.timestamp && formatTimestamp(props.timestamp)}
       </FooterText>
     </Container>
   )

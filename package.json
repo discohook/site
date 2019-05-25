@@ -19,7 +19,6 @@
   "homepage": "https://github.com/jaylineko/discohook#readme",
   "dependencies": {
     "highlight.js": "^9.15.6",
-    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "simple-markdown": "^0.4.4",

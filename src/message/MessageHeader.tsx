@@ -1,4 +1,3 @@
-import moment from "moment"
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { Message } from "./Message"
@@ -85,7 +84,12 @@ const Timestamp = styled.span`
   }
 `
 
-const getTimestamp = () => moment().format("hh:mm A")
+const getTimestamp = () =>
+  new Date().toLocaleString("en-US", {
+    hour: "2-digit",
+    minute: "numeric",
+    hour12: true,
+  })
 
 export function MessageHeader(props: Props) {
   const [timestamp, setTimestamp] = useState(getTimestamp)
