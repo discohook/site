@@ -1,7 +1,7 @@
-import moment from "moment";
-import React from "react";
-import styled from "styled-components";
-import { Footer } from "./Message";
+import moment from "moment"
+import React from "react"
+import styled from "styled-components"
+import { Footer } from "./Message"
 
 interface Props {
   footer?: Footer
