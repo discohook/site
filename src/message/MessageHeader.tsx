@@ -11,7 +11,7 @@ const Container = styled.div`
   display: ${(props) =>
     props.theme.display === "cozy" ? "flex" : "inline-flex"};
   margin: ${(props) =>
-    props.theme.display === "cozy" ? "0 0 0 -80px" : "0 0 0 -9ch"};
+    props.theme.display === "cozy" ? "0 0 2px -80px" : "0 0 0 -9ch"};
 `
 
 const Avatar = styled.img`
