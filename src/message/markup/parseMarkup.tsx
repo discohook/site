@@ -9,8 +9,8 @@ import {
   parserFor,
   ParserRule,
 } from "simple-markdown"
+import CodeBlock from "./CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
-import { highlightCode } from "./highlightCode"
 
 type Rules = Record<string, ParserRule & { react?: NodeOutput<any> | null }>
 
@@ -159,8 +159,13 @@ const blockRules: Rules = {
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
     }),
-    react: (node, _, state) =>
-      highlightCode(node.language, node.content, { key: state.key }),
+    react: (node, _, state) => (
+      <CodeBlock
+        language={node.language}
+        content={node.content}
+        preProps={{ key: state.key }}
+      />
+    ),
   },
 }
 

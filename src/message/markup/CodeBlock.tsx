@@ -2,7 +2,13 @@ import { getLanguage, highlight } from "highlight.js"
 import React, { ComponentPropsWithoutRef } from "react"
 import styled from "styled-components"
 
-const CodeBlock = styled.pre`
+interface Props {
+  content: string
+  language?: string
+  preProps?: ComponentPropsWithoutRef<"pre">
+}
+
+const Container = styled.pre`
   background: ${(props) => props.theme.code.background};
   color: ${(props) => props.theme.code.text};
 
@@ -78,16 +84,13 @@ const CodeBlock = styled.pre`
   }
 `
 
-export const highlightCode = (
-  language: string,
-  content: string,
-  attributes: ComponentPropsWithoutRef<"pre">,
-) => {
-  if (!getLanguage(language))
-    return <CodeBlock {...attributes}>{content}</CodeBlock>
+export default function CodeBlock(props: Props) {
+  const { content, language = "", preProps = {} } = props
 
-  const { value: html } = highlight(language, content, true)
-  return (
-    <CodeBlock {...attributes} dangerouslySetInnerHTML={{ __html: html }} />
-  )
+  if (!getLanguage(language))
+    return <Container {...preProps}>{content}</Container>
+
+  const { value: __html } = highlight(language, content, true)
+
+  return <Container {...preProps} dangerouslySetInnerHTML={{ __html }} />
 }
