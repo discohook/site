@@ -91,7 +91,7 @@ const getTimestamp = () =>
     hour12: true,
   })
 
-export function MessageHeader(props: Props) {
+export default function MessageHeader(props: Props) {
   const [timestamp, setTimestamp] = useState(getTimestamp)
 
   useEffect(() => {

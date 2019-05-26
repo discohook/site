@@ -33,7 +33,7 @@ const AuthorName = styled.a`
   }
 `
 
-export function EmbedAuthor(props: Props) {
+export default function EmbedAuthor(props: Props) {
   return (
     <Container>
       {props.author.iconUrl && <AuthorImage src={props.author.iconUrl} />}

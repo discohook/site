@@ -85,7 +85,7 @@ const formatTimestamp = (timestamp: string) => {
   }
 }
 
-export function EmbedFooter(props: Props) {
+export default function EmbedFooter(props: Props) {
   return (
     <Container>
       {props.footer && props.footer.iconUrl && (

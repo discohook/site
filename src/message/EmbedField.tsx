@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { Markup } from "./markup/Markup"
+import Markup from "./markup/Markup"
 import { Field } from "./Message"
 
 interface Props {
@@ -27,7 +27,7 @@ const FieldValue = styled.div`
   font-size: 14px;
 `
 
-export function EmbedField(props: Props) {
+export default function EmbedField(props: Props) {
   return (
     <Container inline={props.field.inline}>
       <FieldName>

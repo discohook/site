@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "./Message"
-import { MessagePreview } from "./MessagePreview"
+import MessagePreview from "./MessagePreview"
 
 interface Props {
   message: Message

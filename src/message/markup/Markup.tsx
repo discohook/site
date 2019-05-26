@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { parseMarkup } from "./parseMarkup"
+import {parseMarkup }from "./parseMarkup"
 
 interface Props {
   content: string
@@ -72,7 +72,7 @@ const MarkupContainer = styled.div`
   }
 `
 
-export function Markup(props: Props) {
+export default function Markup(props: Props) {
   return (
     <MarkupContainer className="markup">
       {parseMarkup((props.content || "").trim(), props.inline)}

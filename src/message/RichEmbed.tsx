@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { EmbedAuthor } from "./EmbedAuthor"
-import { EmbedField } from "./EmbedField"
-import { EmbedFooter } from "./EmbedFooter"
-import { Markup } from "./markup/Markup"
+import EmbedAuthor from "./EmbedAuthor"
+import EmbedField from "./EmbedField"
+import EmbedFooter from "./EmbedFooter"
+import Markup from "./markup/Markup"
 import { Embed } from "./Message"
 
 interface Props {
@@ -94,7 +94,7 @@ const EmbedThumbnail = styled.img`
   cursor: pointer;
 `
 
-export function RichEmbed(props: Props) {
+export default function RichEmbed(props: Props) {
   return (
     <Container>
       <Pill

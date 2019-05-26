@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { Markup } from "./markup/Markup"
+import Markup from "./markup/Markup"
 import { Message } from "./Message"
-import { MessageHeader } from "./MessageHeader"
-import { RichEmbed } from "./RichEmbed"
+import MessageHeader from "./MessageHeader"
+import RichEmbed from "./RichEmbed"
 
 interface Props {
   message: Message
@@ -28,7 +28,7 @@ const Container = styled.div`
   }
 `
 
-export function MessagePreview(props: Props) {
+export default function MessagePreview(props: Props) {
   return (
     <Container>
       <MessageHeader message={props.message} />
