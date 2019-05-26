@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
 import styled, { DefaultTheme, ThemeProvider } from "styled-components"
 import Editor from "./editor/Editor"
+import { toCamelCase } from "./editor/json/casing"
 import GlobalStyle from "./GlobalStyle"
-import { initialMessage } from "./initialMessage"
+import initialMessage from "./initialMessage.json"
+import { Message } from "./message/Message"
 import Preview from "./message/Preview"
 import { darkTheme, lightTheme } from "./themes"
 import Whitney from "./Whitney"
@@ -15,7 +17,9 @@ const Container = styled.div`
 `
 
 export default function App() {
-  const [message, setMessage] = useState(initialMessage)
+  const [message, setMessage] = useState(
+    () => toCamelCase(initialMessage) as Message,
+  )
   useEffect(() => console.log("message updated", message), [message])
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
