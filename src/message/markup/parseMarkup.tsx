@@ -161,9 +161,9 @@ const blockRules: Rules = {
     }),
     react: (node, _, state) => (
       <CodeBlock
+        key={state.key}
         language={node.language}
         content={node.content}
-        preProps={{ key: state.key }}
       />
     ),
   },
