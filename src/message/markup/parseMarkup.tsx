@@ -200,7 +200,7 @@ export const jumbo = (ast: ASTNode): ASTNode => {
 
 const ellipsize = (text: string, length: number) => {
   const short = text.replace(/[\s]+/g, " ")
-  return short.length <= length ? text : text.substring(0, length) + "…"
+  return short.length <= length ? short : short.substring(0, length) + "…"
 }
 
 export const parseMarkup = (content: string, inline?: boolean) => {
