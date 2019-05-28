@@ -198,10 +198,10 @@ export const jumbo = (ast: ASTNode): ASTNode => {
   return ast.map((node) => ({ ...node, jumboable: true }))
 }
 
-const ellipsize = (text: string, length: number) =>
-  text.length <= length
-    ? text.replace(/[\r\n]/g, "")
-    : text.replace(/[\r\n]/g, "").substring(0, length) + "…"
+const ellipsize = (text: string, length: number) => {
+  const short = text.replace(/[\s]+/g, " ")
+  return short.length <= length ? text : text.substring(0, length) + "…"
+}
 
 export const parseMarkup = (content: string, inline?: boolean) => {
   const startTime = performance.now()
