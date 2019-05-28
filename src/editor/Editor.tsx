@@ -1,19 +1,13 @@
-import React, { useState } from "react"
-import styled from "styled-components"
-import ErrorBoundary from "../ErrorBoundary"
-import { Message } from "../message/Message"
-import EmbedEditor from "./EmbedEditor"
-import FileInput from "./FileInput"
-import InputField from "./InputField"
-import { parseMessage, stringifyMessage } from "./json/convert"
-import JsonInput from "./json/JsonInput"
-import {
-  Action,
-  ActionsContainer,
-  ActionsHeader,
-  Button,
-  Container,
-} from "./styles"
+import React, { useState } from "react";
+import styled from "styled-components";
+import ErrorBoundary from "../ErrorBoundary";
+import { Message } from "../message/Message";
+import EmbedEditor from "./EmbedEditor";
+import FileInput from "./FileInput";
+import InputField from "./InputField";
+import { parseMessage, stringifyMessage } from "./json/convert";
+import JsonInput from "./json/JsonInput";
+import { Action, ActionsContainer, ActionsHeader, Button, Container } from "./styles";
 
 interface Props {
   message: Message
@@ -87,7 +81,8 @@ export default function Editor(props: Props) {
     const { message, errors } = parseMessage(json)
 
     setErrors(errors)
-    if (errors.length > 0) console.log("json errors", message)
+    if (errors.length > 0)
+      console.log("JSON validation errors occurred:", message)
 
     return message
   }
@@ -108,8 +103,7 @@ export default function Editor(props: Props) {
     })
 
     setSending(false)
-
-    console.log("execute webhook response", await response.json())
+    console.log("Webhook executed:", await response.json())
   }
 
   const isDisabled = (() => {

@@ -17,17 +17,15 @@ const Container = styled.div`
 `
 
 export default function App() {
-  const [message, setMessage] = useState(
-    () => toCamelCase(initialMessage) as Message,
-  )
-  useEffect(() => console.log("message updated", message), [message])
+  const [message, setMessage] = useState(() => {
+    return toCamelCase(initialMessage) as Message
+  })
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const [displayTheme, setDisplayTheme] = useState<"cozy" | "compact">("cozy")
-  useEffect(() => console.log("theme updated", colorTheme, displayTheme), [
-    colorTheme,
-    displayTheme,
-  ])
+  useEffect(() => {
+    console.log("Theme updated:", colorTheme, displayTheme)
+  }, [colorTheme, displayTheme])
 
   const theme: DefaultTheme = {
     ...(colorTheme === "dark" ? darkTheme : lightTheme),

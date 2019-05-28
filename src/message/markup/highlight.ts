@@ -21,7 +21,7 @@ const importLanguage = async (language: string) => {
 
   hljs.registerLanguage(language, importedLanguage)
 
-  console.log("imported hljs language", language)
+  console.log("Registered highlight.js language:", language)
 }
 
 export const highlight = async (language: string, content: string) => {

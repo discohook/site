@@ -1,16 +1,7 @@
-import React from "react"
-import {
-  anyScopeRegex,
-  ASTNode,
-  defaultRules,
-  inlineRegex,
-  NodeOutput,
-  outputFor,
-  parserFor,
-  ParserRule,
-} from "simple-markdown"
-import CodeBlock from "./CodeBlock"
-import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
+import React from "react";
+import { anyScopeRegex, ASTNode, defaultRules, inlineRegex, NodeOutput, outputFor, parserFor, ParserRule } from "simple-markdown";
+import CodeBlock from "./CodeBlock";
+import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji";
 
 type Rules = Record<string, ParserRule & { react?: NodeOutput<any> | null }>
 
@@ -212,11 +203,17 @@ export const parseMarkup = (content: string, inline?: boolean) => {
   const output = reactOutput(ast)
   const outputTime = performance.now() - startTime - parseTime
 
-  console.log("render markup", `(${ellipsize(content, 12)})`, {
-    tree: ast,
-    content,
-    inline: inline || false,
-    timing: `parse: ${parseTime}ms, output: ${outputTime}ms`,
-  })
+  const totalTime = parseTime + outputTime
+
+  if (totalTime > 1) {
+    const ellipsized = ellipsize(content, 8)
+    const time = totalTime.toFixed(3)
+    console.log(`Rendered markup for "${ellipsized}" in ${time}ms:`, {
+      tree: ast,
+      options: { content, inline: inline || false },
+      timing: { parseTime, outputTime },
+    })
+  }
+
   return output
 }
