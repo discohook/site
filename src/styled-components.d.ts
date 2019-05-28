@@ -10,7 +10,12 @@ declare module "styled-components" {
     link: string
     input: string
     action: string
-    mention: string
+    mention: {
+      normal: string
+      normalText: string
+      hover: string
+      hoverText: string
+    }
     spoiler: string
     scrollThumb: string
     scrollTrack: string

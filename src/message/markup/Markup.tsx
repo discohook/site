@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import {parseMarkup }from "./parseMarkup"
+import { parseMarkup } from "./parseMarkup"
 
 interface Props {
   content: string
@@ -66,9 +66,14 @@ const MarkupContainer = styled.div`
     padding: 0 2px;
     cursor: pointer;
 
-    background: ${(props) => props.theme.mention};
-    color: ${(props) => props.theme.accent};
+    background: ${(props) => props.theme.mention.normal};
+    color: ${(props) => props.theme.mention.normalText};
     font-weight: 500;
+
+    :hover {
+      background: ${(props) => props.theme.mention.hover};
+      color: ${(props) => props.theme.mention.hoverText};
+    }
   }
 `
 
