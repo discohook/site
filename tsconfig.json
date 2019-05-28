@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es6",
     "module": "commonjs",
     "jsx": "react",
+    "outDir": "./dist/",
     "strict": true,
     "esModuleInterop": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": ["./src/**/*"]
 }
