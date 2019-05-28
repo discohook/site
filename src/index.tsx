@@ -1,5 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./App"
 
-ReactDOM.render(<App />, document.getElementById("root"))
+const main = async () => {
+  const { default: App } = await import("./App")
+  console.log("imported app")
+  ReactDOM.render(<App />, document.querySelector("#root"))
+}
+
+main()

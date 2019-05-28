@@ -1,6 +1,12 @@
-import { getLanguage, highlight } from "highlight.js"
-import React, { ComponentPropsWithoutRef } from "react"
+import React, { ComponentPropsWithoutRef, useEffect, useState } from "react"
 import styled from "styled-components"
+
+let hljs: typeof import("highlight.js")
+const importHljs = async () => {
+  if (hljs) return Promise.resolve()
+  hljs = await import("highlight.js")
+  console.log("imported hljs")
+}
 
 interface Props {
   content: string
@@ -85,12 +91,17 @@ const Container = styled.pre`
 `
 
 export default function CodeBlock(props: Props) {
+  const [, setHljsLoaded] = useState(!!hljs)
+  useEffect(() => {
+    importHljs().then(() => setHljsLoaded(true))
+  }, [])
+
   const { content, language = "", preProps = {} } = props
 
-  if (!getLanguage(language))
+  if (!hljs || !hljs.getLanguage(language))
     return <Container {...preProps}>{content}</Container>
 
-  const { value: __html } = highlight(language, content, true)
+  const { value: __html } = hljs.highlight(language, content, true)
 
   return <Container {...preProps} dangerouslySetInnerHTML={{ __html }} />
 }
