@@ -10,7 +10,7 @@ module.exports = {
   mode: dev ? "development" : "production",
   entry: resolve(__dirname, "src", "index.tsx"),
   output: {
-    filename: "0.[hash].js",
+    filename: "main.[hash].js",
     chunkFilename: "[id].[hash].js",
     path: resolve(__dirname, "dist"),
   },
