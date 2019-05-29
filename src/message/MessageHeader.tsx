@@ -108,7 +108,7 @@ export default function MessageHeader(props: Props) {
         }
       />
       <HeaderInfo>
-        <UserName>{props.message.username || "Captain Hook"}</UserName>
+        <UserName>{props.message.username || "Discohook"}</UserName>
         <BotTag>BOT</BotTag>
         <Timestamp>{timestamp}</Timestamp>
       </HeaderInfo>
