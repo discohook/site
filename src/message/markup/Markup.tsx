@@ -52,8 +52,13 @@ const MarkupContainer = styled.div`
     margin: 0 1.5px 0 0.75px;
 
     &.jumboable {
-      width: 32px;
-      height: 32px;
+      width: ${(props) =>
+        props.theme.display === "cozy" ? "32px" : "21.75px"};
+      height: ${(props) =>
+        props.theme.display === "cozy" ? "32px" : "21.75px"};
+
+      vertical-align: -4.5px;
+      margin: 3px 1.5px 0 0.75px;
     }
   }
 
