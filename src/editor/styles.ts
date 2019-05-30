@@ -43,7 +43,6 @@ export const InputLabel = styled.label`
 export const TextInput = styled.input.attrs((props) => ({
   type: props.type || "text",
 }))`
-  min-height: 20px;
   padding: 10px;
   margin: 8px 0;
 
@@ -59,6 +58,10 @@ export const TextInput = styled.input.attrs((props) => ({
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.4px;
+
+  textarea& {
+    min-height: 60px;
+  }
 `
 
 export const Button = styled.button`
