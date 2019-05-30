@@ -1,27 +1,31 @@
-import { diversities, emojis } from "./emojis"
+const {
+  diversities,
+  emojis,
+}: {
+  diversities: string[]
+  emojis: Record<string, { names: string[]; hasDiversity?: boolean }>
+} = require("./emojis.json")
 
 export const nameToEmoji: Record<string, string> = {}
 export const emojiToName: Record<string, string> = {}
 
-for (const emoji of emojis) {
-  emojiToName[emoji.surrogates] = emoji.names[0]
+for (const [emoji, { names, hasDiversity }] of Object.entries(emojis)) {
+  emojiToName[emoji] = names[0]
 
-  for (const name of emoji.names) {
-    nameToEmoji[name] = emoji.surrogates
+  for (const name of names) {
+    nameToEmoji[name] = emoji
 
-    if (emoji.hasDiversity)
-      for (const [index, diversity] of Object.entries(diversities)) {
-        const nameWithDiversity = `${name}::skin-tone-${Number(index) + 1}`
-        const surrogates = `${emoji.surrogates}${diversity}`
-        nameToEmoji[nameWithDiversity] = surrogates
+    if (hasDiversity)
+      for (const [id, tone] of Object.entries(diversities)) {
+        const nameWithDiversity = `${name}::skin-tone-${Number(id) + 1}`
+        nameToEmoji[nameWithDiversity] = `${emoji}${tone}`
       }
   }
 
-  if (emoji.hasDiversity)
-    for (const [index, diversity] of Object.entries(diversities)) {
-      const name = `${emoji.names[0]}::skin-tone-${Number(index) + 1}`
-      const surrogates = `${emoji.surrogates}${diversity}`
-      emojiToName[surrogates] = name
+  if (hasDiversity)
+    for (const [id, diversity] of Object.entries(diversities)) {
+      const name = `${names[0]}::skin-tone-${Number(id) + 1}`
+      emojiToName[`${emoji}${diversity}`] = name
     }
 }
 
