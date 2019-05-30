@@ -36,13 +36,6 @@ export default function FooterEditor(props: Props) {
         label="Embed footer name"
       />
       <InputField
-        value={props.timestamp || ""}
-        onChange={(timestamp) =>
-          handleChange({ footer: props.footer, timestamp })
-        }
-        label="Embed footer timestamp"
-      />
-      <InputField
         value={(props.footer || { iconUrl: "" }).iconUrl || ""}
         onChange={(iconUrl) =>
           handleChange({
@@ -51,6 +44,13 @@ export default function FooterEditor(props: Props) {
           })
         }
         label="Embed footer icon"
+      />
+      <InputField
+        value={props.timestamp || ""}
+        onChange={(timestamp) =>
+          handleChange({ footer: props.footer, timestamp })
+        }
+        label="Embed footer timestamp"
       />
     </InputGroup>
   )
