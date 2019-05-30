@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-import { Message } from "./Message"
 
 interface Props {
-  message: Message
+  username?: string
+  avatarUrl?: string
 }
 
 const Container = styled.div`
@@ -92,6 +92,11 @@ const getTimestamp = () =>
   })
 
 export default function MessageHeader(props: Props) {
+  const {
+    username = "Discohook",
+    avatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png",
+  } = props
+
   const [timestamp, setTimestamp] = useState(getTimestamp)
 
   useEffect(() => {
@@ -101,14 +106,9 @@ export default function MessageHeader(props: Props) {
 
   return (
     <Container>
-      <Avatar
-        src={
-          props.message.avatarUrl ||
-          "https://cdn.discordapp.com/embed/avatars/0.png"
-        }
-      />
+      <Avatar src={avatarUrl} />
       <HeaderInfo>
-        <UserName>{props.message.username || "Discohook"}</UserName>
+        <UserName>{username}</UserName>
         <BotTag>BOT</BotTag>
         <Timestamp>{timestamp}</Timestamp>
       </HeaderInfo>

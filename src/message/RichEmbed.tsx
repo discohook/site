@@ -95,47 +95,41 @@ const EmbedThumbnail = styled.img`
 `
 
 export default function RichEmbed(props: Props) {
+  const { author, title, description, fields, footer, timestamp } = props.embed
+  const { url, color, image, thumbnail } = props.embed
+
+  const embedPillColor =
+    typeof color === "number"
+      ? `#${color.toString(16).padStart(6, "0")}`
+      : undefined
+
   return (
     <Container>
-      <Pill
-        style={{
-          background:
-            props.embed.color === undefined
-              ? undefined
-              : `#${props.embed.color.toString(16).padStart(6, "0")}`,
-        }}
-      />
+      <Pill style={{ background: embedPillColor }} />
       <EmbedContent>
         <InnerEmbedContent>
-          {props.embed.author && <EmbedAuthor author={props.embed.author} />}
-          {props.embed.title && (
-            <EmbedTitle href={props.embed.url}>
-              <Markup content={props.embed.title} inline={true} />
+          {author && <EmbedAuthor author={author} />}
+          {title && (
+            <EmbedTitle href={url}>
+              <Markup content={title} inline={true} />
             </EmbedTitle>
           )}
-          {props.embed.description && (
+          {description && (
             <EmbedDescription>
-              <Markup content={props.embed.description} />
+              <Markup content={description} />
             </EmbedDescription>
           )}
-          {props.embed.fields && (
+          {fields && (
             <EmbedFields>
-              {props.embed.fields.map((field, index) => (
+              {fields.map((field, index) => (
                 <EmbedField field={field} key={index} />
               ))}
             </EmbedFields>
           )}
-          {props.embed.image && <EmbedImage src={props.embed.image.url} />}
-          {(props.embed.footer || props.embed.timestamp) && (
-            <EmbedFooter
-              footer={props.embed.footer}
-              timestamp={props.embed.timestamp}
-            />
-          )}
+          {image && <EmbedImage src={image.url} />}
+          {(footer || timestamp) && <EmbedFooter {...{ footer, timestamp }} />}
         </InnerEmbedContent>
-        {props.embed.thumbnail && (
-          <EmbedThumbnail src={props.embed.thumbnail.url} />
-        )}
+        {thumbnail && <EmbedThumbnail src={thumbnail.url} />}
       </EmbedContent>
     </Container>
   )

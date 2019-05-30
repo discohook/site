@@ -29,14 +29,13 @@ const Container = styled.div`
 `
 
 export default function MessagePreview(props: Props) {
+  const { content, embeds, username, avatarUrl } = props.message
+
   return (
     <Container>
-      <MessageHeader message={props.message} />
-      {props.message.content && <Markup content={props.message.content} />}
-      {props.message.embeds &&
-        props.message.embeds.map((embed, index) => (
-          <RichEmbed embed={embed} key={index} />
-        ))}
+      <MessageHeader {...{ username, avatarUrl }} />
+      {content && <Markup content={content} />}
+      {embeds && embeds.map((embed, i) => <RichEmbed embed={embed} key={i} />)}
     </Container>
   )
 }

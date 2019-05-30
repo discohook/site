@@ -34,12 +34,12 @@ const AuthorName = styled.a`
 `
 
 export default function EmbedAuthor(props: Props) {
+  const { name, url, iconUrl } = props.author
+
   return (
     <Container>
-      {props.author.iconUrl && <AuthorImage src={props.author.iconUrl} />}
-      {props.author.name && (
-        <AuthorName href={props.author.url}>{props.author.name}</AuthorName>
-      )}
+      {iconUrl && <AuthorImage src={iconUrl} />}
+      {name && <AuthorName href={url}>{name}</AuthorName>}
     </Container>
   )
 }

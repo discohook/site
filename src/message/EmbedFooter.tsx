@@ -86,17 +86,16 @@ const formatTimestamp = (timestamp: string) => {
 }
 
 export default function EmbedFooter(props: Props) {
+  const { footer, timestamp } = props
+  const { text, iconUrl } = footer || { text: undefined, iconUrl: undefined }
+
   return (
     <Container>
-      {props.footer && props.footer.iconUrl && (
-        <FooterImage src={props.footer.iconUrl} />
-      )}
+      {iconUrl && <FooterImage src={iconUrl} />}
       <FooterText>
-        {props.footer && props.footer.text}
-        {props.footer && props.timestamp && (
-          <FooterSeparator>•</FooterSeparator>
-        )}
-        {props.timestamp && formatTimestamp(props.timestamp)}
+        {text}
+        {footer && timestamp && <FooterSeparator>•</FooterSeparator>}
+        {timestamp && formatTimestamp(timestamp)}
       </FooterText>
     </Container>
   )

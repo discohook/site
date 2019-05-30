@@ -49,7 +49,7 @@ function PreviewError() {
 export default function Preview(props: Props) {
   return (
     <Container>
-      <ErrorBoundary onError={() => <PreviewError />}>
+      <ErrorBoundary onError={PreviewError}>
         <MessagePreview message={props.message} />
       </ErrorBoundary>
     </Container>
