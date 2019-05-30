@@ -1,7 +1,7 @@
 // @ts-check
 const { resolve } = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const CleanWebpackPlugin = require("clean-webpack-plugin").default
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
 const dev = process.env.NODE_ENV === "development"
 
