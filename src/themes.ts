@@ -1,6 +1,6 @@
 import { DefaultTheme } from "styled-components"
 
-type Theme = Pick<DefaultTheme, Exclude<keyof DefaultTheme, "display">>
+type Theme = Omit<DefaultTheme, "display">
 
 export const darkTheme: Theme = {
   accent: "#7289da",
