@@ -1,13 +1,19 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import ErrorBoundary from "../ErrorBoundary";
-import { Message } from "../message/Message";
-import EmbedEditor from "./EmbedEditor";
-import FileInput from "./FileInput";
-import InputField from "./InputField";
-import { parseMessage, stringifyMessage } from "./json/convert";
-import JsonInput from "./json/JsonInput";
-import { Action, ActionsContainer, ActionsHeader, Button, Container } from "./styles";
+import React, { useState } from "react"
+import styled from "styled-components"
+import ErrorBoundary from "../ErrorBoundary"
+import { Message } from "../message/Message"
+import EmbedEditor from "./EmbedEditor"
+import FileInput from "./FileInput"
+import InputField from "./InputField"
+import { parseMessage, stringifyMessage } from "./json/convert"
+import JsonInput from "./json/JsonInput"
+import {
+  Action,
+  ActionsContainer,
+  ActionsHeader,
+  Button,
+  Container,
+} from "./styles"
 
 interface Props {
   message: Message
@@ -78,11 +84,13 @@ export default function Editor(props: Props) {
   }
 
   const checkErrors = (json: string) => {
-    const { message, errors } = parseMessage(json)
+    let prevErrors = errors
+    const { message, errors: newErrors } = parseMessage(json)
 
-    setErrors(errors)
-    if (errors.length > 0)
-      console.log("JSON validation errors occurred:", message)
+    setErrors(newErrors)
+
+    if (newErrors.length > 0 && prevErrors.join("\n") !== newErrors.join("\n"))
+      console.log("JSON validation errors occurred:", newErrors, message)
 
     return message
   }
