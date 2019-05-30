@@ -31,7 +31,7 @@
   "coffeescript": ["coffee", "cson", "iced"],
   "coq": {},
   "cos": ["cls"],
-  "cpp": ["c", "c++", "cc", "h", "h++", "hpp"],
+  "cpp": ["c", "c++", "cc", "cxx", "h", "h++", "hh", "hpp", "hxx"],
   "crmsh": ["crm", "pcmk"],
   "crystal": ["cr"],
   "cs": ["c#", "csharp"],
