@@ -91,7 +91,6 @@ export default function CodeBlock(props: Props) {
   const [highlighted, setHighlighted] = useState<IHighlightResult | null>(null)
 
   useEffect(() => {
-    if (!language) return
     highlight(language, content).then(setHighlighted)
   }, [props.language, props.content])
 
