@@ -29,24 +29,9 @@ for (const [emoji, { names, hasDiversity }] of Object.entries(emojis)) {
     }
 }
 
-export const getEmojiUrl = (surrogate: string) => {
-  if (["™", "©", "®"].includes(surrogate)) return
+export const getEmojiUrl = (emoji: string) => {
+  if (["™", "©", "®"].includes(emoji)) return
 
-  const result: string[] = []
-  let p = 0
-  for (let i = 0; i < surrogate.length; i++) {
-    const char = surrogate.charCodeAt(i)
-    if (p) {
-      result.push(
-        (0x10000 + ((p - 0xd800) << 10) + (char - 0xdc00)).toString(16),
-      )
-      p = 0
-    } else if (0xd800 <= char && char <= 0xdbff) {
-      p = char
-    } else {
-      result.push(char.toString(16))
-    }
-  }
-
-  return `https://jaylineko.com/twemoji/${result.join("-")}.svg`
+  const file = [...emoji].map((c) => c.codePointAt(0)!.toString(16)).join("-")
+  return `https://jaylineko.com/twemoji/${file}.svg`
 }
