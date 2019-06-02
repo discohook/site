@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
@@ -75,6 +75,7 @@ export default function Editor(props: Props) {
   const [errors, setErrors] = useState<string[]>([])
   const [sending, setSending] = useState(false)
   const [files, setFiles] = useState<FileList | undefined>()
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const handleChange = (message: Message) => {
     props.onChange(message)
@@ -128,6 +129,11 @@ export default function Editor(props: Props) {
     console.log("Webhook executed:", await response.json())
   }
 
+  const clearFiles = () => {
+    if (!fileInputRef.current) return
+    fileInputRef.current.value = ""
+  }
+
   const isDisabled = (() => {
     if (sending) return true
     if (webhookUrl.trim().length === 0) return true
@@ -150,7 +156,14 @@ export default function Editor(props: Props) {
           <Action onClick={() => props.onToggleDisplay()}>
             Toggle display
           </Action>
-          <Action onClick={() => handleChange({})}>Clear all</Action>
+          <Action
+            onClick={() => {
+              handleChange({})
+              clearFiles()
+            }}
+          >
+            Clear all
+          </Action>
         </EditorActionsContainer>
       </EditorActionsWrapper>
       <Container direction="row">
@@ -192,7 +205,10 @@ export default function Editor(props: Props) {
           />
         </Container>
       </ErrorBoundary>
-      <FileInput onChange={setFiles} />
+      <Container direction="row">
+        <FileInput onChange={setFiles} ref={fileInputRef} />{" "}
+        <Button onClick={clearFiles}>Remove files</Button>
+      </Container>
       <JsonInput
         json={json}
         onChange={(json) => {
