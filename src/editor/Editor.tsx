@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
@@ -87,13 +87,27 @@ export default function Editor(props: Props) {
     let prevErrors = errors
     const { message, errors: newErrors } = parseMessage(json)
 
-    setErrors(newErrors)
+    setErrors(filterEmptyMessageError(newErrors))
 
     if (newErrors.length > 0 && prevErrors.join("\n") !== newErrors.join("\n"))
       console.log("JSON validation errors occurred:", newErrors, message)
 
     return message
   }
+
+  // If the message is empty the JSON validator returns an error because
+  // the message appears to be empty. However when there's at least one file
+  // present, this error is false.
+  const filterEmptyMessageError = (errors: string[]) =>
+    files
+      ? errors.filter(
+          (error) =>
+            error !==
+            "message: Expected one of following keys: 'content', 'embeds'",
+        )
+      : errors
+
+  useEffect(() => setErrors(filterEmptyMessageError), [files])
 
   const executeWebhook = async () => {
     setSending(true)
