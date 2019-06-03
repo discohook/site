@@ -52,7 +52,7 @@ export default function App() {
               setDisplayTheme(displayTheme === "cozy" ? "compact" : "cozy")
             }
           />
-          <Preview message={message} />
+          <Preview message={message} files={files} />
         </Container>
       </>
     </ThemeProvider>

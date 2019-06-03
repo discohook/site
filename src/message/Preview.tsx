@@ -6,6 +6,7 @@ import MessagePreview from "./MessagePreview"
 
 interface Props {
   message: Message
+  files: FileList | undefined
 }
 
 const Container = styled.div`
@@ -50,7 +51,7 @@ export default function Preview(props: Props) {
   return (
     <Container>
       <ErrorBoundary onError={PreviewError}>
-        <MessagePreview message={props.message} />
+        <MessagePreview message={props.message} files={props.files} />
       </ErrorBoundary>
     </Container>
   )

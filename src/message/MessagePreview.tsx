@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import Attachment from "./Attachment"
 import Markup from "./markup/Markup"
 import { Message } from "./Message"
 import MessageHeader from "./MessageHeader"
@@ -7,6 +8,7 @@ import RichEmbed from "./RichEmbed"
 
 interface Props {
   message: Message
+  files: FileList | undefined
 }
 
 const Container = styled.div`
@@ -29,13 +31,16 @@ const Container = styled.div`
 `
 
 export default function MessagePreview(props: Props) {
-  const { content, embeds, username, avatarUrl } = props.message
+  const { message, files: fileList } = props
+  const { content, embeds, username, avatarUrl } = message
+  const files = fileList && Array.from(fileList)
 
   return (
     <Container>
       <MessageHeader {...{ username, avatarUrl }} />
       {content && <Markup content={content} />}
       {embeds && embeds.map((embed, i) => <RichEmbed embed={embed} key={i} />)}
+      {files && files.map((file, i) => <Attachment file={file} key={i} />)}
     </Container>
   )
 }

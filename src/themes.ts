@@ -57,6 +57,14 @@ export const darkTheme: Theme = {
     comment: "#586e75",
     formula: "#073642",
   },
+  attachment: {
+    background: "#34373c",
+    border: "#313338",
+    fileName: "#00b0f4",
+    fileSize: "#72767d",
+    download: "#4f545c",
+    downloadHover: "#595d63",
+  },
 }
 
 export const lightTheme: Theme = {
@@ -113,5 +121,13 @@ export const lightTheme: Theme = {
     text: "#657b83",
     comment: "#93a1a1",
     formula: "#eee8d5",
+  },
+  attachment: {
+    background: "#ffffff",
+    border: "#f6f6f7",
+    fileName: "#00b0f4",
+    fileSize: "#72767d",
+    download: "#4f545c",
+    downloadHover: "#595d63",
   },
 }

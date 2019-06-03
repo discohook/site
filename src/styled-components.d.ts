@@ -57,5 +57,13 @@ declare module "styled-components" {
       comment: string
       formula: string
     }
+    attachment: {
+      background: string
+      border: string
+      fileName: string
+      fileSize: string
+      download: string
+      downloadHover: string
+    }
   }
 }
