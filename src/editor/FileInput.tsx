@@ -11,6 +11,7 @@ function FileInput(props: Props, ref: Ref<HTMLInputElement>) {
       Files
       <TextInput
         type="file"
+        multiple={true}
         onChange={(event) => props.onChange(event.target.files || undefined)}
         ref={ref}
       />
