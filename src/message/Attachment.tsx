@@ -31,6 +31,7 @@ const AttachmentContainer = styled.div`
   width: 100%;
   max-width: 520px;
 
+  margin: 8px 0 0;
   padding: 10px;
 
   display: flex;
