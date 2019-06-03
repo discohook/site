@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { ComponentProps, useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
@@ -75,7 +75,7 @@ export default function Editor(props: Props) {
   const [errors, setErrors] = useState<string[]>([])
   const [sending, setSending] = useState(false)
   const [files, setFiles] = useState<FileList | undefined>()
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const fileInputRef: ComponentProps<typeof FileInput>["ref"] = useRef(null)
 
   const handleChange = (message: Message) => {
     props.onChange(message)
@@ -130,8 +130,7 @@ export default function Editor(props: Props) {
   }
 
   const clearFiles = () => {
-    if (!fileInputRef.current) return
-    fileInputRef.current.value = ""
+    if (fileInputRef.current) fileInputRef.current.clearFiles()
   }
 
   const isDisabled = (() => {
