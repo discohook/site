@@ -21,6 +21,8 @@ export default function App() {
     return toCamelCase(initialMessage) as Message
   })
 
+  const [files, setFiles] = useState<FileList | undefined>()
+
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const [displayTheme, setDisplayTheme] = useState<"cozy" | "compact">("cozy")
   useEffect(() => {
@@ -41,6 +43,8 @@ export default function App() {
           <Editor
             message={message}
             onChange={setMessage}
+            files={files}
+            onFilesChange={setFiles}
             onToggleTheme={() =>
               setColorTheme(colorTheme === "dark" ? "light" : "dark")
             }

@@ -18,6 +18,8 @@ import {
 interface Props {
   message: Message
   onChange: (message: Message) => void
+  files: FileList | undefined
+  onFilesChange: (files: FileList | undefined) => void
   onToggleTheme: () => void
   onToggleDisplay: () => void
 }
@@ -74,7 +76,6 @@ export default function Editor(props: Props) {
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])
   const [sending, setSending] = useState(false)
-  const [files, setFiles] = useState<FileList | undefined>()
   const fileInputRef: ComponentProps<typeof FileInput>["ref"] = useRef(null)
 
   const handleChange = (message: Message) => {
@@ -100,7 +101,7 @@ export default function Editor(props: Props) {
   // the message appears to be empty. However when there's at least one file
   // present, this error is false.
   const filterEmptyMessageError = (errors: string[]) =>
-    files
+    props.files
       ? errors.filter(
           (error) =>
             error !==
@@ -108,7 +109,7 @@ export default function Editor(props: Props) {
         )
       : errors
 
-  useEffect(() => setErrors(filterEmptyMessageError), [files])
+  useEffect(() => setErrors(filterEmptyMessageError), [props.files])
 
   const executeWebhook = async () => {
     setSending(true)
@@ -116,8 +117,8 @@ export default function Editor(props: Props) {
     const formData = new FormData()
     formData.append("payload_json", json)
 
-    if (files)
-      for (const [index, file] of Object.entries(files))
+    if (props.files)
+      for (const [index, file] of Object.entries(props.files))
         formData.append(`file[${index}]`, file, file.name)
 
     const response = await fetch(webhookUrl + "?wait=true", {
@@ -141,7 +142,7 @@ export default function Editor(props: Props) {
     if ((typeof content === "string" || embeds) && errors.length > 0)
       return true
 
-    if (files && files.length === 0) return true
+    if (props.files && props.files.length === 0) return true
 
     return false
   })()
@@ -205,7 +206,7 @@ export default function Editor(props: Props) {
         </Container>
       </ErrorBoundary>
       <Container direction="row">
-        <FileInput onChange={setFiles} ref={fileInputRef} />{" "}
+        <FileInput onChange={props.onFilesChange} ref={fileInputRef} />{" "}
         <Button onClick={clearFiles}>Remove files</Button>
       </Container>
       <JsonInput
