@@ -16,6 +16,24 @@ const readAsBase64 = (blob: Blob) => {
   })
 }
 
+const getHumanReadableSize = (bytes: number) => {
+  const units = ["bytes", "KB", "MB"]
+
+  let unit = 0
+  let number = bytes
+
+  while (number >= 1024 || unit >= units.length - 1) {
+    unit++
+    number /= 1024
+  }
+
+  const formattedNumber = number.toLocaleString("en-US", {
+    maximumFractionDigits: 2,
+  })
+
+  return `${formattedNumber} ${units[unit]}`
+}
+
 const ImageAttachment = styled.img`
   display: block;
 
@@ -120,7 +138,7 @@ export default function Attachment(props: Props) {
         <AttachmentFileName>
           <AttachmentFileNameInner>{name}</AttachmentFileNameInner>
         </AttachmentFileName>
-        <AttachmentFileSize>{size} bytes</AttachmentFileSize>
+        <AttachmentFileSize>{getHumanReadableSize(size)}</AttachmentFileSize>
       </AttachmentInfo>
       <AttachmentDownloadButton>
         <svg width={24} height={24} viewBox="0 0 24 24">
