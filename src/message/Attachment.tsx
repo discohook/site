@@ -22,7 +22,7 @@ const getHumanReadableSize = (bytes: number) => {
   let unit = 0
   let number = bytes
 
-  while (number >= 1024 || unit >= units.length - 1) {
+  while (number >= 1024 && unit < units.length - 1) {
     unit++
     number /= 1024
   }
@@ -125,6 +125,7 @@ export default function Attachment(props: Props) {
 
   useEffect(() => {
     if (isImage) readAsBase64(props.file).then(setDataUrl)
+    // else setDataUrl("")
   })
 
   if (isImage) return <ImageAttachment src={dataUrl} />
