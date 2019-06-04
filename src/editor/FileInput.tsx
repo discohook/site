@@ -16,7 +16,10 @@ function FileInput(props: Props, ref: Ref<RefType>) {
   useImperativeHandle(ref, () => ({
     files: (inputRef.current && inputRef.current.files) || undefined,
     clearFiles: () => {
-      if (inputRef.current) inputRef.current.value = ""
+      if (inputRef.current) {
+        inputRef.current.value = ""
+        props.onChange(undefined)
+      }
     },
   }))
 
