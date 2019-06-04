@@ -125,7 +125,7 @@ export default function Attachment(props: Props) {
 
   useEffect(() => {
     if (isImage) readAsBase64(props.file).then(setDataUrl)
-    // else setDataUrl("")
+    else setDataUrl("")
   })
 
   if (isImage) return <ImageAttachment src={dataUrl} />
