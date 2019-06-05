@@ -14,7 +14,7 @@ module.exports = {
     chunkFilename: "[id].[hash].js",
     path: resolve(__dirname, "dist"),
   },
-  devtool: dev ? "source-map" : false,
+  devtool: "source-map",
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
