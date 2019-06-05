@@ -7,7 +7,6 @@ import initialMessage from "./initialMessage.json"
 import { Message } from "./message/Message"
 import Preview from "./message/Preview"
 import { darkTheme, lightTheme } from "./themes"
-import Whitney from "./Whitney"
 
 const Container = styled.div`
   display: grid;
@@ -37,7 +36,6 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <>
-        <Whitney />
         <GlobalStyle />
         <Container>
           <Editor
