@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "../styled"
 
 export const Container = styled.div<{ direction?: "column" | "row" }>`
   display: flex;
@@ -40,9 +40,7 @@ export const InputLabel = styled.label`
   margin: 8px 8px 0;
 `
 
-export const TextInput = styled.input.attrs((props) => ({
-  type: props.type || "text",
-}))`
+export const TextInput = styled.input`
   padding: 10px;
   margin: 8px 0;
 
@@ -51,17 +49,17 @@ export const TextInput = styled.input.attrs((props) => ({
   border-radius: 3px;
   outline: none;
 
-  resize: vertical;
-
   color: ${(props) => props.theme.text};
   font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.4px;
+`
+TextInput.defaultProps = { type: "text" }
 
-  textarea& {
-    min-height: 60px;
-  }
+export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
+  resize: vertical;
+  min-height: 60px;
 `
 
 export const Button = styled.button`

@@ -1,6 +1,6 @@
 import { IHighlightResult } from "highlight.js"
 import React, { ComponentPropsWithoutRef, useEffect, useState } from "react"
-import styled from "styled-components"
+import styled from "../../styled"
 import { highlight } from "./highlight"
 
 interface Props {

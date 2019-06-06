@@ -1,7 +1,7 @@
 import React, { ComponentProps, useEffect, useRef, useState } from "react"
-import styled from "styled-components"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
+import styled from "../styled"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
 import InputField from "./InputField"

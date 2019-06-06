@@ -1,6 +1,6 @@
 import React from "react"
-import styled from "styled-components"
 import ErrorBoundary from "../ErrorBoundary"
+import styled from "../styled"
 import { Message } from "./Message"
 import MessagePreview from "./MessagePreview"
 

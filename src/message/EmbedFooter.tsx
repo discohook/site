@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-import { Footer } from "./Message"
+import React from "react";
+import styled from "../styled";
+import { Footer } from "./Message";
 
 interface Props {
   footer?: Footer

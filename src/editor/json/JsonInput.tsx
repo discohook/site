@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-import { TextInput } from "../styles"
+import React, { ChangeEvent } from "react"
+import styled from "../../styled"
+import { MultilineTextInput } from "../styles"
 
 interface Props {
   json: string
@@ -34,9 +34,9 @@ const Error = styled.div`
   line-height: 16px;
 `
 
-const CodeInput = styled(TextInput).attrs(() => ({ as: "textarea" }))`
+const CodeInput = styled(MultilineTextInput)`
   min-height: 240px;
-  margin: 8px 8px;
+  margin: 8px;
   font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
 `
 
@@ -53,7 +53,9 @@ export default function JsonInput(props: Props) {
       )}
       <CodeInput
         value={props.json}
-        onChange={(event) => props.onChange(event.target.value)}
+        onChange={(
+          event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+        ) => props.onChange(event.target.value)}
       />
     </Container>
   )

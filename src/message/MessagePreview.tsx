@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled from "../styled"
 import Attachment from "./Attachment"
 import Markup from "./markup/Markup"
 import { Message } from "./Message"

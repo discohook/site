@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components"
+import { Theme as DefaultTheme } from "./styled"
 
 type Theme = Omit<DefaultTheme, "display">
 
