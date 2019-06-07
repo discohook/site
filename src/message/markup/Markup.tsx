@@ -7,7 +7,7 @@ interface Props {
   inline?: boolean
 }
 
-const MarkupContainer = styled.div`
+export const MarkupContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
 
@@ -42,44 +42,37 @@ const MarkupContainer = styled.div`
     font-size: 14px;
     color: #839496;
   }
+`
 
-  img.emoji {
-    width: 21.75px;
-    height: 21.75px;
-    object-fit: contain;
+export const Emoji = styled.img<{ big?: boolean }>`
+  width: ${(props) =>
+    props.big && props.theme.display === "cozy" ? "32px" : "21.75px"};
+  height: ${(props) =>
+    props.big && props.theme.display === "cozy" ? "32px" : "21.75px"};
 
-    vertical-align: -6px;
-    margin: 0 1.5px 0 0.75px;
+  object-fit: contain;
 
-    &.jumboable {
-      width: ${(props) =>
-        props.theme.display === "cozy" ? "32px" : "21.75px"};
-      height: ${(props) =>
-        props.theme.display === "cozy" ? "32px" : "21.75px"};
+  vertical-align: ${(props) => (props.big ? "-4.5px" : "-6px")};
+  margin: ${(props) => (props.big ? "3px" : "0")} 1.5px 0 0.75px;
+`
 
-      vertical-align: -4.5px;
-      margin: 3px 1.5px 0 0.75px;
-    }
+export const Mention = styled.span`
+  padding: 0 2px;
+  cursor: pointer;
+
+  background: ${(props) => props.theme.mention.normal};
+  color: ${(props) => props.theme.mention.normalText};
+  font-weight: 500;
+
+  :hover {
+    background: ${(props) => props.theme.mention.hover};
+    color: ${(props) => props.theme.mention.hoverText};
   }
+`
 
-  span.spoiler {
-    background: ${(props) => props.theme.spoiler};
-    border-radius: 3px;
-  }
-
-  span.mention {
-    padding: 0 2px;
-    cursor: pointer;
-
-    background: ${(props) => props.theme.mention.normal};
-    color: ${(props) => props.theme.mention.normalText};
-    font-weight: 500;
-
-    :hover {
-      background: ${(props) => props.theme.mention.hover};
-      color: ${(props) => props.theme.mention.hoverText};
-    }
-  }
+export const Spoiler = styled.span`
+  background: ${(props) => props.theme.spoiler};
+  border-radius: 3px;
 `
 
 export default function Markup(props: Props) {

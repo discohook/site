@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
 import Attachment from "./Attachment"
-import Markup from "./markup/Markup"
+import Markup, { MarkupContainer } from "./markup/Markup"
 import { Message } from "./Message"
 import MessageHeader from "./MessageHeader"
 import RichEmbed from "./RichEmbed"
@@ -20,12 +20,12 @@ const Container = styled.div`
   font-size: 15px;
   line-height: 1.3;
 
-  > .markup {
+  > ${MarkupContainer} {
     display: inline;
     margin-left: ${(props) => (props.theme.display === "cozy" ? "0" : "4px")};
   }
 
-  > * + *:not(.markup) {
+  > * + *:not(${MarkupContainer}) {
     margin-left: ${(props) => (props.theme.display === "cozy" ? "0" : "6px")};
   }
 `

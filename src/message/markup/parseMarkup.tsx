@@ -11,6 +11,7 @@ import {
 } from "simple-markdown"
 import CodeBlock from "./CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
+import { Emoji, Mention, Spoiler } from "./Markup"
 
 type Rules = Record<string, ParserRule & { react?: NodeOutput<any> | null }>
 
@@ -60,12 +61,12 @@ const baseRules: Rules = {
           },
     react: (node, _, state) =>
       node.src ? (
-        <img
-          draggable={false}
-          className={`emoji ${node.jumboable ? "jumboable" : ""}`.trim()}
+        <Emoji
+          src={node.src}
           alt={node.surrogate}
           title={node.name}
-          src={node.src}
+          draggable={false}
+          big={node.jumboable}
           key={state.key}
         />
       ) : (
@@ -82,12 +83,12 @@ const baseRules: Rules = {
       animated: !!capture[1],
     }),
     react: (node, _, state) => (
-      <img
-        draggable={false}
-        className={`emoji ${node.jumboable ? "jumboable" : ""}`.trim()}
-        alt={node.name}
-        title={node.name}
+      <Emoji
         src={node.src}
+        alt={node.surrogate}
+        title={node.name}
+        draggable={false}
+        big={node.jumboable}
         key={state.key}
       />
     ),
@@ -115,9 +116,7 @@ const baseRules: Rules = {
     parse: (capture) =>
       capture[1] ? { content: `@${capture[1]}` } : { content: "@unknown-user" },
     react: (node, _, state) => (
-      <span className="mention" key={state.key}>
-        {node.content}
-      </span>
+      <Mention key={state.key}>{node.content}</Mention>
     ),
   },
   roleMention: {
@@ -135,9 +134,7 @@ const baseRules: Rules = {
     match: inlineRegex(/^\|\|([\s\S]+?)\|\|/),
     parse: (capture, parse, state) => ({ content: parse(capture[1], state) }),
     react: (node, output, state) => (
-      <span className="spoiler" key={state.key}>
-        {output(node.content, state)}
-      </span>
+      <Spoiler key={state.key}>{output(node.content, state)}</Spoiler>
     ),
   },
 }
