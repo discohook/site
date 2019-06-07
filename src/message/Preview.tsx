@@ -1,6 +1,6 @@
+import styled from "@emotion/styled"
 import React from "react"
 import ErrorBoundary from "../ErrorBoundary"
-import styled from "../styled"
 import { Message } from "./Message"
 import MessagePreview from "./MessagePreview"
 

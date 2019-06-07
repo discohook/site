@@ -1,8 +1,7 @@
-import { Theme as DefaultTheme } from "./styled"
+type ColorTheme = typeof darkTheme
+export type Theme = ColorTheme & { display: "cozy" | "compact" }
 
-type Theme = Omit<DefaultTheme, "display">
-
-export const darkTheme: Theme = {
+export const darkTheme = {
   accent: "#7289da",
   background: "#36393f",
   border: "#1e1f23",
@@ -67,7 +66,7 @@ export const darkTheme: Theme = {
   },
 }
 
-export const lightTheme: Theme = {
+export const lightTheme: ColorTheme = {
   accent: "#7289da",
   background: "#ffffff",
   border: "#c5c6c9",

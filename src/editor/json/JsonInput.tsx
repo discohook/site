@@ -1,5 +1,5 @@
+import styled from "@emotion/styled"
 import React, { ChangeEvent } from "react"
-import styled from "../../styled"
 import { MultilineTextInput } from "../styles"
 
 interface Props {

@@ -1,4 +1,4 @@
-import styled from "../styled"
+import styled from "@emotion/styled"
 
 export const Container = styled.div<{ direction?: "column" | "row" }>`
   display: flex;

@@ -1,3 +1,4 @@
+import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import React, { useEffect, useState } from "react"
 import Editor from "./editor/Editor"
@@ -6,8 +7,7 @@ import GlobalStyle from "./GlobalStyle"
 import initialMessage from "./initialMessage.json"
 import { Message } from "./message/Message"
 import Preview from "./message/Preview"
-import styled, { Theme } from "./styled"
-import { darkTheme, lightTheme } from "./themes"
+import { darkTheme, lightTheme, Theme } from "./themes"
 
 const Container = styled.div`
   display: grid;
