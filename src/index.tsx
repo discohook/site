@@ -1,9 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
-const main = async () => {
-  const { default: App } = await import("./App")
-  ReactDOM.render(<App />, document.querySelector("#root"))
-}
-
-main()
+import("./App").then(function(App) {
+  ReactDOM.render(<App.default />, document.querySelector("#root"))
+})
