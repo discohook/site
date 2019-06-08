@@ -1,6 +1,8 @@
-import styled from "@emotion/styled"
-import React, { ChangeEvent } from "react"
-import { MultilineTextInput } from "../styles"
+import styled from "@emotion/styled";
+import React from "react";
+import { Container, InputLabel, MultilineTextInput } from "../styles";
+
+let nextId = 0
 
 interface Props {
   json: string
@@ -8,18 +10,8 @@ interface Props {
   errors: string[]
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const InputLabel = styled.span`
-  display: inline-block;
-  margin: 8px 8px 0;
-`
-
 const ErrorContainer = styled.div`
-  margin: 8px;
+  margin: 8px 8px 0;
   padding: 8px 16px;
 
   background: #f04747;
@@ -41,9 +33,11 @@ const CodeInput = styled(MultilineTextInput)`
 `
 
 export default function JsonInput(props: Props) {
+  const id = `JsonInput-${nextId++}`
+
   return (
     <Container>
-      <InputLabel>JSON data</InputLabel>
+      <InputLabel htmlFor={id}>JSON data</InputLabel>
       {props.errors.length > 0 && (
         <ErrorContainer>
           {props.errors.map((error, index) => (
@@ -52,10 +46,9 @@ export default function JsonInput(props: Props) {
         </ErrorContainer>
       )}
       <CodeInput
+        id={id}
         value={props.json}
-        onChange={(
-          event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        ) => props.onChange(event.target.value)}
+        onChange={(event) => props.onChange(event.target.value)}
       />
     </Container>
   )
