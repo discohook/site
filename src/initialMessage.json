@@ -3,7 +3,7 @@
   "embeds": [
     {
       "title": "What even?",
-      "description": "So uhh, yeah, this is __Discohook__.\n\nThis creates and sends messages for Discord's webhook feature, you can read more about it \\👉 [here](https://support.discordapp.com/hc/en-us/articles/228383668).\nIn short, they exist to send messages to a channel from outside Discord. You create them in the channel settings, copy the link in here and go wild!\n\nThis application serves to help you create and send messages like these to your own server!\nThese messages can contain not only the usual content and maybe a file or two, but also have up to 10 embeds! \\✨",
+      "description": "So uhh, yeah, this is __Discohook__.\n\nThis creates and sends messages for Discord's webhook feature, you can read more about it on [the support article](https://support.discordapp.com/hc/en-us/articles/228383668). \\👈\nIn short, they exist to send messages to a channel from outside Discord. You create them in the channel settings, copy the link in here and go wild!\n\nThis application serves to help you create and send messages like these to your own server!\nThese messages can contain not only the usual content and maybe a file or two, but also have up to 10 embeds! \\✨",
       "color": 7506394
     },
     {
