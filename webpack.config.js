@@ -8,7 +8,11 @@ const dev = process.env.NODE_ENV === "development"
 /** @type {import("webpack").Configuration} */
 module.exports = {
   mode: dev ? "development" : "production",
-  entry: resolve(__dirname, "src", "index.tsx"),
+  entry: [
+    "core-js/stable",
+    "regenerator-runtime/runtime",
+    resolve(__dirname, "src", "index.tsx"),
+  ],
   output: {
     filename: "[id].[hash].js",
     chunkFilename: "[id].[hash].js",
