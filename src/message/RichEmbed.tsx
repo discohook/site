@@ -44,16 +44,20 @@ const InnerEmbedContent = styled.div`
   }
 `
 
-const EmbedTitle = styled.a`
+const EmbedTitleNormal = styled.span`
   display: inline-block;
 
   font-size: 14px;
   font-weight: 500;
-  color: ${(props) => props.theme.embed.title[props.href ? "link" : "normal"]};
+  color: ${(props) => props.theme.embed.title.normal};
   text-decoration: none;
+`
+
+const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
+  color: ${(props) => props.theme.embed.title.link};
 
   :hover {
-    text-decoration: ${(props) => (props.href ? "underline" : "none")};
+    text-decoration: underline;
   }
 `
 
@@ -102,6 +106,8 @@ export default function RichEmbed(props: Props) {
     typeof color === "number"
       ? `#${color.toString(16).padStart(6, "0")}`
       : undefined
+
+  const EmbedTitle = !url ? EmbedTitleNormal : EmbedTitleLink
 
   return (
     <Container>

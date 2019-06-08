@@ -87,9 +87,11 @@ const AttachmentFileName = styled.div`
   overflow: hidden;
 `
 
-const AttachmentFileNameInner = styled.a`
+const AttachmentFileNameInner = styled.span`
   color: ${(props) => props.theme.attachment.fileName};
   font-size: 16px;
+
+  cursor: pointer;
 
   :hover {
     text-decoration: underline;

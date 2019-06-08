@@ -21,20 +21,24 @@ const AuthorImage = styled.img`
   border-radius: 50%;
 `
 
-const AuthorName = styled.a`
+const AuthorNameNormal = styled.span`
   color: ${(props) => props.theme.embed.author.name};
   font-size: 14px;
   font-weight: 500;
 
   text-decoration: none;
+`
 
+const AuthorNameLink = styled(AuthorNameNormal.withComponent("a"))`
   :hover {
-    text-decoration: ${(props) => (props.href ? "underline" : "none")};
+    text-decoration: underline;
   }
 `
 
 export default function EmbedAuthor(props: Props) {
   const { name, url, iconUrl } = props.author
+
+  const AuthorName = !url ? AuthorNameNormal : AuthorNameLink
 
   return (
     <Container>
