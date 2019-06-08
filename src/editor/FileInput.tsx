@@ -13,14 +13,16 @@ interface RefType {
 function FileInput(props: Props, ref: Ref<RefType>) {
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const clearFiles = () => {
+    if (!inputRef.current) return
+
+    inputRef.current.value = ""
+    props.onChange(undefined)
+  }
+
   useImperativeHandle(ref, () => ({
     files: (inputRef.current && inputRef.current.files) || undefined,
-    clearFiles: () => {
-      if (inputRef.current) {
-        inputRef.current.value = ""
-        props.onChange(undefined)
-      }
-    },
+    clearFiles,
   }))
 
   return (
@@ -29,6 +31,7 @@ function FileInput(props: Props, ref: Ref<RefType>) {
       <TextInput
         type="file"
         multiple={true}
+        onClick={clearFiles}
         onChange={(event) => props.onChange(event.target.files || undefined)}
         ref={inputRef}
       />
