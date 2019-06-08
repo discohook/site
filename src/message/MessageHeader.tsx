@@ -106,7 +106,7 @@ export default function MessageHeader(props: Props) {
 
   return (
     <Container>
-      <Avatar src={avatarUrl} />
+      <Avatar src={avatarUrl} alt="" />
       <HeaderInfo>
         <UserName>{username}</UserName>
         <BotTag>BOT</BotTag>

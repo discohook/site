@@ -42,7 +42,7 @@ export default function EmbedAuthor(props: Props) {
 
   return (
     <Container>
-      {iconUrl && <AuthorImage src={iconUrl} />}
+      {iconUrl && <AuthorImage src={iconUrl} alt="" />}
       {name && <AuthorName href={url}>{name}</AuthorName>}
     </Container>
   )

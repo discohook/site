@@ -130,7 +130,7 @@ export default function Attachment(props: Props) {
     else setDataUrl("")
   })
 
-  if (isImage) return <ImageAttachment src={dataUrl} />
+  if (isImage) return <ImageAttachment src={dataUrl} alt={name} />
 
   return (
     <AttachmentContainer>
