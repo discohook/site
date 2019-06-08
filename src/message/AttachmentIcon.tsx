@@ -1,6 +1,28 @@
 import React from "react"
 
-export default function AttachmentIcon() {
+export type AttachmentType =
+  | "acrobat"
+  | "ae"
+  | "ai"
+  | "archive"
+  | "audio"
+  | "code"
+  | "document"
+  | "image"
+  | "photoshop"
+  | "sketch"
+  | "spreadsheet"
+  | "video"
+  | "webcode"
+  | "unknown"
+
+interface Props {
+  type: AttachmentType
+}
+
+export default function AttachmentIcon(props: Props) {
+  const { type } = props
+
   return (
     <svg
       width="28px"

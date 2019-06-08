@@ -1,19 +1,10 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
-import AttachmentIcon from "./AttachmentIcon"
+import AttachmentIcon, { AttachmentType } from "./AttachmentIcon"
+import attachmentTypes from "./attachmentTypes.json"
 
 interface Props {
   file: File
-}
-
-const readAsBase64 = (blob: Blob) => {
-  return new Promise<string>((res, rej) => {
-    const reader = new FileReader()
-    reader.addEventListener("load", () => res(reader.result as string))
-    reader.addEventListener("error", rej)
-    reader.addEventListener("abort", rej)
-    reader.readAsDataURL(blob)
-  })
 }
 
 const getHumanReadableSize = (bytes: number) => {
@@ -119,23 +110,58 @@ const AttachmentDownloadButton = styled.div`
   }
 `
 
-export default function Attachment(props: Props) {
-  const { name, size, type } = props.file
+interface AttachmentTypeInfo {
+  check: "mime" | "name"
+  regex: string
+  icon: AttachmentType
+}
 
-  const isImage = /^image\/(png|jpeg|gif|webp)(?:;.*)?$/.test(type)
-  const [dataUrl, setDataUrl] = useState("")
+const getAttachmentType = (name: string, mime: string): AttachmentType => {
+  const types = attachmentTypes as AttachmentTypeInfo[]
 
-  useEffect(() => {
-    if (isImage) readAsBase64(props.file).then(setDataUrl)
-    else setDataUrl("")
+  for (const type of types) {
+    const regex = new RegExp(type.regex)
+    if (regex.test(type.check === "name" ? name : mime)) {
+      return type.icon
+    }
+  }
+
+  return "unknown"
+}
+
+const readAsBase64 = (blob: Blob) => {
+  return new Promise<string>((res, rej) => {
+    const reader = new FileReader()
+    reader.addEventListener("load", () => res(reader.result as string))
+    reader.addEventListener("error", rej)
+    reader.addEventListener("abort", rej)
+    reader.readAsDataURL(blob)
   })
+}
 
-  if (isImage) return <ImageAttachment src={dataUrl} alt={name} />
+export default function Attachment(props: Props) {
+  const { name, size, type: mime } = props.file
+
+  const [type, setType] = useState(getAttachmentType(name, mime))
+  useEffect(() => {
+    setType(getAttachmentType(name, mime))
+  }, [name, mime])
+  useEffect(() => {
+    console.log(`Attachment type for ${name}:`, type)
+  }, [type])
+
+  const [dataUrl, setDataUrl] = useState("")
+  useEffect(() => {
+    if (type === "image") readAsBase64(props.file).then(setDataUrl)
+    else setDataUrl("")
+  }, [props.file])
+
+  if (type === "image") return <ImageAttachment src={dataUrl} alt={name} />
 
   return (
     <AttachmentContainer>
       <AttachmentIconContainer>
-        <AttachmentIcon />
+        <AttachmentIcon type={type} />
       </AttachmentIconContainer>
       <AttachmentInfo>
         <AttachmentFileName>
