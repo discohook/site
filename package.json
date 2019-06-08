@@ -49,5 +49,5 @@
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1"
   },
-  "browserslist": "> 0.5% and last 1 years"
+  "browserslist": "> 0.5% and last 1 years, chrome 41"
 }
