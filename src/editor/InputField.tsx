@@ -5,21 +5,21 @@ interface Props {
   value: string
   onChange: (value: string | undefined) => void
   label: string
-  multiline?: true
+  multiline?: boolean
   placeholder?: string
 }
 
+type E = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+
 export default function InputField(props: Props) {
-  const InputComponent = props.multiline ? MultilineTextInput : TextInput
+  const Input = props.multiline ? MultilineTextInput : TextInput
 
   return (
     <InputLabel>
       {props.label}
-      <InputComponent
+      <Input
         value={props.value}
-        onChange={(
-          event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        ) => props.onChange(event.target.value || undefined)}
+        onChange={(event: E) => props.onChange(event.target.value || undefined)}
         placeholder={props.placeholder}
       />
     </InputLabel>
