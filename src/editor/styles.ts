@@ -1,4 +1,11 @@
-import styled from "@emotion/styled"
+import styled, { StyledComponent } from "@emotion/styled"
+import { Theme } from "../themes"
+
+type SC<Tag extends keyof JSX.IntrinsicElements> = StyledComponent<
+  JSX.IntrinsicElements[Tag],
+  Omit<JSX.IntrinsicElements[Tag], "ref" | "key">,
+  Theme
+>
 
 export const Container = styled.div<{ direction?: "column" | "row" }>`
   display: flex;
@@ -60,7 +67,7 @@ TextInput.defaultProps = { type: "text" }
 export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
   resize: vertical;
   min-height: 60px;
-`
+` as SC<"textarea">
 
 export const Button = styled.button`
   min-height: 40px;
