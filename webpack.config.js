@@ -32,15 +32,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: resolve(__dirname, "dist", "index.html"),
       template: resolve(__dirname, "public", "index.html"),
-      minify: !dev && {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeAttributeQuotes: true,
-        removeOptionalTags: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-      },
+      minify: !dev && { collapseWhitespace: true, removeComments: true },
     }),
     new CleanWebpackPlugin(),
   ],
