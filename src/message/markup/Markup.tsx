@@ -11,15 +11,6 @@ export const MarkupContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
 
-  a {
-    color: ${({ theme }) => theme.link};
-    text-decoration: none;
-
-    :hover {
-      text-decoration: underline;
-    }
-  }
-
   code {
     padding: 2.55px;
     margin: -2.55px 0;

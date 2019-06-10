@@ -61,6 +61,16 @@ function GlobalStyle(props: { theme: Theme }) {
           font-family: ${theme.fonts.code};
         }
 
+        a {
+          color: ${theme.link};
+
+          text-decoration: none;
+
+          :hover {
+            text-decoration: underline;
+          }
+        }
+
         ::-webkit-scrollbar {
           width: 14px;
           height: 14px;

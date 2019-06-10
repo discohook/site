@@ -50,16 +50,9 @@ const EmbedTitleNormal = styled.span`
   font-size: 14px;
   font-weight: 500;
   color: ${({ theme }) => theme.message.embed.title.normal};
-  text-decoration: none;
 `
 
-const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
-  color: ${({ theme }) => theme.message.embed.title.link};
-
-  :hover {
-    text-decoration: underline;
-  }
-`
+const EmbedTitleLink = EmbedTitleNormal.withComponent("a")
 
 const EmbedDescription = styled.div`
   color: ${({ theme }) => theme.message.embed.description};

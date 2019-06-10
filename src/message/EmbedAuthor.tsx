@@ -25,15 +25,9 @@ const AuthorNameNormal = styled.span`
   color: ${({ theme }) => theme.message.embed.author};
   font-size: 14px;
   font-weight: 500;
-
-  text-decoration: none;
 `
 
-const AuthorNameLink = styled(AuthorNameNormal.withComponent("a"))`
-  :hover {
-    text-decoration: underline;
-  }
-`
+const AuthorNameLink = AuthorNameNormal.withComponent("a")
 
 export default function EmbedAuthor(props: Props) {
   const { name, url, iconUrl } = props.author
