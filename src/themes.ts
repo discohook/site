@@ -42,12 +42,7 @@ export const darkTheme = {
       pillDefaultFill: "#4f545c",
 
       author: "#ffffff",
-
-      title: {
-        normal: "#ffffff",
-        link: "#0096cf",
-      },
-
+      title: "#ffffff",
       description: "#aeafb1",
 
       field: {
@@ -130,12 +125,7 @@ export const lightTheme: ColorTheme = {
       pillDefaultFill: "#cacbce",
 
       author: "#4f545c",
-
-      title: {
-        normal: "#4f545c",
-        link: "#00b0f4",
-      },
-
+      title: "#4f545c",
       description: "#60646b",
 
       field: {

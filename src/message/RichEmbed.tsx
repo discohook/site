@@ -49,7 +49,7 @@ const EmbedTitleNormal = styled.span`
 
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.message.embed.title.normal};
+  color: ${({ theme }) => theme.message.embed.title};
 `
 
 const EmbedTitleLink = EmbedTitleNormal.withComponent("a")
