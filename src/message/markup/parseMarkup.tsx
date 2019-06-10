@@ -213,7 +213,7 @@ export const parseMarkup = (content: string, inline: boolean = false) => {
 
   if (totalTime > 1) {
     const ellipsized = ellipsize(content, 8)
-    const time = totalTime.toFixed(3)
+    const time = totalTime.toLocaleString("en-US")
     console.log(`Rendered markup for "${ellipsized}" in ${time}ms:`, {
       tree: ast,
       options: { content, inline },
