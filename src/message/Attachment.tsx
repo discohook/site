@@ -7,24 +7,6 @@ interface Props {
   file: File
 }
 
-const getHumanReadableSize = (bytes: number) => {
-  const units = ["bytes", "KB", "MB"]
-
-  let unit = 0
-  let number = bytes
-
-  while (number >= 1024 && unit < units.length - 1) {
-    unit++
-    number /= 1024
-  }
-
-  const formattedNumber = number.toLocaleString("en-US", {
-    maximumFractionDigits: 2,
-  })
-
-  return `${formattedNumber} ${units[unit]}`
-}
-
 const ImageAttachment = styled.img`
   display: block;
 
@@ -127,6 +109,24 @@ const getAttachmentType = (name: string, mime: string): AttachmentType => {
   }
 
   return "unknown"
+}
+
+const getHumanReadableSize = (bytes: number) => {
+  const units = ["bytes", "KB", "MB", "GB", "TB", "PB"]
+
+  let unit = 0
+  let number = bytes
+
+  while (number >= 1024 && unit < units.length - 1) {
+    unit++
+    number /= 1024
+  }
+
+  const formattedNumber = number.toLocaleString("en-US", {
+    maximumFractionDigits: 2,
+  })
+
+  return `${formattedNumber} ${units[unit]}`
 }
 
 export default function Attachment(props: Props) {
