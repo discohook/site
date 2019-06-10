@@ -129,34 +129,26 @@ const getAttachmentType = (name: string, mime: string): AttachmentType => {
   return "unknown"
 }
 
-const readAsBase64 = (blob: Blob) => {
-  return new Promise<string>((res, rej) => {
-    const reader = new FileReader()
-    reader.addEventListener("load", () => res(reader.result as string))
-    reader.addEventListener("error", rej)
-    reader.addEventListener("abort", rej)
-    reader.readAsDataURL(blob)
-  })
-}
-
 export default function Attachment(props: Props) {
   const { name, size, type: mime } = props.file
 
   const [type, setType] = useState(getAttachmentType(name, mime))
-  useEffect(() => {
-    setType(getAttachmentType(name, mime))
-  }, [name, mime])
-  useEffect(() => {
-    console.log(`Attachment type for ${name}:`, type)
-  }, [type])
+  useEffect(() => setType(getAttachmentType(name, mime)), [name, mime])
+  useEffect(() => console.log(`Attachment type for ${name}:`, type), [type])
 
-  const [dataUrl, setDataUrl] = useState("")
+  const [objectUrl, setObjectUrl] = useState("")
   useEffect(() => {
-    if (type === "image") readAsBase64(props.file).then(setDataUrl)
-    else setDataUrl("")
+    if (type !== "image") return
+
+    const objectUrl = URL.createObjectURL(props.file)
+    setObjectUrl(objectUrl)
+
+    return () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl)
+    }
   }, [props.file])
 
-  if (type === "image") return <ImageAttachment src={dataUrl} alt={name} />
+  if (type === "image") return <ImageAttachment src={objectUrl} alt={name} />
 
   return (
     <AttachmentContainer>
