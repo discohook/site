@@ -8,22 +8,22 @@ interface Props {
 }
 
 const Container = styled.div<{ inline?: boolean }>`
-  flex: ${(props) => (props.inline ? 1 : 0)};
+  flex: ${({ inline }) => (inline ? 1 : 0)};
   margin: 4px 0 0;
-  min-width: ${(props) => (props.inline ? "150px" : "100%")};
+  min-width: ${({ inline }) => (inline ? "150px" : "100%")};
   flex-basis: auto;
 `
 
 const FieldName = styled.div`
   margin: 0 0 4px;
 
-  color: ${(props) => props.theme.embed.field.name};
+  color: ${({ theme }) => theme.message.embed.field.name};
   font-size: 14px;
   font-weight: 500;
 `
 
 const FieldValue = styled.div`
-  color: ${(props) => props.theme.embed.field.value};
+  color: ${({ theme }) => theme.message.embed.field.value};
   font-size: 14px;
 `
 

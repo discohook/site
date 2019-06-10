@@ -12,7 +12,7 @@ export const MarkupContainer = styled.div`
   word-wrap: break-word;
 
   a {
-    color: ${(props) => props.theme.link};
+    color: ${({ theme }) => theme.link};
     text-decoration: none;
 
     :hover {
@@ -25,7 +25,7 @@ export const MarkupContainer = styled.div`
     margin: -2.55px 0;
 
     border-radius: 3px;
-    background: ${(props) => props.theme.code.background};
+    background: ${({ theme }) => theme.message.code.background};
 
     font-size: 12.75px;
   }
@@ -35,8 +35,8 @@ export const MarkupContainer = styled.div`
     margin: 6px 0 0;
     padding: 7px;
 
-    border: 2px solid ${(props) => props.theme.code.border};
-    background: ${(props) => props.theme.code.background};
+    border: 2px solid ${({ theme }) => theme.message.code.border};
+    background: ${({ theme }) => theme.message.code.background};
     border-radius: 5px;
 
     font-size: 14px;
@@ -45,33 +45,33 @@ export const MarkupContainer = styled.div`
 `
 
 export const Emoji = styled.img<{ big?: boolean }>`
-  width: ${(props) =>
-    props.big && props.theme.display === "cozy" ? "32px" : "21.75px"};
-  height: ${(props) =>
-    props.big && props.theme.display === "cozy" ? "32px" : "21.75px"};
+  width: ${({ theme, big }) =>
+    big && theme.display === "cozy" ? "32px" : "21.75px"};
+  height: ${({ theme, big }) =>
+    big && theme.display === "cozy" ? "32px" : "21.75px"};
 
   object-fit: contain;
 
-  vertical-align: ${(props) => (props.big ? "-4.5px" : "-6px")};
-  margin: ${(props) => (props.big ? "3px" : "0")} 1.5px 0 0.75px;
+  vertical-align: ${({ big }) => (big ? "-4.5px" : "-6px")};
+  margin: ${({ big }) => (big ? "3px" : "0")} 1.5px 0 0.75px;
 `
 
 export const Mention = styled.span`
   padding: 0 2px;
   cursor: pointer;
 
-  background: ${(props) => props.theme.mention.normal};
-  color: ${(props) => props.theme.mention.normalText};
+  background: ${({ theme }) => theme.message.mention.normal};
+  color: ${({ theme }) => theme.message.mention.normalText};
   font-weight: 500;
 
   :hover {
-    background: ${(props) => props.theme.mention.hover};
-    color: ${(props) => props.theme.mention.hoverText};
+    background: ${({ theme }) => theme.message.mention.hover};
+    color: ${({ theme }) => theme.message.mention.hoverText};
   }
 `
 
 export const Spoiler = styled.span`
-  background: ${(props) => props.theme.spoiler};
+  background: ${({ theme }) => theme.message.spoiler};
   border-radius: 3px;
 `
 

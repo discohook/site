@@ -17,7 +17,7 @@ const Container = styled.div`
 `
 
 const Pill = styled.div`
-  background: ${(props) => props.theme.embed.pillDefaultFill};
+  background: ${({ theme }) => theme.message.embed.pillDefaultFill};
   border-radius: 3px 0 0 3px;
   flex-shrink: 0;
   width: 4px;
@@ -27,9 +27,9 @@ const EmbedContent = styled.div`
   max-width: 520px;
   display: flex;
 
-  border: 1px solid ${(props) => props.theme.embed.border};
+  border: 1px solid ${({ theme }) => theme.message.embed.border};
 
-  background: ${(props) => props.theme.embed.background};
+  background: ${({ theme }) => theme.message.embed.background};
   border-radius: 0 3px 3px 0;
 
   padding: 8px 10px;
@@ -49,12 +49,12 @@ const EmbedTitleNormal = styled.span`
 
   font-size: 14px;
   font-weight: 500;
-  color: ${(props) => props.theme.embed.title.normal};
+  color: ${({ theme }) => theme.message.embed.title.normal};
   text-decoration: none;
 `
 
 const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
-  color: ${(props) => props.theme.embed.title.link};
+  color: ${({ theme }) => theme.message.embed.title.link};
 
   :hover {
     text-decoration: underline;
@@ -62,7 +62,7 @@ const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
 `
 
 const EmbedDescription = styled.div`
-  color: ${(props) => props.theme.embed.description};
+  color: ${({ theme }) => theme.message.embed.description};
   font-size: 14px;
   line-height: 16px;
 `

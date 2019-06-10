@@ -46,9 +46,9 @@ function GlobalStyle(props: { theme: Theme }) {
 
         body {
           margin: 0;
-          font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial",
-            sans-serif;
+          font-family: ${theme.fonts.normal};
           line-height: 1;
+
           text-rendering: optimizeLegibility;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
@@ -58,8 +58,7 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         code {
-          font-family: "Consolas", "Liberation Mono", "Menlo", "Courier",
-            monospace;
+          font-family: ${theme.fonts.code};
         }
 
         ::-webkit-scrollbar {
@@ -73,14 +72,14 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         ::-webkit-scrollbar-thumb {
-          background-color: ${theme.scrollThumb};
+          background-color: ${theme.scrollBar.thumb};
           border: 3px solid ${theme.background};
           border-radius: 7px;
           background-clip: padding-box;
         }
 
         ::-webkit-scrollbar-track-piece {
-          background-color: ${theme.scrollTrack};
+          background-color: ${theme.scrollBar.track};
           border: 3px solid ${theme.background};
           border-radius: 7px;
         }

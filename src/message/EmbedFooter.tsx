@@ -27,7 +27,7 @@ const FooterImage = styled.img`
 `
 
 const FooterText = styled.span`
-  color: ${(props) => props.theme.embed.footer.text};
+  color: ${({ theme }) => theme.message.embed.footer.text};
   font-size: 12px;
   font-weight: 500;
 `
@@ -36,7 +36,7 @@ const FooterSeparator = styled.span`
   display: inline-block;
   margin: 0 4px;
 
-  color: ${(props) => props.theme.embed.footer.separator};
+  color: ${({ theme }) => theme.message.embed.footer.separator};
   font-weight: 700;
 `
 

@@ -7,15 +7,15 @@ interface Props {
 }
 
 const Container = styled.div`
-  height: ${(props) => (props.theme.display === "cozy" ? "20.8px" : "auto")};
-  display: ${(props) =>
-    props.theme.display === "cozy" ? "flex" : "inline-flex"};
-  margin: ${(props) =>
-    props.theme.display === "cozy" ? "0 0 2px -80px" : "0 0 0 -9ch"};
+  height: ${({ theme }) => (theme.display === "cozy" ? "20.8px" : "auto")};
+  display: ${({ theme }) =>
+    theme.display === "cozy" ? "flex" : "inline-flex"};
+  margin: ${({ theme }) =>
+    theme.display === "cozy" ? "0 0 2px -80px" : "0 0 0 -9ch"};
 `
 
 const Avatar = styled.img`
-  display: ${(props) => (props.theme.display === "cozy" ? "block" : "none")};
+  display: ${({ theme }) => (theme.display === "cozy" ? "block" : "none")};
 
   width: 40px;
   height: 40px;
@@ -35,13 +35,13 @@ const Avatar = styled.img`
 const HeaderInfo = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: ${(props) =>
-    props.theme.display === "cozy" ? "row" : "row-reverse"};
+  flex-direction: ${({ theme }) =>
+    theme.display === "cozy" ? "row" : "row-reverse"};
   margin: 0;
 `
 
 const UserName = styled.span`
-  color: ${(props) => props.theme.message.username};
+  color: ${({ theme }) => theme.message.username};
   font-weight: 500;
 `
 
@@ -53,34 +53,32 @@ const BotTag = styled.span`
   align-items: center;
   justify-content: center;
 
-  width: ${(props) => (props.theme.display === "cozy" ? "23px" : "21px")};
+  width: ${({ theme }) => (theme.display === "cozy" ? "23px" : "21px")};
   height: 14px;
-  padding: ${(props) => (props.theme.display === "cozy" ? "1px 0 0" : "0")};
+  padding: ${({ theme }) => (theme.display === "cozy" ? "1px 0 0" : "0")};
 
   border-radius: 3px;
   margin: 0 4.8px;
 
-  background: ${(props) => props.theme.accent};
+  background: ${({ theme }) => theme.accent};
 
   color: #ffffff;
-  font-size: ${(props) =>
-    props.theme.display === "cozy" ? "10px" : "9.375px"};
+  font-size: ${({ theme }) => (theme.display === "cozy" ? "10px" : "9.375px")};
   font-weight: 500;
 `
 
 const Timestamp = styled.span`
-  width: ${(props) => (props.theme.display === "cozy" ? "auto" : "74px")};
+  width: ${({ theme }) => (theme.display === "cozy" ? "auto" : "74px")};
 
-  margin: ${(props) => (props.theme.display === "cozy" ? "1px 0 0" : "0")};
+  margin: ${({ theme }) => (theme.display === "cozy" ? "1px 0 0" : "0")};
 
-  color: ${(props) => props.theme.message.timestamp};
+  color: ${({ theme }) => theme.message.timestamp};
   font-size: 12px;
 
   text-align: right;
 
   ::before {
-    content: ${(props) =>
-      props.theme.display === "cozy" ? "'Today at '" : ""};
+    content: ${({ theme }) => (theme.display === "cozy" ? "'Today at '" : "")};
   }
 `
 

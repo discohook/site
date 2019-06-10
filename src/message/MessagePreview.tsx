@@ -12,21 +12,21 @@ interface Props {
 }
 
 const Container = styled.div`
-  margin: ${(props) =>
-    props.theme.display === "cozy" ? "0 0 0 80px" : "0 0 0 9ch"};
-  padding: ${(props) =>
-    props.theme.display === "cozy" ? "20px 10px 20px 0" : "10px"};
+  margin: ${({ theme }) =>
+    theme.display === "cozy" ? "0 0 0 80px" : "0 0 0 9ch"};
+  padding: ${({ theme }) =>
+    theme.display === "cozy" ? "20px 10px 20px 0" : "10px"};
 
   font-size: 15px;
   line-height: 1.3;
 
   > ${MarkupContainer} {
     display: inline;
-    margin-left: ${(props) => (props.theme.display === "cozy" ? "0" : "4px")};
+    margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "4px")};
   }
 
   > * + *:not(${MarkupContainer}) {
-    margin-left: ${(props) => (props.theme.display === "cozy" ? "0" : "6px")};
+    margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "6px")};
   }
 `
 

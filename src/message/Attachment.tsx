@@ -47,10 +47,10 @@ const AttachmentContainer = styled.div`
   align-items: center;
 
   box-sizing: border-box;
-  border: 1px solid ${(props) => props.theme.attachment.border};
+  border: 1px solid ${({ theme }) => theme.message.attachment.border};
   border-radius: 3px;
 
-  background: ${(props) => props.theme.attachment.background};
+  background: ${({ theme }) => theme.message.attachment.background};
 `
 
 const AttachmentIconContainer = styled.div`
@@ -79,7 +79,7 @@ const AttachmentFileName = styled.div`
 `
 
 const AttachmentFileNameInner = styled.span`
-  color: ${(props) => props.theme.attachment.fileName};
+  color: ${({ theme }) => theme.message.attachment.fileName};
   font-size: 16px;
 
   cursor: pointer;
@@ -90,7 +90,7 @@ const AttachmentFileNameInner = styled.span`
 `
 
 const AttachmentFileSize = styled.div`
-  color: ${(props) => props.theme.attachment.fileSize};
+  color: ${({ theme }) => theme.message.attachment.fileSize};
   font-size: 12px;
   line-height: 16px;
   font-weight: 300;
@@ -99,10 +99,10 @@ const AttachmentFileSize = styled.div`
 const AttachmentDownloadButton = styled.div`
   cursor: pointer;
 
-  color: ${(props) => props.theme.attachment.download};
+  color: ${({ theme }) => theme.message.attachment.download};
 
   :hover {
-    color: ${(props) => props.theme.attachment.downloadHover};
+    color: ${({ theme }) => theme.message.attachment.downloadHover};
   }
 
   > svg {

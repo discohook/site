@@ -10,12 +10,12 @@ interface Props {
 }
 
 const Container = styled.pre`
-  background: ${(props) => props.theme.code.background};
-  color: ${(props) => props.theme.code.text};
+  background: ${({ theme }) => theme.message.code.background};
+  color: ${({ theme }) => theme.message.code.text};
 
   .hljs-comment,
   .hljs-quote {
-    color: ${(props) => props.theme.code.comment};
+    color: ${({ theme }) => theme.message.code.comment};
   }
 
   /* Solarized Green */
@@ -73,7 +73,7 @@ const Container = styled.pre`
   }
 
   .hljs-formula {
-    background: ${(props) => props.theme.code.formula};
+    background: ${({ theme }) => theme.message.code.formula};
   }
 
   .hljs-emphasis {

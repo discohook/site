@@ -9,8 +9,8 @@ type SC<Tag extends keyof JSX.IntrinsicElements> = StyledComponent<
 
 export const Container = styled.div<{ direction?: "column" | "row" }>`
   display: flex;
-  flex-direction: ${(props) => props.direction || "column"};
-  flex-wrap: ${(props) => (props.direction === "row" ? "wrap" : "nowrap")};
+  flex-direction: ${({ direction }) => direction || "column"};
+  flex-wrap: ${({ direction }) => (direction === "row" ? "wrap" : "nowrap")};
 
   > *:not(button) {
     flex-grow: 1;
@@ -28,7 +28,7 @@ export const BoxContainer = styled.div`
   margin: 8px;
   padding: 8px;
 
-  border: 1px solid ${(props) => props.theme.border};
+  border: 1px solid ${({ theme }) => theme.editor.border};
   border-radius: 3px;
 `
 
@@ -51,13 +51,13 @@ export const TextInput = styled.input`
   padding: 10px;
   margin: 8px 0;
 
-  background: ${(props) => props.theme.input};
+  background: ${({ theme }) => theme.editor.input};
   border: 0;
   border-radius: 3px;
   outline: none;
 
-  color: ${(props) => props.theme.text};
-  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  color: ${({ theme }) => theme.text};
+  font-family: ${({ theme }) => theme.fonts.normal};
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.4px;
@@ -76,13 +76,13 @@ export const Button = styled.button`
   padding: 0 16px;
 
   background: transparent;
-  border: 1px solid ${(props) => props.theme.accent};
+  border: 1px solid ${({ theme }) => theme.accent};
   border-radius: 3px;
   outline: none;
   cursor: pointer;
 
-  color: ${(props) => props.theme.button.enabled};
-  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  color: ${({ theme }) => theme.editor.button.enabled};
+  font-family: ${({ theme }) => theme.fonts.normal};
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.4px;
@@ -90,11 +90,11 @@ export const Button = styled.button`
   transition: background-color 300ms;
 
   :hover:not(:disabled) {
-    background: ${(props) => props.theme.accent};
+    background: ${({ theme }) => theme.accent};
   }
 
   :disabled {
-    color: ${(props) => props.theme.button.disabled};
+    color: ${({ theme }) => theme.editor.button.disabled};
     cursor: not-allowed;
   }
 `
@@ -102,10 +102,10 @@ export const Button = styled.button`
 export const ToggleButton = styled(Button)<{ filled: boolean }>`
   &,
   :hover:not(:disabled) {
-    background: ${(props) =>
-      props.filled ? props.theme.accent : "transparent"};
-    color: ${(props) =>
-      props.filled ? props.theme.button.filled : props.theme.button.enabled};
+    background: ${({ theme, filled }) =>
+      filled ? theme.accent : "transparent"};
+    color: ${({ theme, filled }) =>
+      filled ? theme.editor.button.filled : theme.editor.button.enabled};
   }
 `
 
@@ -127,8 +127,8 @@ export const Action = styled.button`
   outline: none;
   cursor: pointer;
 
-  color: ${(props) => props.theme.action};
-  font-family: "Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  color: ${({ theme }) => theme.editor.action};
+  font-family: ${({ theme }) => theme.fonts.normal};
   font-size: 15px;
   font-weight: 500;
   line-height: 20px;

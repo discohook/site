@@ -48,7 +48,7 @@ const ErrorContainer = styled.div`
 
 const ErrorHeader = styled.p`
   margin: 0;
-  color: ${(props) => props.theme.action};
+  color: ${({ theme }) => theme.editor.action};
   font-weight: 500;
 `
 

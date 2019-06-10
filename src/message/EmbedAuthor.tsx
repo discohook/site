@@ -22,7 +22,7 @@ const AuthorImage = styled.img`
 `
 
 const AuthorNameNormal = styled.span`
-  color: ${(props) => props.theme.embed.author.name};
+  color: ${({ theme }) => theme.message.embed.author};
   font-size: 14px;
   font-weight: 500;
 
