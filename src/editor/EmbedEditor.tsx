@@ -21,31 +21,27 @@ interface Props {
 }
 
 export default function EmbedEditor(props: Props) {
-  const addEmbed = () => {
-    const newEmbeds = Array.from(props.embeds)
-    newEmbeds.push({})
-    props.onChange(newEmbeds)
-  }
+  const embeds = Array.isArray(props.embeds) ? props.embeds : []
 
-  const modifyEmbed = (index: number, partialEmbed: Partial<Embed>) => {
-    const newEmbeds = Array.from(props.embeds)
-    newEmbeds[index] = { ...newEmbeds[index], ...partialEmbed }
-    props.onChange(newEmbeds)
-  }
+  const addEmbed = () => props.onChange([...embeds, {}])
 
-  const deleteEmbed = (index: number) => {
-    const newEmbeds = Array.from(props.embeds)
-    newEmbeds.splice(index, 1)
-    props.onChange(newEmbeds.length === 0 ? undefined : newEmbeds)
-  }
+  const deleteEmbed = (index: number) =>
+    props.onChange([...embeds.slice(0, index), ...embeds.slice(index + 1)])
 
   const moveEmbed = (from: number, to: number) => {
-    const newEmbeds = Array.from(props.embeds)
+    const newEmbeds = [...embeds]
     newEmbeds.splice(to, 0, ...newEmbeds.splice(from, 1))
     props.onChange(newEmbeds)
   }
 
-  const editors = (props.embeds || []).map((embed, index) => (
+  const modifyEmbed = (index: number, partialEmbed: Partial<Embed>) =>
+    props.onChange([
+      ...embeds.slice(0, index),
+      { ...embeds[index], ...partialEmbed },
+      ...embeds.slice(index + 1),
+    ])
+
+  const editors = embeds.map((embed, index) => (
     <Container key={index}>
       <ActionsContainer>
         <ActionsHeader>Embed {index + 1}</ActionsHeader>
@@ -53,7 +49,7 @@ export default function EmbedEditor(props: Props) {
         {index > 0 && (
           <Action onClick={() => moveEmbed(index, index - 1)}>Move up</Action>
         )}
-        {props.embeds.length - index > 1 && (
+        {embeds.length - index > 1 && (
           <Action onClick={() => moveEmbed(index, index + 1)}>Move down</Action>
         )}
       </ActionsContainer>
@@ -116,7 +112,7 @@ export default function EmbedEditor(props: Props) {
   return (
     <Container>
       {editors}
-      <Button disabled={props.embeds.length >= 10} onClick={addEmbed}>
+      <Button disabled={embeds.length >= 10} onClick={addEmbed}>
         Add embed
       </Button>
     </Container>
