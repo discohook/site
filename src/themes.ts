@@ -95,6 +95,11 @@ export const lightTheme: ColorTheme = {
   link: "#00b0f4",
   accent: "#7289da",
 
+  fonts: {
+    normal: '"Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;',
+    code: '"Consolas", "Liberation Mono", "Menlo", "Courier", monospace;',
+  },
+
   editor: {
     input: "#f6f6f7",
     border: "#c5c6c9",
