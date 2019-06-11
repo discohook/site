@@ -25,12 +25,15 @@ interface Props {
 }
 
 const EditorContainer = styled(Container)`
-  padding: 8px;
   overflow-y: scroll;
 
-  > *:not(button) {
+  & > *:not(button) {
     flex-grow: 0;
   }
+`
+
+const EditorInnerContainer = styled.div`
+  margin: 8px;
 `
 
 const EditorActionsWrapper = styled.div``
@@ -149,75 +152,77 @@ export default function Editor(props: Props) {
 
   return (
     <EditorContainer>
-      <EditorActionsWrapper>
-        <EditorActionsContainer>
-          <ActionsHeader>Message editor</ActionsHeader>
-          <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
-          <Action onClick={() => props.onToggleDisplay()}>
-            Toggle display
-          </Action>
-          <Action
-            onClick={() => {
-              handleChange({})
-              clearFiles()
-            }}
-          >
-            Clear all
-          </Action>
-        </EditorActionsContainer>
-      </EditorActionsWrapper>
-      <Container direction="row">
-        <InputField
-          value={webhookUrl}
-          onChange={(url) => setWebhookUrl(url || "")}
-          label="Webhook URL"
-          placeholder="https://discordapp.com/api/webhooks/..."
-        />
-        <Button disabled={isDisabled} onClick={executeWebhook}>
-          Send
-        </Button>
-      </Container>
-      <ErrorBoundary onError={() => <EditorError />}>
-        <InputField
-          value={props.message.content || ""}
-          onChange={(content) => handleChange({ ...props.message, content })}
-          label="Message content"
-          multiline
-        />
-        <EmbedEditor
-          embeds={props.message.embeds || []}
-          onChange={(embeds) => handleChange({ ...props.message, embeds })}
-        />
+      <EditorInnerContainer>
+        <EditorActionsWrapper>
+          <EditorActionsContainer>
+            <ActionsHeader>Message editor</ActionsHeader>
+            <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
+            <Action onClick={() => props.onToggleDisplay()}>
+              Toggle display
+            </Action>
+            <Action
+              onClick={() => {
+                handleChange({})
+                clearFiles()
+              }}
+            >
+              Clear all
+            </Action>
+          </EditorActionsContainer>
+        </EditorActionsWrapper>
         <Container direction="row">
           <InputField
-            value={props.message.username || ""}
-            onChange={(username) =>
-              handleChange({ ...props.message, username })
-            }
-            label="Override username"
+            value={webhookUrl}
+            onChange={(url) => setWebhookUrl(url || "")}
+            label="Webhook URL"
+            placeholder="https://discordapp.com/api/webhooks/..."
           />
-          <InputField
-            value={props.message.avatarUrl || ""}
-            onChange={(avatarUrl) =>
-              handleChange({ ...props.message, avatarUrl })
-            }
-            label="Override avatar"
-          />
+          <Button disabled={isDisabled} onClick={executeWebhook}>
+            Send
+          </Button>
         </Container>
-      </ErrorBoundary>
-      <Container direction="row">
-        <FileInput onChange={props.onFilesChange} ref={fileInputRef} />{" "}
-        <Button onClick={clearFiles}>Remove files</Button>
-      </Container>
-      <JsonInput
-        json={json}
-        onChange={(json) => {
-          setJson(json)
-          const message = checkErrors(json)
-          if (message) props.onChange(message)
-        }}
-        errors={errors}
-      />
+        <ErrorBoundary onError={() => <EditorError />}>
+          <InputField
+            value={props.message.content || ""}
+            onChange={(content) => handleChange({ ...props.message, content })}
+            label="Message content"
+            multiline
+          />
+          <EmbedEditor
+            embeds={props.message.embeds || []}
+            onChange={(embeds) => handleChange({ ...props.message, embeds })}
+          />
+          <Container direction="row">
+            <InputField
+              value={props.message.username || ""}
+              onChange={(username) =>
+                handleChange({ ...props.message, username })
+              }
+              label="Override username"
+            />
+            <InputField
+              value={props.message.avatarUrl || ""}
+              onChange={(avatarUrl) =>
+                handleChange({ ...props.message, avatarUrl })
+              }
+              label="Override avatar"
+            />
+          </Container>
+        </ErrorBoundary>
+        <Container direction="row">
+          <FileInput onChange={props.onFilesChange} ref={fileInputRef} />{" "}
+          <Button onClick={clearFiles}>Remove files</Button>
+        </Container>
+        <JsonInput
+          json={json}
+          onChange={(json) => {
+            setJson(json)
+            const message = checkErrors(json)
+            if (message) props.onChange(message)
+          }}
+          errors={errors}
+        />
+      </EditorInnerContainer>
     </EditorContainer>
   )
 }
