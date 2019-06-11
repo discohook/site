@@ -57,8 +57,6 @@ export default function Markup(props: Props) {
   const { content, inline } = props
 
   return (
-    <MarkupContainer className="markup">
-      {parseMarkup(content.trim(), inline)}
-    </MarkupContainer>
+    <MarkupContainer>{parseMarkup(content.trim(), inline)}</MarkupContainer>
   )
 }
