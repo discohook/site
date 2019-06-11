@@ -66,7 +66,7 @@ function GlobalStyle(props: { theme: Theme }) {
 
           text-decoration: none;
 
-          :hover {
+          &:hover {
             text-decoration: underline;
           }
         }

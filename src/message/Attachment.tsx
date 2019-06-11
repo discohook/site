@@ -66,7 +66,7 @@ const AttachmentFileNameInner = styled.span`
 
   cursor: pointer;
 
-  :hover {
+  &:hover {
     text-decoration: underline;
   }
 `
@@ -83,11 +83,11 @@ const AttachmentDownloadButton = styled.div`
 
   color: ${({ theme }) => theme.message.attachment.download};
 
-  :hover {
+  &:hover {
     color: ${({ theme }) => theme.message.attachment.downloadHover};
   }
 
-  > svg {
+  & > svg {
     fill: currentColor;
   }
 `

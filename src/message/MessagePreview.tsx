@@ -20,12 +20,12 @@ const Container = styled.div`
   font-size: 15px;
   line-height: 1.3;
 
-  > ${MarkupContainer} {
+  & > ${MarkupContainer} {
     display: inline;
     margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "4px")};
   }
 
-  > * + *:not(${MarkupContainer}) {
+  & > * + *:not(${MarkupContainer}) {
     margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "6px")};
   }
 `

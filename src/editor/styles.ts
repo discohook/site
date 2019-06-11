@@ -12,11 +12,11 @@ export const Container = styled.div<{ direction?: "column" | "row" }>`
   flex-direction: ${({ direction }) => direction || "column"};
   flex-wrap: ${({ direction }) => (direction === "row" ? "wrap" : "nowrap")};
 
-  > *:not(button) {
+  & > *:not(button) {
     flex-grow: 1;
   }
 
-  > button {
+  & > button {
     align-self: flex-end;
   }
 `
@@ -36,7 +36,7 @@ export const InputGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
 
-  > * {
+  & > * {
     flex-grow: 1;
   }
 `
@@ -89,11 +89,11 @@ export const Button = styled.button`
 
   transition: background-color 300ms;
 
-  :hover:not(:disabled) {
+  &:hover:not(:disabled) {
     background: ${({ theme }) => theme.accent};
   }
 
-  :disabled {
+  &:disabled {
     color: ${({ theme }) => theme.editor.button.disabled};
     cursor: not-allowed;
   }
@@ -101,7 +101,7 @@ export const Button = styled.button`
 
 export const ToggleButton = styled(Button)<{ filled: boolean }>`
   &,
-  :hover:not(:disabled) {
+  &:hover:not(:disabled) {
     background: ${({ theme, filled }) =>
       filled ? theme.accent : "transparent"};
     color: ${({ theme, filled }) =>
@@ -134,7 +134,7 @@ export const Action = styled.button`
   line-height: 20px;
   letter-spacing: -0.4px;
 
-  :hover {
+  &:hover {
     text-decoration: underline;
   }
 `

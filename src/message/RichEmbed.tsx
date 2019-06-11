@@ -39,7 +39,7 @@ const InnerEmbedContent = styled.div`
   flex: 1;
   overflow: hidden;
 
-  > * + * {
+  & > * + * {
     margin: 4px 0 0;
   }
 `

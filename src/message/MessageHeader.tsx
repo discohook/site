@@ -27,7 +27,7 @@ const Avatar = styled.img`
 
   object-fit: cover;
 
-  :hover {
+  &:hover {
     opacity: 0.8;
   }
 `
@@ -77,7 +77,7 @@ const Timestamp = styled.span`
 
   text-align: right;
 
-  ::before {
+  &::before {
     content: ${({ theme }) => (theme.display === "cozy" ? "'Today at '" : "")};
   }
 `

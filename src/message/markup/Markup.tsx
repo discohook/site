@@ -11,7 +11,7 @@ export const MarkupContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
 
-  code {
+  & code {
     padding: 2.55px;
     margin: -2.55px 0;
 
@@ -21,7 +21,7 @@ export const MarkupContainer = styled.div`
     font-size: 12.75px;
   }
 
-  pre {
+  & pre {
     max-width: 90%;
     margin: 6px 0 0;
     padding: 7px;
@@ -55,7 +55,7 @@ export const Mention = styled.span`
   color: ${({ theme }) => theme.message.mention.normalText};
   font-weight: 500;
 
-  :hover {
+  &:hover {
     background: ${({ theme }) => theme.message.mention.hover};
     color: ${({ theme }) => theme.message.mention.hoverText};
   }

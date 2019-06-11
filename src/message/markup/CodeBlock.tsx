@@ -13,74 +13,74 @@ const Container = styled.pre`
   background: ${({ theme }) => theme.message.code.background};
   color: ${({ theme }) => theme.message.code.text};
 
-  .hljs-comment,
-  .hljs-quote {
+  & .hljs-comment,
+  & .hljs-quote {
     color: ${({ theme }) => theme.message.code.comment};
   }
 
   /* Solarized Green */
-  .hljs-keyword,
-  .hljs-selector-tag,
-  .hljs-addition {
+  & .hljs-keyword,
+  & .hljs-selector-tag,
+  & .hljs-addition {
     color: #859900;
   }
 
   /* Solarized Cyan */
-  .hljs-number,
-  .hljs-string,
-  .hljs-meta .hljs-meta-string,
-  .hljs-literal,
-  .hljs-doctag,
-  .hljs-regexp {
+  & .hljs-number,
+  & .hljs-string,
+  & .hljs-meta .hljs-meta-string,
+  & .hljs-literal,
+  & .hljs-doctag,
+  & .hljs-regexp {
     color: #2aa198;
   }
 
   /* Solarized Blue */
-  .hljs-title,
-  .hljs-section,
-  .hljs-name,
-  .hljs-selector-id,
-  .hljs-selector-class {
+  & .hljs-title,
+  & .hljs-section,
+  & .hljs-name,
+  & .hljs-selector-id,
+  & .hljs-selector-class {
     color: #268bd2;
   }
 
   /* Solarized Yellow */
-  .hljs-attribute,
-  .hljs-attr,
-  .hljs-variable,
-  .hljs-template-variable,
-  .hljs-class .hljs-title,
-  .hljs-type {
+  & .hljs-attribute,
+  & .hljs-attr,
+  & .hljs-variable,
+  & .hljs-template-variable,
+  & .hljs-class .hljs-title,
+  & .hljs-type {
     color: #b58900;
   }
 
   /* Solarized Orange */
-  .hljs-symbol,
-  .hljs-bullet,
-  .hljs-subst,
-  .hljs-meta,
-  .hljs-meta .hljs-keyword,
-  .hljs-selector-attr,
-  .hljs-selector-pseudo,
-  .hljs-link {
+  & .hljs-symbol,
+  & .hljs-bullet,
+  & .hljs-subst,
+  & .hljs-meta,
+  & .hljs-meta .hljs-keyword,
+  & .hljs-selector-attr,
+  & .hljs-selector-pseudo,
+  & .hljs-link {
     color: #cb4b16;
   }
 
   /* Solarized Red */
-  .hljs-built_in,
-  .hljs-deletion {
+  & .hljs-built_in,
+  & .hljs-deletion {
     color: #dc322f;
   }
 
-  .hljs-formula {
+  & .hljs-formula {
     background: ${({ theme }) => theme.message.code.formula};
   }
 
-  .hljs-emphasis {
+  & .hljs-emphasis {
     font-style: italic;
   }
 
-  .hljs-strong {
+  & .hljs-strong {
     font-weight: bold;
   }
 `
