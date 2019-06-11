@@ -1,8 +1,6 @@
 const hljs: typeof import("highlight.js") = require("highlight.js/lib/highlight")
 const languages: Record<string, Language> = require("./languages.json")
 
-console.log(hljs)
-
 interface Language {
   aliases?: string[]
   dependencies?: string[]
