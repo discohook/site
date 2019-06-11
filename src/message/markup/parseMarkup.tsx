@@ -212,13 +212,16 @@ export const parseMarkup = (content: string, inline: boolean = false) => {
   const totalTime = parseTime + outputTime
 
   if (totalTime > 1) {
-    const ellipsized = ellipsize(content, 8)
+    const ellipsized = ellipsize(content, 10)
     const time = totalTime.toLocaleString("en-US")
-    console.log(`Rendered markup for "${ellipsized}" in ${time}ms:`, {
-      tree: ast,
-      options: { content, inline },
-      timing: { parseTime, outputTime },
-    })
+
+    console.groupCollapsed(`Parsed markup for "${ellipsized}" in ${time}ms`)
+    console.log("AST:", ast)
+    console.log("Content:", content)
+    console.log("Inline:", inline)
+    console.log("Parse time:", parseTime)
+    console.log("Output time:", outputTime)
+    console.groupEnd()
   }
 
   return output
