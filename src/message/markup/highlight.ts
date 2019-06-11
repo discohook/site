@@ -18,8 +18,11 @@ const importLanguage = async (language: string) => {
   if (lang.dependencies)
     await Promise.all(lang.dependencies.map(importLanguage))
 
-  const hl = await import(`highlight.js/lib/languages/${aliases[language]}.js`)
-  hljs.registerLanguage(language, hl.default)
+  const hljs = await import(
+    `highlight.js/lib/languages/${aliases[language]}`
+    /* webpackChunkName: "hljs-[request]" */
+  )
+  hljs.registerLanguage(language, hljs.default)
 
   console.log("Registered highlight.js language:", aliases[language])
 }

@@ -14,8 +14,8 @@ module.exports = {
     resolve(__dirname, "src", "index.tsx"),
   ],
   output: {
-    filename: "[id].[chunkhash].js",
-    chunkFilename: "[id].[chunkhash].js",
+    filename: "[name].[chunkhash].js",
+    chunkFilename: "[name].[chunkhash].js",
     path: resolve(__dirname, "dist"),
   },
   devtool: "source-map",
@@ -28,7 +28,13 @@ module.exports = {
       { enforce: "pre", test: /\.js$/, use: "source-map-loader" },
     ],
   },
-  optimization: { splitChunks: { chunks: "all" } },
+  optimization: {
+    splitChunks: {
+      chunks: (chunk) =>
+        typeof chunk.name === "string" ? !chunk.name.startsWith("hljs") : true,
+      automaticNameDelimiter: "-",
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: resolve(__dirname, "dist", "index.html"),
