@@ -17,14 +17,20 @@ const Container = styled.div`
 `
 
 export default function App() {
-  const [message, setMessage] = useState(() => {
-    return toCamelCase(initialMessage) as Message
-  })
+  const [message, setMessage] = useState<Message>(() =>
+    toCamelCase(initialMessage),
+  )
 
   const [files, setFiles] = useState<FileList | undefined>()
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
+  const toggleTheme = () =>
+    setColorTheme(colorTheme === "dark" ? "light" : "dark")
+
   const [displayTheme, setDisplayTheme] = useState<"cozy" | "compact">("cozy")
+  const toggleDisplay = () =>
+    setDisplayTheme(displayTheme === "cozy" ? "compact" : "cozy")
+
   useEffect(() => {
     console.log("Theme updated:", colorTheme, displayTheme)
   }, [colorTheme, displayTheme])
@@ -36,24 +42,18 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <>
-        <GlobalStyle />
-        <Container>
-          <Editor
-            message={message}
-            onChange={setMessage}
-            files={files}
-            onFilesChange={setFiles}
-            onToggleTheme={() =>
-              setColorTheme(colorTheme === "dark" ? "light" : "dark")
-            }
-            onToggleDisplay={() =>
-              setDisplayTheme(displayTheme === "cozy" ? "compact" : "cozy")
-            }
-          />
-          <Preview message={message} files={files} />
-        </Container>
-      </>
+      <GlobalStyle />
+      <Container>
+        <Editor
+          message={message}
+          onChange={setMessage}
+          files={files}
+          onFilesChange={setFiles}
+          onToggleTheme={toggleTheme}
+          onToggleDisplay={toggleDisplay}
+        />
+        <Preview message={message} files={files} />
+      </Container>
     </ThemeProvider>
   )
 }
