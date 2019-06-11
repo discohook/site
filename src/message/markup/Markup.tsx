@@ -10,29 +10,16 @@ interface Props {
 export const MarkupContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
+`
 
-  & code {
-    padding: 2.55px;
-    margin: -2.55px 0;
+export const Code = styled.code`
+  padding: 2.55px;
+  margin: -2.55px 0;
 
-    border-radius: 3px;
-    background: ${({ theme }) => theme.message.code.background};
+  border-radius: 3px;
+  background: ${({ theme }) => theme.message.code.background};
 
-    font-size: 12.75px;
-  }
-
-  & pre {
-    max-width: 90%;
-    margin: 6px 0 0;
-    padding: 7px;
-
-    border: 2px solid ${({ theme }) => theme.message.code.border};
-    background: ${({ theme }) => theme.message.code.background};
-    border-radius: 5px;
-
-    font-size: 14px;
-    color: #839496;
-  }
+  font-size: 12.75px;
 `
 
 export const Emoji = styled.img<{ big?: boolean }>`

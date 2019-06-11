@@ -10,8 +10,16 @@ interface Props {
 }
 
 const Container = styled.pre`
+  max-width: 90%;
+  margin: 6px 0 0;
+  padding: 7px;
+
   background: ${({ theme }) => theme.message.code.background};
+  border: 2px solid ${({ theme }) => theme.message.code.border};
+  border-radius: 5px;
+
   color: ${({ theme }) => theme.message.code.text};
+  font-size: 14px;
 
   & .hljs-comment,
   & .hljs-quote {

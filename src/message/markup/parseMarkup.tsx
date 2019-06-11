@@ -11,7 +11,7 @@ import {
 } from "simple-markdown"
 import CodeBlock from "./CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
-import { Emoji, Mention, Spoiler } from "./Markup"
+import { Code, Emoji, Mention, Spoiler } from "./Markup"
 
 type Rules = Record<string, ParserRule & { react?: NodeOutput<any> | null }>
 
@@ -37,7 +37,10 @@ const baseRules: Rules = {
   strong: defaultRules.strong,
   em: defaultRules.em,
   u: defaultRules.u,
-  inlineCode: defaultRules.inlineCode,
+  inlineCode: {
+    ...defaultRules.inlineCode,
+    react: (node, _, state) => <Code key={state.key}>{node.content}</Code>,
+  },
   shrug: {
     // Exception for left arm disappearing because of the underscore getting
     // escaped, and the right arm being a part of an italic node.
