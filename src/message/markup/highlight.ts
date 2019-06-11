@@ -1,6 +1,8 @@
 const hljs: typeof import("highlight.js") = require("highlight.js/lib/highlight")
 const languages: Record<string, Language> = require("./languages.json")
 
+console.log(hljs)
+
 interface Language {
   aliases?: string[]
   dependencies?: string[]
@@ -12,19 +14,19 @@ for (const [name, language] of Object.entries(languages)) {
   for (const alias of language.aliases || []) aliases[alias] = name
 }
 
-const importLanguage = async (language: string) => {
-  const lang = languages[aliases[language]]
+const importLanguage = async (name: string) => {
+  const lang = languages[aliases[name]]
 
   if (lang.dependencies)
     await Promise.all(lang.dependencies.map(importLanguage))
 
-  const hljs = await import(
-    `highlight.js/lib/languages/${aliases[language]}`
+  const { default: language } = await import(
+    `highlight.js/lib/languages/${aliases[name]}`
     /* webpackChunkName: "hljs-[request]" */
   )
-  hljs.registerLanguage(language, hljs.default)
+  hljs.registerLanguage(name, language)
 
-  console.log("Registered highlight.js language:", aliases[language])
+  console.log("Registered highlight.js language:", aliases[name])
 }
 
 export const highlight = async (language: string, content: string) => {
