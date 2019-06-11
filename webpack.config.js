@@ -14,8 +14,8 @@ module.exports = {
     resolve(__dirname, "src", "index.tsx"),
   ],
   output: {
-    filename: "[id].[hash].js",
-    chunkFilename: "[id].[hash].js",
+    filename: "[id].[chunkhash].js",
+    chunkFilename: "[id].[chunkhash].js",
     path: resolve(__dirname, "dist"),
   },
   devtool: "source-map",
