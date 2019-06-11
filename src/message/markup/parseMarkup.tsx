@@ -11,7 +11,7 @@ import {
 } from "simple-markdown"
 import CodeBlock from "./CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
-import { Code, Emoji, Mention, Spoiler } from "./Markup"
+import { Code, Emoji, Mention, Spoiler } from "./styles"
 
 type Rules = Record<string, ParserRule & { react?: NodeOutput<any> | null }>
 

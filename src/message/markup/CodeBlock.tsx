@@ -1,97 +1,13 @@
-import styled from "@emotion/styled"
 import { IHighlightResult } from "highlight.js"
 import React, { ComponentPropsWithoutRef, useEffect, useState } from "react"
 import { highlight } from "./highlight"
+import { CodeBlockContainer } from "./styles"
 
 interface Props {
   content: string
   language?: string
   preProps?: ComponentPropsWithoutRef<"pre">
 }
-
-const Container = styled.pre`
-  max-width: 90%;
-  margin: 6px 0 0;
-  padding: 7px;
-
-  background: ${({ theme }) => theme.message.code.background};
-  border: 2px solid ${({ theme }) => theme.message.code.border};
-  border-radius: 5px;
-
-  color: ${({ theme }) => theme.message.code.text};
-  font-size: 14px;
-
-  & .hljs-comment,
-  & .hljs-quote {
-    color: ${({ theme }) => theme.message.code.comment};
-  }
-
-  /* Solarized Green */
-  & .hljs-keyword,
-  & .hljs-selector-tag,
-  & .hljs-addition {
-    color: #859900;
-  }
-
-  /* Solarized Cyan */
-  & .hljs-number,
-  & .hljs-string,
-  & .hljs-meta .hljs-meta-string,
-  & .hljs-literal,
-  & .hljs-doctag,
-  & .hljs-regexp {
-    color: #2aa198;
-  }
-
-  /* Solarized Blue */
-  & .hljs-title,
-  & .hljs-section,
-  & .hljs-name,
-  & .hljs-selector-id,
-  & .hljs-selector-class {
-    color: #268bd2;
-  }
-
-  /* Solarized Yellow */
-  & .hljs-attribute,
-  & .hljs-attr,
-  & .hljs-variable,
-  & .hljs-template-variable,
-  & .hljs-class .hljs-title,
-  & .hljs-type {
-    color: #b58900;
-  }
-
-  /* Solarized Orange */
-  & .hljs-symbol,
-  & .hljs-bullet,
-  & .hljs-subst,
-  & .hljs-meta,
-  & .hljs-meta .hljs-keyword,
-  & .hljs-selector-attr,
-  & .hljs-selector-pseudo,
-  & .hljs-link {
-    color: #cb4b16;
-  }
-
-  /* Solarized Red */
-  & .hljs-built_in,
-  & .hljs-deletion {
-    color: #dc322f;
-  }
-
-  & .hljs-formula {
-    background: ${({ theme }) => theme.message.code.formula};
-  }
-
-  & .hljs-emphasis {
-    font-style: italic;
-  }
-
-  & .hljs-strong {
-    font-weight: bold;
-  }
-`
 
 export default function CodeBlock(props: Props) {
   const { content, language = "", preProps = {} } = props
@@ -102,10 +18,11 @@ export default function CodeBlock(props: Props) {
     highlight(language, content).then(setHighlighted)
   }, [props.language, props.content])
 
-  if (!highlighted) return <Container {...preProps}>{content}</Container>
+  if (!highlighted)
+    return <CodeBlockContainer {...preProps}>{content}</CodeBlockContainer>
 
   return (
-    <Container
+    <CodeBlockContainer
       {...preProps}
       dangerouslySetInnerHTML={{ __html: highlighted.value }}
     />
