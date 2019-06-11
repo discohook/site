@@ -28,6 +28,7 @@ module.exports = {
       { enforce: "pre", test: /\.js$/, use: "source-map-loader" },
     ],
   },
+  optimization: { splitChunks: { chunks: "all" } },
   plugins: [
     new HtmlWebpackPlugin({
       filename: resolve(__dirname, "dist", "index.html"),
