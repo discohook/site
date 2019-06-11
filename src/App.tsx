@@ -10,10 +10,14 @@ import Preview from "./message/Preview"
 import { darkTheme, lightTheme, Theme } from "./themes"
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
+  display: flex;
+  align-items: stretch;
+
   height: 100vh;
-  overflow: hidden;
+
+  & > * {
+    flex: 1;
+  }
 `
 
 export default function App() {
