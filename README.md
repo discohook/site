@@ -2,4 +2,4 @@
 
 A message builder for Discord's webhooks.
 
-Check it out at <https://jaylineko.com/discohook>
+Check it out at <https://discohook.jaylineko.com/>
