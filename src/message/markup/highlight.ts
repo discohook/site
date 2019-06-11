@@ -1,33 +1,31 @@
 const hljs: typeof import("highlight.js") = require("highlight.js/lib/highlight")
 const languages: Record<string, Language> = require("./languages.json")
 
-type Language = string[] | { aliases?: string[]; dependencies?: string[] }
+interface Language {
+  aliases?: string[]
+  dependencies?: string[]
+}
 
-const aliasToName: Record<string, string> = {}
+const aliases: Record<string, string> = {}
 for (const [name, language] of Object.entries(languages)) {
-  aliasToName[name] = name
-
-  const aliases = Array.isArray(language) ? language : language.aliases || []
-  for (const alias of aliases) aliasToName[alias] = name
+  aliases[name] = name
+  for (const alias of language.aliases || []) aliases[alias] = name
 }
 
 const importLanguage = async (language: string) => {
-  const lang = languages[aliasToName[language]]
+  const lang = languages[aliases[language]]
 
-  if (!Array.isArray(lang) && lang.dependencies)
+  if (lang.dependencies)
     await Promise.all(lang.dependencies.map(importLanguage))
 
-  const { default: importedLanguage } = await import(
-    `highlight.js/lib/languages/${aliasToName[language]}.js`
-  )
+  const hl = await import(`highlight.js/lib/languages/${aliases[language]}.js`)
+  hljs.registerLanguage(language, hl.default)
 
-  hljs.registerLanguage(language, importedLanguage)
-
-  console.log("Registered highlight.js language:", aliasToName[language])
+  console.log("Registered highlight.js language:", aliases[language])
 }
 
 export const highlight = async (language: string, content: string) => {
-  if (!aliasToName[language]) return null
+  if (!aliases[language]) return null
   if (hljs.getLanguage(language)) return hljs.highlight(language, content)
 
   await importLanguage(language)
