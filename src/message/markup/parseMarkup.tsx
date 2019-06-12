@@ -8,6 +8,7 @@ import {
   outputFor,
   parserFor,
   ParserRule,
+  SingleASTNode,
 } from "simple-markdown"
 import CodeBlock from "./CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
@@ -173,24 +174,25 @@ const parseInline = parserFor(inlineRules, { inline: true })
 const parseBlock = parserFor(blockRules, { inline: true })
 const reactOutput = outputFor({ ...inlineRules, ...blockRules }, "react")
 
-export const jumbo = (ast: ASTNode): ASTNode => {
-  if (!Array.isArray(ast))
-    return { ...ast, jumboable: ["emoji", "customEmoji"].includes(ast.type) }
+const jumbosizeEmojis = (ast: ASTNode): ASTNode => {
+  const isEmoji = (node: SingleASTNode) => /emoji|customEmoji/.test(node.type)
+  const isNotEmoji = (node: SingleASTNode) => !isEmoji(node)
+
+  if (!Array.isArray(ast)) return { ...ast, jumboable: isEmoji(ast) }
 
   // Gets all nodes of type 'emoji' or 'customEmoji'
-  const emojiNodes = ast.filter(
-    (node) => !["emoji", "customEmoji"].includes(node.type),
-  )
+  const emojiNodes = ast.filter(isNotEmoji)
   // If there's more than 26 (limit of jumbosized emojis), return the tree as is
   if (emojiNodes.length >= 26) return ast
 
   // Check if the tree has any amount of nodes that aren't emojis,
   // or nodes containing whitespace only
-  const hasText = ast.some(
-    (node) =>
-      !["emoji", "customEmoji"].includes(node.type) &&
-      (typeof node.content !== "string" || node.content.trim() !== ""),
-  )
+  const hasText = ast.some((node) => {
+    if (isEmoji(node)) return false
+    if (typeof node.content !== "string") return true
+    if (node.content.trim() !== "") return true
+    return false
+  })
   if (hasText) return ast
 
   // If the message passed all checks, return a copy of the tree where all nodes
@@ -199,14 +201,18 @@ export const jumbo = (ast: ASTNode): ASTNode => {
 }
 
 const ellipsize = (text: string, length: number) => {
-  const short = text.replace(/[\s]+/g, " ")
-  return short.length <= length ? short : short.substring(0, length) + "…"
+  const shortenedText = text.replace(/\s+/g, " ")
+  return shortenedText.length <= length
+    ? shortenedText
+    : shortenedText.substring(0, length) + "…"
 }
 
 export const parseMarkup = (content: string, inline: boolean = false) => {
   const startTime = performance.now()
 
-  const ast = inline ? parseInline(content) : jumbo(parseBlock(content))
+  const ast = inline
+    ? parseInline(content)
+    : jumbosizeEmojis(parseBlock(content))
   const parseTime = performance.now() - startTime
 
   const output = reactOutput(ast)
