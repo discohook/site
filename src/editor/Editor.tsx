@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import React, { ComponentProps, useEffect, useRef, useState } from "react"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
+import BackupModal from "./backup/BackupModal"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
 import InputField from "./InputField"
@@ -24,16 +25,19 @@ interface Props {
   onToggleDisplay: () => void
 }
 
-const EditorContainer = styled(Container)`
+const EditorContainer = styled.div`
+  position: relative;
+`
+
+const EditorInnerContainer = styled(Container)`
+  box-sizing: border-box;
+  height: 100vh;
   overflow-y: scroll;
+  padding: 8px;
 
   & > *:not(button) {
     flex-grow: 0;
   }
-`
-
-const EditorInnerContainer = styled.div`
-  margin: 8px;
 `
 
 const EditorActionsWrapper = styled.div``
@@ -150,20 +154,24 @@ export default function Editor(props: Props) {
     return false
   })()
 
+  const [isBackupModalShown, setIsBackupModalShown] = useState(false)
+
   return (
     <EditorContainer>
-      <EditorInnerContainer>
+      <EditorInnerContainer
+        style={isBackupModalShown ? { overflow: "hidden" } : undefined}
+      >
         <EditorActionsWrapper>
           <EditorActionsContainer>
             <ActionsHeader>Message editor</ActionsHeader>
+            <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
             <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
             <Action onClick={() => props.onToggleDisplay()}>
               Toggle display
             </Action>
             <Action
               onClick={() => {
-                handleChange({})
-                clearFiles()
+                handleChange({}), clearFiles()
               }}
             >
               Clear all
@@ -223,6 +231,14 @@ export default function Editor(props: Props) {
           errors={errors}
         />
       </EditorInnerContainer>
+      {isBackupModalShown && (
+        <BackupModal
+          message={props.message}
+          files={props.files}
+          onLoad={() => {}}
+          onClose={() => setIsBackupModalShown(false)}
+        />
+      )}
     </EditorContainer>
   )
 }
