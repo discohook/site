@@ -1,9 +1,22 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Message } from "../../message/Message"
-import { Action, ActionsContainer, ActionsHeader, Container } from "../styles"
+import InputField from "../InputField"
+import {
+  Action,
+  ActionsContainer,
+  ActionsHeader,
+  Button,
+  Container,
+} from "../styles"
 import BackupList from "./BackupList"
-import { Backup, deleteBackup, getBackup, getBackups } from "./backupStorage"
+import {
+  Backup,
+  deleteBackup,
+  getBackup,
+  getBackups,
+  setBackup,
+} from "./backupStorage"
 
 interface Props {
   message: Message
@@ -63,6 +76,15 @@ export default function BackupModal(props: Props) {
     getAllBackups()
   }
 
+  const [newBackupName, setNewBackupName] = useState("")
+
+  const handleCreate = () => {
+    setBackup(newBackupName.trim().replace(/\s+/, " "), {
+      message,
+      files: Array.from(files || []).map((file) => file.name),
+    }).then(getAllBackups)
+  }
+
   return (
     <ModalBackground onClick={handleClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -75,6 +97,14 @@ export default function BackupModal(props: Props) {
           onLoad={loadBackup}
           onDelete={handleDelete}
         />
+        <Container direction="row">
+          <InputField
+            value={newBackupName}
+            onChange={(name) => setNewBackupName(name || "")}
+            label="Backup name"
+          />
+          <Button onClick={handleCreate}>Create</Button>
+        </Container>
       </ModalContainer>
     </ModalBackground>
   )
