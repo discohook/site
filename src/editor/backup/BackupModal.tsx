@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { Message } from "../../message/Message"
 import { Action, ActionsContainer, ActionsHeader, Container } from "../styles"
 import BackupList from "./BackupList"
-import { Backup, getBackup, getBackups } from "./backupStorage"
+import { Backup, deleteBackup, getBackup, getBackups } from "./backupStorage"
 
 interface Props {
   message: Message
@@ -41,7 +41,7 @@ const ModalContainer = styled(Container)`
 `
 
 const ModalActionsContainer = styled(ActionsContainer)`
-  margin: 8px 8px 4px;
+  margin: 8px;
 `
 
 export default function BackupModal(props: Props) {
@@ -55,9 +55,12 @@ export default function BackupModal(props: Props) {
 
   const loadBackup = async (name: string) => {
     const backup = await getBackup(name)
+    if (backup) handleLoad(backup)
+  }
 
-    if (!backup) return
-    handleLoad(backup)
+  const handleDelete = (backup: string) => {
+    deleteBackup(backup)
+    getAllBackups()
   }
 
   return (
@@ -70,7 +73,7 @@ export default function BackupModal(props: Props) {
         <BackupList
           backups={backups}
           onLoad={loadBackup}
-          onDelete={getAllBackups}
+          onDelete={handleDelete}
         />
       </ModalContainer>
     </ModalBackground>

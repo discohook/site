@@ -22,6 +22,16 @@ export const darkTheme = {
       disabled: "rgba(255, 255, 255, 0.6)",
       filled: "#ffffff",
     },
+
+    backups: {
+      name: "#ffffff",
+      delete: {
+        text: "#f04747",
+        border: "#6e3d41",
+        hoverBorder: "#a64244",
+        hoverBackground: "#483a40",
+      },
+    },
   },
 
   message: {
@@ -104,6 +114,16 @@ export const lightTheme: ColorTheme = {
       enabled: "#4f545c",
       disabled: "rgba(79, 84, 92, 0.6)",
       filled: "#ffffff",
+    },
+
+    backups: {
+      name: "#4f545c",
+      delete: {
+        text: "#f04747",
+        border: "#fac7c7",
+        hoverBorder: "#f69191",
+        hoverBackground: "#fdecec",
+      },
     },
   },
 
