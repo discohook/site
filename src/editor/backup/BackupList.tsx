@@ -8,7 +8,7 @@ interface Props {
 }
 
 const List = styled.ul`
-  margin: 0;
+  margin: 0 0 8px;
   padding: 0;
 `
 
@@ -17,7 +17,7 @@ const Item = styled.li`
   align-items: center;
 
   margin: 0 8px;
-  padding: 4px 0;
+  padding: 6px 0;
 
   border: solid ${({ theme }) => theme.editor.border};
   border-width: 1px 0 1px;
@@ -37,21 +37,9 @@ const BackupName = styled.a`
   cursor: pointer;
 `
 
-const BackupAction = styled.button`
-  color: ${({ theme }) => theme.editor.backups.delete.text};
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.editor.backups.delete.border};
-  border-radius: 3px;
-
-  padding: 4px 16px;
-
+const BackupAction = styled.a`
+  color: ${({ theme }) => theme.editor.backups.delete};
   cursor: pointer;
-
-  transition: 300ms;
-  &:hover {
-    background: ${({ theme }) => theme.editor.backups.delete.hoverBackground};
-    border: 1px solid ${({ theme }) => theme.editor.backups.delete.hoverBorder};
-  }
 `
 
 export default function BackupList(props: Props) {

@@ -26,7 +26,7 @@ export const BoxContainer = styled.div`
   flex-direction: column;
 
   margin: 8px;
-  padding: 8px;
+  padding: 8px 4px 4px;
 
   border: 1px solid ${({ theme }) => theme.editor.border};
   border-radius: 3px;
@@ -44,11 +44,11 @@ export const InputGroup = styled.div`
 export const InputLabel = styled.label`
   display: flex;
   flex-direction: column;
-  margin: 8px 8px 0;
+  margin: 4px 8px 0;
 `
 
 export const TextInput = styled.input`
-  padding: 10px;
+  padding: 6px 8px;
   margin: 8px 0;
 
   background: ${({ theme }) => theme.editor.input};
@@ -70,10 +70,10 @@ export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
 ` as SC<"textarea">
 
 export const Button = styled.button`
-  min-height: 40px;
-  max-height: 40px;
+  min-height: 32px;
+  max-height: 32px;
   margin: 8px;
-  padding: 0 16px;
+  padding: 0 10px;
 
   background: transparent;
   border: 1px solid ${({ theme }) => theme.accent};

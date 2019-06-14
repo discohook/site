@@ -25,12 +25,7 @@ export const darkTheme = {
 
     backups: {
       name: "#ffffff",
-      delete: {
-        text: "#f04747",
-        border: "#6e3d41",
-        hoverBorder: "#a64244",
-        hoverBackground: "#483a40",
-      },
+      delete: "#f04747",
     },
   },
 
@@ -118,12 +113,7 @@ export const lightTheme: ColorTheme = {
 
     backups: {
       name: "#4f545c",
-      delete: {
-        text: "#f04747",
-        border: "#fac7c7",
-        hoverBorder: "#f69191",
-        hoverBackground: "#fdecec",
-      },
+      delete: "#f04747",
     },
   },
 

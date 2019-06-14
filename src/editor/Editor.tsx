@@ -42,7 +42,7 @@ const EditorInnerContainer = styled(Container)`
 `
 
 const EditorActionsContainer = styled(ActionsContainer)`
-  margin: 8px 8px 4px;
+  margin: 8px;
 `
 
 export default function Editor(props: Props) {
