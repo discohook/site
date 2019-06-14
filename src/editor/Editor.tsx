@@ -3,6 +3,7 @@ import React, { ComponentProps, useEffect, useRef, useState } from "react"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
 import BackupModal from "./backup/BackupModal"
+import EditorError from "./EditorError"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
 import InputField from "./InputField"
@@ -40,92 +41,56 @@ const EditorInnerContainer = styled(Container)`
   }
 `
 
-const EditorActionsWrapper = styled.div``
-
 const EditorActionsContainer = styled(ActionsContainer)`
   margin: 8px 8px 4px;
 `
 
-const ErrorContainer = styled.div`
-  margin: 8px;
-  padding: 16px;
-  border: 1px solid #a54043;
-  border-radius: 3px;
-`
-
-const ErrorHeader = styled.p`
-  margin: 0;
-  color: ${({ theme }) => theme.editor.action};
-  font-weight: 500;
-`
-
-const ErrorParagraph = styled.p`
-  margin: 8px 0 0;
-`
-
-function EditorError() {
-  return (
-    <ErrorContainer>
-      <ErrorHeader>Oops.</ErrorHeader>
-      <ErrorParagraph>It looks like an error occurred.</ErrorParagraph>
-      <ErrorParagraph>
-        If you manually edited the JSON data below, try double checking it.
-      </ErrorParagraph>
-      <ErrorParagraph>
-        If that doesn't work out, reload the page.
-      </ErrorParagraph>
-    </ErrorContainer>
-  )
-}
-
 export default function Editor(props: Props) {
-  const [webhookUrl, setWebhookUrl] = useState("")
+  const {
+    message,
+    files,
+    onFilesChange: handleFilesChange,
+    onToggleTheme: handleToggleTheme,
+    onToggleDisplay: handleToggleDisplay,
+  } = props
+
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])
-  const [sending, setSending] = useState(false)
-  const fileInputRef: ComponentProps<typeof FileInput>["ref"] = useRef(null)
 
-  const handleChange = (message: Message) => {
-    props.onChange(message)
-    const json = stringifyMessage(message)
-    setJson(json)
-    checkErrors(json)
-  }
+  const handleChange = (message: Message) => setJson(stringifyMessage(message))
 
-  const checkErrors = (json: string) => {
-    let prevErrors = errors
+  useEffect(() => {
+    let prevErrors = [...errors]
     const { message, errors: newErrors } = parseMessage(json)
 
-    setErrors(filterEmptyMessageError(newErrors))
+    setErrors(newErrors.filter(filterEmptyMessage))
 
     if (newErrors.length > 0 && prevErrors.join("\n") !== newErrors.join("\n"))
       console.log("JSON validation errors occurred:", newErrors, message)
 
-    return message
-  }
+    if (message) props.onChange(message)
+  }, [json])
 
-  // If the message is empty the JSON validator returns an error because
-  // the message appears to be empty. However when there's at least one file
-  // present, this error is false.
-  const filterEmptyMessageError = (errors: string[]) =>
-    props.files
-      ? errors.filter(
-          (error) =>
-            error !==
-            "message: Expected one of following keys: 'content', 'embeds'",
-        )
-      : errors
+  useEffect(() => {
+    const { errors } = parseMessage(json)
+    setErrors(errors.filter(filterEmptyMessage))
+  }, [files])
 
-  useEffect(() => setErrors(filterEmptyMessageError), [props.files])
+  const filterEmptyMessage = (error: string) =>
+    files && files.length > 0
+      ? error !== "message: Expected one of following keys: 'content', 'embeds'"
+      : true
 
+  const [webhookUrl, setWebhookUrl] = useState("")
+  const [sending, setSending] = useState(false)
   const executeWebhook = async () => {
     setSending(true)
 
     const formData = new FormData()
     formData.append("payload_json", json)
 
-    if (props.files)
-      for (const [index, file] of Object.entries(props.files))
+    if (files)
+      for (const [index, file] of Object.entries(files))
         formData.append(`file[${index}]`, file, file.name)
 
     const response = await fetch(webhookUrl + "?wait=true", {
@@ -137,8 +102,15 @@ export default function Editor(props: Props) {
     console.log("Webhook executed:", await response.json())
   }
 
+  const fileInputRef: ComponentProps<typeof FileInput>["ref"] = useRef(null)
   const clearFiles = () => {
-    if (fileInputRef.current) fileInputRef.current.clearFiles()
+    const { current: fileInput } = fileInputRef
+    if (fileInput) fileInput.clearFiles()
+  }
+
+  const clearAll = () => {
+    handleChange({})
+    clearFiles()
   }
 
   const isDisabled = (() => {
@@ -149,7 +121,7 @@ export default function Editor(props: Props) {
     if ((typeof content === "string" || embeds) && errors.length > 0)
       return true
 
-    if (props.files && props.files.length === 0) return true
+    if (files && files.length === 0) return true
 
     return false
   })()
@@ -161,23 +133,13 @@ export default function Editor(props: Props) {
       <EditorInnerContainer
         style={isBackupModalShown ? { overflow: "hidden" } : undefined}
       >
-        <EditorActionsWrapper>
-          <EditorActionsContainer>
-            <ActionsHeader>Message editor</ActionsHeader>
-            <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
-            <Action onClick={() => props.onToggleTheme()}>Toggle theme</Action>
-            <Action onClick={() => props.onToggleDisplay()}>
-              Toggle display
-            </Action>
-            <Action
-              onClick={() => {
-                handleChange({}), clearFiles()
-              }}
-            >
-              Clear all
-            </Action>
-          </EditorActionsContainer>
-        </EditorActionsWrapper>
+        <EditorActionsContainer>
+          <ActionsHeader>Message editor</ActionsHeader>
+          <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
+          <Action onClick={handleToggleTheme}>Toggle theme</Action>
+          <Action onClick={handleToggleDisplay}>Toggle display</Action>
+          <Action onClick={clearAll}>Clear all</Action>
+        </EditorActionsContainer>
         <Container direction="row">
           <InputField
             value={webhookUrl}
@@ -191,50 +153,38 @@ export default function Editor(props: Props) {
         </Container>
         <ErrorBoundary onError={() => <EditorError />}>
           <InputField
-            value={props.message.content || ""}
-            onChange={(content) => handleChange({ ...props.message, content })}
+            value={message.content || ""}
+            onChange={(content) => handleChange({ ...message, content })}
             label="Message content"
             multiline
           />
           <EmbedEditor
-            embeds={props.message.embeds || []}
-            onChange={(embeds) => handleChange({ ...props.message, embeds })}
+            embeds={message.embeds || []}
+            onChange={(embeds) => handleChange({ ...message, embeds })}
           />
           <Container direction="row">
             <InputField
-              value={props.message.username || ""}
-              onChange={(username) =>
-                handleChange({ ...props.message, username })
-              }
+              value={message.username || ""}
+              onChange={(username) => handleChange({ ...message, username })}
               label="Override username"
             />
             <InputField
-              value={props.message.avatarUrl || ""}
-              onChange={(avatarUrl) =>
-                handleChange({ ...props.message, avatarUrl })
-              }
+              value={message.avatarUrl || ""}
+              onChange={(avatarUrl) => handleChange({ ...message, avatarUrl })}
               label="Override avatar"
             />
           </Container>
         </ErrorBoundary>
         <Container direction="row">
-          <FileInput onChange={props.onFilesChange} ref={fileInputRef} />{" "}
+          <FileInput onChange={handleFilesChange} ref={fileInputRef} />
           <Button onClick={clearFiles}>Remove files</Button>
         </Container>
-        <JsonInput
-          json={json}
-          onChange={(json) => {
-            setJson(json)
-            const message = checkErrors(json)
-            if (message) props.onChange(message)
-          }}
-          errors={errors}
-        />
+        <JsonInput json={json} onChange={setJson} errors={errors} />
       </EditorInnerContainer>
       {isBackupModalShown && (
         <BackupModal
-          message={props.message}
-          files={props.files}
+          message={message}
+          files={files}
           onLoad={() => {}}
           onClose={() => setIsBackupModalShown(false)}
         />
