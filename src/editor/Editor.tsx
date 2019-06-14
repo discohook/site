@@ -143,7 +143,7 @@ export default function Editor(props: Props) {
         <Container direction="row">
           <InputField
             value={webhookUrl}
-            onChange={(url) => setWebhookUrl(url || "")}
+            onChange={setWebhookUrl}
             label="Webhook URL"
             placeholder="https://discordapp.com/api/webhooks/..."
           />

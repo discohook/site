@@ -9,27 +9,28 @@ interface Props {
 }
 
 export default function AuthorEditor(props: Props) {
-  const handleChange = (author: Author) =>
-    Object.values(author).filter((value) => !!value).length === 0
-      ? props.onChange(undefined)
-      : props.onChange(author)
+  const { author = {} as Author } = props
+  const { name, url, iconUrl } = author
 
-  const author = props.author || { name: "" }
+  const handleChange = (author: Author) =>
+    Object.values(author).some((value) => !!value)
+      ? props.onChange(author)
+      : props.onChange(undefined)
 
   return (
     <InputGroup>
       <InputField
-        value={author.name || ""}
-        onChange={(name) => handleChange({ ...author, name: name || "" })}
+        value={name || ""}
+        onChange={(name) => handleChange({ ...author, name })}
         label="Embed author name"
       />
       <InputField
-        value={author.url || ""}
+        value={url || ""}
         onChange={(url) => handleChange({ ...author, url })}
         label="Embed author link"
       />
       <InputField
-        value={author.iconUrl || ""}
+        value={iconUrl || ""}
         onChange={(iconUrl) => handleChange({ ...author, iconUrl })}
         label="Embed author icon"
       />

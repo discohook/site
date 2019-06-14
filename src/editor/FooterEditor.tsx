@@ -1,9 +1,9 @@
 import React from "react"
-import { Embed, Footer } from "../message/Message"
+import { Footer } from "../message/Message"
 import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
-type PartialEmbed = Pick<Embed, "footer" | "timestamp">
+type PartialEmbed = { footer?: Partial<Footer>; timestamp?: string }
 
 interface Props {
   footer: Footer | undefined
@@ -12,44 +12,38 @@ interface Props {
 }
 
 export default function FooterEditor(props: Props) {
-  const handleChange = (embed: PartialEmbed) => {
-    const footer =
-      embed.footer &&
-      Object.values(embed.footer).filter((value) => !!value).length !== 0
-        ? embed.footer
-        : undefined
-    const timestamp = embed.timestamp || undefined
+  const { footer = {} as Partial<Footer>, timestamp } = props
+  const { text, iconUrl } = footer
 
-    props.onChange({ footer, timestamp })
+  const handleChange = (embed: PartialEmbed) => {
+    props.onChange({
+      footer:
+        embed.footer && Object.values(embed.footer).some((value) => !!value)
+          ? embed.footer
+          : undefined,
+      timestamp: embed.timestamp || undefined,
+    })
   }
 
   return (
     <InputGroup>
       <InputField
-        value={(props.footer || { text: "" }).text || ""}
+        value={text || ""}
         onChange={(text) =>
-          handleChange({
-            footer: { ...props.footer, text } as Footer,
-            timestamp: props.timestamp,
-          })
+          handleChange({ footer: { ...footer, text }, timestamp })
         }
         label="Embed footer name"
       />
       <InputField
-        value={(props.footer || { iconUrl: "" }).iconUrl || ""}
+        value={iconUrl || ""}
         onChange={(iconUrl) =>
-          handleChange({
-            footer: { ...(props.footer as Footer), iconUrl },
-            timestamp: props.timestamp,
-          })
+          handleChange({ footer: { ...footer, iconUrl }, timestamp })
         }
         label="Embed footer icon"
       />
       <InputField
-        value={props.timestamp || ""}
-        onChange={(timestamp) =>
-          handleChange({ footer: props.footer, timestamp })
-        }
+        value={timestamp || ""}
+        onChange={(timestamp) => handleChange({ footer, timestamp })}
         label="Embed footer timestamp"
       />
     </InputGroup>

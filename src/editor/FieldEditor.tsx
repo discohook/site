@@ -17,31 +17,27 @@ interface Props {
 }
 
 export default function FieldEditor(props: Props) {
-  const addField = () => {
-    const newFields = Array.from(props.fields)
-    newFields.push({} as Field)
-    props.onChange(newFields)
-  }
+  const fields = Array.isArray(props.fields) ? props.fields : []
 
-  const modifyField = (index: number, partialField: Partial<Field>) => {
-    const newFields = Array.from(props.fields)
-    newFields[index] = { ...newFields[index], ...partialField }
-    props.onChange(newFields)
-  }
+  const addField = () => props.onChange([...fields, {} as Field])
 
-  const deleteField = (index: number) => {
-    const newFields = Array.from(props.fields)
-    newFields.splice(index, 1)
-    props.onChange(newFields.length === 0 ? undefined : newFields)
-  }
+  const deleteField = (index: number) =>
+    props.onChange([...fields.slice(0, index), ...fields.slice(index + 1)])
 
   const moveField = (from: number, to: number) => {
-    const newFields = Array.from(props.fields)
+    const newFields = [...fields]
     newFields.splice(to, 0, ...newFields.splice(from, 1))
     props.onChange(newFields)
   }
 
-  const editors = (props.fields || []).map((field, index) => (
+  const modifyField = (index: number, partialField: Partial<Field>) =>
+    props.onChange([
+      ...fields.slice(0, index),
+      { ...fields[index], ...partialField },
+      ...fields.slice(index + 1),
+    ])
+
+  const editors = fields.map((field, index) => (
     <Container key={index}>
       <ActionsContainer>
         <ActionsHeader>Field {index + 1}</ActionsHeader>
@@ -49,7 +45,7 @@ export default function FieldEditor(props: Props) {
         {index > 0 && (
           <Action onClick={() => moveField(index, index - 1)}>Move up</Action>
         )}
-        {props.fields.length - index > 1 && (
+        {fields.length - index > 1 && (
           <Action onClick={() => moveField(index, index + 1)}>Move down</Action>
         )}
       </ActionsContainer>
@@ -82,7 +78,7 @@ export default function FieldEditor(props: Props) {
   return (
     <Container>
       {editors}
-      <Button disabled={props.fields.length >= 25} onClick={addField}>
+      <Button disabled={fields.length >= 25} onClick={addField}>
         Add field
       </Button>
     </Container>

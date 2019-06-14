@@ -1,5 +1,5 @@
 import React from "react"
-import { Embed, Image } from "../message/Message"
+import { Embed } from "../message/Message"
 import AuthorEditor from "./AuthorEditor"
 import ColorInput from "./ColorInput"
 import FieldEditor from "./FieldEditor"
@@ -83,18 +83,18 @@ export default function EmbedEditor(props: Props) {
         <FooterEditor
           footer={embed.footer}
           timestamp={embed.timestamp}
-          onChange={(partial) => modifyEmbed(index, partial)}
+          onChange={(partial) => modifyEmbed(index, partial as Partial<Embed>)}
         />
         <InputGroup>
           <InputField
-            value={(embed.image || ({} as Image)).url || ""}
+            value={(embed.image || { url: "" }).url || ""}
             onChange={(url) =>
               modifyEmbed(index, { image: url ? { url } : undefined })
             }
             label="Embed image"
           />
           <InputField
-            value={(embed.thumbnail || ({} as Image)).url || ""}
+            value={(embed.thumbnail || { url: "" }).url || ""}
             onChange={(url) =>
               modifyEmbed(index, { thumbnail: url ? { url } : undefined })
             }
