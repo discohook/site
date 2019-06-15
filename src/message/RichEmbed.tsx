@@ -1,10 +1,10 @@
-import styled from "@emotion/styled"
-import React from "react"
-import EmbedAuthor from "./EmbedAuthor"
-import EmbedField from "./EmbedField"
-import EmbedFooter from "./EmbedFooter"
-import Markup from "./markup/Markup"
-import { Embed } from "./Message"
+import styled from "@emotion/styled";
+import React from "react";
+import EmbedAuthor from "./EmbedAuthor";
+import EmbedField from "./EmbedField";
+import EmbedFooter from "./EmbedFooter";
+import Markup from "./markup/Markup";
+import { Embed } from "./Message";
 
 interface Props {
   embed: Embed
@@ -52,7 +52,9 @@ const EmbedTitleNormal = styled.span`
   color: ${({ theme }) => theme.message.embed.title};
 `
 
-const EmbedTitleLink = EmbedTitleNormal.withComponent("a")
+const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
+  color: ${({ theme }) => theme.link};
+`
 
 const EmbedDescription = styled.div`
   color: ${({ theme }) => theme.message.embed.description};
