@@ -1,7 +1,8 @@
 // @ts-check
-const { resolve } = require("path")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const { resolve } = require("path")
 
 const dev = process.env.NODE_ENV === "development"
 
@@ -42,6 +43,12 @@ module.exports = {
       minify: !dev && { collapseWhitespace: true, removeComments: true },
     }),
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: resolve(__dirname, "public"),
+        ignore: [resolve(__dirname, "public", "index.html")],
+      },
+    ]),
   ],
   devServer: { host: "localhost", port: 3000 },
 }
