@@ -57,7 +57,10 @@ export default function Editor(props: Props) {
   const [json, setJson] = useState(stringifyMessage(props.message))
   const [errors, setErrors] = useState<string[]>([])
 
-  const handleChange = (message: Message) => setJson(stringifyMessage(message))
+  const handleChange = (message: Message) => {
+    setJson(stringifyMessage(message))
+    props.onChange(message)
+  }
 
   useEffect(() => {
     let prevErrors = [...errors]
