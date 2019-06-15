@@ -18,7 +18,7 @@
       },
       "title": "Title (they can have links)",
       "url": "https://discordapp.com/",
-      "description": "If you're confused, you haven't been reading along.\nEmbeds *can* have text, but don't tell anybody.\nAlso, I forgot to tell you this earlier, but yes this does support **markdown**.",
+      "description": "If you're confused, you haven't been reading along.\nEmbeds *can* have text, but don't tell anybody.\nAlso, I forgot to tell you this earlier, but yes this does support [__***markdown***__](https://support.discordapp.com/hc/en-us/articles/210298617), even masked links like this: `[name](link)`.",
       "fields": [
         {
           "name": "Embeds have fields",
@@ -50,9 +50,13 @@
       }
     },
     {
-      "title": "\\⚠ The big disclaimer",
-      "description": "This uses small bits of code from Discord to make messages appear as accurately as possible. This is not to infringe on Discord's rights, but to give more helpful visuals.\nDiscohook is not affiliated with Discord in any way, shape, or form.",
+      "title": "Backups!",
+      "description": "As a little extra, there's also support for backups.\nTo use them just click on the **Backups** button in the top of the editor!\n\n\\❗ Backups are stored locally, and will always be stored locally. This means that if you clear your browsers data your backups will be lost forever!",
       "color": 16426522
+    },
+    {
+      "title": "\\⚠ The big disclaimer",
+      "description": "This uses small bits of code from Discord to make messages appear as accurately as possible. This is not to infringe on Discord's rights, but to give more helpful visuals.\nDiscohook is not affiliated with Discord in any way, shape, or form."
     }
   ]
 }
