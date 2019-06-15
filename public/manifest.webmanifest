@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json.schemastore.org/web-manifest",
+  "name": "Discohook",
+  "short_name": "Discohook",
+  "start_url": "/",
+  "description": "An easy-to-use tool for building and sending Discord messages and embeds using webhooks.",
+  "display": "standalone",
+  "background_color": "#36393f",
+  "theme_color": "#7289da",
+  "lang": "en-US"
+}
