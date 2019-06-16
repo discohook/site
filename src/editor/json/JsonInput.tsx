@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import React from "react";
-import { Container, InputLabel, MultilineTextInput } from "../styles";
-
-let nextId = 0
+import styled from "@emotion/styled"
+import React from "react"
+import { getUniqueId } from "../InputField"
+import { Container, InputLabel, MultilineTextInput } from "../styles"
 
 interface Props {
   json: string
@@ -33,7 +32,7 @@ const CodeInput = styled(MultilineTextInput)`
 `
 
 export default function JsonInput(props: Props) {
-  const id = `JsonInput-${nextId++}`
+  const id = getUniqueId()
 
   return (
     <Container>
