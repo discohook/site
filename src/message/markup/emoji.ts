@@ -1,10 +1,4 @@
-const {
-  diversities,
-  emojis,
-}: {
-  diversities: string[]
-  emojis: Record<string, { names: string[]; hasDiversity?: boolean }>
-} = require("./emojis.json")
+import { diversities, emojis } from "./emojis"
 
 export const nameToEmoji: Record<string, string> = {}
 export const emojiToName: Record<string, string> = {}
