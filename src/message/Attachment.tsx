@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
-import AttachmentIcon, { AttachmentType } from "./AttachmentIcon"
-import attachmentTypes from "./attachmentTypes.json"
+import AttachmentIcon from "./AttachmentIcon"
+import { AttachmentIconType, attachmentTypes } from "./attachmentTypes"
 
 interface Props {
   file: File
@@ -92,14 +92,8 @@ const AttachmentDownloadButton = styled.div`
   }
 `
 
-interface AttachmentTypeInfo {
-  check: "mime" | "name"
-  regex: string
-  icon: AttachmentType
-}
-
-const getAttachmentType = (name: string, mime: string): AttachmentType => {
-  const types = attachmentTypes as AttachmentTypeInfo[]
+const getAttachmentType = (name: string, mime: string): AttachmentIconType => {
+  const types = attachmentTypes
 
   for (const type of types) {
     const regex = new RegExp(type.regex)

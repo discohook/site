@@ -1,23 +1,8 @@
 import React from "react"
-
-export type AttachmentType =
-  | "acrobat"
-  | "ae"
-  | "ai"
-  | "archive"
-  | "audio"
-  | "code"
-  | "document"
-  | "image"
-  | "photoshop"
-  | "sketch"
-  | "spreadsheet"
-  | "video"
-  | "webcode"
-  | "unknown"
+import { AttachmentIconType } from "./attachmentTypes"
 
 interface Props {
-  type: Exclude<AttachmentType, "image">
+  type: Exclude<AttachmentIconType, "image">
 }
 
 export default function AttachmentIcon(props: Props) {
@@ -77,7 +62,7 @@ export default function AttachmentIcon(props: Props) {
   )
 }
 
-const icons: Record<Exclude<AttachmentType, "image">, JSX.Element> = {
+const icons: Record<Exclude<AttachmentIconType, "image">, JSX.Element> = {
   acrobat: (
     <>
       <path
