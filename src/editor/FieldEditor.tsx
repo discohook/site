@@ -53,7 +53,9 @@ export default function FieldEditor(props: Props) {
         <Container direction="row">
           <InputField
             value={field.name || ""}
-            onChange={(name) => modifyField(index, { name })}
+            onChange={(value) =>
+              modifyField(index, { name: value || undefined })
+            }
             label="Field name"
           />
           <ToggleButton
@@ -67,7 +69,9 @@ export default function FieldEditor(props: Props) {
         </Container>
         <InputField
           value={field.value || ""}
-          onChange={(value) => modifyField(index, { value })}
+          onChange={(value) =>
+            modifyField(index, { value: value || undefined })
+          }
           label="Field value"
           multiline
         />

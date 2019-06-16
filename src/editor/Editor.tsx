@@ -1,21 +1,15 @@
-import styled from "@emotion/styled"
-import React, { ComponentProps, useEffect, useRef, useState } from "react"
-import ErrorBoundary from "../ErrorBoundary"
-import { Message } from "../message/Message"
-import BackupModal from "./backup/BackupModal"
-import EditorError from "./EditorError"
-import EmbedEditor from "./EmbedEditor"
-import FileInput from "./FileInput"
-import InputField from "./InputField"
-import { parseMessage, stringifyMessage } from "./json/convert"
-import JsonInput from "./json/JsonInput"
-import {
-  Action,
-  ActionsContainer,
-  ActionsHeader,
-  Button,
-  Container,
-} from "./styles"
+import styled from "@emotion/styled";
+import React, { ComponentProps, useEffect, useRef, useState } from "react";
+import ErrorBoundary from "../ErrorBoundary";
+import { Message } from "../message/Message";
+import BackupModal from "./backup/BackupModal";
+import EditorError from "./EditorError";
+import EmbedEditor from "./EmbedEditor";
+import FileInput from "./FileInput";
+import InputField from "./InputField";
+import { parseMessage, stringifyMessage } from "./json/convert";
+import JsonInput from "./json/JsonInput";
+import { Action, ActionsContainer, ActionsHeader, Button, Container } from "./styles";
 
 interface Props {
   message: Message
@@ -58,8 +52,16 @@ export default function Editor(props: Props) {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleChange = (message: Message) => {
-    setJson(stringifyMessage(message))
-    props.onChange(message)
+    const {content,embeds,username,avatarUrl} = message
+    const newMessage = {
+      content: content || undefined,
+      embeds: embeds && embeds.length > 0 ? embeds  : undefined,
+      username: username || undefined,
+      avatarUrl: avatarUrl || undefined,
+    }
+
+    setJson(stringifyMessage(newMessage))
+    props.onChange(newMessage)
   }
 
   useEffect(() => {
