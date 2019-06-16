@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { resolve } = require("path")
+const PreloadWebpackPlugin = require("preload-webpack-plugin")
 
 const dev = process.env.NODE_ENV === "development"
 
@@ -41,6 +42,10 @@ module.exports = {
       filename: resolve(__dirname, "dist", "index.html"),
       template: resolve(__dirname, "public", "index.html"),
       minify: !dev && { collapseWhitespace: true, removeComments: true },
+    }),
+    new PreloadWebpackPlugin({
+      rel: "preload",
+      include: ["main", "vendors-main", "app", "vendors-app"],
     }),
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
