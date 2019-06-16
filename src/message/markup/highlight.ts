@@ -2,13 +2,15 @@ const hljs: typeof import("highlight.js") = require("highlight.js/lib/highlight"
 import { languages } from "./languages"
 
 const aliases: Record<string, string> = {}
-for (const [name, language] of Object.entries(languages)) {
+for (const language of languages) {
+  const name = language.aliases[0]
   aliases[name] = name
-  for (const alias of language.aliases || []) aliases[alias] = name
+  for (const alias of language.aliases) aliases[alias] = name
 }
 
 const importLanguage = async (name: string) => {
-  const lang = languages[aliases[name]]
+  const lang = languages.find((lang) => lang.aliases.includes(name))
+  if (!lang) return
 
   if (lang.dependencies)
     await Promise.all(lang.dependencies.map(importLanguage))
