@@ -1,3 +1,4 @@
+import styled from "@emotion/styled"
 import React, { forwardRef, Ref, useImperativeHandle, useRef } from "react"
 import { InputLabel, TextInput } from "./styles"
 
@@ -9,6 +10,10 @@ interface RefType {
   files: FileList | undefined
   clearFiles: () => void
 }
+
+const Input = styled(TextInput)`
+  padding: 4px 8px;
+`
 
 function FileInput(props: Props, ref: Ref<RefType>) {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -28,7 +33,7 @@ function FileInput(props: Props, ref: Ref<RefType>) {
   return (
     <InputLabel>
       Files
-      <TextInput
+      <Input
         type="file"
         multiple={true}
         onClick={clearFiles}
