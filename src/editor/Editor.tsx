@@ -1,15 +1,21 @@
-import styled from "@emotion/styled";
-import React, { ComponentProps, useEffect, useRef, useState } from "react";
-import ErrorBoundary from "../ErrorBoundary";
-import { Message } from "../message/Message";
-import BackupModal from "./backup/BackupModal";
-import EditorError from "./EditorError";
-import EmbedEditor from "./EmbedEditor";
-import FileInput from "./FileInput";
-import InputField from "./InputField";
-import { parseMessage, stringifyMessage } from "./json/convert";
-import JsonInput from "./json/JsonInput";
-import { Action, ActionsContainer, ActionsHeader, Button, Container } from "./styles";
+import styled from "@emotion/styled"
+import React, { ComponentProps, useEffect, useRef, useState } from "react"
+import ErrorBoundary from "../ErrorBoundary"
+import { Message } from "../message/Message"
+import BackupModal from "./backup/BackupModal"
+import EditorError from "./EditorError"
+import EmbedEditor from "./EmbedEditor"
+import FileInput from "./FileInput"
+import InputField from "./InputField"
+import { parseMessage, stringifyMessage } from "./json/convert"
+import JsonInput from "./json/JsonInput"
+import {
+  Action,
+  ActionsContainer,
+  ActionsHeader,
+  Button,
+  Container,
+} from "./styles"
 
 interface Props {
   message: Message
@@ -25,6 +31,7 @@ const EditorContainer = styled.div`
 `
 
 const EditorInnerContainer = styled(Container)`
+  display: block;
   box-sizing: border-box;
   height: 100vh;
   overflow-y: scroll;
@@ -52,10 +59,10 @@ export default function Editor(props: Props) {
   const [errors, setErrors] = useState<string[]>([])
 
   const handleChange = (message: Message) => {
-    const {content,embeds,username,avatarUrl} = message
+    const { content, embeds, username, avatarUrl } = message
     const newMessage = {
       content: content || undefined,
-      embeds: embeds && embeds.length > 0 ? embeds  : undefined,
+      embeds: embeds && embeds.length > 0 ? embeds : undefined,
       username: username || undefined,
       avatarUrl: avatarUrl || undefined,
     }
