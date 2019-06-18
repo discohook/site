@@ -5,6 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
+    "serve": "npm run build && webpack --config webpack.server.js && node dist/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,9 @@
     "core-js": "^3.1.4",
     "emotion-theming": "^10.0.10",
     "highlight.js": "^9.15.8",
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "regenerator-runtime": "^0.13.2",
@@ -37,6 +41,9 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@types/highlight.js": "^9.12.3",
+    "@types/koa": "^2.0.48",
+    "@types/koa-router": "^7.0.41",
+    "@types/koa-static": "^4.0.1",
     "@types/node": "^12.0.8",
     "@types/react": "^16.8.20",
     "@types/react-dom": "^16.8.4",

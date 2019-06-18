@@ -207,16 +207,19 @@ const ellipsize = (text: string, length: number) => {
     : shortenedText.substring(0, length) + "…"
 }
 
+const now = () =>
+  typeof performance === "object" && performance.now ? performance.now() : 0
+
 export const parseMarkup = (content: string, inline: boolean = false) => {
-  const startTime = performance.now()
+  const startTime = now()
 
   const ast = inline
     ? parseInline(content)
     : jumbosizeEmojis(parseBlock(content))
-  const parseTime = performance.now() - startTime
+  const parseTime = now() - startTime
 
   const output = reactOutput(ast)
-  const outputTime = performance.now() - startTime - parseTime
+  const outputTime = now() - startTime - parseTime
 
   const totalTime = parseTime + outputTime
 

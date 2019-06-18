@@ -9,26 +9,25 @@ const dev = process.env.NODE_ENV === "development"
 
 /** @type {import("webpack").Configuration} */
 module.exports = {
-  mode: dev ? "development" : "production",
   entry: [
     "core-js/stable",
     "regenerator-runtime/runtime",
     resolve(__dirname, "src", "index.tsx"),
   ],
+  mode: dev ? "development" : "production",
   output: {
     filename: "[name].[chunkhash].js",
     chunkFilename: "[name].[chunkhash].js",
-    path: resolve(__dirname, "dist"),
-  },
-  devtool: "source-map",
-  resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+    path: resolve(__dirname, "build"),
   },
   module: {
     rules: [
       { test: /\.[jt]sx?$/, use: "babel-loader" },
       { enforce: "pre", test: /\.js$/, use: "source-map-loader" },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   optimization: {
     splitChunks: {
@@ -39,7 +38,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: resolve(__dirname, "dist", "index.html"),
+      filename: resolve(__dirname, "build", "index.html"),
       template: resolve(__dirname, "public", "index.html"),
       minify: !dev && { collapseWhitespace: true, removeComments: true },
     }),
@@ -56,4 +55,5 @@ module.exports = {
     ]),
   ],
   devServer: { host: "localhost", port: 3000 },
+  devtool: "source-map",
 }
