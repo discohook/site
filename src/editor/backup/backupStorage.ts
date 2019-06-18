@@ -6,6 +6,7 @@ export interface Backup {
 }
 
 const dbPromise = new Promise<IDBDatabase>((res, rej) => {
+  if (typeof indexedDB === "undefined") rej()
   const openRequest = indexedDB.open("backups", 1)
 
   openRequest.addEventListener("success", () => res(openRequest.result))
@@ -17,7 +18,7 @@ const dbPromise = new Promise<IDBDatabase>((res, rej) => {
 })
 
 let db!: IDBDatabase
-dbPromise.then((database) => (db = database))
+dbPromise.then((database) => (db = database)).catch(() => {})
 
 const runTransaction = async (
   mode: IDBTransactionMode,
