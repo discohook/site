@@ -42,7 +42,7 @@ export const getBackups = async () => {
 
   await runTransaction("readonly", (store) => {
     const cursor = store.openKeyCursor || store.openCursor
-    const request = cursor()
+    const request = cursor.call(store)
 
     request.addEventListener("success", () => {
       if (!request.result) return
