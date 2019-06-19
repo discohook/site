@@ -26,7 +26,7 @@ interface Props {
   onToggleDisplay: () => void
 }
 
-const EditorContainer = styled.div`
+const EditorContainer = styled.form`
   position: relative;
 `
 

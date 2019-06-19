@@ -9,7 +9,7 @@ interface Props {
   files: FileList | undefined
 }
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
