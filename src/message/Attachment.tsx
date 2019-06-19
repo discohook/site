@@ -124,23 +124,27 @@ const getHumanReadableSize = (bytes: number) => {
 }
 
 export default function Attachment(props: Props) {
-  const { name, size, type: mime } = props.file
+  const { file } = props
+  const { name, size, type: mime } = file
 
   const [type, setType] = useState(getAttachmentType(name, mime))
   useEffect(() => setType(getAttachmentType(name, mime)), [name, mime])
-  useEffect(() => console.log(`Attachment type for ${name}:`, type), [type])
+  useEffect(() => console.log(`Attachment type for ${name}:`, type), [
+    name,
+    type,
+  ])
 
   const [objectUrl, setObjectUrl] = useState("")
   useEffect(() => {
     if (type !== "image") return
 
-    const objectUrl = URL.createObjectURL(props.file)
+    const objectUrl = URL.createObjectURL(file)
     setObjectUrl(objectUrl)
 
     return () => {
       if (objectUrl) URL.revokeObjectURL(objectUrl)
     }
-  }, [props.file])
+  }, [file, type])
 
   if (type === "image") return <ImageAttachment src={objectUrl} alt={name} />
 

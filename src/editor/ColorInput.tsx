@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { InputLabel, TextInput } from "./styles"
 
 interface Props {
@@ -12,16 +12,17 @@ const numToHex = (num: number | undefined) =>
 const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
 
 export default function ColorInput(props: Props) {
-  const [hex, setHex] = useState(numToHex(props.value))
+  const { value, onChange } = props
+  const [hex, setHex] = useState(numToHex(value))
 
   useEffect(() => {
     setHex(numToHex(props.value))
   }, [props.value])
 
+  const handleChange = useCallback(onChange, [])
   useEffect(() => {
-    if (/^#[0-9a-f]{6}$/i.exec(hex)) props.onChange(hexToNum(hex))
-    if (hex.trim() === "") props.onChange(undefined)
-  }, [hex])
+    handleChange(/^#[0-9a-f]{6}$/i.exec(hex) ? hexToNum(hex) : undefined)
+  }, [hex, handleChange])
 
   return (
     <InputLabel>

@@ -1,5 +1,11 @@
 import styled from "@emotion/styled"
-import React, { ComponentProps, useEffect, useRef, useState } from "react"
+import React, {
+  ComponentProps,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
 import BackupModal from "./backup/BackupModal"
@@ -50,49 +56,40 @@ const EditorActionsContainer = styled(ActionsContainer)`
 export default function Editor(props: Props) {
   const {
     message,
+    onChange,
     files,
     onFilesChange: handleFilesChange,
     onToggleTheme: handleToggleTheme,
     onToggleDisplay: handleToggleDisplay,
   } = props
+  const handleChange = useCallback(onChange, [])
 
   const [json, setJson] = useState(stringifyMessage(props.message))
+  useEffect(() => setJson(stringifyMessage(message)), [message])
+
   const [errors, setErrors] = useState<string[]>([])
 
-  const handleChange = (message: Message) => {
-    const { content, embeds, username, avatarUrl } = message
-    const newMessage = {
-      content: content || undefined,
-      embeds: embeds && embeds.length > 0 ? embeds : undefined,
-      username: username || undefined,
-      avatarUrl: avatarUrl || undefined,
-    }
+  const filterEmptyMessage = useCallback(
+    (error: string) =>
+      files && files.length > 0
+        ? error !==
+          "message: Expected one of following keys: 'content', 'embeds'"
+        : true,
+    [files],
+  )
 
-    setJson(stringifyMessage(newMessage))
-    props.onChange(newMessage)
-  }
+  useEffect(() => {
+    const { errors } = parseMessage(json)
+    setErrors(errors.filter(filterEmptyMessage))
+  }, [filterEmptyMessage, json])
 
   useEffect(() => {
     let prevErrors = [...errors]
     const { message, errors: newErrors } = parseMessage(json)
 
-    setErrors(newErrors.filter(filterEmptyMessage))
-
     if (newErrors.length > 0 && prevErrors.join("\n") !== newErrors.join("\n"))
       console.log("JSON validation errors occurred:", newErrors, message)
-
-    if (message) props.onChange(message)
-  }, [json])
-
-  useEffect(() => {
-    const { errors } = parseMessage(json)
-    setErrors(errors.filter(filterEmptyMessage))
-  }, [files])
-
-  const filterEmptyMessage = (error: string) =>
-    files && files.length > 0
-      ? error !== "message: Expected one of following keys: 'content', 'embeds'"
-      : true
+  }, [errors, json])
 
   const [webhookUrl, setWebhookUrl] = useState("")
   const [sending, setSending] = useState(false)

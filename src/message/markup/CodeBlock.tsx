@@ -16,7 +16,7 @@ export default function CodeBlock(props: Props) {
 
   useEffect(() => {
     highlight(language, content).then(setHighlighted)
-  }, [props.language, props.content])
+  }, [language, content])
 
   if (!highlighted)
     return <CodeBlockContainer {...preProps}>{content}</CodeBlockContainer>
