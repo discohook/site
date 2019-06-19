@@ -24,6 +24,7 @@ module.exports = {
     rules: [
       { test: /\.[jt]sx?$/, use: "babel-loader" },
       { enforce: "pre", test: /\.js$/, use: "source-map-loader" },
+      { enforce: "pre", test: /\.[ts]sx?$/, use: "eslint-loader" },
     ],
   },
   resolve: {
