@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import React from "react";
+import styled from "@emotion/styled"
+import React from "react"
 
 const ErrorContainer = styled.div`
   margin: 8px;
@@ -10,7 +10,6 @@ const ErrorContainer = styled.div`
 
 const ErrorHeader = styled.p`
   margin: 0;
-  color: ${({ theme }) => theme.editor.action};
   font-weight: 500;
 `
 
