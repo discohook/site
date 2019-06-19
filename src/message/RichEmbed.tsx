@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import React from "react";
-import EmbedAuthor from "./EmbedAuthor";
-import EmbedField from "./EmbedField";
-import EmbedFooter from "./EmbedFooter";
-import Markup from "./markup/Markup";
-import { Embed } from "./Message";
+import styled from "@emotion/styled"
+import React from "react"
+import EmbedAuthor from "./EmbedAuthor"
+import EmbedField from "./EmbedField"
+import EmbedFooter from "./EmbedFooter"
+import Markup from "./markup/Markup"
+import { Embed } from "./Message"
 
 interface Props {
   embed: Embed
@@ -94,8 +94,18 @@ const EmbedThumbnail = styled.img`
 `
 
 export default function RichEmbed(props: Props) {
-  const { author, title, description, fields, footer, timestamp } = props.embed
-  const { url, color, image, thumbnail } = props.embed
+  const {
+    title,
+    description,
+    url,
+    timestamp,
+    color,
+    footer,
+    image,
+    thumbnail,
+    author,
+    fields,
+  } = props.embed
 
   const embedPillColor =
     typeof color === "number"
