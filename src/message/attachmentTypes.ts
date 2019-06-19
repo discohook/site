@@ -94,6 +94,6 @@ export const attachmentTypes: AttachmentType[] = [
   {
     check: "mime",
     regex: /.*/,
-    icon: "unknown"
-  }
+    icon: "unknown",
+  },
 ]
