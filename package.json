@@ -6,7 +6,8 @@
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "serve": "npm run build && webpack --config webpack.server.js && node dist/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noemit"
   },
   "repository": {
     "type": "git",

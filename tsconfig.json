@@ -2,11 +2,10 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
-    "jsx": "react",
-    "outDir": "./dist/",
+    "lib": ["dom", "esnext"],
+    "jsx": "preserve",
     "strict": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true
+    "esModuleInterop": true
   },
   "include": ["./src/**/*"]
 }
