@@ -29,6 +29,7 @@ interface Props {
 const EditorContainer = styled.form`
   position: relative;
 `
+EditorContainer.defaultProps = { onSubmit: (event) => event.preventDefault() }
 
 const EditorInnerContainer = styled(Container)`
   display: block;
