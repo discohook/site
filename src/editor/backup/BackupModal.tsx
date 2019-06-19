@@ -100,7 +100,7 @@ export default function BackupModal(props: Props) {
         <Container direction="row">
           <InputField
             value={newBackupName}
-            onChange={(name) => setNewBackupName(name || "")}
+            onChange={setNewBackupName}
             label="Backup name"
           />
           <Button onClick={handleCreate}>Create</Button>
