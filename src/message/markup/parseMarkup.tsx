@@ -4,20 +4,16 @@ import {
   ASTNode,
   defaultRules,
   inlineRegex,
-  NodeOutput,
   outputFor,
   parserFor,
-  ParserRule,
-  SingleASTNode,
+  Rules,
 } from "simple-markdown"
 import CodeBlock from "./CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 import { Code, Emoji, Mention, Spoiler } from "./styles"
 
-type Rules = Record<string, ParserRule & { react?: NodeOutput<any> | null }>
-
 const escape = (s: string) =>
-  s.replace(/[\-\[\]\/\{}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
+  s.replace(/[\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|\-]/g, "\\$&")
 
 const emojiRegex = new RegExp(
   `(?:${Object.keys(emojiToName)
@@ -174,11 +170,9 @@ const parseInline = parserFor(inlineRules, { inline: true })
 const parseBlock = parserFor(blockRules, { inline: true })
 const reactOutput = outputFor({ ...inlineRules, ...blockRules }, "react")
 
-const jumbosizeEmojis = (ast: ASTNode): ASTNode => {
-  const isEmoji = (node: SingleASTNode) => /emoji|customEmoji/.test(node.type)
-  const isNotEmoji = (node: SingleASTNode) => !isEmoji(node)
-
-  if (!Array.isArray(ast)) return { ...ast, jumboable: isEmoji(ast) }
+const jumbosizeEmojis = (ast: ASTNode[]): ASTNode[] => {
+  const isEmoji = (node: ASTNode) => /emoji|customEmoji/.test(node.type)
+  const isNotEmoji = (node: ASTNode) => !isEmoji(node)
 
   // Gets all nodes of type 'emoji' or 'customEmoji'
   const emojiNodes = ast.filter(isNotEmoji)
