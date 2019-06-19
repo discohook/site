@@ -38,7 +38,7 @@ export default function MessagePreview(props: Props) {
 
   return (
     <Container>
-      <MessageHeader {...{ username, avatarUrl }} />
+      <MessageHeader username={username} avatarUrl={avatarUrl} />
       {content && <Markup content={content} />}
       {embeds && embeds.map((embed, i) => <RichEmbed embed={embed} key={i} />)}
       {files && files.map((file, i) => <Attachment file={file} key={i} />)}
