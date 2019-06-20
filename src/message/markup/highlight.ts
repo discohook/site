@@ -12,16 +12,21 @@ const importLanguage = async (name: string) => {
   const lang = languages.find((lang) => lang.aliases.includes(name))
   if (!lang) return
 
-  if (lang.dependencies)
-    await Promise.all(lang.dependencies.map(importLanguage))
-
-  const { default: language } = await import(
-    `highlight.js/lib/languages/${aliases[name]}`
-    /* webpackChunkName: "hljs-[request]" */
+  const languagesToImport = [...(lang.dependencies || []), aliases[name]]
+  const hljsLanguages = await Promise.all(
+    languagesToImport.map((name) =>
+      import(
+        /* webpackChunkName: "hljs-[request]" */
+        `highlight.js/lib/languages/${name}`
+      ),
+    ),
   )
-  hljs.registerLanguage(name, language)
 
-  console.log("Registered highlight.js language:", aliases[name])
+  for (const [index, { default: language }] of Object.entries(hljsLanguages)) {
+    const name = languagesToImport[Number(index)]
+    hljs.registerLanguage(name, language)
+    console.log("Registered highlight.js language:", name)
+  }
 }
 
 export const highlight = async (language: string, content: string) => {
