@@ -1,5 +1,6 @@
 import { readFileSync } from "fs"
 import Koa from "koa"
+import conditional from "koa-conditional-get"
 import Router from "koa-router"
 import serve from "koa-static"
 import { resolve } from "path"
@@ -19,6 +20,9 @@ const html = readFileSync(resolve(build, "index.html")).toString()
 const [templateBefore, templateAfter] = html
   .replace('<div id="app"></div>', '<div id="app"><!--APP--></div>')
   .split("<!--APP-->")
+
+app.use(conditional())
+app.use(serve(build, { defer: true }))
 
 router.get("/", async (context) => {
   const readable = new Readable({ read: () => {} })
@@ -47,6 +51,5 @@ router.get("/", async (context) => {
 })
 
 app.use(router.middleware())
-app.use(serve(build))
 
 app.listen(port, () => console.log(`Listening on ${port}`))
