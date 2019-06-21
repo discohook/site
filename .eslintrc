@@ -3,8 +3,9 @@
   "parserOptions": { "sourceType": "module" },
   "plugins": ["@typescript-eslint", "react", "react-hooks"],
   "rules": {
-    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-key": "warn",
+    "react/self-closing-comp": "warn",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-key": "warn"
+    "react-hooks/rules-of-hooks": "error"
   }
 }
