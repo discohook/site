@@ -6,10 +6,8 @@ import React, {
   useRef,
   useState,
 } from "react"
-import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "../message/Message"
 import BackupModal from "./backup/BackupModal"
-import EditorError from "./EditorError"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
 import InputField from "./InputField"
@@ -165,30 +163,28 @@ export default function Editor(props: Props) {
             Send
           </Button>
         </Container>
-        <ErrorBoundary onError={() => <EditorError />}>
+        <InputField
+          value={message.content}
+          onChange={(content) => handleChange({ ...message, content })}
+          label="Message content"
+          multiline
+        />
+        <EmbedEditor
+          embeds={message.embeds || []}
+          onChange={(embeds) => handleChange({ ...message, embeds })}
+        />
+        <Container direction="row">
           <InputField
-            value={message.content}
-            onChange={(content) => handleChange({ ...message, content })}
-            label="Message content"
-            multiline
+            value={message.username}
+            onChange={(username) => handleChange({ ...message, username })}
+            label="Override username"
           />
-          <EmbedEditor
-            embeds={message.embeds || []}
-            onChange={(embeds) => handleChange({ ...message, embeds })}
+          <InputField
+            value={message.avatarUrl}
+            onChange={(avatarUrl) => handleChange({ ...message, avatarUrl })}
+            label="Override avatar"
           />
-          <Container direction="row">
-            <InputField
-              value={message.username}
-              onChange={(username) => handleChange({ ...message, username })}
-              label="Override username"
-            />
-            <InputField
-              value={message.avatarUrl}
-              onChange={(avatarUrl) => handleChange({ ...message, avatarUrl })}
-              label="Override avatar"
-            />
-          </Container>
-        </ErrorBoundary>
+        </Container>
         <Container direction="row">
           <FileInput onChange={handleFilesChange} ref={fileInputRef} />
           <Button onClick={clearFiles}>Remove files</Button>
