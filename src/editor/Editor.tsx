@@ -64,8 +64,13 @@ export default function Editor(props: Props) {
   } = props
   const handleChange = useCallback(onChange, [])
 
-  const [json, setJson] = useState(stringifyMessage(props.message))
+  const [json, setJson] = useState(stringifyMessage(message))
   useEffect(() => setJson(stringifyMessage(message)), [message])
+  const handleJsonChange = (json: string) => {
+    setJson(json)
+    const { message } = parseMessage(json)
+    if (message) handleChange(message)
+  }
 
   const [errors, setErrors] = useState<string[]>([])
 
@@ -84,12 +89,11 @@ export default function Editor(props: Props) {
   }, [filterEmptyMessage, json])
 
   useEffect(() => {
-    let prevErrors = [...errors]
-    const { message, errors: newErrors } = parseMessage(json)
+    const { message, errors } = parseMessage(json)
 
-    if (newErrors.length > 0 && prevErrors.join("\n") !== newErrors.join("\n"))
-      console.log("JSON validation errors occurred:", newErrors, message)
-  }, [errors, json])
+    if (errors.length > 0)
+      console.log("JSON validation errors occurred:", errors, message)
+  }, [json])
 
   const [webhookUrl, setWebhookUrl] = useState("")
   const [sending, setSending] = useState(false)
@@ -189,7 +193,7 @@ export default function Editor(props: Props) {
           <FileInput onChange={handleFilesChange} ref={fileInputRef} />
           <Button onClick={clearFiles}>Remove files</Button>
         </Container>
-        <JsonInput json={json} onChange={setJson} errors={errors} />
+        <JsonInput json={json} onChange={handleJsonChange} errors={errors} />
       </EditorInnerContainer>
       {isBackupModalShown && (
         <BackupModal

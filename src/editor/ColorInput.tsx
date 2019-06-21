@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { InputLabel, TextInput } from "./styles"
+import React, { useState } from "react"
+import InputField from "./InputField"
 
 interface Props {
   value: number | undefined
@@ -12,22 +12,17 @@ const numToHex = (num: number | undefined) =>
 const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
 
 export default function ColorInput(props: Props) {
-  const { value, onChange } = props
+  const { value, onChange: handleChange } = props
   const [hex, setHex] = useState(numToHex(value))
 
-  useEffect(() => {
-    setHex(numToHex(props.value))
-  }, [props.value])
-
-  const handleChange = useCallback(onChange, [])
-  useEffect(() => {
-    handleChange(/^#[0-9a-f]{6}$/i.exec(hex) ? hexToNum(hex) : undefined)
-  }, [hex, handleChange])
-
   return (
-    <InputLabel>
-      Embed color
-      <TextInput value={hex} onChange={(event) => setHex(event.target.value)} />
-    </InputLabel>
+    <InputField
+      value={hex}
+      onChange={(hex) => {
+        setHex(numToHex(value))
+        handleChange(/^#[0-9a-f]{6}$/i.exec(hex) ? hexToNum(hex) : undefined)
+      }}
+      label="Embed color"
+    />
   )
 }
