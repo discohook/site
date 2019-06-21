@@ -100,7 +100,7 @@ export const initialMessage: Message = {
         This uses small bits of code from Discord to make messages appear as accurately as possible. This is not to infringe on Discord's rights, but to give more helpful visuals.
         Discohook is not affiliated with Discord in any way, shape, or form.
 
-        The source code of this project is available at <https://github.com/jaylineko/discohook>, and licensed under an MIT license.
+        The source code of this project is available at <https://github.com/jaylineko/discohook>.
         `,
     },
   ],
