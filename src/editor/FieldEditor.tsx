@@ -13,11 +13,11 @@ import {
 
 interface Props {
   fields: Field[]
-  onChange: (fields: Field[] | undefined) => void
+  onChange: (fields: Field[]) => void
 }
 
 export default function FieldEditor(props: Props) {
-  const fields = Array.isArray(props.fields) ? props.fields : []
+  const fields = Array.from(props.fields)
 
   const addField = () => props.onChange([...fields, {} as Field])
 
@@ -30,10 +30,10 @@ export default function FieldEditor(props: Props) {
     props.onChange(newFields)
   }
 
-  const modifyField = (index: number, partialField: Partial<Field>) =>
+  const modifyField = (index: number, field: Field) =>
     props.onChange([
       ...fields.slice(0, index),
-      { ...fields[index], ...partialField },
+      field,
       ...fields.slice(index + 1),
     ])
 
@@ -52,25 +52,34 @@ export default function FieldEditor(props: Props) {
       <BoxContainer>
         <Container direction="row">
           <InputField
-            value={field.name || ""}
-            onChange={(value) =>
-              modifyField(index, { name: value || undefined })
+            value={field.name}
+            onChange={(name) =>
+              modifyField(index, {
+                ...field,
+                name: name || (undefined as any),
+              })
             }
             label="Field name"
           />
           <ToggleButton
             filled={field.inline || false}
             onClick={() =>
-              modifyField(index, { inline: !field.inline || undefined })
+              modifyField(index, {
+                ...field,
+                inline: !field.inline || undefined,
+              })
             }
           >
             Inline
           </ToggleButton>
         </Container>
         <InputField
-          value={field.value || ""}
+          value={field.value}
           onChange={(value) =>
-            modifyField(index, { value: value || undefined })
+            modifyField(index, {
+              ...field,
+              value: value || (undefined as any),
+            })
           }
           label="Field value"
           multiline

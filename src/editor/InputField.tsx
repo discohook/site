@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react"
 import { InputLabel, MultilineTextInput, TextInput } from "./styles"
 
 interface Props {
-  value: string
+  value?: string
   onChange: (value: string) => void
   label: string
   multiline?: boolean

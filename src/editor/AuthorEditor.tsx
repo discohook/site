@@ -20,17 +20,17 @@ export default function AuthorEditor(props: Props) {
   return (
     <InputGroup>
       <InputField
-        value={name || ""}
+        value={name}
         onChange={(name) => handleChange({ ...author, name })}
         label="Embed author name"
       />
       <InputField
-        value={url || ""}
+        value={url}
         onChange={(url) => handleChange({ ...author, url })}
         label="Embed author link"
       />
       <InputField
-        value={iconUrl || ""}
+        value={iconUrl}
         onChange={(iconUrl) => handleChange({ ...author, iconUrl })}
         label="Embed author icon"
       />

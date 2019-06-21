@@ -34,10 +34,10 @@ export default function EmbedEditor(props: Props) {
     props.onChange(newEmbeds)
   }
 
-  const modifyEmbed = (index: number, partialEmbed: Partial<Embed>) =>
+  const modifyEmbed = (index: number, embed: Embed) =>
     props.onChange([
       ...embeds.slice(0, index),
-      { ...embeds[index], ...partialEmbed },
+      embed,
       ...embeds.slice(index + 1),
     ])
 
@@ -56,53 +56,94 @@ export default function EmbedEditor(props: Props) {
       <BoxContainer>
         <InputGroup>
           <InputField
-            value={embed.title || ""}
-            onChange={(title) => modifyEmbed(index, { title })}
+            value={embed.title}
+            onChange={(title) =>
+              modifyEmbed(index, {
+                ...embed,
+                title: title || undefined,
+              })
+            }
             label="Embed title"
           />
           <InputField
-            value={embed.url || ""}
-            onChange={(url) => modifyEmbed(index, { url })}
+            value={embed.url}
+            onChange={(url) =>
+              modifyEmbed(index, {
+                ...embed,
+                url: url || undefined,
+              })
+            }
             label="Embed title link"
           />
         </InputGroup>
         <InputField
-          value={embed.description || ""}
-          onChange={(description) => modifyEmbed(index, { description })}
+          value={embed.description}
+          onChange={(description) =>
+            modifyEmbed(index, {
+              ...embed,
+              description: description || undefined,
+            })
+          }
           label="Embed description"
           multiline
         />
         <AuthorEditor
           author={embed.author}
-          onChange={(author) => modifyEmbed(index, { author })}
+          onChange={(author) =>
+            modifyEmbed(index, {
+              ...embed,
+              author,
+            })
+          }
         />
         <FieldEditor
           fields={embed.fields || []}
-          onChange={(fields) => modifyEmbed(index, { fields })}
+          onChange={(fields) =>
+            modifyEmbed(index, {
+              ...embed,
+              fields: fields.length > 0 ? fields : undefined,
+            })
+          }
         />
         <FooterEditor
           footer={embed.footer}
           timestamp={embed.timestamp}
-          onChange={(partial) => modifyEmbed(index, partial as Partial<Embed>)}
+          onChange={(partial) =>
+            modifyEmbed(index, {
+              ...embed,
+              ...partial,
+            })
+          }
         />
         <InputGroup>
           <InputField
-            value={(embed.image || { url: "" }).url || ""}
+            value={(embed.image || {}).url}
             onChange={(url) =>
-              modifyEmbed(index, { image: url ? { url } : undefined })
+              modifyEmbed(index, {
+                ...embed,
+                image: url ? { url } : undefined,
+              })
             }
             label="Embed image"
           />
           <InputField
-            value={(embed.thumbnail || { url: "" }).url || ""}
+            value={(embed.thumbnail || {}).url}
             onChange={(url) =>
-              modifyEmbed(index, { thumbnail: url ? { url } : undefined })
+              modifyEmbed(index, {
+                ...embed,
+                thumbnail: url ? { url } : undefined,
+              })
             }
             label="Embed thumbnail"
           />
           <ColorInput
             value={embed.color}
-            onChange={(color) => modifyEmbed(index, { color })}
+            onChange={(color) =>
+              modifyEmbed(index, {
+                ...embed,
+                color,
+              })
+            }
           />
         </InputGroup>
       </BoxContainer>

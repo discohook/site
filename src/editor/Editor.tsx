@@ -163,7 +163,7 @@ export default function Editor(props: Props) {
         </Container>
         <ErrorBoundary onError={() => <EditorError />}>
           <InputField
-            value={message.content || ""}
+            value={message.content}
             onChange={(content) => handleChange({ ...message, content })}
             label="Message content"
             multiline
@@ -174,12 +174,12 @@ export default function Editor(props: Props) {
           />
           <Container direction="row">
             <InputField
-              value={message.username || ""}
+              value={message.username}
               onChange={(username) => handleChange({ ...message, username })}
               label="Override username"
             />
             <InputField
-              value={message.avatarUrl || ""}
+              value={message.avatarUrl}
               onChange={(avatarUrl) => handleChange({ ...message, avatarUrl })}
               label="Override avatar"
             />
