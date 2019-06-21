@@ -19,22 +19,22 @@ export interface Embed {
 }
 
 export interface Author {
-  name: string
+  name?: string
   url?: string
   iconUrl?: string
 }
 
 export interface Footer {
-  text: string
+  text?: string
   iconUrl?: string
 }
 
 export interface Field {
-  name: string
-  value: string
+  name?: string
+  value?: string
   inline?: boolean
 }
 
 export interface Image {
-  url: string
+  url?: string
 }
