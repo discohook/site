@@ -36,6 +36,9 @@ const isDate: Validator = first(isString, (value, key) =>
 const optional = (validate: Validator): Validator => (value, key) =>
   value === undefined ? [] : validate(value, key)
 
+const nullable = (validate: Validator): Validator => (value, key) =>
+  value === null ? [] : validate(value, key)
+
 const contains = (validate: Validator): Validator =>
   first(isArray, (value, key) =>
     (value as any[]).flatMap((item, index) =>
@@ -119,7 +122,7 @@ export const isMessage: Validator = first(
               description: optional(first(isString, length(1, 2048))),
               url: optional(isString),
               timestamp: optional(isDate),
-              color: optional(between(0, 16777215)),
+              color: optional(nullable(between(0, 16777215))),
               footer: optional(
                 first(
                   requiresKey("text"),
