@@ -95,80 +95,64 @@ const between = (min: number, max: number): Validator =>
       : [],
   )
 
+const isAuthor: Validator = first(
+  requiresKey("name"),
+  isShape({
+    name: first(isString, length(1, 256)),
+    url: optional(isString),
+    iconUrl: optional(isString),
+  }),
+)
+
+const isFooter: Validator = first(
+  requiresKey("text"),
+  isShape({
+    text: first(isString, length(1, 2048)),
+    iconUrl: optional(isString),
+  }),
+)
+
+const isField: Validator = first(
+  requiresKeys("name", "value"),
+  isShape({
+    name: first(isString, length(1, 256)),
+    value: first(isString, length(1, 1024)),
+    inline: optional(isBoolean),
+  }),
+)
+
+const isEmbed: Validator = first(
+  requiresKey(
+    "title",
+    "description",
+    "url",
+    "timestamp",
+    "color",
+    "footer",
+    "image",
+    "thumbnail",
+    "author",
+    "fields",
+  ),
+  isShape({
+    title: optional(first(isString, length(1, 256))),
+    description: optional(first(isString, length(1, 2048))),
+    url: optional(isString),
+    timestamp: optional(isDate),
+    color: optional(nullable(between(0, 16777215))),
+    footer: optional(isFooter),
+    image: optional(first(requiresKey("url"), isShape({ url: isString }))),
+    thumbnail: optional(first(requiresKey("url"), isShape({ url: isString }))),
+    author: optional(isAuthor),
+    fields: optional(first(isArray, length(1, 25), contains(isField))),
+  }),
+)
+
 export const isMessage: Validator = first(
   requiresKey("content", "embeds"),
   isShape({
     content: optional(first(isString, length(1, 2000))),
-    embeds: optional(
-      first(
-        isArray,
-        length(1, 10),
-        contains(
-          first(
-            requiresKey(
-              "title",
-              "description",
-              "url",
-              "timestamp",
-              "color",
-              "footer",
-              "image",
-              "thumbnail",
-              "author",
-              "fields",
-            ),
-            isShape({
-              title: optional(first(isString, length(1, 256))),
-              description: optional(first(isString, length(1, 2048))),
-              url: optional(isString),
-              timestamp: optional(isDate),
-              color: optional(nullable(between(0, 16777215))),
-              footer: optional(
-                first(
-                  requiresKey("text"),
-                  isShape({
-                    text: first(isString, length(1, 2048)),
-                    iconUrl: optional(isString),
-                  }),
-                ),
-              ),
-              image: optional(
-                first(requiresKey("url"), isShape({ url: isString })),
-              ),
-              thumbnail: optional(
-                first(requiresKey("url"), isShape({ url: isString })),
-              ),
-              author: optional(
-                first(
-                  requiresKey("name"),
-                  isShape({
-                    name: first(isString, length(1, 256)),
-                    url: optional(isString),
-                    iconUrl: optional(isString),
-                  }),
-                ),
-              ),
-              fields: optional(
-                first(
-                  isArray,
-                  length(1, 25),
-                  contains(
-                    first(
-                      requiresKeys("name", "value"),
-                      isShape({
-                        name: first(isString, length(1, 256)),
-                        value: first(isString, length(1, 1024)),
-                        inline: optional(isBoolean),
-                      }),
-                    ),
-                  ),
-                ),
-              ),
-            }),
-          ),
-        ),
-      ),
-    ),
+    embeds: optional(first(isArray, length(1, 10), contains(isEmbed))),
     username: optional(first(isString, length(1, 256))),
     avatarUrl: optional(isString),
   }),
