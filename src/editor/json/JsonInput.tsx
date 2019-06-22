@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { getUniqueId } from "../InputField"
+import { getUniqueId } from "../../uid"
 import { Container, InputLabel, MultilineTextInput } from "../styles"
 
 interface Props {
@@ -39,8 +39,8 @@ export default function JsonInput(props: Props) {
       <InputLabel htmlFor={id}>JSON data</InputLabel>
       {props.errors.length > 0 && (
         <ErrorContainer>
-          {props.errors.map((error, index) => (
-            <Error key={index}>{error}</Error>
+          {props.errors.map((error) => (
+            <Error key={error}>{error}</Error>
           ))}
         </ErrorContainer>
       )}

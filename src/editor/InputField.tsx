@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react"
+import { getUniqueId } from "../uid"
 import { InputLabel, MultilineTextInput, TextInput } from "./styles"
 
 interface Props {
@@ -8,9 +9,6 @@ interface Props {
   multiline?: boolean
   placeholder?: string
 }
-
-let nextId = 1
-export const getUniqueId = () => `uid-${nextId++}`
 
 type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 

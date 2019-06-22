@@ -1,3 +1,5 @@
+import { id } from "../uid"
+
 export interface Message {
   content?: string
   embeds?: Embed[]
@@ -6,6 +8,7 @@ export interface Message {
 }
 
 export interface Embed {
+  [id]: string
   title?: string
   description?: string
   url?: string
@@ -30,6 +33,7 @@ export interface Footer {
 }
 
 export interface Field {
+  [id]: string
   name?: string
   value?: string
   inline?: boolean

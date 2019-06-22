@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { id } from "../uid"
 import Attachment from "./Attachment"
 import Markup from "./markup/Markup"
 import { MarkupContainer } from "./markup/styles"
@@ -40,7 +41,8 @@ export default function MessagePreview(props: Props) {
     <Container>
       <MessageHeader username={username} avatarUrl={avatarUrl} />
       {content && <Markup content={content} />}
-      {embeds && embeds.map((embed, i) => <RichEmbed embed={embed} key={i} />)}
+      {embeds &&
+        embeds.map((embed) => <RichEmbed embed={embed} key={embed[id]} />)}
       {files && files.map((file, i) => <Attachment file={file} key={i} />)}
     </Container>
   )

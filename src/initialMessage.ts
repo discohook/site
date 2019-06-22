@@ -1,4 +1,5 @@
 import { Message } from "./message/Message"
+import { getUniqueId, id } from "./uid"
 
 const dedent = (strings: TemplateStringsArray) =>
   strings
@@ -15,6 +16,7 @@ export const initialMessage: Message = {
     `,
   embeds: [
     {
+      [id]: getUniqueId(),
       title: "What even?",
       description: dedent`
         So uhh, yeah, this is __Discohook__.
@@ -28,6 +30,7 @@ export const initialMessage: Message = {
       color: 7506394,
     },
     {
+      [id]: getUniqueId(),
       title: "Embeds?",
       description: dedent`
         Yeah, embeds. They look like this, you've been reading them.
@@ -40,6 +43,7 @@ export const initialMessage: Message = {
       color: 4437377,
     },
     {
+      [id]: getUniqueId(),
       author: {
         name: "Author who?",
         iconUrl: "https://cdn.discordapp.com/embed/avatars/4.png",
@@ -52,6 +56,7 @@ export const initialMessage: Message = {
         Also, I forgot to tell you this earlier, but yes this does support [__***markdown***__](https://support.discordapp.com/hc/en-us/articles/210298617), even masked links like this: \`[name](link)\`.`,
       fields: [
         {
+          [id]: getUniqueId(),
           name: "Embeds have fields",
           value: dedent`
             Crazy right?
@@ -59,16 +64,19 @@ export const initialMessage: Message = {
             `,
         },
         {
+          [id]: getUniqueId(),
           name: "Inline fields",
           value: "If you have enough room,",
           inline: true,
         },
         {
+          [id]: getUniqueId(),
           name: "are cool!",
           value: "they appear next to each other",
           inline: true,
         },
         {
+          [id]: getUniqueId(),
           name: "Embeds also support images",
           value:
             "But it makes your messages a little bulky, so I didn't add one.",
@@ -85,6 +93,7 @@ export const initialMessage: Message = {
       },
     },
     {
+      [id]: getUniqueId(),
       title: "Backups!",
       description: dedent`
         As a little extra, there's also support for backups.
@@ -95,6 +104,7 @@ export const initialMessage: Message = {
       color: 16426522,
     },
     {
+      [id]: getUniqueId(),
       title: "\\⚠ The big disclaimer",
       description: dedent`
         This uses small bits of code from Discord to make messages appear as accurately as possible. This is not to infringe on Discord's rights, but to give more helpful visuals.

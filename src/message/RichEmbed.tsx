@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { id } from "../uid"
 import EmbedAuthor from "./EmbedAuthor"
 import EmbedField from "./EmbedField"
 import EmbedFooter from "./EmbedFooter"
@@ -132,8 +133,8 @@ export default function RichEmbed(props: Props) {
           )}
           {fields && (
             <EmbedFields>
-              {fields.map((field, index) => (
-                <EmbedField field={field} key={index} />
+              {fields.map((field) => (
+                <EmbedField field={field} key={field[id]} />
               ))}
             </EmbedFields>
           )}

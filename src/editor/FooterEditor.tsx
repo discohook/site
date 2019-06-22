@@ -6,15 +6,15 @@ import { InputGroup } from "./styles"
 interface Props {
   footer: Footer | undefined
   timestamp: string | undefined
-  onChange: (embed: Embed) => void
+  onChange: (embed: Omit<Embed, symbol>) => void
 }
 
 export default function FooterEditor(props: Props) {
-  const { footer = {}, timestamp } = props
+  const { footer = {}, timestamp, onChange } = props
   const { text, iconUrl } = footer
 
-  const handleChange = (embed: Embed) => {
-    props.onChange({
+  const handleChange = (embed: Omit<Embed, symbol>) => {
+    onChange({
       footer:
         embed.footer && Object.values(embed.footer).some((value) => !!value)
           ? embed.footer

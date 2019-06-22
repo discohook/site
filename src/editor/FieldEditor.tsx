@@ -1,5 +1,6 @@
 import React from "react"
 import { Field } from "../message/Message"
+import { getUniqueId, id } from "../uid"
 import InputField from "./InputField"
 import {
   Action,
@@ -19,7 +20,7 @@ interface Props {
 export default function FieldEditor(props: Props) {
   const fields = Array.from(props.fields)
 
-  const addField = () => props.onChange([...fields, {} as Field])
+  const addField = () => props.onChange([...fields, { [id]: getUniqueId() }])
 
   const deleteField = (index: number) =>
     props.onChange([...fields.slice(0, index), ...fields.slice(index + 1)])
@@ -38,7 +39,7 @@ export default function FieldEditor(props: Props) {
     ])
 
   const editors = fields.map((field, index) => (
-    <Container key={index}>
+    <Container key={field[id]}>
       <ActionsContainer>
         <ActionsHeader>Field {index + 1}</ActionsHeader>
         <Action onClick={() => deleteField(index)}>Delete</Action>

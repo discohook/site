@@ -1,4 +1,5 @@
 import { Message } from "../../message/Message"
+import { getUniqueId, id } from "../../uid"
 import { toCamelCase, toSnakeCase } from "./casing"
 import { isMessage } from "./validation"
 
@@ -8,9 +9,9 @@ export const stringifyMessage = (message: Message) => {
 
 export const parseMessage = (json: string) => {
   try {
-    const object = toCamelCase(JSON.parse(json))
+    const message = toCamelCase(JSON.parse(json)) as Message
 
-    const errors = isMessage(object, "message").map((error) => {
+    const errors = isMessage(message, "message").map((error) => {
       const [key, ...message] = error.split(": ")
       return [
         key.replace(/[A-Z]/g, (match) => `_${match.toLowerCase()}`),
@@ -18,7 +19,14 @@ export const parseMessage = (json: string) => {
       ].join(": ")
     })
 
-    return { message: object as Message, errors }
+    for (const embed of message.embeds || []) {
+      embed[id] = getUniqueId()
+      for (const field of embed.fields || []) {
+        field[id] = getUniqueId()
+      }
+    }
+
+    return { message, errors }
   } catch (error) {
     return { errors: [`message: ${error.message}`] }
   }

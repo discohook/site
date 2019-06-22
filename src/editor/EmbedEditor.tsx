@@ -1,5 +1,6 @@
 import React from "react"
 import { Embed } from "../message/Message"
+import { getUniqueId, id } from "../uid"
 import AuthorEditor from "./AuthorEditor"
 import ColorInput from "./ColorInput"
 import FieldEditor from "./FieldEditor"
@@ -23,7 +24,7 @@ interface Props {
 export default function EmbedEditor(props: Props) {
   const embeds = Array.isArray(props.embeds) ? props.embeds : []
 
-  const addEmbed = () => props.onChange([...embeds, {}])
+  const addEmbed = () => props.onChange([...embeds, { [id]: getUniqueId() }])
 
   const deleteEmbed = (index: number) =>
     props.onChange([...embeds.slice(0, index), ...embeds.slice(index + 1)])
@@ -42,7 +43,7 @@ export default function EmbedEditor(props: Props) {
     ])
 
   const editors = embeds.map((embed, index) => (
-    <Container key={index}>
+    <Container key={embed[id]}>
       <ActionsContainer>
         <ActionsHeader>Embed {index + 1}</ActionsHeader>
         <Action onClick={() => deleteEmbed(index)}>Delete</Action>
