@@ -138,10 +138,10 @@ export default function RichEmbed(props: Props) {
               ))}
             </EmbedFields>
           )}
-          {image && <EmbedImage src={image.url} alt="" />}
+          {image && <EmbedImage src={image.url} alt="Image" />}
           {(footer || timestamp) && <EmbedFooter {...{ footer, timestamp }} />}
         </InnerEmbedContent>
-        {thumbnail && <EmbedThumbnail src={thumbnail.url} alt="" />}
+        {thumbnail && <EmbedThumbnail src={thumbnail.url} alt="Thumbnail" />}
       </EmbedContent>
     </Container>
   )

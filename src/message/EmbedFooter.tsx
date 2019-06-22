@@ -91,7 +91,7 @@ export default function EmbedFooter(props: Props) {
 
   return (
     <Container>
-      {iconUrl && <FooterImage src={iconUrl} alt="" />}
+      {iconUrl && <FooterImage src={iconUrl} alt="Footer image" />}
       <FooterText>
         {text}
         {footer && timestamp && <FooterSeparator>•</FooterSeparator>}
