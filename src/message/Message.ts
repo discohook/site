@@ -13,7 +13,7 @@ export interface Embed {
   description?: string
   url?: string
   timestamp?: string
-  color?: number
+  color?: number | null
   footer?: Footer
   image?: Image
   thumbnail?: Image
