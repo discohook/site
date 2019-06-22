@@ -18,7 +18,7 @@ import {
 
 interface Props {
   embeds: Embed[]
-  onChange: (embeds: Embed[] | undefined) => void
+  onChange: (embeds: Embed[]) => void
 }
 
 export default function EmbedEditor(props: Props) {

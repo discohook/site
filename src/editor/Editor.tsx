@@ -165,23 +165,34 @@ export default function Editor(props: Props) {
         </Container>
         <InputField
           value={message.content}
-          onChange={(content) => handleChange({ ...message, content })}
+          onChange={(content) =>
+            handleChange({ ...message, content: content || undefined })
+          }
           label="Message content"
           multiline
         />
         <EmbedEditor
           embeds={message.embeds || []}
-          onChange={(embeds) => handleChange({ ...message, embeds })}
+          onChange={(embeds) =>
+            handleChange({
+              ...message,
+              embeds: embeds.length > 0 ? embeds : undefined,
+            })
+          }
         />
         <Container direction="row">
           <InputField
             value={message.username}
-            onChange={(username) => handleChange({ ...message, username })}
+            onChange={(username) =>
+              handleChange({ ...message, username: username || undefined })
+            }
             label="Override username"
           />
           <InputField
             value={message.avatarUrl}
-            onChange={(avatarUrl) => handleChange({ ...message, avatarUrl })}
+            onChange={(avatarUrl) =>
+              handleChange({ ...message, avatarUrl: avatarUrl || undefined })
+            }
             label="Override avatar"
           />
         </Container>
