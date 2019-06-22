@@ -1,17 +1,7 @@
 type Validator = (value: unknown, key: string) => string[]
 
-const flatMap = <T, U>(
-  array: T[],
-  fn: (value: T, index: number, array: T[]) => ReadonlyArray<U>,
-): U[] => {
-  const result: U[] = []
-  for (const [index, value] of Object.entries(array))
-    result.push(...fn(value, Number(index), array))
-  return result
-}
-
 const all = (...validators: Validator[]): Validator => (value, key) =>
-  flatMap(validators, (validate) => validate(value, key))
+  validators.flatMap((validate) => validate(value, key))
 
 const first = (...validators: Validator[]): Validator => (value, key) =>
   validators.reduce(
@@ -48,14 +38,14 @@ const optional = (validate: Validator): Validator => (value, key) =>
 
 const contains = (validate: Validator): Validator =>
   first(isArray, (value, key) =>
-    flatMap(value as any[], (item, index) =>
+    (value as any[]).flatMap((item, index) =>
       validate(item, `${key}[${index}]`),
     ),
   )
 
 const isShape = (shape: Record<string, Validator>): Validator =>
   first(isObject, (value, key) =>
-    flatMap(Object.entries(shape), ([shapeKey, validate]) =>
+    Object.entries(shape).flatMap(([shapeKey, validate]) =>
       validate((value as any)[shapeKey], `${key}.${shapeKey}`),
     ),
   )
