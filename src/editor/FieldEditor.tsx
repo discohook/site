@@ -61,6 +61,7 @@ export default function FieldEditor(props: Props) {
               })
             }
             label="Field name"
+            maxLength={256}
           />
           <ToggleButton
             filled={field.inline || false}
@@ -84,6 +85,7 @@ export default function FieldEditor(props: Props) {
           }
           label="Field value"
           multiline
+          maxLength={1024}
         />
       </BoxContainer>
     </Container>

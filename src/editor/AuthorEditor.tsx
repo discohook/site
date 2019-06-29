@@ -23,6 +23,7 @@ export default function AuthorEditor(props: Props) {
         value={name}
         onChange={(name) => handleChange({ ...author, name })}
         label="Embed author name"
+        maxLength={256}
       />
       <InputField
         value={url}

@@ -170,6 +170,7 @@ export default function Editor(props: Props) {
           }
           label="Message content"
           multiline
+          maxLength={2000}
         />
         <EmbedEditor
           embeds={message.embeds || []}
@@ -187,6 +188,7 @@ export default function Editor(props: Props) {
               handleChange({ ...message, username: username || undefined })
             }
             label="Override username"
+            maxLength={32}
           />
           <InputField
             value={message.avatarUrl}

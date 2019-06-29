@@ -7,6 +7,10 @@ export const darkTheme = {
   link: "#0096cf",
   accent: "#7289da",
 
+  green: "#43b581",
+  yellow: "#faa61a",
+  red: "#f04747",
+
   fonts: {
     normal: '"Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;',
     code: '"Consolas", "Liberation Mono", "Menlo", "Courier", monospace;',
@@ -94,6 +98,10 @@ export const lightTheme: ColorTheme = {
   text: "#747f8d",
   link: "#00b0f4",
   accent: "#7289da",
+
+  green: "#43b581",
+  yellow: "#faa61a",
+  red: "#f04747",
 
   fonts: {
     normal: '"Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;',

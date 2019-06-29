@@ -31,6 +31,7 @@ export default function FooterEditor(props: Props) {
           handleChange({ footer: { ...footer, text }, timestamp })
         }
         label="Embed footer name"
+        maxLength={2048}
       />
       <InputField
         value={iconUrl}

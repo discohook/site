@@ -69,6 +69,22 @@ export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
   min-height: 60px;
 ` as SC<"textarea">
 
+export const InputNote = styled.div<{
+  state: "normal" | "warning" | "error"
+}>`
+  align-self: flex-end;
+  margin: 0 10px 0 0;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: ${({ theme, state }) => {
+    if (state === "error") return theme.red
+    if (state === "warning") return theme.yellow
+    if (state === "normal") return theme.text
+  }};
+`
+
 export const Button = styled.button`
   min-height: 32px;
   max-height: 32px;

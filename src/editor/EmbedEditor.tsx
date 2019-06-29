@@ -65,6 +65,7 @@ export default function EmbedEditor(props: Props) {
               })
             }
             label="Embed title"
+            maxLength={256}
           />
           <InputField
             value={embed.url}
@@ -87,6 +88,7 @@ export default function EmbedEditor(props: Props) {
           }
           label="Embed description"
           multiline
+          maxLength={2048}
         />
         <AuthorEditor
           author={embed.author}
