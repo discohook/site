@@ -116,8 +116,7 @@ export const Button = styled.button`
 `
 
 export const ToggleButton = styled(Button)<{ filled: boolean }>`
-  &,
-  &:hover:not(:disabled) {
+  && {
     background: ${({ theme, filled }) =>
       filled ? theme.accent : "transparent"};
     color: ${({ theme, filled }) =>

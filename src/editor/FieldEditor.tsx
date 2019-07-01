@@ -1,3 +1,4 @@
+import styled from "@emotion/styled"
 import React from "react"
 import { Field } from "../message/Message"
 import { getUniqueId, id } from "../uid"
@@ -16,6 +17,13 @@ interface Props {
   fields: Field[]
   onChange: (fields: Field[]) => void
 }
+
+const InlineToggle = styled(ToggleButton)`
+  && {
+    margin: 28px 8px 8px;
+    align-self: flex-start;
+  }
+`
 
 export default function FieldEditor(props: Props) {
   const fields = Array.from(props.fields)
@@ -63,7 +71,7 @@ export default function FieldEditor(props: Props) {
             label="Field name"
             maxLength={256}
           />
-          <ToggleButton
+          <InlineToggle
             filled={field.inline || false}
             onClick={() =>
               modifyField(index, {
@@ -73,7 +81,7 @@ export default function FieldEditor(props: Props) {
             }
           >
             Inline
-          </ToggleButton>
+          </InlineToggle>
         </Container>
         <InputField
           value={field.value}
