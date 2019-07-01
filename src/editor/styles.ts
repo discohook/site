@@ -142,7 +142,7 @@ export const Action = styled.button`
   outline: none;
   cursor: pointer;
 
-  color: ${({ theme }) => theme.editor.action};
+  color: ${({ theme }) => theme.important};
   font-family: ${({ theme }) => theme.fonts.normal};
   font-size: 15px;
   font-weight: 500;

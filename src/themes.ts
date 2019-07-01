@@ -4,6 +4,7 @@ export type Theme = ColorTheme & { display: "cozy" | "compact" }
 export const darkTheme = {
   background: "#36393f",
   text: "#dcddde",
+  important: "#ffffff",
   link: "#0096cf",
   accent: "#7289da",
 
@@ -20,7 +21,6 @@ export const darkTheme = {
     input: "#484c52",
     border: "#1e1f23",
 
-    action: "#ffffff",
     button: {
       enabled: "#ffffff",
       disabled: "rgba(255, 255, 255, 0.6)",
@@ -96,6 +96,7 @@ export const darkTheme = {
 export const lightTheme: ColorTheme = {
   background: "#ffffff",
   text: "#747f8d",
+  important: "#4f545c",
   link: "#00b0f4",
   accent: "#7289da",
 
@@ -112,7 +113,6 @@ export const lightTheme: ColorTheme = {
     input: "#f6f6f7",
     border: "#c5c6c9",
 
-    action: "#4f545c",
     button: {
       enabled: "#4f545c",
       disabled: "rgba(79, 84, 92, 0.6)",
