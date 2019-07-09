@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { parseMarkup } from "./parseMarkup"
 import { MarkupContainer } from "./styles"
 
@@ -10,7 +10,9 @@ interface Props {
 export default function Markup(props: Props) {
   const { content, inline } = props
 
-  return (
-    <MarkupContainer>{parseMarkup(content.trim(), inline)}</MarkupContainer>
-  )
+  const markup = useMemo(() => {
+    return parseMarkup(content.trim(), inline)
+  }, [content, inline])
+
+  return <MarkupContainer>{markup}</MarkupContainer>
 }
