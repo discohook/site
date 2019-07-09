@@ -22,13 +22,13 @@ const Container = styled.div`
   font-size: 15px;
   line-height: 1.3;
 
+  & > * + * {
+    margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "6px")};
+  }
+
   & > ${MarkupContainer} {
     display: inline;
     margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "4px")};
-  }
-
-  & > * + *:not(${MarkupContainer}) {
-    margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "6px")};
   }
 `
 
