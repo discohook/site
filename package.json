@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
-    "serve": "npm run build && webpack --config webpack.server.js && node dist/main.js",
+    "serve": "node dist/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
     "typecheck": "tsc --noemit"

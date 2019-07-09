@@ -4,31 +4,49 @@ const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { resolve } = require("path")
 const PreloadWebpackPlugin = require("preload-webpack-plugin")
+const { LimitChunkCountPlugin } = require("webpack").optimize
 
 const dev = process.env.NODE_ENV === "development"
 
-/** @type {import("webpack").Configuration} */
-module.exports = {
+/**
+ * @typedef {import("webpack").Configuration & {
+ *   devServer?: import("webpack-dev-server").Configuration
+ * }} Configuration
+ */
+
+/** @type {Configuration} */
+const appConfig = {
   entry: [
     "core-js/stable",
     "regenerator-runtime/runtime",
-    resolve(__dirname, "src", "index.tsx"),
+    resolve(__dirname, "src/index.tsx"),
   ],
   mode: dev ? "development" : "production",
   output: {
-    filename: "[name].[chunkhash].js",
-    chunkFilename: "[name].[chunkhash].js",
-    path: resolve(__dirname, "build"),
+    filename: "[name].js?q=[chunkhash]",
+    chunkFilename: "[name].js?q=[chunkhash]",
+    path: resolve(__dirname, "dist/public"),
   },
   module: {
     rules: [
-      { test: /\.[jt]sx?$/, use: "babel-loader" },
-      { enforce: "pre", test: /\.js$/, use: "source-map-loader" },
-      { enforce: "pre", test: /\.[ts]sx?$/, use: "eslint-loader" },
+      {
+        test: /\.[jt]sx?$/,
+        use: "babel-loader",
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        use: "source-map-loader",
+      },
+      {
+        enforce: "pre",
+        test: /\.[ts]sx?$/,
+        use: "eslint-loader",
+      },
     ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
   },
   optimization: {
     splitChunks: {
@@ -39,9 +57,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: resolve(__dirname, "build", "index.html"),
-      template: resolve(__dirname, "public", "index.html"),
-      minify: !dev && { collapseWhitespace: true, removeComments: true },
+      filename: resolve(__dirname, "dist/public/index.html"),
+      template: resolve(__dirname, "public/index.html"),
+      minify: !dev && {
+        collapseWhitespace: true,
+        removeComments: true,
+      },
     }),
     new PreloadWebpackPlugin({
       rel: "preload",
@@ -51,10 +72,66 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: resolve(__dirname, "public"),
-        ignore: [resolve(__dirname, "public", "index.html")],
+        ignore: [resolve(__dirname, "public/index.html")],
       },
     ]),
   ],
-  devServer: { host: "localhost", port: 3000 },
+  devServer: {
+    host: "localhost",
+    port: 3000,
+  },
   devtool: "source-map",
 }
+
+/** @type {Configuration} */
+const serverConfig = {
+  entry: [
+    "core-js/stable",
+    "regenerator-runtime/runtime",
+    resolve(__dirname, "src/server.tsx"),
+  ],
+  mode: "production",
+  output: {
+    filename: "main.js",
+    chunkFilename: "[name].js",
+    path: resolve(__dirname, "dist"),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.[jt]sx?$/,
+        use: "babel-loader",
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        use: "source-map-loader",
+      },
+      {
+        enforce: "pre",
+        test: /\.[ts]sx?$/,
+        use: "eslint-loader",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+  },
+  optimization: {
+    minimize: false,
+  },
+  plugins: [
+    new LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+  ],
+  devtool: "source-map",
+  target: "node",
+  externals: {
+    "any-promise": "Promise",
+  },
+  node: false,
+}
+
+/** @type {Configuration[]} */
+module.exports = dev ? [appConfig] : [appConfig, serverConfig]

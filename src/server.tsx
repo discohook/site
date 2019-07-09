@@ -14,21 +14,20 @@ const router = new Router()
 
 const port = 5000
 
-const build = resolve(__dirname, "..", "build")
+const build = resolve(__dirname, "public")
 const html = readFileSync(resolve(build, "index.html")).toString()
-
 const [templateBefore, templateAfter] = html
-  .replace('<div id="app"></div>', '<div id="app"><!--APP--></div>')
-  .split("<!--APP-->")
+  .replace('<div id="app"></div>', '<div id="app">{app}</div>')
+  .split("{app}")
 
 app.use(conditional())
 app.use(serve(build, { defer: true }))
 
-router.get("/", async (context) => {
+router.get("/", async (context, next) => {
   const readable = new Readable({ read: () => {} })
 
-  context.body = readable
   context.set("content-type", "text/html")
+  context.body = readable
 
   readable.push(templateBefore)
 
@@ -48,6 +47,8 @@ router.get("/", async (context) => {
 
   readable.push(templateAfter)
   readable.push(null)
+
+  return await next()
 })
 
 app.use(router.middleware())
