@@ -1,6 +1,7 @@
 // @ts-check
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const { resolve } = require("path")
+const { LimitChunkCountPlugin } = require("webpack").optimize
 
 /** @type {import("webpack").Configuration} */
 module.exports = {
@@ -25,7 +26,10 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   optimization: { minimize: false },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new LimitChunkCountPlugin({ maxChunks: 1 }),
+  ],
   devtool: "source-map",
   target: "node",
   externals: { "any-promise": "Promise" },
