@@ -81,6 +81,9 @@ const appConfig = {
     port: 3000,
   },
   devtool: "source-map",
+  performance: {
+    assetFilter: (name) => /\.js$/.test(name),
+  },
 }
 
 /** @type {Configuration} */
