@@ -20,9 +20,8 @@ const importLanguage = async (name: string) => {
     async (name) =>
       [
         name,
-        (await import(
-          `highlight.js/lib/languages/${name}` /* webpackChunkName: "hljs-[request]" */
-        )).default,
+        (await import(`highlight.js/lib/languages/${name}` /* webpackChunkName: "hljs-[request]" */))
+          .default,
       ] as [string, HLJSLanguage],
   )
 
