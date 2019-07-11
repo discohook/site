@@ -46,14 +46,13 @@ const getFormat = (date: Date) => {
 
   const difference = (givenDate - now) / 86400000
 
-  if (difference < -6) return "full"
+  if (difference < -6 || difference > 6) return "full"
+
   if (difference < -1) return "last-week"
   if (difference < 0) return "yesterday"
   if (difference < 1) return "today"
   if (difference < 2) return "tomorrow"
   if (difference < 7) return "next-week"
-
-  return "full"
 }
 
 const formatTimestamp = (timestamp: string) => {
