@@ -25,32 +25,21 @@ interface Props {
   onClose: () => void
 }
 
-const ModalBackground = styled.div`
+const ModalContainer = styled.div`
   position: absolute;
-
-  width: 100%;
-  height: 100%;
-
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  background: rgba(0, 0, 0, 0.85);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const ModalContainer = styled(Container)`
-  width: 400px;
-  max-width: calc(100% - 32px);
+  width: 100%;
+  height: 100%;
 
   background: ${({ theme }) => theme.background};
   border-radius: 3px;
-
   padding: 8px;
+  box-sizing: border-box;
+  overflow-y: scroll;
 `
 
 const ModalActionsContainer = styled(ActionsContainer)`
@@ -86,26 +75,24 @@ export default function BackupModal(props: Props) {
   }
 
   return (
-    <ModalBackground onClick={handleClose}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}>
-        <ModalActionsContainer>
-          <ActionsHeader>Backups</ActionsHeader>
-          <Action onClick={handleClose}>Close</Action>
-        </ModalActionsContainer>
-        <BackupList
-          backups={backups}
-          onLoad={loadBackup}
-          onDelete={handleDelete}
+    <ModalContainer onClick={(e) => e.stopPropagation()}>
+      <ModalActionsContainer>
+        <ActionsHeader>Backups</ActionsHeader>
+        <Action onClick={handleClose}>Close</Action>
+      </ModalActionsContainer>
+      <BackupList
+        backups={backups}
+        onLoad={loadBackup}
+        onDelete={handleDelete}
+      />
+      <Container direction="row">
+        <InputField
+          value={newBackupName}
+          onChange={setNewBackupName}
+          label="Backup name"
         />
-        <Container direction="row">
-          <InputField
-            value={newBackupName}
-            onChange={setNewBackupName}
-            label="Backup name"
-          />
-          <Button onClick={handleCreate}>Create</Button>
-        </Container>
-      </ModalContainer>
-    </ModalBackground>
+        <Button onClick={handleCreate}>Create</Button>
+      </Container>
+    </ModalContainer>
   )
 }
