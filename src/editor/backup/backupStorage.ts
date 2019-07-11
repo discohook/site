@@ -1,4 +1,5 @@
 import { Message } from "../../message/Message"
+import { getUniqueId, id } from "../../uid"
 
 export interface Backup {
   message: Message
@@ -65,7 +66,17 @@ export const setBackup = async (name: string, backup: Backup) => {
 export const getBackup = async (name: string) => {
   let request: IDBRequest
   await runTransaction("readonly", (store) => (request = store.get(name)))
-  return request!.result
+
+  const backup: Backup = request!.result
+
+  for (const embed of backup.message.embeds || []) {
+    embed[id] = getUniqueId()
+    for (const field of embed.fields || []) {
+      field[id] = getUniqueId()
+    }
+  }
+
+  return backup
 }
 
 export const deleteBackup = async (name: string) => {
