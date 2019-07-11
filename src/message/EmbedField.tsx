@@ -11,7 +11,6 @@ const Container = styled.div<{ inline?: boolean }>`
   flex: ${({ inline }) => (inline ? 1 : 0)};
   margin: 4px 0 0;
   min-width: ${({ inline }) => (inline ? "150px" : "100%")};
-  flex-basis: auto;
 `
 
 const FieldName = styled.div`
