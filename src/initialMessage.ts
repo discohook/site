@@ -3,57 +3,64 @@ import { getUniqueId, id } from "./uid"
 
 export const initialMessage: Message = {
   content: [
-    "Hey, this is Discohook, a message builder for Discord webhooks. \\🔗",
-    "You can read through my small introduction, or click **Clear all** on the top to get started.",
+    "Hey, this is Discohook, a message builder for Discord webhooks. :link:",
+    "You can read through my small introduction to this project below, or click the **Clear all** button on the top to get started.",
   ].join("\n"),
   embeds: [
     {
       [id]: getUniqueId(),
-      title: "What even?",
+      title: "What is this?",
       description: [
-        "So uhh, yeah, this is __Discohook__.",
+        "Yeah uhh, this is __Discohook__.",
         "",
-        "This creates and sends messages for Discord's webhook feature, you can read more about it on [the support article](https://support.discordapp.com/hc/en-us/articles/228383668). \\👈",
-        "In short, they exist to send messages to a channel from outside Discord. You create them in the channel settings, copy the link in here and go wild!",
+        "This can help you create and send messages for Discord's webhooks, which you can read more about on the [support article]" +
+          "(https://support.discordapp.com/hc/en-us/articles/228383668).",
+        "Webhooks are made to send messages to a Discord channel from third party applications, without setting up a bot.",
+        "If you have the 'Manage webhooks' permission, you can create one in the channel settings, copy the link in here and go wild!",
         "",
-        "This application serves to help you create and send messages like these to your own server!",
-        "These messages can contain not only the usual content and maybe a file or two, but also have up to 10 embeds! \\✨",
+        "This application can help you create unique messages that stand out!",
+        "These messages can not only contain a simple message in plain text, but also up to 10 embeds (like this one). :sparkles:",
       ].join("\n"),
       color: 7506394,
     },
     {
       [id]: getUniqueId(),
-      title: "Embeds?",
+      title: "What's an embed?",
       description: [
-        "Yeah, embeds. They look like this, you've been reading them.",
-        "Unlike with bots, you can send multiple at a time without going through the hassle of sending multiple messages.",
+        "Embeds were originally made to give you a hint to where a link will take you,",
+        "however since then Discord has expanded the feature and allowed bots and webhooks to take advantage of it too.",
         "",
-        "Embeds can not only have a simple title and a description, but also up to 25 fields, an author, and more!",
-        "In the editor on the left you can set all kinds of properties an embed can have with ease.",
-        "You can see an embed with (almost) all fields set below. \\👇",
+        "Embeds can not only have a few basic fields such as a title and a description, but also up to 25 fields, an author, and even more!",
+        "In the editor on the left you can set all the properties an embed can have with relative ease.",
+        "You can see a very nice embed with most of it's fields set below! :point_down:",
       ].join("\n"),
       color: 4437377,
     },
     {
       [id]: getUniqueId(),
       author: {
-        name: "Author who?",
+        name: "Author",
         iconUrl: "https://cdn.discordapp.com/embed/avatars/4.png",
       },
-      title: "Title (they can have links)",
+      title: "Title(s can have links)",
       url: "https://discordapp.com/",
       description: [
-        "If you're confused, you haven't been reading along.",
-        "Embeds *can* have text, but don't tell anybody.",
-        "Also, I forgot to tell you this earlier, but yes this does support [__***markdown***__](https://support.discordapp.com/hc/en-us/articles/210298617), even masked links like this: `[name](link)`.",
+        "This embed is for showing off all these cool embed features.",
+        "",
+        [
+          "Also, as should be obvious by now, this supports",
+          "Discord's flavour of [__***markdown***__](https://support.discordapp.com/hc/en-us/articles/210298617),",
+          "including ||[spoiler tags](https://support.discordapp.com/hc/en-us/articles/360022320632)||",
+          "and masked links like this: `[Cool embed builder](https://discohook.jaylineko.com/)`.",
+        ].join(" "),
       ].join("\n"),
       fields: [
         {
           [id]: getUniqueId(),
-          name: "Embeds have fields",
+          name: "Embeds can have fields",
           value: [
             "Crazy right?",
-            "You can even have inline fields, like the ones below! \\⏬",
+            "You can even have inline fields, like the ones below! :arrow_double_down:",
           ].join("\n"),
         },
         {
@@ -70,16 +77,15 @@ export const initialMessage: Message = {
         },
         {
           [id]: getUniqueId(),
-          name: "Embeds also support images",
-          value:
-            "But it makes your messages a little bulky, so I didn't add one.",
+          name: "Embeds can even have images",
+          value: "However it makes your embeds very big, so I didn't add one.",
         },
       ],
       footer: {
-        text: "Even a footer, with an icon and a timestamp",
+        text: "Even a footer, with an optional icon and timestamp",
         iconUrl: "https://cdn.discordapp.com/embed/avatars/4.png",
       },
-      timestamp: "2019-04-22T11:02:04.000Z",
+      timestamp: "2019-04-22T11:02:04.000Z", // GitHub repo creation date
       color: 15746887,
       thumbnail: {
         url: "https://cdn.discordapp.com/embed/avatars/4.png",
@@ -89,21 +95,23 @@ export const initialMessage: Message = {
       [id]: getUniqueId(),
       title: "Backups!",
       description: [
-        "As a little extra, there's also support for backups.",
-        "To use them just click on the **Backups** button in the top of the editor!",
+        "As a small extra, you can back up your messages in here.",
+        "To get started using them, click on the **Backups** button on the top of the editor!",
         "",
-        "\\❗ Backups are stored locally, and will always be stored locally. This means that if you clear your browsers data your backups will be lost forever!",
+        ":bangbang: Backups are stored in the browser, and will always be stored there.",
+        "This means that if you clear your browsers data your backups will be lost forever!",
       ].join("\n"),
       color: 16426522,
     },
     {
       [id]: getUniqueId(),
-      title: "\\⚠ The big disclaimer",
+      title: ":warning: Small disclaimer",
       description: [
-        "This uses small bits of code from Discord to make messages appear as accurately as possible. This is not to infringe on Discord's rights, but to give more helpful visuals.",
+        "Discohook makes use of some assets derived or extracted from Discord's application.",
+        "This is to make visuals as accurate as possible, and not to infringe on their copyright.",
         "Discohook is not affiliated with Discord in any way, shape, or form.",
         "",
-        "The source code of this project is available at <https://github.com/jaylineko/discohook>.",
+        "The source code of this project is available on [GitHub](https://github.com/jaylineko/discohook), under the MIT license.",
       ].join("\n"),
     },
   ],
