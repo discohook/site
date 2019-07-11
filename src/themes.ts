@@ -26,11 +26,6 @@ export const darkTheme = {
       disabled: "rgba(255, 255, 255, 0.6)",
       filled: "#ffffff",
     },
-
-    backups: {
-      name: "#ffffff",
-      delete: "#f04747",
-    },
   },
 
   message: {
@@ -117,11 +112,6 @@ export const lightTheme: ColorTheme = {
       enabled: "#4f545c",
       disabled: "rgba(79, 84, 92, 0.6)",
       filled: "#ffffff",
-    },
-
-    backups: {
-      name: "#4f545c",
-      delete: "#f04747",
     },
   },
 
