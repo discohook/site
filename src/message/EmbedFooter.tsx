@@ -41,9 +41,10 @@ const FooterSeparator = styled.span`
 `
 
 const getFormat = (date: Date) => {
-  const now = new Date()
+  const givenDate = new Date(date).setHours(0, 0, 0, 0)
+  const now = new Date().setHours(0, 0, 0, 0)
 
-  const difference = (now.getTime() - date.getTime()) / 86400000
+  const difference = (givenDate - now) / 86400000
 
   if (difference < -6) return "full"
   if (difference < -1) return "last-week"
