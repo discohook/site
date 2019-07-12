@@ -81,6 +81,12 @@ function GlobalStyle(props: { theme: Theme }) {
           }
         }
 
+        img[alt] {
+          text-indent: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+
         ::-webkit-scrollbar {
           width: 14px;
           height: 14px;
