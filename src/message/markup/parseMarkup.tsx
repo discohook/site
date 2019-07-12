@@ -12,14 +12,11 @@ import CodeBlock from "./CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 import { Code, Emoji, Mention, Spoiler } from "./styles"
 
-const escape = (s: string) =>
-  s.replace(/[\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|\-]/g, "\\$&")
-
 const emojiRegex = new RegExp(
-  `(?:${Object.keys(emojiToName)
-    .sort((emoji) => -emoji.length)
-    .map(escape)
-    .join("|")})`,
+  Object.keys(emojiToName)
+    .join("|")
+    .replace("*", "\\*"),
+  // Asterisk emoji starts with an asterisk and must be escaped
   "g",
 )
 
@@ -49,14 +46,18 @@ const baseRules: Rules = {
   u: defaultRules.u,
   inlineCode: {
     ...defaultRules.inlineCode,
-    react: (node, _, state) => <Code key={state.key}>{node.content}</Code>,
+    react: (node, _output, state) => (
+      <Code key={state.key}>{node.content}</Code>
+    ),
   },
   shrug: {
-    // Exception for left arm disappearing because of the underscore getting
-    // escaped, and the right arm being a part of an italic node.
+    // Edge case for shrug emoji getting parsed as markup.
     order: defaultRules.text.order,
     match: (source) => /^(¯\\_\(ツ\)_\/¯)/.exec(source),
-    parse: (capture) => ({ type: "text", content: capture[1] }),
+    parse: (capture) => ({
+      type: "text",
+      content: capture[1],
+    }),
   },
   emoji: {
     order: defaultRules.text.order,
@@ -72,7 +73,7 @@ const baseRules: Rules = {
             type: "text",
             content: capture[0],
           },
-    react: (node, _, state) =>
+    react: (node, _output, state) =>
       node.src ? (
         <Emoji
           src={node.src}
@@ -95,7 +96,7 @@ const baseRules: Rules = {
       src: `https://cdn.discordapp.com/emojis/${capture[3]}`,
       animated: !!capture[1],
     }),
-    react: (node, _, state) => (
+    react: (node, _output, state) => (
       <Emoji
         src={node.src}
         alt={node.surrogate}
@@ -110,14 +111,13 @@ const baseRules: Rules = {
     ...defaultRules.text,
     parse: (capture, parse, state) =>
       state.nested
-        ? { content: capture[0] }
-        : parse(
-            capture[0].replace(
-              emojiRegex,
-              (match) => `:${emojiToName[match]}:`,
-            ),
-            { ...state, nested: true },
-          ),
+        ? {
+            content: capture[0],
+          }
+        : parse(capture[0].replace(emojiRegex, (e) => `:${emojiToName[e]}:`), {
+            ...state,
+            nested: true,
+          }),
   },
   del: {
     ...defaultRules.del,
@@ -126,33 +126,44 @@ const baseRules: Rules = {
   mention: {
     order: defaultRules.text.order,
     match: inlineRegex(/^<@!?\d+>|^@(everyone|here)/),
-    parse: (capture) =>
-      capture[1] ? { content: `@${capture[1]}` } : { content: "@unknown-user" },
-    react: (node, _, state) => (
+    parse: (capture) => ({
+      content: capture[1] ? `@${capture[1]}` : "@unknown-user",
+    }),
+    react: (node, _output, state) => (
       <Mention key={state.key}>{node.content}</Mention>
     ),
   },
   roleMention: {
     order: defaultRules.text.order,
     match: inlineRegex(/^<@&\d+>/),
-    parse: () => ({ type: "mention", content: "@unknown-role" }),
+    parse: () => ({
+      type: "mention",
+      content: "@unknown-role",
+    }),
   },
   channelMention: {
     order: defaultRules.text.order,
     match: inlineRegex(/^<#\d+>/),
-    parse: () => ({ type: "mention", content: "#unknown-channel" }),
+    parse: () => ({
+      type: "mention",
+      content: "#unknown-channel",
+    }),
   },
   spoiler: {
     order: defaultRules.text.order,
     match: inlineRegex(/^\|\|([\s\S]+?)\|\|/),
-    parse: (capture, parse, state) => ({ content: parse(capture[1], state) }),
+    parse: (capture, parse, state) => ({
+      content: parse(capture[1], state),
+    }),
     react: (node, output, state) => (
       <Spoiler key={state.key}>{output(node.content, state)}</Spoiler>
     ),
   },
 }
 
-const inlineRules: Rules = { ...baseRules }
+const inlineRules: Rules = {
+  ...baseRules,
+}
 
 const blockRules: Rules = {
   ...baseRules,
@@ -169,7 +180,7 @@ const blockRules: Rules = {
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
     }),
-    react: (node, _, state) => (
+    react: (node, _output, state) => (
       <CodeBlock
         key={state.key}
         language={node.language}
@@ -204,7 +215,10 @@ const jumbosizeEmojis = (ast: ASTNode[]): ASTNode[] => {
 
   // If the message passed all checks, return a copy of the tree where all nodes
   // have the 'jumboable' property set to true
-  return ast.map((node) => ({ ...node, jumboable: true }))
+  return ast.map((node) => ({
+    ...node,
+    jumboable: true,
+  }))
 }
 
 const ellipsize = (text: string, length: number) => {
@@ -236,10 +250,13 @@ export const parseMarkup = (content: string, inline: boolean = false) => {
 
     console.groupCollapsed(`Parsed markup for "${ellipsized}" in ${time}ms`)
     console.log("AST:", ast)
-    console.log("Content:", content)
+    if (content.includes("\n")) {
+      console.log("Content:", "\n" + content)
+    } else {
+      console.log("Content:", content)
+    }
     console.log("Inline:", inline)
-    console.log("Parse time:", parseTime)
-    console.log("Output time:", outputTime)
+    console.log("Parse time: ", parseTime, "\nOutput time:", outputTime)
     console.groupEnd()
   }
 
