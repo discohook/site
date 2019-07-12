@@ -26,8 +26,13 @@ export const parseMessage = (json: string) => {
       }
     }
 
-    return { message, errors }
+    return {
+      message,
+      errors,
+    }
   } catch (error) {
-    return { errors: [`message: ${error.message}`] }
+    return {
+      errors: [`\$: ${error.message}`],
+    }
   }
 }
