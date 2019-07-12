@@ -10,6 +10,7 @@ import { darkTheme, lightTheme, Theme } from "./themes"
 
 const Container = styled.div`
   display: flex;
+  flex-direction: row-reverse;
   align-items: stretch;
 
   height: 100vh;
@@ -46,6 +47,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Container>
+        <Preview message={message} files={files} />
         <Editor
           message={message}
           onChange={setMessage}
@@ -54,7 +56,6 @@ export default function App() {
           onToggleTheme={toggleTheme}
           onToggleDisplay={toggleDisplay}
         />
-        <Preview message={message} files={files} />
       </Container>
     </ThemeProvider>
   )
