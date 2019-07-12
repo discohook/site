@@ -25,7 +25,20 @@ const emojiRegex = new RegExp(
 
 const baseRules: Rules = {
   escape: defaultRules.escape,
-  link: defaultRules.link,
+  link: {
+    ...defaultRules.link,
+    react: (node, output, state) => (
+      <a
+        href={node.target}
+        title={node.title}
+        rel="noopener noreferrer"
+        target="_blank"
+        key={state.key}
+      >
+        {output(node.content, state)}
+      </a>
+    ),
+  },
   autolink: {
     ...defaultRules.autolink,
     match: anyScopeRegex(/^<(https?:\/\/[^ >]+)>/),
