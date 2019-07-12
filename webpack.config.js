@@ -50,8 +50,7 @@ const appConfig = {
   },
   optimization: {
     splitChunks: {
-      chunks: (chunk) =>
-        typeof chunk.name === "string" ? !chunk.name.startsWith("hljs") : true,
+      chunks: chunk => !/^hljs-[\w\-]+$/.test(chunk.name),
       automaticNameDelimiter: "-",
     },
   },
@@ -82,7 +81,7 @@ const appConfig = {
   },
   devtool: "source-map",
   performance: {
-    assetFilter: (name) => /\.js$/.test(name),
+    assetFilter: name => /\.js$/.test(name),
   },
 }
 
