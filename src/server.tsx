@@ -6,7 +6,8 @@ import serve from "koa-static"
 import { resolve } from "path"
 import React from "react"
 import { renderToNodeStream } from "react-dom/server"
-import { Readable, Writable } from "stream"
+import { Transform } from "stream"
+import { createBrotliCompress, createDeflate, createGzip } from "zlib"
 import App from "./App"
 
 const app = new Koa()
@@ -20,33 +21,41 @@ const [templateBefore, templateAfter] = html
   .replace('<div id="app"></div>', '<div id="app">{app}</div>')
   .split("{app}")
 
+const encodings = {
+  gzip: createGzip,
+  deflate: createDeflate,
+  br: createBrotliCompress,
+  identity: () =>
+    new Transform({ transform: (chunk, _enc, cb) => cb(undefined, chunk) }),
+} as const
+
 app.use(conditional())
 app.use(serve(build, { defer: true }))
 
 router.get("/", async (context, next) => {
-  const readable = new Readable({ read: () => {} })
-
   context.set("content-type", "text/html")
-  context.body = readable
 
-  readable.push(templateBefore)
+  const encoding = context.acceptsEncodings(Object.keys(encodings)) as
+    | keyof typeof encodings
+    | false
+
+  if (typeof encoding === "boolean") return context.throw(406)
+  if (encoding !== "identity") context.set("content-encoding", encoding)
+
+  const stream = encodings[encoding]()
+  context.body = stream
+
+  stream.write(templateBefore)
 
   await new Promise((res, rej) => {
-    const writable = new Writable({
-      write: (chunk, encoding, next) => {
-        readable.push(chunk, encoding)
-        next()
-      },
-    })
-
-    const stream = renderToNodeStream(<App />)
-    stream.pipe(writable)
-    stream.once("end", res)
-    stream.once("error", rej)
+    const nodeStream = renderToNodeStream(<App />)
+    nodeStream.on("data", chunk => stream.write(chunk))
+    nodeStream.once("end", res)
+    nodeStream.once("error", rej)
   })
 
-  readable.push(templateAfter)
-  readable.push(null)
+  stream.write(templateAfter)
+  stream.end()
 
   return await next()
 })
