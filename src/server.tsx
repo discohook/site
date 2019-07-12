@@ -62,4 +62,6 @@ router.get("/", async (context, next) => {
 
 app.use(router.middleware())
 
+app.on("error", () => {})
+
 app.listen(port, () => console.log(`Listening on ${port}`))
