@@ -7,7 +7,7 @@ import { resolve } from "path"
 import React from "react"
 import { renderToNodeStream } from "react-dom/server"
 import { Transform } from "stream"
-import { createBrotliCompress, createDeflate, createGzip } from "zlib"
+import { createDeflate, createGzip } from "zlib"
 import App from "./App"
 
 const app = new Koa()
@@ -24,7 +24,6 @@ const [templateBefore, templateAfter] = html
 const encodings = {
   gzip: createGzip,
   deflate: createDeflate,
-  br: createBrotliCompress,
   identity: () =>
     new Transform({ transform: (chunk, _enc, cb) => cb(undefined, chunk) }),
 } as const
