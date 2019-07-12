@@ -33,7 +33,7 @@ interface Props {
 const EditorContainer = styled.form`
   position: relative;
 `
-EditorContainer.defaultProps = { onSubmit: (event) => event.preventDefault() }
+EditorContainer.defaultProps = { onSubmit: event => event.preventDefault() }
 
 const EditorInnerContainer = styled(Container)`
   display: block;
@@ -165,8 +165,11 @@ export default function Editor(props: Props) {
         </Container>
         <InputField
           value={message.content}
-          onChange={(content) =>
-            handleChange({ ...message, content: content || undefined })
+          onChange={content =>
+            handleChange({
+              ...message,
+              content: content || undefined,
+            })
           }
           label="Message content"
           multiline
@@ -174,7 +177,7 @@ export default function Editor(props: Props) {
         />
         <EmbedEditor
           embeds={message.embeds || []}
-          onChange={(embeds) =>
+          onChange={embeds =>
             handleChange({
               ...message,
               embeds: embeds.length > 0 ? embeds : undefined,
@@ -184,16 +187,22 @@ export default function Editor(props: Props) {
         <Container direction="row">
           <InputField
             value={message.username}
-            onChange={(username) =>
-              handleChange({ ...message, username: username || undefined })
+            onChange={username =>
+              handleChange({
+                ...message,
+                username: username || undefined,
+              })
             }
             label="Override username"
             maxLength={32}
           />
           <InputField
             value={message.avatarUrl}
-            onChange={(avatarUrl) =>
-              handleChange({ ...message, avatarUrl: avatarUrl || undefined })
+            onChange={avatarUrl =>
+              handleChange({
+                ...message,
+                avatarUrl: avatarUrl || undefined,
+              })
             }
             label="Override avatar"
           />
@@ -208,7 +217,7 @@ export default function Editor(props: Props) {
         <BackupModal
           message={message}
           files={files}
-          onLoad={(backup) => handleChange(backup.message)}
+          onLoad={backup => handleChange(backup.message)}
           onClose={() => setIsBackupModalShown(false)}
         />
       )}

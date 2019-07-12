@@ -1,12 +1,12 @@
 type Validator = (value: unknown, key: string) => string[]
 
 const all = (...validators: Validator[]): Validator => (value, key) =>
-  validators.flatMap((validate) => validate(value, key))
+  validators.flatMap(validate => validate(value, key))
 
 const first = (...validators: Validator[]): Validator => (value, key) =>
   validators.reduce(
     (results, validate) =>
-      results.some((result) => typeof result === "string")
+      results.some(result => typeof result === "string")
         ? results
         : validate(value, key),
     [] as string[],
@@ -56,20 +56,20 @@ const isShape = (shape: Record<string, Validator>): Validator =>
 const requiresKey = (...keys: string[]): Validator =>
   first(isObject, (value, key) =>
     keys
-      .map((requiredKey) => (value as Object).hasOwnProperty(requiredKey))
-      .some((result) => result)
+      .map(requiredKey => (value as Object).hasOwnProperty(requiredKey))
+      .some(result => result)
       ? []
       : keys.length === 1
       ? [`${key}: Expected key '${keys[0]}'`]
       : [
           `${key}: Expected one of following keys: ${keys
-            .map((key) => `'${key}'`)
+            .map(key => `'${key}'`)
             .join(", ")}`,
         ],
   )
 
 const requiresKeys = (...keys: string[]): Validator =>
-  first(isObject, all(...keys.map((key) => requiresKey(key))))
+  first(isObject, all(...keys.map(key => requiresKey(key))))
 
 const minLength = (length: number): Validator => (value, key) =>
   typeof value === "string" && value.trim().length < length

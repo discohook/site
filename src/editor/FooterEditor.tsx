@@ -16,7 +16,7 @@ export default function FooterEditor(props: Props) {
   const handleChange = (embed: Omit<Embed, symbol>) => {
     onChange({
       footer:
-        embed.footer && Object.values(embed.footer).some((value) => !!value)
+        embed.footer && Object.values(embed.footer).some(value => !!value)
           ? embed.footer
           : undefined,
       timestamp: embed.timestamp || undefined,
@@ -27,7 +27,7 @@ export default function FooterEditor(props: Props) {
     <InputGroup>
       <InputField
         value={text}
-        onChange={(text) =>
+        onChange={text =>
           handleChange({ footer: { ...footer, text }, timestamp })
         }
         label="Embed footer name"
@@ -35,14 +35,14 @@ export default function FooterEditor(props: Props) {
       />
       <InputField
         value={iconUrl}
-        onChange={(iconUrl) =>
+        onChange={iconUrl =>
           handleChange({ footer: { ...footer, iconUrl }, timestamp })
         }
         label="Embed footer icon"
       />
       <InputField
         value={timestamp}
-        onChange={(timestamp) => handleChange({ footer, timestamp })}
+        onChange={timestamp => handleChange({ footer, timestamp })}
         label="Embed footer timestamp"
       />
     </InputGroup>

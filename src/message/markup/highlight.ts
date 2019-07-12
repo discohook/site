@@ -12,12 +12,12 @@ for (const language of languages) {
 type HLJSLanguage = (hljs?: HLJSStatic) => IModeBase
 
 const importLanguage = async (name: string) => {
-  const lang = languages.find((lang) => lang.aliases.includes(name))
+  const lang = languages.find(lang => lang.aliases.includes(name))
   if (!lang) return
 
   const languagesToImport = [...(lang.dependencies || []), aliases[name]]
   const hljsLanguages = languagesToImport.map(
-    async (name) =>
+    async name =>
       [
         name,
         (await import(`highlight.js/lib/languages/${name}` /* webpackChunkName: "hljs-[request]" */))

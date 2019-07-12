@@ -58,7 +58,7 @@ export default function EmbedEditor(props: Props) {
         <InputGroup>
           <InputField
             value={embed.title}
-            onChange={(title) =>
+            onChange={title =>
               modifyEmbed(index, {
                 ...embed,
                 title: title || undefined,
@@ -69,7 +69,7 @@ export default function EmbedEditor(props: Props) {
           />
           <InputField
             value={embed.url}
-            onChange={(url) =>
+            onChange={url =>
               modifyEmbed(index, {
                 ...embed,
                 url: url || undefined,
@@ -80,7 +80,7 @@ export default function EmbedEditor(props: Props) {
         </InputGroup>
         <InputField
           value={embed.description}
-          onChange={(description) =>
+          onChange={description =>
             modifyEmbed(index, {
               ...embed,
               description: description || undefined,
@@ -92,7 +92,7 @@ export default function EmbedEditor(props: Props) {
         />
         <AuthorEditor
           author={embed.author}
-          onChange={(author) =>
+          onChange={author =>
             modifyEmbed(index, {
               ...embed,
               author,
@@ -101,7 +101,7 @@ export default function EmbedEditor(props: Props) {
         />
         <FieldEditor
           fields={embed.fields || []}
-          onChange={(fields) =>
+          onChange={fields =>
             modifyEmbed(index, {
               ...embed,
               fields: fields.length > 0 ? fields : undefined,
@@ -111,7 +111,7 @@ export default function EmbedEditor(props: Props) {
         <FooterEditor
           footer={embed.footer}
           timestamp={embed.timestamp}
-          onChange={(partial) =>
+          onChange={partial =>
             modifyEmbed(index, {
               ...embed,
               ...partial,
@@ -121,7 +121,7 @@ export default function EmbedEditor(props: Props) {
         <InputGroup>
           <InputField
             value={(embed.image || {}).url}
-            onChange={(url) =>
+            onChange={url =>
               modifyEmbed(index, {
                 ...embed,
                 image: url ? { url } : undefined,
@@ -131,7 +131,7 @@ export default function EmbedEditor(props: Props) {
           />
           <InputField
             value={(embed.thumbnail || {}).url}
-            onChange={(url) =>
+            onChange={url =>
               modifyEmbed(index, {
                 ...embed,
                 thumbnail: url ? { url } : undefined,
@@ -141,7 +141,7 @@ export default function EmbedEditor(props: Props) {
           />
           <ColorInput
             value={embed.color}
-            onChange={(color) =>
+            onChange={color =>
               modifyEmbed(index, {
                 ...embed,
                 color,

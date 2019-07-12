@@ -62,7 +62,7 @@ export default function FieldEditor(props: Props) {
         <Container direction="row">
           <InputField
             value={field.name}
-            onChange={(name) =>
+            onChange={name =>
               modifyField(index, {
                 ...field,
                 name: name || (undefined as any),
@@ -85,7 +85,7 @@ export default function FieldEditor(props: Props) {
         </Container>
         <InputField
           value={field.value}
-          onChange={(value) =>
+          onChange={value =>
             modifyField(index, {
               ...field,
               value: value || (undefined as any),

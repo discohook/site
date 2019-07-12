@@ -111,18 +111,18 @@ export default function BackupModal(props: Props) {
   const handleCreate = () => {
     setBackup(newBackupName.trim().replace(/\s+/, " "), {
       message,
-      files: Array.from(files || []).map((file) => file.name),
+      files: Array.from(files || []).map(file => file.name),
     }).then(getAllBackups)
   }
 
   return (
-    <ModalContainer onClick={(e) => e.stopPropagation()}>
+    <ModalContainer onClick={e => e.stopPropagation()}>
       <ModalActionsContainer>
         <ActionsHeader>Backups</ActionsHeader>
         <Action onClick={handleClose}>Close</Action>
       </ModalActionsContainer>
       <List>
-        {backups.map((backup) => (
+        {backups.map(backup => (
           <Item key={backup}>
             <BackupName onClick={() => handleLoad(backup)}>{backup}</BackupName>
             <BackupAction onClick={() => handleShare(backup)}>

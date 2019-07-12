@@ -37,7 +37,7 @@ function FileInput(props: Props, ref: Ref<RefType>) {
         type="file"
         multiple={true}
         onClick={clearFiles}
-        onChange={(event) => props.onChange(event.target.files || undefined)}
+        onChange={event => props.onChange(event.target.files || undefined)}
         ref={inputRef}
       />
     </InputLabel>

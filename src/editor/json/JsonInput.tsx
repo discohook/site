@@ -39,7 +39,7 @@ export default function JsonInput(props: Props) {
       <InputLabel htmlFor={id}>JSON data</InputLabel>
       {props.errors.length > 0 && (
         <ErrorContainer>
-          {props.errors.map((error) => (
+          {props.errors.map(error => (
             <Error key={error}>{error}</Error>
           ))}
         </ErrorContainer>
@@ -47,7 +47,7 @@ export default function JsonInput(props: Props) {
       <CodeInput
         id={id}
         value={props.json}
-        onChange={(event) => props.onChange(event.target.value)}
+        onChange={event => props.onChange(event.target.value)}
       />
     </Container>
   )

@@ -19,7 +19,7 @@ const dbPromise = new Promise<IDBDatabase>((res, rej) => {
 })
 
 let db!: IDBDatabase
-dbPromise.then((database) => (db = database)).catch(() => {})
+dbPromise.then(database => (db = database)).catch(() => {})
 
 const runTransaction = async (
   mode: IDBTransactionMode,
@@ -41,7 +41,7 @@ const runTransaction = async (
 export const getBackups = async () => {
   const keys: IDBValidKey[] = []
 
-  await runTransaction("readonly", (store) => {
+  await runTransaction("readonly", store => {
     const cursor = store.openKeyCursor || store.openCursor
     const request = cursor.call(store)
 
@@ -60,12 +60,12 @@ export const getBackups = async () => {
 }
 
 export const setBackup = async (name: string, backup: Backup) => {
-  await runTransaction("readwrite", (store) => store.put(backup, name))
+  await runTransaction("readwrite", store => store.put(backup, name))
 }
 
 export const getBackup = async (name: string) => {
   let request: IDBRequest
-  await runTransaction("readonly", (store) => (request = store.get(name)))
+  await runTransaction("readonly", store => (request = store.get(name)))
 
   const backup: Backup = request!.result
 
@@ -80,5 +80,5 @@ export const getBackup = async (name: string) => {
 }
 
 export const deleteBackup = async (name: string) => {
-  await runTransaction("readwrite", (store) => store.delete(name))
+  await runTransaction("readwrite", store => store.delete(name))
 }

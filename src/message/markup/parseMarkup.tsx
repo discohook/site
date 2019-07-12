@@ -53,8 +53,8 @@ const baseRules: Rules = {
   shrug: {
     // Edge case for shrug emoji getting parsed as markup.
     order: defaultRules.text.order,
-    match: (source) => /^(¯\\_\(ツ\)_\/¯)/.exec(source),
-    parse: (capture) => ({
+    match: anyScopeRegex(/^¯\\_\(ツ\)_\/¯/),
+    parse: (capture, _parse, _state) => ({
       type: "text",
       content: capture[1],
     }),
@@ -62,7 +62,7 @@ const baseRules: Rules = {
   emoji: {
     order: defaultRules.text.order,
     match: anyScopeRegex(/^:([^\s:]+?(?:::skin\-tone\-\d)?):/),
-    parse: (capture) =>
+    parse: (capture, _parse, _state) =>
       nameToEmoji[capture[1]]
         ? {
             name: `:${capture[1]}:`,
@@ -90,7 +90,7 @@ const baseRules: Rules = {
   customEmoji: {
     order: defaultRules.text.order,
     match: anyScopeRegex(/^<(a?):(\w+):(\d+)>/),
-    parse: (capture) => ({
+    parse: (capture, _parse, _state) => ({
       id: capture[3],
       name: `${capture[2]}`,
       src: `https://cdn.discordapp.com/emojis/${capture[3]}`,
@@ -114,7 +114,7 @@ const baseRules: Rules = {
         ? {
             content: capture[0],
           }
-        : parse(capture[0].replace(emojiRegex, (e) => `:${emojiToName[e]}:`), {
+        : parse(capture[0].replace(emojiRegex, e => `:${emojiToName[e]}:`), {
             ...state,
             nested: true,
           }),
@@ -126,7 +126,7 @@ const baseRules: Rules = {
   mention: {
     order: defaultRules.text.order,
     match: inlineRegex(/^<@!?\d+>|^@(everyone|here)/),
-    parse: (capture) => ({
+    parse: (capture, _parse, _state) => ({
       content: capture[1] ? `@${capture[1]}` : "@unknown-user",
     }),
     react: (node, _output, state) => (
@@ -176,7 +176,7 @@ const blockRules: Rules = {
   codeBlock: {
     order: defaultRules.codeBlock.order,
     match: anyScopeRegex(/^```([a-z0-9\-]+?\n+)?\n*([^]+?)\n*```/),
-    parse: (capture) => ({
+    parse: (capture, _parse, _state) => ({
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
     }),
@@ -205,7 +205,7 @@ const jumbosizeEmojis = (ast: ASTNode[]): ASTNode[] => {
 
   // Check if the tree has any amount of nodes that aren't emojis,
   // or nodes containing whitespace only
-  const hasText = ast.some((node) => {
+  const hasText = ast.some(node => {
     if (isEmoji(node)) return false
     if (typeof node.content !== "string") return true
     if (node.content.trim() !== "") return true
@@ -215,7 +215,7 @@ const jumbosizeEmojis = (ast: ASTNode[]): ASTNode[] => {
 
   // If the message passed all checks, return a copy of the tree where all nodes
   // have the 'jumboable' property set to true
-  return ast.map((node) => ({
+  return ast.map(node => ({
     ...node,
     jumboable: true,
   }))

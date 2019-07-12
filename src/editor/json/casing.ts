@@ -11,11 +11,9 @@ const mapKeys = (obj: Record<string, any>, fn: (key: string) => string) => {
 }
 
 export const toSnakeCase = (obj: Record<string, any>) =>
-  mapKeys(obj, (key) =>
-    key.replace(/[A-Z]/g, (match) => `_${match.toLowerCase()}`),
-  )
+  mapKeys(obj, key => key.replace(/[A-Z]/g, match => `_${match.toLowerCase()}`))
 
 export const toCamelCase = (obj: Record<string, any>) =>
-  mapKeys(obj, (key) =>
-    key.replace(/_[a-z]/g, (match) => `${match.toUpperCase()}`.substring(1)),
+  mapKeys(obj, key =>
+    key.replace(/_[a-z]/g, match => `${match.toUpperCase()}`.substring(1)),
   )

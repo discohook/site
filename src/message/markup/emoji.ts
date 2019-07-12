@@ -26,6 +26,6 @@ for (const { emoji, names, hasDiversity } of emojis) {
 export const getEmojiUrl = (emoji: string) => {
   if (["™", "©", "®"].includes(emoji)) return
 
-  const file = [...emoji].map((c) => c.codePointAt(0)!.toString(16)).join("-")
+  const file = [...emoji].map(c => c.codePointAt(0)!.toString(16)).join("-")
   return `https://jaylineko.com/twemoji/${file}.svg`
 }

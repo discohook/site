@@ -13,7 +13,7 @@ export default function AuthorEditor(props: Props) {
   const { name, url, iconUrl } = author
 
   const handleChange = (author: Author) =>
-    Object.values(author).some((value) => !!value)
+    Object.values(author).some(value => !!value)
       ? props.onChange(author)
       : props.onChange(undefined)
 
@@ -21,18 +21,33 @@ export default function AuthorEditor(props: Props) {
     <InputGroup>
       <InputField
         value={name}
-        onChange={(name) => handleChange({ ...author, name })}
+        onChange={name =>
+          handleChange({
+            ...author,
+            name,
+          })
+        }
         label="Embed author name"
         maxLength={256}
       />
       <InputField
         value={url}
-        onChange={(url) => handleChange({ ...author, url })}
+        onChange={url =>
+          handleChange({
+            ...author,
+            url,
+          })
+        }
         label="Embed author link"
       />
       <InputField
         value={iconUrl}
-        onChange={(iconUrl) => handleChange({ ...author, iconUrl })}
+        onChange={iconUrl =>
+          handleChange({
+            ...author,
+            iconUrl,
+          })
+        }
         label="Embed author icon"
       />
     </InputGroup>

@@ -11,10 +11,10 @@ export const parseMessage = (json: string) => {
   try {
     const message = toCamelCase(JSON.parse(json)) as Message
 
-    const errors = isMessage(message, "$").map((error) => {
+    const errors = isMessage(message, "$").map(error => {
       const [key, ...message] = error.split(": ")
       return [
-        key.replace(/[A-Z]/g, (match) => `_${match.toLowerCase()}`),
+        key.replace(/[A-Z]/g, match => `_${match.toLowerCase()}`),
         ...message,
       ].join(": ")
     })
