@@ -32,7 +32,7 @@ export const parseMessage = (json: string) => {
     }
   } catch (error) {
     return {
-      errors: [`\$: ${error.message}`],
+      errors: [error.message.replace(/^JSON\.parse(?: Error)?: /, "")],
     }
   }
 }
