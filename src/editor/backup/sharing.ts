@@ -4,7 +4,8 @@ import { getBackup } from "./backupStorage"
 
 export const shareBackup = async (name: string) => {
   const backup = await getBackup(name)
-  window.location.search = `?backup=${b64urlEncode(JSON.stringify(backup))}`
+  const base64 = b64urlEncode(JSON.stringify(backup))
+  window.history.replaceState(undefined, "", `?backup=${base64}`)
 }
 
 let backup: Backup | undefined
