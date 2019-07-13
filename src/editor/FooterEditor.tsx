@@ -9,6 +9,14 @@ interface Props {
   onChange: (embed: Omit<Embed, symbol>) => void
 }
 
+const supportsDateTimeInput = (() => {
+  if (typeof window === "undefined") return false
+
+  const input = document.createElement("input")
+  input.type = "datetime-local"
+  return input.type === "datetime-local"
+})()
+
 export default function FooterEditor(props: Props) {
   const { footer = {}, timestamp, onChange } = props
   const { text, iconUrl } = footer
@@ -28,7 +36,13 @@ export default function FooterEditor(props: Props) {
       <InputField
         value={text}
         onChange={text =>
-          handleChange({ footer: { ...footer, text }, timestamp })
+          handleChange({
+            footer: {
+              ...footer,
+              text,
+            },
+            timestamp,
+          })
         }
         label="Embed footer name"
         maxLength={2048}
@@ -36,15 +50,44 @@ export default function FooterEditor(props: Props) {
       <InputField
         value={iconUrl}
         onChange={iconUrl =>
-          handleChange({ footer: { ...footer, iconUrl }, timestamp })
+          handleChange({
+            footer: {
+              ...footer,
+              iconUrl,
+            },
+            timestamp,
+          })
         }
         label="Embed footer icon"
       />
-      <InputField
-        value={timestamp}
-        onChange={timestamp => handleChange({ footer, timestamp })}
-        label="Embed footer timestamp"
-      />
+      {supportsDateTimeInput ? (
+        <InputField
+          value={
+            timestamp && new Date(timestamp).toISOString().replace("Z", "")
+          }
+          onChange={timestamp =>
+            handleChange({
+              footer,
+              timestamp: timestamp
+                ? new Date(timestamp + "Z").toISOString()
+                : undefined,
+            })
+          }
+          label="Embed footer timestamp (GMT)"
+          type="datetime-local"
+        />
+      ) : (
+        <InputField
+          value={timestamp}
+          onChange={timestamp =>
+            handleChange({
+              footer,
+              timestamp,
+            })
+          }
+          label="Embed footer timestamp (ISO-8601, GMT)"
+        />
+      )}
     </InputGroup>
   )
 }
