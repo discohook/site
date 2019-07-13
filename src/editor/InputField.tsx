@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react"
+import React, { ChangeEvent, useMemo } from "react"
 import { getUniqueId } from "../uid"
 import {
   Container,
@@ -31,7 +31,7 @@ export default function InputField(props: Props) {
     maxLength,
   } = props
 
-  const id = getUniqueId()
+  const id = useMemo(getUniqueId, [])
 
   const Input = multiline ? MultilineTextInput : TextInput
 
