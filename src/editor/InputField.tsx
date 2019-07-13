@@ -12,6 +12,7 @@ interface Props {
   value?: string
   onChange: (value: string) => void
   label: string
+  type?: string
   multiline?: boolean
   placeholder?: string
   maxLength?: number
@@ -24,6 +25,7 @@ export default function InputField(props: Props) {
     value,
     onChange: handleChange,
     label,
+    type,
     multiline,
     placeholder,
     maxLength,
@@ -49,6 +51,7 @@ export default function InputField(props: Props) {
           id={id}
           value={value || ""}
           onChange={(event: Event) => handleChange(event.target.value)}
+          type={type || "text"}
           placeholder={placeholder}
         />
       </InputLabel>
