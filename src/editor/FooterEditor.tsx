@@ -44,7 +44,7 @@ export default function FooterEditor(props: Props) {
             timestamp,
           })
         }
-        label="Embed footer name"
+        label="Footer text"
         maxLength={2048}
       />
       <InputField
@@ -58,7 +58,7 @@ export default function FooterEditor(props: Props) {
             timestamp,
           })
         }
-        label="Embed footer icon"
+        label="Footer icon"
       />
       {supportsDateTimeInput ? (
         <InputField
@@ -73,7 +73,7 @@ export default function FooterEditor(props: Props) {
                 : undefined,
             })
           }
-          label="Embed footer timestamp (GMT)"
+          label="Timestamp (GMT)"
           type="datetime-local"
         />
       ) : (
@@ -85,7 +85,7 @@ export default function FooterEditor(props: Props) {
               timestamp,
             })
           }
-          label="Embed footer timestamp (ISO-8601, GMT)"
+          label="Timestamp (ISO 8601)"
         />
       )}
     </InputGroup>

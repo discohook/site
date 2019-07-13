@@ -27,7 +27,7 @@ export default function AuthorEditor(props: Props) {
             name,
           })
         }
-        label="Embed author name"
+        label="Author text"
         maxLength={256}
       />
       <InputField
@@ -38,7 +38,7 @@ export default function AuthorEditor(props: Props) {
             url,
           })
         }
-        label="Embed author link"
+        label="Author link"
       />
       <InputField
         value={iconUrl}
@@ -48,7 +48,7 @@ export default function AuthorEditor(props: Props) {
             iconUrl,
           })
         }
-        label="Embed author icon"
+        label="Author icon"
       />
     </InputGroup>
   )

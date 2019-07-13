@@ -64,7 +64,7 @@ export default function EmbedEditor(props: Props) {
                 title: title || undefined,
               })
             }
-            label="Embed title"
+            label="Title"
             maxLength={256}
           />
           <InputField
@@ -75,7 +75,7 @@ export default function EmbedEditor(props: Props) {
                 url: url || undefined,
               })
             }
-            label="Embed title link"
+            label="Title link"
           />
         </InputGroup>
         <InputField
@@ -86,7 +86,7 @@ export default function EmbedEditor(props: Props) {
               description: description || undefined,
             })
           }
-          label="Embed description"
+          label="Description"
           multiline
           maxLength={2048}
         />
@@ -127,7 +127,7 @@ export default function EmbedEditor(props: Props) {
                 image: url ? { url } : undefined,
               })
             }
-            label="Embed image"
+            label="Image"
           />
           <InputField
             value={(embed.thumbnail || {}).url}
@@ -137,7 +137,7 @@ export default function EmbedEditor(props: Props) {
                 thumbnail: url ? { url } : undefined,
               })
             }
-            label="Embed thumbnail"
+            label="Thumbnail"
           />
           <ColorInput
             value={embed.color}

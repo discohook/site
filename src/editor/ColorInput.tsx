@@ -35,5 +35,5 @@ export default function ColorInput(props: Props) {
     }
   }, [handleChange, hex, value])
 
-  return <InputField value={hex} onChange={setHex} label="Embed color" />
+  return <InputField value={hex} onChange={setHex} label="Color" />
 }
