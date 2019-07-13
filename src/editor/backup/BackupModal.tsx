@@ -10,13 +10,8 @@ import {
   Button,
   Container,
 } from "../styles"
-import {
-  Backup,
-  deleteBackup,
-  getBackup,
-  getBackups,
-  setBackup,
-} from "./backupStorage"
+import { Backup } from "./Backup"
+import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 
 interface Props {
   message: Message

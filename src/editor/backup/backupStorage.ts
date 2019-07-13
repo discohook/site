@@ -1,14 +1,5 @@
-import { Message } from "../../message/Message"
 import { getUniqueId, id } from "../../uid"
-
-export interface Backup {
-  message: Message
-  files: {
-    name: string
-    type: string
-    size: number
-  }[]
-}
+import { Backup } from "./Backup"
 
 const dbPromise = new Promise<IDBDatabase>((res, rej) => {
   if (typeof indexedDB === "undefined") rej()

@@ -1,5 +1,5 @@
 import { b64urlDecode } from "@waiting/base64"
-import { Backup } from "./backupStorage"
+import { Backup } from "./Backup"
 
 let backup: Backup | undefined
 
