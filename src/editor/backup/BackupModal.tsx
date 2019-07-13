@@ -1,5 +1,4 @@
 import styled from "@emotion/styled"
-import { b64urlEncode } from "@waiting/base64"
 import React, { useEffect, useState } from "react"
 import { Message } from "../../message/Message"
 import InputField from "../InputField"
@@ -12,6 +11,7 @@ import {
 } from "../styles"
 import { Backup, FakeFile } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
+import { shareBackup } from "./sharing"
 
 interface Props {
   message: Message
@@ -91,10 +91,7 @@ export default function BackupModal(props: Props) {
     if (backup) onLoad(backup)
   }
 
-  const handleShare = async (name: string) => {
-    const backup = await getBackup(name)
-    window.location.hash = `backup:${b64urlEncode(JSON.stringify(backup))}`
-  }
+  const handleShare = (name: string) => shareBackup(name)
 
   const handleDelete = (backup: string) => {
     deleteBackup(backup)

@@ -2,12 +2,16 @@ import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import React, { useEffect, useState } from "react"
 import { FakeFile } from "./editor/backup/Backup"
-import { sharedBackup } from "./editor/backup/sharedBackup"
+import { getSharedBackup } from "./editor/backup/sharing"
 import Editor from "./editor/Editor"
 import GlobalStyle from "./GlobalStyle"
 import { initialMessage } from "./initialMessage"
 import Preview from "./message/Preview"
 import { darkTheme, lightTheme, Theme } from "./themes"
+
+interface Props {
+  url?: URL
+}
 
 const Container = styled.div`
   display: flex;
@@ -21,9 +25,12 @@ const Container = styled.div`
   }
 `
 
-const backup = sharedBackup || { message: initialMessage, files: [] }
+export default function App(props: Props) {
+  const backup = getSharedBackup(props.url) || {
+    message: initialMessage,
+    files: [],
+  }
 
-export default function App() {
   const [message, setMessage] = useState(backup.message)
   const [files, setFiles] = useState<FileList | FakeFile[]>(backup.files)
 

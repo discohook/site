@@ -135,7 +135,7 @@ export default function Attachment(props: Props) {
     type,
   ])
 
-  const isFile = file instanceof Blob
+  const isFile = process.env.SSR || file instanceof Blob
 
   const [objectUrl, setObjectUrl] = useState("")
   useEffect(() => {
