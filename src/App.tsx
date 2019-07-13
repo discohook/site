@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import React, { useEffect, useState } from "react"
+import { FakeFile } from "./editor/backup/Backup"
 import { sharedBackup } from "./editor/backup/sharedBackup"
 import Editor from "./editor/Editor"
 import GlobalStyle from "./GlobalStyle"
@@ -20,11 +21,11 @@ const Container = styled.div`
   }
 `
 
-export default function App() {
-  const backup = sharedBackup || { message: initialMessage, files: [] }
+const backup = sharedBackup || { message: initialMessage, files: [] }
 
+export default function App() {
   const [message, setMessage] = useState(backup.message)
-  const [files, setFiles] = useState<FileList | undefined>()
+  const [files, setFiles] = useState<FileList | FakeFile[]>(backup.files)
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const toggleTheme = () =>

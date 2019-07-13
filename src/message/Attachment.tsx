@@ -1,10 +1,11 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
+import { FakeFile } from "../editor/backup/Backup"
 import AttachmentIcon from "./AttachmentIcon"
 import { AttachmentIconType, attachmentTypes } from "./attachmentTypes"
 
 interface Props {
-  file: File
+  file: File | FakeFile
 }
 
 const ImageAttachment = styled.img`
@@ -134,9 +135,11 @@ export default function Attachment(props: Props) {
     type,
   ])
 
+  const isFile = file instanceof Blob
+
   const [objectUrl, setObjectUrl] = useState("")
   useEffect(() => {
-    if (type !== "image") return
+    if (type !== "image" || !isFile) return
 
     const objectUrl = URL.createObjectURL(file)
     setObjectUrl(objectUrl)
@@ -144,14 +147,15 @@ export default function Attachment(props: Props) {
     return () => {
       if (objectUrl) URL.revokeObjectURL(objectUrl)
     }
-  }, [file, type])
+  }, [file, isFile, type])
 
-  if (type === "image") return <ImageAttachment src={objectUrl} alt={name} />
+  if (type === "image" && isFile)
+    return <ImageAttachment src={objectUrl} alt={name} />
 
   return (
     <AttachmentContainer>
       <AttachmentIconContainer>
-        <AttachmentIcon type={type} />
+        <AttachmentIcon type={type === "image" ? "unknown" : type} />
       </AttachmentIconContainer>
       <AttachmentInfo>
         <AttachmentFileName>
@@ -160,7 +164,7 @@ export default function Attachment(props: Props) {
         <AttachmentFileSize>{getHumanReadableSize(size)}</AttachmentFileSize>
       </AttachmentInfo>
       <AttachmentDownloadButton>
-        <svg width={24} height={24} viewBox="0 0 24 24">
+        <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M19,9h-4V3H9v6H5l7,7,7-7zM5,18v2h14v-2H5z" />
         </svg>
       </AttachmentDownloadButton>

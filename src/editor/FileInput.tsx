@@ -1,13 +1,14 @@
 import styled from "@emotion/styled"
 import React, { forwardRef, Ref, useImperativeHandle, useRef } from "react"
+import { FakeFile } from "./backup/Backup"
 import { InputLabel, TextInput } from "./styles"
 
 interface Props {
-  onChange: (files: FileList | undefined) => void
+  onChange: (files: FileList | FakeFile[]) => void
 }
 
 interface RefType {
-  files: FileList | undefined
+  files: FileList | FakeFile[]
   clearFiles: () => void
 }
 
@@ -22,11 +23,11 @@ function FileInput(props: Props, ref: Ref<RefType>) {
     if (!inputRef.current) return
 
     inputRef.current.value = ""
-    props.onChange(undefined)
+    props.onChange([])
   }
 
   useImperativeHandle(ref, () => ({
-    files: (inputRef.current && inputRef.current.files) || undefined,
+    files: (inputRef.current && inputRef.current.files) || [],
     clearFiles,
   }))
 
@@ -37,7 +38,7 @@ function FileInput(props: Props, ref: Ref<RefType>) {
         type="file"
         multiple={true}
         onClick={clearFiles}
-        onChange={event => props.onChange(event.target.files || undefined)}
+        onChange={event => props.onChange(event.target.files || [])}
         ref={inputRef}
       />
     </InputLabel>

@@ -10,12 +10,12 @@ import {
   Button,
   Container,
 } from "../styles"
-import { Backup } from "./Backup"
+import { Backup, FakeFile } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 
 interface Props {
   message: Message
-  files: FileList | undefined
+  files: FileList | FakeFile[]
   onLoad: (backup: Backup) => void
   onClose: () => void
 }

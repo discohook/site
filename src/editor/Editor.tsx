@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react"
 import { Message } from "../message/Message"
+import { FakeFile } from "./backup/Backup"
 import BackupModal from "./backup/BackupModal"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
@@ -24,8 +25,8 @@ import {
 interface Props {
   message: Message
   onChange: (message: Message) => void
-  files: FileList | undefined
-  onFilesChange: (files: FileList | undefined) => void
+  files: FileList | FakeFile[]
+  onFilesChange: (files: FileList | FakeFile[]) => void
   onToggleTheme: () => void
   onToggleDisplay: () => void
 }
@@ -75,8 +76,7 @@ export default function Editor(props: Props) {
   const filterEmptyMessage = useCallback(
     (error: string) =>
       files && files.length > 0
-        ? error !==
-          "message: Expected one of following keys: 'content', 'embeds'"
+        ? error !== "$: Expected one of following keys: 'content', 'embeds'"
         : true,
     [files],
   )
@@ -101,7 +101,7 @@ export default function Editor(props: Props) {
     const formData = new FormData()
     formData.append("payload_json", json)
 
-    if (files)
+    if (files && files instanceof FileList)
       for (const [index, file] of Object.entries(files))
         formData.append(`file[${index}]`, file, file.name)
 

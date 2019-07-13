@@ -1,12 +1,13 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { FakeFile } from "../editor/backup/Backup"
 import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "./Message"
 import MessagePreview from "./MessagePreview"
 
 interface Props {
   message: Message
-  files: FileList | undefined
+  files: FileList | FakeFile[]
 }
 
 const Container = styled.main`

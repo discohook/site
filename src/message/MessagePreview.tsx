@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { FakeFile } from "../editor/backup/Backup"
 import { id } from "../uid"
 import Attachment from "./Attachment"
 import Markup from "./markup/Markup"
@@ -10,7 +11,7 @@ import RichEmbed from "./RichEmbed"
 
 interface Props {
   message: Message
-  files: FileList | undefined
+  files: FileList | FakeFile[]
 }
 
 const Container = styled.div`
