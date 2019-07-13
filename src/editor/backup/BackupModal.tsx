@@ -111,7 +111,11 @@ export default function BackupModal(props: Props) {
   const handleCreate = () => {
     setBackup(newBackupName.trim().replace(/\s+/, " "), {
       message,
-      files: Array.from(files || []).map(file => file.name),
+      files: Array.from(files || []).map(file => ({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      })),
     }).then(getAllBackups)
   }
 

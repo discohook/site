@@ -3,7 +3,11 @@ import { getUniqueId, id } from "../../uid"
 
 export interface Backup {
   message: Message
-  files: string[]
+  files: {
+    name: string
+    type: string
+    size: number
+  }[]
 }
 
 const dbPromise = new Promise<IDBDatabase>((res, rej) => {
