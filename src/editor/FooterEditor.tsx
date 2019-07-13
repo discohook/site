@@ -10,7 +10,7 @@ interface Props {
 }
 
 const supportsDateTimeInput = (() => {
-  if (typeof window === "undefined") return false
+  if (process.env.SSR) return false
 
   const input = document.createElement("input")
   input.type = "datetime-local"
