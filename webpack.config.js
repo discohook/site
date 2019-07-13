@@ -4,8 +4,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { resolve } = require("path")
 const PreloadWebpackPlugin = require("preload-webpack-plugin")
-const { LimitChunkCountPlugin } = require("webpack").optimize
+const { DefinePlugin, optimize: webpackOptimize } = require("webpack")
+const { LimitChunkCountPlugin } = webpackOptimize
 
+if (!process.env.NODE_ENV) process.env.NODE_ENV = "development"
 const dev = process.env.NODE_ENV === "development"
 
 /**
@@ -74,6 +76,10 @@ const appConfig = {
         ignore: [resolve(__dirname, "public/index.html")],
       },
     ]),
+    new DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.SSR": JSON.stringify(false),
+    }),
   ],
   devServer: {
     host: "localhost",
@@ -125,6 +131,10 @@ const serverConfig = {
   plugins: [
     new LimitChunkCountPlugin({
       maxChunks: 1,
+    }),
+    new DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production"),
+      "process.env.SSR": JSON.stringify(true),
     }),
   ],
   devtool: "source-map",
