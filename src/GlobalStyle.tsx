@@ -1,7 +1,7 @@
-import { css, Global } from "@emotion/core"
-import { withTheme } from "emotion-theming"
-import React from "react"
-import { Theme } from "./themes"
+import { css, Global } from "@emotion/core";
+import { withTheme } from "emotion-theming";
+import React from "react";
+import { Theme } from "./themes";
 
 function GlobalStyle(props: { theme: Theme }) {
   const { theme } = props
@@ -14,8 +14,8 @@ function GlobalStyle(props: { theme: Theme }) {
           font-style: normal;
           font-weight: 300;
           font-display: swap;
-          src: url("/whitney-300.woff2") format("woff2"),
-            url("/whitney-300.woff") format("woff");
+          src: url("/fonts/whitney-300.woff2") format("woff2"),
+            url("/fonts/whitney-300.woff") format("woff");
         }
 
         @font-face {
@@ -23,8 +23,8 @@ function GlobalStyle(props: { theme: Theme }) {
           font-style: normal;
           font-weight: 400;
           font-display: swap;
-          src: url("/whitney-400.woff2") format("woff2"),
-            url("/whitney-400.woff") format("woff");
+          src: url("/fonts/whitney-400.woff2") format("woff2"),
+            url("/fonts/whitney-400.woff") format("woff");
         }
 
         @font-face {
@@ -32,8 +32,8 @@ function GlobalStyle(props: { theme: Theme }) {
           font-style: normal;
           font-weight: 500;
           font-display: swap;
-          src: url("/whitney-500.woff2") format("woff2"),
-            url("/whitney-500.woff") format("woff");
+          src: url("/fonts/whitney-500.woff2") format("woff2"),
+            url("/fonts/whitney-500.woff") format("woff");
         }
 
         @font-face {
@@ -41,8 +41,8 @@ function GlobalStyle(props: { theme: Theme }) {
           font-style: normal;
           font-weight: 600;
           font-display: swap;
-          src: url("/whitney-600.woff2") format("woff2"),
-            url("/whitney-600.woff") format("woff");
+          src: url("/fonts/whitney-600.woff2") format("woff2"),
+            url("/fonts/whitney-600.woff") format("woff");
         }
 
         @font-face {
@@ -50,8 +50,8 @@ function GlobalStyle(props: { theme: Theme }) {
           font-style: normal;
           font-weight: 700;
           font-display: swap;
-          src: url("/whitney-700.woff2") format("woff2"),
-            url("/whitney-700.woff") format("woff");
+          src: url("/fonts/whitney-700.woff2") format("woff2"),
+            url("/fonts/whitney-700.woff") format("woff");
         }
 
         body {
