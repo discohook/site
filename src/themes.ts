@@ -1,11 +1,7 @@
 type ColorTheme = typeof darkTheme
 export type Theme = ColorTheme & { display: "cozy" | "compact" }
 
-export const darkTheme = {
-  background: "#36393f",
-  text: "#dcddde",
-  important: "#ffffff",
-  link: "#0096cf",
+const common = {
   accent: "#7289da",
 
   green: "#43b581",
@@ -13,9 +9,28 @@ export const darkTheme = {
   red: "#f04747",
 
   fonts: {
-    normal: '"Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;',
-    code: '"Consolas", "Liberation Mono", "Menlo", "Courier", monospace;',
+    normal: "'Whitney', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;",
+    code: "'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace;",
   },
+
+  message: {
+    attachment: {
+      fileName: "#00b0f4",
+      fileSize: "#72767d",
+
+      download: "#4f545c",
+      downloadHover: "#595d63",
+    },
+  },
+}
+
+export const darkTheme = {
+  ...common,
+
+  background: "#36393f",
+  text: "#dcddde",
+  important: "#ffffff",
+  link: "#0096cf",
 
   editor: {
     input: "#484c52",
@@ -69,14 +84,10 @@ export const darkTheme = {
     },
 
     attachment: {
+      ...common.message.attachment,
+
       background: "#34373c",
       border: "#313338",
-
-      fileName: "#00b0f4",
-      fileSize: "#72767d",
-
-      download: "#4f545c",
-      downloadHover: "#595d63",
     },
 
     spoiler: "#4b4d53",
@@ -89,20 +100,12 @@ export const darkTheme = {
 }
 
 export const lightTheme: ColorTheme = {
+  ...common,
+
   background: "#ffffff",
   text: "#747f8d",
   important: "#4f545c",
   link: "#00b0f4",
-  accent: "#7289da",
-
-  green: "#43b581",
-  yellow: "#faa61a",
-  red: "#f04747",
-
-  fonts: {
-    normal: '"Whitney", "Helvetica Neue", "Helvetica", "Arial", sans-serif;',
-    code: '"Consolas", "Liberation Mono", "Menlo", "Courier", monospace;',
-  },
 
   editor: {
     input: "#f6f6f7",
@@ -156,14 +159,10 @@ export const lightTheme: ColorTheme = {
     },
 
     attachment: {
+      ...common.message.attachment,
+
       background: "#ffffff",
       border: "#f6f6f7",
-
-      fileName: "#00b0f4",
-      fileSize: "#72767d",
-
-      download: "#4f545c",
-      downloadHover: "#595d63",
     },
 
     spoiler: "#e5e5e5",
