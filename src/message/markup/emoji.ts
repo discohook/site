@@ -27,5 +27,5 @@ export const getEmojiUrl = (emoji: string) => {
   if (["™", "©", "®"].includes(emoji)) return
 
   const file = [...emoji].map(c => c.codePointAt(0)!.toString(16)).join("-")
-  return `https://jaylineko.com/twemoji/${file}.svg`
+  return `https://jaylineko.github.io/discord-emoji/${file}.svg`
 }
