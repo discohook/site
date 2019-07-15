@@ -1,23 +1,14 @@
 import styled from "@emotion/styled"
-import React, { useEffect, useState } from "react"
-import { FakeFile } from "../editor/backup/Backup"
+import React from "react"
+import { FakeFile } from "../../editor/backup/Backup"
 import AttachmentIcon from "./AttachmentIcon"
-import { AttachmentIconType, attachmentTypes } from "./attachmentTypes"
+import { AttachmentIconType } from "./attachmentTypes"
+import { getHumanReadableSize } from "./getHumanReadableSize"
 
 interface Props {
   file: File | FakeFile
+  type: AttachmentIconType
 }
-
-const ImageAttachment = styled.img`
-  display: block;
-
-  max-width: 400px;
-  max-height: 300px;
-
-  margin: 8px 0 0;
-  border-radius: 3px;
-  cursor: pointer;
-`
 
 const AttachmentContainer = styled.div`
   width: 100%;
@@ -93,69 +84,14 @@ const AttachmentDownloadButton = styled.div`
   }
 `
 
-const getAttachmentType = (name: string, mime: string): AttachmentIconType => {
-  const types = attachmentTypes
-
-  for (const type of types) {
-    const regex = new RegExp(type.regex)
-    if (regex.test(type.check === "name" ? name : mime)) {
-      return type.icon
-    }
-  }
-
-  return "unknown"
-}
-
-const getHumanReadableSize = (bytes: number) => {
-  const units = ["bytes", "KB", "MB", "GB", "TB", "PB"]
-
-  let unit = 0
-  let number = bytes
-
-  while (number >= 1024 && unit < units.length - 1) {
-    unit++
-    number /= 1024
-  }
-
-  const formattedNumber = number.toLocaleString("en-US", {
-    maximumFractionDigits: 2,
-  })
-
-  return `${formattedNumber} ${units[unit]}`
-}
-
-export default function Attachment(props: Props) {
-  const { file } = props
-  const { name, size, type: mime } = file
-
-  const [type, setType] = useState(getAttachmentType(name, mime))
-  useEffect(() => setType(getAttachmentType(name, mime)), [name, mime])
-  useEffect(() => console.log(`Attachment type for ${name}:`, type), [
-    name,
-    type,
-  ])
-
-  const isFile = process.env.SSR || file instanceof Blob
-
-  const [objectUrl, setObjectUrl] = useState("")
-  useEffect(() => {
-    if (type !== "image" || !isFile) return
-
-    const objectUrl = URL.createObjectURL(file)
-    setObjectUrl(objectUrl)
-
-    return () => {
-      if (objectUrl) URL.revokeObjectURL(objectUrl)
-    }
-  }, [file, isFile, type])
-
-  if (type === "image" && isFile)
-    return <ImageAttachment src={objectUrl} alt={name} />
+export default function DefaultAttachment(props: Props) {
+  const { name, size } = props.file
+  const type = props.type === "image" ? "unknown" : props.type
 
   return (
     <AttachmentContainer>
       <AttachmentIconContainer>
-        <AttachmentIcon type={type === "image" ? "unknown" : type} />
+        <AttachmentIcon type={type} />
       </AttachmentIconContainer>
       <AttachmentInfo>
         <AttachmentFileName>
