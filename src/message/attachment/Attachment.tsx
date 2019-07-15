@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { FakeFile } from "../../editor/backup/Backup"
+import AudioAttachment from "./AudioAttachment"
 import DefaultAttachment from "./DefaultAttachment"
 import { getAttachmentType } from "./getAttachmentType"
 import ImageAttachment from "./ImageAttachment"
@@ -22,6 +23,10 @@ export default function Attachment(props: Props) {
 
   if (file instanceof File && type === "image") {
     return <ImageAttachment file={file} />
+  }
+
+  if (type === "audio") {
+    return <AudioAttachment file={file} />
   }
 
   return <DefaultAttachment file={file} type={type} />
