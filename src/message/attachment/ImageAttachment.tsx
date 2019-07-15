@@ -1,9 +1,8 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
-import { FakeFile } from "../../editor/backup/Backup"
 
 interface Props {
-  file: File | FakeFile
+  file: File
 }
 
 const Image = styled.img`
