@@ -18,9 +18,9 @@ if (!process.env.SSR && location.search.startsWith("?backup=")) {
 }
 
 export const getSharedBackup = (url?: URL) => {
-  if (!url) return backup
+  if (!process.env.SSR) return backup
 
-  if (url.searchParams.has("backup")) {
+  if (url && url.searchParams.has("backup")) {
     try {
       return JSON.parse(b64urlDecode(url.searchParams.get("backup")!))
     } catch {}
