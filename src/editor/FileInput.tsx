@@ -1,5 +1,12 @@
 import styled from "@emotion/styled"
-import React, { forwardRef, Ref, useImperativeHandle, useRef } from "react"
+import React, {
+  forwardRef,
+  Ref,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react"
+import { getUniqueId } from "../uid"
 import { FakeFile } from "./backup/Backup"
 import { InputLabel, TextInput } from "./styles"
 
@@ -31,14 +38,17 @@ function FileInput(props: Props, ref: Ref<RefType>) {
     clearFiles,
   }))
 
+  const id = useMemo(getUniqueId, [])
+
   return (
-    <InputLabel>
+    <InputLabel htmlFor={id}>
       Files
       <Input
-        type="file"
-        multiple={true}
+        id={id}
         onClick={clearFiles}
         onChange={event => props.onChange(event.target.files || [])}
+        type="file"
+        multiple={true}
         ref={inputRef}
       />
     </InputLabel>
