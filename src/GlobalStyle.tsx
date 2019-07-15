@@ -1,7 +1,7 @@
-import { css, Global } from "@emotion/core";
-import { withTheme } from "emotion-theming";
-import React from "react";
-import { Theme } from "./themes";
+import { css, Global } from "@emotion/core"
+import { withTheme } from "emotion-theming"
+import React from "react"
+import { Theme } from "./themes"
 
 function GlobalStyle(props: { theme: Theme }) {
   const { theme } = props
@@ -52,6 +52,22 @@ function GlobalStyle(props: { theme: Theme }) {
           font-display: swap;
           src: url("/fonts/whitney-700.woff2") format("woff2"),
             url("/fonts/whitney-700.woff") format("woff");
+        }
+
+        @font-face {
+          font-family: SourceCodePro;
+          font-style: normal;
+          font-weight: 400;
+          src: url("/fonts/source-code-pro-400.woff") format("woff")
+            url("/fonts/source-code-pro-400.woff2") format("woff2");
+        }
+
+        @font-face {
+          font-family: SourceCodePro;
+          font-style: normal;
+          font-weight: 600;
+          src: url("/fonts/source-code-pro-600.woff") format("woff")
+            url("/fonts/source-code-pro-600.woff2") format("woff2");
         }
 
         body {
