@@ -9,8 +9,10 @@ const common = {
   red: "#f04747",
 
   fonts: {
-    normal: "'Whitney', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;",
-    code: "'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace;",
+    normal: "'Whitney', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+    code: "'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
+    mono:
+      "'SourceCodePro', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
   },
 
   message: {
@@ -88,6 +90,17 @@ export const darkTheme = {
 
       background: "#34373c",
       border: "#313338",
+
+      player: {
+        background: "#151618",
+        duration: "#ffffff",
+
+        seekbar: "#47474a",
+        seekbarHandle: "#7289da",
+
+        control: "#a1a2a3",
+        controlHover: "#ffffff",
+      },
     },
 
     spoiler: "#4b4d53",
@@ -163,6 +176,17 @@ export const lightTheme: ColorTheme = {
 
       background: "#ffffff",
       border: "#f6f6f7",
+
+      player: {
+        background: "#666666",
+        duration: "#ffffff",
+
+        seekbar: "#7f7f80",
+        seekbarHandle: "#7289da",
+
+        control: "#c2c2c2",
+        controlHover: "#ffffff",
+      },
     },
 
     spoiler: "#e5e5e5",
