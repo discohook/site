@@ -48,7 +48,7 @@ export const initialMessage: Message = {
         "This embed is for showing off all these cool embed features.",
         "",
         [
-          "Also, as should be obvious by now, this supports",
+          "Also, this should be obvious by now, this supports",
           "Discord's flavour of [__***markdown***__](https://support.discordapp.com/hc/en-us/articles/210298617),",
           "including ||[spoiler tags](https://support.discordapp.com/hc/en-us/articles/360022320632)||",
           "and masked links like this: `[Cool embed builder](https://discohook.jaylineko.com/)`.",
