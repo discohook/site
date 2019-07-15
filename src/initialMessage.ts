@@ -60,7 +60,7 @@ export const initialMessage: Message = {
           name: "Embeds can have fields",
           value: [
             "Crazy right?",
-            "You can even have inline fields, like the ones below! :arrow_double_down:",
+            "You can even have inline fields, like the ones below! :arrow_down:",
           ].join("\n"),
         },
         {
