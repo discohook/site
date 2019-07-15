@@ -17,7 +17,7 @@ const AuthorImage = styled.img`
 
   margin: 0 8px 0 0;
 
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
 `
 
