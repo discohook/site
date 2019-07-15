@@ -65,7 +65,7 @@ const baseRules: Rules = {
     parse: (capture, _parse, _state) =>
       nameToEmoji[capture[1]]
         ? {
-            name: `:${capture[1]}:`,
+            name: capture[1],
             surrogate: nameToEmoji[capture[1]],
             src: getEmojiUrl(nameToEmoji[capture[1]]),
           }
