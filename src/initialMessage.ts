@@ -3,7 +3,7 @@ import { getUniqueId, id } from "./uid"
 
 export const initialMessage: Message = {
   content: [
-    "Hey, this is Discohook, a message builder for Discord webhooks. :link:",
+    "Hey, this is Discohook, a message builder for Discord webhooks. <:discohook:600312020192985088>",
     "You can read through my small introduction to this project below, or click the **Clear all** button on the top to get started.",
   ].join("\n"),
   embeds: [
