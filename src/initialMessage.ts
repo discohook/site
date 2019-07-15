@@ -97,9 +97,14 @@ export const initialMessage: Message = {
       description: [
         "As a small extra, you can back up your messages in here.",
         "To get started using them, click on the **Backups** button on the top of the editor!",
+        "You can even share them with your friends! Just click the share button and copy the URL.",
         "",
-        ":bangbang: Backups are stored in the browser, and will always be stored there.",
+        ":warning: Backups are stored in the browser, and will always be stored there.",
         "This means that if you clear your browsers data your backups will be lost forever!",
+        [
+          "If you want to keep your backups when clearing your browser data,",
+          "use the share functionality to copy your backups and store them somewhere safe.",
+        ].join(" "),
       ].join("\n"),
       color: 16426522,
     },
