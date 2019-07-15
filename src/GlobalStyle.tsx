@@ -58,16 +58,18 @@ function GlobalStyle(props: { theme: Theme }) {
           font-family: SourceCodePro;
           font-style: normal;
           font-weight: 400;
-          src: url("/fonts/source-code-pro-400.woff") format("woff")
-            url("/fonts/source-code-pro-400.woff2") format("woff2");
+          font-display: swap;
+          src: url("/fonts/source-code-pro-400.woff2") format("woff2"),
+            url("/fonts/source-code-pro-400.woff") format("woff");
         }
 
         @font-face {
           font-family: SourceCodePro;
           font-style: normal;
           font-weight: 600;
-          src: url("/fonts/source-code-pro-600.woff") format("woff")
-            url("/fonts/source-code-pro-600.woff2") format("woff2");
+          font-display: swap;
+          src: url("/fonts/source-code-pro-600.woff2") format("woff2"),
+            url("/fonts/source-code-pro-600.woff") format("woff");
         }
 
         body {
