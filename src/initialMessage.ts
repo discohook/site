@@ -110,7 +110,7 @@ export const initialMessage: Message = {
     },
     {
       [id]: getUniqueId(),
-      title: ":warning: Small disclaimer",
+      title: "Small disclaimer",
       description: [
         "Discohook makes use of some assets derived or extracted from Discord's application.",
         "This is to make visuals as accurate as possible, and not to infringe on their copyright.",
