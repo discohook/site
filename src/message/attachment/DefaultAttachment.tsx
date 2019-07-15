@@ -4,13 +4,13 @@ import AttachmentIcon from "./AttachmentIcon"
 import { AttachmentIconType } from "./attachmentTypes"
 import { getHumanReadableSize } from "./getHumanReadableSize"
 import {
-  AttachmentContainer as Container,
-  AttachmentDownloadButton as DownloadButton,
-  AttachmentFileName as FileName,
-  AttachmentFileNameInner as FileNameInner,
-  AttachmentFileSize as FileSize,
-  AttachmentIconContainer as IconContainer,
-  AttachmentInfo as Info,
+  Container,
+  DownloadButton,
+  FileName,
+  FileNameInner,
+  FileSize,
+  IconContainer,
+  Info,
 } from "./styles"
 
 interface Props {

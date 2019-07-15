@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 
-export const AttachmentContainer = styled.div`
+export const Container = styled.div`
   width: 100%;
   max-width: 520px;
 
@@ -17,7 +17,7 @@ export const AttachmentContainer = styled.div`
   background: ${({ theme }) => theme.message.attachment.background};
 `
 
-export const AttachmentIconContainer = styled.div`
+export const IconContainer = styled.div`
   width: 30px;
   height: 40px;
   margin: 0 8px 0 0;
@@ -27,14 +27,14 @@ export const AttachmentIconContainer = styled.div`
   justify-content: center;
 `
 
-export const AttachmentInfo = styled.div`
+export const Info = styled.div`
   flex: 1;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 `
 
-export const AttachmentFileName = styled.div`
+export const FileName = styled.div`
   line-height: 16px;
 
   white-space: nowrap;
@@ -42,7 +42,7 @@ export const AttachmentFileName = styled.div`
   overflow: hidden;
 `
 
-export const AttachmentFileNameInner = styled.span`
+export const FileNameInner = styled.span`
   color: ${({ theme }) => theme.message.attachment.fileName};
   font-size: 16px;
 
@@ -53,14 +53,14 @@ export const AttachmentFileNameInner = styled.span`
   }
 `
 
-export const AttachmentFileSize = styled.div`
+export const FileSize = styled.div`
   color: ${({ theme }) => theme.message.attachment.fileSize};
   font-size: 12px;
   line-height: 16px;
   font-weight: 300;
 `
 
-export const AttachmentDownloadButton = styled.div`
+export const DownloadButton = styled.div`
   cursor: pointer;
 
   color: ${({ theme }) => theme.message.attachment.download};
