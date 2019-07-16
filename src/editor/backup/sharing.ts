@@ -1,3 +1,4 @@
+import { getUniqueId, id } from "../../uid"
 import { Backup } from "./Backup"
 import { getBackup } from "./backupStorage"
 
@@ -15,7 +16,14 @@ const decodeBackup = (base64: string) => {
   try {
     const escaped = atob(base64)
     const unescaped = decodeURIComponent(escaped)
-    return JSON.parse(unescaped) as Backup
+    const backup = JSON.parse(unescaped) as Backup
+    for (const embed of backup.message.embeds || []) {
+      embed[id] = getUniqueId()
+      for (const field of embed.fields || []) {
+        field[id] = getUniqueId()
+      }
+    }
+    return backup
   } catch {
     return null
   }
