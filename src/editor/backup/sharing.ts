@@ -13,7 +13,8 @@ export const shareBackup = async (name: string) => {
 
 const decodeBackup = (base64: string) => {
   try {
-    const unescaped = decodeURIComponent(base64)
+    const escaped = atob(base64)
+    const unescaped = decodeURIComponent(escaped)
     return JSON.parse(unescaped) as Backup
   } catch {
     return null
