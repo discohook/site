@@ -13,7 +13,7 @@ import {
   Info,
 } from "./styles"
 
-interface Props {
+type Props = {
   file: File | FakeFile
   type: AttachmentIconType
 }

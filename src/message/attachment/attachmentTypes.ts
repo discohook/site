@@ -14,7 +14,7 @@ export type AttachmentIconType =
   | "webcode"
   | "unknown"
 
-export interface AttachmentType {
+export type AttachmentType = {
   check: "mime" | "name"
   regex: RegExp
   icon: AttachmentIconType

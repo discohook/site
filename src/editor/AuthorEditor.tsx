@@ -1,9 +1,9 @@
-import React from "react"
-import { Author } from "../message/Message"
-import InputField from "./InputField"
-import { InputGroup } from "./styles"
+import React from "react";
+import { Author } from "../message/Message";
+import InputField from "./InputField";
+import { InputGroup } from "./styles";
 
-interface Props {
+type Props = {
   id: number
   author: Author | undefined
   onChange: (author: Author | undefined) => void

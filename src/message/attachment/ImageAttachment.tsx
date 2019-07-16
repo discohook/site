@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import DefaultAttachment from "./DefaultAttachment"
 
-interface Props {
+type Props = {
   file: File
 }
 

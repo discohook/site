@@ -3,7 +3,7 @@ import React from "react"
 import Markup from "./markup/Markup"
 import { Field } from "./Message"
 
-interface Props {
+type Props = {
   field: Field
 }
 

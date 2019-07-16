@@ -3,7 +3,7 @@ import { Embed, Footer } from "../message/Message"
 import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
-interface Props {
+type Props = {
   id: number
   footer: Footer | undefined
   timestamp: string | undefined

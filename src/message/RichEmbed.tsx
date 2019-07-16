@@ -7,7 +7,7 @@ import EmbedFooter from "./EmbedFooter"
 import Markup from "./markup/Markup"
 import { Embed } from "./Message"
 
-interface Props {
+type Props = {
   embed: Embed
 }
 

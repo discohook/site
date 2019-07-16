@@ -1,8 +1,8 @@
-import styled from "@emotion/styled"
-import React from "react"
-import { Author } from "./Message"
+import styled from "@emotion/styled";
+import React from "react";
+import { Author } from "./Message";
 
-interface Props {
+type Props = {
   author: Author
 }
 

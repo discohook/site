@@ -2,7 +2,7 @@ import React, { useMemo } from "react"
 import { parseMarkup } from "./parseMarkup"
 import { MarkupContainer } from "./styles"
 
-interface Props {
+type Props = {
   content: string
   inline?: boolean
 }

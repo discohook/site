@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
-import InputField from "./InputField"
+import React, { useEffect, useState } from "react";
+import InputField from "./InputField";
 
-interface Props {
+type Props = {
   id: number
   value: number | null | undefined
   onChange: (value: number | null | undefined) => void

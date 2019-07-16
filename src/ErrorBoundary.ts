@@ -1,11 +1,11 @@
 import { Component, ErrorInfo, ReactNode } from "react"
 
-interface Props {
+type Props = {
   children: ReactNode
   onError: (error: Error, info: ErrorInfo) => ReactNode | void
 }
 
-interface State {
+type State = {
   error?: Error
   info?: ErrorInfo
 }

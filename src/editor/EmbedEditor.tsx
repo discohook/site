@@ -16,7 +16,7 @@ import {
   InputGroup,
 } from "./styles"
 
-interface Props {
+type Props = {
   embeds: Embed[]
   onChange: (embeds: Embed[]) => void
 }

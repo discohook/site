@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import React from "react"
 import { Container, InputLabel, MultilineTextInput } from "../styles"
 
-interface Props {
+type Props = {
   json: string
   onChange: (json: string) => void
   errors: string[]

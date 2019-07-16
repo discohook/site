@@ -16,7 +16,7 @@ import {
   Container,
 } from "./styles"
 
-interface Props {
+type Props = {
   message: Message
   onChange: (message: Message) => void
   files: FileList | FakeFile[]

@@ -9,7 +9,7 @@ import { Message } from "./Message"
 import MessageHeader from "./MessageHeader"
 import RichEmbed from "./RichEmbed"
 
-interface Props {
+type Props = {
   message: Message
   files: FileList | FakeFile[]
 }

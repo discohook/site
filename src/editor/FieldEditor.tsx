@@ -13,7 +13,7 @@ import {
   ToggleButton,
 } from "./styles"
 
-interface Props {
+type Props = {
   id: number
   fields: Field[]
   onChange: (fields: Field[]) => void

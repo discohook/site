@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 
-interface Props {
+type Props = {
   username?: string
   avatarUrl?: string
 }

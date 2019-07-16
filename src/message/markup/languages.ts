@@ -1,4 +1,4 @@
-export interface Language {
+export type Language = {
   aliases: string[]
   dependencies?: string[]
 }

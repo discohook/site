@@ -1,7 +1,7 @@
 import React from "react"
 import { AttachmentIconType } from "./attachmentTypes"
 
-interface Props {
+type Props = {
   type: Exclude<AttachmentIconType, "image">
 }
 

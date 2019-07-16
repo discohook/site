@@ -5,7 +5,7 @@ import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "./Message"
 import MessagePreview from "./MessagePreview"
 
-interface Props {
+type Props = {
   message: Message
   files: FileList | FakeFile[]
 }

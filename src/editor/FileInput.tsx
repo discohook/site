@@ -1,9 +1,9 @@
-import styled from "@emotion/styled"
-import React, { useRef } from "react"
-import { FakeFile } from "./backup/Backup"
-import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
+import styled from "@emotion/styled";
+import React, { useRef } from "react";
+import { FakeFile } from "./backup/Backup";
+import { Button, Container, InputLabel, InputNote, TextInput } from "./styles";
 
-interface Props {
+type Props = {
   files: FileList | FakeFile[]
   onChange: (files: FileList | FakeFile[]) => void
 }

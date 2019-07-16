@@ -1,4 +1,4 @@
-export interface Emoji {
+export type Emoji = {
   emoji: string
   names: string[]
   hasDiversity?: boolean

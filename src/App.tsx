@@ -1,15 +1,15 @@
-import styled from "@emotion/styled"
-import { ThemeProvider } from "emotion-theming"
-import React, { useEffect, useState } from "react"
-import { FakeFile } from "./editor/backup/Backup"
-import { getSharedBackup } from "./editor/backup/sharing"
-import Editor from "./editor/Editor"
-import GlobalStyle from "./GlobalStyle"
-import { initialMessage } from "./initialMessage"
-import Preview from "./message/Preview"
-import { darkTheme, lightTheme, Theme } from "./themes"
+import styled from "@emotion/styled";
+import { ThemeProvider } from "emotion-theming";
+import React, { useEffect, useState } from "react";
+import { FakeFile } from "./editor/backup/Backup";
+import { getSharedBackup } from "./editor/backup/sharing";
+import Editor from "./editor/Editor";
+import GlobalStyle from "./GlobalStyle";
+import { initialMessage } from "./initialMessage";
+import Preview from "./message/Preview";
+import { darkTheme, lightTheme, Theme } from "./themes";
 
-interface Props {
+type Props = {
   startUrl: URL
 }
 

@@ -1,13 +1,13 @@
 import { id } from "../uid"
 
-export interface Message {
+export type Message = {
   content?: string
   embeds?: Embed[]
   username?: string
   avatarUrl?: string
 }
 
-export interface Embed {
+export type Embed = {
   [id]: number
   title?: string
   description?: string
@@ -21,24 +21,24 @@ export interface Embed {
   fields?: Field[]
 }
 
-export interface Author {
+export type Author = {
   name?: string
   url?: string
   iconUrl?: string
 }
 
-export interface Footer {
+export type Footer = {
   text?: string
   iconUrl?: string
 }
 
-export interface Field {
+export type Field = {
   [id]: number
   name?: string
   value?: string
   inline?: boolean
 }
 
-export interface Image {
+export type Image = {
   url?: string
 }

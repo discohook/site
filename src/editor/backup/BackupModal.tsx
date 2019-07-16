@@ -13,7 +13,7 @@ import { Backup, FakeFile } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 import { shareBackup } from "./sharing"
 
-interface Props {
+type Props = {
   message: Message
   files: FileList | FakeFile[]
   onLoad: (backup: Backup) => void

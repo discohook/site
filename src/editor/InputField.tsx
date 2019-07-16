@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "./styles"
 
-interface Props {
+type Props = {
   id: string
   value?: string
   onChange: (value: string) => void

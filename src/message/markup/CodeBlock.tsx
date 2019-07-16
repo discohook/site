@@ -3,7 +3,7 @@ import React, { ComponentPropsWithoutRef, useEffect, useState } from "react"
 import { highlight } from "./highlight"
 import { CodeBlockContainer } from "./styles"
 
-interface Props {
+type Props = {
   content: string
   language?: string
   preProps?: ComponentPropsWithoutRef<"pre">

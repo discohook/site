@@ -5,7 +5,7 @@ import DefaultAttachment from "./DefaultAttachment"
 import { getAttachmentType } from "./getAttachmentType"
 import ImageAttachment from "./ImageAttachment"
 
-interface Props {
+type Props = {
   file: File | FakeFile
 }
 

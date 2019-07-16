@@ -1,8 +1,8 @@
-import styled from "@emotion/styled"
-import React from "react"
-import { Footer } from "./Message"
+import styled from "@emotion/styled";
+import React from "react";
+import { Footer } from "./Message";
 
-interface Props {
+type Props = {
   footer?: Footer
   timestamp?: string
 }
