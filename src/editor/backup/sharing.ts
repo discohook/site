@@ -14,7 +14,9 @@ export const shareBackup = async (name: string) => {
 
 const decodeBackup = (base64: string) => {
   try {
-    const escaped = atob(base64)
+    const escaped = process.env.SSR
+      ? Buffer.from(base64, "base64").toString("binary")
+      : atob(base64)
     const unescaped = decodeURIComponent(escaped)
     const backup = JSON.parse(unescaped) as Backup
     for (const embed of backup.message.embeds || []) {
