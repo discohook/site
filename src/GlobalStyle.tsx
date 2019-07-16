@@ -10,7 +10,7 @@ function GlobalStyle(props: { theme: Theme }) {
     <Global
       styles={css`
         @font-face {
-          font-family: Whitney;
+          font-family: "Whitney";
           font-style: normal;
           font-weight: 300;
           font-display: swap;
@@ -19,7 +19,7 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         @font-face {
-          font-family: Whitney;
+          font-family: "Whitney";
           font-style: normal;
           font-weight: 400;
           font-display: swap;
@@ -28,7 +28,7 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         @font-face {
-          font-family: Whitney;
+          font-family: "Whitney";
           font-style: normal;
           font-weight: 500;
           font-display: swap;
@@ -37,7 +37,7 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         @font-face {
-          font-family: Whitney;
+          font-family: "Whitney";
           font-style: normal;
           font-weight: 600;
           font-display: swap;
@@ -46,7 +46,7 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         @font-face {
-          font-family: Whitney;
+          font-family: "Whitney";
           font-style: normal;
           font-weight: 700;
           font-display: swap;
@@ -55,7 +55,7 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         @font-face {
-          font-family: SourceCodePro;
+          font-family: "SourceCodePro";
           font-style: normal;
           font-weight: 400;
           font-display: swap;
@@ -64,7 +64,7 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         @font-face {
-          font-family: SourceCodePro;
+          font-family: "SourceCodePro";
           font-style: normal;
           font-weight: 600;
           font-display: swap;
