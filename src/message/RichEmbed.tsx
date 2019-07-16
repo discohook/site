@@ -133,7 +133,7 @@ export default function RichEmbed(props: Props) {
           )}
           {fields && (
             <EmbedFields>
-              {fields.map(field => (
+              {Array.from(fields).map(field => (
                 <EmbedField field={field} key={field[id]} />
               ))}
             </EmbedFields>
