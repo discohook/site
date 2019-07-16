@@ -11,7 +11,7 @@ export default function Markup(props: Props) {
   const { content, inline } = props
 
   const markup = useMemo(() => {
-    return parseMarkup(content.trim(), inline)
+    return parseMarkup(String(content).trim(), inline)
   }, [content, inline])
 
   return <MarkupContainer>{markup}</MarkupContainer>
