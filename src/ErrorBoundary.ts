@@ -21,7 +21,11 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidUpdate(_prevProps: Readonly<Props>, prevState: Readonly<State>) {
-    if (prevState.error) this.setState({ error: undefined, info: undefined })
+    if (prevState.error)
+      this.setState({
+        error: undefined,
+        info: undefined,
+      })
   }
 
   render() {
