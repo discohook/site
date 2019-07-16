@@ -47,7 +47,7 @@ router.get("/", async (context, next) => {
   stream.write(templateBefore)
 
   await new Promise((res, rej) => {
-    const nodeStream = renderToNodeStream(<App url={context.URL} />)
+    const nodeStream = renderToNodeStream(<App startUrl={context.URL} />)
     nodeStream.on("data", chunk => stream.write(chunk))
     nodeStream.once("end", res)
     nodeStream.once("error", rej)

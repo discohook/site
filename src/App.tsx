@@ -10,7 +10,7 @@ import Preview from "./message/Preview"
 import { darkTheme, lightTheme, Theme } from "./themes"
 
 interface Props {
-  url?: URL
+  startUrl: URL
 }
 
 const Container = styled.div`
@@ -26,7 +26,7 @@ const Container = styled.div`
 `
 
 export default function App(props: Props) {
-  const backup = getSharedBackup(props.url) || {
+  const backup = getSharedBackup(props.startUrl) || {
     message: initialMessage,
     files: [],
   }

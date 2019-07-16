@@ -1,28 +1,39 @@
-import { b64urlDecode, b64urlEncode } from "@waiting/base64"
 import { Backup } from "./Backup"
 import { getBackup } from "./backupStorage"
 
 export const shareBackup = async (name: string) => {
   const backup = await getBackup(name)
-  const base64 = b64urlEncode(JSON.stringify(backup))
+
+  const json = JSON.stringify(backup)
+  const escaped = encodeURIComponent(json)
+  const base64 = btoa(escaped)
+
   window.history.replaceState(undefined, "", `?backup=${base64}`)
 }
 
-let backup: Backup | undefined
-
-if (!process.env.SSR && location.search.startsWith("?backup=")) {
+const decodeBackup = (base64: string) => {
   try {
-    backup = JSON.parse(b64urlDecode(location.search.substring(8)))
-    console.log("Loaded with shared backup:", backup)
-  } catch {}
+    const unescaped = decodeURIComponent(base64)
+    return JSON.parse(unescaped) as Backup
+  } catch {
+    return null
+  }
 }
 
-export const getSharedBackup = (url?: URL) => {
-  if (!process.env.SSR) return backup
+let cachedBackup: undefined | null | Backup
 
-  if (url && url.searchParams.has("backup")) {
-    try {
-      return JSON.parse(b64urlDecode(url.searchParams.get("backup")!))
-    } catch {}
+export const getSharedBackup = (url: URL) => {
+  if (cachedBackup !== undefined) return cachedBackup
+
+  const backupParam = url.searchParams.get("backup")
+  if (backupParam) {
+    const backup = decodeBackup(backupParam)
+
+    if (!process.env.SSR) {
+      if (backup) console.log("Loaded with shared backup:", backup)
+      cachedBackup = backup
+    }
+
+    return backup
   }
 }
