@@ -117,18 +117,18 @@ export default function RichEmbed(props: Props) {
 
   return (
     <Container>
-      <Pill style={{ background: embedPillColor }} />
+      <Pill style={{ backgroundColor: embedPillColor }} />
       <EmbedContent>
         <InnerEmbedContent>
-          {author && <EmbedAuthor author={author} />}
-          {title && (
+          {author !== undefined && <EmbedAuthor author={author} />}
+          {title !== undefined && (
             <EmbedTitle href={String(url)}>
-              <Markup content={title} inline />
+              <Markup content={String(title)} inline />
             </EmbedTitle>
           )}
-          {description && (
+          {description !== undefined && (
             <EmbedDescription>
-              <Markup content={description} />
+              <Markup content={String(description)} />
             </EmbedDescription>
           )}
           {fields && (
@@ -138,12 +138,14 @@ export default function RichEmbed(props: Props) {
               ))}
             </EmbedFields>
           )}
-          {image && <EmbedImage src={String(image.url)} alt="Image" />}
-          {(footer || timestamp) && (
+          {image !== undefined && (
+            <EmbedImage src={String(image.url)} alt="Image" />
+          )}
+          {(footer !== undefined || timestamp !== undefined) && (
             <EmbedFooter footer={footer} timestamp={timestamp} />
           )}
         </InnerEmbedContent>
-        {thumbnail && (
+        {thumbnail !== undefined && (
           <EmbedThumbnail src={String(thumbnail.url)} alt="Thumbnail" />
         )}
       </EmbedContent>
