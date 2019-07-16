@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import React from "react";
-import { Footer } from "./Message";
+import styled from "@emotion/styled"
+import React from "react"
+import { Footer } from "./Message"
 
 type Props = {
   footer?: Footer
@@ -91,9 +91,9 @@ export default function EmbedFooter(props: Props) {
 
   return (
     <Container>
-      {iconUrl && <FooterImage src={iconUrl} alt="Footer image" />}
+      {iconUrl && <FooterImage src={String(iconUrl)} alt="Footer image" />}
       <FooterText>
-        {text}
+        {String(text || "")}
         {footer && timestamp && <FooterSeparator>•</FooterSeparator>}
         {timestamp && formatTimestamp(timestamp)}
       </FooterText>

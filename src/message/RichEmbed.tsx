@@ -122,7 +122,7 @@ export default function RichEmbed(props: Props) {
         <InnerEmbedContent>
           {author && <EmbedAuthor author={author} />}
           {title && (
-            <EmbedTitle href={url}>
+            <EmbedTitle href={String(url)}>
               <Markup content={title} inline={true} />
             </EmbedTitle>
           )}
@@ -138,10 +138,14 @@ export default function RichEmbed(props: Props) {
               ))}
             </EmbedFields>
           )}
-          {image && <EmbedImage src={image.url} alt="Image" />}
-          {(footer || timestamp) && <EmbedFooter {...{ footer, timestamp }} />}
+          {image && <EmbedImage src={String(image.url)} alt="Image" />}
+          {(footer || timestamp) && (
+            <EmbedFooter footer={footer} timestamp={timestamp} />
+          )}
         </InnerEmbedContent>
-        {thumbnail && <EmbedThumbnail src={thumbnail.url} alt="Thumbnail" />}
+        {thumbnail && (
+          <EmbedThumbnail src={String(thumbnail.url)} alt="Thumbnail" />
+        )}
       </EmbedContent>
     </Container>
   )

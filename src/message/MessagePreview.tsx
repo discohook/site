@@ -34,16 +34,21 @@ const Container = styled.div`
 `
 
 export default function MessagePreview(props: Props) {
-  const { message, files: fileList } = props
+  const { message, files } = props
   const { content, embeds, username, avatarUrl } = message
-  const files = fileList && Array.from(fileList)
 
   return (
     <Container>
       <MessageHeader username={username} avatarUrl={avatarUrl} />
       {content && <Markup content={content} />}
-      {embeds && embeds.map(e => <RichEmbed embed={e} key={e[id]} />)}
-      {files && files.map(f => <Attachment file={f} key={f.name} />)}
+      {embeds &&
+        Array.from(embeds).map(embed => (
+          <RichEmbed embed={embed} key={embed[id]} />
+        ))}
+      {files &&
+        Array.from(files).map(file => (
+          <Attachment file={file} key={file.name} />
+        ))}
     </Container>
   )
 }

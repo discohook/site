@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import React from "react";
-import { Author } from "./Message";
+import styled from "@emotion/styled"
+import React from "react"
+import { Author } from "./Message"
 
 type Props = {
   author: Author
@@ -36,8 +36,8 @@ export default function EmbedAuthor(props: Props) {
 
   return (
     <Container>
-      {iconUrl && <AuthorImage src={iconUrl} alt="Author image" />}
-      {name && <AuthorName href={url}>{name}</AuthorName>}
+      {iconUrl && <AuthorImage src={String(iconUrl)} alt="Author image" />}
+      {name && <AuthorName href={String(url)}>{String(name)}</AuthorName>}
     </Container>
   )
 }
