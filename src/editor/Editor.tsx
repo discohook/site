@@ -25,10 +25,9 @@ interface Props {
   onToggleDisplay: () => void
 }
 
-const EditorContainer = styled.form`
+const EditorContainer = styled.div`
   position: relative;
 `
-EditorContainer.defaultProps = { onSubmit: event => event.preventDefault() }
 
 const EditorInnerContainer = styled(Container)`
   display: block;
