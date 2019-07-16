@@ -45,6 +45,15 @@ const EditorActionsContainer = styled(ActionsContainer)`
   margin: 8px;
 `
 
+const JavaScriptWarning = styled.noscript`
+  display: block;
+
+  margin: -8px -8px 16px;
+  padding: 16px;
+  background: ${({ theme }) => theme.red};
+  color: #ffffff;
+`
+
 export default function Editor(props: Props) {
   const {
     message,
@@ -132,6 +141,10 @@ export default function Editor(props: Props) {
       <EditorInnerContainer
         style={isBackupModalShown ? { overflow: "hidden" } : undefined}
       >
+        <JavaScriptWarning>
+          Discohook requires JavaScript to be enabled, please turn it on in your
+          browser settings to use this app.
+        </JavaScriptWarning>
         <EditorActionsContainer>
           <ActionsHeader>Message editor</ActionsHeader>
           <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
