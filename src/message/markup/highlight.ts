@@ -9,21 +9,19 @@ for (const language of languages) {
   for (const alias of language.aliases) aliases[alias] = name
 }
 
-type HLJSLanguage = (hljs?: HLJSStatic) => IModeBase
+// prettier-ignore
+const importFromHljs = (name: string) =>
+  import(`highlight.js/lib/languages/${name}` /* webpackChunkName: "hljs-[request]" */)
+    .then(module => module.default) as Promise<(hljs?: HLJSStatic) => IModeBase>
 
 const importLanguage = async (name: string) => {
   const lang = languages.find(lang => lang.aliases.includes(name))
   if (!lang) return
 
   const languagesToImport = [...(lang.dependencies || []), aliases[name]]
-  const hljsLanguages = languagesToImport.map(
-    async name =>
-      [
-        name,
-        (await import(`highlight.js/lib/languages/${name}` /* webpackChunkName: "hljs-[request]" */))
-          .default,
-      ] as [string, HLJSLanguage],
-  )
+  const hljsLanguages = languagesToImport.map(async language => {
+    return [language, await importFromHljs(language)] as const
+  })
 
   for await (const [name, language] of hljsLanguages) {
     hljs.registerLanguage(name, language)
