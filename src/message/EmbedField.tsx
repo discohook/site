@@ -32,7 +32,7 @@ export default function EmbedField(props: Props) {
   return (
     <Container inline={inline}>
       <FieldName>
-        <Markup content={name} inline={true} />
+        <Markup content={name} inline />
       </FieldName>
       <FieldValue>
         <Markup content={value} />

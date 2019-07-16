@@ -123,7 +123,7 @@ export default function RichEmbed(props: Props) {
           {author && <EmbedAuthor author={author} />}
           {title && (
             <EmbedTitle href={String(url)}>
-              <Markup content={title} inline={true} />
+              <Markup content={title} inline />
             </EmbedTitle>
           )}
           {description && (
