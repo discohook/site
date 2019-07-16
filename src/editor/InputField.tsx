@@ -23,7 +23,7 @@ type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 export default function InputField(props: Props) {
   const {
     id,
-    value,
+    value: rawValue,
     onChange: handleChange,
     label,
     type,
@@ -31,16 +31,16 @@ export default function InputField(props: Props) {
     placeholder,
     maxLength,
   } = props
+  const value = String(rawValue === undefined ? "" : rawValue)
 
   const Input = multiline ? MultilineTextInput : TextInput
 
-  const state = !maxLength
-    ? "normal"
-    : (value || "").length / maxLength < 0.9
-    ? "normal"
-    : (value || "").length / maxLength > 1
-    ? "error"
-    : "warning"
+  const state =
+    !maxLength || value.length / maxLength < 0.9
+      ? "normal"
+      : value.length / maxLength > 1
+      ? "error"
+      : "warning"
 
   return (
     <Container>
@@ -48,7 +48,7 @@ export default function InputField(props: Props) {
         {label}
         <Input
           id={id}
-          value={value || ""}
+          value={value}
           onChange={(event: Event) => handleChange(event.target.value)}
           type={type || "text"}
           placeholder={placeholder}
@@ -56,7 +56,7 @@ export default function InputField(props: Props) {
       </InputLabel>
       {maxLength && (
         <InputNote state={state}>
-          {(value || "").length} / {maxLength}
+          {value.length} / {maxLength}
         </InputNote>
       )}
     </Container>
