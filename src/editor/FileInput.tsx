@@ -1,6 +1,5 @@
 import styled from "@emotion/styled"
-import React, { useMemo, useRef } from "react"
-import { getUniqueId } from "../uid"
+import React, { useRef } from "react"
 import { FakeFile } from "./backup/Backup"
 import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
 
@@ -55,19 +54,17 @@ export default function FileInput(props: Props) {
     handleChange(fakeFiles)
   }
 
-  const id = useMemo(getUniqueId, [])
-
   const isFileList =
     !process.env.SSR && (fileList instanceof FileList || files.length === 0)
 
   return (
     <Container>
-      <InputLabel htmlFor={id}>Files</InputLabel>
+      <InputLabel htmlFor="file">Files</InputLabel>
       <Container direction="row">
         <InputContainer>
           <FakeInput>{files.map(file => file.name).join(", ")}</FakeInput>
           <HiddenInput
-            id={id}
+            id="file"
             type="file"
             multiple
             onClick={() => fakeFiles()}

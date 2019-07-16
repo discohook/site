@@ -57,6 +57,7 @@ export default function EmbedEditor(props: Props) {
       <BoxContainer>
         <InputGroup>
           <InputField
+            id={`message-embed${embed[id]}-title`}
             value={embed.title}
             onChange={title =>
               modifyEmbed(index, {
@@ -68,6 +69,7 @@ export default function EmbedEditor(props: Props) {
             maxLength={256}
           />
           <InputField
+            id={`message-embed${embed[id]}-url`}
             value={embed.url}
             onChange={url =>
               modifyEmbed(index, {
@@ -79,6 +81,7 @@ export default function EmbedEditor(props: Props) {
           />
         </InputGroup>
         <InputField
+          id={`message-embed${embed[id]}-description`}
           value={embed.description}
           onChange={description =>
             modifyEmbed(index, {
@@ -91,6 +94,7 @@ export default function EmbedEditor(props: Props) {
           maxLength={2048}
         />
         <AuthorEditor
+          id={embed[id]}
           author={embed.author}
           onChange={author =>
             modifyEmbed(index, {
@@ -100,6 +104,7 @@ export default function EmbedEditor(props: Props) {
           }
         />
         <FieldEditor
+          id={embed[id]}
           fields={embed.fields || []}
           onChange={fields =>
             modifyEmbed(index, {
@@ -109,6 +114,7 @@ export default function EmbedEditor(props: Props) {
           }
         />
         <FooterEditor
+          id={embed[id]}
           footer={embed.footer}
           timestamp={embed.timestamp}
           onChange={partial =>
@@ -120,6 +126,7 @@ export default function EmbedEditor(props: Props) {
         />
         <InputGroup>
           <InputField
+            id={`message-embed${embed[id]}-image`}
             value={(embed.image || {}).url}
             onChange={url =>
               modifyEmbed(index, {
@@ -130,6 +137,7 @@ export default function EmbedEditor(props: Props) {
             label="Image"
           />
           <InputField
+            id={`message-embed${embed[id]}-thumbnail`}
             value={(embed.thumbnail || {}).url}
             onChange={url =>
               modifyEmbed(index, {
@@ -140,6 +148,7 @@ export default function EmbedEditor(props: Props) {
             label="Thumbnail"
           />
           <ColorInput
+            id={embed[id]}
             value={embed.color}
             onChange={color =>
               modifyEmbed(index, {

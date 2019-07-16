@@ -132,6 +132,7 @@ export default function BackupModal(props: Props) {
       </List>
       <Container direction="row">
         <InputField
+          id="backup-name"
           value={newBackupName}
           onChange={setNewBackupName}
           label="Backup name"

@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useMemo } from "react"
-import { getUniqueId } from "../uid"
+import React, { ChangeEvent } from "react"
 import {
   Container,
   InputLabel,
@@ -9,6 +8,7 @@ import {
 } from "./styles"
 
 interface Props {
+  id: string
   value?: string
   onChange: (value: string) => void
   label: string
@@ -22,6 +22,7 @@ type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
 export default function InputField(props: Props) {
   const {
+    id,
     value,
     onChange: handleChange,
     label,
@@ -30,8 +31,6 @@ export default function InputField(props: Props) {
     placeholder,
     maxLength,
   } = props
-
-  const id = useMemo(getUniqueId, [])
 
   const Input = multiline ? MultilineTextInput : TextInput
 

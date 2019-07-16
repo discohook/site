@@ -14,6 +14,7 @@ import {
 } from "./styles"
 
 interface Props {
+  id: number
   fields: Field[]
   onChange: (fields: Field[]) => void
 }
@@ -26,6 +27,7 @@ const InlineToggle = styled(ToggleButton)`
 `
 
 export default function FieldEditor(props: Props) {
+  const { id: embedId } = props
   const fields = Array.from(props.fields)
 
   const addField = () => props.onChange([...fields, { [id]: getUniqueId() }])
@@ -61,6 +63,7 @@ export default function FieldEditor(props: Props) {
       <BoxContainer>
         <Container direction="row">
           <InputField
+            id={`message-embed${embedId}-field${field[id]}-name`}
             value={field.name}
             onChange={name =>
               modifyField(index, {
@@ -84,6 +87,7 @@ export default function FieldEditor(props: Props) {
           </InlineToggle>
         </Container>
         <InputField
+          id={`message-embed${embedId}-field${field[id]}-value`}
           value={field.value}
           onChange={value =>
             modifyField(index, {

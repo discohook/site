@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import InputField from "./InputField"
 
 interface Props {
+  id: number
   value: number | null | undefined
   onChange: (value: number | null | undefined) => void
 }
@@ -12,7 +13,7 @@ const numToHex = (num: number | null | undefined) =>
 const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
 
 export default function ColorInput(props: Props) {
-  const { value, onChange: handleChange } = props
+  const { id, value, onChange: handleChange } = props
 
   const [hex, setHex] = useState(numToHex(value))
 
@@ -35,5 +36,12 @@ export default function ColorInput(props: Props) {
     }
   }, [handleChange, hex, value])
 
-  return <InputField value={hex} onChange={setHex} label="Color" />
+  return (
+    <InputField
+      id={`message-embed${id}-color`}
+      value={hex}
+      onChange={setHex}
+      label="Color"
+    />
+  )
 }

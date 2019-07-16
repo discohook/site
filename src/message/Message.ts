@@ -8,7 +8,7 @@ export interface Message {
 }
 
 export interface Embed {
-  [id]: string
+  [id]: number
   title?: string
   description?: string
   url?: string
@@ -33,7 +33,7 @@ export interface Footer {
 }
 
 export interface Field {
-  [id]: string
+  [id]: number
   name?: string
   value?: string
   inline?: boolean

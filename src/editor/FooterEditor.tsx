@@ -4,6 +4,7 @@ import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
 interface Props {
+  id: number
   footer: Footer | undefined
   timestamp: string | undefined
   onChange: (embed: Omit<Embed, symbol>) => void
@@ -18,7 +19,7 @@ const supportsDateTimeInput = (() => {
 })()
 
 export default function FooterEditor(props: Props) {
-  const { footer = {}, timestamp, onChange } = props
+  const { id: embedId, footer = {}, timestamp, onChange } = props
   const { text, iconUrl } = footer
 
   const handleChange = (embed: Omit<Embed, symbol>) => {
@@ -34,6 +35,7 @@ export default function FooterEditor(props: Props) {
   return (
     <InputGroup>
       <InputField
+        id={`message-embed${embedId}-footer-text`}
         value={text}
         onChange={text =>
           handleChange({
@@ -48,6 +50,7 @@ export default function FooterEditor(props: Props) {
         maxLength={2048}
       />
       <InputField
+        id={`message-embed${embedId}-footer-icon`}
         value={iconUrl}
         onChange={iconUrl =>
           handleChange({
@@ -62,6 +65,7 @@ export default function FooterEditor(props: Props) {
       />
       {supportsDateTimeInput ? (
         <InputField
+          id={`message-embed${embedId}-footer-timestamp`}
           value={
             timestamp && new Date(timestamp).toISOString().replace("Z", "")
           }
@@ -78,6 +82,7 @@ export default function FooterEditor(props: Props) {
         />
       ) : (
         <InputField
+          id={`message-embed${embedId}-footer-timestamp`}
           value={timestamp}
           onChange={timestamp =>
             handleChange({

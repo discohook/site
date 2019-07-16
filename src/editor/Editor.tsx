@@ -154,6 +154,7 @@ export default function Editor(props: Props) {
         </EditorActionsContainer>
         <Container direction="row">
           <InputField
+            id="webhook-url"
             value={webhookUrl}
             onChange={setWebhookUrl}
             label="Webhook URL"
@@ -164,6 +165,7 @@ export default function Editor(props: Props) {
           </Button>
         </Container>
         <InputField
+          id="message-content"
           value={message.content}
           onChange={content =>
             handleChange({
@@ -186,6 +188,7 @@ export default function Editor(props: Props) {
         />
         <Container direction="row">
           <InputField
+            id="message-username"
             value={message.username}
             onChange={username =>
               handleChange({
@@ -197,6 +200,7 @@ export default function Editor(props: Props) {
             maxLength={32}
           />
           <InputField
+            id="message-avatar"
             value={message.avatarUrl}
             onChange={avatarUrl =>
               handleChange({
