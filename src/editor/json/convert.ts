@@ -19,9 +19,9 @@ export const parseMessage = (json: string) => {
       ].join(": ")
     })
 
-    for (const embed of message.embeds || []) {
+    for (const embed of Array.from(message.embeds || [])) {
       embed[id] = getUniqueId()
-      for (const field of embed.fields || []) {
+      for (const field of Array.from(embed.fields || [])) {
         field[id] = getUniqueId()
       }
     }

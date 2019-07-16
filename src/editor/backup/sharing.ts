@@ -19,12 +19,14 @@ const decodeBackup = (base64: string) => {
       : atob(base64)
     const unescaped = decodeURIComponent(escaped)
     const backup = JSON.parse(unescaped) as Backup
-    for (const embed of backup.message.embeds || []) {
+
+    for (const embed of Array.from(backup.message.embeds || [])) {
       embed[id] = getUniqueId()
-      for (const field of embed.fields || []) {
+      for (const field of Array.from(embed.fields || [])) {
         field[id] = getUniqueId()
       }
     }
+
     return backup
   } catch {
     return null
