@@ -57,7 +57,8 @@ export default function FileInput(props: Props) {
 
   const id = useMemo(getUniqueId, [])
 
-  const isFileList = fileList instanceof FileList || files.length === 0
+  const isFileList =
+    !process.env.SSR && (fileList instanceof FileList || files.length === 0)
 
   return (
     <Container>
