@@ -1,29 +1,41 @@
 import styled from "@emotion/styled"
-import React, {
-  forwardRef,
-  Ref,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-} from "react"
+import React, { useMemo, useRef } from "react"
 import { getUniqueId } from "../uid"
 import { FakeFile } from "./backup/Backup"
-import { InputLabel, TextInput } from "./styles"
+import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
 
 interface Props {
+  files: FileList | FakeFile[]
   onChange: (files: FileList | FakeFile[]) => void
 }
 
-interface RefType {
-  files: FileList | FakeFile[]
-  clearFiles: () => void
-}
-
-const Input = styled(TextInput)`
-  padding: 4px 8px;
+const InputContainer = styled.div`
+  position: relative;
+  margin: 0 8px;
 `
 
-function FileInput(props: Props, ref: Ref<RefType>) {
+const FakeInput = styled(TextInput.withComponent("div"))`
+  position: absolute;
+
+  box-sizing: border-box;
+  height: 32px;
+  width: 100%;
+`
+
+const HiddenInput = styled.input`
+  position: absolute;
+  top: 8px;
+
+  height: 32px;
+  width: 100%;
+
+  opacity: 0;
+`
+
+export default function FileInput(props: Props) {
+  const { files: fileList, onChange: handleChange } = props
+  const files = Array.from(fileList)
+
   const inputRef = useRef<HTMLInputElement>(null)
 
   const clearFiles = () => {
@@ -33,26 +45,40 @@ function FileInput(props: Props, ref: Ref<RefType>) {
     props.onChange([])
   }
 
-  useImperativeHandle(ref, () => ({
-    files: (inputRef.current && inputRef.current.files) || [],
-    clearFiles,
-  }))
+  const fakeFiles = () => {
+    const fakeFiles = files.map(file => ({
+      name: file.name,
+      type: file.type,
+      size: file.size,
+    }))
+
+    handleChange(fakeFiles)
+  }
 
   const id = useMemo(getUniqueId, [])
 
+  const isFileList = fileList instanceof FileList || files.length === 0
+
   return (
-    <InputLabel htmlFor={id}>
-      Files
-      <Input
-        id={id}
-        onClick={clearFiles}
-        onChange={event => props.onChange(event.target.files || [])}
-        type="file"
-        multiple={true}
-        ref={inputRef}
-      />
-    </InputLabel>
+    <Container>
+      <InputLabel htmlFor={id}>Files</InputLabel>
+      <Container direction="row">
+        <InputContainer>
+          <FakeInput>{files.map(file => file.name).join(", ")}</FakeInput>
+          <HiddenInput
+            id={id}
+            type="file"
+            multiple
+            onClick={() => fakeFiles()}
+            onChange={event => handleChange(event.target.files || [])}
+            ref={inputRef}
+          />
+        </InputContainer>
+        <Button onClick={clearFiles}>Remove files</Button>
+      </Container>
+      {!isFileList && (
+        <InputNote state="error">Files are unavailable</InputNote>
+      )}
+    </Container>
   )
 }
-
-export default forwardRef(FileInput)

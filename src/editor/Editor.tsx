@@ -1,11 +1,5 @@
 import styled from "@emotion/styled"
-import React, {
-  ComponentProps,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { Message } from "../message/Message"
 import { FakeFile } from "./backup/Backup"
 import BackupModal from "./backup/BackupModal"
@@ -114,15 +108,9 @@ export default function Editor(props: Props) {
     console.log("Webhook executed:", await response.json())
   }
 
-  const fileInputRef: ComponentProps<typeof FileInput>["ref"] = useRef(null)
-  const clearFiles = () => {
-    const { current: fileInput } = fileInputRef
-    if (fileInput) fileInput.clearFiles()
-  }
-
   const clearAll = () => {
     handleChange({})
-    clearFiles()
+    handleFilesChange([])
   }
 
   const isDisabled = (() => {
@@ -207,10 +195,7 @@ export default function Editor(props: Props) {
             label="Override avatar"
           />
         </Container>
-        <Container direction="row">
-          <FileInput onChange={handleFilesChange} ref={fileInputRef} />
-          <Button onClick={clearFiles}>Remove files</Button>
-        </Container>
+        <FileInput files={files} onChange={handleFilesChange} />
         <JsonInput json={json} onChange={handleJsonChange} errors={errors} />
       </EditorInnerContainer>
       {isBackupModalShown && (
