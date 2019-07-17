@@ -7,7 +7,7 @@ type Props = {
   field: Field
 }
 
-const Container = styled.div<{ inline?: boolean }>`
+const Container = styled.div<{ inline: boolean }>`
   flex: ${({ inline }) => (inline ? 1 : 0)};
   margin: 4px 0 0;
   min-width: ${({ inline }) => (inline ? "150px" : "100%")};
@@ -27,7 +27,7 @@ const FieldValue = styled.div`
 `
 
 export default function EmbedField(props: Props) {
-  const { name = "", value = "", inline } = props.field
+  const { name = "", value = "", inline = false } = props.field
 
   return (
     <Container inline={inline}>
