@@ -1,7 +1,7 @@
-import React from "react";
-import { Author } from "../message/Message";
-import InputField from "./InputField";
-import { InputGroup } from "./styles";
+import React from "react"
+import { Author } from "../message/Message"
+import InputField from "./InputField"
+import { InputGroup } from "./styles"
 
 type Props = {
   id: number

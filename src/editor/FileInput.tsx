@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import React, { useRef } from "react";
-import { FakeFile } from "./backup/Backup";
-import { Button, Container, InputLabel, InputNote, TextInput } from "./styles";
+import styled from "@emotion/styled"
+import React, { useRef } from "react"
+import { FakeFile } from "./backup/Backup"
+import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
 
 type Props = {
   files: FileList | FakeFile[]

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import InputField from "./InputField";
+import React, { useEffect, useState } from "react"
+import InputField from "./InputField"
 
 type Props = {
   id: number
