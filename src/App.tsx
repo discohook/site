@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
+import { Context } from "koa"
 import React, { useEffect, useState } from "react"
 import { FakeFile } from "./editor/backup/Backup"
 import { getSharedBackup } from "./editor/backup/sharing"
@@ -10,7 +11,7 @@ import Preview from "./message/Preview"
 import { darkTheme, lightTheme, Theme } from "./themes"
 
 type Props = {
-  startUrl: URL
+  requestContext?: Context
 }
 
 const Container = styled.div`
@@ -51,7 +52,10 @@ const View = styled.div<{ mobile: boolean }>`
 `
 
 export default function App(props: Props) {
-  const backup = getSharedBackup(props.startUrl) || {
+  const { URL: url = new URL(location.href), headers = {} } =
+    props.requestContext || {}
+
+  const backup = getSharedBackup(url) || {
     message: initialMessage,
     files: [],
   }
@@ -77,7 +81,11 @@ export default function App(props: Props) {
   }
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
-  const isMobile = /mobile/i.test(navigator.userAgent)
+
+  const userAgent = process.env.SSR
+    ? headers["user-agent"]
+    : navigator.userAgent
+  const isMobile = /mobile/i.test(userAgent)
 
   return (
     <ThemeProvider theme={theme}>
