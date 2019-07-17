@@ -9,10 +9,9 @@ const common = {
   red: "#f04747",
 
   fonts: {
-    normal: "'Whitney', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-    code: "'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
-    mono:
-      "'SourceCodePro', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', monospace",
+    normal: "Whitney, Helvetica Neue, Helvetica, Arial, sans-serif",
+    code: "Consolas, Liberation Mono, Menlo, Courier, monospace",
+    mono: "SourceCodePro, Consolas, Liberation Mono, Menlo, Courier, monospace",
   },
 
   message: {
