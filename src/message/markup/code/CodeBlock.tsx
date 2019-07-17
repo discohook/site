@@ -1,7 +1,7 @@
 import { IHighlightResult } from "highlight.js"
 import React, { ComponentPropsWithoutRef, useEffect, useState } from "react"
+import { CodeBlockContainer } from "../styles"
 import { highlight } from "./highlight"
-import { CodeBlockContainer } from "./styles"
 
 type Props = {
   content: string

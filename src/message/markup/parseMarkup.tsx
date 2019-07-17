@@ -8,7 +8,7 @@ import {
   parserFor,
   Rules,
 } from "simple-markdown"
-import CodeBlock from "./CodeBlock"
+import CodeBlock from "./code/CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 import { Code, Emoji, Mention, Spoiler } from "./styles"
 
