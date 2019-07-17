@@ -69,9 +69,7 @@ export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
   min-height: 60px;
 ` as SC<"textarea">
 
-export const InputNote = styled.div<{
-  state: "normal" | "warning" | "error"
-}>`
+export const InputNote = styled.div<{ state: "normal" | "warning" | "error" }>`
   align-self: flex-end;
   margin: 0 10px 0 0;
 
