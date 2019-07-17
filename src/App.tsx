@@ -26,16 +26,22 @@ const TabSwitcher = styled.div`
   display: flex;
 `
 
-const Tab = styled.div<{ active: boolean }>`
+const Tab = styled.button<{ active: boolean }>`
   box-sizing: border-box;
 
   height: 40px;
   padding: 0 12px;
+
+  background: transparent;
+  border: none;
   border-bottom: 2px solid
     ${({ theme, active }) => (active ? theme.accent : theme.text)};
 
+  font-family: ${({ theme }) => theme.fonts.normal};
+  font-weight: 500;
+  font-size: 15px;
+  color: ${({ theme }) => theme.important};
   line-height: 38px;
-  vertical-align: center;
 `
 
 const View = styled.div<{ mobile: boolean }>`
