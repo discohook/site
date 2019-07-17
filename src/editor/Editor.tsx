@@ -128,12 +128,11 @@ export default function Editor(props: Props) {
     if (webhookUrl.trim().length === 0) return true
 
     const { content, embeds } = props.message
-    if ((typeof content === "string" || embeds) && errors.length > 0)
-      return true
+    if (typeof content === "string") return false
+    if (embeds && embeds.length !== 0) return false
+    if (files && files.length !== 0) return false
 
-    if (files && files.length === 0) return true
-
-    return false
+    return true
   })()
 
   const [isBackupModalShown, setIsBackupModalShown] = useState(false)
