@@ -24,8 +24,7 @@ const [templateBefore, templateAfter] = html
 const encodings = {
   gzip: createGzip,
   deflate: createDeflate,
-  identity: () =>
-    new Transform({ transform: (chunk, _enc, cb) => cb(undefined, chunk) }),
+  identity: () => new Transform({ transform: (data, _, cb) => cb(null, data) }),
 } as const
 
 app.use(conditional())
