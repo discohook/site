@@ -32,7 +32,7 @@ const EditorContainer = styled.div`
 const EditorInnerContainer = styled(Container)`
   display: block;
   box-sizing: border-box;
-  height: 100vh;
+  height: 100%;
   overflow-y: scroll;
   padding: 8px;
 
