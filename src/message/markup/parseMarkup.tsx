@@ -53,7 +53,7 @@ const baseRules: Rules = {
   shrug: {
     // Edge case for shrug emoji getting parsed as markup.
     order: defaultRules.text.order,
-    match: anyScopeRegex(/^¯\\_\(ツ\)_\/¯/),
+    match: inlineRegex(/^¯\\_\(ツ\)_\/¯/),
     parse: (capture, _parse, _state) => ({
       type: "text",
       content: capture[1],
@@ -61,7 +61,7 @@ const baseRules: Rules = {
   },
   emoji: {
     order: defaultRules.text.order,
-    match: anyScopeRegex(/^:([^\s:]+?(?:::skin\-tone\-\d)?):/),
+    match: inlineRegex(/^:([^\s:]+?(?:::skin\-tone\-\d)?):/),
     parse: (capture, _parse, _state) =>
       nameToEmoji[capture[1]]
         ? {
@@ -89,12 +89,11 @@ const baseRules: Rules = {
   },
   customEmoji: {
     order: defaultRules.text.order,
-    match: anyScopeRegex(/^<(a?):(\w+):(\d+)>/),
+    match: inlineRegex(/^<a?:(\w+):(\d+)>/),
     parse: (capture, _parse, _state) => ({
-      id: capture[3],
-      name: `${capture[2]}`,
-      src: `https://cdn.discordapp.com/emojis/${capture[3]}`,
-      animated: !!capture[1],
+      id: capture[2],
+      name: `${capture[1]}`,
+      src: `https://cdn.discordapp.com/emojis/${capture[2]}`,
     }),
     react: (node, _output, state) => (
       <Emoji
@@ -122,32 +121,6 @@ const baseRules: Rules = {
   del: {
     ...defaultRules.del,
     match: inlineRegex(/^~~([\s\S]+?)~~(?!_)/),
-  },
-  mention: {
-    order: defaultRules.text.order,
-    match: inlineRegex(/^<@!?\d+>|^@(everyone|here)/),
-    parse: (capture, _parse, _state) => ({
-      content: capture[1] ? `@${capture[1]}` : "@unknown-user",
-    }),
-    react: (node, _output, state) => (
-      <Mention key={state.key}>{node.content}</Mention>
-    ),
-  },
-  roleMention: {
-    order: defaultRules.text.order,
-    match: inlineRegex(/^<@&\d+>/),
-    parse: () => ({
-      type: "mention",
-      content: "@unknown-role",
-    }),
-  },
-  channelMention: {
-    order: defaultRules.text.order,
-    match: inlineRegex(/^<#\d+>/),
-    parse: () => ({
-      type: "mention",
-      content: "#unknown-channel",
-    }),
   },
   spoiler: {
     order: defaultRules.text.order,
@@ -187,6 +160,32 @@ const blockRules: Rules = {
         content={node.content}
       />
     ),
+  },
+  mention: {
+    order: defaultRules.text.order,
+    match: inlineRegex(/^<@!?\d+>|^@(everyone|here)/),
+    parse: (capture, _parse, _state) => ({
+      content: capture[1] ? `@${capture[1]}` : "@unknown-user",
+    }),
+    react: (node, _output, state) => (
+      <Mention key={state.key}>{node.content}</Mention>
+    ),
+  },
+  roleMention: {
+    order: defaultRules.text.order,
+    match: inlineRegex(/^<@&\d+>/),
+    parse: () => ({
+      type: "mention",
+      content: "@unknown-role",
+    }),
+  },
+  channelMention: {
+    order: defaultRules.text.order,
+    match: inlineRegex(/^<#\d+>/),
+    parse: () => ({
+      type: "mention",
+      content: "#unknown-channel",
+    }),
   },
 }
 
