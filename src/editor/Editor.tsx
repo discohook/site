@@ -17,6 +17,7 @@ import {
 } from "./styles"
 
 type Props = {
+  mobile: boolean
   message: Message
   onChange: (message: Message) => void
   files: FileList | FakeFile[]
@@ -29,10 +30,10 @@ const EditorContainer = styled.div`
   position: relative;
 `
 
-const EditorInnerContainer = styled(Container)`
+const EditorInnerContainer = styled(Container)<{ mobile: boolean }>`
   display: block;
   box-sizing: border-box;
-  height: 100%;
+  height: ${({ mobile }) => (mobile ? "calc(100vh - 40px)" : "100vh")};
   overflow-y: scroll;
   padding: 8px;
 
@@ -56,6 +57,7 @@ const JavaScriptWarning = styled.noscript`
 
 export default function Editor(props: Props) {
   const {
+    mobile: isMobile,
     message,
     onChange,
     files,
@@ -139,6 +141,7 @@ export default function Editor(props: Props) {
   return (
     <EditorContainer>
       <EditorInnerContainer
+        mobile={isMobile}
         style={isBackupModalShown ? { overflow: "hidden" } : undefined}
       >
         <JavaScriptWarning>

@@ -18,7 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  max-height: 100vh;
+  height: 100vh;
 `
 
 const TabSwitcher = styled.div`
@@ -119,6 +119,7 @@ export default function App(props: Props) {
           )}
           {(!isMobile || activeTab === "editor") && (
             <Editor
+              mobile={isMobile}
               message={message}
               onChange={setMessage}
               files={files}
