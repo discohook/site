@@ -11,7 +11,7 @@ type Props = {
 export default function CodeBlock(props: Props) {
   const { content, language = "" } = props
 
-  const [highlighted, setHighlighted] = useState<IHighlightResult | null>(null)
+  const [highlighted, setHighlighted] = useState<IHighlightResult | undefined>()
 
   useEffect(() => {
     highlight(language, content).then(setHighlighted)

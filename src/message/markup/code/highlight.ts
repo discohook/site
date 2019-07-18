@@ -30,7 +30,7 @@ const importLanguage = async (name: string) => {
 }
 
 export const highlight = async (language: string, content: string) => {
-  if (!aliases[language]) return null
+  if (!aliases[language]) return
   if (hljs.getLanguage(language)) return hljs.highlight(language, content)
 
   await importLanguage(language)
