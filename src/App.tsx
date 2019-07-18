@@ -36,6 +36,7 @@ const Tab = styled.button<{ active: boolean }>`
   border: none;
   border-bottom: 2px solid
     ${({ theme, active }) => (active ? theme.accent : theme.text)};
+  border-radius: 0;
 
   font-family: ${({ theme }) => theme.fonts.normal};
   font-weight: 500;
