@@ -10,10 +10,6 @@ import { initialMessage } from "./initialMessage"
 import Preview from "./message/Preview"
 import { darkTheme, lightTheme, Theme } from "./themes"
 
-type Props = {
-  requestContext?: Context
-}
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,6 +53,10 @@ const View = styled.div<{ mobile: boolean }>`
     flex: 1;
   }
 `
+
+type Props = {
+  requestContext?: Context
+}
 
 export default function App(props: Props) {
   const { URL: url = new URL(location.href), headers = {} } =

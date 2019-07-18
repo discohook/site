@@ -3,11 +3,6 @@ import React, { useRef } from "react"
 import { FakeFile } from "./backup/Backup"
 import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
 
-type Props = {
-  files: FileList | FakeFile[]
-  onChange: (files: FileList | FakeFile[]) => void
-}
-
 const InputContainer = styled.div`
   position: relative;
   margin: 0 8px;
@@ -30,6 +25,11 @@ const HiddenInput = styled.input`
 
   opacity: 0;
 `
+
+type Props = {
+  files: FileList | FakeFile[]
+  onChange: (files: FileList | FakeFile[]) => void
+}
 
 export default function FileInput(props: Props) {
   const { files: fileList, onChange: handleChange } = props

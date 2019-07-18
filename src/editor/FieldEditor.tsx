@@ -13,18 +13,18 @@ import {
   ToggleButton,
 } from "./styles"
 
-type Props = {
-  id: number
-  fields: Field[]
-  onChange: (fields: Field[]) => void
-}
-
 const InlineToggle = styled(ToggleButton)`
   && {
     margin: 28px 8px 8px;
     align-self: flex-start;
   }
 `
+
+type Props = {
+  id: number
+  fields: Field[]
+  onChange: (fields: Field[]) => void
+}
 
 export default function FieldEditor(props: Props) {
   const { id: embedId } = props

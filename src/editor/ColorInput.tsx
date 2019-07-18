@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react"
 import InputField from "./InputField"
 
+const numToHex = (num: number | null | undefined) =>
+  typeof num === "number" ? `#${num.toString(16).padStart(6, "0")}` : ""
+
+const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
+
 type Props = {
   id: number
   value: number | null | undefined
   onChange: (value: number | null | undefined) => void
 }
-
-const numToHex = (num: number | null | undefined) =>
-  typeof num === "number" ? `#${num.toString(16).padStart(6, "0")}` : ""
-
-const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
 
 export default function ColorInput(props: Props) {
   const { id, value, onChange: handleChange } = props

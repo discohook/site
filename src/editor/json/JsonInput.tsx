@@ -2,12 +2,6 @@ import styled from "@emotion/styled"
 import React from "react"
 import { Container, InputLabel, MultilineTextInput } from "../styles"
 
-type Props = {
-  json: string
-  onChange: (json: string) => void
-  errors: string[]
-}
-
 const ErrorContainer = styled.div`
   margin: 8px 8px 0;
   padding: 8px 16px;
@@ -29,6 +23,12 @@ const CodeInput = styled(MultilineTextInput)`
   margin: 8px;
   font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
 `
+
+type Props = {
+  json: string
+  onChange: (json: string) => void
+  errors: string[]
+}
 
 export default function JsonInput(props: Props) {
   return (

@@ -2,10 +2,6 @@ import styled from "@emotion/styled"
 import React from "react"
 import { Author } from "./Message"
 
-type Props = {
-  author: Author
-}
-
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -28,6 +24,10 @@ const AuthorNameNormal = styled.span`
 `
 
 const AuthorNameLink = AuthorNameNormal.withComponent("a")
+
+type Props = {
+  author: Author
+}
 
 export default function EmbedAuthor(props: Props) {
   const { name, url, iconUrl } = props.author

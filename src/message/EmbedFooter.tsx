@@ -2,11 +2,6 @@ import styled from "@emotion/styled"
 import React from "react"
 import { Footer } from "./Message"
 
-type Props = {
-  footer?: Footer
-  timestamp?: string
-}
-
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -83,6 +78,11 @@ const formatTimestamp = (timestamp: string) => {
     default:
       return `${day}/${month}/${year}`
   }
+}
+
+type Props = {
+  footer?: Footer
+  timestamp?: string
 }
 
 export default function EmbedFooter(props: Props) {

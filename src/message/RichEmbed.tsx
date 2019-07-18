@@ -7,10 +7,6 @@ import EmbedFooter from "./EmbedFooter"
 import Markup from "./markup/Markup"
 import { Embed } from "./Message"
 
-type Props = {
-  embed: Embed
-}
-
 const Container = styled.div`
   margin: 8px 0 0;
   max-width: 520px;
@@ -93,6 +89,10 @@ const EmbedThumbnail = styled.img`
 
   cursor: pointer;
 `
+
+type Props = {
+  embed: Embed
+}
 
 export default function RichEmbed(props: Props) {
   const {

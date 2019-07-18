@@ -16,16 +16,6 @@ import {
   Container,
 } from "./styles"
 
-type Props = {
-  mobile: boolean
-  message: Message
-  onChange: (message: Message) => void
-  files: FileList | FakeFile[]
-  onFilesChange: (files: FileList | FakeFile[]) => void
-  onToggleTheme: () => void
-  onToggleDisplay: () => void
-}
-
 const EditorContainer = styled.div`
   position: relative;
 `
@@ -54,6 +44,16 @@ const JavaScriptWarning = styled.noscript`
   background: ${({ theme }) => theme.red};
   color: #ffffff;
 `
+
+type Props = {
+  mobile: boolean
+  message: Message
+  onChange: (message: Message) => void
+  files: FileList | FakeFile[]
+  onFilesChange: (files: FileList | FakeFile[]) => void
+  onToggleTheme: () => void
+  onToggleDisplay: () => void
+}
 
 export default function Editor(props: Props) {
   const {

@@ -13,13 +13,6 @@ import { Backup, FakeFile } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 import { shareBackup } from "./sharing"
 
-type Props = {
-  message: Message
-  files: FileList | FakeFile[]
-  onLoad: (backup: Backup) => void
-  onClose: () => void
-}
-
 const ModalContainer = styled.div`
   position: absolute;
   top: 0;
@@ -76,6 +69,13 @@ const BackupAction = styled.a<{ dangerous?: boolean }>`
   color: ${({ theme, dangerous }) => (dangerous ? theme.red : theme.important)};
   cursor: pointer;
 `
+
+type Props = {
+  message: Message
+  files: FileList | FakeFile[]
+  onLoad: (backup: Backup) => void
+  onClose: () => void
+}
 
 export default function BackupModal(props: Props) {
   const { message, files, onLoad, onClose: handleClose } = props

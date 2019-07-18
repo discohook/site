@@ -3,10 +3,6 @@ import React from "react"
 import Markup from "./markup/Markup"
 import { Field } from "./Message"
 
-type Props = {
-  field: Field
-}
-
 const Container = styled.div<{ inline: boolean }>`
   flex: ${({ inline }) => (inline ? 1 : 0)};
   margin: 4px 0 0;
@@ -25,6 +21,10 @@ const FieldValue = styled.div`
   color: ${({ theme }) => theme.message.embed.field.value};
   font-size: 14px;
 `
+
+type Props = {
+  field: Field
+}
 
 export default function EmbedField(props: Props) {
   const { name = "", value = "", inline = false } = props.field

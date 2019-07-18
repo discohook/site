@@ -5,11 +5,6 @@ import ErrorBoundary from "../ErrorBoundary"
 import { Message } from "./Message"
 import MessagePreview from "./MessagePreview"
 
-type Props = {
-  message: Message
-  files: FileList | FakeFile[]
-}
-
 const Container = styled.main`
   display: flex;
   flex-direction: column;
@@ -45,6 +40,11 @@ function PreviewError() {
       </ErrorParagraph>
     </ErrorContainer>
   )
+}
+
+type Props = {
+  message: Message
+  files: FileList | FakeFile[]
 }
 
 export default function Preview(props: Props) {

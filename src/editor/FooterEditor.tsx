@@ -3,13 +3,6 @@ import { Embed, Footer } from "../message/Message"
 import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
-type Props = {
-  id: number
-  footer: Footer | undefined
-  timestamp: string | undefined
-  onChange: (embed: Omit<Embed, symbol>) => void
-}
-
 const supportsDateTimeInput = (() => {
   if (process.env.SSR) return false
 
@@ -17,6 +10,13 @@ const supportsDateTimeInput = (() => {
   input.type = "datetime-local"
   return input.type === "datetime-local"
 })()
+
+type Props = {
+  id: number
+  footer: Footer | undefined
+  timestamp: string | undefined
+  onChange: (embed: Omit<Embed, symbol>) => void
+}
 
 export default function FooterEditor(props: Props) {
   const { id: embedId, footer = {}, timestamp, onChange } = props

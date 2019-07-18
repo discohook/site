@@ -7,6 +7,8 @@ import {
   TextInput,
 } from "./styles"
 
+type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+
 type Props = {
   id: string
   value?: string
@@ -17,8 +19,6 @@ type Props = {
   placeholder?: string
   maxLength?: number
 }
-
-type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
 export default function InputField(props: Props) {
   const {

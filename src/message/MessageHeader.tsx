@@ -1,11 +1,6 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 
-type Props = {
-  username?: string
-  avatarUrl?: string
-}
-
 const Container = styled.div`
   height: ${({ theme }) => (theme.display === "cozy" ? "20.8px" : "auto")};
   display: ${({ theme }) =>
@@ -88,6 +83,11 @@ const getTimestamp = () =>
     minute: "numeric",
     hour12: true,
   })
+
+type Props = {
+  username?: string
+  avatarUrl?: string
+}
 
 export default function MessageHeader(props: Props) {
   const {

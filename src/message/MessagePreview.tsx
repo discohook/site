@@ -9,11 +9,6 @@ import { Message } from "./Message"
 import MessageHeader from "./MessageHeader"
 import RichEmbed from "./RichEmbed"
 
-type Props = {
-  message: Message
-  files: FileList | FakeFile[]
-}
-
 const Container = styled.div`
   margin: ${({ theme }) =>
     theme.display === "cozy" ? "0 0 0 80px" : "0 0 0 9ch"};
@@ -32,6 +27,11 @@ const Container = styled.div`
     margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "4px")};
   }
 `
+
+type Props = {
+  message: Message
+  files: FileList | FakeFile[]
+}
 
 export default function MessagePreview(props: Props) {
   const { message, files } = props
