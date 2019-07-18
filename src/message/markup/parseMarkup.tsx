@@ -230,12 +230,16 @@ const ellipsize = (text: string, length: number) => {
 const now = () =>
   typeof performance === "object" && performance.now ? performance.now() : 0
 
-export const parseMarkup = (content: string, inline: boolean = false) => {
+export const parseMarkup = (
+  content: string,
+  options: { inline?: boolean; jumboable?: boolean },
+) => {
+  const { inline = false, jumboable = false } = options || {}
+
   const startTime = now()
 
-  const ast = inline
-    ? parseInline(content)
-    : jumbosizeEmojis(parseBlock(content))
+  const raw = inline ? parseInline(content) : parseBlock(content)
+  const ast = jumboable ? jumbosizeEmojis(raw) : raw
   const parseTime = now() - startTime
 
   const output = reactOutput(ast)

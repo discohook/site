@@ -5,14 +5,15 @@ import { MarkupContainer } from "./styles"
 type Props = {
   content: string
   inline?: boolean
+  jumboable?: boolean
 }
 
 export default function Markup(props: Props) {
-  const { content, inline } = props
+  const { content, ...options } = props
 
   const markup = useMemo(() => {
-    return parseMarkup(String(content).trim(), inline)
-  }, [content, inline])
+    return parseMarkup(String(content).trim(), options)
+  }, [content, options])
 
   return <MarkupContainer>{markup}</MarkupContainer>
 }
