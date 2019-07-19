@@ -5,6 +5,7 @@ import EmbedAuthor from "./EmbedAuthor"
 import EmbedField from "./EmbedField"
 import EmbedFooter from "./EmbedFooter"
 import Markup from "./markup/Markup"
+import { MarkupContainer } from "./markup/styles"
 import { Embed } from "./Message"
 
 const Container = styled.div`
@@ -57,6 +58,10 @@ const EmbedDescription = styled.div`
   color: ${({ theme }) => theme.message.embed.description};
   font-size: 14px;
   line-height: 16px;
+
+  & > ${MarkupContainer} {
+    white-space: pre-line;
+  }
 `
 
 const EmbedFields = styled.div`

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
 import Markup from "./markup/Markup"
+import { MarkupContainer } from "./markup/styles"
 import { Field } from "./Message"
 
 const Container = styled.div<{ inline: boolean }>`
@@ -20,6 +21,10 @@ const FieldName = styled.div`
 const FieldValue = styled.div`
   color: ${({ theme }) => theme.message.embed.field.value};
   font-size: 14px;
+
+  & > ${MarkupContainer} {
+    white-space: pre-line;
+  }
 `
 
 type Props = {

@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 export const MarkupContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
+  display: inline;
 `
 
 export const Code = styled.code`
