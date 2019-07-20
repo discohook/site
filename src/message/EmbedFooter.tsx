@@ -95,7 +95,7 @@ export default function EmbedFooter(props: Props) {
         <FooterImage src={String(iconUrl)} alt="Footer image" />
       )}
       <FooterText>
-        {String(text === undefined ? undefined : text)}
+        {String(text === undefined ? "" : text)}
         {footer && timestamp && <FooterSeparator>•</FooterSeparator>}
         {timestamp && formatTimestamp(timestamp)}
       </FooterText>
