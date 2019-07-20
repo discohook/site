@@ -7,7 +7,7 @@ import { getSharedBackup } from "./editor/backup/sharing"
 import Editor from "./editor/Editor"
 import GlobalStyle from "./GlobalStyle"
 import { initialMessage } from "./initialMessage"
-import Preview from "./message/Preview"
+import MessagePreview from "./message/MessagePreview"
 import { darkTheme, lightTheme, Theme } from "./themes"
 
 const Container = styled.div`
@@ -116,7 +116,7 @@ export default function App(props: Props) {
         )}
         <View mobile={isMobile}>
           {(!isMobile || activeTab === "preview") && (
-            <Preview message={message} files={files} />
+            <MessagePreview message={message} files={files} />
           )}
           {(!isMobile || activeTab === "editor") && (
             <Editor

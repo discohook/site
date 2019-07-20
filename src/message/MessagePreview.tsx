@@ -9,6 +9,10 @@ import { Message } from "./Message"
 import MessageHeader from "./MessageHeader"
 import RichEmbed from "./RichEmbed"
 
+const ScrollContainer = styled.div`
+  overflow-y: scroll;
+`
+
 const Container = styled.div`
   margin: ${({ theme }) =>
     theme.display === "cozy" ? "0 0 0 80px" : "0 0 0 9ch"};
@@ -38,17 +42,19 @@ export default function MessagePreview(props: Props) {
   const { content, embeds, username, avatarUrl } = message
 
   return (
-    <Container>
-      <MessageHeader username={username} avatarUrl={avatarUrl} />
-      {content && <Markup content={content} jumboable />}
-      {embeds &&
-        Array.from(embeds).map(embed => (
-          <RichEmbed embed={embed} key={embed[id]} />
-        ))}
-      {files &&
-        Array.from(files).map(file => (
-          <Attachment file={file} key={file.name} />
-        ))}
-    </Container>
+    <ScrollContainer>
+      <Container>
+        <MessageHeader username={username} avatarUrl={avatarUrl} />
+        {content && <Markup content={content} jumboable />}
+        {embeds &&
+          Array.from(embeds).map(embed => (
+            <RichEmbed embed={embed} key={embed[id]} />
+          ))}
+        {files &&
+          Array.from(files).map(file => (
+            <Attachment file={file} key={file.name} />
+          ))}
+      </Container>
+    </ScrollContainer>
   )
 }
