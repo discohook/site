@@ -148,7 +148,7 @@ export default function Editor(props: Props) {
           browser settings to use this app.
         </JavaScriptWarning>
         <EditorActionsContainer>
-          <ActionsHeader>Message editor</ActionsHeader>
+          <ActionsHeader>{!isMobile && "Message editor"}</ActionsHeader>
           <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
           <Action onClick={handleToggleTheme}>Toggle theme</Action>
           <Action onClick={handleToggleDisplay}>Toggle display</Action>
