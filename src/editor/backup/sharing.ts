@@ -1,4 +1,4 @@
-import { getUniqueId, id } from "../../uid"
+import { applyIds } from "../json/applyIds"
 import { Backup } from "./Backup"
 import { getBackup } from "./backupStorage"
 
@@ -20,14 +20,12 @@ const decodeBackup = (base64: string) => {
     const unescaped = decodeURIComponent(escaped)
     const backup = JSON.parse(unescaped) as Backup
 
-    for (const embed of Array.from(backup.message.embeds || [])) {
-      embed[id] = getUniqueId()
-      for (const field of Array.from(embed.fields || [])) {
-        field[id] = getUniqueId()
-      }
-    }
+    const message = applyIds(backup.message)
 
-    return backup
+    return {
+      ...backup,
+      message,
+    }
   } catch {
     return null
   }

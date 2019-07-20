@@ -1,5 +1,5 @@
 import { Message } from "../../message/Message"
-import { getUniqueId, id } from "../../uid"
+import { applyIds } from "./applyIds"
 import { toCamelCase, toSnakeCase } from "./casing"
 import { isMessage } from "./validation"
 
@@ -19,15 +19,8 @@ export const parseMessage = (json: string) => {
       ].join(": ")
     })
 
-    for (const embed of Array.from(message.embeds || [])) {
-      embed[id] = getUniqueId()
-      for (const field of Array.from(embed.fields || [])) {
-        field[id] = getUniqueId()
-      }
-    }
-
     return {
-      message,
+      message: applyIds(message),
       errors,
     }
   } catch (error) {
