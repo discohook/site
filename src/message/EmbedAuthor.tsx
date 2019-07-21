@@ -21,6 +21,7 @@ const AuthorNameNormal = styled.span`
   color: ${({ theme }) => theme.message.embed.author};
   font-size: 14px;
   font-weight: 500;
+  white-space: pre-wrap;
 `
 
 const AuthorNameLink = AuthorNameNormal.withComponent("a")
