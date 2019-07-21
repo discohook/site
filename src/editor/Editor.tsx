@@ -220,7 +220,10 @@ export default function Editor(props: Props) {
         <BackupModal
           message={message}
           files={files}
-          onLoad={backup => handleChange(backup.message)}
+          onLoad={backup => {
+            handleChange(backup.message)
+            handleFilesChange(backup.files)
+          }}
           onClose={() => setIsBackupModalShown(false)}
         />
       )}
