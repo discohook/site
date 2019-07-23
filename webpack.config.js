@@ -42,7 +42,7 @@ const appConfig = {
       },
       {
         enforce: "pre",
-        test: /\.[ts]sx?$/,
+        test: /\.[js]sx?$/,
         use: "eslint-loader",
       },
     ],
