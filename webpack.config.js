@@ -101,7 +101,6 @@ const serverConfig = {
   mode: "production",
   output: {
     filename: "main.js",
-    chunkFilename: "[name].js",
     path: resolve(__dirname, "dist"),
   },
   module: {
