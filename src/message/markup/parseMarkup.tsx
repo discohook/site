@@ -10,7 +10,7 @@ import {
 import CodeBlock from "./code/CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 import { jumbosizeEmojis } from "./jumbosizeEmojis"
-import { Code, Emoji, Mention, Spoiler } from "./styles"
+import { BlockQuote, Code, Emoji, Mention, Spoiler } from "./styles"
 
 const emojiRegex = new RegExp(
   Object.keys(emojiToName)
@@ -130,6 +130,40 @@ const baseRules: Rules = {
     }),
     react: (node, output, state) => (
       <Spoiler key={state.key}>{output(node.content, state)}</Spoiler>
+    ),
+  },
+  blockQuote: {
+    ...defaultRules.blockQuote,
+    match: (source, state, previous) =>
+      !/^$|\n *$/.test(previous) || state.inQuote
+        ? null
+        : /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
+            source,
+          ),
+    parse: (capture, parse, state) => {
+      const multiline = /^ *>>> ?/.test(capture[0])
+      const trimmedContent = capture[0].replace(
+        multiline ? /^ *>>> ?/ : /^ *> ?/gm,
+        "",
+      )
+
+      const nestedContent = parse(trimmedContent, {
+        ...state,
+        inQuote: true,
+        inline: multiline ? state.inline : true,
+      })
+
+      if (nestedContent.length === 0) {
+        nestedContent.push({
+          type: "text",
+          content: " ",
+        })
+      }
+
+      return { content: nestedContent }
+    },
+    react: (node, output, state) => (
+      <BlockQuote key={state.key}>{output(node.content, state)}</BlockQuote>
     ),
   },
 }

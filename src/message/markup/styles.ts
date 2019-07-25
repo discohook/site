@@ -47,6 +47,16 @@ export const Spoiler = styled.span`
   border-radius: 3px;
 `
 
+export const BlockQuote = styled.blockquote`
+  box-sizing: border-box;
+  max-width: 90%;
+
+  margin: 8px 0;
+  padding: 0 8px 0 12px;
+
+  border-left: 4px solid ${({ theme }) => theme.message.blockQuote};
+`
+
 export const CodeBlockContainer = styled.pre`
   max-width: 90%;
   margin: 6px 0 0;

@@ -103,6 +103,8 @@ export const darkTheme = {
     },
 
     spoiler: "#4b4d53",
+
+    blockQuote: "#4f545c",
   },
 
   scrollBar: {
@@ -189,6 +191,8 @@ export const lightTheme: ColorTheme = {
     },
 
     spoiler: "#e5e5e5",
+
+    blockQuote: "#c7ccd1",
   },
 
   scrollBar: {
