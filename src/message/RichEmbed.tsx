@@ -1,12 +1,12 @@
-import styled from "@emotion/styled"
-import React from "react"
-import { id } from "../uid"
-import EmbedAuthor from "./EmbedAuthor"
-import EmbedField from "./EmbedField"
-import EmbedFooter from "./EmbedFooter"
-import Markup from "./markup/Markup"
-import { MarkupContainer } from "./markup/styles"
-import { Embed } from "./Message"
+import styled from "@emotion/styled";
+import React from "react";
+import { id } from "../uid";
+import EmbedAuthor from "./EmbedAuthor";
+import EmbedField from "./EmbedField";
+import EmbedFooter from "./EmbedFooter";
+import Markup from "./markup/Markup";
+import { CodeBlockContainer, MarkupContainer } from "./markup/styles";
+import { Embed } from "./Message";
 
 const Container = styled.div`
   margin: 8px 0 0;
@@ -61,6 +61,10 @@ const EmbedDescription = styled.div`
 
   & > ${MarkupContainer} {
     white-space: pre-line;
+
+    & ${CodeBlockContainer} {
+      max-width: 100%;
+    }
   }
 `
 

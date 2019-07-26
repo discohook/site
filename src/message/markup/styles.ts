@@ -69,6 +69,8 @@ export const CodeBlockContainer = styled.pre`
   color: ${({ theme }) => theme.message.code.text};
   font-size: 14px;
 
+  white-space: pre-wrap;
+
   & .hljs-comment,
   & .hljs-quote {
     color: ${({ theme }) => theme.message.code.comment};
