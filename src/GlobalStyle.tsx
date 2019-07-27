@@ -85,6 +85,7 @@ function GlobalStyle(props: { theme: Theme }) {
           color: ${theme.text};
         }
 
+        pre,
         code {
           font-family: ${theme.fonts.code};
         }
@@ -99,7 +100,7 @@ function GlobalStyle(props: { theme: Theme }) {
           }
         }
 
-        img[alt] {
+        img {
           text-indent: 100%;
           white-space: nowrap;
           overflow: hidden;
