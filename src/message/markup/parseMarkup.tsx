@@ -135,7 +135,7 @@ const baseRules: Rules = {
   blockQuote: {
     ...defaultRules.blockQuote,
     match: (source, state, previous) =>
-      !/^$|\n *$/.test(previous) || state.inQuote
+      !/^$|\n *$/.test(previous) || state.inQuote || state.nested
         ? null
         : /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
             source,
@@ -183,9 +183,10 @@ const blockRules: Rules = {
   codeBlock: {
     order: defaultRules.codeBlock.order,
     match: anyScopeRegex(/^```([a-z0-9\-]+?\n+)?\n*([^]+?)\n*```/),
-    parse: (capture, _parse, _state) => ({
+    parse: (capture, _parse, state) => ({
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
+      inQuote: state.inQuote,
     }),
     react: (node, _output, state) => (
       <CodeBlock
