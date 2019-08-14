@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
+import { Theme } from "../../themes"
 
-export const Container = styled.div`
+export const Container = styled.div<{}, Theme>`
   width: 100%;
   max-width: 520px;
 
@@ -42,7 +43,7 @@ export const FileName = styled.div`
   overflow: hidden;
 `
 
-export const FileNameInner = styled.span`
+export const FileNameInner = styled.span<{}, Theme>`
   color: ${({ theme }) => theme.message.attachment.fileName};
   font-size: 16px;
 
@@ -53,14 +54,14 @@ export const FileNameInner = styled.span`
   }
 `
 
-export const FileSize = styled.div`
+export const FileSize = styled.div<{}, Theme>`
   color: ${({ theme }) => theme.message.attachment.fileSize};
   font-size: 12px;
   line-height: 16px;
   font-weight: 300;
 `
 
-export const DownloadButton = styled.div`
+export const DownloadButton = styled.div<{}, Theme>`
   cursor: pointer;
 
   color: ${({ theme }) => theme.message.attachment.download};

@@ -1,7 +1,8 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
+import { Theme } from "../themes"
 
-const Container = styled.div`
+const Container = styled.div<{}, Theme>`
   height: ${({ theme }) => (theme.display === "cozy" ? "20.8px" : "auto")};
   display: ${({ theme }) =>
     theme.display === "cozy" ? "flex" : "inline-flex"};
@@ -9,7 +10,7 @@ const Container = styled.div`
     theme.display === "cozy" ? "0 0 2px -80px" : "0 0 0 -9ch"};
 `
 
-const Avatar = styled.img`
+const Avatar = styled.img<{}, Theme>`
   display: ${({ theme }) => (theme.display === "cozy" ? "block" : "none")};
 
   width: 40px;
@@ -27,7 +28,7 @@ const Avatar = styled.img`
   }
 `
 
-const HeaderInfo = styled.div`
+const HeaderInfo = styled.div<{}, Theme>`
   display: flex;
   align-items: center;
   flex-direction: ${({ theme }) =>
@@ -35,12 +36,12 @@ const HeaderInfo = styled.div`
   margin: 0;
 `
 
-const UserName = styled.span`
+const UserName = styled.span<{}, Theme>`
   color: ${({ theme }) => theme.message.username};
   font-weight: 500;
 `
 
-const BotTag = styled.span`
+const BotTag = styled.span<{}, Theme>`
   position: relative;
   top: 1px;
 
@@ -62,7 +63,7 @@ const BotTag = styled.span`
   font-weight: 500;
 `
 
-const Timestamp = styled.span`
+const Timestamp = styled.span<{}, Theme>`
   width: ${({ theme }) => (theme.display === "cozy" ? "auto" : "74px")};
 
   margin: ${({ theme }) => (theme.display === "cozy" ? "1px 0 0" : "0")};

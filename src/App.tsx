@@ -22,7 +22,7 @@ const TabSwitcher = styled.div`
   display: flex;
 `
 
-const Tab = styled.button<{ active: boolean }>`
+const Tab = styled.button<{ active: boolean }, Theme>`
   box-sizing: border-box;
 
   height: 40px;

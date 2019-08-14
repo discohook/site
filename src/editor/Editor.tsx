@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import React, { useCallback, useEffect, useState } from "react"
 import { Message } from "../message/Message"
+import { Theme } from "../themes"
 import { FakeFile } from "./backup/Backup"
 import BackupModal from "./backup/BackupModal"
 import EmbedEditor from "./EmbedEditor"
@@ -36,7 +37,7 @@ const EditorActionsContainer = styled(ActionsContainer)`
   margin: 8px;
 `
 
-const JavaScriptWarning = styled.noscript`
+const JavaScriptWarning = styled.noscript<{}, Theme>`
   display: block;
 
   margin: -8px -8px 16px;

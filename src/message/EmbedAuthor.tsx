@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { Theme } from "../themes"
 import { Author } from "./Message"
 
 const Container = styled.div`
@@ -17,7 +18,7 @@ const AuthorImage = styled.img`
   border-radius: 50%;
 `
 
-const AuthorNameNormal = styled.span`
+const AuthorNameNormal = styled.span<{}, Theme>`
   color: ${({ theme }) => theme.message.embed.author};
   font-size: 14px;
   font-weight: 500;

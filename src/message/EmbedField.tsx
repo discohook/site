@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { Theme } from "../themes"
 import Markup from "./markup/Markup"
 import { MarkupContainer } from "./markup/styles"
 import { Field } from "./Message"
@@ -10,7 +11,7 @@ const Container = styled.div<{ inline: boolean }>`
   min-width: ${({ inline }) => (inline ? "150px" : "100%")};
 `
 
-const FieldName = styled.div`
+const FieldName = styled.div<{}, Theme>`
   margin: 0 0 4px;
 
   color: ${({ theme }) => theme.message.embed.field.name};
@@ -18,7 +19,7 @@ const FieldName = styled.div`
   font-weight: 500;
 `
 
-const FieldValue = styled.div`
+const FieldValue = styled.div<{}, Theme>`
   color: ${({ theme }) => theme.message.embed.field.value};
   font-size: 14px;
 

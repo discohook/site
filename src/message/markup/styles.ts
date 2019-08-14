@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { Theme } from "../../themes"
 
 export const MarkupContainer = styled.div`
   white-space: pre-wrap;
@@ -6,7 +7,7 @@ export const MarkupContainer = styled.div`
   display: inline;
 `
 
-export const Code = styled.code`
+export const Code = styled.code<{}, Theme>`
   padding: 2.55px;
   margin: -2.55px 0;
 
@@ -16,7 +17,7 @@ export const Code = styled.code`
   font-size: 12.75px;
 `
 
-export const Emoji = styled.img<{ big?: boolean }>`
+export const Emoji = styled.img<{ big?: boolean }, Theme>`
   width: ${({ theme, big }) =>
     big && theme.display === "cozy" ? "32px" : "21.75px"};
   height: ${({ theme, big }) =>
@@ -28,7 +29,7 @@ export const Emoji = styled.img<{ big?: boolean }>`
   margin: ${({ big }) => (big ? "3px" : "0")} 1.5px 0 0.75px;
 `
 
-export const Mention = styled.span`
+export const Mention = styled.span<{}, Theme>`
   padding: 0 2px;
   cursor: pointer;
 
@@ -42,12 +43,12 @@ export const Mention = styled.span`
   }
 `
 
-export const Spoiler = styled.span`
+export const Spoiler = styled.span<{}, Theme>`
   background: ${({ theme }) => theme.message.spoiler};
   border-radius: 3px;
 `
 
-export const BlockQuote = styled.blockquote`
+export const BlockQuote = styled.blockquote<{}, Theme>`
   box-sizing: border-box;
   max-width: 90%;
 
@@ -57,7 +58,7 @@ export const BlockQuote = styled.blockquote`
   border-left: 4px solid ${({ theme }) => theme.message.blockQuote};
 `
 
-export const CodeBlockContainer = styled.pre`
+export const CodeBlockContainer = styled.pre<{}, Theme>`
   max-width: 90%;
   margin: 6px 0 0;
   padding: 7px;

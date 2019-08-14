@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
 import { FakeFile } from "../editor/backup/Backup"
+import { Theme } from "../themes"
 import { id } from "../uid"
 import Attachment from "./attachment/Attachment"
 import Markup from "./markup/Markup"
@@ -13,7 +14,7 @@ const ScrollContainer = styled.div`
   overflow-y: scroll;
 `
 
-const Container = styled.div`
+const Container = styled.div<{}, Theme>`
   margin: ${({ theme }) =>
     theme.display === "cozy" ? "0 0 0 80px" : "0 0 0 9ch"};
   padding: ${({ theme }) =>

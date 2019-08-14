@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { Theme } from "../themes"
 import { formatTimestamp } from "./formatTimestamp"
 import { Footer } from "./Message"
 
@@ -22,13 +23,13 @@ const FooterImage = styled.img`
   border-radius: 50%;
 `
 
-const FooterText = styled.span`
+const FooterText = styled.span<{}, Theme>`
   color: ${({ theme }) => theme.message.embed.footer.text};
   font-size: 12px;
   font-weight: 500;
 `
 
-const FooterSeparator = styled.span`
+const FooterSeparator = styled.span<{}, Theme>`
   display: inline-block;
   margin: 0 4px;
 

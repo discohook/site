@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Message } from "../../message/Message"
+import { Theme } from "../../themes"
 import InputField from "../InputField"
 import {
   Action,
@@ -13,7 +14,7 @@ import { Backup, FakeFile } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 import { shareBackup } from "./sharing"
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div<{}, Theme>`
   position: absolute;
   top: 0;
   right: 0;
@@ -39,7 +40,7 @@ const List = styled.ul`
   padding: 0;
 `
 
-const Item = styled.li`
+const Item = styled.li<{}, Theme>`
   display: flex;
   align-items: center;
 
@@ -54,7 +55,7 @@ const Item = styled.li`
   }
 `
 
-const BackupName = styled.a`
+const BackupName = styled.a<{}, Theme>`
   margin: 0 auto 0 0;
 
   color: ${({ theme }) => theme.important};
@@ -64,7 +65,7 @@ const BackupName = styled.a`
   cursor: pointer;
 `
 
-const BackupAction = styled.a<{ dangerous?: boolean }>`
+const BackupAction = styled.a<{ dangerous?: boolean }, Theme>`
   margin: 0 0 0 8px;
   color: ${({ theme, dangerous }) => (dangerous ? theme.red : theme.important)};
   cursor: pointer;

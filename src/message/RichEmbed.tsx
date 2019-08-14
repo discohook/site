@@ -1,12 +1,13 @@
-import styled from "@emotion/styled";
-import React from "react";
-import { id } from "../uid";
-import EmbedAuthor from "./EmbedAuthor";
-import EmbedField from "./EmbedField";
-import EmbedFooter from "./EmbedFooter";
-import Markup from "./markup/Markup";
-import { CodeBlockContainer, MarkupContainer } from "./markup/styles";
-import { Embed } from "./Message";
+import styled from "@emotion/styled"
+import React from "react"
+import { Theme } from "../themes"
+import { id } from "../uid"
+import EmbedAuthor from "./EmbedAuthor"
+import EmbedField from "./EmbedField"
+import EmbedFooter from "./EmbedFooter"
+import Markup from "./markup/Markup"
+import { CodeBlockContainer, MarkupContainer } from "./markup/styles"
+import { Embed } from "./Message"
 
 const Container = styled.div`
   margin: 8px 0 0;
@@ -14,14 +15,14 @@ const Container = styled.div`
   display: flex;
 `
 
-const Pill = styled.div`
+const Pill = styled.div<{}, Theme>`
   background: ${({ theme }) => theme.message.embed.pillDefaultFill};
   border-radius: 3px 0 0 3px;
   flex-shrink: 0;
   width: 4px;
 `
 
-const EmbedContent = styled.div`
+const EmbedContent = styled.div<{}, Theme>`
   max-width: 520px;
   display: flex;
 
@@ -42,7 +43,7 @@ const InnerEmbedContent = styled.div`
   }
 `
 
-const EmbedTitleNormal = styled.span`
+const EmbedTitleNormal = styled.span<{}, Theme>`
   display: inline-block;
 
   font-size: 14px;
@@ -54,7 +55,7 @@ const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
   color: ${({ theme }) => theme.link};
 `
 
-const EmbedDescription = styled.div`
+const EmbedDescription = styled.div<{}, Theme>`
   color: ${({ theme }) => theme.message.embed.description};
   font-size: 14px;
   line-height: 16px;

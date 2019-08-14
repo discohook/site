@@ -7,7 +7,7 @@ type SC<Tag extends keyof JSX.IntrinsicElements> = StyledComponent<
   Theme
 >
 
-export const Container = styled.div<{ direction?: "column" | "row" }>`
+export const Container = styled.div<{ direction?: "column" | "row" }, Theme>`
   display: flex;
   flex-direction: ${({ direction }) => direction || "column"};
   flex-wrap: ${({ direction }) => (direction === "row" ? "wrap" : "nowrap")};
@@ -21,7 +21,7 @@ export const Container = styled.div<{ direction?: "column" | "row" }>`
   }
 `
 
-export const BoxContainer = styled.div`
+export const BoxContainer = styled.div<{}, Theme>`
   display: flex;
   flex-direction: column;
 
@@ -47,7 +47,7 @@ export const InputLabel = styled.label`
   margin: 4px 8px 0;
 `
 
-export const TextInput = styled.input`
+export const TextInput = styled.input<{}, Theme>`
   padding: 6px 8px;
   margin: 8px 0;
 
@@ -69,7 +69,10 @@ export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
   min-height: 60px;
 ` as SC<"textarea">
 
-export const InputNote = styled.div<{ state: "normal" | "warning" | "error" }>`
+export const InputNote = styled.div<
+  { state: "normal" | "warning" | "error" },
+  Theme
+>`
   align-self: flex-end;
   margin: 0 10px 0 0;
 
@@ -83,7 +86,7 @@ export const InputNote = styled.div<{ state: "normal" | "warning" | "error" }>`
   }};
 `
 
-export const Button = styled.button`
+export const Button = styled.button<{}, Theme>`
   min-height: 32px;
   max-height: 32px;
   margin: 8px;
@@ -113,7 +116,7 @@ export const Button = styled.button`
   }
 `
 
-export const ToggleButton = styled(Button)<{ filled: boolean }>`
+export const ToggleButton = styled(Button)<{ filled: boolean }, Theme>`
   && {
     background: ${({ theme, filled }) =>
       filled ? theme.accent : "transparent"};
@@ -131,7 +134,7 @@ export const ActionsHeader = styled.span`
   flex: 1;
 `
 
-export const Action = styled.button`
+export const Action = styled.button<{}, Theme>`
   padding: 0;
   margin: 0 4px 0 8px;
 
