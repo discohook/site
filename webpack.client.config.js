@@ -4,20 +4,13 @@ const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { resolve } = require("path")
 const PreloadWebpackPlugin = require("preload-webpack-plugin")
-const { DefinePlugin, optimize: webpackOptimize } = require("webpack")
-const { LimitChunkCountPlugin } = webpackOptimize
+const { DefinePlugin } = require("webpack")
 
 if (!process.env.NODE_ENV) process.env.NODE_ENV = "development"
 const dev = process.env.NODE_ENV === "development"
 
-/**
- * @typedef {import("webpack").Configuration & {
- *   devServer?: import("webpack-dev-server").Configuration
- * }} Configuration
- */
-
-/** @type {Configuration} */
-const appConfig = {
+/** @type {import("webpack").Configuration} */
+module.exports = {
   entry: [
     "core-js/stable",
     "regenerator-runtime/runtime",
@@ -90,59 +83,3 @@ const appConfig = {
     assetFilter: name => /\.js$/.test(name),
   },
 }
-
-/** @type {Configuration} */
-const serverConfig = {
-  entry: [
-    "core-js/stable",
-    "regenerator-runtime/runtime",
-    resolve(__dirname, "src/server.tsx"),
-  ],
-  mode: "production",
-  output: {
-    filename: "main.js",
-    path: resolve(__dirname, "dist"),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.[jt]sx?$/,
-        use: "babel-loader",
-      },
-      {
-        enforce: "pre",
-        test: /\.js$/,
-        use: "source-map-loader",
-      },
-      {
-        enforce: "pre",
-        test: /\.[ts]sx?$/,
-        use: "eslint-loader",
-      },
-    ],
-  },
-  resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
-  },
-  optimization: {
-    minimize: false,
-  },
-  plugins: [
-    new LimitChunkCountPlugin({
-      maxChunks: 1,
-    }),
-    new DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production"),
-      "process.env.SSR": JSON.stringify(true),
-    }),
-  ],
-  devtool: "source-map",
-  target: "node",
-  externals: {
-    "any-promise": "Promise",
-  },
-  node: false,
-}
-
-/** @type {Configuration[]} */
-module.exports = dev ? [appConfig] : [appConfig, serverConfig]
