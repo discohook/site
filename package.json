@@ -7,7 +7,7 @@
     "build-client": "cross-env NODE_ENV=production webpack --config webpack.client.config.js",
     "build-server": "cross-env NODE_ENV=production webpack --config webpack.server.config.js",
     "serve": "node dist/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
     "typecheck": "tsc --noemit"
   },
@@ -45,6 +45,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@types/highlight.js": "^9.12.3",
+    "@types/jest": "^24.0.17",
     "@types/koa": "^2.0.49",
     "@types/koa-conditional-get": "^2.0.0",
     "@types/koa-router": "^7.0.42",
@@ -54,6 +55,7 @@
     "@types/react-dom": "^16.8.5",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-emotion": "^10.0.15",
     "clean-webpack-plugin": "^3.0.0",
@@ -64,6 +66,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "html-webpack-plugin": "^4.0.0-beta.2",
+    "jest": "^24.8.0",
     "preload-webpack-plugin": "^3.0.0-beta.3",
     "source-map-loader": "^0.2.4",
     "typescript": "^3.5.3",
@@ -71,5 +74,17 @@
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.8.0"
   },
-  "browserslist": "> 0.5% and last 1 years, chrome 41, firefox 56, edge 18, safari 12, and_chr 41, and_ff 56"
+  "browserslist": "> 0.5% and last 1 years, chrome 41, firefox 56, edge 18, safari 12, and_chr 41, and_ff 56",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest"
+    }
+  }
 }
