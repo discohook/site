@@ -10,7 +10,15 @@ import {
 import CodeBlock from "./code/CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 import { jumbosizeEmojis } from "./jumbosizeEmojis"
-import { BlockQuote, Code, Emoji, Mention, Spoiler } from "./styles"
+import {
+  BlockQuoteContainer,
+  BlockQuoteContent,
+  BlockQuoteDivider,
+  Code,
+  Emoji,
+  Mention,
+  Spoiler,
+} from "./styles"
 
 const emojiRegex = new RegExp(
   Object.keys(emojiToName)
@@ -163,7 +171,10 @@ const baseRules: Rules = {
       return { content: nestedContent }
     },
     react: (node, output, state) => (
-      <BlockQuote key={state.key}>{output(node.content, state)}</BlockQuote>
+      <BlockQuoteContainer key={state.key}>
+        <BlockQuoteDivider />
+        <BlockQuoteContent>{output(node.content, state)}</BlockQuoteContent>
+      </BlockQuoteContainer>
     ),
   },
 }
