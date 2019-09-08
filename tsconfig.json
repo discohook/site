@@ -5,7 +5,8 @@
     "lib": ["dom", "esnext"],
     "jsx": "preserve",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noEmit": true
   },
   "include": ["./src/**/*"]
 }
