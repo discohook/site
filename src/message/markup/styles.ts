@@ -81,11 +81,12 @@ export const CodeBlockContainer = styled.pre<{}, Theme>`
   padding: 7px;
 
   background: ${({ theme }) => theme.background.secondary};
-  border: 2px solid ${({ theme }) => theme.background.tertiary};
+  border: 1px solid ${({ theme }) => theme.background.tertiary};
   border-radius: 5px;
 
   color: ${({ theme }) => theme.header.secondary};
   font-size: 14px;
+  line-height: 16px;
 
   white-space: pre-wrap;
 

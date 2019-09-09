@@ -20,8 +20,8 @@ const Container = styled.div<{}, Theme>`
   padding: ${({ theme }) =>
     theme.display === "cozy" ? "20px 10px 20px 0" : "10px"};
 
-  font-size: 15px;
-  line-height: 1.3;
+  font-size: 16px;
+  line-height: 22px;
 
   & > * + * {
     margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "6px")};

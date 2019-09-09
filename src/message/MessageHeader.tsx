@@ -38,7 +38,7 @@ const HeaderInfo = styled.div<{}, Theme>`
 
 const UserName = styled.span<{}, Theme>`
   color: ${({ theme }) => theme.header.primary};
-  font-weight: 600;
+  font-weight: 500;
 `
 
 const BotTag = styled.span<{}, Theme>`
