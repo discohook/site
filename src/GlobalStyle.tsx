@@ -132,6 +132,13 @@ function GlobalStyle(props: { theme: Theme }) {
         ::-webkit-resizer {
           background-color: ${theme.background.primary};
         }
+
+        * {
+          scrollbar-color: ${theme.color === "dark"
+            ? "#202225 #2f3136"
+            : "#e3e5e8 #f6f6f7"};
+          scrollbar-width: thin;
+        }
       `}
     />
   )
