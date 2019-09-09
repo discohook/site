@@ -19,7 +19,7 @@ const AuthorImage = styled.img`
 `
 
 const AuthorNameNormal = styled.span<{}, Theme>`
-  color: ${({ theme }) => theme.message.embed.author};
+  color: ${({ theme }) => (theme.color === "dark" ? "#ffffff" : "#4f545c")};
   font-size: 14px;
   font-weight: 500;
   white-space: pre-wrap;

@@ -34,10 +34,10 @@ const Tab = styled.button<{ active: boolean }, Theme>`
     ${({ theme, active }) => (active ? theme.accent : theme.text)};
   border-radius: 0;
 
-  font-family: ${({ theme }) => theme.fonts.normal};
+  font-family: ${({ theme }) => theme.fonts.sans};
   font-weight: 500;
   font-size: 15px;
-  color: ${({ theme }) => theme.important};
+  color: ${({ theme }) => theme.header.primary};
   line-height: 38px;
 `
 
@@ -84,6 +84,7 @@ export default function App(props: Props) {
 
   const theme: Theme = {
     ...(colorTheme === "dark" ? darkTheme : lightTheme),
+    color: colorTheme,
     display: displayTheme,
   }
 

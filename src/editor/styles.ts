@@ -28,7 +28,7 @@ export const BoxContainer = styled.div<{}, Theme>`
   margin: 8px;
   padding: 8px 4px 4px;
 
-  border: 1px solid ${({ theme }) => theme.editor.border};
+  border: 1px solid ${({ theme }) => theme.backgroundModifier.accent};
   border-radius: 3px;
 `
 
@@ -51,13 +51,13 @@ export const TextInput = styled.input<{}, Theme>`
   padding: 6px 8px;
   margin: 8px 0;
 
-  background: ${({ theme }) => theme.editor.input};
+  background: ${({ theme }) => theme.textAreaBackground};
   border: 0;
   border-radius: 3px;
   outline: none;
 
-  color: ${({ theme }) => theme.text};
-  font-family: ${({ theme }) => theme.fonts.normal};
+  color: ${({ theme }) => theme.text.normal};
+  font-family: ${({ theme }) => theme.fonts.sans};
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.4px;
@@ -98,8 +98,8 @@ export const Button = styled.button<{}, Theme>`
   outline: none;
   cursor: pointer;
 
-  color: ${({ theme }) => theme.editor.button.enabled};
-  font-family: ${({ theme }) => theme.fonts.normal};
+  color: ${({ theme }) => theme.header.primary};
+  font-family: ${({ theme }) => theme.fonts.sans};
   font-size: 15px;
   line-height: 20px;
   letter-spacing: -0.4px;
@@ -111,7 +111,7 @@ export const Button = styled.button<{}, Theme>`
   }
 
   &:disabled {
-    color: ${({ theme }) => theme.editor.button.disabled};
+    color: ${({ theme }) => theme.header.secondary};
     cursor: not-allowed;
   }
 `
@@ -120,8 +120,7 @@ export const ToggleButton = styled(Button)<{ filled: boolean }, Theme>`
   && {
     background: ${({ theme, filled }) =>
       filled ? theme.accent : "transparent"};
-    color: ${({ theme, filled }) =>
-      filled ? theme.editor.button.filled : theme.editor.button.enabled};
+    color: ${({ theme, filled }) => theme.header.primary};
   }
 `
 
@@ -143,8 +142,8 @@ export const Action = styled.button<{}, Theme>`
   outline: none;
   cursor: pointer;
 
-  color: ${({ theme }) => theme.important};
-  font-family: ${({ theme }) => theme.fonts.normal};
+  color: ${({ theme }) => theme.header.primary};
+  font-family: ${({ theme }) => theme.fonts.sans};
   font-size: 15px;
   font-weight: 500;
   line-height: 20px;

@@ -24,7 +24,7 @@ const ModalContainer = styled.div<{}, Theme>`
   width: 100%;
   height: 100%;
 
-  background: ${({ theme }) => theme.background};
+  background: ${({ theme }) => theme.background.primary};
   border-radius: 3px;
   padding: 8px;
   box-sizing: border-box;
@@ -47,7 +47,7 @@ const Item = styled.li<{}, Theme>`
   margin: 0 8px;
   padding: 6px 0;
 
-  border: solid ${({ theme }) => theme.editor.border};
+  border: solid ${({ theme }) => theme.backgroundModifier.accent};
   border-width: 1px 0 1px;
 
   & + & {
@@ -58,7 +58,7 @@ const Item = styled.li<{}, Theme>`
 const BackupName = styled.a<{}, Theme>`
   margin: 0 auto 0 0;
 
-  color: ${({ theme }) => theme.important};
+  color: ${({ theme }) => theme.header.primary};
   font-size: 15px;
   font-weight: 500;
 
@@ -67,7 +67,8 @@ const BackupName = styled.a<{}, Theme>`
 
 const BackupAction = styled.a<{ dangerous?: boolean }, Theme>`
   margin: 0 0 0 8px;
-  color: ${({ theme, dangerous }) => (dangerous ? theme.red : theme.important)};
+  color: ${({ theme, dangerous }) =>
+    dangerous ? theme.red : theme.header.primary};
   cursor: pointer;
 `
 

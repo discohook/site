@@ -57,7 +57,7 @@ function GlobalStyle(props: { theme: Theme }) {
         @font-face {
           font-family: "SourceCodePro";
           font-style: normal;
-          font-weight: 400;
+          font-weight: 500;
           font-display: swap;
           src: url("/fonts/source-code-pro-400.woff2") format("woff2"),
             url("/fonts/source-code-pro-400.woff") format("woff");
@@ -74,24 +74,24 @@ function GlobalStyle(props: { theme: Theme }) {
 
         body {
           margin: 0;
-          font-family: ${theme.fonts.normal};
+          font-family: ${theme.fonts.sans};
           line-height: 1;
 
           text-rendering: optimizeLegibility;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
 
-          background: ${theme.background};
-          color: ${theme.text};
+          background: ${theme.background.primary};
+          color: ${theme.text.normal};
         }
 
         pre,
         code {
-          font-family: ${theme.fonts.code};
+          font-family: ${theme.fonts.mono};
         }
 
         a {
-          color: ${theme.link};
+          color: ${theme.text.link};
 
           text-decoration: none;
 
@@ -109,7 +109,7 @@ function GlobalStyle(props: { theme: Theme }) {
         ::-webkit-scrollbar {
           width: 14px;
           height: 14px;
-          background-color: ${theme.background};
+          background-color: ${theme.background.primary};
         }
 
         ::-webkit-scroll-corner {
@@ -117,20 +117,20 @@ function GlobalStyle(props: { theme: Theme }) {
         }
 
         ::-webkit-scrollbar-thumb {
-          background-color: ${theme.scrollBar.thumb};
-          border: 3px solid ${theme.background};
+          background-color: ${theme.color === "dark" ? "#202225" : "#e3e5e8"};
+          border: 3px solid ${theme.background.primary};
           border-radius: 7px;
           background-clip: padding-box;
         }
 
         ::-webkit-scrollbar-track-piece {
-          background-color: ${theme.scrollBar.track};
-          border: 3px solid ${theme.background};
+          background-color: ${theme.color === "dark" ? "#2f3136" : "#f6f6f7"};
+          border: 3px solid ${theme.background.primary};
           border-radius: 7px;
         }
 
         ::-webkit-resizer {
-          background-color: ${theme.background};
+          background-color: ${theme.background.primary};
         }
       `}
     />

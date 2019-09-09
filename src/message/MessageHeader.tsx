@@ -37,8 +37,8 @@ const HeaderInfo = styled.div<{}, Theme>`
 `
 
 const UserName = styled.span<{}, Theme>`
-  color: ${({ theme }) => theme.message.username};
-  font-weight: 500;
+  color: ${({ theme }) => theme.header.primary};
+  font-weight: 600;
 `
 
 const BotTag = styled.span<{}, Theme>`
@@ -68,7 +68,7 @@ const Timestamp = styled.span<{}, Theme>`
 
   margin: ${({ theme }) => (theme.display === "cozy" ? "1px 0 0" : "0")};
 
-  color: ${({ theme }) => theme.message.timestamp};
+  color: ${({ theme }) => theme.text.muted};
   font-size: 12px;
 
   text-align: right;

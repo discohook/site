@@ -14,13 +14,14 @@ const Container = styled.div<{ inline: boolean }>`
 const FieldName = styled.div<{}, Theme>`
   margin: 0 0 4px;
 
-  color: ${({ theme }) => theme.message.embed.field.name};
+  color: ${({ theme }) => (theme.color === "dark" ? "#ffffff" : "#36393f")};
   font-size: 14px;
   font-weight: 500;
 `
 
 const FieldValue = styled.div<{}, Theme>`
-  color: ${({ theme }) => theme.message.embed.field.value};
+  color: ${({ theme }) =>
+    theme.color === "dark" ? "rgba(255, 255, 255, 0.6)" : "#36393f"};
   font-size: 14px;
 
   & > ${MarkupContainer} {

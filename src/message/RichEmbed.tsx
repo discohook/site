@@ -16,7 +16,8 @@ const Container = styled.div`
 `
 
 const Pill = styled.div<{}, Theme>`
-  background: ${({ theme }) => theme.message.embed.pillDefaultFill};
+  background: ${({ theme }) =>
+    theme.color === "dark" ? "#4f545c" : "#cacbce"};
   border-radius: 3px 0 0 3px;
   flex-shrink: 0;
   width: 4px;
@@ -26,9 +27,16 @@ const EmbedContent = styled.div<{}, Theme>`
   max-width: 520px;
   display: flex;
 
-  border: 1px solid ${({ theme }) => theme.message.embed.border};
+  border: 1px solid
+    ${({ theme }) =>
+      theme.color === "dark"
+        ? "rgba(46, 48, 54, 0.6)"
+        : "rgba(205, 205, 205, 0.3)"};
 
-  background: ${({ theme }) => theme.message.embed.background};
+  background: ${({ theme }) =>
+    theme.color === "dark"
+      ? "rgba(46, 48, 54, 0.3)"
+      : "rgba(249, 249, 249, 0.3)"};
   border-radius: 0 3px 3px 0;
 
   padding: 8px 10px;
@@ -48,15 +56,16 @@ const EmbedTitleNormal = styled.span<{}, Theme>`
 
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.message.embed.title};
+  color: ${({ theme }) => (theme.color === "dark" ? "#ffffff" : "#4f545c")};
 `
 
 const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
-  color: ${({ theme }) => theme.link};
+  color: ${({ theme }) => theme.text.link};
 `
 
 const EmbedDescription = styled.div<{}, Theme>`
-  color: ${({ theme }) => theme.message.embed.description};
+  color: ${({ theme }) =>
+    theme.color === "dark" ? "rgba(255, 255, 255, 0.6)" : ""};
   font-size: 14px;
   line-height: 16px;
 

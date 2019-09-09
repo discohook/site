@@ -67,7 +67,7 @@ const AudioControls = styled.div<{}, Theme>`
   width: 378px;
   height: 32px;
 
-  background: ${({ theme }) => theme.message.attachment.player.background};
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 3px;
 `
 
@@ -75,7 +75,7 @@ const AudioDuration = styled.div<{}, Theme>`
   display: flex;
   margin: 4px;
 
-  color: ${({ theme }) => theme.message.attachment.player.duration};
+  color: #ffffff;
   font-family: ${({ theme }) => theme.fonts.mono};
   font-size: 12px;
   line-height: 12px;
@@ -102,7 +102,7 @@ const AudioSeekbar = styled.div<{}, Theme>`
   width: 100%;
   height: 6px;
 
-  background: ${({ theme }) => theme.message.attachment.player.seekbar};
+  background: rgba(185, 187, 190, 0.3);
   border-radius: 3px;
 `
 
@@ -110,7 +110,7 @@ const AudioSeekbarHandle = styled.div<{}, Theme>`
   width: 6px;
   height: 6px;
 
-  background: ${({ theme }) => theme.message.attachment.player.seekbarHandle};
+  background: ${({ theme }) => theme.accent};
   border-radius: 3px;
 `
 
@@ -121,10 +121,11 @@ const AudioControlButton = styled.div<{}, Theme>`
 
   cursor: hover;
 
-  color: ${({ theme }) => theme.message.attachment.player.control};
+  color: white;
+  opacity: 0.6;
 
   &:hover {
-    color: ${({ theme }) => theme.message.attachment.player.controlHover};
+    opacity: 1;
   }
 
   & > svg {

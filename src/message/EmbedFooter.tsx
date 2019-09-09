@@ -24,7 +24,10 @@ const FooterImage = styled.img`
 `
 
 const FooterText = styled.span<{}, Theme>`
-  color: ${({ theme }) => theme.message.embed.footer.text};
+  color: ${({ theme }) =>
+    theme.color === "dark"
+      ? "rgba(255, 255, 255, 0.6)"
+      : "rgba(79, 83, 91, 0.6)"};
   font-size: 12px;
   font-weight: 500;
 `
@@ -33,7 +36,7 @@ const FooterSeparator = styled.span<{}, Theme>`
   display: inline-block;
   margin: 0 4px;
 
-  color: ${({ theme }) => theme.message.embed.footer.separator};
+  color: ${({ theme }) => (theme.color === "dark" ? "#4f545c" : "#cacbce")};
   font-weight: 700;
 `
 

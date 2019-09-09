@@ -12,10 +12,13 @@ export const Container = styled.div<{}, Theme>`
   align-items: center;
 
   box-sizing: border-box;
-  border: 1px solid ${({ theme }) => theme.message.attachment.border};
+  border: 1px solid
+    ${({ theme }) =>
+      theme.color === "dark" ? "rgba(47, 49, 54, 0.6)" : "#f6f6f7"};
   border-radius: 3px;
 
-  background: ${({ theme }) => theme.message.attachment.background};
+  background: ${({ theme }) =>
+    theme.color === "dark" ? "rgba(47, 49, 54, 0.3)" : "transparent"};
 `
 
 export const IconContainer = styled.div`
@@ -44,7 +47,7 @@ export const FileName = styled.div`
 `
 
 export const FileNameInner = styled.span<{}, Theme>`
-  color: ${({ theme }) => theme.message.attachment.fileName};
+  color: ${({ theme }) => theme.text.link};
   font-size: 16px;
 
   cursor: pointer;
@@ -55,7 +58,7 @@ export const FileNameInner = styled.span<{}, Theme>`
 `
 
 export const FileSize = styled.div<{}, Theme>`
-  color: ${({ theme }) => theme.message.attachment.fileSize};
+  color: #72767d;
   font-size: 12px;
   line-height: 16px;
   font-weight: 300;
@@ -64,10 +67,10 @@ export const FileSize = styled.div<{}, Theme>`
 export const DownloadButton = styled.div<{}, Theme>`
   cursor: pointer;
 
-  color: ${({ theme }) => theme.message.attachment.download};
+  color: #4f545c;
 
   &:hover {
-    color: ${({ theme }) => theme.message.attachment.downloadHover};
+    color: rgba(114, 118, 125, 0.6);
   }
 
   & > svg {

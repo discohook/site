@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
+import { Theme } from "../../themes"
 import { Container, InputLabel, MultilineTextInput } from "../styles"
 
 const ErrorContainer = styled.div`
@@ -12,16 +13,16 @@ const ErrorContainer = styled.div`
   color: #ffffff;
 `
 
-const Error = styled.div`
+const Error = styled.div<{}, Theme>`
   padding: 4px 0;
-  font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
+  font-family: ${({ theme }) => theme.fonts.mono};
   line-height: 16px;
 `
 
-const CodeInput = styled(MultilineTextInput)`
+const CodeInput = styled(MultilineTextInput)<{}, Theme>`
   min-height: 240px;
   margin: 8px;
-  font-family: "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
+  font-family: ${({ theme }) => theme.fonts.mono};
 `
 
 type Props = {

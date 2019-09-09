@@ -12,7 +12,7 @@ export const Code = styled.code<{}, Theme>`
   margin: -2.55px 0;
 
   border-radius: 3px;
-  background: ${({ theme }) => theme.message.code.background};
+  background: ${({ theme }) => theme.background.secondary};
 
   font-size: 12.75px;
 `
@@ -33,18 +33,21 @@ export const Mention = styled.span<{}, Theme>`
   padding: 0 2px;
   cursor: pointer;
 
-  background: ${({ theme }) => theme.message.mention.normal};
-  color: ${({ theme }) => theme.message.mention.normalText};
+  background: ${({ theme }) =>
+    theme.color === "dark" ? "rgba(114, 137, 218, 0.1)" : "#f1f3fb"};
+  color: ${({ theme }) => theme.accent};
   font-weight: 500;
 
   &:hover {
-    background: ${({ theme }) => theme.message.mention.hover};
-    color: ${({ theme }) => theme.message.mention.hoverText};
+    background: ${({ theme }) =>
+      theme.color === "dark" ? "rgba(114, 137, 218, 0.7)" : theme.accent};
+    color: #ffffff;
   }
 `
 
 export const Spoiler = styled.span<{}, Theme>`
-  background: ${({ theme }) => theme.message.spoiler};
+  background: ${({ theme }) =>
+    theme.color === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"};
   border-radius: 3px;
 `
 
@@ -57,7 +60,7 @@ export const BlockQuoteDivider = styled.div<{}, Theme>`
   margin: 8px 0;
   border-radius: 4px;
 
-  background: ${({ theme }) => theme.message.blockQuote};
+  background: ${({ theme }) => theme.interactive.muted};
 `
 
 export const BlockQuoteContent = styled.blockquote<{}, Theme>`
@@ -77,76 +80,70 @@ export const CodeBlockContainer = styled.pre<{}, Theme>`
   margin: 6px 0 0;
   padding: 7px;
 
-  background: ${({ theme }) => theme.message.code.background};
-  border: 2px solid ${({ theme }) => theme.message.code.border};
+  background: ${({ theme }) => theme.background.secondary};
+  border: 2px solid ${({ theme }) => theme.background.tertiary};
   border-radius: 5px;
 
-  color: ${({ theme }) => theme.message.code.text};
+  color: ${({ theme }) => theme.header.secondary};
   font-size: 14px;
 
   white-space: pre-wrap;
 
   & .hljs-comment,
   & .hljs-quote {
-    color: ${({ theme }) => theme.message.code.comment};
+    color: ${({ theme }) => theme.interactive.muted};
   }
 
-  /* Solarized Green */
+  & .hljs-addition,
   & .hljs-keyword,
-  & .hljs-selector-tag,
-  & .hljs-addition {
+  & .hljs-selector-tag {
     color: #859900;
   }
 
-  /* Solarized Cyan */
-  & .hljs-number,
-  & .hljs-string,
-  & .hljs-meta .hljs-meta-string,
-  & .hljs-literal,
   & .hljs-doctag,
-  & .hljs-regexp {
+  & .hljs-literal,
+  & .hljs-meta .hljs-meta-string,
+  & .hljs-number,
+  & .hljs-regexp,
+  & .hljs-string {
     color: #2aa198;
   }
 
-  /* Solarized Blue */
-  & .hljs-title,
-  & .hljs-section,
   & .hljs-name,
+  & .hljs-section,
+  & .hljs-selector-class,
   & .hljs-selector-id,
-  & .hljs-selector-class {
+  & .hljs-title {
     color: #268bd2;
   }
 
-  /* Solarized Yellow */
-  & .hljs-attribute,
   & .hljs-attr,
-  & .hljs-variable,
-  & .hljs-template-variable,
+  & .hljs-attribute,
   & .hljs-class .hljs-title,
-  & .hljs-type {
+  & .hljs-template-variable,
+  & .hljs-type,
+  & .hljs-variable {
     color: #b58900;
   }
 
-  /* Solarized Orange */
-  & .hljs-symbol,
   & .hljs-bullet,
-  & .hljs-subst,
+  & .hljs-link,
   & .hljs-meta,
   & .hljs-meta .hljs-keyword,
   & .hljs-selector-attr,
   & .hljs-selector-pseudo,
-  & .hljs-link {
+  & .hljs-subst,
+  & .hljs-symbol {
     color: #cb4b16;
   }
 
-  /* Solarized Red */
   & .hljs-built_in,
   & .hljs-deletion {
     color: #dc322f;
   }
 
   & .hljs-formula {
-    background: ${({ theme }) => theme.message.code.formula};
+    background: #073642;
   }
 
   & .hljs-emphasis {
@@ -154,6 +151,6 @@ export const CodeBlockContainer = styled.pre<{}, Theme>`
   }
 
   & .hljs-strong {
-    font-weight: bold;
+    font-weight: 700;
   }
 `
