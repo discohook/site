@@ -13,6 +13,7 @@ export const jumbosizeEmojis = (ast: ASTNode[]): ASTNode[] => {
   // or nodes containing whitespace only
   const hasText = ast.some(node => {
     if (isEmoji(node)) return false
+    if (node.type === "br") return false
     if (typeof node.content !== "string") return true
     if (node.content.trim() !== "") return true
     return false
