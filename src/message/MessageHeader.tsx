@@ -7,7 +7,7 @@ const Container = styled.div<{}, Theme>`
   display: ${({ theme }) =>
     theme.display === "cozy" ? "flex" : "inline-flex"};
   margin: ${({ theme }) =>
-    theme.display === "cozy" ? "0 0 2px -80px" : "0 0 0 -9ch"};
+    theme.display === "cozy" ? "0 0 0 -80px" : "0 0 0 -9ch"};
 `
 
 const Avatar = styled.img<{}, Theme>`
@@ -51,7 +51,7 @@ const BotTag = styled.span<{}, Theme>`
 
   width: ${({ theme }) => (theme.display === "cozy" ? "23px" : "21px")};
   height: 14px;
-  padding: ${({ theme }) => (theme.display === "cozy" ? "1px 0 0" : "0")};
+  padding: ${({ theme }) => (theme.display === "cozy" ? "1px 2px" : "0")};
 
   border-radius: 3px;
   margin: 0 4.8px;

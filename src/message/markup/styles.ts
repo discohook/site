@@ -8,25 +8,24 @@ export const MarkupContainer = styled.div`
 `
 
 export const Code = styled.code<{}, Theme>`
-  padding: 2.55px;
-  margin: -2.55px 0;
+  padding: 2.38px;
+  margin: -2.38px 0;
 
   border-radius: 3px;
   background: ${({ theme }) => theme.background.secondary};
 
-  font-size: 12.75px;
+  font-size: 0.85em;
+  line-height: 16px;
 `
 
 export const Emoji = styled.img<{ big?: boolean }, Theme>`
   width: ${({ theme, big }) =>
-    big && theme.display === "cozy" ? "32px" : "21.75px"};
+    big && theme.display === "cozy" ? "32px" : "22px"};
   height: ${({ theme, big }) =>
-    big && theme.display === "cozy" ? "32px" : "21.75px"};
+    big && theme.display === "cozy" ? "32px" : "22px"};
 
   object-fit: contain;
-
-  vertical-align: ${({ big }) => (big ? "-4.5px" : "-6px")};
-  margin: ${({ big }) => (big ? "3px" : "0")} 1.5px 0 0.75px;
+  vertical-align: bottom;
 `
 
 export const Mention = styled.span<{}, Theme>`

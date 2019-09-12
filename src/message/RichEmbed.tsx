@@ -6,13 +6,23 @@ import EmbedAuthor from "./EmbedAuthor"
 import EmbedField from "./EmbedField"
 import EmbedFooter from "./EmbedFooter"
 import Markup from "./markup/Markup"
-import { CodeBlockContainer, MarkupContainer } from "./markup/styles"
+import { CodeBlockContainer, Emoji, MarkupContainer } from "./markup/styles"
 import { Embed } from "./Message"
 
 const Container = styled.div`
   margin: 8px 0 0;
   max-width: 520px;
   display: flex;
+
+  & ${Emoji} {
+    width: 1rem;
+    height: 1rem;
+    min-width: 22px;
+    min-height: 22px;
+
+    margin: 0 0.05em 0 0.1em;
+    vertical-align: -0.4em;
+  }
 `
 
 const Pill = styled.div<{}, Theme>`
@@ -68,6 +78,7 @@ const EmbedDescription = styled.div<{}, Theme>`
     theme.color === "dark" ? "rgba(255, 255, 255, 0.6)" : ""};
   font-size: 14px;
   line-height: 16px;
+  font-weight: 500;
 
   & > ${MarkupContainer} {
     white-space: pre-line;
