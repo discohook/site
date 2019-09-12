@@ -36,7 +36,7 @@ const baseRules: Rules = {
       <a
         href={node.target}
         title={node.title}
-        rel="noopener noreferrer"
+        rel="noopener noreferrer nofollow ugc"
         target="_blank"
         key={state.key}
       >
