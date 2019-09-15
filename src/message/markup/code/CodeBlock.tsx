@@ -1,7 +1,6 @@
-import { IHighlightResult } from "highlight.js"
 import React, { useEffect, useState } from "react"
 import { CodeBlockContainer } from "../styles"
-import { highlight } from "./highlight"
+import { highlightCode } from "./highlightCode"
 
 type Props = {
   content: string
@@ -11,17 +10,15 @@ type Props = {
 export default function CodeBlock(props: Props) {
   const { content, language = "" } = props
 
-  const [highlighted, setHighlighted] = useState<IHighlightResult | undefined>()
+  const [html, setHtml] = useState<string>()
 
   useEffect(() => {
-    highlight(language, content).then(setHighlighted)
-  }, [language, content])
+    highlightCode(language, content).then(setHtml)
+  }, [content, language])
 
-  if (!highlighted) return <CodeBlockContainer>{content}</CodeBlockContainer>
+  if (!html) {
+    return <CodeBlockContainer>{content}</CodeBlockContainer>
+  }
 
-  return (
-    <CodeBlockContainer
-      dangerouslySetInnerHTML={{ __html: highlighted.value }}
-    />
-  )
+  return <CodeBlockContainer dangerouslySetInnerHTML={{ __html: html }} />
 }

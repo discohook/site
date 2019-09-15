@@ -1,133 +1,175 @@
 export type Language = {
-  aliases: string[]
+  name: string
+  aliases?: string[]
   dependencies?: string[]
 }
 
 export const languages: Language[] = [
   {
-    aliases: ["1c"],
+    name: "1c",
   },
   {
-    aliases: ["abnf"],
+    name: "abnf",
   },
   {
-    aliases: ["accesslog"],
+    name: "accesslog",
   },
   {
-    aliases: ["actionscript"],
+    name: "actionscript",
+    aliases: ["as"],
   },
   {
-    aliases: ["ada"],
+    name: "ada",
   },
   {
-    aliases: ["angelscript"],
+    name: "angelscript",
+    aliases: ["asc"],
   },
   {
-    aliases: ["apache"],
+    name: "apache",
+    aliases: ["apacheconf"],
   },
   {
-    aliases: ["applescript"],
+    name: "applescript",
+    aliases: ["osascript"],
   },
   {
-    aliases: ["arcade"],
+    name: "arcade",
   },
   {
-    aliases: ["arduino"],
+    name: "cpp",
+    aliases: ["c", "c++", "cc", "cxx", "h", "h++", "hh", "hpp", "hxx"],
+  },
+  {
+    name: "arduino",
     dependencies: ["cpp"],
   },
   {
-    aliases: ["armasm", "arm"],
+    name: "armasm",
+    aliases: ["arm"],
   },
   {
-    aliases: ["asciidoc", "adoc"],
-  },
-  {
-    aliases: ["aspectj"],
-  },
-  {
-    aliases: ["autohotkey", "ahk"],
-  },
-  {
-    aliases: ["autoit"],
-  },
-  {
-    aliases: ["avrasm"],
-  },
-  {
-    aliases: ["awk"],
-  },
-  {
-    aliases: ["axapta"],
-  },
-  {
-    aliases: ["bash", "sh", "zsh"],
-  },
-  {
-    aliases: ["basic"],
-  },
-  {
-    aliases: ["bnf"],
-  },
-  {
-    aliases: ["brainfuck", "bf"],
-  },
-  {
-    aliases: ["cal"],
-  },
-  {
-    aliases: ["capnproto", "capnp"],
-  },
-  {
-    aliases: ["ceylon"],
-  },
-  {
-    aliases: ["clean", "dcl", "icl"],
-  },
-  {
-    aliases: ["clojure", "clj"],
-  },
-  {
-    aliases: ["clojure-repl"],
-  },
-  {
-    aliases: ["cmake", "cmake.in"],
-  },
-  {
-    aliases: ["coffeescript", "coffee", "cson", "iced"],
-  },
-  {
-    aliases: ["coq"],
-  },
-  {
-    aliases: ["cos", "cls"],
-  },
-  {
-    aliases: ["cpp", "c", "c++", "cc", "cxx", "h", "h++", "hh", "hpp", "hxx"],
-  },
-  {
-    aliases: ["crmsh", "crm", "pcmk"],
-  },
-  {
-    aliases: ["crystal", "cr"],
-  },
-  {
-    aliases: ["cs", "c#", "csharp"],
-  },
-  {
-    aliases: ["csp"],
-  },
-  {
-    aliases: ["css"],
-  },
-  {
-    aliases: ["d"],
-  },
-  {
-    aliases: ["dart"],
-  },
-  {
+    name: "xml",
     aliases: [
-      "delphi",
+      "atom",
+      "html",
+      "plist",
+      "rss",
+      "wsf",
+      "xhtml",
+      "xjb",
+      "xsd",
+      "xsl",
+    ],
+  },
+  {
+    name: "asciidoc",
+    aliases: ["adoc"],
+    dependencies: ["xml"],
+  },
+  {
+    name: "aspectj",
+  },
+  {
+    name: "autohotkey",
+    aliases: ["ahk"],
+  },
+  {
+    name: "autoit",
+  },
+  {
+    name: "avrasm",
+  },
+  {
+    name: "awk",
+  },
+  {
+    name: "axapta",
+  },
+  {
+    name: "bash",
+    aliases: ["sh", "zsh"],
+  },
+  {
+    name: "basic",
+  },
+  {
+    name: "bnf",
+  },
+  {
+    name: "brainfuck",
+    aliases: ["bf"],
+  },
+  {
+    name: "cal",
+  },
+  {
+    name: "capnproto",
+    aliases: ["capnp"],
+  },
+  {
+    name: "ceylon",
+  },
+  {
+    name: "clean",
+    aliases: ["dcl", "icl"],
+  },
+  {
+    name: "clojure",
+    aliases: ["clj"],
+  },
+  {
+    name: "clojure-repl",
+    dependencies: ["clojure"],
+  },
+  {
+    name: "cmake",
+    aliases: ["cmake.in"],
+  },
+  {
+    name: "coffeescript",
+    aliases: ["coffee", "cson", "iced"],
+  },
+  {
+    name: "coq",
+  },
+  {
+    name: "cos",
+    aliases: ["cls"],
+  },
+  {
+    name: "crmsh",
+    aliases: ["crm", "pcmk"],
+  },
+  {
+    name: "crystal",
+    aliases: ["cr"],
+  },
+  {
+    name: "cs",
+    aliases: ["c#", "csharp"],
+  },
+  {
+    name: "csp",
+  },
+  {
+    name: "css",
+  },
+  {
+    name: "d",
+  },
+  {
+    name: "markdown",
+    aliases: ["md", "mkd", "mkdown"],
+    dependencies: ["xml"],
+  },
+  {
+    name: "dart",
+    dependencies: ["markdown"],
+  },
+  {
+    name: "delphi",
+    aliases: [
       "dfm",
       "dpr",
       "freepascal",
@@ -139,446 +181,517 @@ export const languages: Language[] = [
     ],
   },
   {
-    aliases: ["diff", "patch"],
+    name: "diff",
+    aliases: ["patch"],
   },
   {
-    aliases: ["django", "jinja"],
+    name: "django",
+    aliases: ["jinja"],
+    dependencies: ["xml"],
   },
   {
-    aliases: ["dns", "bind", "zone"],
+    name: "dns",
+    aliases: ["bind", "zone"],
   },
   {
-    aliases: ["dockerfile", "docker"],
+    name: "dockerfile",
+    aliases: ["docker"],
+    dependencies: ["bash"],
   },
   {
-    aliases: ["dos", "bat", "cmd"],
+    name: "dos",
+    aliases: ["bat", "cmd"],
   },
   {
-    aliases: ["dsconfig"],
+    name: "dsconfig",
   },
   {
-    aliases: ["dts"],
+    name: "dts",
   },
   {
-    aliases: ["dust", "dst"],
+    name: "dust",
+    aliases: ["dst"],
+    dependencies: ["xml"],
   },
   {
-    aliases: ["ebnf"],
+    name: "ebnf",
   },
   {
-    aliases: ["elixir"],
+    name: "elixir",
   },
   {
-    aliases: ["elm"],
+    name: "elm",
   },
   {
-    aliases: ["erb"],
+    name: "ruby",
+    aliases: ["gemspec", "irb", "podspec", "rb", "thor"],
   },
   {
-    aliases: ["erlang", "erl"],
+    name: "erb",
+    dependencies: ["ruby", "xml"],
   },
   {
-    aliases: ["erlang-repl"],
+    name: "erlang-repl",
   },
   {
-    aliases: ["excel", "xls", "xlsx"],
+    name: "erlang",
+    aliases: ["erl"],
   },
   {
-    aliases: ["fix"],
+    name: "excel",
+    aliases: ["xls", "xlsx"],
   },
   {
-    aliases: ["flix"],
+    name: "fix",
   },
   {
-    aliases: ["fortran", "f90", "f95"],
+    name: "flix",
   },
   {
-    aliases: ["fsharp", "fs"],
+    name: "fortran",
+    aliases: ["f90", "f95"],
   },
   {
-    aliases: ["gams", "gms"],
+    name: "fsharp",
+    aliases: ["fs"],
   },
   {
-    aliases: ["gauss", "gss"],
+    name: "gams",
+    aliases: ["gms"],
   },
   {
-    aliases: ["gcode", "nc"],
+    name: "gauss",
+    aliases: ["gss"],
   },
   {
-    aliases: ["gherkin", "feature"],
+    name: "gcode",
+    aliases: ["nc"],
   },
   {
-    aliases: ["glsl"],
+    name: "gherkin",
+    aliases: ["feature"],
   },
   {
-    aliases: ["gml"],
+    name: "glsl",
   },
   {
-    aliases: ["go", "golang"],
+    name: "gml",
   },
   {
-    aliases: ["golo"],
+    name: "go",
+    aliases: ["golang"],
   },
   {
-    aliases: ["gradle"],
+    name: "golo",
   },
   {
-    aliases: ["groovy"],
+    name: "gradle",
   },
   {
-    aliases: ["haml"],
+    name: "groovy",
   },
   {
-    aliases: ["handlebars", "hbs", "html.handlebars", "html.hbs"],
+    name: "haml",
+    dependencies: ["ruby"],
   },
   {
-    aliases: ["haskell", "hs"],
+    name: "handlebars",
+    aliases: ["hbs", "html.handlebars", "html.hbs"],
+    dependencies: ["xml"],
   },
   {
-    aliases: ["haxe", "hx"],
+    name: "haskell",
+    aliases: ["hs"],
   },
   {
-    aliases: ["hsp"],
+    name: "haxe",
+    aliases: ["hx"],
   },
   {
-    aliases: ["htmlbars"],
+    name: "hsp",
   },
   {
-    aliases: ["http", "https"],
+    name: "htmlbars",
+    dependencies: ["xml"],
   },
   {
-    aliases: ["hy", "hylang"],
+    name: "http",
+    aliases: ["https"],
   },
   {
-    aliases: ["inform7", "i7"],
+    name: "hy",
+    aliases: ["hylang"],
   },
   {
-    aliases: ["ini", "toml"],
+    name: "inform7",
+    aliases: ["i7"],
   },
   {
-    aliases: ["irpf90"],
+    name: "ini",
+    aliases: ["toml"],
   },
   {
-    aliases: ["isbl"],
+    name: "irpf90",
   },
   {
-    aliases: ["java", "jsp"],
+    name: "isbl",
   },
   {
-    aliases: ["javascript", "js", "jsx"],
+    name: "java",
+    aliases: ["jsp"],
   },
   {
-    aliases: ["jboss-cli", "wildfly-cli"],
+    name: "javascript",
+    aliases: ["js", "jsx"],
   },
   {
-    aliases: ["json"],
+    name: "jboss-cli",
+    aliases: ["wildfly-cli"],
   },
   {
-    aliases: ["julia"],
+    name: "json",
   },
   {
-    aliases: ["julia-repl"],
+    name: "julia",
   },
   {
-    aliases: ["kotlin", "kt"],
+    name: "julia-repl",
+    dependencies: ["julia"],
   },
   {
-    aliases: ["lasso", "lassoscript", "ls"],
+    name: "kotlin",
+    aliases: ["kt"],
   },
   {
-    aliases: ["ldif"],
+    name: "lasso",
+    aliases: ["lassoscript", "ls"],
   },
   {
-    aliases: ["leaf"],
+    name: "ldif",
   },
   {
-    aliases: ["less"],
+    name: "leaf",
   },
   {
-    aliases: ["lisp"],
+    name: "less",
   },
   {
-    aliases: ["livecodeserver"],
+    name: "lisp",
   },
   {
-    aliases: ["livescript", "ls"],
+    name: "livecodeserver",
   },
   {
-    aliases: ["llvm"],
+    name: "livescript",
+    aliases: ["ls"],
   },
   {
-    aliases: ["lsl"],
+    name: "llvm",
   },
   {
-    aliases: ["lua"],
+    name: "lsl",
   },
   {
-    aliases: ["makefile", "mak", "mk"],
+    name: "lua",
   },
   {
-    aliases: ["markdown", "md", "mkd", "mkdown"],
+    name: "makefile",
+    aliases: ["mak", "mk"],
   },
   {
-    aliases: ["mathematica", "mma"],
+    name: "mathematica",
+    aliases: ["mma", "wl"],
   },
   {
-    aliases: ["matlab"],
+    name: "matlab",
   },
   {
-    aliases: ["maxima"],
+    name: "maxima",
   },
   {
-    aliases: ["mel"],
+    name: "mel",
   },
   {
-    aliases: ["mercury", "m", "moo"],
+    name: "mercury",
+    aliases: ["m", "moo"],
   },
   {
-    aliases: ["mipsasm", "mips"],
+    name: "mipsasm",
+    aliases: ["mips"],
   },
   {
-    aliases: ["mizar"],
+    name: "mizar",
   },
   {
-    aliases: ["mojolicious"],
+    name: "perl",
+    aliases: ["pl", "pm"],
   },
   {
-    aliases: ["monkey"],
+    name: "mojolicious",
+    dependencies: ["perl", "xml"],
   },
   {
-    aliases: ["moonscript", "moon"],
+    name: "monkey",
   },
   {
-    aliases: ["n1ql"],
+    name: "moonscript",
+    aliases: ["moon"],
   },
   {
-    aliases: ["nginx", "nginxconf"],
+    name: "n1ql",
   },
   {
-    aliases: ["nimrod", "nim"],
+    name: "nginx",
+    aliases: ["nginxconf"],
   },
   {
-    aliases: ["nix", "nixos"],
+    name: "nimrod",
+    aliases: ["nim"],
   },
   {
-    aliases: ["nsis"],
+    name: "nix",
+    aliases: ["nixos"],
   },
   {
-    aliases: ["objectivec", "mm", "obj-c", "objc"],
+    name: "nsis",
   },
   {
-    aliases: ["ocaml", "ml"],
+    name: "objectivec",
+    aliases: ["mm", "obj-c", "objc"],
   },
   {
-    aliases: ["openscad", "scad"],
+    name: "ocaml",
+    aliases: ["ml"],
   },
   {
-    aliases: ["oxygene"],
+    name: "openscad",
+    aliases: ["scad"],
   },
   {
-    aliases: ["parser3"],
+    name: "oxygene",
   },
   {
-    aliases: ["perl", "pl", "pm"],
+    name: "parser3",
+    dependencies: ["xml"],
   },
   {
-    aliases: ["pf", "pf.conf"],
+    name: "pf",
+    aliases: ["pf.conf"],
   },
   {
-    aliases: ["pgsql", "postgres", "postgresql"],
+    name: "pgsql",
+    aliases: ["postgres", "postgresql"],
   },
   {
-    aliases: ["php", "php3", "php4", "php5", "php6", "php7"],
+    name: "php",
+    aliases: ["php3", "php4", "php5", "php6", "php7"],
   },
   {
-    aliases: ["plaintext"],
+    name: "plaintext",
   },
   {
-    aliases: ["pony"],
+    name: "pony",
   },
   {
-    aliases: ["powershell", "ps"],
+    name: "powershell",
+    aliases: ["ps"],
   },
   {
-    aliases: ["processing"],
+    name: "processing",
   },
   {
-    aliases: ["profile"],
+    name: "profile",
   },
   {
-    aliases: ["prolog"],
+    name: "prolog",
   },
   {
-    aliases: ["properties"],
+    name: "properties",
   },
   {
-    aliases: ["protobuf"],
+    name: "protobuf",
   },
   {
-    aliases: ["puppet", "pp"],
+    name: "puppet",
+    aliases: ["pp"],
   },
   {
-    aliases: ["purebasic", "pb", "pbi"],
+    name: "purebasic",
+    aliases: ["pb", "pbi"],
   },
   {
-    aliases: ["python", "gyp", "ipython", "py"],
+    name: "python",
+    aliases: ["gyp", "ipython", "py"],
   },
   {
-    aliases: ["q", "k", "kdb"],
+    name: "q",
+    aliases: ["k", "kdb"],
   },
   {
-    aliases: ["qml", "qt"],
+    name: "qml",
+    aliases: ["qt"],
+    dependencies: ["javascript", "xml"],
   },
   {
-    aliases: ["r"],
+    name: "r",
   },
   {
-    aliases: ["reasonml", "re"],
+    name: "reasonml",
+    aliases: ["re"],
   },
   {
-    aliases: ["rib"],
+    name: "rib",
   },
   {
-    aliases: ["roboconf", "graph", "instances"],
+    name: "roboconf",
+    aliases: ["graph", "instances"],
   },
   {
-    aliases: ["routeros", "mikrotik"],
+    name: "routeros",
+    aliases: ["mikrotik"],
   },
   {
-    aliases: ["rsl"],
+    name: "rsl",
   },
   {
-    aliases: ["ruby", "gemspec", "irb", "podspec", "rb", "thor"],
+    name: "ruleslanguage",
   },
   {
-    aliases: ["ruleslanguage"],
+    name: "rust",
+    aliases: ["rs"],
   },
   {
-    aliases: ["rust", "rs"],
+    name: "sas",
   },
   {
-    aliases: ["sas"],
+    name: "scala",
   },
   {
-    aliases: ["scala"],
+    name: "scheme",
   },
   {
-    aliases: ["scheme"],
+    name: "scilab",
+    aliases: ["sci"],
   },
   {
-    aliases: ["scilab", "sci"],
+    name: "scss",
   },
   {
-    aliases: ["scss"],
+    name: "shell",
+    aliases: ["console"],
+    dependencies: ["bash"],
   },
   {
-    aliases: ["shell", "console"],
+    name: "smali",
   },
   {
-    aliases: ["smali"],
+    name: "smalltalk",
+    aliases: ["st"],
   },
   {
-    aliases: ["smalltalk", "st"],
+    name: "sml",
+    aliases: ["ml"],
   },
   {
-    aliases: ["sml", "ml"],
-  },
-  {
-    aliases: ["sqf"],
+    name: "sqf",
     dependencies: ["cpp"],
   },
   {
-    aliases: ["sql"],
+    name: "sql",
   },
   {
-    aliases: ["stan"],
+    name: "stan",
   },
   {
-    aliases: ["stata", "ado", "do"],
+    name: "stata",
+    aliases: ["ado", "do"],
   },
   {
-    aliases: ["step21", "p21", "step", "stp"],
+    name: "step21",
+    aliases: ["p21", "step", "stp"],
   },
   {
-    aliases: ["stylus", "styl"],
+    name: "stylus",
+    aliases: ["styl"],
   },
   {
-    aliases: ["subunit"],
+    name: "subunit",
   },
   {
-    aliases: ["swift"],
+    name: "swift",
   },
   {
-    aliases: ["taggerscript"],
+    name: "taggerscript",
   },
   {
-    aliases: ["tap"],
+    name: "yaml",
+    aliases: ["yml"],
+    dependencies: ["ruby"],
   },
   {
-    aliases: ["tcl", "tk"],
+    name: "tap",
+    dependencies: ["yaml"],
   },
   {
-    aliases: ["tex"],
+    name: "tcl",
+    aliases: ["tk"],
   },
   {
-    aliases: ["thrift"],
+    name: "tex",
   },
   {
-    aliases: ["tp"],
+    name: "thrift",
   },
   {
-    aliases: ["twig", "craftcms"],
+    name: "tp",
   },
   {
-    aliases: ["typescript", "ts"],
+    name: "twig",
+    aliases: ["craftcms"],
+    dependencies: ["xml"],
   },
   {
-    aliases: ["vala"],
+    name: "typescript",
+    aliases: ["ts"],
   },
   {
-    aliases: ["vbnet", "vb"],
+    name: "vala",
   },
   {
-    aliases: ["vbscript", "vbs"],
+    name: "vbnet",
+    aliases: ["vb"],
   },
   {
-    aliases: ["vbscript-html"],
+    name: "vbscript",
+    aliases: ["vbs"],
   },
   {
-    aliases: ["verilog", "sv", "svh", "v"],
+    name: "vbscript-html",
+    dependencies: ["vbscript", "xml"],
   },
   {
-    aliases: ["vhdl"],
+    name: "verilog",
+    aliases: ["sv", "svh", "v"],
   },
   {
-    aliases: ["vim"],
+    name: "vhdl",
   },
   {
-    aliases: ["x86asm"],
+    name: "vim",
   },
   {
-    aliases: ["xl", "tao"],
+    name: "x86asm",
   },
   {
-    aliases: [
-      "xml",
-      "atom",
-      "html",
-      "plist",
-      "rss",
-      "xhtml",
-      "xjb",
-      "xsd",
-      "xsl",
-    ],
+    name: "xl",
+    aliases: ["tao"],
   },
   {
-    aliases: ["xquery", "xpath", "xq"],
+    name: "xquery",
+    aliases: ["xpath", "xq"],
   },
   {
-    aliases: ["yaml", "yml"],
-  },
-  {
-    aliases: ["zephir", "zep"],
+    name: "zephir",
+    aliases: ["zep"],
   },
 ]
