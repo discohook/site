@@ -73,7 +73,7 @@ export default function FooterEditor(props: Props) {
             handleChange({
               footer,
               timestamp: timestamp
-                ? new Date(timestamp + "Z").toISOString()
+                ? new Date(`${timestamp}Z`).toISOString()
                 : undefined,
             })
           }

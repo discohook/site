@@ -69,10 +69,8 @@ export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
   min-height: 60px;
 ` as SC<"textarea">
 
-export const InputNote = styled.div<
-  { state: "normal" | "warning" | "error" },
-  Theme
->`
+type InputNoteProps = { state: "normal" | "warning" | "error" }
+export const InputNote = styled.div<InputNoteProps, Theme>`
   align-self: flex-end;
   margin: 0 10px 0 0;
 
@@ -120,7 +118,7 @@ export const ToggleButton = styled(Button)<{ filled: boolean }, Theme>`
   && {
     background: ${({ theme, filled }) =>
       filled ? theme.accent : "transparent"};
-    color: ${({ theme, filled }) => theme.header.primary};
+    color: ${({ theme }) => theme.header.primary};
   }
 `
 

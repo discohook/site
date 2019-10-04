@@ -143,7 +143,7 @@ export default function RichEmbed(props: Props) {
       ? `#${color.toString(16).padStart(6, "0")}`
       : undefined
 
-  const EmbedTitle = !url ? EmbedTitleNormal : EmbedTitleLink
+  const EmbedTitle = url ? EmbedTitleLink : EmbedTitleNormal
 
   return (
     <Container>

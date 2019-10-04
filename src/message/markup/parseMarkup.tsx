@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+
 import React from "react"
 import {
   anyScopeRegex,
@@ -54,23 +56,21 @@ const baseRules: Rules = {
   u: defaultRules.u,
   inlineCode: {
     ...defaultRules.inlineCode,
-    react: (node, _output, state) => (
-      <Code key={state.key}>{node.content}</Code>
-    ),
+    react: (node, _, state) => <Code key={state.key}>{node.content}</Code>,
   },
   shrug: {
     // Edge case for shrug emoji getting parsed as markup.
     order: defaultRules.text.order,
     match: inlineRegex(/^¯\\_\(ツ\)_\/¯/),
-    parse: (capture, _parse, _state) => ({
+    parse: capture => ({
       type: "text",
       content: capture[1],
     }),
   },
   emoji: {
     order: defaultRules.text.order,
-    match: inlineRegex(/^:([^\s:]+?(?:::skin\-tone\-\d)?):/),
-    parse: (capture, _parse, _state) =>
+    match: inlineRegex(/^:([^\s:]+?(?:::skin-tone-\d)?):/),
+    parse: capture =>
       nameToEmoji[capture[1]]
         ? {
             name: capture[1],
@@ -98,7 +98,7 @@ const baseRules: Rules = {
   customEmoji: {
     order: defaultRules.text.order,
     match: inlineRegex(/^<a?:(\w+):(\d+)>/),
-    parse: (capture, _parse, _state) => ({
+    parse: capture => ({
       id: capture[2],
       name: `${capture[1]}`,
       src: `https://cdn.discordapp.com/emojis/${capture[2]}`,
@@ -193,13 +193,13 @@ const blockRules: Rules = {
   },
   codeBlock: {
     order: defaultRules.codeBlock.order,
-    match: anyScopeRegex(/^```([a-z0-9\-]+?\n+)?\n*([^]+?)\n*```/),
+    match: anyScopeRegex(/^```([a-z0-9-]+?\n+)?\n*([^]+?)\n*```/),
     parse: (capture, _parse, state) => ({
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
       inQuote: state.inQuote,
     }),
-    react: (node, _output, state) => (
+    react: (node, _, state) => (
       <CodeBlock
         key={state.key}
         language={node.language}
@@ -210,7 +210,7 @@ const blockRules: Rules = {
   mention: {
     order: defaultRules.text.order,
     match: inlineRegex(/^<@!?\d+>|^@(everyone|here)/),
-    parse: (capture, _parse, _state) => ({
+    parse: capture => ({
       content: capture[1] ? `@${capture[1]}` : "@unknown-user",
     }),
     react: (node, _output, state) => (
@@ -243,7 +243,7 @@ const ellipsize = (text: string, length: number) => {
   const shortenedText = text.replace(/\s+/g, " ")
   return shortenedText.length <= length
     ? shortenedText
-    : shortenedText.substring(0, length) + "…"
+    : `${shortenedText.substring(0, length)}…`
 }
 
 const now = () =>
@@ -273,7 +273,7 @@ export const parseMarkup = (
     console.groupCollapsed(`Parsed markup for "${ellipsized}" in ${time}ms`)
     console.log("AST:", ast)
     if (content.includes("\n")) {
-      console.log("Content:", "\n" + content)
+      console.log("Content:", `\n${content}`)
     } else {
       console.log("Content:", content)
     }

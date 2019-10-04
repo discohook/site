@@ -1,10 +1,3 @@
-type ColorTheme = typeof darkTheme
-
-export type Theme = ColorTheme & {
-  display: "cozy" | "compact"
-  color: "dark" | "light"
-}
-
 const common = {
   accent: "#7289da",
 
@@ -94,4 +87,9 @@ export const lightTheme: typeof darkTheme = {
   },
 
   textAreaBackground: "#ebedef",
+}
+
+export type Theme = typeof darkTheme & {
+  display: "cozy" | "compact"
+  color: "dark" | "light"
 }

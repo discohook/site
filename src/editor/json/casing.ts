@@ -1,19 +1,27 @@
-const mapKeys = (obj: Record<string, any>, fn: (key: string) => string) => {
-  const result: Record<string, any> = Array.isArray(obj) ? [] : {}
+const mapKeys = (obj: object, fn: (key: string) => string): object => {
+  if (Array.isArray(obj)) {
+    return obj.map(x =>
+      typeof x === "object" && x !== null ? mapKeys(x, fn) : x,
+    )
+  }
 
-  for (const key in obj) {
-    const isObject = typeof obj[key] === "object" && obj[key] !== null
+  const result: Record<string, unknown> = {}
 
-    result[fn(key)] = isObject ? mapKeys(obj[key], fn) : obj[key]
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof value === "object" && value !== null) {
+      result[fn(key)] = mapKeys(value, fn)
+    } else {
+      result[fn(key)] = value
+    }
   }
 
   return result
 }
 
-export const toSnakeCase = (obj: Record<string, any>) =>
+export const toSnakeCase = (obj: object) =>
   mapKeys(obj, key => key.replace(/[A-Z]/g, match => `_${match.toLowerCase()}`))
 
-export const toCamelCase = (obj: Record<string, any>) =>
+export const toCamelCase = (obj: object) =>
   mapKeys(obj, key =>
     key.replace(/_[a-z]/g, match => `${match.toUpperCase()}`.substring(1)),
   )

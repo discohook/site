@@ -34,7 +34,7 @@ type Props = {
 export default function EmbedAuthor(props: Props) {
   const { name, url, iconUrl } = props.author
 
-  const AuthorName = !url ? AuthorNameNormal : AuthorNameLink
+  const AuthorName = url ? AuthorNameLink : AuthorNameNormal
 
   return (
     <Container>

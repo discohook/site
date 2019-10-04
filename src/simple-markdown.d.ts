@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 type ReactNode = React.ReactNode
 
 declare module "simple-markdown" {

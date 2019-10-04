@@ -55,7 +55,7 @@ router.get("/", async (context, next) => {
   stream.write(templateAfter)
   stream.end()
 
-  return await next()
+  return next()
 })
 
 app.use(router.middleware())

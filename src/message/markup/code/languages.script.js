@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 // @ts-check
 const { get } = require("https")
 const hljs = require("highlight.js")
@@ -40,9 +43,9 @@ const getLanguage = async language => {
     .map(alias => alias.toLowerCase())
     .filter(alias => alias !== language)
     .filter((alias, i, a) => a.indexOf(alias) === i)
-    .sort()
+    .sort((a, b) => ((a > b ? 1 : -1)))
 
-  const dependencies = ((await getDependencies(language)) || []).sort()
+  const dependencies = (await getDependencies(language)) || []
 
   return {
     name: language,
@@ -64,4 +67,4 @@ const main = async () => {
   console.log(JSON.stringify(languages, undefined, 2))
 }
 
-main()
+main().catch(() => {})

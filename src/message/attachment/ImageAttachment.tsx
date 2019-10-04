@@ -33,9 +33,9 @@ export default function ImageAttachment(props: Props) {
   const [errored, setErrored] = useState(false)
   useEffect(() => setErrored(false), [objectUrl])
 
-  return !errored ? (
-    <Image src={objectUrl} alt={name} onError={() => setErrored(true)} />
-  ) : (
+  return errored ? (
     <DefaultAttachment file={file} type="image" />
+  ) : (
+    <Image src={objectUrl} alt={name} onError={() => setErrored(true)} />
   )
 }

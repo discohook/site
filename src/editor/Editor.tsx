@@ -94,8 +94,9 @@ export default function Editor(props: Props) {
   useEffect(() => {
     const { message, errors } = parseMessage(json)
 
-    if (errors.length > 0)
+    if (errors.length > 0) {
       console.log("JSON validation errors occurred:", errors, message)
+    }
   }, [json])
 
   const [webhookUrl, setWebhookUrl] = useState("")
@@ -106,11 +107,13 @@ export default function Editor(props: Props) {
     const formData = new FormData()
     formData.append("payload_json", json)
 
-    if (files && files instanceof FileList)
-      for (const [index, file] of Object.entries(files))
+    if (files && files instanceof FileList) {
+      for (const [index, file] of Object.entries(files)) {
         formData.append(`file[${index}]`, file, file.name)
+      }
+    }
 
-    const response = await fetch(webhookUrl + "?wait=true", {
+    const response = await fetch(`${webhookUrl}?wait=true`, {
       method: "POST",
       body: formData,
     })

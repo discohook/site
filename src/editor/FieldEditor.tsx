@@ -68,7 +68,7 @@ export default function FieldEditor(props: Props) {
             onChange={name =>
               modifyField(index, {
                 ...field,
-                name: name || (undefined as any),
+                name: name || undefined,
               })
             }
             label="Field name"
@@ -92,7 +92,7 @@ export default function FieldEditor(props: Props) {
           onChange={value =>
             modifyField(index, {
               ...field,
-              value: value || (undefined as any),
+              value: value || undefined,
             })
           }
           label="Field value"

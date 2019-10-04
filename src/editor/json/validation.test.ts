@@ -16,7 +16,7 @@ const primitiveValues = primitives
 
 describe("type validation", () => {
   it("can compose validators", () => {
-    const { first, all, isString } = v
+    const { first, all } = v
 
     const cont = jest.fn<string[], Parameters<Validator>>(() => [])
     const fail = jest.fn<string[], Parameters<Validator>>((_, key) => [

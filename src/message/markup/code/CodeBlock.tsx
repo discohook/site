@@ -13,7 +13,9 @@ export default function CodeBlock(props: Props) {
   const [html, setHtml] = useState<string>()
 
   useEffect(() => {
-    highlightCode(language, content).then(setHtml)
+    highlightCode(language, content)
+      .then(setHtml)
+      .catch(() => setHtml(undefined))
   }, [content, language])
 
   if (!html) {

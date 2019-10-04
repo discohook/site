@@ -46,7 +46,7 @@ export const nullable = (validate: Validator): Validator => (value, key) =>
 
 export const contains = (validate: Validator): Validator =>
   first(isArray, (value, key) =>
-    (value as any[]).flatMap((item, index) =>
+    (value as unknown[]).flatMap((item, index) =>
       validate(item, `${key}[${index}]`),
     ),
   )
@@ -54,14 +54,17 @@ export const contains = (validate: Validator): Validator =>
 export const isShape = (shape: Record<string, Validator>): Validator =>
   first(isObject, (value, key) =>
     Object.entries(shape).flatMap(([shapeKey, validate]) =>
-      validate((value as any)[shapeKey], `${key}.${shapeKey}`),
+      validate(
+        (value as Record<string, unknown>)[shapeKey],
+        `${key}.${shapeKey}`,
+      ),
     ),
   )
 
 export const requiresKey = (...keys: string[]): Validator =>
   first(isObject, (value, key) =>
     keys
-      .map(requiredKey => (value as Object).hasOwnProperty(requiredKey))
+      .map(requiredKey => requiredKey in (value as object))
       .some(result => result)
       ? []
       : keys.length === 1

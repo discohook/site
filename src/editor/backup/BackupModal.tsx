@@ -85,7 +85,7 @@ export default function BackupModal(props: Props) {
   const [backups, setBackups] = useState<string[]>([])
   const getAllBackups = async () => setBackups(await getBackups())
   useEffect(() => {
-    getAllBackups()
+    getAllBackups().catch(() => {})
   }, [])
 
   const handleLoad = async (name: string) => {
@@ -93,11 +93,13 @@ export default function BackupModal(props: Props) {
     if (backup) onLoad(backup)
   }
 
-  const handleShare = (name: string) => shareBackup(name)
+  const handleShare = async (name: string) => {
+    await shareBackup(name)
+  }
 
-  const handleDelete = (backup: string) => {
-    deleteBackup(backup)
-    getAllBackups()
+  const handleDelete = async (backup: string) => {
+    await deleteBackup(backup)
+    await getAllBackups()
   }
 
   const [newBackupName, setNewBackupName] = useState("")
@@ -110,7 +112,9 @@ export default function BackupModal(props: Props) {
         type: file.type,
         size: file.size,
       })),
-    }).then(getAllBackups)
+    })
+      .then(getAllBackups)
+      .catch(() => {})
   }
 
   return (
@@ -122,11 +126,13 @@ export default function BackupModal(props: Props) {
       <List>
         {backups.map(backup => (
           <Item key={backup}>
-            <BackupName onClick={() => handleLoad(backup)}>{backup}</BackupName>
-            <BackupAction onClick={() => handleShare(backup)}>
+            <BackupName onClick={async () => handleLoad(backup)}>
+              {backup}
+            </BackupName>
+            <BackupAction onClick={async () => handleShare(backup)}>
               Share
             </BackupAction>
-            <BackupAction onClick={() => handleDelete(backup)} dangerous>
+            <BackupAction onClick={async () => handleDelete(backup)} dangerous>
               Delete
             </BackupAction>
           </Item>

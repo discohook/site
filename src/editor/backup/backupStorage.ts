@@ -16,20 +16,20 @@ const dbPromise = new Promise<IDBDatabase>((res, rej) => {
 let db!: IDBDatabase
 dbPromise.then(database => (db = database)).catch(() => {})
 
-const runTransaction = async (
+const runTransaction = async <T>(
   mode: IDBTransactionMode,
-  callback: (store: IDBObjectStore) => void,
-) => {
+  callback: (store: IDBObjectStore) => T,
+): Promise<T> => {
   await dbPromise
 
-  return new Promise((res, rej) => {
+  return new Promise<T>((res, rej) => {
     const transaction = db.transaction("backupStore", mode)
 
     transaction.addEventListener("complete", () => res())
     transaction.addEventListener("error", () => rej(transaction.error))
     transaction.addEventListener("abort", () => rej(transaction.error))
 
-    callback(transaction.objectStore("backupStore"))
+    return callback(transaction.objectStore("backupStore"))
   })
 }
 
@@ -37,12 +37,12 @@ export const getBackups = async () => {
   const keys: IDBValidKey[] = []
 
   await runTransaction("readonly", store => {
-    const cursor = store.openKeyCursor || store.openCursor
-    const request = cursor.call(store)
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const request = (store.openKeyCursor || store.openCursor).call(store)
 
     request.addEventListener("success", () => {
       if (!request.result) return
-      keys.push(request.result!.key)
+      keys.push(request.result.key)
       request.result.continue()
     })
 
@@ -59,10 +59,8 @@ export const setBackup = async (name: string, backup: Backup) => {
 }
 
 export const getBackup = async (name: string) => {
-  let request: IDBRequest
-  await runTransaction("readonly", store => (request = store.get(name)))
-
-  const backup: Backup = request!.result
+  const request = await runTransaction("readonly", store => store.get(name))
+  const backup: Backup = request.result
 
   for (const embed of backup.message.embeds || []) {
     embed[id] = getUniqueId()
