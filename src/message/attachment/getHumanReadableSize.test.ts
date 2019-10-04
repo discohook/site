@@ -16,6 +16,6 @@ describe("human readable file sizes", () => {
     [16221470, "15.47 MB"],
     [50000000, "47.68 MB"],
   ])("formats file sizes correctly (%p -> %p)", (input, expected) => {
-    expect(getHumanReadableSize(input - 1)).toEqual(expected)
+    expect(getHumanReadableSize(input)).toEqual(expected)
   })
 })
