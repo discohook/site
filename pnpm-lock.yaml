@@ -45,6 +45,7 @@ devDependencies:
   html-webpack-plugin: 4.0.0-beta.8_webpack@4.41.0
   jest: 24.9.0
   preload-webpack-plugin: 3.0.0-beta.4_9223090a3eb610217d244c2c22b13d4f
+  prettier: 1.18.2
   source-map-loader: 0.2.4
   typescript: 3.6.3
   webpack: 4.41.0_webpack@4.41.0
@@ -6416,6 +6417,13 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
+  /prettier/1.18.2:
+    dev: true
+    engines:
+      node: '>=4'
+    hasBin: true
+    resolution:
+      integrity: sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
   /pretty-error/2.1.1:
     dependencies:
       renderkid: 2.0.3
@@ -8409,6 +8417,7 @@ specifiers:
   koa-router: ^7.4.0
   koa-static: ^5.0.0
   preload-webpack-plugin: ^3.0.0-beta.4
+  prettier: ^1.18.2
   react: ^16.10.2
   react-dom: ^16.10.2
   regenerator-runtime: ^0.13.3
