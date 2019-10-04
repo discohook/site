@@ -14,7 +14,7 @@ export default function AuthorEditor(props: Props) {
   const { name, url, iconUrl } = author
 
   const handleChange = (author: Author) =>
-    Object.values(author).some(value => !!value)
+    Object.values(author).some(Boolean)
       ? props.onChange(author)
       : props.onChange(undefined)
 

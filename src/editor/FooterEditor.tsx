@@ -25,7 +25,7 @@ export default function FooterEditor(props: Props) {
   const handleChange = (embed: Omit<Embed, symbol>) => {
     onChange({
       footer:
-        embed.footer && Object.values(embed.footer).some(value => !!value)
+        embed.footer && Object.values(embed.footer).some(Boolean)
           ? embed.footer
           : undefined,
       timestamp: embed.timestamp || undefined,
