@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Message } from "../message/Message"
 import { Theme } from "../themes"
 import { FakeFile } from "./backup/Backup"
@@ -60,13 +60,12 @@ export default function Editor(props: Props) {
   const {
     mobile: isMobile,
     message,
-    onChange,
+    onChange: handleChange,
     files,
     onFilesChange: handleFilesChange,
     onToggleTheme: handleToggleTheme,
     onToggleDisplay: handleToggleDisplay,
   } = props
-  const handleChange = useCallback(onChange, [])
 
   const [json, setJson] = useState(stringifyMessage(message))
   useEffect(() => setJson(stringifyMessage(message)), [message])
@@ -78,18 +77,21 @@ export default function Editor(props: Props) {
 
   const [errors, setErrors] = useState<string[]>([])
 
-  const filterEmptyMessage = useCallback(
-    (error: string) =>
-      files && files.length > 0
-        ? error !== "$: Expected one of following keys: 'content', 'embeds'"
-        : true,
-    [files],
-  )
-
   useEffect(() => {
-    const { errors } = parseMessage(json)
-    setErrors(errors.filter(filterEmptyMessage))
-  }, [filterEmptyMessage, json])
+    const errors = parseMessage(json).errors.filter(error => {
+      if (
+        files &&
+        files.length > 0 &&
+        error === "$: Expected one of following keys: 'content', 'embeds'"
+      ) {
+        return false
+      }
+
+      return true
+    })
+
+    setErrors(errors)
+  }, [files, json])
 
   useEffect(() => {
     const { message, errors } = parseMessage(json)
