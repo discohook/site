@@ -90,6 +90,7 @@
     "no-useless-rename": "error",
     "object-shorthand": "error",
     "prefer-arrow-callback": "error",
+    "prefer-const": "error",
     "prefer-destructuring": [
       "error",
       {
