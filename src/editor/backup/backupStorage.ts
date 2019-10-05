@@ -18,18 +18,20 @@ dbPromise.then(database => (db = database)).catch(() => {})
 
 const runTransaction = async <T>(
   mode: IDBTransactionMode,
-  callback: (store: IDBObjectStore) => T,
-): Promise<T> => {
+  fn: (store: IDBObjectStore) => T,
+) => {
   await dbPromise
 
   return new Promise<T>((res, rej) => {
     const transaction = db.transaction("backupStore", mode)
 
-    transaction.addEventListener("complete", () => res())
+    const result = {} as { value: T }
+
+    transaction.addEventListener("complete", () => res(result.value))
     transaction.addEventListener("error", () => rej(transaction.error))
     transaction.addEventListener("abort", () => rej(transaction.error))
 
-    return callback(transaction.objectStore("backupStore"))
+    result.value = fn(transaction.objectStore("backupStore"))
   })
 }
 
