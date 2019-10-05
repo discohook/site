@@ -1,7 +1,7 @@
+import Router from "@koa/router"
 import { readFileSync } from "fs"
 import Koa from "koa"
 import conditional from "koa-conditional-get"
-import Router from "koa-router"
 import serve from "koa-static"
 import { resolve } from "path"
 import React from "react"
