@@ -82,7 +82,11 @@
     "no-multi-assign": "error",
     "no-negated-condition": "error",
     "no-new-object": "error",
-    "no-restricted-syntax": ["error", "WithStatement"],
+    "no-restricted-syntax": [
+      "error",
+      "WithStatement",
+      ":not(TaggedTemplateExpression) > TemplateLiteral[expressions.length=0]"
+    ],
     "no-unneeded-ternary": "error",
     "one-var": ["error", "never"],
     "prefer-object-spread": "error",
@@ -121,7 +125,6 @@
     "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/prefer-readonly": "error",
     "@typescript-eslint/promise-function-async": "error",
-    "@typescript-eslint/quotes": ["error", "double", { "avoidEscape": true }],
     "@typescript-eslint/require-array-sort-compare": "error",
     "@typescript-eslint/require-await": "error",
     "@typescript-eslint/triple-slash-reference": "error",
