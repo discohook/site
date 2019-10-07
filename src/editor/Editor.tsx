@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Message } from "../message/Message"
+import { RequestContext } from "../RequestContext"
 import { Theme } from "../themes"
 import { FakeFile } from "./backup/Backup"
 import BackupModal from "./backup/BackupModal"
@@ -47,7 +48,6 @@ const JavaScriptWarning = styled.noscript<{}, Theme>`
 `
 
 type Props = {
-  mobile: boolean
   message: Message
   onChange: (message: Message) => void
   files: FileList | FakeFile[]
@@ -58,7 +58,6 @@ type Props = {
 
 export default function Editor(props: Props) {
   const {
-    mobile: isMobile,
     message,
     onChange: handleChange,
     files,
@@ -142,6 +141,11 @@ export default function Editor(props: Props) {
   })()
 
   const [isBackupModalShown, setIsBackupModalShown] = useState(false)
+
+  const request = useContext(RequestContext)
+  const isMobile = /mobile/i.test(
+    (request.get && request.get("user-agent")) || navigator.userAgent,
+  )
 
   return (
     <EditorContainer>

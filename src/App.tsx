@@ -1,13 +1,13 @@
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
-import { Context } from "koa"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { FakeFile } from "./editor/backup/Backup"
 import { getSharedBackup } from "./editor/backup/sharing"
 import Editor from "./editor/Editor"
 import GlobalStyle from "./GlobalStyle"
 import { initialMessage } from "./initialMessage"
 import MessagePreview from "./message/MessagePreview"
+import { RequestContext } from "./RequestContext"
 import { darkTheme, lightTheme, Theme } from "./themes"
 
 const Container = styled.div`
@@ -54,15 +54,10 @@ const View = styled.div<{ mobile: boolean }>`
   }
 `
 
-type Props = {
-  requestContext?: Context
-}
+export default function App() {
+  const request = useContext(RequestContext)
 
-export default function App(props: Props) {
-  const { URL: url = new URL(location.href), headers = {} } =
-    props.requestContext || {}
-
-  const backup = getSharedBackup(url) || {
+  const backup = getSharedBackup(request.URL || new URL(location.href)) || {
     message: initialMessage,
     files: [],
   }
@@ -90,10 +85,9 @@ export default function App(props: Props) {
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
-  const userAgent = process.env.SSR
-    ? headers["user-agent"]
-    : navigator.userAgent
-  const isMobile = /mobile/i.test(userAgent)
+  const isMobile = /mobile/i.test(
+    (request.get && request.get("content-type")) || navigator.userAgent,
+  )
 
   return (
     <ThemeProvider theme={theme}>
@@ -121,7 +115,6 @@ export default function App(props: Props) {
           )}
           {(!isMobile || activeTab === "editor") && (
             <Editor
-              mobile={isMobile}
               message={message}
               onChange={setMessage}
               files={files}
