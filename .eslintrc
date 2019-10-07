@@ -4,7 +4,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "settings": {
     "react": {
       "version": "detect"
@@ -15,7 +15,10 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
   ],
   "rules": {
     "accessor-pairs": ["error", { "enforceForClassMembers": true }],
@@ -85,6 +88,7 @@
     "no-restricted-syntax": [
       "error",
       "WithStatement",
+      "SequenceExpression",
       ":not(TaggedTemplateExpression) > TemplateLiteral[expressions.length=0]"
     ],
     "no-unneeded-ternary": "error",
@@ -137,6 +141,7 @@
     "react/jsx-no-useless-fragment": "error",
     "react/self-closing-comp": "error",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error"
+    "react-hooks/exhaustive-deps": "error",
+    "prettier/prettier": "error"
   }
 }
