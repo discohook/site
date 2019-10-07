@@ -82,6 +82,7 @@
     "no-multi-assign": "error",
     "no-negated-condition": "error",
     "no-new-object": "error",
+    "no-restricted-syntax": ["error", "WithStatement"],
     "no-unneeded-ternary": "error",
     "one-var": ["error", "never"],
     "prefer-object-spread": "error",
