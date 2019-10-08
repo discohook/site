@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { FakeFile } from "../editor/backup/Backup"
+import { FileLike } from "../editor/backup/Backup"
 import { Theme } from "../themes"
 import { id } from "../uid"
 import Attachment from "./attachment/Attachment"
@@ -35,7 +35,7 @@ const Container = styled.div<{}, Theme>`
 
 type Props = {
   message: Message
-  files: FileList | FakeFile[]
+  files: FileList | FileLike[]
 }
 
 export default function MessagePreview(props: Props) {

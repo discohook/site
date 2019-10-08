@@ -10,7 +10,7 @@ import {
   Button,
   Container,
 } from "../styles"
-import { Backup, FakeFile } from "./Backup"
+import { Backup, FileLike } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 import { shareBackup } from "./sharing"
 
@@ -73,7 +73,7 @@ const BackupAction = styled.a<{ dangerous?: boolean }, Theme>`
 
 type Props = {
   message: Message
-  files: FileList | FakeFile[]
+  files: FileLike[]
   onLoad: (backup: Backup) => void
   onClose: () => void
 }

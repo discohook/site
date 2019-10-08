@@ -1,5 +1,5 @@
 import React from "react"
-import { FakeFile } from "../../editor/backup/Backup"
+import { FileLike } from "../../editor/backup/Backup"
 import AttachmentIcon from "./AttachmentIcon"
 import { AttachmentIconType } from "./attachmentTypes"
 import { getHumanReadableSize } from "./getHumanReadableSize"
@@ -14,7 +14,7 @@ import {
 } from "./styles"
 
 type Props = {
-  file: File | FakeFile
+  file: FileLike
   type: AttachmentIconType
 }
 

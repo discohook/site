@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Message } from "../message/Message"
 import { Theme } from "../themes"
-import { FakeFile } from "./backup/Backup"
+import { FileLike } from "./backup/Backup"
 import BackupModal from "./backup/BackupModal"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
@@ -48,8 +48,8 @@ const JavaScriptWarning = styled.noscript<{}, Theme>`
 type Props = {
   message: Message
   onChange: (message: Message) => void
-  files: FileList | FakeFile[]
-  onFilesChange: (files: FileList | FakeFile[]) => void
+  files: FileList | FileLike[]
+  onFilesChange: (files: FileList | FileLike[]) => void
   onToggleTheme: () => void
   onToggleDisplay: () => void
 }
@@ -215,13 +215,13 @@ export default function Editor(props: Props) {
             label="Override avatar"
           />
         </Container>
-        <FileInput files={files} onChange={handleFilesChange} />
+        <FileInput files={[...files]} onChange={handleFilesChange} />
         <JsonInput json={json} onChange={handleJsonChange} errors={errors} />
       </EditorInnerContainer>
       {isBackupModalShown && (
         <BackupModal
           message={message}
-          files={files}
+          files={[...files]}
           onLoad={backup => {
             handleChange(backup.message)
             handleFilesChange(backup.files)

@@ -2,10 +2,10 @@ import { Message } from "../../message/Message"
 
 export type Backup = {
   message: Message
-  files: FakeFile[]
+  files: FileLike[]
 }
 
-export type FakeFile = {
+export type FileLike = {
   name: string
   type: string
   size: number

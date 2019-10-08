@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { FakeFile } from "../../editor/backup/Backup"
+import { FileLike } from "../../editor/backup/Backup"
 import AudioAttachment from "./AudioAttachment"
 import DefaultAttachment from "./DefaultAttachment"
 import { getAttachmentType } from "./getAttachmentType"
 import ImageAttachment from "./ImageAttachment"
 
 type Props = {
-  file: File | FakeFile
+  file: File | FileLike
 }
 
 export default function Attachment(props: Props) {

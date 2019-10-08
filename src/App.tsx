@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import React, { useContext, useEffect, useState } from "react"
-import { FakeFile } from "./editor/backup/Backup"
+import { FileLike } from "./editor/backup/Backup"
 import { getSharedBackup } from "./editor/backup/sharing"
 import Editor from "./editor/Editor"
 import GlobalStyle from "./GlobalStyle"
@@ -69,7 +69,7 @@ export default function App() {
   }
 
   const [message, setMessage] = useState(backup.message)
-  const [files, setFiles] = useState<FileList | FakeFile[]>(backup.files)
+  const [files, setFiles] = useState<FileList | FileLike[]>(backup.files)
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const toggleTheme = () =>

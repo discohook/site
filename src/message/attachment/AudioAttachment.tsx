@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { FakeFile } from "../../editor/backup/Backup"
+import { FileLike } from "../../editor/backup/Backup"
 import { Theme } from "../../themes"
 import AttachmentIcon from "./AttachmentIcon"
 import { getHumanReadableSize } from "./getHumanReadableSize"
@@ -15,7 +15,7 @@ import {
 } from "./styles"
 
 type Props = {
-  file: File | FakeFile
+  file: FileLike
 }
 
 const AudioContainer = styled(Container)`

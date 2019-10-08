@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React, { useRef } from "react"
-import { FakeFile } from "./backup/Backup"
+import { FileLike } from "./backup/Backup"
 import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
 
 const InputContainer = styled.div`
@@ -26,8 +26,8 @@ const HiddenInput = styled.input`
 `
 
 type Props = {
-  files: FileList | FakeFile[]
-  onChange: (files: FileList | FakeFile[]) => void
+  files: FileLike[]
+  onChange: (files: FileList | FileLike[]) => void
 }
 
 export default function FileInput(props: Props) {
