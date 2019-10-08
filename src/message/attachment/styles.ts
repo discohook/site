@@ -11,7 +11,6 @@ export const Container = styled.div<{}, Theme>`
   display: flex;
   align-items: center;
 
-  box-sizing: border-box;
   border: 1px solid
     ${({ theme }) =>
       theme.color === "dark" ? "rgba(47, 49, 54, 0.6)" : "#f6f6f7"};

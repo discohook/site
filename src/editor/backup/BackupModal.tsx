@@ -27,7 +27,6 @@ const ModalContainer = styled.div<{}, Theme>`
   background: ${({ theme }) => theme.background.primary};
   border-radius: 3px;
   padding: 8px;
-  box-sizing: border-box;
   overflow-y: scroll;
 `
 

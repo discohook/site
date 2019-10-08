@@ -63,11 +63,8 @@ export const BlockQuoteDivider = styled.div<{}, Theme>`
 `
 
 export const BlockQuoteContent = styled.blockquote<{}, Theme>`
-  box-sizing: border-box;
-
   text-indent: 0;
 
-  box-sizing: border-box;
   max-width: 90%;
 
   margin: 8px 0;

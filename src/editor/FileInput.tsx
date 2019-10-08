@@ -11,7 +11,6 @@ const InputContainer = styled.div`
 const FakeInput = styled(TextInput.withComponent("div"))`
   position: absolute;
 
-  box-sizing: border-box;
   height: 32px;
   width: 100%;
 `

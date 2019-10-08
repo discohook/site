@@ -31,8 +31,6 @@ const TabSwitcher = styled.div<{}, Theme>`
 `
 
 const Tab = styled.button<{ active: boolean }, Theme>`
-  box-sizing: border-box;
-
   height: 40px;
   padding: 0 12px;
 
