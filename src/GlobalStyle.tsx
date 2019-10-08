@@ -72,8 +72,11 @@ function GlobalStyle(props: { theme: Theme }) {
             url("/fonts/source-code-pro-600.woff") format("woff");
         }
 
+        html,
         body {
           margin: 0;
+          padding: 0;
+
           font-family: ${theme.fonts.sans};
           line-height: 1;
 
@@ -83,6 +86,12 @@ function GlobalStyle(props: { theme: Theme }) {
 
           background: ${theme.background.primary};
           color: ${theme.text.normal};
+
+          height: 100%;
+        }
+
+        #app {
+          height: 100%;
         }
 
         pre,

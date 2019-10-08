@@ -1,7 +1,6 @@
 import styled from "@emotion/styled"
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Message } from "../message/Message"
-import { RequestContext } from "../RequestContext"
 import { Theme } from "../themes"
 import { FakeFile } from "./backup/Backup"
 import BackupModal from "./backup/BackupModal"
@@ -22,10 +21,10 @@ const EditorContainer = styled.div`
   position: relative;
 `
 
-const EditorInnerContainer = styled(Container)<{ mobile: boolean }>`
+const EditorInnerContainer = styled(Container)`
   display: block;
   box-sizing: border-box;
-  height: ${({ mobile }) => (mobile ? "calc(100vh - 40px)" : "100vh")};
+  height: 100%;
   overflow-y: scroll;
   padding: 8px;
 
@@ -142,15 +141,9 @@ export default function Editor(props: Props) {
 
   const [isBackupModalShown, setIsBackupModalShown] = useState(false)
 
-  const request = useContext(RequestContext)
-  const isMobile = /mobile/i.test(
-    (request.get && request.get("user-agent")) || navigator.userAgent,
-  )
-
   return (
     <EditorContainer>
       <EditorInnerContainer
-        mobile={isMobile}
         style={isBackupModalShown ? { overflow: "hidden" } : undefined}
       >
         <JavaScriptWarning>
@@ -158,7 +151,7 @@ export default function Editor(props: Props) {
           browser settings to use this app.
         </JavaScriptWarning>
         <EditorActionsContainer>
-          <ActionsHeader>{!isMobile && "Message editor"}</ActionsHeader>
+          <ActionsHeader>Message editor</ActionsHeader>
           <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
           <Action onClick={handleToggleTheme}>Toggle theme</Action>
           <Action onClick={handleToggleDisplay}>Toggle display</Action>

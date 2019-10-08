@@ -14,12 +14,20 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  height: 100vh;
+  height: 100%;
 `
 
-const TabSwitcher = styled.div`
-  background: rgba(0, 0, 0, 0.2);
+const TabSwitcher = styled.div<{}, Theme>`
   display: flex;
+
+  background: ${({ theme }) => theme.background.secondary};
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1;
 `
 
 const Tab = styled.button<{ active: boolean }, Theme>`
@@ -46,7 +54,7 @@ const View = styled.div<{ mobile: boolean }>`
   flex-direction: row-reverse;
   align-items: stretch;
 
-  max-height: ${({ mobile }) => (mobile ? "calc(100vh - 40px)" : "100vh")};
+  margin-top: ${({ mobile }) => (mobile ? "40px" : "0")};
   flex: 1;
 
   & > * {
