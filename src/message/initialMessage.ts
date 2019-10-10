@@ -1,14 +1,13 @@
+import { applyIds } from "./applyIds"
 import { Message } from "./Message"
-import { getUniqueId, id } from "./uid"
 
-export const initialMessage: Message = {
+export const initialMessage: Message = applyIds({
   content: [
     "Hey, this is Discohook, a message builder for Discord webhooks. <:discohook:600312020192985088>",
     "You can read through my small introduction to this project below, or click the **Clear all** button on the top to get started.",
   ].join("\n"),
   embeds: [
     {
-      [id]: getUniqueId(),
       title: "What is this?",
       description: [
         "Yeah uhh, this is __Discohook__.",
@@ -24,7 +23,6 @@ export const initialMessage: Message = {
       color: 7506394,
     },
     {
-      [id]: getUniqueId(),
       title: "What's an embed?",
       description: [
         "Embeds were originally made to give you a hint to where a link will take you,",
@@ -37,7 +35,6 @@ export const initialMessage: Message = {
       color: 4437377,
     },
     {
-      [id]: getUniqueId(),
       author: {
         name: "Author",
         iconUrl: "https://cdn.discordapp.com/embed/avatars/4.png",
@@ -56,7 +53,6 @@ export const initialMessage: Message = {
       ].join("\n"),
       fields: [
         {
-          [id]: getUniqueId(),
           name: "Embeds can have fields",
           value: [
             "Crazy right?",
@@ -64,19 +60,16 @@ export const initialMessage: Message = {
           ].join("\n"),
         },
         {
-          [id]: getUniqueId(),
           name: "Inline fields",
           value: "If you have enough room,",
           inline: true,
         },
         {
-          [id]: getUniqueId(),
           name: "are cool!",
           value: "they appear next to each other",
           inline: true,
         },
         {
-          [id]: getUniqueId(),
           name: "Embeds can even have images",
           value: "However it makes your embeds very big, so I didn't add one.",
         },
@@ -92,7 +85,6 @@ export const initialMessage: Message = {
       },
     },
     {
-      [id]: getUniqueId(),
       title: "Backups!",
       description: [
         "As a small extra, you can back up your messages in here.",
@@ -109,7 +101,6 @@ export const initialMessage: Message = {
       color: 16426522,
     },
     {
-      [id]: getUniqueId(),
       title: "Small disclaimer",
       description: [
         "Discohook makes use of some assets derived or extracted from Discord's application.",
@@ -120,4 +111,4 @@ export const initialMessage: Message = {
       ].join("\n"),
     },
   ],
-}
+})

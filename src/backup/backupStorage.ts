@@ -1,4 +1,4 @@
-import { getUniqueId, id } from "../message/uid"
+import { applyIds } from "../message/applyIds"
 import { Backup } from "./Backup"
 
 const dbPromise = new Promise<IDBDatabase>((res, rej) => {
@@ -64,12 +64,7 @@ export const getBackup = async (name: string) => {
   const request = await runTransaction("readonly", store => store.get(name))
   const backup: Backup = request.result
 
-  for (const embed of backup.message.embeds || []) {
-    embed[id] = getUniqueId()
-    for (const field of embed.fields || []) {
-      field[id] = getUniqueId()
-    }
-  }
+  backup.message = applyIds(backup.message)
 
   return backup
 }

@@ -1,5 +1,5 @@
 import { applyIds } from "../message/applyIds"
-import { Message } from "../message/Message"
+import { Message, MessageWithoutIds } from "../message/Message"
 import { toCamelCase, toSnakeCase } from "./casing"
 import { isMessage } from "./validation"
 
@@ -9,7 +9,7 @@ export const stringifyMessage = (message: Message) => {
 
 export const parseMessage = (json: string) => {
   try {
-    const message = toCamelCase(JSON.parse(json)) as Message
+    const message = toCamelCase(JSON.parse(json)) as MessageWithoutIds
 
     const errors = isMessage(message, "$").map(error => {
       const [key, ...message] = error.split(": ")
