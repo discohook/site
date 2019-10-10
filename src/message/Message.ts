@@ -42,3 +42,9 @@ export type Field = {
 export type Image = {
   url?: string
 }
+
+export type MessageWithoutIds = Omit<Message, "embeds"> & {
+  embeds?: (Omit<Embed, symbol | "fields"> & {
+    fields?: (Omit<Field, symbol>)[]
+  })[]
+}

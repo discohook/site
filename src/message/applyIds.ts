@@ -1,8 +1,8 @@
-import { Message } from "./Message"
+import { Message, MessageWithoutIds } from "./Message"
 import { getUniqueId, id } from "./uid"
 
-export const applyIds = (message: Message) => {
-  const newMessage = { ...message }
+export const applyIds = (message: MessageWithoutIds): Message => {
+  const newMessage = { ...message } as Message
 
   if (!Array.isArray(newMessage.embeds)) return newMessage
 
