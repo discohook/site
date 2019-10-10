@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
-import { Theme } from "../themes"
+import { Theme } from "../core/themes"
 
 const Container = styled.div<{}, Theme>`
   height: ${({ theme }) => (theme.display === "cozy" ? "20.8px" : "auto")};

@@ -1,5 +1,5 @@
 import styled, { StyledComponent } from "@emotion/styled"
-import { Theme } from "../themes"
+import { Theme } from "../core/themes"
 
 type SC<Tag extends keyof JSX.IntrinsicElements> = StyledComponent<
   JSX.IntrinsicElements[Tag],

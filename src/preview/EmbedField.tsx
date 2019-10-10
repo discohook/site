@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../themes"
-import Markup from "./markup/Markup"
-import { MarkupContainer } from "./markup/styles"
-import { Field } from "./Message"
+import { Theme } from "../core/themes"
+import Markup from "../markup/Markup"
+import { MarkupContainer } from "../markup/styles"
+import { Field } from "../message/Message"
 
 const Container = styled.div<{ inline: boolean }>`
   flex: ${({ inline }) => (inline ? 1 : 0)};

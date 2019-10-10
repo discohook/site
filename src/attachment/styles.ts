@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { Theme } from "../../themes"
+import { Theme } from "../core/themes"
 
 export const Container = styled.div<{}, Theme>`
   width: 100%;

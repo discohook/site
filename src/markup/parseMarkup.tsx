@@ -9,7 +9,7 @@ import {
   parserFor,
   Rules,
 } from "simple-markdown"
-import CodeBlock from "./code/CodeBlock"
+import CodeBlock from "../code/CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
 import { jumbosizeEmojis } from "./jumbosizeEmojis"
 import {

@@ -1,8 +1,8 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../themes"
+import { Theme } from "../core/themes"
+import { Footer } from "../message/Message"
 import { formatTimestamp } from "./formatTimestamp"
-import { Footer } from "./Message"
 
 const Container = styled.div`
   display: flex;

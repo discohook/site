@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { FileLike } from "../../editor/backup/Backup"
+import { FileLike } from "../backup/Backup"
 import AudioAttachment from "./AudioAttachment"
 import DefaultAttachment from "./DefaultAttachment"
 import { getAttachmentType } from "./getAttachmentType"
@@ -16,7 +16,7 @@ export default function Attachment(props: Props) {
   const [type, setType] = useState(getAttachmentType(name, mime))
   useEffect(() => {
     setType(getAttachmentType(name, mime))
-  }, [name, mime])
+  }, [mime, name])
   useEffect(() => {
     console.log(`Attachment type for ${name}:`, type)
   }, [name, type])

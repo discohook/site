@@ -1,14 +1,14 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
+import { FileLike } from "../backup/Backup"
+import BackupModal from "../backup/BackupModal"
+import { Theme } from "../core/themes"
+import { parseMessage, stringifyMessage } from "../json/convert"
+import JsonInput from "../json/JsonInput"
 import { Message } from "../message/Message"
-import { Theme } from "../themes"
-import { FileLike } from "./backup/Backup"
-import BackupModal from "./backup/BackupModal"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
 import InputField from "./InputField"
-import { parseMessage, stringifyMessage } from "./json/convert"
-import JsonInput from "./json/JsonInput"
 import {
   Action,
   ActionsContainer,

@@ -1,4 +1,4 @@
-import { Message } from "../../message/Message"
+import { Message } from "../message/Message"
 
 export type Backup = {
   message: Message

@@ -1,4 +1,4 @@
-import { initialMessage } from "../../initialMessage"
+import { initialMessage } from "../message/initialMessage"
 import * as v from "./validation"
 import { Validator } from "./validation"
 

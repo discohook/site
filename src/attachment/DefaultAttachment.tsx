@@ -1,5 +1,5 @@
 import React from "react"
-import { FileLike } from "../../editor/backup/Backup"
+import { FileLike } from "../backup/Backup"
 import AttachmentIcon from "./AttachmentIcon"
 import { AttachmentIconType } from "./attachmentTypes"
 import { getHumanReadableSize } from "./getHumanReadableSize"

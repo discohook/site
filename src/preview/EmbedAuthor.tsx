@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../themes"
-import { Author } from "./Message"
+import { Theme } from "../core/themes"
+import { Author } from "../message/Message"
 
 const Container = styled.div`
   display: flex;

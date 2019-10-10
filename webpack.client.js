@@ -14,7 +14,7 @@ module.exports = {
   entry: [
     "core-js/stable",
     "regenerator-runtime/runtime",
-    resolve(__dirname, "src/index.tsx"),
+    resolve(__dirname, "src/core/client.tsx"),
   ],
   mode: dev ? "development" : "production",
   output: {

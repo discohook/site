@@ -1,15 +1,15 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
-import { Message } from "../../message/Message"
-import { Theme } from "../../themes"
-import InputField from "../InputField"
+import { Theme } from "../core/themes"
+import InputField from "../editor/InputField"
 import {
   Action,
   ActionsContainer,
   ActionsHeader,
   Button,
   Container,
-} from "../styles"
+} from "../editor/styles"
+import { Message } from "../message/Message"
 import { Backup, FileLike } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 import { shareBackup } from "./sharing"

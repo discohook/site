@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
 import { Field } from "../message/Message"
-import { getUniqueId, id } from "../uid"
+import { getUniqueId, id } from "../message/uid"
 import InputField from "./InputField"
 import {
   Action,

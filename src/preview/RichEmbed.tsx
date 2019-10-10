@@ -1,20 +1,20 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../themes"
-import { id } from "../uid"
+import { Theme } from "../core/themes"
+import Markup from "../markup/Markup"
+import { CodeBlockContainer, Emoji, MarkupContainer } from "../markup/styles"
+import { Embed } from "../message/Message"
+import { id } from "../message/uid"
 import EmbedAuthor from "./EmbedAuthor"
 import EmbedField from "./EmbedField"
 import EmbedFooter from "./EmbedFooter"
-import Markup from "./markup/Markup"
-import { CodeBlockContainer, Emoji, MarkupContainer } from "./markup/styles"
-import { Embed } from "./Message"
 
 const Container = styled.div`
   margin: 8px 0 0;
   max-width: 520px;
   display: flex;
 
-  & ${Emoji} {
+  & > ${MarkupContainer} ${Emoji} {
     width: 1rem;
     height: 1rem;
     min-width: 22px;

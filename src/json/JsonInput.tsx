@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../../themes"
-import { Container, InputLabel, MultilineTextInput } from "../styles"
+import { Theme } from "../core/themes"
+import { Container, InputLabel, MultilineTextInput } from "../editor/styles"
 
 const ErrorContainer = styled.div`
   margin: 8px 8px 0;

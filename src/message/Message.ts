@@ -1,4 +1,4 @@
-import { id } from "../uid"
+import { id } from "./uid"
 
 export type Message = {
   content?: string

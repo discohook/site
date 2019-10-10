@@ -1,5 +1,5 @@
-import { Message } from "../../message/Message"
-import { applyIds } from "./applyIds"
+import { applyIds } from "../message/applyIds"
+import { Message } from "../message/Message"
 import { toCamelCase, toSnakeCase } from "./casing"
 import { isMessage } from "./validation"
 

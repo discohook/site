@@ -1,4 +1,4 @@
-import { applyIds } from "../json/applyIds"
+import { applyIds } from "../message/applyIds"
 import { Backup } from "./Backup"
 import { getBackup } from "./backupStorage"
 

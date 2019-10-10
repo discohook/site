@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { CodeBlockContainer } from "../styles"
+import { CodeBlockContainer } from "../markup/styles"
 import { highlightCode } from "./highlightCode"
 
 type Props = {

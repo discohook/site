@@ -1,4 +1,4 @@
-import { getUniqueId, id } from "../../uid"
+import { getUniqueId, id } from "../message/uid"
 import { Backup } from "./Backup"
 
 const dbPromise = new Promise<IDBDatabase>((res, rej) => {

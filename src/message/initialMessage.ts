@@ -1,4 +1,4 @@
-import { Message } from "./message/Message"
+import { Message } from "./Message"
 import { getUniqueId, id } from "./uid"
 
 export const initialMessage: Message = {

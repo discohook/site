@@ -1,5 +1,5 @@
-import { Message } from "../../message/Message"
-import { getUniqueId, id } from "../../uid"
+import { Message } from "./Message"
+import { getUniqueId, id } from "./uid"
 
 export const applyIds = (message: Message) => {
   const newMessage = { ...message }

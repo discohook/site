@@ -1,6 +1,6 @@
 import React from "react"
 import { Embed } from "../message/Message"
-import { getUniqueId, id } from "../uid"
+import { getUniqueId, id } from "../message/uid"
 import AuthorEditor from "./AuthorEditor"
 import ColorInput from "./ColorInput"
 import FieldEditor from "./FieldEditor"
