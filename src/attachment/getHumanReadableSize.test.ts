@@ -1,6 +1,6 @@
 import { getHumanReadableSize } from "./getHumanReadableSize"
 
-describe("human readable file sizes", () => {
+describe("getHumanReadableSize", () => {
   it.each<[number, string]>([
     [0, "0 bytes"],
     [1, "1 bytes"],

@@ -1,6 +1,6 @@
 import { formatTimestamp } from "./formatTimestamp"
 
-describe("timestamp formatting", () => {
+describe("formatTimestamp", () => {
   it.each<[string, string]>([
     ["2019-08-15T01:21:05.715Z", "15/08/2019"],
     ["2019-04-22T11:02:04.000Z", "Today at 11:02"],

@@ -14,7 +14,7 @@ const primitiveValues = primitives
   .flatMap(set => set.slice(1))
   .concat([undefined, null])
 
-describe("type validation", () => {
+describe("validation", () => {
   it("can compose validators", () => {
     const { first, all } = v
 
