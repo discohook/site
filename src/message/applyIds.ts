@@ -5,24 +5,26 @@ export const applyIds = (message: MessageWithoutIds): Message => {
   const newMessage = { ...message } as Message
 
   if (!Array.isArray(newMessage.embeds)) return newMessage
+  newMessage.embeds = [...newMessage.embeds]
 
   for (const index of newMessage.embeds.keys()) {
-    const embed = {
+    const newEmbed = {
       ...newMessage.embeds[index],
       [id]: getUniqueId(),
     }
 
-    newMessage.embeds[index] = embed
+    newMessage.embeds[index] = newEmbed
 
-    if (!Array.isArray(embed.fields)) continue
+    if (!Array.isArray(newEmbed.fields)) continue
+    newEmbed.fields = [...newEmbed.fields]
 
-    for (const index of embed.fields.keys()) {
-      const field = {
-        ...embed.fields[index],
+    for (const index of newEmbed.fields.keys()) {
+      const newField = {
+        ...newEmbed.fields[index],
         [id]: getUniqueId(),
       }
 
-      embed.fields[index] = field
+      newEmbed.fields[index] = newField
     }
   }
 
