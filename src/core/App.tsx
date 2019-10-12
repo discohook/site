@@ -69,7 +69,7 @@ export default function App() {
   }
 
   const [message, setMessage] = useState(backup.message)
-  const [files, setFiles] = useState<FileList | FileLike[]>(backup.files)
+  const [files, setFiles] = useState<(File | FileLike)[]>(backup.files)
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const toggleTheme = () =>

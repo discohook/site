@@ -35,7 +35,7 @@ const Container = styled.div<{}, Theme>`
 
 type Props = {
   message: Message
-  files: FileList | FileLike[]
+  files: (File | FileLike)[]
 }
 
 export default function MessagePreview(props: Props) {

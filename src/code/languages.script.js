@@ -61,6 +61,7 @@ const main = async () => {
   const languages = []
 
   for (const language of hljsLanguages) {
+    // eslint-disable-next-line no-await-in-loop
     languages.push(await getLanguage(language))
   }
 

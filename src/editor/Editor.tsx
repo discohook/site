@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { FileLike } from "../backup/Backup"
 import BackupModal from "../backup/BackupModal"
 import { Theme } from "../core/themes"
@@ -48,8 +48,8 @@ const JavaScriptWarning = styled.noscript<{}, Theme>`
 type Props = {
   message: Message
   onChange: (message: Message) => void
-  files: FileList | FileLike[]
-  onFilesChange: (files: FileList | FileLike[]) => void
+  files: (File | FileLike)[]
+  onFilesChange: (files: (File | FileLike)[]) => void
   onToggleTheme: () => void
   onToggleDisplay: () => void
 }
@@ -75,17 +75,12 @@ export default function Editor(props: Props) {
   const [errors, setErrors] = useState<string[]>([])
 
   useEffect(() => {
-    const errors = parseMessage(json).errors.filter(error => {
-      if (
+    const errors = parseMessage(json).errors.filter(
+      error =>
         files &&
         files.length > 0 &&
-        error === "$: Expected one of following keys: 'content', 'embeds'"
-      ) {
-        return false
-      }
-
-      return true
-    })
+        error === "$: Expected one of following keys: 'content', 'embeds'",
+    )
 
     setErrors(errors)
   }, [files, json])
@@ -106,9 +101,9 @@ export default function Editor(props: Props) {
     const formData = new FormData()
     formData.append("payload_json", json)
 
-    if (files && files instanceof FileList) {
-      for (const [index, file] of Object.entries(files)) {
-        formData.append(`file[${index}]`, file, file.name)
+    if (files && files.every(f => f instanceof File)) {
+      for (const [index, file] of files.entries()) {
+        formData.append(`file[${index}]`, file as File, file.name)
       }
     }
 
@@ -126,17 +121,17 @@ export default function Editor(props: Props) {
     handleFilesChange([])
   }
 
-  const isDisabled = (() => {
+  const isDisabled = useMemo(() => {
     if (sending) return true
     if (webhookUrl.trim().length === 0) return true
 
-    const { content, embeds } = props.message
+    const { content, embeds } = message
     if (typeof content === "string") return false
     if (embeds && embeds.length !== 0) return false
     if (files && files.length !== 0) return false
 
     return true
-  })()
+  }, [files, message, sending, webhookUrl])
 
   const [isBackupModalShown, setIsBackupModalShown] = useState(false)
 

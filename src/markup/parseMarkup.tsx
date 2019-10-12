@@ -1,4 +1,5 @@
 /* eslint-disable react/display-name */
+/* eslint-disable react/no-multi-comp */
 
 import React from "react"
 import {

@@ -26,13 +26,12 @@ const HiddenInput = styled.input`
 `
 
 type Props = {
-  files: FileLike[]
-  onChange: (files: FileList | FileLike[]) => void
+  files: (File | FileLike)[]
+  onChange: (files: (File | FileLike)[]) => void
 }
 
 export default function FileInput(props: Props) {
-  const { files: fileList, onChange: handleChange } = props
-  const files = Array.from(fileList)
+  const { files, onChange: handleChange } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -40,7 +39,7 @@ export default function FileInput(props: Props) {
     if (!inputRef.current) return
 
     inputRef.current.value = ""
-    props.onChange([])
+    handleChange([])
   }
 
   const fakeFiles = () => {
@@ -53,8 +52,9 @@ export default function FileInput(props: Props) {
     handleChange(fakeFiles)
   }
 
-  const isFileList =
-    !process.env.SSR && (fileList instanceof FileList || files.length === 0)
+  const filesAvailable =
+    files.length === 0 ||
+    files.every(f => !process.env.SSR && f instanceof File)
 
   return (
     <Container>
@@ -67,13 +67,15 @@ export default function FileInput(props: Props) {
             type="file"
             multiple
             onClick={() => fakeFiles()}
-            onChange={event => handleChange(event.target.files || [])}
+            onChange={event =>
+              handleChange(Array.from(event.target.files || []))
+            }
             ref={inputRef}
           />
         </InputContainer>
         <Button onClick={clearFiles}>Remove files</Button>
       </Container>
-      {!isFileList && (
+      {!filesAvailable && (
         <InputNote state="error">Files are unavailable</InputNote>
       )}
     </Container>

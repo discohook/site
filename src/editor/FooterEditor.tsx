@@ -15,19 +15,18 @@ type Props = {
   id: number
   footer: Footer | undefined
   timestamp: string | undefined
-  onChange: (embed: Omit<Embed, symbol>) => void
+  onChange: (embed: Pick<Embed, "footer" | "timestamp">) => void
 }
 
 export default function FooterEditor(props: Props) {
   const { id: embedId, footer = {}, timestamp, onChange } = props
   const { text, iconUrl } = footer
 
-  const handleChange = (embed: Omit<Embed, symbol>) => {
+  const handleChange = (embed: Pick<Embed, "footer" | "timestamp">) => {
     onChange({
-      footer:
-        embed.footer && Object.values(embed.footer).some(Boolean)
-          ? embed.footer
-          : undefined,
+      footer: Object.values(embed.footer || {}).some(Boolean)
+        ? embed.footer
+        : undefined,
       timestamp: embed.timestamp || undefined,
     })
   }
@@ -77,7 +76,7 @@ export default function FooterEditor(props: Props) {
                 : undefined,
             })
           }
-          label="Timestamp (GMT)"
+          label="Timestamp (UTC)"
           type="datetime-local"
         />
       ) : (
