@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import React, { useEffect, useState } from "react"
+import React, { useLayoutEffect, useState } from "react"
 import DefaultAttachment from "./DefaultAttachment"
 
 type Props = {
@@ -21,7 +21,7 @@ export default function ImageAttachment(props: Props) {
   const { file } = props
 
   const [objectUrl, setObjectUrl] = useState("")
-  useEffect(() => {
+  useLayoutEffect(() => {
     const objectUrl = URL.createObjectURL(file)
     setObjectUrl(objectUrl)
 
@@ -31,7 +31,7 @@ export default function ImageAttachment(props: Props) {
   }, [file])
 
   const [errored, setErrored] = useState(false)
-  useEffect(() => setErrored(false), [objectUrl])
+  useLayoutEffect(() => setErrored(false), [objectUrl])
 
   return errored ? (
     <DefaultAttachment file={file} type="image" />
