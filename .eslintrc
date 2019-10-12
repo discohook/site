@@ -216,7 +216,6 @@
     "react/jsx-fragments": "warn",
     "react/jsx-handler-names": "warn",
     "react/jsx-key": ["warn", { "checkFragmentShorthand": true }],
-    "react/jsx-no-bind": "warn",
     "react/jsx-no-comment-textnodes": "warn",
     "react/jsx-no-duplicate-props": "warn",
     "react/jsx-no-target-blank": "warn",
