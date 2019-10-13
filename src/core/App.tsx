@@ -55,6 +55,8 @@ const View = styled.div<{ mobile: boolean }>`
   margin-top: ${({ mobile }) => (mobile ? "40px" : "0")};
   flex: 1;
 
+  max-height: ${({ mobile }) => (mobile ? "calc(100% - 40px)" : "100%")};
+
   & > * {
     flex: 1;
   }

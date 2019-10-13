@@ -56,6 +56,7 @@ const styles = (theme: Theme) => css`
     color: ${theme.text.normal};
 
     height: 100%;
+    overflow: hidden;
   }
 
   #app {
