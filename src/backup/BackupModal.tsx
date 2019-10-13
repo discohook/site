@@ -9,8 +9,9 @@ import {
   Button,
   Container,
 } from "../editor/styles"
+import { FileLike } from "../message/FileLike"
 import { Message } from "../message/Message"
-import { Backup, FileLike } from "./Backup"
+import { Backup } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 import { shareBackup } from "./sharing"
 

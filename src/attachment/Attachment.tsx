@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { FileLike } from "../backup/Backup"
+import { FileLike } from "../message/FileLike"
 import AudioAttachment from "./AudioAttachment"
 import DefaultAttachment from "./DefaultAttachment"
 import { getAttachmentType } from "./getAttachmentType"

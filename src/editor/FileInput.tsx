@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React, { useRef } from "react"
-import { FileLike } from "../backup/Backup"
+import { FileLike } from "../message/FileLike"
 import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
 
 const InputContainer = styled.div`
