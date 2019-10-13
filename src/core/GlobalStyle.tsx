@@ -1,5 +1,5 @@
 import { css, Global } from "@emotion/core"
-import { withTheme } from "emotion-theming"
+import { useTheme } from "emotion-theming"
 import React from "react"
 import { Theme } from "./themes"
 
@@ -121,10 +121,8 @@ const styles = (theme: Theme) => css`
   }
 `
 
-function GlobalStyle(props: { theme: Theme }) {
-  const { theme } = props
+export default function GlobalStyle() {
+  const theme = useTheme<Theme>()
 
   return <Global styles={styles(theme)} />
 }
-
-export default withTheme(GlobalStyle)
