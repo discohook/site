@@ -1,7 +1,14 @@
 import styled from "@emotion/styled"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
-import { Container, InputLabel, MultilineTextInput } from "../editor/styles"
+import {
+  Button,
+  Container,
+  InputLabel,
+  MultilineTextInput,
+} from "../editor/styles"
+import { Message } from "../message/Message"
+import { parseMessage, stringifyMessage } from "./convert"
 
 const ErrorContainer = styled.div`
   margin: 8px 8px 0;
@@ -26,27 +33,55 @@ const CodeInput = styled(MultilineTextInput)<{}, Theme>`
 `
 
 type Props = {
-  json: string
-  onChange: (json: string) => void
-  errors: string[]
+  message: Message
+  onChange: (message: Message) => void
 }
 
 export default function JsonInput(props: Props) {
+  const { message, onChange } = props
+
+  const [json, setJson] = useState(stringifyMessage(message))
+  useEffect(() => {
+    setJson(stringifyMessage(message))
+  }, [message])
+
+  const [errors, setErrors] = useState<string[]>([])
+  useEffect(() => {
+    const { message, errors: rawErrors } = parseMessage(json)
+
+    const errors = rawErrors.filter(
+      error =>
+        error !== "$: Expected one of following keys: 'content', 'embeds'",
+    )
+
+    setErrors(errors)
+
+    if (errors.length > 0) {
+      console.log("JSON validation errors occurred:", errors, message)
+    }
+  }, [json])
+
   return (
     <Container>
       <InputLabel htmlFor="json">JSON data</InputLabel>
-      {props.errors.length > 0 && (
+      {errors.length > 0 && (
         <ErrorContainer>
-          {props.errors.map(error => (
+          {errors.map(error => (
             <Error key={error}>{error}</Error>
           ))}
         </ErrorContainer>
       )}
       <CodeInput
         id="json"
-        value={props.json}
-        onChange={event => props.onChange(event.target.value)}
+        value={json}
+        onChange={event => setJson(event.target.value)}
       />
+      <Button
+        disabled={errors.length > 0}
+        onClick={() => onChange(parseMessage(json).message || {})}
+      >
+        Submit
+      </Button>
     </Container>
   )
 }

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import { FileLike } from "../backup/Backup"
 import BackupModal from "../backup/BackupModal"
 import { Theme } from "../core/themes"
-import { parseMessage, stringifyMessage } from "../json/convert"
+import { stringifyMessage } from "../json/convert"
 import JsonInput from "../json/JsonInput"
 import { Message } from "../message/Message"
 import EmbedEditor from "./EmbedEditor"
@@ -64,42 +64,13 @@ export default function Editor(props: Props) {
     onToggleDisplay: handleToggleDisplay,
   } = props
 
-  const [json, setJson] = useState(stringifyMessage(message))
-  useEffect(() => setJson(stringifyMessage(message)), [message])
-  const handleJsonChange = (json: string) => {
-    setJson(json)
-    const { message } = parseMessage(json)
-    if (message) handleChange(message)
-  }
-
-  const [errors, setErrors] = useState<string[]>([])
-
-  useEffect(() => {
-    const errors = parseMessage(json).errors.filter(
-      error =>
-        files &&
-        files.length > 0 &&
-        error === "$: Expected one of following keys: 'content', 'embeds'",
-    )
-
-    setErrors(errors)
-  }, [files, json])
-
-  useEffect(() => {
-    const { message, errors } = parseMessage(json)
-
-    if (errors.length > 0) {
-      console.log("JSON validation errors occurred:", errors, message)
-    }
-  }, [json])
-
   const [webhookUrl, setWebhookUrl] = useState("")
   const [sending, setSending] = useState(false)
   const executeWebhook = async () => {
     setSending(true)
 
     const formData = new FormData()
-    formData.append("payload_json", json)
+    formData.append("payload_json", stringifyMessage(message))
 
     if (files && files.every(f => f instanceof File)) {
       for (const [index, file] of files.entries()) {
@@ -211,7 +182,7 @@ export default function Editor(props: Props) {
           />
         </Container>
         <FileInput files={[...files]} onChange={handleFilesChange} />
-        <JsonInput json={json} onChange={handleJsonChange} errors={errors} />
+        <JsonInput message={message} onChange={handleChange} />
       </EditorInnerContainer>
       {isBackupModalShown && (
         <BackupModal
