@@ -23,6 +23,8 @@ const AuthorNameNormal = styled.span<{}, Theme>`
   font-size: 14px;
   font-weight: 500;
   white-space: pre-wrap;
+  margin: 0 0 1px;
+  display: inline-block;
 `
 
 const AuthorNameLink = AuthorNameNormal.withComponent("a")

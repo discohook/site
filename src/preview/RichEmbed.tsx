@@ -14,7 +14,8 @@ const Container = styled.div`
   max-width: 520px;
   display: flex;
 
-  & > ${MarkupContainer} ${Emoji} {
+  & ${MarkupContainer} ${Emoji} {
+    object-fit: contain;
     width: 1rem;
     height: 1rem;
     min-width: 22px;
@@ -63,8 +64,9 @@ const InnerEmbedContent = styled.div`
 
 const EmbedTitleNormal = styled.span<{}, Theme>`
   display: inline-block;
+  padding: 2px 0 1px;
 
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: ${({ theme }) => (theme.color === "dark" ? "#ffffff" : "#4f545c")};
 `
@@ -75,12 +77,13 @@ const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
 
 const EmbedDescription = styled.div<{}, Theme>`
   color: ${({ theme }) =>
-    theme.color === "dark" ? "rgba(255, 255, 255, 0.6)" : ""};
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 500;
+    theme.color === "dark"
+      ? "rgba(255, 255, 255, 0.6)"
+      : "rgba(79, 83, 91, 0.9)"};
+  font-size: 0.875rem;
 
   & > ${MarkupContainer} {
+    line-height: 1rem;
     white-space: pre-line;
 
     & ${CodeBlockContainer} {
@@ -150,15 +153,15 @@ export default function RichEmbed(props: Props) {
       <Pill style={{ backgroundColor: embedPillColor }} />
       <EmbedContent>
         <InnerEmbedContent>
-          {author !== undefined && <EmbedAuthor author={author} />}
-          {title !== undefined && (
-            <EmbedTitle href={String(url)}>
-              <Markup content={String(title)} inline />
+          {author && <EmbedAuthor author={author} />}
+          {title && (
+            <EmbedTitle href={url}>
+              <Markup content={title} inline />
             </EmbedTitle>
           )}
-          {description !== undefined && (
+          {description && (
             <EmbedDescription>
-              <Markup content={String(description)} />
+              <Markup content={description} />
             </EmbedDescription>
           )}
           {fields && (
@@ -168,16 +171,12 @@ export default function RichEmbed(props: Props) {
               ))}
             </EmbedFields>
           )}
-          {image !== undefined && (
-            <EmbedImage src={String(image.url)} alt="Image" />
-          )}
-          {(footer !== undefined || timestamp !== undefined) && (
+          {image && <EmbedImage src={image.url} alt="Image" />}
+          {(footer || timestamp) && (
             <EmbedFooter footer={footer} timestamp={timestamp} />
           )}
         </InnerEmbedContent>
-        {thumbnail !== undefined && (
-          <EmbedThumbnail src={String(thumbnail.url)} alt="Thumbnail" />
-        )}
+        {thumbnail && <EmbedThumbnail src={thumbnail.url} alt="Thumbnail" />}
       </EmbedContent>
     </Container>
   )

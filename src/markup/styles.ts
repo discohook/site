@@ -5,6 +5,7 @@ export const MarkupContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
   display: inline;
+  line-height: 1.375;
 `
 
 export const Code = styled.code<{}, Theme>`
@@ -20,9 +21,9 @@ export const Code = styled.code<{}, Theme>`
 
 export const Emoji = styled.img<{ big?: boolean }, Theme>`
   width: ${({ theme, big }) =>
-    big && theme.display === "cozy" ? "32px" : "22px"};
+    big && theme.display === "cozy" ? "2rem" : "1.375em"};
   height: ${({ theme, big }) =>
-    big && theme.display === "cozy" ? "32px" : "22px"};
+    big && theme.display === "cozy" ? "2rem" : "1.375em"};
 
   object-fit: contain;
   vertical-align: bottom;

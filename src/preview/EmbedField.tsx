@@ -22,7 +22,7 @@ const FieldName = styled.div<{}, Theme>`
 const FieldValue = styled.div<{}, Theme>`
   color: ${({ theme }) =>
     theme.color === "dark" ? "rgba(255, 255, 255, 0.6)" : "#36393f"};
-  font-size: 14px;
+  font-size: 0.875rem;
 
   & > ${MarkupContainer} {
     white-space: pre-line;

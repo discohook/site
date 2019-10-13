@@ -21,7 +21,6 @@ const Container = styled.div<{}, Theme>`
     theme.display === "cozy" ? "20px 10px 20px 0" : "10px"};
 
   font-size: 16px;
-  line-height: 22px;
 
   & > * + * {
     margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "6px")};
