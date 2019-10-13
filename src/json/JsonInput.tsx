@@ -22,6 +22,8 @@ const ErrorContainer = styled.div`
 
 const Error = styled.div<{}, Theme>`
   padding: 4px 0;
+
+  font-size: 14px;
   font-family: ${({ theme }) => theme.fonts.mono};
   line-height: 16px;
 `
@@ -29,7 +31,13 @@ const Error = styled.div<{}, Theme>`
 const CodeInput = styled(MultilineTextInput)<{}, Theme>`
   min-height: 240px;
   margin: 8px;
+
+  font-size: 14px;
   font-family: ${({ theme }) => theme.fonts.mono};
+`
+
+const SubmitButton = styled(Button)<{}, Theme>`
+  margin: 8px 8px 16px;
 `
 
 type Props = {
@@ -76,12 +84,12 @@ export default function JsonInput(props: Props) {
         value={json}
         onChange={event => setJson(event.target.value)}
       />
-      <Button
+      <SubmitButton
         disabled={errors.length > 0}
         onClick={() => onChange(parseMessage(json).message || {})}
       >
         Submit
-      </Button>
+      </SubmitButton>
     </Container>
   )
 }
