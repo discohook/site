@@ -7,6 +7,10 @@ export type Message = {
   avatarUrl?: string
 }
 
+export type MessageWithoutIds = Omit<Message, "embeds"> & {
+  embeds?: EmbedWithoutIds[]
+}
+
 export type Embed = {
   [id]: number
   title?: string
@@ -19,6 +23,10 @@ export type Embed = {
   thumbnail?: Image
   author?: Author
   fields?: Field[]
+}
+
+export type EmbedWithoutIds = Omit<Embed, symbol | "fields"> & {
+  fields?: FieldWithoutIds[]
 }
 
 export type Author = {
@@ -39,12 +47,8 @@ export type Field = {
   inline?: boolean
 }
 
+export type FieldWithoutIds = Omit<Field, symbol>
+
 export type Image = {
   url?: string
-}
-
-export type MessageWithoutIds = Omit<Message, "embeds"> & {
-  embeds?: (Omit<Embed, symbol | "fields"> & {
-    fields?: (Omit<Field, symbol>)[]
-  })[]
 }
