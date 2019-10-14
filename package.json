@@ -10,6 +10,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.client.js",
     "test": "cross-env TZ=UTC jest --config .jestrc.json",
     "test:watch": "cross-env TZ=UTC jest --config .jestrc.json --watch",
+    "test:cov": "cross-env TZ=UTC jest --config .jestrc.json --coverage --collectCoverageFrom=\"src/**/*.{ts,tsx}\"",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src/**/*",
     "typecheck": "tsc",
     "typecheck:watch": "tsc --watch",
