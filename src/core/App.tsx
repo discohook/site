@@ -94,7 +94,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
   const isMobile = /mobile/i.test(
-    (request.get && request.get("content-type")) || navigator.userAgent,
+    process.env.SSR ? request.get!("User-Agent") : navigator.userAgent,
   )
 
   return (
