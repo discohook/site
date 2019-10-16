@@ -46,6 +46,7 @@ const Tab = styled.button<{ active: boolean }, Theme>`
   color: ${({ theme }) => theme.header.primary};
   line-height: 38px;
 `
+Tab.defaultProps = { type: "button" }
 
 const View = styled.div<{ mobile: boolean }>`
   display: flex;

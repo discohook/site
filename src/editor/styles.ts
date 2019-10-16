@@ -113,6 +113,7 @@ export const Button = styled.button<{}, Theme>`
     cursor: not-allowed;
   }
 `
+Button.defaultProps = { type: "button" }
 
 export const ToggleButton = styled(Button)<{ filled: boolean }, Theme>`
   && {
@@ -151,3 +152,4 @@ export const Action = styled.button<{}, Theme>`
     text-decoration: underline;
   }
 `
+Action.defaultProps = { type: "button" }
