@@ -7,6 +7,7 @@
   },
   "plugins": [
     "@typescript-eslint",
+    "unicorn",
     "import",
     "react",
     "react-hooks",
@@ -82,11 +83,6 @@
     "no-restricted-properties": [
       "warn",
       {
-        "object": "Math",
-        "property": "pow",
-        "message": "Please use the exponentiation operator (**) instead."
-      },
-      {
         "property": "__defineGetter__",
         "message": "Please use Object.defineProperty instead."
       },
@@ -125,6 +121,7 @@
     "no-buffer-constructor": "warn",
     "no-new-require": "warn",
     "no-path-concat": "warn",
+    "no-process-exit": "warn",
     "func-style": ["warn", "declaration", { "allowArrowFunctions": true }],
     "lines-between-class-members": [
       "warn",
@@ -215,6 +212,55 @@
     "@typescript-eslint/require-await": "warn",
     "@typescript-eslint/triple-slash-reference": "warn",
     "@typescript-eslint/unbound-method": "warn",
+    "unicorn/catch-error-name": "warn",
+    "unicorn/consistent-function-scoping": "warn",
+    "unicorn/custom-error-definition": "warn",
+    "unicorn/error-message": "warn",
+    "unicorn/escape-case": "warn",
+    "unicorn/explicit-length-check": "warn",
+    "unicorn/filename-case": [
+      "warn",
+      { "cases": { "camelCase": true, "pascalCase": true } }
+    ],
+    "unicorn/new-for-builtins": "warn",
+    "unicorn/no-abusive-eslint-disable": "warn",
+    "unicorn/no-array-instanceof": "warn",
+    "unicorn/no-console-spaces": "warn",
+    "unicorn/no-fn-reference-in-iterator": "warn",
+    "unicorn/no-for-loop": "warn",
+    "unicorn/no-hex-escape": "warn",
+    "unicorn/no-new-buffer": "warn",
+    "unicorn/no-process-exit": "warn",
+    "unicorn/no-unsafe-regex": "warn",
+    "unicorn/no-unused-properties": "warn",
+    "unicorn/no-zero-fractions": "warn",
+    "unicorn/prefer-add-event-listener": "warn",
+    "unicorn/prefer-dataset": "warn",
+    "unicorn/prefer-event-key": "warn",
+    "unicorn/prefer-exponentiation-operator": "warn",
+    "unicorn/prefer-flat-map": "warn",
+    "unicorn/prefer-includes": "warn",
+    "unicorn/prefer-node-append": "warn",
+    "unicorn/prefer-node-remove": "warn",
+    "unicorn/prefer-query-selector": "warn",
+    "unicorn/prefer-reflect-apply": "warn",
+    "unicorn/prefer-starts-ends-with": "warn",
+    "unicorn/prefer-string-slice": "warn",
+    "unicorn/prefer-text-content": "warn",
+    "unicorn/prefer-type-error": "warn",
+    "unicorn/prevent-abbreviations": [
+      "warn",
+      {
+        "replacements": {
+          "res": { "resolve": true },
+          "rej": { "reject": true },
+          "props": { "properties": false },
+          "ref": { "reference": false }
+        }
+      }
+    ],
+    "unicorn/regex-shorthand": "warn",
+    "unicorn/throw-new-error": "warn",
     "import/no-self-import": "warn",
     "import/no-cycle": "warn",
     "import/no-useless-path-segments": "warn",
