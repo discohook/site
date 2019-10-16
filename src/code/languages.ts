@@ -37,30 +37,12 @@ export const languages: Language[] = [
     name: "arcade",
   },
   {
-    name: "cpp",
-    aliases: ["c", "c++", "cc", "cxx", "h", "h++", "hh", "hpp", "hxx"],
-  },
-  {
     name: "arduino",
     dependencies: ["cpp"],
   },
   {
     name: "armasm",
     aliases: ["arm"],
-  },
-  {
-    name: "xml",
-    aliases: [
-      "atom",
-      "html",
-      "plist",
-      "rss",
-      "wsf",
-      "xhtml",
-      "xjb",
-      "xsd",
-      "xsl",
-    ],
   },
   {
     name: "asciidoc",
@@ -138,6 +120,10 @@ export const languages: Language[] = [
     aliases: ["cls"],
   },
   {
+    name: "cpp",
+    aliases: ["c", "c++", "cc", "cxx", "h", "h++", "hh", "hpp", "hxx"],
+  },
+  {
     name: "crmsh",
     aliases: ["crm", "pcmk"],
   },
@@ -157,11 +143,6 @@ export const languages: Language[] = [
   },
   {
     name: "d",
-  },
-  {
-    name: "markdown",
-    aliases: ["md", "mkd", "mkdown"],
-    dependencies: ["xml"],
   },
   {
     name: "dart",
@@ -223,19 +204,15 @@ export const languages: Language[] = [
     name: "elm",
   },
   {
-    name: "ruby",
-    aliases: ["gemspec", "irb", "podspec", "rb", "thor"],
-  },
-  {
     name: "erb",
     dependencies: ["ruby", "xml"],
   },
   {
-    name: "erlang-repl",
-  },
-  {
     name: "erlang",
     aliases: ["erl"],
+  },
+  {
+    name: "erlang-repl",
   },
   {
     name: "excel",
@@ -399,6 +376,11 @@ export const languages: Language[] = [
     aliases: ["mak", "mk"],
   },
   {
+    name: "markdown",
+    aliases: ["md", "mkd", "mkdown"],
+    dependencies: ["xml"],
+  },
+  {
     name: "mathematica",
     aliases: ["mma", "wl"],
   },
@@ -421,10 +403,6 @@ export const languages: Language[] = [
   },
   {
     name: "mizar",
-  },
-  {
-    name: "perl",
-    aliases: ["pl", "pm"],
   },
   {
     name: "mojolicious",
@@ -473,6 +451,10 @@ export const languages: Language[] = [
   {
     name: "parser3",
     dependencies: ["xml"],
+  },
+  {
+    name: "perl",
+    aliases: ["pl", "pm"],
   },
   {
     name: "pf",
@@ -554,6 +536,10 @@ export const languages: Language[] = [
     name: "rsl",
   },
   {
+    name: "ruby",
+    aliases: ["gemspec", "irb", "podspec", "rb", "thor"],
+  },
+  {
     name: "ruleslanguage",
   },
   {
@@ -594,7 +580,6 @@ export const languages: Language[] = [
   },
   {
     name: "sqf",
-    dependencies: ["cpp"],
   },
   {
     name: "sql",
@@ -622,11 +607,6 @@ export const languages: Language[] = [
   },
   {
     name: "taggerscript",
-  },
-  {
-    name: "yaml",
-    aliases: ["yml"],
-    dependencies: ["ruby"],
   },
   {
     name: "tap",
@@ -687,8 +667,27 @@ export const languages: Language[] = [
     aliases: ["tao"],
   },
   {
+    name: "xml",
+    aliases: [
+      "atom",
+      "html",
+      "plist",
+      "rss",
+      "wsf",
+      "xhtml",
+      "xjb",
+      "xsd",
+      "xsl",
+    ],
+  },
+  {
     name: "xquery",
     aliases: ["xpath", "xq"],
+  },
+  {
+    name: "yaml",
+    aliases: ["yml"],
+    dependencies: ["ruby"],
   },
   {
     name: "zephir",

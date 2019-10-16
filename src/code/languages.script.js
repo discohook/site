@@ -33,6 +33,7 @@ const getDependencies = async language => {
     .substring("Requires:".length)
     .split(",")
     .map(file => file.trim().replace(".js", ""))
+    .sort((a, b) => ((a > b ? 1 : -1)))
 }
 
 /** @type {(language: string) => Promise<Language>} */
@@ -54,8 +55,8 @@ const getLanguage = async language => {
   }
 }
 
-const main = async () => {
-  const hljsLanguages = hljs.listLanguages()
+const getAllLanguages = async () => {
+  const hljsLanguages = hljs.listLanguages().sort((a, b) => (a > b ? 1 : -1))
 
   /** @type {Language[]} */
   const languages = []
@@ -65,7 +66,13 @@ const main = async () => {
     languages.push(await getLanguage(language))
   }
 
-  console.log(JSON.stringify(languages, undefined, 2))
+  return languages
 }
 
-main().catch(() => {})
+getAllLanguages()
+  .then(languages => {
+    console.log(JSON.stringify(languages, undefined, 2))
+  })
+  .catch(error => {
+    throw error
+  })
