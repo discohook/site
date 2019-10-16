@@ -5,7 +5,13 @@
     "project": "./tsconfig.json",
     "createDefaultProgram": true
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "react",
+    "react-hooks",
+    "prettier"
+  ],
   "settings": {
     "react": {
       "version": "detect"
@@ -209,6 +215,22 @@
     "@typescript-eslint/require-await": "warn",
     "@typescript-eslint/triple-slash-reference": "warn",
     "@typescript-eslint/unbound-method": "warn",
+    "import/no-self-import": "warn",
+    "import/no-cycle": "warn",
+    "import/no-useless-path-segments": "warn",
+    "import/no-unused-modules": "warn",
+    "import/no-named-as-default-member": "warn",
+    "import/no-mutable-exports": "warn",
+    "import/first": "warn",
+    "import/no-namespace": "warn",
+    "import/extensions": "warn",
+    "import/newline-after-import": "warn",
+    "import/no-named-default": "warn",
+    "import/no-anonymous-default-export": "warn",
+    "import/dynamic-import-chunkname": [
+      "warn",
+      { "webpackChunknameFormat": "[a-z-\\[\\]]+" }
+    ],
     "react/display-name": "warn",
     "react/jsx-boolean-value": "warn",
     "react/jsx-child-element-spacing": "warn",

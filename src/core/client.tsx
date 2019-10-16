@@ -2,7 +2,7 @@ import React from "react"
 import { hydrate, render } from "react-dom"
 
 const main = async () => {
-  const { default: App } = await import("./App" /* webpackChunkName: "app" */)
+  const { default: App } = await import(/* webpackChunkName: "app" */ "./App")
   const app = document.querySelector("#app")
 
   if (app && app.hasChildNodes()) {

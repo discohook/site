@@ -1,13 +1,28 @@
 import { initialMessage } from "../message/initialMessage"
-import * as v from "./validation"
-import { Validator } from "./validation"
+import {
+  all,
+  between,
+  first,
+  isArray,
+  isBoolean,
+  isDate,
+  isNumber,
+  isObject,
+  isShape,
+  isString,
+  nullable,
+  optional,
+  requiresKey,
+  requiresKeys,
+  Validator,
+} from "./validation"
 
 const primitives = [
-  [v.isString, "", "test"],
-  [v.isNumber, 0, 1, Infinity, -Infinity, NaN],
-  [v.isBoolean, true, false],
-  [v.isObject, {}],
-  [v.isArray, []],
+  [isString, "", "test"],
+  [isNumber, 0, 1, Infinity, -Infinity, NaN],
+  [isBoolean, true, false],
+  [isObject, {}],
+  [isArray, []],
 ] as [Validator, ...unknown[]][]
 
 const primitiveValues = primitives
@@ -16,8 +31,6 @@ const primitiveValues = primitives
 
 describe("validation", () => {
   it("can compose validators", () => {
-    const { first, all } = v
-
     const cont = jest.fn<string[], Parameters<Validator>>(() => [])
     const fail = jest.fn<string[], Parameters<Validator>>((_, key) => [
       `${key}: Fail`,
@@ -55,8 +68,6 @@ describe("validation", () => {
   })
 
   it("validates dates", () => {
-    const { isDate } = v
-
     expect(isDate("2019-04-22T11:02:04.000Z", "$")).toHaveLength(0)
     expect(isDate("1234-56-78T12:34:56.789Z", "$")).toHaveLength(0)
 
@@ -70,8 +81,6 @@ describe("validation", () => {
   })
 
   it("validates optionals and nullables", () => {
-    const { optional, nullable, isString } = v
-
     expect(optional(isString)(undefined, "$")).toHaveLength(0)
     expect(optional(isString)(null, "$")).not.toHaveLength(0)
     expect(optional(isString)("", "$")).toHaveLength(0)
@@ -94,8 +103,6 @@ describe("validation", () => {
   })
 
   it("validates object shapes", () => {
-    const { isShape, isString, isNumber } = v
-
     expect(isShape({})({}, "$")).toHaveLength(0)
     expect(isShape({ key: isString })({ key: "value" }, "$")).toHaveLength(0)
     expect(
@@ -119,8 +126,6 @@ describe("validation", () => {
   })
 
   it("validates object key requirements", () => {
-    const { requiresKey, requiresKeys } = v
-
     expect(requiresKey("test")({ test: "test" }, "$")).toHaveLength(0)
     expect(requiresKey("key")({}, "$")).not.toHaveLength(0)
     expect(requiresKey("one")({ one: 1, two: 2 }, "$")).toHaveLength(0)
@@ -166,8 +171,6 @@ describe("validation", () => {
   })
 
   it("validates number ranges", () => {
-    const { between } = v
-
     expect(between(0, 1)(-1, "$")).not.toHaveLength(0)
     expect(between(0, 1)(0, "$")).toHaveLength(0)
     expect(between(0, 1)(1, "$")).toHaveLength(0)

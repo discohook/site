@@ -4,8 +4,8 @@ type HLJSLanguage = (hljs?: HLJSStatic) => IModeBase
 
 export const importRawLanguage = async (name: string) => {
   const module = await import(
-    `highlight.js/lib/languages/${name}`
     /* webpackChunkName: "hljs-[request]" */
+    `highlight.js/lib/languages/${name}`
   )
 
   return module.default as HLJSLanguage
