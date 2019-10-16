@@ -2,14 +2,23 @@ import { initialMessage } from "../message/initialMessage"
 import {
   all,
   between,
+  contains,
   first,
   isArray,
+  isAuthor,
   isBoolean,
   isDate,
+  isEmbed,
+  isField,
+  isFooter,
+  isMessage,
   isNumber,
   isObject,
   isShape,
   isString,
+  length,
+  maxLength,
+  minLength,
   nullable,
   optional,
   requiresKey,
@@ -91,8 +100,6 @@ describe("validation", () => {
   })
 
   it("validates array contents", () => {
-    const { contains, isString } = v
-
     expect(contains(isString)(["test"], "$")).toHaveLength(0)
     expect(contains(isString)(["one", "two", "three"], "$")).toHaveLength(0)
     expect(contains(isString)([], "$")).toHaveLength(0)
@@ -144,8 +151,6 @@ describe("validation", () => {
   })
 
   it("validates array and string lengths", () => {
-    const { minLength, maxLength, length } = v
-
     // Min length
     expect(minLength(0)([1, 2, 3], "$")).toHaveLength(0)
     expect(minLength(0)(["some value"], "$")).toHaveLength(0)
@@ -247,16 +252,8 @@ describe("validation", () => {
           { color: 0x000000 },
           { color: 0xffffff },
           { color: null },
-          {
-            footer: {
-              text: "Footer",
-            },
-          },
-          {
-            image: {
-              url: "https://cdn.discordapp.com/embed/avatars/0.png",
-            },
-          },
+          { footer: { text: "Footer" } },
+          { image: { url: "https://cdn.discordapp.com/embed/avatars/0.png" } },
           {
             thumbnail: {
               url: "https://cdn.discordapp.com/embed/avatars/0.png",
@@ -326,9 +323,10 @@ describe("validation", () => {
         ],
       },
     } as const
+    const validators = { isAuthor, isFooter, isField, isEmbed, isMessage }
 
     for (const [validatorName, { valid, invalid }] of Object.entries(objects)) {
-      const validate = v[validatorName as keyof typeof objects]
+      const validate = validators[validatorName as keyof typeof objects]
 
       for (const value of valid) {
         expect(validate(value, "$")).toHaveLength(0)
