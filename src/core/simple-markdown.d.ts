@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable unicorn/filename-case */
 
 type ReactNode = React.ReactNode
 

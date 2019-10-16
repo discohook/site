@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import InputField from "./InputField"
 
-const numToHex = (num: number | null | undefined) =>
-  typeof num === "number" ? `#${num.toString(16).padStart(6, "0")}` : ""
+const numberToHex = (number: number | null | undefined) =>
+  typeof number === "number" ? `#${number.toString(16).padStart(6, "0")}` : ""
 
-const hexToNum = (hex: string) => parseInt(hex.substring(1), 16)
+const hexToNumber = (hex: string) => parseInt(hex.slice(1), 16)
 
 type Props = {
   id: number
@@ -15,22 +15,22 @@ type Props = {
 export default function ColorInput(props: Props) {
   const { id, value, onChange: handleChange } = props
 
-  const [hex, setHex] = useState(numToHex(value))
+  const [hex, setHex] = useState(numberToHex(value))
 
   useEffect(() => {
-    setHex(numToHex(value))
+    setHex(numberToHex(value))
   }, [value])
 
   useEffect(() => {
     const isHex = /^#[0-9a-f]{6}$/i.test(hex)
-    const num = hexToNum(hex) // NaN if isHex is false
+    const number = hexToNumber(hex) // NaN if isHex is false
 
     if (value === null && !isHex) return
     if (hex.trim() === "" && value === undefined) return
-    if (num === value) return
+    if (number === value) return
 
     if (isHex) {
-      handleChange(num)
+      handleChange(number)
     } else if (hex.trim() === "") {
       handleChange(undefined)
     }

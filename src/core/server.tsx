@@ -25,7 +25,7 @@ const [templateBefore, templateAfter] = html
 const encodings = {
   gzip: createGzip,
   deflate: createDeflate,
-  identity: () => new Transform({ transform: (data, _, cb) => cb(null, data) }),
+  identity: () => new Transform({ transform: (data, _, fn) => fn(null, data) }),
 } as const
 
 app.use(conditional())
@@ -46,7 +46,7 @@ router.get("/", async (context, next) => {
 
   stream.write(templateBefore)
 
-  await new Promise((res, rej) => {
+  await new Promise((resolve, reject) => {
     const nodeStream = renderToNodeStream(
       <RequestProvider value={context}>
         <App />
@@ -54,8 +54,8 @@ router.get("/", async (context, next) => {
     )
 
     nodeStream.on("data", chunk => stream.write(chunk))
-    nodeStream.once("end", res)
-    nodeStream.once("error", rej)
+    nodeStream.once("end", resolve)
+    nodeStream.once("error", reject)
   })
 
   stream.write(templateAfter)

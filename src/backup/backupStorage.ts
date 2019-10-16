@@ -1,35 +1,35 @@
 import { applyIds } from "../message/applyIds"
 import { Backup } from "./Backup"
 
-const dbPromise = new Promise<IDBDatabase>((res, rej) => {
-  if (typeof indexedDB === "undefined") rej()
+const databasePromise = new Promise<IDBDatabase>((resolve, reject) => {
+  if (typeof indexedDB === "undefined") reject()
   const openRequest = indexedDB.open("backups", 1)
 
-  openRequest.addEventListener("success", () => res(openRequest.result))
-  openRequest.addEventListener("error", () => rej(openRequest.error))
+  openRequest.addEventListener("success", () => resolve(openRequest.result))
+  openRequest.addEventListener("error", () => reject(openRequest.error))
 
   openRequest.addEventListener("upgradeneeded", () =>
     openRequest.result.createObjectStore("backupStore"),
   )
 })
 
-let db!: IDBDatabase
-dbPromise.then(database => (db = database)).catch(() => {})
+let database!: IDBDatabase
+databasePromise.then(idb => (database = idb)).catch(() => {})
 
 const runTransaction = async <T>(
   mode: IDBTransactionMode,
   fn: (store: IDBObjectStore) => T,
 ) => {
-  await dbPromise
+  await databasePromise
 
-  return new Promise<T>((res, rej) => {
-    const transaction = db.transaction("backupStore", mode)
+  return new Promise<T>((resolve, reject) => {
+    const transaction = database.transaction("backupStore", mode)
 
     const result = {} as { value: T }
 
-    transaction.addEventListener("complete", () => res(result.value))
-    transaction.addEventListener("error", () => rej(transaction.error))
-    transaction.addEventListener("abort", () => rej(transaction.error))
+    transaction.addEventListener("complete", () => resolve(result.value))
+    transaction.addEventListener("error", () => reject(transaction.error))
+    transaction.addEventListener("abort", () => reject(transaction.error))
 
     result.value = fn(transaction.objectStore("backupStore"))
   })

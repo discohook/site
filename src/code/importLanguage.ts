@@ -9,7 +9,7 @@ export const importLanguage = async (name: string) => {
   const langPromise = importRawLanguage(language.name)
 
   if (language.dependencies) {
-    const dependencies = language.dependencies.map(importLanguage)
+    const dependencies = language.dependencies.map(async d => importLanguage(d))
     await Promise.all(dependencies)
   }
 

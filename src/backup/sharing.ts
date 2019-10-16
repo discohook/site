@@ -36,8 +36,8 @@ let cachedBackup: undefined | null | Backup
 export const getSharedBackup = (url: URL) => {
   if (cachedBackup !== undefined) return cachedBackup
 
-  const backupParam = url.searchParams.get("backup")
-  const backup = decodeBackup(backupParam || "")
+  const backupParameter = url.searchParams.get("backup")
+  const backup = decodeBackup(backupParameter || "")
 
   if (!process.env.SSR) {
     if (backup) console.log("Loaded with shared backup:", backup)

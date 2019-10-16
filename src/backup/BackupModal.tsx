@@ -93,10 +93,6 @@ export default function BackupModal(props: Props) {
     if (backup) onLoad(backup)
   }
 
-  const handleShare = async (name: string) => {
-    await shareBackup(name)
-  }
-
   const handleDelete = async (backup: string) => {
     await deleteBackup(backup)
     await getAllBackups()
@@ -118,7 +114,7 @@ export default function BackupModal(props: Props) {
   }
 
   return (
-    <ModalContainer onClick={e => e.stopPropagation()}>
+    <ModalContainer onClick={event => event.stopPropagation()}>
       <ModalActionsContainer>
         <ActionsHeader>Backups</ActionsHeader>
         <Action onClick={handleClose}>Close</Action>
@@ -129,7 +125,7 @@ export default function BackupModal(props: Props) {
             <BackupName onClick={async () => handleLoad(backup)}>
               {backup}
             </BackupName>
-            <BackupAction onClick={async () => handleShare(backup)}>
+            <BackupAction onClick={async () => shareBackup(backup)}>
               Share
             </BackupAction>
             <BackupAction onClick={async () => handleDelete(backup)} dangerous>

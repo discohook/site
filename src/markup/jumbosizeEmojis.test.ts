@@ -1,5 +1,7 @@
 import { jumbosizeEmojis } from "./jumbosizeEmojis"
 
+const array = (size: number) => new Array(size).fill(undefined)
+
 describe("jumbosizeEmojis", () => {
   it("jumbosizes a single emoji", () => {
     expect(jumbosizeEmojis([{ type: "emoji" }])).toEqual([
@@ -14,55 +16,25 @@ describe("jumbosizeEmojis", () => {
   it("jumbosizes up to 27 emojis", () => {
     for (let amount = 0; amount <= 27; amount++) {
       expect(
-        jumbosizeEmojis(
-          Array(amount)
-            .fill(undefined)
-            .map(() => ({ type: "emoji" })),
-        ),
-      ).toEqual(
-        Array(amount)
-          .fill(undefined)
-          .map(() => ({ type: "emoji", jumboable: true })),
-      )
+        jumbosizeEmojis(array(amount).map(() => ({ type: "emoji" }))),
+      ).toEqual(array(amount).map(() => ({ type: "emoji", jumboable: true })))
 
       expect(
-        jumbosizeEmojis(
-          Array(amount)
-            .fill(undefined)
-            .map(() => ({ type: "customEmoji" })),
-        ),
+        jumbosizeEmojis(array(amount).map(() => ({ type: "customEmoji" }))),
       ).toEqual(
-        Array(amount)
-          .fill(undefined)
-          .map(() => ({ type: "customEmoji", jumboable: true })),
+        array(amount).map(() => ({ type: "customEmoji", jumboable: true })),
       )
     }
   })
 
   it("does not jumbosize 28 emojis and up", () => {
-    expect(
-      jumbosizeEmojis(
-        Array(28)
-          .fill(undefined)
-          .map(() => ({ type: "emoji" })),
-      ),
-    ).toEqual(
-      Array(28)
-        .fill(undefined)
-        .map(() => ({ type: "emoji" })),
+    expect(jumbosizeEmojis(array(28).map(() => ({ type: "emoji" })))).toEqual(
+      array(28).map(() => ({ type: "emoji" })),
     )
 
     expect(
-      jumbosizeEmojis(
-        Array(28)
-          .fill(undefined)
-          .map(() => ({ type: "customEmoji" })),
-      ),
-    ).toEqual(
-      Array(28)
-        .fill(undefined)
-        .map(() => ({ type: "customEmoji" })),
-    )
+      jumbosizeEmojis(array(28).map(() => ({ type: "customEmoji" }))),
+    ).toEqual(array(28).map(() => ({ type: "customEmoji" })))
   })
 
   it("does not jumbosize when there are non emoji nodes", () => {

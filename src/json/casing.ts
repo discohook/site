@@ -1,13 +1,13 @@
-const mapKeys = (obj: object, fn: (key: string) => string): object => {
-  const isObject = (x: unknown) => typeof x === "object" && x !== null
+const isObject = (x: unknown) => typeof x === "object" && x !== null
 
-  if (Array.isArray(obj)) {
-    return obj.map(x => (isObject(x) ? mapKeys(x, fn) : x))
+const mapKeys = (object: object, fn: (key: string) => string): object => {
+  if (Array.isArray(object)) {
+    return object.map(x => (isObject(x) ? mapKeys(x, fn) : x))
   }
 
   const result: Record<string, unknown> = {}
 
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [key, value] of Object.entries(object)) {
     if (isObject(value)) {
       result[fn(key)] = mapKeys(value, fn)
     } else {
@@ -18,8 +18,8 @@ const mapKeys = (obj: object, fn: (key: string) => string): object => {
   return result
 }
 
-export const toSnakeCase = (obj: object) =>
-  mapKeys(obj, key => key.replace(/([A-Z])/g, (_, l) => `_${l.toLowerCase()}`))
+export const toSnakeCase = (object: object) =>
+  mapKeys(object, key => key.replace(/[A-Z]/g, m => `_${m.toLowerCase()}`))
 
-export const toCamelCase = (obj: object) =>
-  mapKeys(obj, key => key.replace(/_([a-z])/g, (_, l) => l.toUpperCase()))
+export const toCamelCase = (object: object) =>
+  mapKeys(object, key => key.replace(/_[a-z]/g, m => m[1].toUpperCase()))

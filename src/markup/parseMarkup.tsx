@@ -122,10 +122,10 @@ const baseRules: Rules = {
         ? {
             content: capture[0],
           }
-        : parse(capture[0].replace(emojiRegex, e => `:${emojiToName[e]}:`), {
-            ...state,
-            nested: true,
-          }),
+        : parse(
+            capture[0].replace(emojiRegex, emoji => `:${emojiToName[emoji]}:`),
+            { ...state, nested: true },
+          ),
   },
   del: {
     ...defaultRules.del,
@@ -146,7 +146,8 @@ const baseRules: Rules = {
     match: (source, state, previous) =>
       !/^$|\n *$/.test(previous) || state.inQuote || state.nested
         ? null
-        : /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
+        : // eslint-disable-next-line unicorn/no-unsafe-regex
+          /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
             source,
           ),
     parse: (capture, parse, state) => {
@@ -194,7 +195,8 @@ const blockRules: Rules = {
   },
   codeBlock: {
     order: defaultRules.codeBlock.order,
-    match: anyScopeRegex(/^```([a-z0-9-]+?\n+)?\n*([^]+?)\n*```/),
+    // eslint-disable-next-line unicorn/no-unsafe-regex
+    match: anyScopeRegex(/^```([a-z0-9-]*\n+)?\n*(.*)\n*```/),
     parse: (capture, _parse, state) => ({
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
@@ -244,7 +246,7 @@ const ellipsize = (text: string, length: number) => {
   const shortenedText = text.replace(/\s+/g, " ")
   return shortenedText.length <= length
     ? shortenedText
-    : `${shortenedText.substring(0, length)}…`
+    : `${shortenedText.slice(0, length)}…`
 }
 
 const now = () =>
@@ -279,7 +281,7 @@ export const parseMarkup = (
       console.log("Content:", content)
     }
     console.log("Inline:", inline)
-    console.log("Parse time: ", parseTime, "\nOutput time:", outputTime)
+    console.log("Parse time:", parseTime, "\nOutput time:", outputTime)
     console.groupEnd()
   }
 

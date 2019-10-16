@@ -14,14 +14,14 @@ const GITHUB_LANG_BASE =
 /** @type {(language: string) => Promise<string[] | undefined>} */
 const getDependencies = async language => {
   /** @type {IncomingMessage} */
-  const message = await new Promise(res =>
-    get(`${GITHUB_LANG_BASE}/${language}.js`, res),
+  const message = await new Promise(resolve =>
+    get(`${GITHUB_LANG_BASE}/${language}.js`, resolve),
   )
 
   let source = ""
   message.on("data", data => (source += data))
 
-  await new Promise(res => message.once("end", res))
+  await new Promise(resolve => message.once("end", resolve))
 
   const requires = source
     .split(/\n|\r/g)
@@ -30,7 +30,7 @@ const getDependencies = async language => {
   if (!requires) return
 
   return requires
-    .substring("Requires:".length)
+    .slice("Requires:".length)
     .split(",")
     .map(file => file.trim().replace(".js", ""))
     .sort((a, b) => ((a > b ? 1 : -1)))
