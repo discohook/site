@@ -95,6 +95,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
   const isMobile = /mobile/i.test(
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     process.env.SSR ? request.get!("User-Agent") : navigator.userAgent,
   )
 
