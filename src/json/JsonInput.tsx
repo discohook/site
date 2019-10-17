@@ -46,7 +46,7 @@ type Props = {
 }
 
 export default function JsonInput(props: Props) {
-  const { message, onChange } = props
+  const { message, onChange: handleChange } = props
 
   const [json, setJson] = useState(stringifyMessage(message))
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function JsonInput(props: Props) {
       />
       <SubmitButton
         disabled={errors.length > 0}
-        onClick={() => onChange(parseMessage(json).message || {})}
+        onClick={() => handleChange(parseMessage(json).message || {})}
       >
         Submit
       </SubmitButton>
