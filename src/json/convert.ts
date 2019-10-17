@@ -1,19 +1,11 @@
 import { applyIds } from "../message/applyIds"
 import { Message } from "../message/Message"
 import { toCamelCase, toSnakeCase } from "./casing"
+import { parseJson } from "./parseJson"
 import { isMessage } from "./validation"
 
 export const stringifyMessage = (message: Message) => {
   return JSON.stringify(toSnakeCase(message), undefined, 2)
-}
-
-const parseJson = (json: string) => {
-  try {
-    return { value: JSON.parse(json) }
-  } catch (error) {
-    const message = error.message.replace(/^JSON\.parse: /, "")
-    return { error: message }
-  }
 }
 
 export const parseMessage = (json: string) => {
