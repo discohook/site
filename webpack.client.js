@@ -12,7 +12,6 @@ const dev = process.env.NODE_ENV === "development"
 /** @type {import("webpack").Configuration} */
 module.exports = {
   entry: [
-    "core-js/stable",
     "regenerator-runtime/runtime",
     resolve(__dirname, "src/core/client.tsx"),
   ],
