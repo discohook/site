@@ -32,14 +32,14 @@ app.use(conditional())
 app.use(serve(build, { defer: true }))
 
 router.get("/", async (context, next) => {
-  context.set("content-type", "text/html")
+  context.set("Content-Type", "text/html; charset=utf-8")
 
   const encoding = context.acceptsEncodings(Object.keys(encodings)) as
     | keyof typeof encodings
     | false
 
-  if (typeof encoding === "boolean") return context.throw(406)
-  if (encoding !== "identity") context.set("content-encoding", encoding)
+  if (encoding === false) return context.throw(406)
+  context.set("Content-Encoding", encoding)
 
   const stream = encodings[encoding]()
   context.body = stream
