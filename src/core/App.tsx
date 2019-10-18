@@ -1,9 +1,8 @@
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import React, { useContext, useEffect, useState } from "react"
-import { getSharedBackup } from "../backup/sharing"
+import { decodeBackup } from "../backup/sharing"
 import Editor from "../editor/Editor"
-import { FileLike } from "../message/FileLike"
 import { initialMessage } from "../message/initialMessage"
 import MessagePreview from "../preview/MessagePreview"
 import GlobalStyle from "./GlobalStyle"
@@ -66,13 +65,18 @@ const View = styled.div<{ mobile: boolean }>`
 export default function App() {
   const request = useContext(RequestContext)
 
-  const backup = getSharedBackup(request.URL || new URL(location.href)) || {
-    message: initialMessage,
-    files: [],
-  }
+  const [backup, setBackup] = useState(() => {
+    const search = process.env.SSR ? request.search : location.search
+    const parameters = new URLSearchParams(search)
+    const encodedBackup = parameters.get("backup")
 
-  const [message, setMessage] = useState(backup.message)
-  const [files, setFiles] = useState<(File | FileLike)[]>(backup.files)
+    const backup = decodeBackup(encodedBackup || "")
+    if (backup) {
+      console.log("Loaded with shared backup:", backup)
+    }
+
+    return backup || { message: initialMessage, files: [] }
+  })
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const toggleTheme = () =>
@@ -121,14 +125,18 @@ export default function App() {
         )}
         <View mobile={isMobile}>
           {(!isMobile || activeTab === "preview") && (
-            <MessagePreview message={message} files={files} />
+            <MessagePreview message={backup.message} files={backup.files} />
           )}
           {(!isMobile || activeTab === "editor") && (
             <Editor
-              message={message}
-              onChange={setMessage}
-              files={files}
-              onFilesChange={setFiles}
+              message={backup.message}
+              onChange={message =>
+                setBackup(backup => ({ ...backup, message }))
+              }
+              files={backup.files}
+              onFilesChange={files =>
+                setBackup(backup => ({ ...backup, files }))
+              }
               onToggleTheme={toggleTheme}
               onToggleDisplay={toggleDisplay}
             />

@@ -13,7 +13,9 @@ export const shareBackup = async (name: string) => {
   window.history.replaceState(undefined, "", `?backup=${base64}`)
 }
 
-const decodeBackup = (base64: string) => {
+export const decodeBackup = (base64: string) => {
+  if (!base64) return
+
   const json = base64Decode(base64)
   if (!json) {
     console.log("Shared backup base64 contains an invalid character")
@@ -35,15 +37,4 @@ const decodeBackup = (base64: string) => {
     ...backup,
     message,
   }
-}
-
-export const getSharedBackup = (url: URL) => {
-  const backupParameter = url.searchParams.get("backup")
-  const backup = decodeBackup(backupParameter || "")
-
-  if (!process.env.SSR && backup) {
-    console.log("Loaded with shared backup:", backup)
-  }
-
-  return backup
 }
