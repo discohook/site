@@ -12,4 +12,6 @@ const main = async () => {
   }
 }
 
-main().catch(() => {})
+main().catch(error => {
+  console.error("Error initializing app:", error)
+})

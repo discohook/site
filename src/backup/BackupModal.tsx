@@ -85,7 +85,9 @@ export default function BackupModal(props: Props) {
   const [backups, setBackups] = useState<string[]>([])
   const getAllBackups = async () => setBackups(await getBackups())
   useEffect(() => {
-    getAllBackups().catch(() => {})
+    getAllBackups().catch(error => {
+      console.error("Error getting backups:", error)
+    })
   }, [])
 
   const handleLoad = async (name: string) => {
@@ -110,7 +112,9 @@ export default function BackupModal(props: Props) {
       })),
     })
       .then(getAllBackups)
-      .catch(() => {})
+      .catch(error => {
+        console.error("Error creating backup:", error)
+      })
   }
 
   return (

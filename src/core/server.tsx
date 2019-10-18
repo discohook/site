@@ -66,6 +66,10 @@ router.get("/", async (context, next) => {
 
 app.use(router.middleware())
 
-app.on("error", () => {})
+app.on("error", error => {
+  if (error.code === "ECONNRESET") return
+
+  console.error(error)
+})
 
 app.listen(port, () => console.log(`Listening on ${port}`))

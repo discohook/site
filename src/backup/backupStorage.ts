@@ -14,7 +14,12 @@ const databasePromise = new Promise<IDBDatabase>((resolve, reject) => {
 })
 
 let database!: IDBDatabase
-databasePromise.then(idb => (database = idb)).catch(() => {})
+databasePromise
+  .then(idb => (database = idb))
+  .catch(error => {
+    if (!error) return // If indexedDB is not defined
+    console.error("Error opening database:", error)
+  })
 
 const runTransaction = async <T>(
   mode: IDBTransactionMode,
