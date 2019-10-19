@@ -1,3 +1,4 @@
+import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import Attachment from "../attachment/Attachment"
@@ -15,21 +16,29 @@ const ScrollContainer = styled.div`
 `
 
 const Container = styled.div<{}, Theme>`
-  margin: ${({ theme }) =>
-    theme.display === "cozy" ? "0 0 0 80px" : "0 0 0 9ch"};
-  padding: ${({ theme }) =>
-    theme.display === "cozy" ? "20px 10px 20px 0" : "10px"};
+  margin: 0 0 0 80px;
+  padding: 20px 10px 20px 0;
 
   font-size: 16px;
 
-  & > * + * {
-    margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "6px")};
-  }
-
   & > ${MarkupContainer} {
     display: inline;
-    margin-left: ${({ theme }) => (theme.display === "cozy" ? "0" : "4px")};
   }
+
+  ${({ theme }) =>
+    theme.display === "compact" &&
+    css`
+      margin: 0 0 0 9ch;
+      padding: 10px;
+
+      & > * + * {
+        margin-left: 6px;
+      }
+
+      & > ${MarkupContainer} {
+        margin-left: 4px;
+      }
+    `}
 `
 
 type Props = {

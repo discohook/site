@@ -1,3 +1,4 @@
+import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { Theme } from "../core/themes"
 
@@ -20,13 +21,19 @@ export const Code = styled.code<{}, Theme>`
 `
 
 export const Emoji = styled.img<{ big?: boolean }, Theme>`
-  width: ${({ theme, big }) =>
-    big && theme.display === "cozy" ? "2rem" : "1.375em"};
-  height: ${({ theme, big }) =>
-    big && theme.display === "cozy" ? "2rem" : "1.375em"};
+  width: 1.375em;
+  height: 1.375em;
 
   object-fit: contain;
   vertical-align: bottom;
+
+  ${({ theme, big }) =>
+    theme.display === "cozy" &&
+    big &&
+    css`
+      width: 2rem;
+      height: 2rem;
+    `}
 `
 
 export const Mention = styled.span<{}, Theme>`

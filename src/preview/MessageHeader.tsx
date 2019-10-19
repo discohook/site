@@ -1,18 +1,23 @@
+import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
 
 const Container = styled.div<{}, Theme>`
-  height: ${({ theme }) => (theme.display === "cozy" ? "20.8px" : "auto")};
-  display: ${({ theme }) =>
-    theme.display === "cozy" ? "flex" : "inline-flex"};
-  margin: ${({ theme }) =>
-    theme.display === "cozy" ? "0 0 0 -80px" : "0 0 0 -9ch"};
+  height: 20.8px;
+  display: flex;
+  margin: 0 0 0 -80px;
+
+  ${({ theme }) =>
+    theme.display === "compact" &&
+    css`
+      height: auto;
+      display: inline-flex;
+      margin: 0 0 0 -9ch;
+    `}
 `
 
 const Avatar = styled.img<{}, Theme>`
-  display: ${({ theme }) => (theme.display === "cozy" ? "block" : "none")};
-
   width: 40px;
   height: 40px;
 
@@ -26,14 +31,25 @@ const Avatar = styled.img<{}, Theme>`
   &:hover {
     opacity: 0.8;
   }
+
+  ${({ theme }) =>
+    theme.display === "compact" &&
+    css`
+      display: none;
+    `}
 `
 
 const HeaderInfo = styled.div<{}, Theme>`
   display: flex;
   align-items: center;
-  flex-direction: ${({ theme }) =>
-    theme.display === "cozy" ? "row" : "row-reverse"};
+  flex-direction: row;
   margin: 0;
+
+  ${({ theme }) =>
+    theme.display === "compact" &&
+    css`
+      flex-direction: row-reverse;
+    `}
 `
 
 const UserName = styled.span<{}, Theme>`
@@ -49,9 +65,9 @@ const BotTag = styled.span<{}, Theme>`
   align-items: center;
   justify-content: center;
 
-  width: ${({ theme }) => (theme.display === "cozy" ? "23px" : "21px")};
+  width: 23px;
   height: 14px;
-  padding: ${({ theme }) => (theme.display === "cozy" ? "1px 2px" : "0")};
+  padding: 1px 2px;
 
   border-radius: 3px;
   margin: 0 4.8px;
@@ -59,14 +75,19 @@ const BotTag = styled.span<{}, Theme>`
   background: ${({ theme }) => theme.accent};
 
   color: #ffffff;
-  font-size: ${({ theme }) => (theme.display === "cozy" ? "10px" : "9.375px")};
+  font-size: 0.625em;
   font-weight: 500;
+
+  ${({ theme }) =>
+    theme.display === "compact" &&
+    css`
+      width: 21px;
+      padding: 0;
+    `}
 `
 
 const Timestamp = styled.span<{}, Theme>`
-  width: ${({ theme }) => (theme.display === "cozy" ? "auto" : "74px")};
-
-  margin: ${({ theme }) => (theme.display === "cozy" ? "1px 0 0" : "0")};
+  margin: 1px;
 
   color: ${({ theme }) => theme.text.muted};
   font-size: 12px;
@@ -74,8 +95,19 @@ const Timestamp = styled.span<{}, Theme>`
   text-align: right;
 
   &::before {
-    content: ${({ theme }) => (theme.display === "cozy" ? "'Today at '" : "")};
+    content: "Today at ";
   }
+
+  ${({ theme }) =>
+    theme.display === "compact" &&
+    css`
+      width: 74px;
+      margin: 0;
+
+      &::before {
+        content: "";
+      }
+    `}
 `
 
 const getTimestamp = () =>

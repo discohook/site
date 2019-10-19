@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { css } from "@emotion/core"
 import React from "react"
 import { Theme } from "../core/themes"
 import Markup from "../markup/Markup"
@@ -6,9 +7,15 @@ import { MarkupContainer } from "../markup/styles"
 import { Field } from "../message/Message"
 
 const Container = styled.div<{ inline: boolean }>`
-  flex: ${({ inline }) => (inline ? 1 : 0)};
   margin: 4px 0 0;
-  min-width: ${({ inline }) => (inline ? "150px" : "100%")};
+  min-width: 100%;
+
+  ${({ inline }) =>
+    inline &&
+    css`
+      flex: 1;
+      min-width: 150px;
+    `}
 `
 
 const FieldName = styled.div<{}, Theme>`
