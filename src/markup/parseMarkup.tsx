@@ -196,7 +196,7 @@ const blockRules: Rules = {
   codeBlock: {
     order: defaultRules.codeBlock.order,
     // eslint-disable-next-line unicorn/no-unsafe-regex
-    match: anyScopeRegex(/^```([a-z0-9-]*\n+)?\n*(.*)\n*```/),
+    match: anyScopeRegex(/^```(?:([a-z0-9-]+?)\n+)?\n*([\s\S]+?)\n*```/i),
     parse: (capture, _, state) => ({
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
