@@ -82,7 +82,7 @@ const baseRules: Rules = {
             type: "text",
             content: capture[0],
           },
-    react: (node, _output, state) =>
+    react: (node, _, state) =>
       node.src ? (
         <Emoji
           src={node.src}
@@ -104,7 +104,7 @@ const baseRules: Rules = {
       name: `${capture[1]}`,
       src: `https://cdn.discordapp.com/emojis/${capture[2]}`,
     }),
-    react: (node, _output, state) => (
+    react: (node, _, state) => (
       <Emoji
         src={node.src}
         alt={node.surrogate}
@@ -197,7 +197,7 @@ const blockRules: Rules = {
     order: defaultRules.codeBlock.order,
     // eslint-disable-next-line unicorn/no-unsafe-regex
     match: anyScopeRegex(/^```([a-z0-9-]*\n+)?\n*(.*)\n*```/),
-    parse: (capture, _parse, state) => ({
+    parse: (capture, _, state) => ({
       language: (capture[1] || "").trim(),
       content: capture[2] || "",
       inQuote: state.inQuote,
@@ -216,7 +216,7 @@ const blockRules: Rules = {
     parse: capture => ({
       content: capture[1] ? `@${capture[1]}` : "@unknown-user",
     }),
-    react: (node, _output, state) => (
+    react: (node, _, state) => (
       <Mention key={state.key}>{node.content}</Mention>
     ),
   },
