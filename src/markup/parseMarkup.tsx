@@ -65,7 +65,7 @@ const baseRules: Rules = {
     match: inlineRegex(/^¯\\_\(ツ\)_\/¯/),
     parse: capture => ({
       type: "text",
-      content: capture[1],
+      content: capture[0],
     }),
   },
   emoji: {
