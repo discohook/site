@@ -39,6 +39,13 @@ const Container = styled.div<{}, Theme>`
         margin-left: 4px;
       }
     `}
+
+  ${({ theme }) =>
+    theme.mobile &&
+    css`
+      margin: 0;
+      padding: 16px;
+    `}
 `
 
 type Props = {

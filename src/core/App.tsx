@@ -1,3 +1,4 @@
+import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import React, { useContext, useEffect, useState } from "react"
@@ -47,19 +48,25 @@ const Tab = styled.button<{ active: boolean }, Theme>`
 `
 Tab.defaultProps = { type: "button" }
 
-const View = styled.div<{ mobile: boolean }>`
+const View = styled.main<{}, Theme>`
   display: flex;
   flex-direction: row-reverse;
   align-items: stretch;
 
-  margin-top: ${({ mobile }) => (mobile ? "40px" : "0")};
   flex: 1;
 
-  max-height: ${({ mobile }) => (mobile ? "calc(100% - 40px)" : "100%")};
+  max-height: 100%;
 
   & > * {
     flex: 1;
   }
+
+  ${({ theme }) =>
+    theme.mobile &&
+    css`
+      margin: 40px 0 0;
+      max-height: calc(100% - 40px);
+    `}
 `
 
 export default function App() {
@@ -94,20 +101,19 @@ export default function App() {
     ...(colorTheme === "dark" ? darkTheme : lightTheme),
     color: colorTheme,
     display: displayTheme,
+    mobile: /mobile/i.test(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      process.env.SSR ? request.get!("User-Agent") : navigator.userAgent,
+    ),
   }
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
-
-  const isMobile = /mobile/i.test(
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    process.env.SSR ? request.get!("User-Agent") : navigator.userAgent,
-  )
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Container>
-        {isMobile && (
+        {theme.mobile && (
           <TabSwitcher>
             <Tab
               active={activeTab === "editor"}
@@ -123,11 +129,11 @@ export default function App() {
             </Tab>
           </TabSwitcher>
         )}
-        <View mobile={isMobile}>
-          {(!isMobile || activeTab === "preview") && (
+        <View>
+          {(!theme.mobile || activeTab === "preview") && (
             <MessagePreview message={backup.message} files={backup.files} />
           )}
-          {(!isMobile || activeTab === "editor") && (
+          {(!theme.mobile || activeTab === "editor") && (
             <Editor
               message={backup.message}
               onChange={message =>

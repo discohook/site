@@ -134,7 +134,7 @@ export const ActionsHeader = styled.span`
 
 export const Action = styled.button<{}, Theme>`
   padding: 0;
-  margin: 0 4px 0 8px;
+  margin: 0 4px 0 0;
 
   background: none;
   border: none;
@@ -150,6 +150,10 @@ export const Action = styled.button<{}, Theme>`
 
   &:hover {
     text-decoration: underline;
+  }
+
+  * + & {
+    margin: 0 4px 0 8px;
   }
 `
 Action.defaultProps = { type: "button" }

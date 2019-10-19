@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { useTheme } from "emotion-theming"
 import React, { useMemo, useState } from "react"
 import BackupModal from "../backup/BackupModal"
 import { Theme } from "../core/themes"
@@ -64,6 +65,8 @@ export default function Editor(props: Props) {
     onToggleDisplay: handleToggleDisplay,
   } = props
 
+  const theme = useTheme<Theme>()
+
   const [webhookUrl, setWebhookUrl] = useState("")
   const [sending, setSending] = useState(false)
   const executeWebhook = async () => {
@@ -116,10 +119,12 @@ export default function Editor(props: Props) {
           browser settings to use this app.
         </JavaScriptWarning>
         <EditorActionsContainer>
-          <ActionsHeader>Message editor</ActionsHeader>
+          {!theme.mobile && <ActionsHeader>Message editor</ActionsHeader>}
           <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
           <Action onClick={handleToggleTheme}>Toggle theme</Action>
-          <Action onClick={handleToggleDisplay}>Toggle display</Action>
+          {!theme.mobile && (
+            <Action onClick={handleToggleDisplay}>Toggle display</Action>
+          )}
           <Action onClick={clearAll}>Clear all</Action>
         </EditorActionsContainer>
         <Container direction="row">

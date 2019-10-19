@@ -92,4 +92,5 @@ export const lightTheme: typeof darkTheme = {
 export type Theme = typeof darkTheme & {
   display: "cozy" | "compact"
   color: "dark" | "light"
+  mobile: boolean
 }
