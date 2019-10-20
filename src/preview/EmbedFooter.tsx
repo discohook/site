@@ -46,17 +46,15 @@ type Props = {
 }
 
 export default function EmbedFooter(props: Props) {
-  const { footer, timestamp } = props
-  const { text, iconUrl } = footer || { text: undefined, iconUrl: undefined }
+  const { footer = {}, timestamp } = props
+  const { text, iconUrl } = footer
 
   return (
     <Container>
-      {iconUrl !== undefined && (
-        <FooterImage src={String(iconUrl)} alt="Footer image" />
-      )}
+      {iconUrl && <FooterImage src={iconUrl} alt="Footer image" />}
       <FooterText>
-        {String(text === undefined ? "" : text)}
-        {footer && timestamp && <FooterSeparator>•</FooterSeparator>}
+        {text}
+        {text && timestamp && <FooterSeparator>•</FooterSeparator>}
         {timestamp && formatTimestamp(timestamp)}
       </FooterText>
     </Container>

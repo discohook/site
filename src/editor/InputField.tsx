@@ -23,7 +23,6 @@ type Props = {
 export default function InputField(props: Props) {
   const {
     id,
-    value: rawValue,
     onChange: handleChange,
     label,
     type,
@@ -31,7 +30,7 @@ export default function InputField(props: Props) {
     placeholder,
     maxLength,
   } = props
-  const value = String(rawValue === undefined ? "" : rawValue)
+  const value = props.value || ""
 
   const Input = multiline ? MultilineTextInput : TextInput
 
@@ -50,7 +49,7 @@ export default function InputField(props: Props) {
           id={id}
           value={value}
           onChange={(event: Event) => handleChange(event.target.value)}
-          type={type || "text"}
+          type={type}
           placeholder={placeholder}
         />
       </InputLabel>

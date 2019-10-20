@@ -67,9 +67,7 @@ export default function FileInput(props: Props) {
             type="file"
             multiple
             onClick={() => fakeFiles()}
-            onChange={event =>
-              handleChange(Array.from(event.target.files || []))
-            }
+            onChange={event => handleChange([...event.target.files])}
             ref={inputRef}
           />
         </InputContainer>

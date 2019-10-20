@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default function AuthorEditor(props: Props) {
-  const { id: embedId, author = {} as Author } = props
+  const { id: embedId, author = {} } = props
   const { name, url, iconUrl } = author
 
   const handleChange = (author: Author) =>

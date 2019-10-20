@@ -40,12 +40,8 @@ export default function EmbedAuthor(props: Props) {
 
   return (
     <Container>
-      {iconUrl !== undefined && (
-        <AuthorImage src={String(iconUrl)} alt="Author image" />
-      )}
-      {name !== undefined && (
-        <AuthorName href={String(url)}>{String(name)}</AuthorName>
-      )}
+      {iconUrl && <AuthorImage src={iconUrl} alt="Author image" />}
+      {name && <AuthorName href={url}>{name}</AuthorName>}
     </Container>
   )
 }

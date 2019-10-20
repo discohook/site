@@ -27,8 +27,7 @@ type Props = {
 }
 
 export default function FieldEditor(props: Props) {
-  const { id: embedId } = props
-  const fields = Array.from(props.fields)
+  const { id: embedId, fields = [] } = props
 
   const addField = () => props.onChange([...fields, { [id]: getUniqueId() }])
 

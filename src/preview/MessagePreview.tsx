@@ -63,13 +63,8 @@ export default function MessagePreview(props: Props) {
         <MessageHeader username={username} avatarUrl={avatarUrl} />
         {content && <Markup content={content} jumboable />}
         {embeds &&
-          Array.from(embeds).map(embed => (
-            <RichEmbed embed={embed} key={embed[id]} />
-          ))}
-        {files &&
-          Array.from(files).map(file => (
-            <Attachment file={file} key={file.name} />
-          ))}
+          embeds.map(embed => <RichEmbed embed={embed} key={embed[id]} />)}
+        {files && files.map(file => <Attachment file={file} key={file.name} />)}
       </Container>
     </ScrollContainer>
   )

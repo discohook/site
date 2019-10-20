@@ -1,5 +1,6 @@
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
+import { useTheme } from "emotion-theming"
 import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
 
@@ -135,11 +136,15 @@ export default function MessageHeader(props: Props) {
     return () => clearInterval(interval)
   }, [])
 
+  const theme = useTheme<Theme>()
+
   return (
     <Container>
-      <Avatar src={String(avatarUrl)} alt="User avatar" />
+      {theme.display === "cozy" && !theme.mobile && (
+        <Avatar src={avatarUrl} alt="User avatar" />
+      )}
       <HeaderInfo>
-        <UserName>{String(username)}</UserName>
+        <UserName>{username}</UserName>
         <BotTag>BOT</BotTag>
         <Timestamp>{timestamp}</Timestamp>
       </HeaderInfo>

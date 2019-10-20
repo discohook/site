@@ -22,7 +22,7 @@ type Props = {
 }
 
 export default function EmbedEditor(props: Props) {
-  const embeds = Array.isArray(props.embeds) ? props.embeds : []
+  const { embeds = [] } = props
 
   const addEmbed = () => props.onChange([...embeds, { [id]: getUniqueId() }])
 
@@ -149,7 +149,7 @@ export default function EmbedEditor(props: Props) {
           />
           <ColorInput
             id={embed[id]}
-            value={embed.color}
+            color={embed.color}
             onChange={color =>
               modifyEmbed(index, {
                 ...embed,
