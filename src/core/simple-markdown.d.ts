@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unicorn/filename-case */
 
-type ReactNode = React.ReactNode
-
 declare module "simple-markdown" {
   namespace SimpleMarkdown {
     export type ASTNode = Record<string, any>
