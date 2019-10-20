@@ -44,6 +44,7 @@ export default function ColorInput(props: Props) {
       value={hex}
       onChange={setHex}
       label="Color"
+      placeholder="#rrggbb"
     />
   )
 }
