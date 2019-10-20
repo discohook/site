@@ -6,10 +6,12 @@ import { Theme } from "../core/themes"
 import { stringifyMessage } from "../json/convert"
 import JsonInput from "../json/JsonInput"
 import { FileLike } from "../message/FileLike"
-import { Message } from "../message/Message"
+import { Embed, Message } from "../message/Message"
+import { getUniqueId, id } from "../message/uid"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
 import InputField from "./InputField"
+import MultiEditor from "./MultiEditor"
 import {
   Action,
   ActionsContainer,
@@ -152,15 +154,23 @@ export default function Editor(props: Props) {
           multiline
           maxLength={2000}
         />
-        <EmbedEditor
-          embeds={message.embeds || []}
+        <MultiEditor<Embed>
+          items={message.embeds || []}
           onChange={embeds =>
             handleChange({
               ...message,
               embeds: embeds.length > 0 ? embeds : undefined,
             })
           }
-        />
+          name="embed"
+          limit={10}
+          factory={() => ({ [id]: getUniqueId() })}
+          keyMapper={embed => embed[id]}
+        >
+          {(embed, onChange) => (
+            <EmbedEditor embed={embed} onChange={onChange} />
+          )}
+        </MultiEditor>
         <Container direction="row">
           <InputField
             id="message-username"

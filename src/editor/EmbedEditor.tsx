@@ -6,168 +6,129 @@ import ColorInput from "./ColorInput"
 import FieldEditor from "./FieldEditor"
 import FooterEditor from "./FooterEditor"
 import InputField from "./InputField"
-import {
-  Action,
-  ActionsContainer,
-  ActionsHeader,
-  BoxContainer,
-  Button,
-  Container,
-  InputGroup,
-} from "./styles"
+import MultiEditor from "./MultiEditor"
+import { BoxContainer, InputGroup } from "./styles"
 
 type Props = {
-  embeds: Embed[]
-  onChange: (embeds: Embed[]) => void
+  embed: Embed
+  onChange: (embeds: Embed) => void
 }
 
 export default function EmbedEditor(props: Props) {
-  const { embeds = [] } = props
-
-  const addEmbed = () => props.onChange([...embeds, { [id]: getUniqueId() }])
-
-  const deleteEmbed = (index: number) =>
-    props.onChange([...embeds.slice(0, index), ...embeds.slice(index + 1)])
-
-  const moveEmbed = (from: number, to: number) => {
-    const newEmbeds = [...embeds]
-    newEmbeds.splice(to, 0, ...newEmbeds.splice(from, 1))
-    props.onChange(newEmbeds)
-  }
-
-  const modifyEmbed = (index: number, embed: Embed) =>
-    props.onChange([
-      ...embeds.slice(0, index),
-      embed,
-      ...embeds.slice(index + 1),
-    ])
-
-  const editors = embeds.map((embed, index) => (
-    <Container key={embed[id]}>
-      <ActionsContainer>
-        <ActionsHeader>Embed {index + 1}</ActionsHeader>
-        <Action onClick={() => deleteEmbed(index)}>Delete</Action>
-        {index > 0 && (
-          <Action onClick={() => moveEmbed(index, index - 1)}>Move up</Action>
-        )}
-        {embeds.length - index > 1 && (
-          <Action onClick={() => moveEmbed(index, index + 1)}>Move down</Action>
-        )}
-      </ActionsContainer>
-      <BoxContainer>
-        <InputGroup>
-          <InputField
-            id={`message-embed${embed[id]}-title`}
-            value={embed.title}
-            onChange={title =>
-              modifyEmbed(index, {
-                ...embed,
-                title: title || undefined,
-              })
-            }
-            label="Title"
-            maxLength={256}
-          />
-          <InputField
-            id={`message-embed${embed[id]}-url`}
-            value={embed.url}
-            onChange={url =>
-              modifyEmbed(index, {
-                ...embed,
-                url: url || undefined,
-              })
-            }
-            label="Title link"
-          />
-        </InputGroup>
-        <InputField
-          id={`message-embed${embed[id]}-description`}
-          value={embed.description}
-          onChange={description =>
-            modifyEmbed(index, {
-              ...embed,
-              description: description || undefined,
-            })
-          }
-          label="Description"
-          multiline
-          maxLength={2048}
-        />
-        <AuthorEditor
-          id={embed[id]}
-          author={embed.author}
-          onChange={author =>
-            modifyEmbed(index, {
-              ...embed,
-              author,
-            })
-          }
-        />
-        <FieldEditor
-          id={embed[id]}
-          fields={embed.fields || []}
-          onChange={fields =>
-            modifyEmbed(index, {
-              ...embed,
-              fields: fields.length > 0 ? fields : undefined,
-            })
-          }
-        />
-        <FooterEditor
-          id={embed[id]}
-          footer={embed.footer}
-          timestamp={embed.timestamp}
-          onChange={partial =>
-            modifyEmbed(index, {
-              ...embed,
-              ...partial,
-            })
-          }
-        />
-        <InputGroup>
-          <InputField
-            id={`message-embed${embed[id]}-image`}
-            value={(embed.image || {}).url}
-            onChange={url =>
-              modifyEmbed(index, {
-                ...embed,
-                image: url ? { url } : undefined,
-              })
-            }
-            label="Image"
-          />
-          <InputField
-            id={`message-embed${embed[id]}-thumbnail`}
-            value={(embed.thumbnail || {}).url}
-            onChange={url =>
-              modifyEmbed(index, {
-                ...embed,
-                thumbnail: url ? { url } : undefined,
-              })
-            }
-            label="Thumbnail"
-          />
-          <ColorInput
-            id={embed[id]}
-            color={embed.color}
-            onChange={color =>
-              modifyEmbed(index, {
-                ...embed,
-                color,
-              })
-            }
-          />
-        </InputGroup>
-      </BoxContainer>
-    </Container>
-  ))
+  const { embed, onChange: handleChange } = props
 
   return (
-    <Container>
-      {editors}
-      <Button disabled={embeds.length >= 10} onClick={addEmbed}>
-        Add embed
-      </Button>
-    </Container>
+    <BoxContainer>
+      <InputGroup>
+        <InputField
+          id={`message-embed${embed[id]}-title`}
+          value={embed.title}
+          onChange={title =>
+            handleChange({
+              ...embed,
+              title: title || undefined,
+            })
+          }
+          label="Title"
+          maxLength={256}
+        />
+        <InputField
+          id={`message-embed${embed[id]}-url`}
+          value={embed.url}
+          onChange={url =>
+            handleChange({
+              ...embed,
+              url: url || undefined,
+            })
+          }
+          label="Title link"
+        />
+      </InputGroup>
+      <InputField
+        id={`message-embed${embed[id]}-description`}
+        value={embed.description}
+        onChange={description =>
+          handleChange({
+            ...embed,
+            description: description || undefined,
+          })
+        }
+        label="Description"
+        multiline
+        maxLength={2048}
+      />
+      <AuthorEditor
+        id={embed[id]}
+        author={embed.author}
+        onChange={author =>
+          handleChange({
+            ...embed,
+            author,
+          })
+        }
+      />
+      <MultiEditor
+        items={embed.fields || []}
+        onChange={fields =>
+          handleChange({
+            ...embed,
+            fields: fields.length > 0 ? fields : undefined,
+          })
+        }
+        name="field"
+        limit={25}
+        factory={() => ({ [id]: getUniqueId() })}
+        keyMapper={field => field[id]}
+      >
+        {(field, onChange) => (
+          <FieldEditor id={embed[id]} field={field} onChange={onChange} />
+        )}
+      </MultiEditor>
+      <FooterEditor
+        id={embed[id]}
+        footer={embed.footer}
+        timestamp={embed.timestamp}
+        onChange={partial =>
+          handleChange({
+            ...embed,
+            ...partial,
+          })
+        }
+      />
+      <InputGroup>
+        <InputField
+          id={`message-embed${embed[id]}-image`}
+          value={(embed.image || {}).url}
+          onChange={url =>
+            handleChange({
+              ...embed,
+              image: url ? { url } : undefined,
+            })
+          }
+          label="Image"
+        />
+        <InputField
+          id={`message-embed${embed[id]}-thumbnail`}
+          value={(embed.thumbnail || {}).url}
+          onChange={url =>
+            handleChange({
+              ...embed,
+              thumbnail: url ? { url } : undefined,
+            })
+          }
+          label="Thumbnail"
+        />
+        <ColorInput
+          id={embed[id]}
+          color={embed.color}
+          onChange={color =>
+            handleChange({
+              ...embed,
+              color,
+            })
+          }
+        />
+      </InputGroup>
+    </BoxContainer>
   )
 }
