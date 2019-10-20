@@ -65,9 +65,7 @@ export default function FooterEditor(props: Props) {
       {supportsDateTimeInput ? (
         <InputField
           id={`message-embed${embedId}-footer-timestamp`}
-          value={
-            timestamp && new Date(timestamp).toISOString().replace("Z", "")
-          }
+          value={timestamp && new Date(timestamp).toISOString().slice(0, -1)}
           onChange={timestamp =>
             handleChange({
               footer,
@@ -82,14 +80,15 @@ export default function FooterEditor(props: Props) {
       ) : (
         <InputField
           id={`message-embed${embedId}-footer-timestamp`}
-          value={timestamp}
+          value={timestamp && timestamp.replace(/[a-z]/gi, " ").slice(0, -8)}
           onChange={timestamp =>
             handleChange({
               footer,
-              timestamp,
+              timestamp: `${timestamp.replace(/\s/g, "T")}:00.000Z`,
             })
           }
-          label="Timestamp (ISO 8601)"
+          label="Timestamp (UTC)"
+          placeholder="YYYY-MM-DD hh:mm"
         />
       )}
     </InputGroup>
