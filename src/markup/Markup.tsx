@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { memo } from "react"
 import { parseMarkup } from "./parseMarkup"
 import { MarkupContainer } from "./styles"
 
@@ -8,12 +8,12 @@ type Props = {
   jumboable?: boolean
 }
 
-export default function Markup(props: Props) {
+function Markup(props: Props) {
   const { content, ...options } = props
 
-  const markup = useMemo(() => {
-    return parseMarkup(content.trim(), options)
-  }, [content, options])
-
-  return <MarkupContainer>{markup}</MarkupContainer>
+  return (
+    <MarkupContainer>{parseMarkup(content.trim(), options)}</MarkupContainer>
+  )
 }
+
+export default memo(Markup)
