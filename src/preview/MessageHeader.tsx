@@ -16,6 +16,12 @@ const Container = styled.div<{}, Theme>`
       display: inline-flex;
       margin: 0 0 0 -9ch;
     `}
+
+  ${({ theme }) =>
+    theme.mobile &&
+    css`
+      margin: 0;
+    `}
 `
 
 const Avatar = styled.img<{}, Theme>`
