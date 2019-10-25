@@ -192,10 +192,6 @@ const blockRules: Rules = {
   ...baseRules,
   newline: defaultRules.newline,
   paragraph: defaultRules.paragraph,
-  br: {
-    ...defaultRules.br,
-    match: anyScopeRegex(/^ *\n/),
-  },
   codeBlock: {
     order: defaultRules.codeBlock.order,
     // eslint-disable-next-line unicorn/no-unsafe-regex
