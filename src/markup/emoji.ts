@@ -1,29 +1,31 @@
 import { diversities, emojis } from "./emojis"
 
-export const nameToEmoji: Record<string, string> = {}
-export const emojiToName: Record<string, string> = {}
+const nameToEmoji = new Map<string, string>()
+const emojiToName = new Map<string, string>()
 
 for (const { emoji, names, hasDiversity } of emojis) {
-  emojiToName[emoji] = names[0]
-
   for (const name of names) {
-    nameToEmoji[name] = emoji
+    nameToEmoji.set(name, emoji)
 
-    if (hasDiversity) {
-      for (const [id, diversity] of Object.entries(diversities)) {
-        const nameWithDiversity = `${name}::skin-tone-${Number(id) + 1}`
-        nameToEmoji[nameWithDiversity] = `${emoji}${diversity}`
-      }
+    if (!hasDiversity) continue
+
+    for (const [id, diversity] of Object.entries(diversities)) {
+      const nameWithDiversity = `${name}::skin-tone-${Number(id) + 1}`
+      nameToEmoji.set(nameWithDiversity, `${emoji}${diversity}`)
     }
   }
 
-  if (hasDiversity) {
-    for (const [id, diversity] of Object.entries(diversities)) {
-      const name = `${names[0]}::skin-tone-${Number(id) + 1}`
-      emojiToName[`${emoji}${diversity}`] = name
-    }
+  emojiToName.set(emoji, names[0])
+
+  if (!hasDiversity) continue
+
+  for (const [id, diversity] of Object.entries(diversities)) {
+    const name = `${names[0]}::skin-tone-${Number(id) + 1}`
+    emojiToName.set(`${emoji}${diversity}`, name)
   }
 }
+
+export { nameToEmoji, emojiToName }
 
 export const getEmojiUrl = (emoji: string) => {
   if (["™", "©", "®"].includes(emoji)) return

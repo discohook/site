@@ -24,10 +24,10 @@ import {
 } from "./styles"
 
 const emojiRegex = new RegExp(
-  Object.keys(emojiToName)
+  Array.from(emojiToName.keys())
     .join("|")
+    // Asterisk emoji starts with an asterisk and must be escaped
     .replace("*", "\\*"),
-  // Asterisk emoji starts with an asterisk and must be escaped
   "g",
 )
 
@@ -72,11 +72,11 @@ const baseRules: Rules = {
     order: defaultRules.text.order,
     match: inlineRegex(/^:([^\s:]+?(?:::skin-tone-\d)?):/),
     parse: capture =>
-      nameToEmoji[capture[1]]
+      nameToEmoji.get(capture[1])
         ? {
             name: capture[1],
-            surrogate: nameToEmoji[capture[1]],
-            src: getEmojiUrl(nameToEmoji[capture[1]]),
+            surrogate: nameToEmoji.get(capture[1]),
+            src: getEmojiUrl(nameToEmoji.get(capture[1]) || ""),
           }
         : {
             type: "text",
@@ -123,7 +123,10 @@ const baseRules: Rules = {
             content: capture[0],
           }
         : parse(
-            capture[0].replace(emojiRegex, emoji => `:${emojiToName[emoji]}:`),
+            capture[0].replace(
+              emojiRegex,
+              emoji => `:${emojiToName.get(emoji)}:`,
+            ),
             { ...state, nested: true },
           ),
   },
