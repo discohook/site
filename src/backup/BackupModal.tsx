@@ -138,7 +138,7 @@ export default function BackupModal(props: Props) {
           </Item>
         ))}
       </List>
-      <Container direction="row">
+      <Container flow="row">
         <InputField
           id="backup-name"
           value={newBackupName}

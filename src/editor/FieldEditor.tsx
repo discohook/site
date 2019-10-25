@@ -23,7 +23,7 @@ export default function FieldEditor(props: Props) {
 
   return (
     <BoxContainer>
-      <Container direction="row">
+      <Container flow="row">
         <InputField
           id={`message-embed${embedId}-field${field[id]}-name`}
           value={field.name}

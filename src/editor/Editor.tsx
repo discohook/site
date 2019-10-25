@@ -129,7 +129,7 @@ export default function Editor(props: Props) {
           )}
           <Action onClick={clearAll}>Clear all</Action>
         </EditorActionsContainer>
-        <Container direction="row">
+        <Container flow="row">
           <InputField
             id="webhook-url"
             value={webhookUrl}
@@ -171,7 +171,7 @@ export default function Editor(props: Props) {
             <EmbedEditor embed={embed} onChange={onChange} />
           )}
         </MultiEditor>
-        <Container direction="row">
+        <Container flow="row">
           <InputField
             id="message-username"
             value={message.username}

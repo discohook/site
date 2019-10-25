@@ -7,10 +7,10 @@ type SC<Tag extends keyof JSX.IntrinsicElements> = StyledComponent<
   Theme
 >
 
-export const Container = styled.div<{ direction?: "column" | "row" }, Theme>`
+export const Container = styled.div<{ flow?: "column" | "row" }, Theme>`
   display: flex;
-  flex-direction: ${({ direction }) => direction || "column"};
-  flex-wrap: ${({ direction }) => (direction === "row" ? "wrap" : "nowrap")};
+  flex-direction: ${({ flow }) => flow || "column"};
+  flex-wrap: ${({ flow }) => (flow === "row" ? "wrap" : "nowrap")};
 
   & > *:not(button) {
     flex-grow: 1;

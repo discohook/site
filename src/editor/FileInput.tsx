@@ -59,7 +59,7 @@ export default function FileInput(props: Props) {
   return (
     <Container>
       <InputLabel htmlFor="file">Files</InputLabel>
-      <Container direction="row">
+      <Container flow="row">
         <InputContainer>
           <FakeInput>{files.map(file => file.name).join(", ")}</FakeInput>
           <HiddenInput
