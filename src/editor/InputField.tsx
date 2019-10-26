@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react"
 import {
   Container,
+  InputContainer,
   InputLabel,
   InputNote,
   MultilineTextInput,
@@ -34,30 +35,27 @@ export default function InputField(props: Props) {
 
   const Input = multiline ? MultilineTextInput : TextInput
 
-  const state =
-    !maxLength || value.length / maxLength < 0.9
-      ? "normal"
-      : value.length / maxLength > 1
-      ? "error"
-      : "warning"
+  let state: "normal" | "warning" | "error" = "normal"
+  if (value.length / (maxLength || 0) > 0.9) state = "warning"
+  if (value.length / (maxLength || 0) > 1) state = "error"
 
   return (
-    <Container>
-      <InputLabel htmlFor={id}>
-        {label}
-        <Input
-          id={id}
-          value={value}
-          onChange={(event: Event) => handleChange(event.target.value)}
-          type={type}
-          placeholder={placeholder}
-        />
-      </InputLabel>
-      {maxLength && (
-        <InputNote state={state}>
-          {value.length} / {maxLength}
-        </InputNote>
-      )}
-    </Container>
+    <InputContainer>
+      <Container flow="row">
+        <InputLabel htmlFor={id}>{label}</InputLabel>
+        {maxLength && (
+          <InputNote state={state}>
+            {value.length} / {maxLength}
+          </InputNote>
+        )}
+      </Container>
+      <Input
+        id={id}
+        value={value}
+        onChange={(event: Event) => handleChange(event.target.value)}
+        type={type}
+        placeholder={placeholder}
+      />
+    </InputContainer>
   )
 }

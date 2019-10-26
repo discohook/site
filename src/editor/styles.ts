@@ -41,11 +41,13 @@ export const InputGroup = styled.div`
   }
 `
 
-export const InputLabel = styled.label`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 4px 8px 0;
 `
+
+export const InputLabel = styled.label``
 
 export const TextInput = styled.input<{}, Theme>`
   padding: 6px 8px;
@@ -71,17 +73,19 @@ export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
 
 type InputNoteProps = { state: "normal" | "warning" | "error" }
 export const InputNote = styled.div<InputNoteProps, Theme>`
-  align-self: flex-end;
-  margin: 0 10px 0 0;
+  && {
+    flex-grow: 0;
+    margin: 3px 1px 0 0;
 
-  font-size: 13px;
-  font-weight: 500;
+    font-size: 13px;
+    font-weight: 500;
 
-  color: ${({ theme, state }) => {
-    if (state === "error") return theme.red
-    if (state === "warning") return theme.yellow
-    if (state === "normal") return theme.text
-  }};
+    color: ${({ theme, state }) => {
+      if (state === "error") return theme.red
+      if (state === "warning") return theme.yellow
+      if (state === "normal") return theme.text
+    }};
+  }
 `
 
 export const Button = styled.button<{}, Theme>`

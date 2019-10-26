@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
 import {
   Button,
-  Container,
+  InputContainer,
   InputLabel,
   MultilineTextInput,
 } from "../editor/styles"
@@ -11,8 +11,8 @@ import { Message } from "../message/Message"
 import { parseMessage, stringifyMessage } from "./convert"
 
 const ErrorContainer = styled.div`
-  margin: 8px 8px 0;
-  padding: 8px 16px;
+  margin: 8px 0 0;
+  padding: 8px 12px;
 
   background: #f04747;
   border-radius: 3px;
@@ -30,14 +30,14 @@ const Error = styled.div<{}, Theme>`
 
 const CodeInput = styled(MultilineTextInput)<{}, Theme>`
   min-height: 240px;
-  margin: 8px;
 
   font-size: 14px;
   font-family: ${({ theme }) => theme.fonts.mono};
 `
 
 const SubmitButton = styled(Button)<{}, Theme>`
-  margin: 8px 8px 16px;
+  margin: 8px 0 16px;
+  align-self: flex-end;
 `
 
 type Props = {
@@ -70,7 +70,7 @@ export default function JsonInput(props: Props) {
   }, [json])
 
   return (
-    <Container>
+    <InputContainer>
       <InputLabel htmlFor="json">JSON data</InputLabel>
       {errors.length > 0 && (
         <ErrorContainer>
@@ -90,6 +90,6 @@ export default function JsonInput(props: Props) {
       >
         Submit
       </SubmitButton>
-    </Container>
+    </InputContainer>
   )
 }

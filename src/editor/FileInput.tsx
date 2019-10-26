@@ -1,11 +1,18 @@
 import styled from "@emotion/styled"
 import React, { useRef } from "react"
 import { FileLike } from "../message/FileLike"
-import { Button, Container, InputLabel, InputNote, TextInput } from "./styles"
+import {
+  Button,
+  Container,
+  InputContainer,
+  InputLabel,
+  InputNote,
+  TextInput,
+} from "./styles"
 
-const InputContainer = styled.div`
+const FileInputContainer = styled.div`
   position: relative;
-  margin: 0 8px;
+  margin: 0 8px 0 0;
 `
 
 const FakeInput = styled(TextInput.withComponent("div"))`
@@ -23,6 +30,11 @@ const HiddenInput = styled.input`
   width: 100%;
 
   opacity: 0;
+`
+HiddenInput.defaultProps = { type: "file", multiple: true }
+
+const RemoveFilesButton = styled(Button)`
+  margin-right: 0;
 `
 
 type Props = {
@@ -53,29 +65,29 @@ export default function FileInput(props: Props) {
   }
 
   const filesAvailable =
-    files.length === 0 ||
-    files.every(f => !process.env.SSR && f instanceof File)
+    !process.env.SSR &&
+    (files.length === 0 || files.every(f => f instanceof File))
 
   return (
-    <Container>
-      <InputLabel htmlFor="file">Files</InputLabel>
+    <InputContainer>
       <Container flow="row">
-        <InputContainer>
+        <InputLabel htmlFor="file">Files</InputLabel>
+        {!filesAvailable && (
+          <InputNote state="error">Files are unavailable</InputNote>
+        )}
+      </Container>
+      <Container flow="row">
+        <FileInputContainer>
           <FakeInput>{files.map(file => file.name).join(", ")}</FakeInput>
           <HiddenInput
             id="file"
-            type="file"
-            multiple
             onClick={() => fakeFiles()}
             onChange={event => handleChange([...event.target.files])}
             ref={inputRef}
           />
-        </InputContainer>
-        <Button onClick={clearFiles}>Remove files</Button>
+        </FileInputContainer>
+        <RemoveFilesButton onClick={clearFiles}>Remove files</RemoveFilesButton>
       </Container>
-      {!filesAvailable && (
-        <InputNote state="error">Files are unavailable</InputNote>
-      )}
-    </Container>
+    </InputContainer>
   )
 }
