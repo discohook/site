@@ -34,7 +34,7 @@ const HiddenInput = styled.input`
 HiddenInput.defaultProps = { type: "file", multiple: true }
 
 const RemoveFilesButton = styled(Button)`
-  margin-right: 0;
+  margin: 8px 0 8px 8px;
 `
 
 type Props = {

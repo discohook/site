@@ -91,7 +91,7 @@ export const InputNote = styled.div<InputNoteProps, Theme>`
 export const Button = styled.button<{}, Theme>`
   min-height: 32px;
   max-height: 32px;
-  margin: 8px;
+  margin: 4px 8px 8px;
   padding: 0 10px;
 
   background: transparent;

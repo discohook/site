@@ -36,7 +36,7 @@ const CodeInput = styled(MultilineTextInput)<{}, Theme>`
 `
 
 const SubmitButton = styled(Button)<{}, Theme>`
-  margin: 8px 0 16px;
+  margin: 4px 0 16px;
   align-self: flex-end;
 `
 
