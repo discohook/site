@@ -84,7 +84,9 @@ export default function FooterEditor(props: Props) {
           onChange={timestamp =>
             handleChange({
               footer,
-              timestamp: `${timestamp.replace(/\s/g, "T")}:00.000Z`,
+              timestamp: timestamp
+                ? `${timestamp.replace(/[^0-9\-:]/g, "T")}:00.000Z`
+                : undefined,
             })
           }
           label="Timestamp (UTC)"
