@@ -107,7 +107,7 @@ export const initialMessage: Message = applyIds({
         "This is to make visuals as accurate as possible, and not to infringe on their copyright.",
         "Discohook is not affiliated with Discord in any way, shape, or form.",
         "",
-        "The source code of this project is available on [GitHub](https://github.com/jaylineko/discohook), under the MIT license.",
+        "The source code of this project is [available on GitHub](https://github.com/jaylineko/discohook), under the MIT license.",
       ].join("\n"),
     },
   ],
