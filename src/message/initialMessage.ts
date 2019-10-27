@@ -47,7 +47,8 @@ export const initialMessage: Message = applyIds({
         [
           "Also, this should be obvious by now, this supports",
           "Discord's flavour of [__***markdown***__](https://support.discordapp.com/hc/en-us/articles/210298617),",
-          "including ||[spoiler tags](https://support.discordapp.com/hc/en-us/articles/360022320632)||",
+          "including ||[spoiler tags](https://support.discordapp.com/hc/en-us/articles/360022320632)||,",
+          "users/roles/channels/emotes using [the syntax mentioned here](https://discordapp.com/developers/docs/reference#message-formatting-formats),",
           "and masked links like this: `[Cool embed builder](https://discohook.jaylineko.com/)`.",
         ].join(" "),
       ].join("\n"),
