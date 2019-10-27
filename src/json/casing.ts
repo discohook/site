@@ -2,7 +2,7 @@ const isObject = (x: unknown) => typeof x === "object" && x !== null
 
 const mapKeys = (object: object, fn: (key: string) => string): object => {
   if (Array.isArray(object)) {
-    return object.map(x => (isObject(x) ? mapKeys(x, fn) : x))
+    return object.map(value => (isObject(value) ? mapKeys(value, fn) : value))
   }
 
   const result: Record<string, unknown> = {}

@@ -9,9 +9,12 @@ export const stringifyMessage = (message: Message) => {
 }
 
 export const parseMessage = (json: string) => {
-  const { value: parsedJson, error: jsonError } = parseJson(json)
+  const { value: parsedJson, error } = parseJson(json)
 
-  if (jsonError) return { errors: [jsonError] }
+  if (error) return { errors: [error] }
+  if (typeof parsedJson !== "object" || parsedJson === null) {
+    return { errors: [] }
+  }
 
   const camelCase = toCamelCase(parsedJson)
 

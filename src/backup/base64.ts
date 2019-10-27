@@ -5,8 +5,8 @@ export const base64Encode = (data: string) => {
 
   const encoded = encodeURIComponent(data)
 
-  const escaped = encoded.replace(/%([0-9A-F]{2})/g, (_, hex) => {
-    return String.fromCharCode(parseInt(hex, 16))
+  const escaped = encoded.replace(/%[0-9A-F]{2}/g, hex => {
+    return String.fromCharCode(parseInt(hex.slice(1), 16))
   })
 
   return btoa(escaped)
