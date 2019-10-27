@@ -59,7 +59,7 @@ export default function JsonInput(props: Props) {
 
     const errors = rawErrors.filter(
       error =>
-        error !== "$: Expected one of following keys: 'content', 'embeds'",
+        error !== '$: Expected one of following keys: "content", "embeds"',
     )
 
     setErrors(errors)
