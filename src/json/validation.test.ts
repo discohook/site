@@ -187,6 +187,7 @@ describe("validation", () => {
   })
 
   it("validates discord objects", () => {
+    /* eslint-disable @typescript-eslint/camelcase */
     const objects = {
       isAuthor: {
         valid: [
@@ -194,21 +195,21 @@ describe("validation", () => {
           { name: "Me", url: "https://example.com/" },
           {
             name: "Me",
-            iconUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            icon_url: "https://cdn.discordapp.com/embed/avatars/0.png",
           },
           {
             name: "Me",
             url: "https://example.com/",
-            iconUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            icon_url: "https://cdn.discordapp.com/embed/avatars/0.png",
           },
         ],
         invalid: [
           {},
           { url: "https://example.com/" },
-          { iconUrl: "https://cdn.discordapp.com/embed/avatars/0.png" },
+          { icon_url: "https://cdn.discordapp.com/embed/avatars/0.png" },
           {
             url: "https://example.com/",
-            iconUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            icon_url: "https://cdn.discordapp.com/embed/avatars/0.png",
           },
           { name: "" },
         ],
@@ -218,12 +219,12 @@ describe("validation", () => {
           { text: "Footnote" },
           {
             text: "Footnote",
-            iconUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            icon_url: "https://cdn.discordapp.com/embed/avatars/0.png",
           },
         ],
         invalid: [
           {},
-          { iconUrl: "https://cdn.discordapp.com/embed/avatars/0.png" },
+          { icon_url: "https://cdn.discordapp.com/embed/avatars/0.png" },
           { text: "" },
         ],
       },
@@ -281,27 +282,27 @@ describe("validation", () => {
           { embeds: [{ description: "Embed" }] },
           { username: "Someone", content: "Hey" },
           {
-            avatarUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png",
             content: "Hey",
           },
           {
             username: "Someone",
-            avatarUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png",
             content: "Hey",
           },
           {
             username: "A robot",
-            avatarUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png",
             embeds: [{ description: "Test" }],
           },
         ],
         invalid: [
           {},
           { username: "Someone" },
-          { avatarUrl: "https://cdn.discordapp.com/embed/avatars/0.png" },
+          { avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png" },
           {
             username: "Someone",
-            avatarUrl: "https://cdn.discordapp.com/embed/avatars/0.png",
+            avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png",
           },
           { content: "" },
           { embeds: [] },

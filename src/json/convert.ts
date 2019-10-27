@@ -11,21 +11,16 @@ export const stringifyMessage = (message: Message) => {
 export const parseMessage = (json: string) => {
   const { value: parsedJson, error } = parseJson(json)
 
-  if (error) return { errors: [error] }
+  if (error) {
+    return { errors: [error] }
+  }
+
   if (typeof parsedJson !== "object" || parsedJson === null) {
     return { errors: [] }
   }
 
-  const camelCase = toCamelCase(parsedJson)
-
-  const errors = isMessage(camelCase, "$").map(error => {
-    const [, key, message] = /(.*?): (.*)/.exec(error)
-    const snakeCaseKey = key.replace(/[A-Z]/g, m => `_${m.toLowerCase()}`)
-    return `${snakeCaseKey}: ${message}`
-  })
-
   return {
-    message: applyIds(camelCase),
-    errors,
+    message: applyIds(toCamelCase(parsedJson)),
+    errors: isMessage(parsedJson, "$"),
   }
 }

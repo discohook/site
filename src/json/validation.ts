@@ -103,12 +103,14 @@ export const between = (min: number, max: number): Validator =>
       : [],
   )
 
+/* eslint-disable @typescript-eslint/camelcase */
+
 export const isAuthor: Validator = first(
   requiresKey("name"),
   isShape({
     name: first(isString, length(1, 256)),
     url: optional(isString),
-    iconUrl: optional(isString),
+    icon_url: optional(isString),
   }),
 )
 
@@ -116,7 +118,7 @@ export const isFooter: Validator = first(
   requiresKey("text"),
   isShape({
     text: first(isString, length(1, 2048)),
-    iconUrl: optional(isString),
+    icon_url: optional(isString),
   }),
 )
 
@@ -162,6 +164,6 @@ export const isMessage: Validator = first(
     content: optional(first(isString, length(1, 2000))),
     embeds: optional(first(isArray, length(1, 10), contains(isEmbed))),
     username: optional(first(isString, length(1, 256))),
-    avatarUrl: optional(isString),
+    avatar_url: optional(isString),
   }),
 )
