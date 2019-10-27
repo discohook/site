@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node ./dist/main.js",
     "build": "pnpm run build-client && pnpm run build-server",
-    "build-client": "cross-env NODE_ENV=production webpack --config webpack.client.js",
-    "build-server": "cross-env NODE_ENV=production webpack --config webpack.server.js",
+    "build:client": "cross-env NODE_ENV=production webpack --config webpack.client.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config webpack.server.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.client.js",
     "test": "cross-env TZ=UTC jest --config .jestrc.json",
     "test:watch": "cross-env TZ=UTC jest --config .jestrc.json --watch",
