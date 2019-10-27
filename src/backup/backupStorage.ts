@@ -17,7 +17,8 @@ let database!: IDBDatabase
 databasePromise
   .then(idb => (database = idb))
   .catch(error => {
-    if (!error) return // If indexedDB is not defined
+    // If indexedDB is not defined
+    if (!error) return
     console.error("Error opening database:", error)
   })
 
@@ -44,7 +45,8 @@ export const getBackups = async () => {
   const keys: IDBValidKey[] = []
 
   await runTransaction("readonly", store => {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
+    /* eslint-disable @typescript-eslint/unbound-method */
+    /* eslint-disable @typescript-eslint/no-unnecessary-condition */
     const request = (store.openKeyCursor || store.openCursor).call(store)
 
     request.addEventListener("success", () => {
@@ -67,7 +69,8 @@ export const setBackup = async (name: string, backup: Backup) => {
 
 export const getBackup = async (name: string) => {
   const request = await runTransaction("readonly", store => store.get(name))
-  const backup: Backup = request.result
+  const backup: Backup | undefined = request.result
+  if (!backup) return
 
   backup.message = applyIds(backup.message)
 

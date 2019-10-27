@@ -79,7 +79,7 @@ export const initialMessage: Message = applyIds({
         text: "Even a footer, with an optional icon and timestamp",
         iconUrl: "https://cdn.discordapp.com/embed/avatars/4.png",
       },
-      timestamp: "2019-04-22T11:02:04.000Z", // GitHub repo creation date
+      timestamp: "2019-04-22T11:02:04.000Z",
       color: 15746887,
       thumbnail: {
         url: "https://cdn.discordapp.com/embed/avatars/4.png",

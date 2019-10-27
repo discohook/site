@@ -1,4 +1,4 @@
-const isObject = (x: unknown) => typeof x === "object" && x !== null
+const isObject = (value: unknown) => typeof value === "object" && value !== null
 
 const mapKeys = (object: object, fn: (key: string) => string): object => {
   if (Array.isArray(object)) {
@@ -19,7 +19,11 @@ const mapKeys = (object: object, fn: (key: string) => string): object => {
 }
 
 export const toSnakeCase = (object: object) =>
-  mapKeys(object, key => key.replace(/[A-Z]/g, m => `_${m.toLowerCase()}`))
+  mapKeys(object, key =>
+    key.replace(/[A-Z]/g, match => `_${match.toLowerCase()}`),
+  )
 
 export const toCamelCase = (object: object) =>
-  mapKeys(object, key => key.replace(/_[a-z]/g, m => m[1].toUpperCase()))
+  mapKeys(object, key =>
+    key.replace(/_[a-z]/g, match => match.slice(1).toUpperCase()),
+  )

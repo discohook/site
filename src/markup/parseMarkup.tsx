@@ -54,7 +54,7 @@ const baseRules: Rules = {
   url: defaultRules.url,
   strong: defaultRules.strong,
   em: defaultRules.em,
-  u: defaultRules.u,
+  underline: defaultRules.u,
   inlineCode: {
     ...defaultRules.inlineCode,
     react: (node, _, state) => <Code key={state.key}>{node.content}</Code>,
@@ -149,7 +149,8 @@ const baseRules: Rules = {
     match: (source, state, previous) =>
       !/^$|\n *$/.test(previous) || state.inQuote || state.nested
         ? null
-        : // eslint-disable-next-line unicorn/no-unsafe-regex
+        : // eslint-disable-line operator-linebreak
+          // eslint-disable-next-line unicorn/no-unsafe-regex
           /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
             source,
           ),
@@ -255,7 +256,7 @@ export const parseMarkup = (
   content: string,
   options: { inline?: boolean; jumboable?: boolean },
 ) => {
-  const { inline = false, jumboable = false } = options || {}
+  const { inline = false, jumboable = false } = options
 
   const startTime = now()
 

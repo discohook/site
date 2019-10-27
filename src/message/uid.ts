@@ -1,4 +1,4 @@
-let nextId = 1
-export const getUniqueId = () => nextId++
+let lastId = 0
+export const getUniqueId = () => (lastId += 1)
 
 export const id = Symbol.for("id")

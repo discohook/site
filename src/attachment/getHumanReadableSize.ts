@@ -5,7 +5,7 @@ export const getHumanReadableSize = (bytes: number) => {
   let number = bytes
 
   while (number >= 1024 && unit < units.length - 1) {
-    unit++
+    unit += 1
     number /= 1024
   }
 

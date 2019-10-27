@@ -66,7 +66,7 @@ export default function FileInput(props: Props) {
 
   const filesAvailable =
     !process.env.SSR &&
-    (files.length === 0 || files.every(f => f instanceof File))
+    (files.length === 0 || files.every(file => file instanceof File))
 
   return (
     <InputContainer>

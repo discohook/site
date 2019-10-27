@@ -117,7 +117,9 @@ describe("validation", () => {
     ).toHaveLength(0)
 
     // Ignore excessive keys
-    expect(isShape({ a: isString })({ a: "A", b: "B" }, "$")).toHaveLength(0)
+    expect(
+      isShape({ foo: isString })({ foo: "A", bar: "B" }, "$"),
+    ).toHaveLength(0)
 
     // Fail on missing key
     expect(isShape({ key: isString })({}, "$")).not.toHaveLength(0)

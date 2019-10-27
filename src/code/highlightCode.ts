@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+
 import { aliases } from "./aliases"
 import { hljs } from "./hljs"
 import { importLanguage } from "./importLanguage"

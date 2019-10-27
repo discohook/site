@@ -30,7 +30,10 @@ export { nameToEmoji, emojiToName }
 export const getEmojiUrl = (emoji: string) => {
   if (["™", "©", "®"].includes(emoji)) return
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const file = [...emoji].map(c => c.codePointAt(0)!.toString(16)).join("-")
+  const file = [...emoji]
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    .map(char => char.codePointAt(0)!.toString(16))
+    .join("-")
+
   return `https://jaylineko.github.io/discord-emoji/${file}.svg`
 }

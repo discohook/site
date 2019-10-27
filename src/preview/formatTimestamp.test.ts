@@ -22,12 +22,18 @@ describe("formatTimestamp", () => {
 
   it.each([
     "",
-    "2019-04-22T11:02:04.000", // Missing 'Z'
-    "2019-04-22T11:02:04Z", // Missing ms
-    "2019-04-22T11:02", // Missing seconds
-    "2019-04-22", // Missing time
-    "2019-4-22T11:02:04.000Z", // Missing leading zeroes in date
-    "2019-04-22T11:2:4.0Z", // Missing leading zeroes in time
+    // Missing 'Z'
+    "2019-04-22T11:02:04.000",
+    // Missing ms
+    "2019-04-22T11:02:04Z",
+    // Missing seconds
+    "2019-04-22T11:02",
+    // Missing time
+    "2019-04-22",
+    // Missing leading zeroes in date
+    "2019-4-22T11:02:04.000Z",
+    // Missing leading zeroes in time
+    "2019-04-22T11:2:4.0Z",
   ])("returns invalid on bad timestamps (%p)", input => {
     expect(formatTimestamp(input)).toEqual("Invalid date")
   })

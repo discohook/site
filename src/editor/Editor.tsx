@@ -77,7 +77,7 @@ export default function Editor(props: Props) {
     const formData = new FormData()
     formData.append("payload_json", stringifyMessage(message))
 
-    if (files && files.every(f => f instanceof File)) {
+    if (files.every(file => file instanceof File)) {
       for (const [index, file] of files.entries()) {
         formData.append(`file[${index}]`, file as File, file.name)
       }
@@ -104,7 +104,7 @@ export default function Editor(props: Props) {
     const { content, embeds } = message
     if (typeof content === "string") return false
     if (embeds && embeds.length !== 0) return false
-    if (files && files.length !== 0) return false
+    if (files.length !== 0) return false
 
     return true
   }, [files, message, sending, webhookUrl])

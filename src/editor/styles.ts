@@ -83,7 +83,7 @@ export const InputNote = styled.div<InputNoteProps, Theme>`
     color: ${({ theme, state }) => {
       if (state === "error") return theme.red
       if (state === "warning") return theme.yellow
-      if (state === "normal") return theme.text
+      return theme.text
     }};
   }
 `

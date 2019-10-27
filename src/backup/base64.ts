@@ -16,14 +16,14 @@ export const base64Encode = (data: string) => {
 }
 
 export const base64Decode = (base64: string) => {
-  const b64 = base64.replace(/-/g, "+").replace(/_/g, "/")
+  const data = base64.replace(/-/g, "+").replace(/_/g, "/")
 
   if (process.env.SSR) {
-    return Buffer.from(b64, "base64").toString("binary")
+    return Buffer.from(data, "base64").toString("binary")
   }
 
   try {
-    const encoded = atob(b64)
+    const encoded = atob(data)
       .split("")
       .map(char => char.charCodeAt(0).toString(16))
       .map(hex => `%${hex.padStart(2, "0").slice(-2)}`)
