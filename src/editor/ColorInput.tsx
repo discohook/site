@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import InputField from "./InputField"
 
-const numberToHex = (number: Color): string =>
+export const numberToHex = (number: Color): string =>
   typeof number === "number" ? `#${number.toString(16).padStart(6, "0")}` : ""
 
-const hexToNumber = (hex: string): Color => parseInt(hex.slice(1), 16)
+export const hexToNumber = (hex: string): Color => parseInt(hex.slice(1), 16)
 
 type Color = number | null | undefined
 
@@ -42,7 +42,7 @@ export default function ColorInput(props: Props) {
     <InputField
       id={`message-embed${id}-color`}
       value={hex}
-      onChange={setHex}
+      onChange={color => setHex(color.toLowerCase())}
       label="Color"
       placeholder="#rrggbb"
     />
