@@ -95,7 +95,6 @@
     "no-script-url": "warn",
     "no-self-assign": "warn",
     "no-self-compare": "warn",
-    "no-sequences": "warn",
     "no-throw-literal": "warn",
     "no-unmodified-loop-condition": "warn",
     "no-unused-expressions": "warn",
