@@ -12,7 +12,7 @@ type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
 type Props = {
   id: string
-  value?: string
+  value: string | undefined
   onChange: (value: string) => void
   label: string
   type?: string
@@ -44,7 +44,11 @@ export default function InputField(props: Props) {
       <Container flow="row">
         <InputLabel htmlFor={id}>{label}</InputLabel>
         {maxLength && (
-          <InputNote state={state}>
+          <InputNote
+            data-testid="input-length"
+            data-teststate={state}
+            state={state}
+          >
             {value.length} / {maxLength}
           </InputNote>
         )}
