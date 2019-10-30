@@ -38,6 +38,7 @@ devDependencies:
   babel-jest: 24.9.0_@babel+core@7.6.4
   babel-loader: 8.0.6_@babel+core@7.6.4+webpack@4.41.2
   babel-plugin-emotion: 10.0.22
+  babel-plugin-react-remove-properties: 0.3.0
   clean-webpack-plugin: 3.0.0_webpack@4.41.2
   copy-webpack-plugin: 5.0.4_webpack@4.41.2
   cross-env: 6.0.3
@@ -2069,6 +2070,10 @@ packages:
       resolve: 1.12.0
     resolution:
       integrity: sha512-6W2nwiXme6j1n2erPOnmRiWfObUhWH7Qw1LMi9XZy8cj+KtESu3T6asZvtk5bMQQjX8te35o7CFueiSdL/2NmQ==
+  /babel-plugin-react-remove-properties/0.3.0:
+    dev: true
+    resolution:
+      integrity: sha512-vbxegtXGyVcUkCvayLzftU95vuvpYFV85pRpeMpohMHeEY46Qe0VNWfkVVcCbaZ12CXHzDFOj0esumATcW83ng==
   /babel-plugin-syntax-jsx/6.18.0:
     resolution:
       integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=
@@ -8967,6 +8972,7 @@ specifiers:
   babel-jest: 24.9.0
   babel-loader: 8.0.6
   babel-plugin-emotion: 10.0.22
+  babel-plugin-react-remove-properties: 0.3.0
   clean-webpack-plugin: 3.0.0
   copy-webpack-plugin: 5.0.4
   core-js: 3.3.4

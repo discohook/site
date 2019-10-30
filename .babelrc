@@ -8,5 +8,10 @@
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-syntax-dynamic-import",
     "babel-plugin-emotion"
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["babel-plugin-react-remove-properties"]
+    }
+  }
 }

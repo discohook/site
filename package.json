@@ -67,6 +67,7 @@
     "babel-jest": "24.9.0",
     "babel-loader": "8.0.6",
     "babel-plugin-emotion": "10.0.22",
+    "babel-plugin-react-remove-properties": "0.3.0",
     "clean-webpack-plugin": "3.0.0",
     "copy-webpack-plugin": "5.0.4",
     "cross-env": "6.0.3",
