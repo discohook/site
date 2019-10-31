@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable unicorn/filename-case */
+/* eslint-disable @typescript-eslint/no-explicit-any, unicorn/filename-case */
 
 declare module "simple-markdown" {
   namespace SimpleMarkdown {

@@ -45,8 +45,7 @@ export const getBackups = async () => {
   const keys: IDBValidKey[] = []
 
   await runTransaction("readonly", store => {
-    /* eslint-disable @typescript-eslint/unbound-method */
-    /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+    // eslint-disable-next-line @typescript-eslint/unbound-method, @typescript-eslint/no-unnecessary-condition
     const request = (store.openKeyCursor || store.openCursor).call(store)
 
     request.addEventListener("success", () => {

@@ -1,5 +1,4 @@
-/* eslint-disable react/display-name */
-/* eslint-disable react/no-multi-comp */
+/* eslint-disable react/display-name, react/no-multi-comp, unicorn/no-unsafe-regex */
 
 import React from "react"
 import {
@@ -149,9 +148,7 @@ const baseRules: Rules = {
     match: (source, state, previous) =>
       !/^$|\n *$/.test(previous) || state.inQuote || state.nested
         ? null
-        : // eslint-disable-line operator-linebreak
-          // eslint-disable-next-line unicorn/no-unsafe-regex
-          /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
+        : /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
             source,
           ),
     parse: (capture, parse, state) => {
@@ -195,7 +192,6 @@ const blockRules: Rules = {
   paragraph: defaultRules.paragraph,
   codeBlock: {
     order: defaultRules.codeBlock.order,
-    // eslint-disable-next-line unicorn/no-unsafe-regex
     match: anyScopeRegex(/^```(?:([a-z0-9-]+?)\n+)?\n*([\s\S]+?)\n*```/i),
     parse: (capture, _, state) => ({
       language: (capture[1] || "").trim(),

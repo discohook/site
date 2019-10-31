@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import { toCamelCase, toSnakeCase } from "./casing"
 
+/* eslint-disable @typescript-eslint/camelcase */
 const cases = [
   [{}, {}],
   [{ key: 1 }, { key: 1 }],
