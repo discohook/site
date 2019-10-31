@@ -9,7 +9,7 @@ export const hexToNumber = (hex: string): Color => parseInt(hex.slice(1), 16)
 type Color = number | null | undefined
 
 type Props = {
-  id: number
+  id: string
   color: Color
   onChange: (color: Color) => void
 }
@@ -40,7 +40,7 @@ export default function ColorInput(props: Props) {
 
   return (
     <InputField
-      id={`message-embed${id}-color`}
+      id={id}
       value={hex}
       onChange={color => setHex(color.toLowerCase())}
       label="Color"

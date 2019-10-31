@@ -119,7 +119,7 @@ export default function EmbedEditor(props: Props) {
           label="Thumbnail"
         />
         <ColorInput
-          id={embed[id]}
+          id={`message-embed${embed[id]}-color`}
           color={embed.color}
           onChange={color =>
             handleChange({
