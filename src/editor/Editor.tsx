@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { useTheme } from "emotion-theming"
-import React, { useMemo, useState } from "react"
+import React, { useState } from "react"
 import BackupModal from "../backup/BackupModal"
 import { Theme } from "../core/themes"
 import { stringifyMessage } from "../json/convert"
@@ -97,17 +97,13 @@ export default function Editor(props: Props) {
     handleFilesChange([])
   }
 
-  const isDisabled = useMemo(() => {
-    if (sending) return true
-    if (webhookUrl.trim().length === 0) return true
-
-    const { content, embeds } = message
-    if (typeof content === "string") return false
-    if (embeds && embeds.length !== 0) return false
-    if (files.length !== 0) return false
-
-    return true
-  }, [files, message, sending, webhookUrl])
+  let isDisabled: boolean
+  if (sending) isDisabled = true
+  else if (webhookUrl.trim().length === 0) isDisabled = true
+  else if (typeof message.content === "string") isDisabled = false
+  else if (message.embeds && message.embeds.length > 0) isDisabled = false
+  else if (files.length > 0) isDisabled = false
+  else isDisabled = true
 
   const [isBackupModalShown, setIsBackupModalShown] = useState(false)
 
