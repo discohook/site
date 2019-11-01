@@ -1,7 +1,7 @@
 import { Context } from "koa"
 import { createContext } from "react"
 
-export const RequestContext = createContext<Partial<Context>>({})
+export const RequestContext = createContext<Context | undefined>(undefined)
 RequestContext.displayName = "RequestContext"
 
 export const RequestProvider = RequestContext.Provider

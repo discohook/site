@@ -73,7 +73,7 @@ export default function App() {
   const request = useContext(RequestContext)
 
   const [backup, setBackup] = useState(() => {
-    const search = process.env.SSR ? request.search : location.search
+    const search = process.env.SSR && request ? request.search : location.search
     const parameters = new URLSearchParams(search)
     const encodedBackup = parameters.get("backup")
 
@@ -102,8 +102,9 @@ export default function App() {
     color: colorTheme,
     display: displayTheme,
     mobile: /mobile/i.test(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      process.env.SSR ? request.get!("User-Agent") : navigator.userAgent,
+      process.env.SSR && request
+        ? request.get("User-Agent")
+        : navigator.userAgent,
     ),
   }
 
