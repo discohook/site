@@ -25,7 +25,7 @@ module.exports = {
     rules: [
       {
         test: /\.[jt]sx?$/,
-        use: "babel-loader",
+        use: "babel-loader?cacheDirectory",
       },
       {
         enforce: "pre",
