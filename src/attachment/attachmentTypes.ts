@@ -91,9 +91,4 @@ export const attachmentTypes: AttachmentType[] = [
     regex: /\.(?:mp3|ogg|wav|flac)$/,
     icon: "audio",
   },
-  {
-    check: "mime",
-    regex: /.*/,
-    icon: "unknown",
-  },
 ]
