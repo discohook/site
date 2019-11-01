@@ -67,7 +67,7 @@ router.get("/", async (context, next) => {
 app.use(router.middleware())
 
 app.on("error", error => {
-  if (error.code === "ECONNRESET") return
+  if (["ECONNRESET", "EPIPE"].includes(error.code)) return
 
   console.error(error)
 })
