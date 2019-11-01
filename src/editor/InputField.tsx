@@ -45,9 +45,9 @@ export default function InputField(props: Props) {
         <InputLabel htmlFor={id}>{label}</InputLabel>
         {maxLength && (
           <InputNote
+            state={state}
             data-testid="input-length"
             data-teststate={state}
-            state={state}
           >
             {value.length} / {maxLength}
           </InputNote>
