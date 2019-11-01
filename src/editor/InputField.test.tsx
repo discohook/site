@@ -1,9 +1,9 @@
 import React, { cloneElement } from "react"
-import { fireEvent, render } from "../core/testUtils"
+import { render, userEvent } from "../core/testUtils"
 import InputField from "./InputField"
 
 describe("InputField", () => {
-  it("listens for changes", () => {
+  it("listens for changes", async () => {
     const handleChange = jest.fn()
 
     const { getByLabelText } = render(
@@ -17,7 +17,7 @@ describe("InputField", () => {
 
     const input = getByLabelText("Message")
 
-    fireEvent.change(input, { target: { value: "Hello!" } })
+    await userEvent.type(input, "Hello!", { allAtOnce: true })
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith("Hello!")

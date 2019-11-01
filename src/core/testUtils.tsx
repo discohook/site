@@ -5,6 +5,7 @@ import React, { ReactElement, ReactNode } from "react"
 import { darkTheme, Theme } from "./themes"
 
 export * from "@testing-library/react"
+export { default as userEvent } from "@testing-library/user-event"
 
 const ContextWrapper = (props: { children?: ReactNode }) => (
   <ThemeProvider<Theme>

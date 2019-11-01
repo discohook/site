@@ -1,5 +1,5 @@
 import React, { cloneElement } from "react"
-import { fireEvent, render } from "../core/testUtils"
+import { render, userEvent } from "../core/testUtils"
 import MultiEditor from "./MultiEditor"
 
 describe("MultiEditor", () => {
@@ -84,11 +84,11 @@ describe("MultiEditor", () => {
     const moveSecondUp = getByTestId("multieditor-up--2")
     const moveSecondDown = getByTestId("multieditor-down--2")
 
-    fireEvent.click(moveSecondUp)
+    userEvent.click(moveSecondUp)
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith([2, 1, 3])
 
-    fireEvent.click(moveSecondDown)
+    userEvent.click(moveSecondDown)
     expect(handleChange).toHaveBeenCalledTimes(2)
     expect(handleChange).toHaveBeenCalledWith([1, 3, 2])
   })
@@ -110,12 +110,12 @@ describe("MultiEditor", () => {
 
     const deleteSecond = getByTestId("multieditor-delete--2")
 
-    fireEvent.click(deleteSecond)
+    userEvent.click(deleteSecond)
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith([1, 3])
   })
 
-  it("handles changes from children", () => {
+  it("handles changes from children", async () => {
     const handleChange = jest.fn()
 
     const { getByTestId } = render(
@@ -138,13 +138,13 @@ describe("MultiEditor", () => {
     )
 
     const firstInput = getByTestId("item--1")
-    fireEvent.change(firstInput, { target: { value: 0 } })
+    await userEvent.type(firstInput, "0")
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith([0, 2, 3])
 
     const secondInput = getByTestId("item--2")
-    fireEvent.change(secondInput, { target: { value: 5 } })
+    await userEvent.type(secondInput, "5")
 
     expect(handleChange).toHaveBeenCalledTimes(2)
     expect(handleChange).toHaveBeenCalledWith([1, 5, 3])
@@ -168,7 +168,7 @@ describe("MultiEditor", () => {
 
     const addButton = getByTestId("multieditor-add")
 
-    fireEvent.click(addButton)
+    userEvent.click(addButton)
 
     expect(factory).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledTimes(1)
