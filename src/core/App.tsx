@@ -78,7 +78,7 @@ export default function App() {
     const encodedBackup = parameters.get("backup")
 
     const backup = decodeBackup(encodedBackup || "")
-    if (backup && process.env.SSR) {
+    if (backup && !process.env.SSR) {
       console.log("Loaded with shared backup:", backup)
     }
 
