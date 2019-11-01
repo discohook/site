@@ -43,17 +43,32 @@ export default function MultiEditor<T>(props: Props<T>) {
     onChange([...items.slice(0, index), item, ...items.slice(index + 1)])
 
   const editors = items.map((item, index) => (
-    <Container key={getKey(item)}>
+    <Container key={getKey(item)} data-testid={`multieditor--${getKey(item)}`}>
       <ActionsContainer>
-        <ActionsHeader>
+        <ActionsHeader data-testid={`multieditor-header--${getKey(item)}`}>
           {name.replace(/^\w/, char => char.toUpperCase())} {index + 1}
         </ActionsHeader>
-        <Action onClick={() => removeItem(index)}>Delete</Action>
+        <Action
+          onClick={() => removeItem(index)}
+          data-testid={`multieditor-delete--${getKey(item)}`}
+        >
+          Delete
+        </Action>
         {index > 0 && (
-          <Action onClick={() => moveItem(index, index - 1)}>Move up</Action>
+          <Action
+            onClick={() => moveItem(index, index - 1)}
+            data-testid={`multieditor-up--${getKey(item)}`}
+          >
+            Move up
+          </Action>
         )}
         {items.length - index > 1 && (
-          <Action onClick={() => moveItem(index, index + 1)}>Move down</Action>
+          <Action
+            onClick={() => moveItem(index, index + 1)}
+            data-testid={`multieditor-down--${getKey(item)}`}
+          >
+            Move down
+          </Action>
         )}
       </ActionsContainer>
       {render(item, newItem => {
@@ -68,6 +83,7 @@ export default function MultiEditor<T>(props: Props<T>) {
       <Button
         disabled={typeof limit === "number" && items.length >= limit}
         onClick={addItem}
+        data-testid="multieditor-add"
       >
         Add {name}
       </Button>
