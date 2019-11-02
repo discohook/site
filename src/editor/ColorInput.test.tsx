@@ -1,5 +1,5 @@
 import React, { cloneElement } from "react"
-import { fireEvent, render } from "../core/testUtils"
+import { render, userEvent } from "../core/testUtils"
 import ColorInput, { hexToNumber, numberToHex } from "./ColorInput"
 
 describe("ColorInput", () => {
@@ -27,7 +27,7 @@ describe("ColorInput", () => {
     expect(input).toHaveValue("#ff00ff")
   })
 
-  it("handles input changes", () => {
+  it("handles input changes", async () => {
     const handleChange = jest.fn()
 
     const { getByLabelText } = render(
@@ -36,17 +36,30 @@ describe("ColorInput", () => {
 
     const input = getByLabelText("Color")
 
-    fireEvent.change(input, { target: { value: "#" } })
-    fireEvent.change(input, { target: { value: "#f" } })
-    fireEvent.change(input, { target: { value: "#ff" } })
-    fireEvent.change(input, { target: { value: "#ff0" } })
-    fireEvent.change(input, { target: { value: "#ff00" } })
-    fireEvent.change(input, { target: { value: "#ff000" } })
+    await userEvent.type(input, "#ff000")
     expect(handleChange).toHaveBeenCalledTimes(0)
 
-    fireEvent.change(input, { target: { value: "#ff0000" } })
+    await userEvent.type(input, "#ff0000")
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith(0xff0000)
+  })
+
+  it("handles emptying input", async () => {
+    const handleChange = jest.fn()
+
+    const { getByLabelText } = render(
+      <ColorInput id="color-input" color={0xff0000} onChange={handleChange} />,
+    )
+
+    const input = getByLabelText("Color")
+
+    await userEvent.type(input, "#")
+    expect(handleChange).toHaveBeenCalledTimes(0)
+
+    await userEvent.type(input, "", { allAtOnce: true })
+
+    expect(handleChange).toHaveBeenCalledTimes(1)
+    expect(handleChange).toHaveBeenCalledWith(undefined)
   })
 
   it("handles changes from parent component", () => {
