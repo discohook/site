@@ -64,7 +64,9 @@ export const isShape = (shape: Record<string, Validator>): Validator =>
 export const requiresKey = (...keys: string[]): Validator =>
   first(isObject, (value, key) =>
     keys
-      .map(requiredKey => requiredKey in (value as object))
+      .map(requiredKey =>
+        Object.prototype.hasOwnProperty.call(value as object, requiredKey),
+      )
       .some(result => result)
       ? []
       : keys.length === 1
