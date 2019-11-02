@@ -1,5 +1,7 @@
+import { SERVER } from "../core/environment"
+
 export const base64Encode = (data: string) => {
-  if (process.env.SSR) {
+  if (SERVER) {
     return Buffer.from(data, "binary").toString("base64")
   }
 
@@ -18,7 +20,7 @@ export const base64Encode = (data: string) => {
 export const base64Decode = (base64: string) => {
   const data = base64.replace(/-/g, "+").replace(/_/g, "/")
 
-  if (process.env.SSR) {
+  if (SERVER) {
     return Buffer.from(data, "base64").toString("binary")
   }
 

@@ -36,7 +36,8 @@ module.exports = {
     }),
     new DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production"),
-      "process.env.SSR": JSON.stringify(true),
+      "process.env.SERVER": JSON.stringify(true),
+      "process.env.PORT": process.env.PORT || JSON.stringify(5000),
     }),
   ],
   devtool: "source-map",

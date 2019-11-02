@@ -1,3 +1,4 @@
+import { SERVER } from "../core/environment"
 import { parseJson } from "../json/parseJson"
 import { applyIds } from "../message/applyIds"
 import { Backup } from "./Backup"
@@ -18,7 +19,7 @@ export const decodeBackup = (base64: string) => {
 
   const json = base64Decode(base64)
   if (!json) {
-    if (!process.env.SSR) {
+    if (!SERVER) {
       console.error("Shared backup base64 contains an invalid character")
     }
     return
@@ -26,7 +27,7 @@ export const decodeBackup = (base64: string) => {
 
   const { value: parsedJson, error } = parseJson(json)
   if (error) {
-    if (!process.env.SSR) {
+    if (!SERVER) {
       console.error("Shared backup JSON parse error:", error)
     }
     return

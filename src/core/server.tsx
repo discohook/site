@@ -72,4 +72,6 @@ app.on("error", error => {
   console.error(error)
 })
 
-app.listen(port, () => console.log(`Listening on ${port}`))
+app.listen(process.env.PORT, () => {
+  console.log(`Listening on ${port}`)
+})

@@ -1,10 +1,11 @@
 import React from "react"
+import { SERVER } from "../core/environment"
 import { Embed, Footer } from "../message/Message"
 import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
 const supportsDateTimeInput = (() => {
-  if (process.env.SSR) return false
+  if (SERVER) return false
 
   const input = document.createElement("input")
   input.type = "datetime-local"

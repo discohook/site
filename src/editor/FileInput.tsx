@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React, { useRef } from "react"
+import { SERVER } from "../core/environment"
 import { FileLike } from "../message/FileLike"
 import {
   Button,
@@ -65,8 +66,7 @@ export default function FileInput(props: Props) {
   }
 
   const filesAvailable =
-    !process.env.SSR &&
-    (files.length === 0 || files.every(file => file instanceof File))
+    !SERVER && (files.length === 0 || files.every(file => file instanceof File))
 
   return (
     <InputContainer>

@@ -6,6 +6,7 @@ import { decodeBackup } from "../backup/sharing"
 import Editor from "../editor/Editor"
 import { initialMessage } from "../message/initialMessage"
 import MessagePreview from "../preview/MessagePreview"
+import { SERVER } from "./environment"
 import GlobalStyle from "./GlobalStyle"
 import { RequestContext } from "./RequestContext"
 import { darkTheme, lightTheme, Theme } from "./themes"
@@ -73,12 +74,12 @@ export default function App() {
   const request = useContext(RequestContext)
 
   const [backup, setBackup] = useState(() => {
-    const search = process.env.SSR && request ? request.search : location.search
+    const search = SERVER && request ? request.search : location.search
     const parameters = new URLSearchParams(search)
     const encodedBackup = parameters.get("backup")
 
     const backup = decodeBackup(encodedBackup || "")
-    if (backup && !process.env.SSR) {
+    if (backup && !SERVER) {
       console.log("Loaded with shared backup:", backup)
     }
 
@@ -102,9 +103,7 @@ export default function App() {
     color: colorTheme,
     display: displayTheme,
     mobile: /mobile/i.test(
-      process.env.SSR && request
-        ? request.get("User-Agent")
-        : navigator.userAgent,
+      SERVER && request ? request.get("User-Agent") : navigator.userAgent,
     ),
   }
 
