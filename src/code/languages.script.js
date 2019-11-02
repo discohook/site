@@ -7,14 +7,14 @@ const hljs = require("highlight.js")
 /** @typedef {import("http").IncomingMessage} IncomingMessage */
 /** @typedef {import("./languages").Language} Language */
 
-const GITHUB_LANG_BASE =
+const HLJS_GIT_RAW_LANGUAGES_BASE_URL =
   "https://raw.githubusercontent.com/highlightjs/highlight.js/master/src/languages"
 
 /** @type {(language: string) => Promise<string[] | undefined>} */
-const getDependencies = async language => {
+async function getDependencies(language) {
   /** @type {IncomingMessage} */
   const message = await new Promise(resolve =>
-    get(`${GITHUB_LANG_BASE}/${language}.js`, resolve),
+    get(`${HLJS_GIT_RAW_LANGUAGES_BASE_URL}/${language}.js`, resolve),
   )
 
   let source = ""
@@ -36,7 +36,7 @@ const getDependencies = async language => {
 }
 
 /** @type {(language: string) => Promise<Language>} */
-const getLanguage = async language => {
+async function getLanguage(language) {
   const hljsLanguage = hljs.getLanguage(language)
 
   const aliases = (hljsLanguage.aliases || [])
@@ -54,26 +54,34 @@ const getLanguage = async language => {
   }
 }
 
-const getAllLanguages = async () => {
-  const hljsLanguages = hljs
+/** @type {() => Generator<Promise<Language>>} */
+function* getAllLanguages() {
+  const languages = hljs
     .listLanguages()
-    .sort((first, second) => (first > second ? 1 : -1))
+    .sort((first, second) => ((first > second ? 1 : -1)))
 
-  /** @type {Language[]} */
-  const languages = []
-
-  for (const language of hljsLanguages) {
+  for (const language of languages) {
     // eslint-disable-next-line no-await-in-loop
-    languages.push(await getLanguage(language))
+    yield getLanguage(language)
   }
-
-  return languages
 }
 
-getAllLanguages()
-  .then(languages => {
-    console.log(JSON.stringify(languages, undefined, 2))
-  })
-  .catch(error => {
-    throw error
-  })
+async function main() {
+  console.log("[")
+  for await (const { name, aliases, dependencies } of getAllLanguages()) {
+    console.log("  {")
+    console.log(`    name: "${name}",`)
+    if (aliases) {
+      console.log(`    aliases: ["${aliases.join('", "')}"],`)
+    }
+    if (dependencies) {
+      console.log(`    dependencies: ["${dependencies.join('", "')}"],`)
+    }
+    console.log("  },")
+  }
+  console.log("]")
+}
+
+main().catch(error => {
+  console.error(error)
+})
