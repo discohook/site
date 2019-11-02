@@ -38,6 +38,7 @@ export const languages: Language[] = [
   },
   {
     name: "arduino",
+    aliases: ["c", "c++", "cc", "cxx", "h", "h++", "hh", "hpp", "hxx"],
     dependencies: ["cpp"],
   },
   {
@@ -476,7 +477,7 @@ export const languages: Language[] = [
   },
   {
     name: "powershell",
-    aliases: ["ps"],
+    aliases: ["ps", "ps1"],
   },
   {
     name: "processing",
@@ -673,6 +674,7 @@ export const languages: Language[] = [
       "html",
       "plist",
       "rss",
+      "svg",
       "wsf",
       "xhtml",
       "xjb",
