@@ -15,12 +15,11 @@ export const parseMessage = (json: string) => {
     return { errors: [error] }
   }
 
-  if (typeof parsedJson !== "object" || parsedJson === null) {
-    return { errors: [] }
-  }
-
   return {
-    message: applyIds(toCamelCase(parsedJson)),
+    message:
+      typeof parsedJson === "object" && parsedJson !== null
+        ? applyIds(toCamelCase(parsedJson))
+        : parsedJson,
     errors: isMessage(parsedJson, "$"),
   }
 }
