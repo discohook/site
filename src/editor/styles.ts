@@ -68,8 +68,9 @@ TextInput.defaultProps = { type: "text" }
 
 export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
   resize: vertical;
-  min-height: 60px;
+  min-height: 32px;
 ` as SC<"textarea">
+MultilineTextInput.defaultProps = { rows: 2 }
 
 type InputNoteProps = { state: "normal" | "warning" | "error" }
 export const InputNote = styled.div<InputNoteProps, Theme>`

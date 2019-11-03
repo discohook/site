@@ -54,7 +54,7 @@ export default function EmbedEditor(props: Props) {
           })
         }
         label="Description"
-        multiline
+        type="multiline"
         maxLength={2048}
       />
       <AuthorEditor

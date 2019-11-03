@@ -58,7 +58,7 @@ export default function FieldEditor(props: Props) {
           })
         }
         label="Field value"
-        multiline
+        type="multiline"
         maxLength={1024}
       />
     </BoxContainer>

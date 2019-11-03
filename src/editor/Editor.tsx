@@ -147,7 +147,7 @@ export default function Editor(props: Props) {
             })
           }
           label="Message content"
-          multiline
+          type="multiline"
           maxLength={2000}
         />
         <MultiEditor<Embed>

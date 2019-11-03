@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react"
+import React from "react"
 import {
   Container,
   InputContainer,
@@ -8,15 +8,12 @@ import {
   TextInput,
 } from "./styles"
 
-type Event = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-
 type Props = {
   id: string
   value: string | undefined
   onChange: (value: string) => void
   label: string
   type?: string
-  multiline?: boolean
   placeholder?: string
   maxLength?: number
 }
@@ -24,16 +21,13 @@ type Props = {
 export default function InputField(props: Props) {
   const {
     id,
+    value = "",
     onChange: handleChange,
     label,
     type,
-    multiline,
     placeholder,
     maxLength,
   } = props
-  const value = props.value || ""
-
-  const Input = multiline ? MultilineTextInput : TextInput
 
   let state: "normal" | "warning" | "error" = "normal"
   if (value.length / (maxLength || 0) > 0.9) state = "warning"
@@ -53,13 +47,22 @@ export default function InputField(props: Props) {
           </InputNote>
         )}
       </Container>
-      <Input
-        id={id}
-        value={value}
-        onChange={(event: Event) => handleChange(event.target.value)}
-        type={type}
-        placeholder={placeholder}
-      />
+      {type === "multiline" ? (
+        <MultilineTextInput
+          id={id}
+          value={value}
+          onChange={event => handleChange(event.target.value)}
+          placeholder={placeholder}
+        />
+      ) : (
+        <TextInput
+          id={id}
+          value={value}
+          onChange={event => handleChange(event.target.value)}
+          type={type}
+          placeholder={placeholder}
+        />
+      )}
     </InputContainer>
   )
 }
