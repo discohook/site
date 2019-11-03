@@ -1,8 +1,17 @@
 import { SERVER } from "../core/environment"
 
-export const base64Encode = (data: string) => {
+export const base64Encode = (data: string, safe = false) => {
   if (SERVER) {
-    return Buffer.from(data, "binary").toString("base64")
+    let base64 = Buffer.from(data, "binary").toString("base64")
+
+    if (safe) {
+      base64 = base64
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=/g, "")
+    }
+
+    return base64
   }
 
   const encoded = encodeURIComponent(data)
@@ -11,10 +20,16 @@ export const base64Encode = (data: string) => {
     return String.fromCharCode(parseInt(hex.slice(1), 16))
   })
 
-  return btoa(escaped)
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=/g, "")
+  let base64 = btoa(escaped)
+
+  if (safe) {
+    base64 = base64
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=/g, "")
+  }
+
+  return base64
 }
 
 export const base64Decode = (base64: string) => {

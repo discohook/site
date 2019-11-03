@@ -9,7 +9,7 @@ export const shareBackup = async (name: string) => {
   const backup = await getBackup(name)
 
   const json = JSON.stringify(backup)
-  const base64 = base64Encode(json)
+  const base64 = base64Encode(json, true)
 
   window.history.replaceState(undefined, "", `?backup=${base64}`)
 }
