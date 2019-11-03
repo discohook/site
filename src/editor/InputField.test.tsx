@@ -51,4 +51,51 @@ describe("InputField", () => {
     expect(lengthWarning).toHaveTextContent("12 / 10")
     expect(lengthWarning).toHaveAttribute("data-teststate", "error")
   })
+
+  it("defaults to text prop type", () => {
+    const { getByLabelText } = render(
+      <InputField
+        id="message"
+        label="Message"
+        value="Hello"
+        onChange={() => {}}
+      />,
+    )
+
+    const input = getByLabelText("Message")
+
+    expect(input).toHaveAttribute("type", "text")
+  })
+
+  it("respects input type prop", () => {
+    const { getByLabelText } = render(
+      <InputField
+        id="number"
+        label="Number"
+        value="123"
+        onChange={() => {}}
+        type="number"
+      />,
+    )
+
+    const input = getByLabelText("Number")
+
+    expect(input).toHaveAttribute("type", "number")
+  })
+
+  it("renders a textarea when type is multiline", () => {
+    const { getByLabelText } = render(
+      <InputField
+        id="message"
+        label="Message"
+        value="Hello"
+        onChange={() => {}}
+        type="multiline"
+      />,
+    )
+
+    const input = getByLabelText("Message")
+
+    expect(input).toBeInstanceOf(HTMLTextAreaElement)
+  })
 })
