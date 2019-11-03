@@ -48,25 +48,14 @@ export default function FileInput(props: Props) {
 
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const clearFiles = () => {
+  const handleRemoveFiles = () => {
     if (!inputRef.current) return
 
     inputRef.current.value = ""
     handleChange([])
   }
 
-  const fakeFiles = () => {
-    const fakeFiles = files.map(file => ({
-      name: file.name,
-      type: file.type,
-      size: file.size,
-    }))
-
-    handleChange(fakeFiles)
-  }
-
-  const filesAvailable =
-    !SERVER && (files.length === 0 || files.every(file => file instanceof File))
+  const filesAvailable = !SERVER && files.every(file => file instanceof File)
 
   return (
     <InputContainer>
@@ -81,12 +70,13 @@ export default function FileInput(props: Props) {
           <FakeInput>{files.map(file => file.name).join(", ")}</FakeInput>
           <HiddenInput
             id="file"
-            onClick={() => fakeFiles()}
             onChange={event => handleChange([...event.target.files])}
             ref={inputRef}
           />
         </FileInputContainer>
-        <RemoveFilesButton onClick={clearFiles}>Remove files</RemoveFilesButton>
+        <RemoveFilesButton onClick={handleRemoveFiles}>
+          Remove files
+        </RemoveFilesButton>
       </Container>
     </InputContainer>
   )
