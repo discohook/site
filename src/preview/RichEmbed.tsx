@@ -2,7 +2,12 @@ import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
 import Markup from "../markup/Markup"
-import { CodeBlockContainer, Emoji, MarkupContainer } from "../markup/styles"
+import {
+  BlockQuoteContent,
+  CodeBlockContainer,
+  Emoji,
+  MarkupContainer,
+} from "../markup/styles"
 import { Embed } from "../message/Message"
 import { id } from "../message/uid"
 import EmbedAuthor from "./EmbedAuthor"
@@ -86,7 +91,8 @@ const EmbedDescription = styled.div<{}, Theme>`
     line-height: 1rem;
     white-space: pre-line;
 
-    & ${CodeBlockContainer} {
+    & ${CodeBlockContainer},
+    & ${BlockQuoteContent} {
       max-width: 100%;
     }
   }

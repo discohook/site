@@ -80,7 +80,7 @@ export const BlockQuoteContent = styled.blockquote<{}, Theme>`
 `
 
 export const CodeBlockContainer = styled.pre<{}, Theme>`
-  max-width: 90%;
+  max-width: 100%;
   margin: 6px 0 0;
   padding: 7px;
 
