@@ -1,7 +1,7 @@
 import { id } from "../message/uid"
 import { parseMessage, stringifyMessage } from "./convert"
 
-describe("convert", () => {
+describe("parseMessage", () => {
   it("can parse messages", () => {
     const message = parseMessage(`
       {
@@ -125,7 +125,9 @@ describe("convert", () => {
     expect(message.errors).not.toHaveLength(0)
     expect(message.message).toBeUndefined()
   })
+})
 
+describe("stringifyMessage", () => {
   it("stringifies messages", () => {
     expect(
       stringifyMessage({

@@ -54,10 +54,12 @@ export const contains = (validate: Validator): Validator =>
 export const isShape = (shape: Record<string, Validator>): Validator =>
   first(isObject, (value, key) =>
     Object.entries(shape).flatMap(([shapeKey, validate]) =>
-      validate(
-        (value as Record<string, unknown>)[shapeKey],
-        `${key}.${shapeKey}`,
-      ),
+      shapeKey in (value as Record<string, unknown>)
+        ? validate(
+            (value as Record<string, unknown>)[shapeKey],
+            `${key}.${shapeKey}`,
+          )
+        : [],
     ),
   )
 

@@ -1,21 +1,25 @@
 import { getHumanReadableSize } from "./getHumanReadableSize"
 
+const sizes = [
+  { bytes: 0, readable: "0 bytes" },
+  { bytes: 1, readable: "1 bytes" },
+  { bytes: 768, readable: "768 bytes" },
+  { bytes: 1000, readable: "1,000 bytes" },
+  { bytes: 1023, readable: "1,023 bytes" },
+  { bytes: 1024, readable: "1 KB" },
+  { bytes: 1234, readable: "1.21 KB" },
+  { bytes: 256256, readable: "250.25 KB" },
+  { bytes: 1024000, readable: "1,000 KB" },
+  { bytes: 1048575, readable: "1,024 KB" },
+  { bytes: 1048576, readable: "1 MB" },
+  { bytes: 16221470, readable: "15.47 MB" },
+  { bytes: 50000000, readable: "47.68 MB" },
+]
+
 describe("getHumanReadableSize", () => {
-  it.each<[number, string]>([
-    [0, "0 bytes"],
-    [1, "1 bytes"],
-    [768, "768 bytes"],
-    [1000, "1,000 bytes"],
-    [1023, "1,023 bytes"],
-    [1024, "1 KB"],
-    [1234, "1.21 KB"],
-    [256256, "250.25 KB"],
-    [1024000, "1,000 KB"],
-    [1048575, "1,024 KB"],
-    [1048576, "1 MB"],
-    [16221470, "15.47 MB"],
-    [50000000, "47.68 MB"],
-  ])("formats file sizes correctly (%p -> %p)", (input, expected) => {
-    expect(getHumanReadableSize(input)).toEqual(expected)
+  it("formats file sizes correctly", () => {
+    for (const { bytes, readable } of sizes) {
+      expect(getHumanReadableSize(bytes)).toEqual(readable)
+    }
   })
 })

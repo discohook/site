@@ -3,20 +3,6 @@ import { render, userEvent } from "../core/testUtils"
 import ColorInput, { hexToNumber, numberToHex } from "./ColorInput"
 
 describe("ColorInput", () => {
-  it.each<[string, number]>([
-    ["#000000", 0x000000],
-    ["#000001", 0x000001],
-    ["#ffffff", 0xffffff],
-    ["#fffffe", 0xfffffe],
-    ["#7289da", 0x7289da],
-    ["#43b581", 0x43b581],
-    ["#faa61a", 0xfaa61a],
-    ["#f04747", 0xf04747],
-  ])("converts between hex and numbers (%p <-> %p)", (hex, number) => {
-    expect(hexToNumber(hex)).toEqual(number)
-    expect(numberToHex(number)).toEqual(hex)
-  })
-
   it("shows hex value", () => {
     const { getByLabelText } = render(
       <ColorInput id="color-input" color={0xff00ff} onChange={() => {}} />,
@@ -74,5 +60,32 @@ describe("ColorInput", () => {
     rerender(cloneElement(element, { color: 0x00ff00 }))
 
     expect(input).toHaveValue("#00ff00")
+  })
+})
+
+const colors = [
+  { number: 0x000000, hex: "#000000" },
+  { number: 0x000001, hex: "#000001" },
+  { number: 0xffffff, hex: "#ffffff" },
+  { number: 0xfffffe, hex: "#fffffe" },
+  { number: 0x7289da, hex: "#7289da" },
+  { number: 0x43b581, hex: "#43b581" },
+  { number: 0xfaa61a, hex: "#faa61a" },
+  { number: 0xf04747, hex: "#f04747" },
+] as const
+
+describe("hexToNumber", () => {
+  it("converts hex to numbers", () => {
+    for (const { number, hex } of colors) {
+      expect(hexToNumber(hex)).toEqual(number)
+    }
+  })
+})
+
+describe("numberToHex", () => {
+  it("converts numbers to hex", () => {
+    for (const { number, hex } of colors) {
+      expect(numberToHex(number)).toEqual(hex)
+    }
   })
 })

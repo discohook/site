@@ -2,31 +2,51 @@ import { toCamelCase, toSnakeCase } from "./casing"
 
 /* eslint-disable @typescript-eslint/camelcase */
 const cases = [
-  [{}, {}],
-  [{ key: 1 }, { key: 1 }],
-  [{ multipleWords: "test" }, { multiple_words: "test" }],
-  [{ keyOne: "one", keyTwo: "two" }, { key_one: "one", key_two: "two" }],
-  [{ someArray: [1, 2, 3] }, { some_array: [1, 2, 3] }],
-  [
-    { nestedObjects: { areVeryCool: "!" } },
-    { nested_objects: { are_very_cool: "!" } },
-  ],
-  [
-    { nestedObjects: [{ inArrays: true }] },
-    { nested_objects: [{ in_arrays: true }] },
-  ],
-  [[{ arraysOf: "objects" }], [{ arrays_of: "objects" }]],
+  {
+    camelCase: {},
+    snakeCase: {},
+  },
+  {
+    camelCase: { key: 1 },
+    snakeCase: { key: 1 },
+  },
+  {
+    camelCase: { multipleWords: "test" },
+    snakeCase: { multiple_words: "test" },
+  },
+  {
+    camelCase: { keyOne: "one", keyTwo: "two" },
+    snakeCase: { key_one: "one", key_two: "two" },
+  },
+  {
+    camelCase: { someArray: [1, 2, 3] },
+    snakeCase: { some_array: [1, 2, 3] },
+  },
+  {
+    camelCase: { nestedObjects: { areVeryCool: "!" } },
+    snakeCase: { nested_objects: { are_very_cool: "!" } },
+  },
+  {
+    camelCase: { nestedObjects: [{ inArrays: true }] },
+    snakeCase: { nested_objects: [{ in_arrays: true }] },
+  },
+  {
+    camelCase: [{ arraysOf: "objects" }],
+    snakeCase: [{ arrays_of: "objects" }],
+  },
 ] as const
 
-describe("casing", () => {
+describe("toCamelCase", () => {
   it("converts camel case to snake case", () => {
-    for (const [camelCase, snakeCase] of cases) {
+    for (const { camelCase, snakeCase } of cases) {
       expect(toSnakeCase(camelCase)).toEqual(snakeCase)
     }
   })
+})
 
+describe("toSnakeCase", () => {
   it("converts snake case to camel case", () => {
-    for (const [camelCase, snakeCase] of cases) {
+    for (const { camelCase, snakeCase } of cases) {
       expect(toCamelCase(snakeCase)).toEqual(camelCase)
     }
   })
