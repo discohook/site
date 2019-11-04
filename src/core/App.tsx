@@ -1,14 +1,14 @@
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
-import React, { useContext, useEffect, useState } from "react"
-import { decodeBackup } from "../backup/sharing"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import Editor from "../editor/Editor"
 import { initialMessage } from "../message/initialMessage"
 import MessagePreview from "../preview/MessagePreview"
 import { SERVER } from "./environment"
 import GlobalStyle from "./GlobalStyle"
 import { RequestContext } from "./RequestContext"
+import { decodeBackup, setUrlToBackup } from "./sharing"
 import { darkTheme, lightTheme, Theme } from "./themes"
 
 const Container = styled.div`
@@ -85,6 +85,16 @@ export default function App() {
 
     return backup || { message: initialMessage, files: [] }
   })
+
+  const lastUrlChangeRef = useRef(0)
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      lastUrlChangeRef.current = Date.now()
+      setUrlToBackup(backup)
+    }, 1000 - (Date.now() - lastUrlChangeRef.current))
+
+    return () => clearTimeout(timeoutId)
+  }, [backup])
 
   const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
   const toggleTheme = () =>

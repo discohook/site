@@ -13,7 +13,6 @@ import { FileLike } from "../message/FileLike"
 import { Message } from "../message/Message"
 import { Backup } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
-import { shareBackup } from "./sharing"
 
 const ModalContainer = styled.div<{}, Theme>`
   position: absolute;
@@ -33,6 +32,24 @@ const ModalContainer = styled.div<{}, Theme>`
 
 const ModalActionsContainer = styled(ActionsContainer)`
   margin: 8px;
+`
+
+const ShareTip = styled.div<{}, Theme>`
+  margin: 8px;
+  padding: 12px;
+
+  border: 1px solid ${({ theme }) => theme.accent};
+  border-radius: 3px;
+`
+
+const ShareTipParagraph = styled.p<{}, Theme>`
+  color: ${({ theme }) => theme.header.primary};
+
+  margin: 0;
+
+  & + & {
+    margin: 8px 0 0;
+  }
 `
 
 const List = styled.ul`
@@ -65,10 +82,9 @@ const BackupName = styled.a<{}, Theme>`
   cursor: pointer;
 `
 
-const BackupAction = styled.a<{ dangerous?: boolean }, Theme>`
+const DeleteAction = styled.a<{}, Theme>`
   margin: 0 0 0 8px;
-  color: ${({ theme, dangerous }) =>
-    dangerous ? theme.red : theme.header.primary};
+  color: ${({ theme }) => theme.red};
   cursor: pointer;
 `
 
@@ -103,7 +119,7 @@ export default function BackupModal(props: Props) {
   const [newBackupName, setNewBackupName] = useState("")
 
   const handleCreate = () => {
-    setBackup(newBackupName.trim().replace(/\s+/, " "), {
+    setBackup(newBackupName.trim().replace(/\s+/gu, " "), {
       message,
       files: files.map(file => ({
         name: file.name,
@@ -111,7 +127,10 @@ export default function BackupModal(props: Props) {
         size: file.size,
       })),
     })
-      .then(getAllBackups)
+      .then(async () => {
+        await getAllBackups()
+        setNewBackupName("")
+      })
       .catch(error => {
         console.error("Error creating backup:", error)
       })
@@ -123,18 +142,24 @@ export default function BackupModal(props: Props) {
         <ActionsHeader>Backups</ActionsHeader>
         <Action onClick={handleClose}>Close</Action>
       </ModalActionsContainer>
+      <ShareTip>
+        <ShareTipParagraph>
+          Want to share a backup with someone else?
+        </ShareTipParagraph>
+        <ShareTipParagraph>
+          Load the backup by clicking on it, then share the URL in the address
+          bar.
+        </ShareTipParagraph>
+      </ShareTip>
       <List>
         {backups.map(backup => (
           <Item key={backup}>
             <BackupName onClick={async () => handleLoad(backup)}>
               {backup}
             </BackupName>
-            <BackupAction onClick={async () => shareBackup(backup)}>
-              Share
-            </BackupAction>
-            <BackupAction onClick={async () => handleDelete(backup)} dangerous>
+            <DeleteAction onClick={async () => handleDelete(backup)}>
               Delete
-            </BackupAction>
+            </DeleteAction>
           </Item>
         ))}
       </List>
@@ -145,7 +170,11 @@ export default function BackupModal(props: Props) {
           onChange={setNewBackupName}
           label="Backup name"
         />
-        <Button onClick={handleCreate}>Create</Button>
+        <Button onClick={handleCreate}>
+          {backups.includes(newBackupName.trim().replace(/\s+/gu, " "))
+            ? "Update"
+            : "Create"}
+        </Button>
       </Container>
     </ModalContainer>
   )

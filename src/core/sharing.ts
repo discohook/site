@@ -1,17 +1,14 @@
-import { SERVER } from "../core/environment"
+import { Backup } from "../backup/Backup"
+import { base64Decode, base64Encode } from "../backup/base64"
 import { parseJson } from "../json/parseJson"
 import { applyIds } from "../message/applyIds"
-import { Backup } from "./Backup"
-import { getBackup } from "./backupStorage"
-import { base64Decode, base64Encode } from "./base64"
+import { SERVER } from "./environment"
 
-export const shareBackup = async (name: string) => {
-  const backup = await getBackup(name)
-
+export const setUrlToBackup = (backup: Backup) => {
   const json = JSON.stringify(backup)
   const base64 = base64Encode(json, true)
 
-  window.history.replaceState(undefined, "", `?backup=${base64}`)
+  history.replaceState(undefined, "", `?backup=${base64}`)
 }
 
 export const decodeBackup = (base64: string) => {
@@ -19,17 +16,13 @@ export const decodeBackup = (base64: string) => {
 
   const json = base64Decode(base64)
   if (!json) {
-    if (!SERVER) {
-      console.error("Shared backup base64 contains an invalid character")
-    }
+    if (!SERVER) console.error("Shared backup contained invalid base 64")
     return
   }
 
   const { value: parsedJson, error } = parseJson(json)
   if (error) {
-    if (!SERVER) {
-      console.error("Shared backup JSON parse error:", error)
-    }
+    if (!SERVER) console.error("Shared backup JSON parse error:", error)
     return
   }
 
