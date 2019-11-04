@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { SERVER } from "../core/environment"
 import { FileLike } from "../message/FileLike"
 import AudioAttachment from "./AudioAttachment"
 import DefaultAttachment from "./DefaultAttachment"
@@ -21,7 +22,7 @@ export default function Attachment(props: Props) {
     console.log(`Attachment type for ${name}:`, type)
   }, [name, type])
 
-  if (file instanceof File && type === "image") {
+  if (!SERVER && file instanceof File && type === "image") {
     return <ImageAttachment file={file} />
   }
 
