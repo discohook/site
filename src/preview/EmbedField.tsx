@@ -1,5 +1,5 @@
-import styled from "@emotion/styled"
 import { css } from "@emotion/core"
+import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
 import Markup from "../markup/Markup"
