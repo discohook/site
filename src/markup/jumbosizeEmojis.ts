@@ -1,8 +1,14 @@
-import { ASTNode } from "simple-markdown"
+import { ASTNode, SingleASTNode } from "simple-markdown"
 
-const isEmoji = (node: ASTNode) => /^(emoji|customEmoji)$/.test(node.type)
+const isEmoji = (node: SingleASTNode) => /^(emoji|customEmoji)$/.test(node.type)
 
-export const jumbosizeEmojis = (ast: ASTNode[]): ASTNode[] => {
+export const jumbosizeEmojis = (ast: ASTNode): ASTNode => {
+  if (!Array.isArray(ast)) {
+    const node = { ...ast }
+    if (isEmoji(node)) node.jumboable = true
+    return node
+  }
+
   // Gets all nodes of type 'emoji' or 'customEmoji'
   const emojiNodes = ast.filter(node => isEmoji(node))
   // If there's more than 27 (limit of jumbosized emojis), return the tree as is

@@ -7,7 +7,8 @@ import {
   inlineRegex,
   outputFor,
   parserFor,
-  Rules,
+  ParserRule,
+  ReactOutputRule,
 } from "simple-markdown"
 import CodeBlock from "../code/CodeBlock"
 import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
@@ -22,6 +23,8 @@ import {
   Spoiler,
 } from "./styles"
 
+type ReactRules = Record<string, ParserRule & ReactOutputRule>
+
 const emojiRegex = new RegExp(
   Array.from(emojiToName.keys())
     .join("|")
@@ -30,7 +33,7 @@ const emojiRegex = new RegExp(
   "g",
 )
 
-const baseRules: Rules = {
+const baseRules: ReactRules = {
   escape: defaultRules.escape,
   link: {
     ...defaultRules.link,
@@ -66,6 +69,7 @@ const baseRules: Rules = {
       type: "text",
       content: capture[0],
     }),
+    react: null,
   },
   emoji: {
     order: defaultRules.text.order,
@@ -182,11 +186,11 @@ const baseRules: Rules = {
   },
 }
 
-const inlineRules: Rules = {
+const inlineRules: ReactRules = {
   ...baseRules,
 }
 
-const blockRules: Rules = {
+const blockRules: ReactRules = {
   ...baseRules,
   newline: defaultRules.newline,
   paragraph: defaultRules.paragraph,
@@ -223,6 +227,7 @@ const blockRules: Rules = {
       type: "mention",
       content: "@unknown-role",
     }),
+    react: null,
   },
   channelMention: {
     order: defaultRules.text.order,
@@ -231,6 +236,7 @@ const blockRules: Rules = {
       type: "mention",
       content: "#unknown-channel",
     }),
+    react: null,
   },
 }
 
