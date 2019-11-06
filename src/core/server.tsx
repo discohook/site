@@ -1,5 +1,6 @@
 import Router from "@koa/router"
 import { readFileSync } from "fs"
+import isBot from "isbot"
 import Koa from "koa"
 import conditional from "koa-conditional-get"
 import serve from "koa-static"
@@ -18,9 +19,13 @@ const port = 5000
 
 const build = resolve(__dirname, "public")
 const html = readFileSync(resolve(build, "index.html")).toString()
-const [templateBefore, templateAfter] = html
+const [templateStart, templateEnd] = html
   .replace('<div id="app"></div>', '<div id="app">{app}</div>')
   .split("{app}")
+const templateEndBots = templateEnd.replace(
+  /<script src="[^"]*"><\/script>/g,
+  "<!-- $& -->",
+)
 
 const encodings = {
   gzip: createGzip,
@@ -44,7 +49,7 @@ router.get("/", async (context, next) => {
   const stream = encodings[encoding]()
   context.body = stream
 
-  stream.write(templateBefore)
+  stream.write(templateStart)
 
   await new Promise((resolve, reject) => {
     const nodeStream = renderToNodeStream(
@@ -58,7 +63,12 @@ router.get("/", async (context, next) => {
     nodeStream.once("error", reject)
   })
 
-  stream.write(templateAfter)
+  if (isBot(context.get("User-Agent"))) {
+    stream.write(templateEndBots)
+  } else {
+    stream.write(templateEnd)
+  }
+
   stream.end()
 
   return next()

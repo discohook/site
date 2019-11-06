@@ -34,6 +34,7 @@
     "core-js": "3.3.6",
     "emotion-theming": "10.0.19",
     "highlight.js": "9.16.2",
+    "isbot": "^2.5.0",
     "koa": "2.11.0",
     "koa-conditional-get": "2.0.0",
     "koa-static": "5.0.0",

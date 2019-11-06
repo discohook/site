@@ -6,6 +6,7 @@ dependencies:
   core-js: 3.3.6
   emotion-theming: 10.0.19_75a3621563989c24c51854c3e0e71dec
   highlight.js: 9.16.2
+  isbot: 2.5.0
   koa: 2.11.0
   koa-conditional-get: 2.0.0
   koa-static: 5.0.0
@@ -69,27 +70,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-27d4lZoomVyo51VegxI20xZPuSHusqbQag/ztrBC7wegWoQ1nLREPVSKSW8byhTlzTKyNE4ifaTA6lCp7JjpFw==
-  /@babel/core/7.6.4:
-    dependencies:
-      '@babel/code-frame': 7.5.5
-      '@babel/generator': 7.7.0
-      '@babel/helpers': 7.7.0
-      '@babel/parser': 7.7.0
-      '@babel/template': 7.7.0
-      '@babel/traverse': 7.7.0
-      '@babel/types': 7.7.1
-      convert-source-map: 1.6.0
-      debug: 4.1.1
-      json5: 2.1.1
-      lodash: 4.17.15
-      resolve: 1.12.0
-      semver: 5.7.1
-      source-map: 0.5.7
-    dev: true
-    engines:
-      node: '>=6.9.0'
-    resolution:
-      integrity: sha512-Rm0HGw101GY8FTzpWSyRbki/jzq+/PkNQJ+nSulrdY6gFGOsNseCqD6KHRYe2E+EdzuBdr2pxCp6s4Uk6eJ+XQ==
   /@babel/core/7.7.0:
     dependencies:
       '@babel/code-frame': 7.5.5
@@ -99,7 +79,7 @@ packages:
       '@babel/template': 7.7.0
       '@babel/traverse': 7.7.0
       '@babel/types': 7.7.1
-      convert-source-map: 1.6.0
+      convert-source-map: 1.7.0
       debug: 4.1.1
       json5: 2.1.1
       lodash: 4.17.15
@@ -418,15 +398,6 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-VyN4QANJkRW6lDBmENzRszvZf3/4AXaj9YR7GwrWeeN9tEBPuXbmDYVU9bYBN0D70zCWVwUy0HWq2553VCb6Hw==
-  /@babel/plugin-syntax-object-rest-spread/7.2.0_@babel+core@7.6.4:
-    dependencies:
-      '@babel/core': 7.6.4
-      '@babel/helper-plugin-utils': 7.0.0
-    dev: true
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    resolution:
-      integrity: sha512-t0JKGgqk2We+9may3t0xDdmneaXmyxq0xieYcKHxIsrJO64n1OiMWNUtc5gQK1PA0NpdCRrtZp4z+IUaKugrSA==
   /@babel/plugin-syntax-object-rest-spread/7.2.0_@babel+core@7.7.0:
     dependencies:
       '@babel/core': 7.7.0
@@ -870,7 +841,7 @@ packages:
       '@babel/plugin-transform-unicode-regex': 7.7.0_@babel+core@7.7.0
       '@babel/types': 7.7.1
       browserslist: 4.7.2
-      core-js-compat: 3.3.6
+      core-js-compat: 3.4.0
       invariant: 2.2.4
       js-levenshtein: 1.1.6
       semver: 5.7.1
@@ -1169,11 +1140,11 @@ packages:
       integrity: sha512-6qqsU4o0kW1dvA95qfNog8v8gkRN9ph6Lz7r96IvZpHdNipP2cBcb07J1Z45mz/VIS01OHJ3pY8T5fUY38tg4A==
   /@jest/transform/24.9.0:
     dependencies:
-      '@babel/core': 7.6.4
+      '@babel/core': 7.7.0
       '@jest/types': 24.9.0
       babel-plugin-istanbul: 5.2.0
       chalk: 2.4.2
-      convert-source-map: 1.6.0
+      convert-source-map: 1.7.0
       fast-json-stable-stringify: 2.0.0
       graceful-fs: 4.2.3
       jest-haste-map: 24.9.0
@@ -2050,23 +2021,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
-  /babel-jest/24.9.0_@babel+core@7.6.4:
-    dependencies:
-      '@babel/core': 7.6.4
-      '@jest/transform': 24.9.0
-      '@jest/types': 24.9.0
-      '@types/babel__core': 7.1.3
-      babel-plugin-istanbul: 5.2.0
-      babel-preset-jest: 24.9.0_@babel+core@7.6.4
-      chalk: 2.4.2
-      slash: 2.0.0
-    dev: true
-    engines:
-      node: '>= 6'
-    peerDependencies:
-      '@babel/core': ^7.0.0
-    resolution:
-      integrity: sha512-ntuddfyiN+EhMw58PTNL1ph4C9rECiQXjI4nMMBKBaNjXvqLdkXpPRcMSr4iyBrJg/+wz9brFUD6RhOAT6r4Iw==
   /babel-jest/24.9.0_@babel+core@7.7.0:
     dependencies:
       '@babel/core': 7.7.0
@@ -2114,7 +2068,7 @@ packages:
       '@emotion/serialize': 0.11.14
       babel-plugin-macros: 2.6.1
       babel-plugin-syntax-jsx: 6.18.0
-      convert-source-map: 1.6.0
+      convert-source-map: 1.7.0
       escape-string-regexp: 1.0.5
       find-root: 1.1.0
       source-map: 0.5.7
@@ -2153,18 +2107,6 @@ packages:
   /babel-plugin-syntax-jsx/6.18.0:
     resolution:
       integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=
-  /babel-preset-jest/24.9.0_@babel+core@7.6.4:
-    dependencies:
-      '@babel/core': 7.6.4
-      '@babel/plugin-syntax-object-rest-spread': 7.2.0_@babel+core@7.6.4
-      babel-plugin-jest-hoist: 24.9.0
-    dev: true
-    engines:
-      node: '>= 6'
-    peerDependencies:
-      '@babel/core': ^7.0.0
-    resolution:
-      integrity: sha512-izTUuhE4TMfTRPF92fFwD2QfdXaZW08qvWTFCI51V8rW5x00UuPgc3ajRoWofXOuxjfcOM5zzSYsQS3H8KGCAg==
   /babel-preset-jest/24.9.0_@babel+core@7.7.0:
     dependencies:
       '@babel/core': 7.7.0
@@ -2353,7 +2295,7 @@ packages:
   /browserslist/4.7.2:
     dependencies:
       caniuse-lite: 1.0.30001008
-      electron-to-chromium: 1.3.303
+      electron-to-chromium: 1.3.304
       node-releases: 1.1.39
     dev: true
     hasBin: true
@@ -2761,11 +2703,11 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
-  /convert-source-map/1.6.0:
+  /convert-source-map/1.7.0:
     dependencies:
       safe-buffer: 5.1.2
     resolution:
-      integrity: sha512-eFu7XigvxdZ1ETfbgPBohgyQ/Z++C0eEhTor0qRwBw9unw+L0/6V8wkSuGgzdThkiS5lSpdptOQPD8Ak40a+7A==
+      integrity: sha512-4FJkXzKXEDB1snCFZlLP4gpC3JILicCpGbzG9f9G7tGqGCzETQ2hWPrcinA9oU4wtf2biUaEH5065UnMeR33oA==
   /cookie-signature/1.0.6:
     dev: true
     resolution:
@@ -2824,13 +2766,13 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-YBuYGpSzoCHSSDGyHy6VJ7SHojKp6WHT4D7ItcQFNAYx2hrwkMe56e97xfVR0/ovDuMTrMffXUiltvQljtAGeg==
-  /core-js-compat/3.3.6:
+  /core-js-compat/3.4.0:
     dependencies:
       browserslist: 4.7.2
       semver: 6.3.0
     dev: true
     resolution:
-      integrity: sha512-YnwZG/+0/f7Pf6Lr3jxtVAFjtGBW9lsLYcqrxhYJai1GfvrP8DEyEpnNzj/FRQfIkOOfk1j5tTBvPBLWVVJm4A==
+      integrity: sha512-pgQUcgT2+v9/yxHgMynYjNj7nmxLRXv3UC39rjCjDwpe63ev2rioQTju1PKLYUBbPCQQvZNWvQC8tBJd65q11g==
   /core-js/3.3.6:
     dev: false
     requiresBuild: true
@@ -3278,10 +3220,10 @@ packages:
   /ee-first/1.1.1:
     resolution:
       integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
-  /electron-to-chromium/1.3.303:
+  /electron-to-chromium/1.3.304:
     dev: true
     resolution:
-      integrity: sha512-xDFPmMjJ0gQBsVwspB0bjcbFn3MVcvU0sxXYmh1UMbZ6rDogQVM3vSyOvTO4rym1KlnJIU6nqzK3qs0yKudmjw==
+      integrity: sha512-a5mqa13jCdBc+Crgk3Gyr7vpXCiFWfFq23YDCEmrPYeiDOQKZDVE6EX/Q4Xdv97n3XkcjiSBDOY0IS19yP2yeA==
   /elliptic/6.5.1:
     dependencies:
       bn.js: 4.11.8
@@ -4290,7 +4232,7 @@ packages:
       node: '>=0.4.7'
     hasBin: true
     optionalDependencies:
-      uglify-js: 3.6.7
+      uglify-js: 3.6.8
     resolution:
       integrity: sha512-C29UoFzHe9yM61lOsIlCE5/mQVGrnIOrOq7maQl76L7tYPCgC1og0Ajt6uWnX4ZTxBPnjw+CUvawphwCfJgUnA==
   /har-schema/2.0.0:
@@ -4443,7 +4385,7 @@ packages:
       he: 1.2.0
       param-case: 2.1.1
       relateurl: 0.2.7
-      uglify-js: 3.6.7
+      uglify-js: 3.6.8
     dev: true
     engines:
       node: '>=6'
@@ -4987,6 +4929,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
+  /isbot/2.5.0:
+    dev: false
+    resolution:
+      integrity: sha512-We4qE4BJa3DAvv6VByO5JyqlR87l51Kx8WlGCvo1Z+db8t/NdySNUK7sqGK8EbcqwdcEazgA+WWkQ4LjuckULA==
   /isexe/2.0.0:
     dev: true
     resolution:
@@ -5092,10 +5038,10 @@ packages:
       integrity: sha512-+VLRKyitT3BWoMeSUIHRxV/2g8y9gw91Jh5z2UmXZzkZKpbC08CSehVxgHUwTpy+HwGcns/tqafQDJW7imYvGg==
   /jest-config/24.9.0:
     dependencies:
-      '@babel/core': 7.6.4
+      '@babel/core': 7.7.0
       '@jest/test-sequencer': 24.9.0
       '@jest/types': 24.9.0
-      babel-jest: 24.9.0_@babel+core@7.6.4
+      babel-jest: 24.9.0_@babel+core@7.7.0
       chalk: 2.4.2
       glob: 7.1.5
       jest-environment-jsdom: 24.9.0
@@ -8372,7 +8318,7 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
-  /uglify-js/3.6.7:
+  /uglify-js/3.6.8:
     dependencies:
       commander: 2.20.3
       source-map: 0.6.1
@@ -8381,7 +8327,7 @@ packages:
       node: '>=0.8.0'
     hasBin: true
     resolution:
-      integrity: sha512-4sXQDzmdnoXiO+xvmTzQsfIiwrjUCSA95rSP4SEd8tDb51W2TiDOlL76Hl+Kw0Ie42PSItCW8/t6pBNCF2R48A==
+      integrity: sha512-XhHJ3S3ZyMwP8kY1Gkugqx3CJh2C3O0y8NPiSxtm1tyD/pktLAkFZsFGpuNfTZddKDQ/bbDBLAd2YyA1pbi8HQ==
   /unicode-canonical-property-names-ecmascript/1.0.4:
     dev: true
     engines:
@@ -8995,6 +8941,7 @@ specifiers:
   eslint-plugin-unicorn: 12.1.0
   highlight.js: 9.16.2
   html-webpack-plugin: 4.0.0-beta.8
+  isbot: ^2.5.0
   jest: 24.9.0
   koa: 2.11.0
   koa-conditional-get: 2.0.0
