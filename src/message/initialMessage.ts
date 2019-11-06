@@ -90,15 +90,26 @@ export const initialMessage: Message = applyIds({
       description: [
         "As a small extra, you can back up your messages in here.",
         "To get started using them, click on the **Backups** button on the top of the editor!",
-        "You can even share them with your friends! Just click the share button and copy the URL.",
         "",
-        ":warning: Backups are stored in the browser, and will always be stored there.",
-        "This means that if you clear your browsers data your backups will be lost forever!",
         [
-          "If you want to keep your backups when clearing your browser data,",
-          "use the share functionality to copy your backups and store them somewhere safe.",
+          "If you want to share a backup with someone else (or to yourself),",
+          "you can copy the URL in the address bar.",
         ].join(" "),
+        "When you open the URL at a later time, the message will be restored.",
       ].join("\n"),
+      fields: [
+        {
+          name: ":warning: Warning",
+          value: [
+            "Backups are stored in the browser, and will always be stored there.",
+            "This means that if you clear your browsers data your backups will be lost forever!",
+            [
+              "If you want to keep your backups when clearing your browser data,",
+              "use the share functionality to copy your backups and store them somewhere safe.",
+            ].join(" "),
+          ].join("\n"),
+        },
+      ],
       color: 16426522,
     },
     {
@@ -109,6 +120,8 @@ export const initialMessage: Message = applyIds({
         "Discohook is not affiliated with Discord in any way, shape, or form.",
         "",
         "The source code of this project is [available on GitHub](https://github.com/jaylineko/discohook), under the MIT license.",
+        "",
+        "If you want to contact me, message me on Discord (jay.#1111) or send an email to jaylineko@gmail.com",
       ].join("\n"),
     },
   ],
