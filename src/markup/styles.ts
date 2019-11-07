@@ -31,8 +31,9 @@ export const Emoji = styled.img<{ big?: boolean }, Theme>`
     theme.display === "cozy" &&
     big &&
     css`
-      width: 2rem;
-      height: 2rem;
+      width: 3rem;
+      height: 3rem;
+      min-height: 3rem;
     `}
 `
 
