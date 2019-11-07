@@ -22,10 +22,11 @@ const html = readFileSync(resolve(build, "index.html")).toString()
 const [templateStart, templateEnd] = html
   .replace('<div id="app"></div>', '<div id="app">{app}</div>')
   .split("{app}")
-const templateEndBots = templateEnd.replace(
-  /<script src="[^"]*"><\/script>/g,
-  "<!-- $& -->",
-)
+const [templateStartBots, templateEndBots] = html
+  .replace(/<script src="[^"]*"><\/script>/g, "<!-- $& -->")
+  .replace(/<link [^>]* rel="preload">/g, "<!-- $& -->")
+  .replace('<div id="app"></div>', '<div id="app">{app}</div>')
+  .split("{app}")
 
 const encodings = {
   gzip: createGzip,
@@ -49,7 +50,11 @@ router.get("/", async (context, next) => {
   const stream = encodings[encoding]()
   context.body = stream
 
-  stream.write(templateStart)
+  if (isBot(context.get("User-Agent"))) {
+    stream.write(templateStartBots)
+  } else {
+    stream.write(templateStart)
+  }
 
   await new Promise((resolve, reject) => {
     const nodeStream = renderToNodeStream(
