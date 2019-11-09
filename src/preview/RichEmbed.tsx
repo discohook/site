@@ -91,8 +91,7 @@ const EmbedDescription = styled.div<{}, Theme>`
     line-height: 1rem;
     white-space: pre-line;
 
-    & ${CodeBlockContainer},
-    & ${BlockQuoteContent} {
+    & ${CodeBlockContainer}, & ${BlockQuoteContent} {
       max-width: 100%;
     }
   }
