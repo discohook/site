@@ -151,7 +151,7 @@ export default function Editor(props: Props) {
           maxLength={2000}
         />
         <MultiEditor<Embed>
-          items={message.embeds || []}
+          items={message.embeds ?? []}
           onChange={embeds =>
             handleChange({
               ...message,

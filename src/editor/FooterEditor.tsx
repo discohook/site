@@ -25,7 +25,7 @@ export default function FooterEditor(props: Props) {
 
   const handleChange = (embed: Pick<Embed, "footer" | "timestamp">) => {
     onChange({
-      footer: Object.values(embed.footer || {}).some(Boolean)
+      footer: Object.values(embed.footer ?? {}).some(Boolean)
         ? embed.footer
         : undefined,
       timestamp: embed.timestamp || undefined,
@@ -81,7 +81,7 @@ export default function FooterEditor(props: Props) {
       ) : (
         <InputField
           id={`message-embed${embedId}-footer-timestamp`}
-          value={timestamp && timestamp.replace(/[a-z]/gi, " ").slice(0, -8)}
+          value={timestamp?.replace(/[a-z]/gi, " ").slice(0, -8)}
           onChange={timestamp =>
             handleChange({
               footer,

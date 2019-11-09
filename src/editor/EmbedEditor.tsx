@@ -68,7 +68,7 @@ export default function EmbedEditor(props: Props) {
         }
       />
       <MultiEditor
-        items={embed.fields || []}
+        items={embed.fields ?? []}
         onChange={fields =>
           handleChange({
             ...embed,
@@ -98,7 +98,7 @@ export default function EmbedEditor(props: Props) {
       <InputGroup>
         <InputField
           id={`message-embed${embed[id]}-image`}
-          value={(embed.image || {}).url}
+          value={embed.image?.url}
           onChange={url =>
             handleChange({
               ...embed,
@@ -109,7 +109,7 @@ export default function EmbedEditor(props: Props) {
         />
         <InputField
           id={`message-embed${embed[id]}-thumbnail`}
-          value={(embed.thumbnail || {}).url}
+          value={embed.thumbnail?.url}
           onChange={url =>
             handleChange({
               ...embed,

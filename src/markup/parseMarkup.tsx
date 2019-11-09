@@ -79,7 +79,7 @@ const baseRules: ReactRules = {
         ? {
             name: capture[1],
             surrogate: nameToEmoji.get(capture[1]),
-            src: getEmojiUrl(nameToEmoji.get(capture[1]) || ""),
+            src: getEmojiUrl(nameToEmoji.get(capture[1]) ?? ""),
           }
         : {
             type: "text",
@@ -198,8 +198,8 @@ const blockRules: ReactRules = {
     order: defaultRules.codeBlock.order,
     match: anyScopeRegex(/^```(?:([a-z0-9-]+?)\n+)?\n*([\s\S]+?)\n*```/i),
     parse: (capture, _, state) => ({
-      language: (capture[1] || "").trim(),
-      content: capture[2] || "",
+      language: capture[1]?.trim() ?? "",
+      content: capture[2] ?? "",
       inQuote: state.inQuote,
     }),
     react: (node, _, state) => (
@@ -251,8 +251,7 @@ const ellipsize = (text: string, length: number) => {
     : `${shortenedText.slice(0, length)}…`
 }
 
-const now = () =>
-  typeof performance === "object" && performance.now ? performance.now() : 0
+const now = () => globalThis.performance?.now?.() ?? 0
 
 export const parseMarkup = (
   content: string,

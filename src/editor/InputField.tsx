@@ -30,8 +30,8 @@ export default function InputField(props: Props) {
   } = props
 
   let state: "normal" | "warning" | "error" = "normal"
-  if (value.length / (maxLength || 0) > 0.9) state = "warning"
-  if (value.length / (maxLength || 0) > 1) state = "error"
+  if (value.length / (maxLength ?? 0) > 0.9) state = "warning"
+  if (value.length / (maxLength ?? 0) > 1) state = "error"
 
   return (
     <InputContainer>

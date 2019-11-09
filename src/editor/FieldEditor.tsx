@@ -37,7 +37,7 @@ export default function FieldEditor(props: Props) {
           maxLength={256}
         />
         <InlineToggle
-          filled={field.inline || false}
+          filled={field.inline ?? false}
           onClick={() =>
             handleChange({
               ...field,

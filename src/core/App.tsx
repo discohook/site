@@ -78,12 +78,12 @@ export default function App() {
     const parameters = new URLSearchParams(search)
     const encodedBackup = parameters.get("backup")
 
-    const backup = decodeBackup(encodedBackup || "")
+    const backup = decodeBackup(encodedBackup ?? "")
     if (backup && !SERVER) {
       console.log("Loaded with shared backup:", backup)
     }
 
-    return backup || { message: initialMessage, files: [] }
+    return backup ?? { message: initialMessage, files: [] }
   })
 
   const lastUrlChangeRef = useRef(0)

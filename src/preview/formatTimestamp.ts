@@ -1,6 +1,6 @@
 export const getFormat = (date: Date, base?: Date) => {
   const givenDate = new Date(date).setHours(0, 0, 0, 0)
-  const now = new Date(base || Date.now()).setHours(0, 0, 0, 0)
+  const now = new Date(base ?? Date.now()).setHours(0, 0, 0, 0)
 
   const difference = (givenDate - now) / 86400000
 

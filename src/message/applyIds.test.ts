@@ -77,11 +77,11 @@ describe("applyIds", () => {
 
     expect.assertions(3)
 
-    for (const embed of withIds.embeds || []) {
+    for (const embed of withIds.embeds ?? []) {
       expect(embed).toHaveProperty([id])
     }
 
-    const ids = (withIds.embeds || []).map(embed => embed[id])
+    const ids = withIds.embeds?.map(embed => embed[id]) ?? []
     expect(new Set(ids).size).toBe(ids.length)
   })
 
@@ -106,12 +106,12 @@ describe("applyIds", () => {
 
     expect.assertions(6)
 
-    for (const embed of withIds.embeds || []) {
-      for (const field of embed.fields || []) {
+    for (const embed of withIds.embeds ?? []) {
+      for (const field of embed.fields ?? []) {
         expect(field).toHaveProperty([id])
       }
 
-      const ids = (embed.fields || []).map(field => field[id])
+      const ids = (embed.fields ?? []).map(field => field[id])
       expect(new Set(ids).size).toBe(ids.length)
     }
   })

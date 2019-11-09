@@ -5,7 +5,7 @@ const main = async () => {
   const { default: App } = await import(/* webpackChunkName: "app" */ "./App")
   const app = document.querySelector("#app")
 
-  if (app && app.hasChildNodes()) {
+  if (app?.hasChildNodes()) {
     hydrate(<App />, app)
   } else {
     render(<App />, app)

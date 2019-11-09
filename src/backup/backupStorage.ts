@@ -46,7 +46,7 @@ export const getBackups = async () => {
 
   await runTransaction("readonly", store => {
     // eslint-disable-next-line @typescript-eslint/unbound-method, @typescript-eslint/no-unnecessary-condition
-    const request = (store.openKeyCursor || store.openCursor).call(store)
+    const request = (store.openKeyCursor ?? store.openCursor).call(store)
 
     request.addEventListener("success", () => {
       if (!request.result) return
