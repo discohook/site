@@ -1,39 +1,46 @@
-import { diversities, emojis } from "./emojis"
+import { emojiData, toneNames, toneNumbers } from "./emojiData"
 
-const nameToEmoji = new Map<string, string>()
-const emojiToName = new Map<string, string>()
+export const nameToEmoji = new Map<string, string>()
+export const emojiToName = new Map<string, string>()
 
-for (const { emoji, names, hasDiversity } of emojis) {
-  for (const name of names) {
-    nameToEmoji.set(name, emoji)
+for (const { emoji, flags, aliases } of emojiData) {
+  for (const alias of aliases) {
+    if (!alias.flags?.includes("*")) {
+      nameToEmoji.set(alias.name, emoji)
+    }
 
-    if (!hasDiversity) continue
+    if (flags?.includes("+")) {
+      for (const [id, diversity] of Object.entries(toneNumbers)) {
+        nameToEmoji.set(`${alias.name}::skin-tone-${id}`, emoji + diversity)
+      }
+    }
 
-    for (const [id, diversity] of Object.entries(diversities)) {
-      const nameWithDiversity = `${name}::skin-tone-${Number(id) + 1}`
-      nameToEmoji.set(nameWithDiversity, `${emoji}${diversity}`)
+    if (alias.flags?.includes("#")) {
+      for (const [id, diversity] of Object.entries(toneNumbers)) {
+        nameToEmoji.set(`${alias.name}_tone${id}`, emoji + diversity)
+      }
+    }
+
+    if (alias.flags?.includes("!")) {
+      for (const [id, diversity] of Object.entries(toneNames)) {
+        nameToEmoji.set(`${alias.name}_${id}`, emoji + diversity)
+      }
     }
   }
 
-  emojiToName.set(emoji, names[0])
+  emojiToName.set(emoji, aliases[0].name)
 
-  if (!hasDiversity) continue
-
-  for (const [id, diversity] of Object.entries(diversities)) {
-    const name = `${names[0]}::skin-tone-${Number(id) + 1}`
-    emojiToName.set(`${emoji}${diversity}`, name)
+  if (flags?.includes("+")) {
+    for (const [id, diversity] of Object.entries(toneNumbers)) {
+      emojiToName.set(emoji + diversity, `${aliases[0].name}_tone${id}`)
+    }
   }
 }
 
-export { nameToEmoji, emojiToName }
-
 export const getEmojiUrl = (emoji: string) => {
-  if (["™", "©", "®"].includes(emoji)) return
-
   const file = [...emoji]
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    .map(char => char.codePointAt(0)!.toString(16))
+    .map(char => char.codePointAt(0)?.toString(16))
     .join("-")
 
-  return `https://jaylineko.github.io/discord-emoji/${file}.svg`
+  return `https://twitter.github.io/twemoji/v/12.1.3/svg/${file}.svg`
 }
