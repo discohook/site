@@ -1,4 +1,3 @@
-import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
@@ -6,50 +5,43 @@ import Markup from "../markup/Markup"
 import { MarkupContainer } from "../markup/styles"
 import { Field } from "../message/Message"
 
-const Container = styled.div<{ inline: boolean }>`
-  margin: 4px 0 0;
-  min-width: 100%;
-
-  ${({ inline }) =>
-    inline &&
-    css`
-      flex: 1;
-      min-width: 150px;
-    `}
+const Container = styled.div`
+  font-size: 0.875rem;
+  line-height: 1.125rem;
 `
 
 const FieldName = styled.div<{}, Theme>`
-  margin: 0 0 4px;
+  margin: 0 0 1px;
 
-  color: ${({ theme }) => (theme.color === "dark" ? "#ffffff" : "#36393f")};
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
+  color: ${({ theme }) => theme.text.muted};
 `
 
 const FieldValue = styled.div<{}, Theme>`
-  color: ${({ theme }) =>
-    theme.color === "dark" ? "rgba(255, 255, 255, 0.6)" : "#36393f"};
-  font-size: 0.875rem;
-
   & > ${MarkupContainer} {
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    color: ${({ theme }) => theme.text.normal};
     white-space: pre-line;
   }
 `
 
 type Props = {
   field: Field
+  width: string
 }
 
 export default function EmbedField(props: Props) {
-  const { name = "", value = "", inline = false } = props.field
+  const { field, width } = props
 
   return (
-    <Container inline={inline}>
+    <Container style={{ gridColumn: width }}>
       <FieldName>
-        <Markup content={name} inline />
+        <Markup content={field.name ?? ""} inline />
       </FieldName>
       <FieldValue>
-        <Markup content={value} />
+        <Markup content={field.value ?? ""} />
       </FieldValue>
     </Container>
   )

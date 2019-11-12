@@ -6,24 +6,26 @@ import { Author } from "../message/Message"
 const Container = styled.div`
   display: flex;
   align-items: center;
+  grid-column: 1 / 1;
+  margin: 8px 0 0;
 `
 
 const AuthorImage = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 
   margin: 0 8px 0 0;
 
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
 `
 
 const AuthorNameNormal = styled.span<{}, Theme>`
-  color: ${({ theme }) => (theme.color === "dark" ? "#ffffff" : "#4f545c")};
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
+  color: ${({ theme }) => theme.header.primary};
+
   white-space: pre-wrap;
-  margin: 0 0 1px;
   display: inline-block;
 `
 

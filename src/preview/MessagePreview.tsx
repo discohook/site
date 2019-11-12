@@ -48,6 +48,14 @@ const Container = styled.div<{}, Theme>`
     `}
 `
 
+const EmbedsContainer = styled.div`
+  margin: 0 0 8px;
+  padding: 0 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`
+
 type Props = {
   message: Message
   files: (File | FileLike)[]
@@ -62,9 +70,13 @@ export default function MessagePreview(props: Props) {
       <Container>
         <MessageHeader username={username} avatarUrl={avatarUrl} />
         {content && <Markup content={content} jumboable />}
-        {embeds?.map(embed => (
-          <RichEmbed embed={embed} key={embed[id]} />
-        ))}
+        {embeds && (
+          <EmbedsContainer>
+            {embeds.map(embed => (
+              <RichEmbed embed={embed} key={embed[id]} />
+            ))}
+          </EmbedsContainer>
+        )}
         {files.map(file => (
           <Attachment file={file} key={file.name} />
         ))}

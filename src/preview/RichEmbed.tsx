@@ -1,9 +1,12 @@
+import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
+import { numberToHex } from "../editor/ColorInput"
 import Markup from "../markup/Markup"
 import {
   BlockQuoteContent,
+  Code,
   CodeBlockContainer,
   Emoji,
   MarkupContainer,
@@ -13,67 +16,39 @@ import { id } from "../message/uid"
 import EmbedAuthor from "./EmbedAuthor"
 import EmbedField from "./EmbedField"
 import EmbedFooter from "./EmbedFooter"
+import { getFieldsWithWidths } from "./getFieldsWithWidths"
 
-const Container = styled.div`
-  margin: 8px 0 0;
+const Container = styled.div<{}, Theme>`
   max-width: 520px;
-  display: flex;
+  margin: 8px 0 0;
+  display: inline;
+
+  background: ${({ theme }) => theme.background.secondary};
+
+  border-radius: 4px;
+  border-left: 4px solid ${({ theme }) => theme.background.tertiary};
 
   & ${MarkupContainer} ${Emoji} {
-    object-fit: contain;
-    width: 1rem;
-    height: 1rem;
-    min-width: 22px;
-    min-height: 22px;
-
-    margin: 0 0.05em 0 0.1em;
-    vertical-align: -0.4em;
+    width: 18px;
+    height: 18px;
   }
 `
 
-const Pill = styled.div<{}, Theme>`
-  background: ${({ theme }) =>
-    theme.color === "dark" ? "#4f545c" : "#cacbce"};
-  border-radius: 3px 0 0 3px;
-  flex-shrink: 0;
-  width: 4px;
-`
-
-const EmbedContent = styled.div<{}, Theme>`
-  max-width: 520px;
-  display: flex;
-
-  border: 1px solid
-    ${({ theme }) =>
-      theme.color === "dark"
-        ? "rgba(46, 48, 54, 0.6)"
-        : "rgba(205, 205, 205, 0.3)"};
-
-  background: ${({ theme }) =>
-    theme.color === "dark"
-      ? "rgba(46, 48, 54, 0.3)"
-      : "rgba(249, 249, 249, 0.3)"};
-  border-radius: 0 3px 3px 0;
-
-  padding: 8px 10px;
-`
-
-const InnerEmbedContent = styled.div`
-  flex: 1;
-  overflow: hidden;
-
-  & > * + * {
-    margin: 4px 0 0;
-  }
+const EmbedGrid = styled.div<{}, Theme>`
+  padding: 8px 16px 16px;
+  display: inline-grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
 `
 
 const EmbedTitleNormal = styled.span<{}, Theme>`
   display: inline-block;
-  padding: 2px 0 1px;
+  margin: 8px 0 0;
+  grid-column: 1 / 1;
 
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: ${({ theme }) => (theme.color === "dark" ? "#ffffff" : "#4f545c")};
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.header.primary};
 `
 
 const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
@@ -81,49 +56,65 @@ const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
 `
 
 const EmbedDescription = styled.div<{}, Theme>`
-  color: ${({ theme }) =>
-    theme.color === "dark"
-      ? "rgba(255, 255, 255, 0.6)"
-      : "rgba(79, 83, 91, 0.9)"};
-  font-size: 0.875rem;
+  margin: 8px 0 0;
+  grid-column: 1 / 1;
 
   & > ${MarkupContainer} {
-    line-height: 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+
+    color: ${({ theme }) => theme.text.normal};
+
+    line-height: 1.125rem;
     white-space: pre-line;
 
     & ${CodeBlockContainer}, & ${BlockQuoteContent} {
       max-width: 100%;
     }
+
+    & ${Code}, & ${CodeBlockContainer} {
+      background: ${({ theme }) => theme.background.tertiary};
+    }
   }
 `
 
 const EmbedFields = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  margin: 8px 0 0;
+
+  display: grid;
+  grid-column: 1 / 1;
+  grid-gap: 8px;
 `
 
-const EmbedImage = styled.img`
+const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
   max-width: 256px;
   max-height: 256px;
 
-  border-radius: 3px;
+  margin: 16px 0 0;
+  border-radius: 4px;
 
   cursor: pointer;
 
-  * + & {
-    margin: 8px 0 0;
-  }
+  grid-column: 1 / 1;
+
+  ${({ hasThumbnail }) =>
+    hasThumbnail &&
+    css`
+      grid-column: 1 / 3;
+    `}
 `
 
 const EmbedThumbnail = styled.img`
   width: 80px;
   height: 80px;
+  margin: 8px 0 0 16px;
+
+  border-radius: 4px;
+
+  grid-row: 1 / 8;
+  grid-column: 2 / 2;
   flex-shrink: 0;
-
-  margin: 0 0 0 16px;
-
-  border-radius: 3px;
-  object-fit: contain;
+  justify-self: end;
 
   cursor: pointer;
 `
@@ -146,43 +137,44 @@ export default function RichEmbed(props: Props) {
     fields,
   } = props.embed
 
-  const embedPillColor =
-    typeof color === "number"
-      ? `#${color.toString(16).padStart(6, "0")}`
-      : undefined
+  const embedColor = numberToHex(color)
+  const hasThumbnail = Boolean(thumbnail)
 
   const EmbedTitle = url ? EmbedTitleLink : EmbedTitleNormal
 
   return (
-    <Container>
-      <Pill style={{ backgroundColor: embedPillColor }} />
-      <EmbedContent>
-        <InnerEmbedContent>
-          {author && <EmbedAuthor author={author} />}
-          {title && (
-            <EmbedTitle href={url}>
-              <Markup content={title} inline />
-            </EmbedTitle>
-          )}
-          {description && (
-            <EmbedDescription>
-              <Markup content={description} />
-            </EmbedDescription>
-          )}
-          {fields && (
-            <EmbedFields>
-              {fields.map(field => (
-                <EmbedField field={field} key={field[id]} />
-              ))}
-            </EmbedFields>
-          )}
-          {image && <EmbedImage src={image.url} alt="Image" />}
-          {(footer ?? timestamp) && (
-            <EmbedFooter footer={footer} timestamp={timestamp} />
-          )}
-        </InnerEmbedContent>
+    <Container style={{ borderColor: embedColor }}>
+      <EmbedGrid>
+        {author && <EmbedAuthor author={author} />}
+        {title && (
+          <EmbedTitle href={url}>
+            <Markup content={title} inline />
+          </EmbedTitle>
+        )}
+        {description && (
+          <EmbedDescription>
+            <Markup content={description} />
+          </EmbedDescription>
+        )}
+        {fields && (
+          <EmbedFields>
+            {getFieldsWithWidths(fields).map(({ width, ...field }) => (
+              <EmbedField key={field[id]} field={field} width={width} />
+            ))}
+          </EmbedFields>
+        )}
+        {image && (
+          <EmbedImage src={image.url} alt="Image" hasThumbnail={hasThumbnail} />
+        )}
+        {(footer ?? timestamp) && (
+          <EmbedFooter
+            footer={footer}
+            timestamp={timestamp}
+            hasThumbnail={hasThumbnail}
+          />
+        )}
         {thumbnail && <EmbedThumbnail src={thumbnail.url} alt="Thumbnail" />}
-      </EmbedContent>
+      </EmbedGrid>
     </Container>
   )
 }

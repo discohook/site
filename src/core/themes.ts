@@ -6,8 +6,28 @@ const common = {
   red: "#f04747",
 
   fonts: {
-    sans: "Whitney, Helvetica Neue, Helvetica, Arial, sans-serif",
-    mono: "SourceCodePro, Consolas, Liberation Mono, Menlo, Courier, monospace",
+    sans: [
+      "Whitney",
+      "Helvetica Neue",
+      "Helvetica",
+      "Arial",
+      "sans-serif",
+    ].join(","),
+    mono: [
+      "Consolas",
+      "Andale Mono WT",
+      "Andale Mono",
+      "Lucida Console",
+      "Lucida Sans Typewriter",
+      "DejaVu Sans Mono",
+      "Bitstream Vera Sans Mono",
+      "Liberation Mono",
+      "Nimbus Mono L",
+      "Monaco",
+      "Courier New",
+      "Courier",
+      "monospace",
+    ].join(","),
   },
 }
 

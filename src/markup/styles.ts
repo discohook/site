@@ -10,14 +10,16 @@ export const MarkupContainer = styled.div`
 `
 
 export const Code = styled.code<{}, Theme>`
-  padding: 2.38px;
-  margin: -2.38px 0;
+  padding: 0.2em;
+  margin: -0.2em 0;
 
   border-radius: 3px;
   background: ${({ theme }) => theme.background.secondary};
 
   font-size: 0.85em;
-  line-height: 16px;
+  line-height: 1.125rem;
+
+  white-space: pre-wrap;
 `
 
 export const Emoji = styled.img<{ big?: boolean }, Theme>`
@@ -81,7 +83,7 @@ export const BlockQuoteContent = styled.blockquote<{}, Theme>`
 `
 
 export const CodeBlockContainer = styled.pre<{}, Theme>`
-  max-width: 100%;
+  max-width: 90%;
   margin: 6px 0 0;
   padding: 7px;
 
@@ -90,10 +92,38 @@ export const CodeBlockContainer = styled.pre<{}, Theme>`
   border-radius: 5px;
 
   color: ${({ theme }) => theme.header.secondary};
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
 
-  white-space: pre-wrap;
+  white-space: pre;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-corner {
+    border: none;
+    background: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(24, 25, 28, 0.6);
+    border-radius: 2px;
+    cursor: move;
+    border: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border: none;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    border: none;
+  }
 
   & .hljs-comment,
   & .hljs-quote {

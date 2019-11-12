@@ -1,16 +1,24 @@
+import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
 import { Footer } from "../message/Message"
 import { formatTimestamp } from "./formatTimestamp"
 
-const Container = styled.div`
+const Container = styled.div<{ hasThumbnail?: boolean }>`
+  margin: 8px 0 0;
+
   display: flex;
   align-items: center;
 
-  * + && {
-    margin: 8px 0 0;
-  }
+  grid-row: auto / auto;
+  grid-column: 1 / 1;
+
+  ${({ hasThumbnail }) =>
+    hasThumbnail &&
+    css`
+      grid-column: 1 / 3;
+    `}
 `
 
 const FooterImage = styled.img`
@@ -19,38 +27,36 @@ const FooterImage = styled.img`
 
   margin: 0 8px 0 0;
 
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
 `
 
 const FooterText = styled.span<{}, Theme>`
-  color: ${({ theme }) =>
-    theme.color === "dark"
-      ? "rgba(255, 255, 255, 0.6)"
-      : "rgba(79, 83, 91, 0.6)"};
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.text.muted};
+  line-height: 1rem;
 `
 
 const FooterSeparator = styled.span<{}, Theme>`
   display: inline-block;
   margin: 0 4px;
 
-  color: ${({ theme }) => (theme.color === "dark" ? "#4f545c" : "#cacbce")};
   font-weight: 700;
+  color: ${({ theme }) => theme.backgroundModifier.accent};
 `
 
 type Props = {
   footer?: Footer
   timestamp?: string
+  hasThumbnail?: boolean
 }
 
 export default function EmbedFooter(props: Props) {
-  const { footer = {}, timestamp } = props
+  const { footer = {}, timestamp, hasThumbnail } = props
   const { text, iconUrl } = footer
 
   return (
-    <Container>
+    <Container hasThumbnail={hasThumbnail}>
       {iconUrl && <FooterImage src={iconUrl} alt="Footer image" />}
       <FooterText>
         {text}
