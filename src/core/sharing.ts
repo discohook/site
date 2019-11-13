@@ -5,7 +5,13 @@ import { applyIds } from "../message/applyIds"
 import { SERVER } from "./environment"
 
 export const setUrlToBackup = (backup: Backup) => {
-  const json = JSON.stringify(backup)
+  const files = backup.files.map(file => ({
+    name: file.name,
+    size: file.size,
+    type: file.type,
+  }))
+
+  const json = JSON.stringify({ ...backup, files })
   const base64 = base64Encode(json, true)
 
   history.replaceState(undefined, "", `?backup=${base64}`)
