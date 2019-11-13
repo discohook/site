@@ -378,8 +378,8 @@ const rawData = `
 👨‍❤️‍👨 couple_mm couple_with_heart_mm
 💏 couplekiss
 👩‍❤️‍💋‍👨 kiss_woman_man
-👩‍❤️‍💋‍👨 kiss_ww couplekiss_ww
-👩‍❤️‍💋‍👨 kiss_mm couplekiss_mm
+👩‍❤️‍💋‍👩 kiss_ww couplekiss_ww
+👨‍❤️‍💋‍👨 kiss_mm couplekiss_mm
 👪 family
 👨‍👩‍👦 family_man_woman_boy
 👨‍👩‍👧 family_mwg
