@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { SERVER } from "../core/environment"
 import { FileLike } from "../message/FileLike"
 import AudioAttachment from "./AudioAttachment"
@@ -14,13 +14,10 @@ export default function Attachment(props: Props) {
   const { file } = props
   const { name, type: mime } = file
 
-  const [type, setType] = useState(getAttachmentType(name, mime))
+  const type = getAttachmentType(name, mime)
   useEffect(() => {
-    setType(getAttachmentType(name, mime))
-  }, [mime, name])
-  useEffect(() => {
-    console.log(`Attachment type for ${name}:`, type)
-  }, [name, type])
+    console.log(`Attachment type for ${name} (${mime}):`, type)
+  }, [mime, name, type])
 
   if (!SERVER && file instanceof File && type === "image") {
     return <ImageAttachment file={file} />
