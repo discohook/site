@@ -28,9 +28,19 @@ const Container = styled.div<{}, Theme>`
   border-radius: 4px;
   border-left: 4px solid ${({ theme }) => theme.background.tertiary};
 
-  & ${MarkupContainer} ${Emoji} {
-    width: 18px;
-    height: 18px;
+  & ${MarkupContainer} {
+    & ${Emoji} {
+      width: 18px;
+      height: 18px;
+    }
+
+    & ${CodeBlockContainer}, & ${BlockQuoteContent} {
+      max-width: 100%;
+    }
+
+    & ${Code}, & ${CodeBlockContainer} {
+      background: ${({ theme }) => theme.background.tertiary};
+    }
   }
 `
 
@@ -67,14 +77,6 @@ const EmbedDescription = styled.div<{}, Theme>`
 
     line-height: 1.125rem;
     white-space: pre-line;
-
-    & ${CodeBlockContainer}, & ${BlockQuoteContent} {
-      max-width: 100%;
-    }
-
-    & ${Code}, & ${CodeBlockContainer} {
-      background: ${({ theme }) => theme.background.tertiary};
-    }
   }
 `
 
