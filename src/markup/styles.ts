@@ -95,35 +95,7 @@ export const CodeBlockContainer = styled.pre<{}, Theme>`
   font-size: 0.875rem;
   line-height: 1.125rem;
 
-  white-space: pre;
-  overflow-x: auto;
-
-  &::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-corner {
-    border: none;
-    background: none;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(24, 25, 28, 0.6);
-    border-radius: 2px;
-    cursor: move;
-    border: none;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-    border: none;
-  }
-
-  &::-webkit-scrollbar-track-piece {
-    border: none;
-  }
+  white-space: pre-wrap;
 
   & .hljs-comment,
   & .hljs-quote {
