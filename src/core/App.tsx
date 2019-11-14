@@ -112,9 +112,7 @@ export default function App() {
     ...(colorTheme === "dark" ? darkTheme : lightTheme),
     color: colorTheme,
     display: displayTheme,
-    mobile: /mobile/i.test(
-      SERVER && request ? request.get("User-Agent") : navigator.userAgent,
-    ),
+    mobile: /mobile/i.test(request?.get("User-Agent") ?? navigator.userAgent),
   }
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
