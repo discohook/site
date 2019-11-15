@@ -1802,5 +1802,3 @@ export const emojiData: Emoji[] = rawData.split("\n").map(data => {
     })),
   }
 })
-
-console.log(emojiData)
