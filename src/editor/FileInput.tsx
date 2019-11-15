@@ -55,7 +55,7 @@ export default function FileInput(props: Props) {
     handleChange([])
   }
 
-  const filesAvailable = !SERVER && files.every(file => file instanceof File)
+  const filesAvailable = files.every(file => !SERVER && file instanceof File)
 
   return (
     <InputContainer>
