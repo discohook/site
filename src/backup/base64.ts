@@ -2,7 +2,7 @@ import { SERVER } from "../core/environment"
 
 export const base64Encode = (data: string, safe = false) => {
   if (SERVER) {
-    let base64 = Buffer.from(data, "binary").toString("base64")
+    let base64 = Buffer.from(data, "utf8").toString("base64")
 
     if (safe) {
       base64 = base64
@@ -36,7 +36,7 @@ export const base64Decode = (base64: string) => {
   const data = base64.replace(/-/g, "+").replace(/_/g, "/")
 
   if (SERVER) {
-    return Buffer.from(data, "base64").toString("binary")
+    return Buffer.from(data, "base64").toString("utf8")
   }
 
   try {
