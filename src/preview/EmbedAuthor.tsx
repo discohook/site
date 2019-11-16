@@ -38,11 +38,13 @@ type Props = {
 export default function EmbedAuthor(props: Props) {
   const { name, url, iconUrl } = props.author
 
+  const hasIcon = /^https?:\/\/.+/i.test(iconUrl ?? "")
+
   const AuthorName = url ? AuthorNameLink : AuthorNameNormal
 
   return (
     <Container>
-      {iconUrl && <AuthorImage src={iconUrl} alt="Author image" />}
+      {hasIcon && <AuthorImage src={iconUrl} alt="Author image" />}
       {name && <AuthorName href={url}>{name}</AuthorName>}
     </Container>
   )

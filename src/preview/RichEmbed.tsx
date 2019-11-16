@@ -140,7 +140,9 @@ export default function RichEmbed(props: Props) {
   } = props.embed
 
   const embedColor = numberToHex(color)
-  const hasThumbnail = Boolean(thumbnail)
+
+  const hasThumbnail = /^https?:\/\/.+/i.test(thumbnail?.url ?? "")
+  const hasImage = /^https?:\/\/.+/i.test(image?.url ?? "")
 
   const EmbedTitle = url ? EmbedTitleLink : EmbedTitleNormal
 
@@ -165,8 +167,12 @@ export default function RichEmbed(props: Props) {
             ))}
           </EmbedFields>
         )}
-        {image && (
-          <EmbedImage src={image.url} alt="Image" hasThumbnail={hasThumbnail} />
+        {hasImage && (
+          <EmbedImage
+            src={image?.url}
+            alt="Image"
+            hasThumbnail={hasThumbnail}
+          />
         )}
         {(footer ?? timestamp) && (
           <EmbedFooter
@@ -175,7 +181,9 @@ export default function RichEmbed(props: Props) {
             hasThumbnail={hasThumbnail}
           />
         )}
-        {thumbnail && <EmbedThumbnail src={thumbnail.url} alt="Thumbnail" />}
+        {hasThumbnail && (
+          <EmbedThumbnail src={thumbnail?.url} alt="Thumbnail" />
+        )}
       </EmbedGrid>
     </Container>
   )

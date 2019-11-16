@@ -55,9 +55,11 @@ export default function EmbedFooter(props: Props) {
   const { footer = {}, timestamp, hasThumbnail } = props
   const { text, iconUrl } = footer
 
+  const hasIcon = /https?:\/\/.+/i.test(iconUrl ?? "")
+
   return (
     <Container hasThumbnail={hasThumbnail}>
-      {iconUrl && <FooterImage src={iconUrl} alt="Footer image" />}
+      {hasIcon && <FooterImage src={iconUrl} alt="Footer image" />}
       <FooterText>
         {text}
         {text && timestamp && <FooterSeparator>•</FooterSeparator>}
