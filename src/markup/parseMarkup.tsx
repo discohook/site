@@ -258,9 +258,9 @@ const now = () => globalThis.performance?.now?.() ?? 0
 
 export const parseMarkup = (
   content: string,
-  options: { inline?: boolean; jumboable?: boolean },
+  options?: { inline?: boolean; jumboable?: boolean },
 ) => {
-  const { inline = false, jumboable = false } = options
+  const { inline = false, jumboable = false } = options || {}
 
   const startTime = now()
 
