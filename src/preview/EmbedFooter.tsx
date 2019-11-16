@@ -12,7 +12,7 @@ const Container = styled.div<{ hasThumbnail?: boolean }>`
   align-items: center;
 
   grid-row: auto / auto;
-  grid-column: 1 / 1;
+  grid-column: 1 / 2;
 
   ${({ hasThumbnail }) =>
     hasThumbnail &&

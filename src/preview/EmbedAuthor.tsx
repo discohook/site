@@ -6,7 +6,7 @@ import { Author } from "../message/Message"
 const Container = styled.div`
   display: flex;
   align-items: center;
-  grid-column: 1 / 1;
+  grid-column: 1 / 2;
   margin: 8px 0 0;
 `
 

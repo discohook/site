@@ -54,7 +54,7 @@ const EmbedGrid = styled.div<{}, Theme>`
 const EmbedTitleNormal = styled.span<{}, Theme>`
   display: inline-block;
   margin: 8px 0 0;
-  grid-column: 1 / 1;
+  grid-column: 1 / 2;
 
   font-size: 1rem;
   font-weight: 600;
@@ -67,7 +67,7 @@ const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
 
 const EmbedDescription = styled.div<{}, Theme>`
   margin: 8px 0 0;
-  grid-column: 1 / 1;
+  grid-column: 1 / 2;
 
   & > ${MarkupContainer} {
     font-size: 0.875rem;
@@ -84,7 +84,7 @@ const EmbedFields = styled.div`
   margin: 8px 0 0;
 
   display: grid;
-  grid-column: 1 / 1;
+  grid-column: 1 / 2;
   grid-gap: 8px;
 `
 
@@ -97,7 +97,7 @@ const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
 
   cursor: pointer;
 
-  grid-column: 1 / 1;
+  grid-column: 1 / 2;
 
   ${({ hasThumbnail }) =>
     hasThumbnail &&
