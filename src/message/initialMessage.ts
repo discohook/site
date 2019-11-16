@@ -3,7 +3,7 @@ import { Message } from "./Message"
 
 export const initialMessage: Message = applyIds({
   content: `
-Hey, this is Discohook, a message builder for Discord webhooks. <:discohook:600312020192985088>
+Hey, this is Discohook, a message builder for Discord webhooks. <:discohook:638012379925577748>
 You can read through my not-so-small introduction to this project below, or click the **Clear all** button on the top to get started.
 `.trim(),
   embeds: [
@@ -28,6 +28,7 @@ These messages can contain a lot more than just text, but also up to 10 embeds l
       description: `
 Originally, embeds got introduced to give everyone reading the chat a hint on what a link will be about,
 however since then Discord has expanded the feature and started allowing bots and webhooks to take advantage of this feature, too.
+In fact, this entire message can be sent to any Discord channel, given you have permission to create a webhook.
 
 Embeds have many shiny features, like the title and description you're reading right now, but also up to 25 "fields", authors, footers, and even more!
 On the editor on your left you can set all properties that embeds can have with ease.
@@ -45,6 +46,7 @@ It's very simple:
 - or use \`**\`s to make your text **bold**,
 - or \`__\`s to make your text __underlined__,
 - or \`~~\`s to make your text ~~striketrough~~,
+- or \`\` \` \`\`s to make your text \`code\`.
 
 You can combine them in any order, if you want to, just make sure the order matches up:
 \`__**text**__\` results in __**text**__, but \`__**text__**\` results in __**text__**, which is probably not what you want.
@@ -67,6 +69,8 @@ Discord will send your message with the raw formatting required to use emoji in 
           value: `
 You can also mention your members, or tag a channel by using this syntax:
 \`<@!user-id>\`, \`<@&role-id>\`, or \`<#channel-id>\`.
+As an example, to mention someone: \`<@!143419667677970434>\`. Don't include the user, role, or channel name.
+If done correctly, it should show <@!1>, <@&1>, or <#1>. Sadly it's impossible to get the channel name inside of Discohook right now, so make sure the ID is correct!
 
 You can get these IDs by going into Discord's appearance settings, and enabling developer mode.
 After you enabled that setting, you can right click on a user, role, or channel to copy it's ID!
