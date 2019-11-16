@@ -103,7 +103,8 @@ You can use them using Reddit-style syntax: \`[text](https://example.com/)\` tur
     {
       author: {
         name: "Author",
-        iconUrl: "https://cdn.discordapp.com/embed/avatars/4.png",
+        iconUrl:
+          "https://discohook.jaylineko.com/assets/discord-avatar-red.png",
       },
       title: "Demo embed",
       url: "https://discordapp.com/",
@@ -137,12 +138,13 @@ You can even have inline fields, like the ones below! :arrow_down:
       ],
       footer: {
         text: "There's also footers, and timestamps",
-        iconUrl: "https://cdn.discordapp.com/embed/avatars/4.png",
+        iconUrl:
+          "https://discohook.jaylineko.com/assets/discord-avatar-red.png",
       },
       timestamp: "2019-04-22T11:02:04.000Z",
       color: 0xf04747,
       thumbnail: {
-        url: "https://cdn.discordapp.com/embed/avatars/4.png",
+        url: "https://discohook.jaylineko.com/assets/discord-avatar-red.png",
       },
     },
     {
