@@ -106,7 +106,7 @@ const baseRules: ReactRules = {
       id: capture[2],
       name: `${capture[1]}`,
       src:
-        capture[2] === "638012379925577748"
+        capture[2] === "645409602393079819"
           ? "https://discohook.jaylineko.com/assets/discohook-emoji.png"
           : `https://cdn.discordapp.com/emojis/${capture[2]}?v=1`,
     }),
