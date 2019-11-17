@@ -82,8 +82,8 @@ export const InputNote = styled.div<InputNoteProps, Theme>`
     font-weight: 500;
 
     color: ${({ theme, state }) => {
-      if (state === "error") return theme.red
-      if (state === "warning") return theme.yellow
+      if (state === "error") return theme.accents.danger
+      if (state === "warning") return theme.accents.warning
       return theme.text
     }};
   }
@@ -96,7 +96,7 @@ export const Button = styled.button<{}, Theme>`
   padding: 0 10px;
 
   background: transparent;
-  border: 1px solid ${({ theme }) => theme.accent};
+  border: 1px solid ${({ theme }) => theme.accents.primary};
   border-radius: 3px;
   outline: none;
   cursor: pointer;
@@ -110,7 +110,7 @@ export const Button = styled.button<{}, Theme>`
   transition: background-color 300ms;
 
   &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.accent};
+    background: ${({ theme }) => theme.accents.primary};
   }
 
   &:disabled {
@@ -123,7 +123,7 @@ Button.defaultProps = { type: "button" }
 export const ToggleButton = styled(Button)<{ filled: boolean }, Theme>`
   && {
     background: ${({ theme, filled }) =>
-      filled ? theme.accent : "transparent"};
+      filled ? theme.accents.primary : "transparent"};
     color: ${({ theme }) => theme.header.primary};
   }
 `

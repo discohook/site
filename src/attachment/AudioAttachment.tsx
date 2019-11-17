@@ -110,7 +110,7 @@ const AudioSeekbarHandle = styled.div<{}, Theme>`
   width: 6px;
   height: 6px;
 
-  background: ${({ theme }) => theme.accent};
+  background: ${({ theme }) => theme.accents.primary};
   border-radius: 3px;
 `
 

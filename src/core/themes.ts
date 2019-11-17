@@ -1,9 +1,10 @@
 const common = {
-  accent: "#7289da",
-
-  green: "#43b581",
-  yellow: "#faa61a",
-  red: "#f04747",
+  accents: {
+    primary: "#7289da",
+    success: "#43b581",
+    warning: "#faa61a",
+    danger: "#f04747",
+  },
 
   fonts: {
     sans: [

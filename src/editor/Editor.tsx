@@ -44,7 +44,7 @@ const JavaScriptWarning = styled.noscript<{}, Theme>`
 
   margin: -8px -8px 16px;
   padding: 16px;
-  background: ${({ theme }) => theme.red};
+  background: ${({ theme }) => theme.accents.danger};
   color: #ffffff;
 `
 

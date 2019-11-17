@@ -79,7 +79,7 @@ const BotTag = styled.span<{}, Theme>`
   border-radius: 3px;
   margin: 0 4.8px;
 
-  background: ${({ theme }) => theme.accent};
+  background: ${({ theme }) => theme.accents.primary};
 
   color: #ffffff;
   font-size: 0.625em;

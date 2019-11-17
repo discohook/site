@@ -45,12 +45,14 @@ export const Mention = styled.span<{}, Theme>`
 
   background: ${({ theme }) =>
     theme.color === "dark" ? "rgba(114, 137, 218, 0.1)" : "#f1f3fb"};
-  color: ${({ theme }) => theme.accent};
+  color: ${({ theme }) => theme.accents.primary};
   font-weight: 500;
 
   &:hover {
     background: ${({ theme }) =>
-      theme.color === "dark" ? "rgba(114, 137, 218, 0.7)" : theme.accent};
+      theme.color === "dark"
+        ? "rgba(114, 137, 218, 0.7)"
+        : theme.accents.primary};
     color: #ffffff;
   }
 `
