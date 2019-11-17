@@ -22,13 +22,13 @@ export const decodeBackup = (base64: string) => {
 
   const json = base64Decode(base64)
   if (!json) {
-    if (!SERVER) console.error("Shared backup contained invalid base 64")
+    if (!SERVER) console.error("Shared backup contained invalid base 64 data")
     return
   }
 
   const { value: parsedJson, error } = parseJson(json)
   if (error) {
-    if (!SERVER) console.error("Shared backup JSON parse error:", error)
+    if (!SERVER) console.error("Shared backup parse error:", error)
     return
   }
 

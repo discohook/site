@@ -105,7 +105,7 @@ export default function App() {
     setDisplayTheme(displayTheme === "cozy" ? "compact" : "cozy")
 
   useEffect(() => {
-    console.log("Theme updated:", colorTheme, displayTheme)
+    console.log("Theme set:", colorTheme, displayTheme)
   }, [colorTheme, displayTheme])
 
   const theme: Theme = {
