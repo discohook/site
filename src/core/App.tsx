@@ -91,7 +91,7 @@ export default function App() {
     const timeoutId = setTimeout(() => {
       lastUrlChangeRef.current = Date.now()
       setUrlToBackup(backup)
-    }, 1000 - (Date.now() - lastUrlChangeRef.current))
+    }, Math.max(1000 - (Date.now() - lastUrlChangeRef.current), 0))
 
     return () => clearTimeout(timeoutId)
   }, [backup])
