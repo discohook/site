@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 
+import { SERVER } from "../core/environment"
 import { aliases } from "./aliases"
 import { hljs } from "./hljs"
 import { importRawLanguage } from "./importRawLanguage"
@@ -18,5 +19,5 @@ export const importLanguage = async (name: string) => {
   }
 
   hljs.registerLanguage(language.name, await langPromise)
-  console.log("Registered highlight.js language:", language.name)
+  if (!SERVER) console.log("Registered highlight.js language:", language.name)
 }

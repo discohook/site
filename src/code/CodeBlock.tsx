@@ -1,6 +1,19 @@
 import React, { useEffect, useState } from "react"
+import { SERVER } from "../core/environment"
 import { CodeBlockContainer } from "../markup/styles"
+import { aliases } from "./aliases"
 import { highlightCode } from "./highlightCode"
+import { hljs } from "./hljs"
+import { importLanguage } from "./importLanguage"
+import { languages } from "./languages"
+
+if (SERVER) {
+  Promise.all(languages.map(async language => importLanguage(language.name)))
+    .then(() => {})
+    .catch(error => {
+      console.error("Error importing language", error)
+    })
+}
 
 type Props = {
   content: string
@@ -17,6 +30,18 @@ export default function CodeBlock(props: Props) {
       .then(setHtml)
       .catch(() => setHtml(undefined))
   }, [content, language])
+
+  if (process.env.SERVER) {
+    const safeLanguage = aliases[language]?.name ?? "plaintext"
+
+    return (
+      <CodeBlockContainer
+        dangerouslySetInnerHTML={{
+          __html: hljs.highlight(safeLanguage, content).value,
+        }}
+      />
+    )
+  }
 
   if (!html) {
     return <CodeBlockContainer>{content}</CodeBlockContainer>
