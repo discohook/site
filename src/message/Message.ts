@@ -1,54 +1,54 @@
 import { id } from "./uid"
 
 export type Message = {
-  content?: string
-  embeds?: Embed[]
-  username?: string
-  avatarUrl?: string
+  readonly content?: string
+  readonly embeds?: readonly Embed[]
+  readonly username?: string
+  readonly avatarUrl?: string
 }
 
 export type MessageWithoutIds = Omit<Message, "embeds"> & {
-  embeds?: EmbedWithoutIds[]
+  readonly embeds?: readonly EmbedWithoutIds[]
 }
 
 export type Embed = {
-  [id]: number
-  title?: string
-  description?: string
-  url?: string
-  timestamp?: string
-  color?: number | null
-  footer?: Footer
-  image?: Image
-  thumbnail?: Image
-  author?: Author
-  fields?: Field[]
+  readonly [id]: number
+  readonly title?: string
+  readonly description?: string
+  readonly url?: string
+  readonly timestamp?: string
+  readonly color?: number | null
+  readonly footer?: Footer
+  readonly image?: Image
+  readonly thumbnail?: Image
+  readonly author?: Author
+  readonly fields?: readonly Field[]
 }
 
 export type EmbedWithoutIds = Omit<Embed, symbol | "fields"> & {
-  fields?: FieldWithoutIds[]
+  readonly fields?: readonly FieldWithoutIds[]
 }
 
 export type Author = {
-  name?: string
-  url?: string
-  iconUrl?: string
+  readonly name?: string
+  readonly url?: string
+  readonly iconUrl?: string
 }
 
 export type Footer = {
-  text?: string
-  iconUrl?: string
+  readonly text?: string
+  readonly iconUrl?: string
 }
 
 export type Field = {
-  [id]: number
-  name?: string
-  value?: string
-  inline?: boolean
+  readonly [id]: number
+  readonly name?: string
+  readonly value?: string
+  readonly inline?: boolean
 }
 
 export type FieldWithoutIds = Omit<Field, symbol>
 
 export type Image = {
-  url?: string
+  readonly url?: string
 }

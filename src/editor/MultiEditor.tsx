@@ -8,7 +8,7 @@ import {
 } from "./styles"
 
 type Props<T> = {
-  items: T[]
+  items: readonly T[]
   onChange: (items: T[]) => void
   children: (item: T, onChange: (item: T) => void) => ReactNode
   name: string

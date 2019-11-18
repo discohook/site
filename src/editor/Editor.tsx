@@ -51,8 +51,8 @@ const JavaScriptWarning = styled.noscript<{}, Theme>`
 type Props = {
   message: Message
   onChange: (message: Message) => void
-  files: (File | FileLike)[]
-  onFilesChange: (files: (File | FileLike)[]) => void
+  files: readonly (File | FileLike)[]
+  onFilesChange: (files: readonly (File | FileLike)[]) => void
   onToggleTheme: () => void
   onToggleDisplay: () => void
 }

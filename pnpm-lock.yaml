@@ -6,6 +6,7 @@ dependencies:
   core-js: 3.4.1
   emotion-theming: 10.0.19_b72901fefb9c28f220e25710e5576e8f
   highlight.js: 9.16.2
+  immer: 5.0.0
   isbot: 2.5.2
   koa: 2.11.0
   koa-conditional-get: 2.0.0
@@ -4550,6 +4551,10 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
+  /immer/5.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-G7gRqKbi9NE025XVyqyTV98dxUOtdKvu/P1QRaVZfA55aEcXgjbxPdm+TlWdcSMNPKijlaHNz61DGPyelouRlA==
   /import-fresh/3.2.1:
     dependencies:
       parent-module: 1.0.1
@@ -8990,6 +8995,7 @@ specifiers:
   eslint-plugin-unicorn: ^13.0.0
   highlight.js: ^9.16.2
   html-webpack-plugin: ^3.2.0
+  immer: ^5.0.0
   isbot: ^2.5.2
   jest: ^24.9.0
   koa: ^2.11.0

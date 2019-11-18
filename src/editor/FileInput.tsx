@@ -39,8 +39,8 @@ const RemoveFilesButton = styled(Button)`
 `
 
 type Props = {
-  files: (File | FileLike)[]
-  onChange: (files: (File | FileLike)[]) => void
+  files: readonly (File | FileLike)[]
+  onChange: (files: readonly (File | FileLike)[]) => void
 }
 
 export default function FileInput(props: Props) {

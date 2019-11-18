@@ -116,7 +116,7 @@ describe("applyIds", () => {
     }
   })
 
-  it("handles messages with no embeds", () => {
+  it("handles messages with no embeds or fields", () => {
     const messageWithoutEmbeds = { content: "Thanks!" }
     expect(applyIds(messageWithoutEmbeds)).toEqual(messageWithoutEmbeds)
 

@@ -71,9 +71,10 @@ export const getBackup = async (name: string) => {
   const backup: Backup | undefined = request.result
   if (!backup) return
 
-  backup.message = applyIds(backup.message)
-
-  return backup
+  return {
+    ...backup,
+    message: applyIds(backup.message),
+  }
 }
 
 export const deleteBackup = async (name: string) => {

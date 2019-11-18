@@ -90,7 +90,7 @@ const DeleteAction = styled.a<{}, Theme>`
 
 type Props = {
   message: Message
-  files: FileLike[]
+  files: readonly FileLike[]
   onLoad: (backup: Backup) => void
   onClose: () => void
 }

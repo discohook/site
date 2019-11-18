@@ -2,7 +2,7 @@ import { Field } from "../message/Message"
 
 type FieldWithWidth = Field & { width: string }
 
-export const getFieldsWithWidths = (fields: Field[]) => {
+export const getFieldsWithWidths = (fields: readonly Field[]) => {
   const fieldsWithWidths: FieldWithWidth[] = fields.map(field => ({
     ...field,
     width: "1 / 13",

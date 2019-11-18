@@ -58,7 +58,7 @@ const EmbedsContainer = styled.div`
 
 type Props = {
   message: Message
-  files: (File | FileLike)[]
+  files: readonly (File | FileLike)[]
 }
 
 export default function MessagePreview(props: Props) {
