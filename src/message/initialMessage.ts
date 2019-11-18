@@ -81,7 +81,7 @@ After you enabled that setting, you can right click on a user, role, or channel 
           value: `
 Discord also has support for code blocks. Just wrap your code in 3 backticks (\\\`\\\`\\\`).
 It also supports the same basic syntax highlighting options Discord has, by adding a language identifier after the first 3 backticks.
-\`\`\`plaintext
+\`\`\`
 Code goes here, supposedly
 \`\`\`
 `.trim(),
