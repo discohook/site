@@ -8,6 +8,7 @@ import { MarkupContainer } from "../markup/styles"
 import { FileLike } from "../message/FileLike"
 import { Message } from "../message/Message"
 import { id } from "../message/uid"
+import { getEmbedsWithGallery } from "./getEmbedsWithGallery"
 import MessageHeader from "./MessageHeader"
 import RichEmbed from "./RichEmbed"
 
@@ -72,8 +73,8 @@ export default function MessagePreview(props: Props) {
         {content && <Markup content={content} jumboable />}
         {embeds && (
           <EmbedsContainer>
-            {embeds.map(embed => (
-              <RichEmbed embed={embed} key={embed[id]} />
+            {getEmbedsWithGallery(embeds).map(embed => (
+              <RichEmbed key={embed[id]} embed={embed} />
             ))}
           </EmbedsContainer>
         )}

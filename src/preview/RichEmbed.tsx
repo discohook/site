@@ -1,4 +1,3 @@
-import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
@@ -11,11 +10,12 @@ import {
   Emoji,
   MarkupContainer,
 } from "../markup/styles"
-import { Embed } from "../message/Message"
 import { id } from "../message/uid"
 import EmbedAuthor from "./EmbedAuthor"
 import EmbedField from "./EmbedField"
 import EmbedFooter from "./EmbedFooter"
+import EmbedGallery from "./EmbedGallery"
+import { EmbedWithGallery } from "./getEmbedsWithGallery"
 import { getFieldsWithWidths } from "./getFieldsWithWidths"
 
 const Container = styled.div<{}, Theme>`
@@ -88,24 +88,6 @@ const EmbedFields = styled.div`
   grid-gap: 8px;
 `
 
-const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
-  max-width: 256px;
-  max-height: 256px;
-
-  margin: 16px 0 0;
-  border-radius: 4px;
-
-  cursor: pointer;
-
-  grid-column: 1 / 2;
-
-  ${({ hasThumbnail }) =>
-    hasThumbnail &&
-    css`
-      grid-column: 1 / 3;
-    `}
-`
-
 const EmbedThumbnail = styled.img`
   width: 80px;
   height: 80px;
@@ -122,7 +104,7 @@ const EmbedThumbnail = styled.img`
 `
 
 type Props = {
-  embed: Embed
+  embed: EmbedWithGallery
 }
 
 export default function RichEmbed(props: Props) {
@@ -133,16 +115,15 @@ export default function RichEmbed(props: Props) {
     timestamp,
     color,
     footer,
-    image,
     thumbnail,
     author,
     fields,
+    gallery,
   } = props.embed
 
   const embedColor = numberToHex(color)
 
   const hasThumbnail = /^https?:\/\/.+/i.test(thumbnail?.url ?? "")
-  const hasImage = /^https?:\/\/.+/i.test(image?.url ?? "")
 
   const EmbedTitle = url ? EmbedTitleLink : EmbedTitleNormal
 
@@ -167,12 +148,8 @@ export default function RichEmbed(props: Props) {
             ))}
           </EmbedFields>
         )}
-        {hasImage && (
-          <EmbedImage
-            src={image?.url}
-            alt="Image"
-            hasThumbnail={hasThumbnail}
-          />
+        {gallery.length > 0 && (
+          <EmbedGallery gallery={gallery} hasThumbnail={hasThumbnail} />
         )}
         {(footer ?? timestamp) && (
           <EmbedFooter
