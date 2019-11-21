@@ -74,8 +74,6 @@ type Props = {
 export default function EmbedGallery(props: Props) {
   const { gallery, hasThumbnail } = props
 
-  console.log(gallery)
-
   if (gallery.length === 1) {
     return (
       <EmbedImage
