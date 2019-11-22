@@ -5,30 +5,33 @@ import { id } from "../message/uid"
 export type ImageWithId = Image & { [id]: number }
 export type EmbedWithGallery = Embed & { readonly gallery: ImageWithId[] }
 
-export const getEmbedsWithGallery = produce((embeds: Draft<Embed[]>) => {
-  const embedsWithGallery: EmbedWithGallery[] = []
+export const getEmbedsWithGallery = (
+  embeds: readonly Embed[],
+): readonly EmbedWithGallery[] =>
+  produce(embeds, (embeds: Draft<EmbedWithGallery[]>) => {
+    let lastEmbed: EmbedWithGallery | undefined
+    const deletionQueue: number[] = []
 
-  for (const embed of embeds) {
-    const lastEmbed = embedsWithGallery.pop()
-    if (lastEmbed) embedsWithGallery.push(lastEmbed)
+    for (const [index, embed] of embeds.entries()) {
+      embed.gallery = []
 
-    if (lastEmbed?.url && lastEmbed.url === embed.url) {
-      if (embed.image && lastEmbed.gallery.length < 4) {
-        lastEmbed.gallery.push({ ...embed.image, [id]: embed[id] })
+      if (lastEmbed?.url && lastEmbed?.url === embed.url) {
+        deletionQueue.unshift(index)
+      } else {
+        lastEmbed = embed
       }
 
-      continue
+      if (embed.image && lastEmbed.gallery.length < 4) {
+        lastEmbed.gallery.push({
+          ...embed.image,
+          [id]: embed[id],
+        })
+      }
     }
 
-    const withGallery: EmbedWithGallery = { ...embed, gallery: [] }
-    if (withGallery.image) {
-      withGallery.gallery.push({
-        ...withGallery.image,
-        [id]: withGallery[id],
-      })
+    for (const index of deletionQueue) {
+      embeds.splice(index, 1)
     }
-    embedsWithGallery.push(withGallery)
-  }
 
-  return embedsWithGallery
-})
+    return embeds
+  })
