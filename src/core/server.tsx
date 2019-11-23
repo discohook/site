@@ -21,7 +21,7 @@ const [templateStart, templateEnd] = html
   .replace('<div id="app"></div>', '<div id="app">{app}</div>')
   .split("{app}")
 const [templateStartBots, templateEndBots] = html
-  .replace(/<script src="[^"]*"><\/script>/g, "<!-- $& -->")
+  .replace(/<script type="[^"]*" src="[^"]*"><\/script>/g, "<!-- $& -->")
   .replace(/<link [^>]* rel="preload">/g, "<!-- $& -->")
   .replace('<div id="app"></div>', '<div id="app">{app}</div>')
   .split("{app}")
