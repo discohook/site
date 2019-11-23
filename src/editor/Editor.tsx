@@ -3,11 +3,11 @@ import { useTheme } from "emotion-theming"
 import React, { useState } from "react"
 import BackupModal from "../backup/BackupModal"
 import { Theme } from "../core/themes"
-import { stringifyMessage } from "../json/convert"
 import JsonInput from "../json/JsonInput"
 import { FileLike } from "../message/FileLike"
 import { Embed, Message } from "../message/Message"
 import { getUniqueId, id } from "../message/uid"
+import { executeWebhook } from "../webhook/executeWebhook"
 import { getAvatarUrl } from "../webhook/getAvatarUrl"
 import { Webhook } from "../webhook/Webhook"
 import EmbedEditor from "./EmbedEditor"
@@ -78,25 +78,17 @@ export default function Editor(props: Props) {
   const theme = useTheme<Theme>()
 
   const [sending, setSending] = useState(false)
-  const executeWebhook = async () => {
+  const sendMessage = async () => {
+    if (sending) return
     setSending(true)
 
-    const formData = new FormData()
-    formData.append("payload_json", stringifyMessage(message))
-
-    if (files.every(file => file instanceof File)) {
-      for (const [index, file] of files.entries()) {
-        formData.append(`file[${index}]`, file as File, file.name)
-      }
+    try {
+      await executeWebhook(webhookUrl, message, files)
+    } catch (error) {
+      console.error("Error executing webhook:", error)
     }
 
-    const response = await fetch(`${webhookUrl}?wait=true`, {
-      method: "POST",
-      body: formData,
-    })
-
     setSending(false)
-    console.log("Webhook executed:", await response.json())
   }
 
   const clearAll = () => {
@@ -140,7 +132,7 @@ export default function Editor(props: Props) {
             label="Webhook URL"
             placeholder="https://discordapp.com/api/webhooks/..."
           />
-          <Button disabled={isDisabled} onClick={executeWebhook}>
+          <Button disabled={isDisabled} onClick={sendMessage}>
             Send
           </Button>
         </Container>
