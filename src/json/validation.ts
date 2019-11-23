@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
+
 export type Validator = (value: unknown, key: string) => string[]
 
 export const all = (...validators: Validator[]): Validator => (value, key) =>
@@ -106,8 +108,6 @@ export const between = (min: number, max: number): Validator =>
       ? [`${key}: Must be between ${min} and ${max} inclusive`]
       : [],
   )
-
-/* eslint-disable @typescript-eslint/camelcase */
 
 export const isAuthor: Validator = first(
   requiresKey("name"),

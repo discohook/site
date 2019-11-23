@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/camelcase */
+
 import { initialMessage } from "../message/initialMessage"
 import {
   all,
@@ -358,8 +360,6 @@ describe("between", () => {
     expect(between(5, 10)(11, "$")).not.toHaveLength(0)
   })
 })
-
-/* eslint-disable @typescript-eslint/camelcase */
 
 describe("isAuthor", () => {
   it("validates discord author objects", () => {

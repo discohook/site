@@ -1,5 +1,4 @@
 // @ts-check
-
 /* eslint-disable max-depth */
 
 const rawData = JSON.parse(

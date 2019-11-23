@@ -8,11 +8,11 @@ import { importLanguage } from "./importLanguage"
 import { languages } from "./languages"
 
 if (SERVER) {
-  Promise.all(languages.map(async language => importLanguage(language.name)))
-    .then(() => {})
-    .catch(error => {
-      console.error("Error importing language", error)
-    })
+  Promise.all(
+    languages.map(async language => importLanguage(language.name)),
+  ).catch(error => {
+    console.error("Error importing language", error)
+  })
 }
 
 type Props = {
@@ -24,7 +24,6 @@ export default function CodeBlock(props: Props) {
   const { content, language = "" } = props
 
   const [html, setHtml] = useState<string>()
-
   useEffect(() => {
     highlightCode(language, content)
       .then(setHtml)

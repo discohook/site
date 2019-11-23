@@ -1,8 +1,10 @@
+const oneDay = 1000 * 60 * 60 * 24
+
 export const getFormat = (date: Date, base?: Date) => {
   const givenDate = new Date(date).setHours(0, 0, 0, 0)
   const now = new Date(base ?? Date.now()).setHours(0, 0, 0, 0)
 
-  const difference = (givenDate - now) / 86400000
+  const difference = (givenDate - now) / oneDay
 
   if (difference < -6) return "full"
   if (difference < -1) return "last-week"
@@ -13,8 +15,9 @@ export const getFormat = (date: Date, base?: Date) => {
   return "full"
 }
 
+const iso8601 = /^(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}\.\d{3}?Z$/
+
 export const formatTimestamp = (timestamp: string, base?: Date) => {
-  const iso8601 = /^(\d{4})-(\d{2})-(\d{2})T\d{2}:\d{2}:\d{2}\.\d{3}?Z$/
   const match = iso8601.exec(timestamp)
   if (!match) return "Invalid date"
 

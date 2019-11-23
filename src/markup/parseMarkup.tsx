@@ -1,4 +1,6 @@
-/* eslint-disable react/display-name, react/no-multi-comp, unicorn/no-unsafe-regex */
+/* eslint-disable react/display-name */
+/* eslint-disable react/no-multi-comp */
+/* eslint-disable unicorn/no-unsafe-regex */
 
 import React from "react"
 import {
