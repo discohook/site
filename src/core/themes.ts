@@ -69,6 +69,8 @@ export const darkTheme = {
   },
 
   textAreaBackground: "#40444b",
+
+  color: "dark" as "dark" | "light",
 }
 
 export const lightTheme: typeof darkTheme = {
@@ -108,10 +110,12 @@ export const lightTheme: typeof darkTheme = {
   },
 
   textAreaBackground: "#ebedef",
+
+  color: "light",
 }
 
 export type Theme = typeof darkTheme & {
-  display: "cozy" | "compact"
   color: "dark" | "light"
+  display: "cozy" | "compact"
   mobile: boolean
 }

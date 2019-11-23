@@ -96,24 +96,27 @@ export default function App() {
     return () => clearTimeout(timeoutId)
   }, [backup])
 
-  const [colorTheme, setColorTheme] = useState<"dark" | "light">("dark")
-  const toggleTheme = () =>
-    setColorTheme(colorTheme === "dark" ? "light" : "dark")
-
-  const [displayTheme, setDisplayTheme] = useState<"cozy" | "compact">("cozy")
-  const toggleDisplay = () =>
-    setDisplayTheme(displayTheme === "cozy" ? "compact" : "cozy")
+  const [theme, setTheme] = useState<Theme>({
+    ...darkTheme,
+    color: "dark",
+    display: "cozy",
+    mobile: /mobile/i.test(request?.get("User-Agent") ?? navigator.userAgent),
+  })
 
   useEffect(() => {
-    console.log("Theme set:", colorTheme, displayTheme)
-  }, [colorTheme, displayTheme])
+    console.log("Theme set:", theme.color, theme.display)
+  }, [theme])
 
-  const theme: Theme = {
-    ...(colorTheme === "dark" ? darkTheme : lightTheme),
-    color: colorTheme,
-    display: displayTheme,
-    mobile: /mobile/i.test(request?.get("User-Agent") ?? navigator.userAgent),
-  }
+  const toggleTheme = () =>
+    setTheme(theme => ({
+      ...theme,
+      ...(theme.color === "dark" ? lightTheme : darkTheme),
+    }))
+  const toggleDisplay = () =>
+    setTheme(theme => ({
+      ...theme,
+      display: theme.display === "cozy" ? "compact" : "cozy",
+    }))
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
