@@ -8,6 +8,8 @@ import JsonInput from "../json/JsonInput"
 import { FileLike } from "../message/FileLike"
 import { Embed, Message } from "../message/Message"
 import { getUniqueId, id } from "../message/uid"
+import { getAvatarUrl } from "../webhook/getAvatarUrl"
+import { Webhook } from "../webhook/Webhook"
 import EmbedEditor from "./EmbedEditor"
 import FileInput from "./FileInput"
 import InputField from "./InputField"
@@ -55,6 +57,9 @@ type Props = {
   onFilesChange: (files: readonly (File | FileLike)[]) => void
   onToggleTheme: () => void
   onToggleDisplay: () => void
+  webhookUrl: string
+  onWebhookUrlChange: (webhookUrl: string) => void
+  webhook?: Webhook
 }
 
 export default function Editor(props: Props) {
@@ -65,11 +70,13 @@ export default function Editor(props: Props) {
     onFilesChange: handleFilesChange,
     onToggleTheme: handleToggleTheme,
     onToggleDisplay: handleToggleDisplay,
+    webhookUrl,
+    onWebhookUrlChange: handleWebhookUrlChange,
+    webhook,
   } = props
 
   const theme = useTheme<Theme>()
 
-  const [webhookUrl, setWebhookUrl] = useState("")
   const [sending, setSending] = useState(false)
   const executeWebhook = async () => {
     setSending(true)
@@ -129,7 +136,7 @@ export default function Editor(props: Props) {
           <InputField
             id="webhook-url"
             value={webhookUrl}
-            onChange={setWebhookUrl}
+            onChange={handleWebhookUrlChange}
             label="Webhook URL"
             placeholder="https://discordapp.com/api/webhooks/..."
           />
@@ -178,6 +185,7 @@ export default function Editor(props: Props) {
               })
             }
             label="Override username"
+            placeholder={webhook?.name}
             maxLength={32}
           />
           <InputField
@@ -190,6 +198,7 @@ export default function Editor(props: Props) {
               })
             }
             label="Override avatar"
+            placeholder={webhook && getAvatarUrl(webhook)}
           />
         </Container>
         <FileInput files={[...files]} onChange={handleFilesChange} />

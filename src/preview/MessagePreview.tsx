@@ -8,6 +8,8 @@ import { MarkupContainer } from "../markup/styles"
 import { FileLike } from "../message/FileLike"
 import { Message } from "../message/Message"
 import { id } from "../message/uid"
+import { getAvatarUrl } from "../webhook/getAvatarUrl"
+import { Webhook } from "../webhook/Webhook"
 import { getEmbedsWithGallery } from "./getEmbedsWithGallery"
 import MessageHeader from "./MessageHeader"
 import RichEmbed from "./RichEmbed"
@@ -60,16 +62,20 @@ const EmbedsContainer = styled.div`
 type Props = {
   message: Message
   files: readonly (File | FileLike)[]
+  webhook?: Webhook
 }
 
 export default function MessagePreview(props: Props) {
-  const { message, files } = props
+  const { message, files, webhook } = props
   const { content, embeds, username, avatarUrl } = message
 
   return (
     <ScrollContainer>
       <Container>
-        <MessageHeader username={username} avatarUrl={avatarUrl} />
+        <MessageHeader
+          username={username || webhook?.name}
+          avatarUrl={avatarUrl || (webhook && getAvatarUrl(webhook))}
+        />
         {content && <Markup content={content} jumboable />}
         {embeds && (
           <EmbedsContainer>

@@ -5,6 +5,8 @@ import React, { useContext, useEffect, useRef, useState } from "react"
 import Editor from "../editor/Editor"
 import { initialMessage } from "../message/initialMessage"
 import MessagePreview from "../preview/MessagePreview"
+import { fetchWebhookInfo } from "../webhook/fetchWebhookInfo"
+import { Webhook } from "../webhook/Webhook"
 import { SERVER } from "./environment"
 import GlobalStyle from "./GlobalStyle"
 import { RequestContext } from "./RequestContext"
@@ -117,6 +119,14 @@ export default function App() {
       display: theme.display === "cozy" ? "compact" : "cozy",
     }))
 
+  const [webhookUrl, setWebhookUrl] = useState("")
+  const [webhook, setWebhook] = useState<Webhook>()
+  useEffect(() => {
+    fetchWebhookInfo(webhookUrl)
+      .then(setWebhook)
+      .catch(() => setWebhook(undefined))
+  }, [webhookUrl])
+
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
   return (
@@ -141,7 +151,11 @@ export default function App() {
         )}
         <View>
           {(!theme.mobile || activeTab === "preview") && (
-            <MessagePreview message={backup.message} files={backup.files} />
+            <MessagePreview
+              message={backup.message}
+              files={backup.files}
+              webhook={webhook}
+            />
           )}
           {(!theme.mobile || activeTab === "editor") && (
             <Editor
@@ -155,6 +169,9 @@ export default function App() {
               }
               onToggleTheme={toggleTheme}
               onToggleDisplay={toggleDisplay}
+              webhookUrl={webhookUrl}
+              onWebhookUrlChange={setWebhookUrl}
+              webhook={webhook}
             />
           )}
         </View>
