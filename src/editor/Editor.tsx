@@ -193,13 +193,13 @@ export default function Editor(props: Props) {
             placeholder={webhook && getAvatarUrl(webhook)}
           />
         </Container>
-        <FileInput files={[...files]} onChange={handleFilesChange} />
+        <FileInput files={files} onChange={handleFilesChange} />
         <JsonInput message={message} onChange={handleChange} />
       </EditorInnerContainer>
       {isBackupModalShown && (
         <BackupModal
           message={message}
-          files={[...files]}
+          files={files}
           onLoad={backup => {
             handleChange(backup.message)
             handleFilesChange(backup.files)
