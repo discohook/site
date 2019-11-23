@@ -102,7 +102,6 @@ export default function App() {
     display: "cozy",
     mobile: /mobile/i.test(request?.get("User-Agent") ?? navigator.userAgent),
   })
-
   useEffect(() => {
     console.log("Theme set:", theme.color, theme.display)
   }, [theme])
