@@ -1,4 +1,7 @@
 // @ts-check
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/newline-after-import */
+
 const { resolve } = require("path")
 const { DefinePlugin, optimize: webpackOptimize } = require("webpack")
 const { LimitChunkCountPlugin } = webpackOptimize

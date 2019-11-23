@@ -11,7 +11,7 @@
     "test": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json",
     "test:watch": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json --watch",
     "test:cov": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json --coverage --collectCoverageFrom=\"src/**/*.{ts,tsx}\"",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src/**/*",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "typecheck": "tsc",
     "typecheck:watch": "tsc --watch",
     "format": "prettier --write ./src/**/*"

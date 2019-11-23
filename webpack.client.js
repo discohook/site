@@ -1,4 +1,7 @@
 // @ts-check
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/newline-after-import */
+
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
@@ -7,7 +10,7 @@ const PreloadWebpackPlugin = require("preload-webpack-plugin")
 const { DefinePlugin } = require("webpack")
 
 if (!process.env.NODE_ENV) process.env.NODE_ENV = "development"
-const dev = process.env.NODE_ENV === "development"
+const development = process.env.NODE_ENV === "development"
 
 /** @type {import("webpack").Configuration} */
 module.exports = {
@@ -15,7 +18,7 @@ module.exports = {
     "regenerator-runtime/runtime",
     resolve(__dirname, "src/core/client.tsx"),
   ],
-  mode: dev ? "development" : "production",
+  mode: development ? "development" : "production",
   output: {
     filename: "[name].js?q=[chunkhash]",
     chunkFilename: "[name].js?q=[chunkhash]",
@@ -44,7 +47,7 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: chunk => !/^hljs-[\w\-]+$/.test(chunk.name),
+      chunks: chunk => !/^hljs-[\w-]+$/.test(chunk.name),
       automaticNameDelimiter: "-",
     },
   },
@@ -52,7 +55,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: resolve(__dirname, "dist/public/index.html"),
       template: resolve(__dirname, "public/index.html"),
-      minify: !dev && {
+      minify: !development && {
         collapseWhitespace: true,
         removeComments: true,
       },
@@ -79,6 +82,6 @@ module.exports = {
   },
   devtool: "source-map",
   performance: {
-    assetFilter: name => /\.js$/.test(name),
+    assetFilter: name => name.endsWith(".js"),
   },
 }
