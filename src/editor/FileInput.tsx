@@ -11,6 +11,8 @@ import {
   TextInput,
 } from "./styles"
 
+const maxFileSize = 8388296
+
 const FileInputContainer = styled.div`
   position: relative;
   margin: 0 8px 0 0;
@@ -55,14 +57,26 @@ export default function FileInput(props: Props) {
     handleChange([])
   }
 
-  const filesAvailable = files.every(file => !SERVER && file instanceof File)
+  const errors: string[] = []
+  if (
+    files.length > 0 &&
+    (SERVER || !files.some(file => file instanceof File))
+  ) {
+    errors.push("files are unavailable")
+  }
+  const totalFileSize = files.reduce((total, file) => total + file.size, 0)
+  if (totalFileSize > maxFileSize) {
+    errors.push("files exceed maximum file size")
+  }
 
   return (
     <InputContainer>
       <Container flow="row">
         <InputLabel htmlFor="file">Files</InputLabel>
-        {!filesAvailable && (
-          <InputNote state="error">Files are unavailable</InputNote>
+        {errors.length > 0 && (
+          <InputNote state="error">
+            {errors.join(", ").replace(/^\w/, letter => letter.toUpperCase())}
+          </InputNote>
         )}
       </Container>
       <Container flow="row">
