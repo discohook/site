@@ -2,13 +2,13 @@ import { id } from "../message/uid"
 import { getEmbedsWithGallery } from "./getEmbedsWithGallery"
 
 describe("getEmbedsWithGallery", () => {
-  it("returns an empty gallery given no images", () => {
+  it("does not return a gallery given no images", () => {
     expect(getEmbedsWithGallery([{ [id]: 1, title: "Nice embed" }])).toEqual([
-      { [id]: 1, title: "Nice embed", gallery: [] },
+      { [id]: 1, title: "Nice embed" },
     ])
   })
 
-  it("returns a gallery given adjacent embeds", () => {
+  it("does not return a gallery given no adjacent embeds", () => {
     expect(
       getEmbedsWithGallery([
         {
@@ -24,10 +24,11 @@ describe("getEmbedsWithGallery", () => {
         title: "Cool embed with an image",
         url: "https://example.com/",
         image: { url: "https://example.com/image-1.png" },
-        gallery: [{ url: "https://example.com/image-1.png", [id]: 1 }],
       },
     ])
+  })
 
+  it("returns a gallery given adjacent embeds", () => {
     expect(
       getEmbedsWithGallery([
         {
@@ -123,14 +124,12 @@ describe("getEmbedsWithGallery", () => {
         title: "Cool embed with images",
         url: "https://example.com/page-1/",
         image: { url: "https://example.com/image-1.png" },
-        gallery: [{ url: "https://example.com/image-1.png", [id]: 1 }],
       },
       {
         [id]: 2,
         title: "Completely different embed with images",
         url: "https://example.com/page-2/",
         image: { url: "https://example.com/image-2.png" },
-        gallery: [{ url: "https://example.com/image-2.png", [id]: 2 }],
       },
     ])
   })
@@ -154,13 +153,11 @@ describe("getEmbedsWithGallery", () => {
         [id]: 1,
         title: "Cool embed with images",
         image: { url: "https://example.com/image-1.png" },
-        gallery: [{ url: "https://example.com/image-1.png", [id]: 1 }],
       },
       {
         [id]: 2,
         title: "Completely different embed with images",
         image: { url: "https://example.com/image-2.png" },
-        gallery: [{ url: "https://example.com/image-2.png", [id]: 2 }],
       },
     ])
   })
@@ -185,6 +182,54 @@ describe("getEmbedsWithGallery", () => {
           { url: "/image4.png", [id]: 4 },
           { url: "/image5.png", [id]: 5 },
         ],
+      },
+    ])
+  })
+
+  it("does not return a gallery given an adjacent embed with no image", () => {
+    expect(
+      getEmbedsWithGallery([
+        {
+          [id]: 1,
+          title: "Cool embed with an image",
+          url: "https://example.com/",
+          image: { url: "https://example.com/image-1.png" },
+        },
+        {
+          [id]: 2,
+          url: "https://example.com/",
+        },
+      ]),
+    ).toEqual([
+      {
+        [id]: 1,
+        title: "Cool embed with an image",
+        url: "https://example.com/",
+        image: { url: "https://example.com/image-1.png" },
+      },
+    ])
+  })
+
+  it("returns a gallery a first embed without an image", () => {
+    expect(
+      getEmbedsWithGallery([
+        {
+          [id]: 1,
+          title: "Cool embed with images",
+          url: "https://example.com/",
+        },
+        {
+          [id]: 2,
+          url: "https://example.com/",
+          image: { url: "https://example.com/image-2.png" },
+        },
+      ]),
+    ).toEqual([
+      {
+        [id]: 1,
+        title: "Cool embed with images",
+        url: "https://example.com/",
+        gallery: [{ url: "https://example.com/image-2.png", [id]: 2 }],
       },
     ])
   })

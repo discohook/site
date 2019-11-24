@@ -1,3 +1,4 @@
+import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
@@ -88,6 +89,24 @@ const EmbedFields = styled.div`
   grid-gap: 8px;
 `
 
+const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
+  max-width: 256px;
+  max-height: 256px;
+
+  margin: 16px 0 0;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  grid-column: 1 / 2;
+
+  ${({ hasThumbnail }) =>
+    hasThumbnail &&
+    css`
+      grid-column: 1 / 3;
+    `}
+`
+
 const EmbedThumbnail = styled.img`
   width: 80px;
   height: 80px;
@@ -115,6 +134,7 @@ export default function RichEmbed(props: Props) {
     timestamp,
     color,
     footer,
+    image,
     thumbnail,
     author,
     fields,
@@ -124,6 +144,7 @@ export default function RichEmbed(props: Props) {
   const embedColor = numberToHex(color)
 
   const hasThumbnail = /^https?:\/\/.+/i.test(thumbnail?.url ?? "")
+  const hasImage = /^https?:\/\/.+/i.test(image?.url ?? "")
 
   const EmbedTitle = url ? EmbedTitleLink : EmbedTitleNormal
 
@@ -148,8 +169,16 @@ export default function RichEmbed(props: Props) {
             ))}
           </EmbedFields>
         )}
-        {gallery.length > 0 && (
-          <EmbedGallery gallery={gallery} hasThumbnail={hasThumbnail} />
+        {gallery ? (
+          <EmbedGallery gallery={gallery} />
+        ) : hasImage ? (
+          <EmbedImage
+            src={image?.url}
+            alt="Image"
+            hasThumbnail={hasThumbnail}
+          />
+        ) : (
+          undefined
         )}
         {(footer ?? timestamp) && (
           <EmbedFooter

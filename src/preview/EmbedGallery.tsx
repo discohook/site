@@ -4,24 +4,6 @@ import React from "react"
 import { id } from "../message/uid"
 import { ImageWithId } from "./getEmbedsWithGallery"
 
-const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
-  max-width: 256px;
-  max-height: 256px;
-
-  margin: 16px 0 0;
-  border-radius: 4px;
-
-  cursor: pointer;
-
-  grid-column: 1 / 2;
-
-  ${({ hasThumbnail }) =>
-    hasThumbnail &&
-    css`
-      grid-column: 1 / 3;
-    `}
-`
-
 const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
   grid-column: 1 / 2;
 
@@ -53,7 +35,7 @@ const EmbedGalleryCell = styled.div<EmbedGalleryCellProps>`
   min-height: 100%;
 
   ${({ length, index }) =>
-    (length === 2 || (length === 3 && index === 0)) &&
+    (length === 1 || length === 2 || (length === 3 && index === 0)) &&
     css`
       grid-row: span 2;
     `}
@@ -68,21 +50,10 @@ const EmbedGalleryImage = styled.img`
 
 type Props = {
   gallery: ImageWithId[]
-  hasThumbnail?: boolean
 }
 
 export default function EmbedGallery(props: Props) {
-  const { gallery, hasThumbnail } = props
-
-  if (gallery.length === 1) {
-    return (
-      <EmbedImage
-        src={gallery[0].url}
-        alt="Image"
-        hasThumbnail={hasThumbnail}
-      />
-    )
-  }
+  const { gallery } = props
 
   return (
     <EmbedGalleryWrapper>
