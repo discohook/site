@@ -3,5 +3,5 @@ const id = /\d+/
 const token = /[\w-]+/
 
 export const webhookUrlRegex = new RegExp(
-  `https?://${host.source}/api/webhooks/${id.source}/${token.source}`,
+  `^https?://${host.source}/api/webhooks/${id.source}/${token.source}$`,
 )
