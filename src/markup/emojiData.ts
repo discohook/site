@@ -1,4 +1,4 @@
-import { toSnakeCase } from "../json/casing"
+import { toSnakeCase } from "../json/objectCasing"
 
 // Flag reference:
 // + = include ::skin-tone-x

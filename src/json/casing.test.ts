@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
-import { toCamelCase, toSnakeCase } from "./casing"
+import { toCamelCase, toSnakeCase } from "./objectCasing"
 
 const cases = [
   {

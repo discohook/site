@@ -1,4 +1,4 @@
-import { toCamelCase } from "../json/casing"
+import { toCamelCase } from "../json/objectCasing"
 import { Webhook } from "./Webhook"
 import { webhookUrlRegex } from "./webhookUrlRegex"
 

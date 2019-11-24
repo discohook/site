@@ -1,6 +1,6 @@
 import { applyIds } from "../message/applyIds"
 import { Message } from "../message/Message"
-import { toCamelCase, toSnakeCase } from "./casing"
+import { toCamelCase, toSnakeCase } from "./objectCasing"
 import { parseJson } from "./parseJson"
 import { isMessage } from "./validation"
 
