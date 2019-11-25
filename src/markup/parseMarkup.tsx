@@ -256,7 +256,7 @@ const ellipsize = (text: string, length: number) => {
     : `${shortenedText.slice(0, length)}…`
 }
 
-const now = () => globalThis.performance?.now?.() ?? 0
+const now = () => (typeof performance === "undefined" ? 0 : performance.now())
 
 export const parseMarkup = (
   content: string,
