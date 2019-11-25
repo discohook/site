@@ -1,16 +1,7 @@
 import React from "react"
-import { SERVER } from "../core/environment"
 import { Embed, Footer } from "../message/Message"
 import InputField from "./InputField"
 import { InputGroup } from "./styles"
-
-const supportsDateTimeInput = (() => {
-  if (SERVER) return false
-
-  const input = document.createElement("input")
-  input.type = "datetime-local"
-  return input.type === "datetime-local"
-})()
 
 type Props = {
   id: number
@@ -46,7 +37,7 @@ export default function FooterEditor(props: Props) {
             timestamp,
           })
         }
-        label="Footer text"
+        label="Footer Text"
         maxLength={2048}
       />
       <InputField
@@ -61,39 +52,22 @@ export default function FooterEditor(props: Props) {
             timestamp,
           })
         }
-        label="Footer icon"
+        label="Footer Icon"
       />
-      {supportsDateTimeInput ? (
-        <InputField
-          id={`message-embed${embedId}-footer-timestamp`}
-          value={timestamp && new Date(timestamp).toISOString().slice(0, -1)}
-          onChange={timestamp =>
-            handleChange({
-              footer,
-              timestamp: timestamp
-                ? new Date(`${timestamp}Z`).toISOString()
-                : undefined,
-            })
-          }
-          label="Timestamp (UTC)"
-          type="datetime-local"
-        />
-      ) : (
-        <InputField
-          id={`message-embed${embedId}-footer-timestamp`}
-          value={timestamp?.replace(/[a-z]/gi, " ").slice(0, -8)}
-          onChange={timestamp =>
-            handleChange({
-              footer,
-              timestamp: timestamp
-                ? `${timestamp.replace(/[^0-9\-:]/g, "T")}:00.000Z`
-                : undefined,
-            })
-          }
-          label="Timestamp (UTC)"
-          placeholder="YYYY-MM-DD hh:mm"
-        />
-      )}
+      <InputField
+        id={`message-embed${embedId}-footer-timestamp`}
+        value={timestamp?.replace(/[a-z]/gi, " ").slice(0, -8)}
+        onChange={timestamp =>
+          handleChange({
+            footer,
+            timestamp: timestamp
+              ? `${timestamp.replace(/[^0-9\-:]/g, "T")}:00.000Z`
+              : undefined,
+          })
+        }
+        label="Timestamp (UTC)"
+        placeholder="YYYY-MM-DD hh:mm"
+      />
     </InputGroup>
   )
 }

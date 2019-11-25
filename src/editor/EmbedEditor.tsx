@@ -1,5 +1,5 @@
 import React from "react"
-import { Embed } from "../message/Message"
+import { Embed, Field } from "../message/Message"
 import { getUniqueId, id } from "../message/uid"
 import AuthorEditor from "./AuthorEditor"
 import ColorInput from "./ColorInput"
@@ -7,7 +7,7 @@ import FieldEditor from "./FieldEditor"
 import FooterEditor from "./FooterEditor"
 import InputField from "./InputField"
 import MultiEditor from "./MultiEditor"
-import { BoxContainer, InputGroup } from "./styles"
+import { Container, InputGroup } from "./styles"
 
 type Props = {
   embed: Embed
@@ -18,7 +18,7 @@ export default function EmbedEditor(props: Props) {
   const { embed, onChange: handleChange } = props
 
   return (
-    <BoxContainer>
+    <Container>
       <InputGroup>
         <InputField
           id={`message-embed${embed[id]}-title`}
@@ -41,7 +41,7 @@ export default function EmbedEditor(props: Props) {
               url: url || undefined,
             })
           }
-          label="Title link"
+          label="URL"
         />
       </InputGroup>
       <InputField
@@ -67,23 +67,6 @@ export default function EmbedEditor(props: Props) {
           })
         }
       />
-      <MultiEditor
-        items={embed.fields ?? []}
-        onChange={fields =>
-          handleChange({
-            ...embed,
-            fields: fields.length > 0 ? fields : undefined,
-          })
-        }
-        name="field"
-        limit={25}
-        factory={() => ({ [id]: getUniqueId() })}
-        keyMapper={field => field[id]}
-      >
-        {(field, onChange) => (
-          <FieldEditor id={embed[id]} field={field} onChange={onChange} />
-        )}
-      </MultiEditor>
       <FooterEditor
         id={embed[id]}
         footer={embed.footer}
@@ -129,6 +112,23 @@ export default function EmbedEditor(props: Props) {
           }
         />
       </InputGroup>
-    </BoxContainer>
+      <MultiEditor<Field>
+        items={embed.fields ?? []}
+        onChange={fields =>
+          handleChange({
+            ...embed,
+            fields: fields.length > 0 ? fields : undefined,
+          })
+        }
+        name="Field"
+        limit={25}
+        factory={() => ({ [id]: getUniqueId() })}
+        keyMapper={field => field[id]}
+      >
+        {(field, onChange) => (
+          <FieldEditor id={embed[id]} field={field} onChange={onChange} />
+        )}
+      </MultiEditor>
+    </Container>
   )
 }

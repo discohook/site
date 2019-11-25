@@ -37,10 +37,6 @@ const EditorInnerContainer = styled(Container)`
   }
 `
 
-const EditorActionsContainer = styled(ActionsContainer)`
-  margin: 8px;
-`
-
 const JavaScriptWarning = styled.noscript<{}, Theme>`
   display: block;
 
@@ -115,7 +111,7 @@ export default function Editor(props: Props) {
           Discohook requires JavaScript to be enabled, please turn it on in your
           browser settings to use this app.
         </JavaScriptWarning>
-        <EditorActionsContainer>
+        <ActionsContainer>
           {!theme.mobile && <ActionsHeader>Message editor</ActionsHeader>}
           <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
           <Action onClick={handleToggleTheme}>Toggle theme</Action>
@@ -123,7 +119,7 @@ export default function Editor(props: Props) {
             <Action onClick={handleToggleDisplay}>Toggle display</Action>
           )}
           <Action onClick={clearAll}>Clear all</Action>
-        </EditorActionsContainer>
+        </ActionsContainer>
         <Container flow="row">
           <InputField
             id="webhook-url"
@@ -157,7 +153,7 @@ export default function Editor(props: Props) {
               embeds: embeds.length > 0 ? embeds : undefined,
             })
           }
-          name="embed"
+          name="Embed"
           limit={10}
           factory={() => ({ [id]: getUniqueId() })}
           keyMapper={embed => embed[id]}

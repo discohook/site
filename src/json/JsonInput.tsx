@@ -11,7 +11,7 @@ import { Message } from "../message/Message"
 import { parseMessage, stringifyMessage } from "./convert"
 
 const ErrorContainer = styled.div`
-  margin: 8px 0 0;
+  margin: 10px 0 4px;
   padding: 8px 12px;
 
   background: #f04747;
@@ -36,7 +36,7 @@ const CodeInput = styled(MultilineTextInput)<{}, Theme>`
 `
 
 const SubmitButton = styled(Button)<{}, Theme>`
-  margin: 4px 0 16px;
+  margin: 8px 0 16px;
   align-self: flex-end;
 `
 

@@ -68,6 +68,15 @@ export const darkTheme = {
     accent: "rgba(255, 255, 255, 0.06)",
   },
 
+  elavation: {
+    low: [
+      "0 1px 0 rgba(4, 4, 5, 0.2)",
+      "0 1.5px 0 rgba(6, 6, 7, 0.05)",
+      "0 2px 0 rgba(4, 4, 5, 0.05)",
+    ].join(","),
+    high: "0 8px 16px rgba(0, 0, 0, 0.24)",
+  },
+
   textAreaBackground: "#40444b",
 
   color: "dark" as "dark" | "light",
@@ -107,6 +116,15 @@ export const lightTheme: typeof darkTheme = {
     active: "rgba(116, 127, 141, 0.16)",
     selected: "rgba(116, 127, 141, 0.24)",
     accent: "rgba(6, 6, 7, 0.08)",
+  },
+
+  elavation: {
+    low: [
+      "0 1px 0 rgba(6, 6, 7, 0.1)",
+      "0 1.5px 0 rgba(6, 6, 7, 0.025)",
+      "0 2px 0 rgba(6, 6, 7, 0.025)",
+    ].join(","),
+    high: "0 8px 16px rgba(0, 0, 0, 0.16)",
   },
 
   textAreaBackground: "#ebedef",

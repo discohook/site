@@ -39,7 +39,6 @@ const styles = (theme: Theme) => css`
     margin: 0;
     padding: 0;
 
-    font-family: ${theme.fonts.sans};
     line-height: 1;
 
     text-rendering: optimizeLegibility;
@@ -51,6 +50,14 @@ const styles = (theme: Theme) => css`
 
     height: 100%;
     overflow: hidden;
+  }
+
+  html,
+  body,
+  button,
+  input,
+  textarea {
+    font-family: ${theme.fonts.sans};
   }
 
   #app {

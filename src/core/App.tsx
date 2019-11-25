@@ -43,7 +43,6 @@ const Tab = styled.button<{ active: boolean }, Theme>`
     ${({ theme, active }) => (active ? theme.accents.primary : theme.text)};
   border-radius: 0;
 
-  font-family: ${({ theme }) => theme.fonts.sans};
   font-weight: 500;
   font-size: 15px;
   color: ${({ theme }) => theme.header.primary};

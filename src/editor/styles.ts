@@ -1,11 +1,6 @@
-import styled, { StyledComponent } from "@emotion/styled"
+import { css } from "@emotion/core"
+import styled from "@emotion/styled"
 import { Theme } from "../core/themes"
-
-type SC<Tag extends keyof JSX.IntrinsicElements> = StyledComponent<
-  JSX.IntrinsicElements[Tag],
-  Omit<JSX.IntrinsicElements[Tag], "ref" | "key">,
-  Theme
->
 
 export const Container = styled.div<{ flow?: "column" | "row" }, Theme>`
   display: flex;
@@ -26,10 +21,19 @@ export const BoxContainer = styled.div<{}, Theme>`
   flex-direction: column;
 
   margin: 8px;
-  padding: 8px 4px 4px;
+  padding: 8px;
 
-  border: 1px solid ${({ theme }) => theme.backgroundModifier.accent};
-  border-radius: 3px;
+  background: ${({ theme }) => theme.background.secondary};
+  border-radius: 4px;
+
+  box-shadow: ${({ theme }) => theme.elavation.low};
+
+  & & {
+    margin: 0;
+    padding: 0;
+
+    box-shadow: none;
+  }
 `
 
 export const InputGroup = styled.div`
@@ -44,10 +48,12 @@ export const InputGroup = styled.div`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 4px 8px 0;
+  margin: 8px 8px 0;
 `
 
-export const InputLabel = styled.label``
+export const InputLabel = styled.label`
+  margin-bottom: 2px;
+`
 
 export const TextInput = styled.input<{}, Theme>`
   padding: 6px 8px;
@@ -59,87 +65,102 @@ export const TextInput = styled.input<{}, Theme>`
   outline: none;
 
   color: ${({ theme }) => theme.text.normal};
-  font-family: ${({ theme }) => theme.fonts.sans};
   font-size: 15px;
   line-height: 20px;
-  letter-spacing: -0.4px;
 `
 TextInput.defaultProps = { type: "text" }
 
 export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
   resize: vertical;
   min-height: 32px;
-` as SC<"textarea">
-MultilineTextInput.defaultProps = { rows: 2 }
+`
+MultilineTextInput.defaultProps = { rows: 3 }
 
-type InputNoteProps = { state: "normal" | "warning" | "error" }
+type InputNoteProps = { state?: "normal" | "warning" | "error" }
 export const InputNote = styled.div<InputNoteProps, Theme>`
+  margin: 3px 1px 0 0;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: ${({ theme, state }) => {
+    if (state === "error") return theme.accents.danger
+    if (state === "warning") return theme.accents.warning
+    return theme.text
+  }};
+
   && {
     flex-grow: 0;
-    margin: 3px 1px 0 0;
-
-    font-size: 13px;
-    font-weight: 500;
-
-    color: ${({ theme, state }) => {
-      if (state === "error") return theme.accents.danger
-      if (state === "warning") return theme.accents.warning
-      return theme.text
-    }};
   }
 `
 
 export const Button = styled.button<{}, Theme>`
+  min-width: 60px;
   min-height: 32px;
   max-height: 32px;
-  margin: 4px 8px 8px;
-  padding: 0 10px;
+  margin: 8px;
+  padding: 2px 16px;
 
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.accents.primary};
+  background: ${({ theme }) => theme.accents.primary};
+  border: none;
   border-radius: 3px;
   outline: none;
   cursor: pointer;
 
-  color: ${({ theme }) => theme.header.primary};
-  font-family: ${({ theme }) => theme.fonts.sans};
-  font-size: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 20px;
-  letter-spacing: -0.4px;
 
-  transition: background-color 300ms;
+  transition: 167ms;
 
   &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.accents.primary};
+    background: #677bc4;
+  }
+
+  &:active:not(:disabled) {
+    background: #5b6eae;
   }
 
   &:disabled {
-    color: ${({ theme }) => theme.header.secondary};
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `
 Button.defaultProps = { type: "button" }
 
 export const ToggleButton = styled(Button)<{ filled: boolean }, Theme>`
-  && {
-    background: ${({ theme, filled }) =>
-      filled ? theme.accents.primary : "transparent"};
-    color: ${({ theme }) => theme.header.primary};
+  border: 1px solid ${({ theme }) => theme.accents.primary};
+
+  &:hover:not(:disabled),
+  &:active:not(:disabled) {
+    color: #ffffff;
   }
+
+  ${({ theme, filled }) =>
+    !filled &&
+    css`
+      color: ${theme.header.primary};
+      background: transparent;
+    `}
 `
 
 export const ActionsContainer = styled.div`
   display: flex;
-  margin: 8px 12px -2px;
+  margin: 8px;
 `
 
-export const ActionsHeader = styled.span`
+export const ActionsHeader = styled.span<{}, Theme>`
   flex: 1;
+
+  color: ${({ theme }) => theme.header.primary};
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
 `
 
 export const Action = styled.button<{}, Theme>`
   padding: 0;
-  margin: 0 4px 0 0;
 
   background: none;
   border: none;
@@ -147,18 +168,16 @@ export const Action = styled.button<{}, Theme>`
   cursor: pointer;
 
   color: ${({ theme }) => theme.header.primary};
-  font-family: ${({ theme }) => theme.fonts.sans};
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 20px;
-  letter-spacing: -0.4px;
 
   &:hover {
     text-decoration: underline;
   }
 
   * + & {
-    margin: 0 4px 0 8px;
+    margin-left: 16px;
   }
 `
 Action.defaultProps = { type: "button" }

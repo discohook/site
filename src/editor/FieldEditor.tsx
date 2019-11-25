@@ -3,13 +3,12 @@ import React from "react"
 import { Field } from "../message/Message"
 import { id } from "../message/uid"
 import InputField from "./InputField"
-import { BoxContainer, Container, ToggleButton } from "./styles"
+import { Container, ToggleButton } from "./styles"
 
 const InlineToggle = styled(ToggleButton)`
-  && {
-    margin: 28px 8px 8px;
-    align-self: flex-start;
-  }
+  min-width: 100px;
+  margin: 34px 8px 8px;
+  align-self: flex-start;
 `
 
 type Props = {
@@ -22,7 +21,7 @@ export default function FieldEditor(props: Props) {
   const { id: embedId, field, onChange: handleChange } = props
 
   return (
-    <BoxContainer>
+    <Container>
       <Container flow="row">
         <InputField
           id={`message-embed${embedId}-field${field[id]}-name`}
@@ -33,7 +32,7 @@ export default function FieldEditor(props: Props) {
               name: name || undefined,
             })
           }
-          label="Field name"
+          label="Field Name"
           maxLength={256}
         />
         <InlineToggle
@@ -45,7 +44,7 @@ export default function FieldEditor(props: Props) {
             })
           }
         >
-          Inline
+          Inline ({field.inline ? "On" : "Off"})
         </InlineToggle>
       </Container>
       <InputField
@@ -57,10 +56,10 @@ export default function FieldEditor(props: Props) {
             value: value || undefined,
           })
         }
-        label="Field value"
+        label="Field Value"
         type="multiline"
         maxLength={1024}
       />
-    </BoxContainer>
+    </Container>
   )
 }

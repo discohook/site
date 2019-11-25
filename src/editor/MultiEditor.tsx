@@ -3,6 +3,7 @@ import {
   Action,
   ActionsContainer,
   ActionsHeader,
+  BoxContainer,
   Button,
   Container,
 } from "./styles"
@@ -43,10 +44,13 @@ export default function MultiEditor<T>(props: Props<T>) {
     onChange([...items.slice(0, index), item, ...items.slice(index + 1)])
 
   const editors = items.map((item, index) => (
-    <Container key={getKey(item)} data-testid={`multieditor--${getKey(item)}`}>
+    <BoxContainer
+      key={getKey(item)}
+      data-testid={`multieditor--${getKey(item)}`}
+    >
       <ActionsContainer>
         <ActionsHeader data-testid={`multieditor-header--${getKey(item)}`}>
-          {name.replace(/^\w/, char => char.toUpperCase())} {index + 1}
+          {name} {index + 1}
         </ActionsHeader>
         <Action
           onClick={() => removeItem(index)}
@@ -59,7 +63,7 @@ export default function MultiEditor<T>(props: Props<T>) {
             onClick={() => moveItem(index, index - 1)}
             data-testid={`multieditor-up--${getKey(item)}`}
           >
-            Move up
+            Move Up
           </Action>
         )}
         {items.length - index > 1 && (
@@ -67,14 +71,14 @@ export default function MultiEditor<T>(props: Props<T>) {
             onClick={() => moveItem(index, index + 1)}
             data-testid={`multieditor-down--${getKey(item)}`}
           >
-            Move down
+            Move Down
           </Action>
         )}
       </ActionsContainer>
       {render(item, newItem => {
         modifyItem(index, newItem)
       })}
-    </Container>
+    </BoxContainer>
   ))
 
   return (
