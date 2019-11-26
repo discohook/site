@@ -11,7 +11,6 @@ const Container = styled.div`
   height: 32px;
 
   user-select: none;
-  cursor: pointer;
 `
 
 const ToggleLabel = styled.label<{}, Theme>`
@@ -36,6 +35,8 @@ const ToggleContainer = styled.div<{ checked?: boolean }, Theme>`
     checked ? theme.accents.primary : "#72767d"};
 
   transition: 150ms ease-in-out;
+
+  cursor: pointer;
 
   &::after {
     position: absolute;
@@ -81,10 +82,11 @@ export default function Toggle(props: Props) {
   const { id, label, value, onChange: handleChange } = props
 
   return (
-    <Container onClick={() => handleChange(!value)}>
+    <Container>
       <ToggleLabel htmlFor={id}>{label}</ToggleLabel>
       <ToggleContainer checked={value}>
         <ToggleInput
+          id={id}
           checked={value}
           onChange={event => handleChange(event.target.checked)}
         />
