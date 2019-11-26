@@ -3,6 +3,9 @@ import { useTheme } from "emotion-theming"
 import React, { useState } from "react"
 import BackupModal from "../backup/BackupModal"
 import { Theme } from "../core/themes"
+import FileInput from "../form/FileInput"
+import InputField from "../form/InputField"
+import { Button } from "../form/styles"
 import JsonInput from "../json/JsonInput"
 import { FileLike } from "../message/FileLike"
 import { Embed, Message } from "../message/Message"
@@ -11,16 +14,8 @@ import { executeWebhook } from "../webhook/executeWebhook"
 import { getAvatarUrl } from "../webhook/getAvatarUrl"
 import { Webhook } from "../webhook/Webhook"
 import EmbedEditor from "./EmbedEditor"
-import FileInput from "./FileInput"
-import InputField from "./InputField"
 import MultiEditor from "./MultiEditor"
-import {
-  Action,
-  ActionsContainer,
-  ActionsHeader,
-  Button,
-  Container,
-} from "./styles"
+import { Action, ActionsContainer, ActionsHeader, Container } from "./styles"
 
 const EditorContainer = styled.div`
   position: relative;

@@ -1,10 +1,10 @@
 import styled from "@emotion/styled"
 import React, { useRef } from "react"
 import { SERVER } from "../core/environment"
+import { Container } from "../editor/styles"
 import { FileLike } from "../message/FileLike"
 import {
   Button,
-  Container,
   InputContainer,
   InputLabel,
   InputNote,

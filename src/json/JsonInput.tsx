@@ -6,7 +6,7 @@ import {
   InputContainer,
   InputLabel,
   MultilineTextInput,
-} from "../editor/styles"
+} from "../form/styles"
 import { Message } from "../message/Message"
 import { parseMessage, stringifyMessage } from "./convert"
 

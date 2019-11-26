@@ -2,7 +2,7 @@ import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
-import { numberToHex } from "../editor/ColorInput"
+import { numberToHex } from "../form/ColorInput"
 import Markup from "../markup/Markup"
 import {
   BlockQuoteContent,

@@ -1,10 +1,10 @@
 import React, { Key, ReactNode } from "react"
+import { Button } from "../form/styles"
 import {
   Action,
   ActionsContainer,
   ActionsHeader,
   BoxContainer,
-  Button,
   Container,
 } from "./styles"
 

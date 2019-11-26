@@ -1,11 +1,11 @@
 import React from "react"
+import ColorInput from "../form/ColorInput"
+import InputField from "../form/InputField"
 import { Embed, Field } from "../message/Message"
 import { getUniqueId, id } from "../message/uid"
 import AuthorEditor from "./AuthorEditor"
-import ColorInput from "./ColorInput"
 import FieldEditor from "./FieldEditor"
 import FooterEditor from "./FooterEditor"
-import InputField from "./InputField"
 import MultiEditor from "./MultiEditor"
 import { Container, InputGroup } from "./styles"
 

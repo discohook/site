@@ -1,9 +1,10 @@
 import styled from "@emotion/styled"
 import React from "react"
+import InputField from "../form/InputField"
+import { ToggleButton } from "../form/styles"
 import { Field } from "../message/Message"
 import { id } from "../message/uid"
-import InputField from "./InputField"
-import { Container, ToggleButton } from "./styles"
+import { Container } from "./styles"
 
 const InlineToggle = styled(ToggleButton)`
   min-width: 100px;

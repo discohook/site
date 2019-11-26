@@ -1,14 +1,14 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
-import InputField from "../editor/InputField"
 import {
   Action,
   ActionsContainer,
   ActionsHeader,
-  Button,
   Container,
 } from "../editor/styles"
+import InputField from "../form/InputField"
+import { Button } from "../form/styles"
 import { FileLike } from "../message/FileLike"
 import { Message } from "../message/Message"
 import { Backup } from "./Backup"

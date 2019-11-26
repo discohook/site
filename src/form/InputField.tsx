@@ -1,6 +1,6 @@
 import React from "react"
+import { Container } from "../editor/styles"
 import {
-  Container,
   InputContainer,
   InputLabel,
   InputNote,

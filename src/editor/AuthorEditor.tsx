@@ -1,6 +1,6 @@
 import React from "react"
+import InputField from "../form/InputField"
 import { Author } from "../message/Message"
-import InputField from "./InputField"
 import { InputGroup } from "./styles"
 
 type Props = {
