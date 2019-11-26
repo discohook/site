@@ -1,6 +1,6 @@
 import React, { cloneElement } from "react"
 import { render, userEvent } from "../core/testUtils"
-import ColorInput, { hexToNumber, numberToHex } from "../form/ColorInput"
+import ColorInput, { hexToNumber, numberToHex } from "./ColorInput"
 
 describe("ColorInput", () => {
   it("shows hex value", () => {
