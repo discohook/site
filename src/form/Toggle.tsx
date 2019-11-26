@@ -51,6 +51,8 @@ const ToggleContainer = styled.div<{ checked?: boolean }, Theme>`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     transition: 150ms ease-in-out;
 
+    pointer-events: none;
+
     ${({ checked }) =>
       checked &&
       css`
