@@ -1,8 +1,12 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
-import Button from "../form/Button"
-import { InputContainer, InputLabel, MultilineTextInput } from "../form/styles"
+import {
+  DefaultButton,
+  InputContainer,
+  InputLabel,
+  MultilineTextInput,
+} from "../form/styles"
 import { Message } from "../message/Message"
 import { parseMessage, stringifyMessage } from "./convert"
 
@@ -31,7 +35,7 @@ const CodeInput = styled(MultilineTextInput)<{}, Theme>`
   font-family: ${({ theme }) => theme.fonts.mono};
 `
 
-const SubmitButton = styled(Button)<{}, Theme>`
+const SubmitButton = styled(DefaultButton)<{}, Theme>`
   margin: 8px 0 16px;
   align-self: flex-end;
 `
