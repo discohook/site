@@ -262,7 +262,7 @@ export const parseMarkup = (
   content: string,
   options?: { inline?: boolean; jumboable?: boolean },
 ) => {
-  const { inline = false, jumboable = false } = options || {}
+  const { inline = false, jumboable = false } = options ?? {}
 
   const startTime = now()
 

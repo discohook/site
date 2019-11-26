@@ -73,8 +73,8 @@ export default function MessagePreview(props: Props) {
     <ScrollContainer>
       <Container>
         <MessageHeader
-          username={username || webhook?.name}
-          avatarUrl={avatarUrl || (webhook && getAvatarUrl(webhook))}
+          username={username ?? webhook?.name}
+          avatarUrl={avatarUrl ?? (webhook && getAvatarUrl(webhook))}
         />
         {content && <Markup content={content} jumboable />}
         {embeds && (
