@@ -1,15 +1,29 @@
 import styled from "@emotion/styled"
 import React from "react"
 import InputField from "../form/InputField"
-import { ToggleButton } from "../form/styles"
+import Toggle from "../form/Toggle"
 import { Field } from "../message/Message"
 import { id } from "../message/uid"
 import { Container } from "./styles"
 
-const InlineToggle = styled(ToggleButton)`
-  min-width: 100px;
-  margin: 34px 8px 8px;
-  align-self: flex-start;
+const TopRowContainer = styled(Container)`
+  & > *:first-of-type {
+    flex: 2;
+    padding-right: 8px;
+  }
+
+  & > *:last-of-type {
+    flex: 1;
+  }
+`
+
+const ToggleContainer = styled.div`
+  margin-top: 34px;
+  height: 32px;
+
+  && > * {
+    padding-left: 0;
+  }
 `
 
 type Props = {
@@ -23,7 +37,7 @@ export default function FieldEditor(props: Props) {
 
   return (
     <Container>
-      <Container flow="row">
+      <TopRowContainer flow="row">
         <InputField
           id={`message-embed${embedId}-field${field[id]}-name`}
           value={field.name}
@@ -36,18 +50,20 @@ export default function FieldEditor(props: Props) {
           label="Field Name"
           maxLength={256}
         />
-        <InlineToggle
-          filled={field.inline ?? false}
-          onClick={() =>
-            handleChange({
-              ...field,
-              inline: !field.inline || undefined,
-            })
-          }
-        >
-          Inline ({field.inline ? "On" : "Off"})
-        </InlineToggle>
-      </Container>
+        <ToggleContainer>
+          <Toggle
+            id={`message-embed${embedId}-field${field[id]}-inline`}
+            label="Inline"
+            value={field.inline ?? false}
+            onChange={inline =>
+              handleChange({
+                ...field,
+                inline: inline || undefined,
+              })
+            }
+          />
+        </ToggleContainer>
+      </TopRowContainer>
       <InputField
         id={`message-embed${embedId}-field${field[id]}-value`}
         value={field.value}
