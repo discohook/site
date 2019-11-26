@@ -75,11 +75,10 @@ type Props = {
   label: string
   value: boolean
   onChange: (value: boolean) => void
-  disabled?: boolean
 }
 
 export default function Toggle(props: Props) {
-  const { id, label, value, onChange: handleChange, disabled } = props
+  const { id, label, value, onChange: handleChange } = props
 
   return (
     <Container onClick={() => handleChange(!value)}>
@@ -88,7 +87,6 @@ export default function Toggle(props: Props) {
         <ToggleInput
           checked={value}
           onChange={event => handleChange(event.target.checked)}
-          disabled={disabled}
         />
       </ToggleContainer>
     </Container>
