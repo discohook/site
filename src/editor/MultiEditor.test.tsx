@@ -8,7 +8,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3]}
         onChange={() => {}}
-        name="number"
+        name="Number"
         factory={() => 0}
         keyMapper={number => number}
       >
@@ -30,7 +30,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3]}
         onChange={() => {}}
-        name="number"
+        name="Number"
         factory={() => 0}
         keyMapper={number => number}
       >
@@ -42,7 +42,7 @@ describe("MultiEditor", () => {
     expect(getByTestId("multieditor-header--2")).toHaveTextContent("Number 2")
     expect(getByTestId("multieditor-header--3")).toHaveTextContent("Number 3")
 
-    expect(getByTestId("multieditor-add")).toHaveTextContent("Add number")
+    expect(getByTestId("multieditor-add")).toHaveTextContent("Add Number")
   })
 
   it("editors have move up or down buttons where needed", () => {
@@ -50,7 +50,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3]}
         onChange={() => {}}
-        name="number"
+        name="Number"
         factory={() => 0}
         keyMapper={number => number}
       >
@@ -73,7 +73,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3]}
         onChange={handleChange}
-        name="number"
+        name="Number"
         factory={() => 0}
         keyMapper={number => number}
       >
@@ -100,7 +100,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3]}
         onChange={handleChange}
-        name="number"
+        name="Number"
         factory={() => 0}
         keyMapper={number => number}
       >
@@ -122,7 +122,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3]}
         onChange={handleChange}
-        name="number"
+        name="Number"
         factory={() => 0}
         keyMapper={number => number}
       >
@@ -158,7 +158,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3]}
         onChange={handleChange}
-        name="number"
+        name="Number"
         factory={factory}
         keyMapper={number => number}
       >
@@ -180,7 +180,7 @@ describe("MultiEditor", () => {
       <MultiEditor<number>
         items={[1, 2, 3, 4]}
         onChange={() => {}}
-        name="number"
+        name="Number"
         limit={5}
         factory={() => 0}
         keyMapper={number => number}
