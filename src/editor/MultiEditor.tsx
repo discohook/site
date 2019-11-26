@@ -1,5 +1,5 @@
 import React, { Key, ReactNode } from "react"
-import { Button } from "../form/styles"
+import Button from "../form/Button"
 import {
   Action,
   ActionsContainer,

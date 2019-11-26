@@ -3,13 +3,8 @@ import React, { useRef } from "react"
 import { SERVER } from "../core/environment"
 import { Container } from "../editor/styles"
 import { FileLike } from "../message/FileLike"
-import {
-  Button,
-  InputContainer,
-  InputLabel,
-  InputNote,
-  TextInput,
-} from "./styles"
+import Button from "./Button"
+import { InputContainer, InputLabel, InputNote, TextInput } from "./styles"
 
 const maxFileSize = 8388296
 

@@ -7,8 +7,8 @@ import {
   ActionsHeader,
   Container,
 } from "../editor/styles"
+import Button from "../form/Button"
 import InputField from "../form/InputField"
-import { Button } from "../form/styles"
 import { FileLike } from "../message/FileLike"
 import { Message } from "../message/Message"
 import { Backup } from "./Backup"

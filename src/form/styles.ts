@@ -51,7 +51,7 @@ export const InputNote = styled.div<InputNoteProps, Theme>`
   }
 `
 
-export const Button = styled.button<{}, Theme>`
+export const DefaultButton = styled.button<{}, Theme>`
   min-width: 60px;
   min-height: 32px;
   max-height: 32px;
@@ -84,9 +84,9 @@ export const Button = styled.button<{}, Theme>`
     opacity: 0.5;
   }
 `
-Button.defaultProps = { type: "button" }
+DefaultButton.defaultProps = { type: "button" }
 
-export const ToggleButton = styled(Button)<{ filled: boolean }, Theme>`
+export const ToggleButton = styled(DefaultButton)<{ filled: boolean }, Theme>`
   border: 1px solid ${({ theme }) => theme.accents.primary};
 
   &:hover:not(:disabled),
