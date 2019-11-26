@@ -2,11 +2,19 @@ import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { Theme } from "../core/themes"
 
-export const MarkupContainer = styled.div`
+export const MarkupContainer = styled.div<{}, Theme>`
   white-space: pre-wrap;
   word-wrap: break-word;
   display: inline;
   line-height: 1.375;
+
+  ${({ theme }) =>
+    theme.color === "light" &&
+    css`
+      @media (max-resolution: 1dppx) {
+        font-weight: 500;
+      }
+    `}
 `
 
 export const Code = styled.code<{}, Theme>`

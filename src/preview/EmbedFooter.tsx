@@ -35,6 +35,14 @@ const FooterText = styled.span<{}, Theme>`
   font-size: 0.75rem;
   color: ${({ theme }) => theme.text.muted};
   line-height: 1rem;
+
+  ${({ theme }) =>
+    theme.color === "light" &&
+    css`
+      @media (max-resolution: 1dppx) {
+        font-weight: 500;
+      }
+    `}
 `
 
 const FooterSeparator = styled.span<{}, Theme>`

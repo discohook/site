@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { css } from "@emotion/core"
 import React from "react"
 import { Theme } from "../core/themes"
 import { Author } from "../message/Message"
@@ -27,6 +28,14 @@ const AuthorNameNormal = styled.span<{}, Theme>`
 
   white-space: pre-wrap;
   display: inline-block;
+
+  ${({ theme }) =>
+    theme.color === "light" &&
+    css`
+      @media (max-resolution: 1dppx) {
+        font-weight: 500;
+      }
+    `}
 `
 
 const AuthorNameLink = AuthorNameNormal.withComponent("a")
