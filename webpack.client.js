@@ -28,17 +28,12 @@ module.exports = {
     rules: [
       {
         test: /\.[jt]sx?$/,
-        use: "babel-loader?cacheDirectory",
+        use: ["babel-loader?cacheDirectory", "eslint-loader"],
       },
       {
         enforce: "pre",
         test: /\.js$/,
         use: "source-map-loader",
-      },
-      {
-        enforce: "pre",
-        test: /\.[js]sx?$/,
-        use: "eslint-loader",
       },
     ],
   },
