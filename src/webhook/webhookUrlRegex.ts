@@ -1,4 +1,4 @@
-const host = /(?:www\.|ptb\.|canary\.)discordapp\.com/
+const host = /(?:www\.|ptb\.|canary\.)?discordapp\.com/
 const id = /\d+/
 const token = /[\w-]+/
 

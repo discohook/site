@@ -16,6 +16,7 @@ import { Webhook } from "../webhook/Webhook"
 import EmbedEditor from "./EmbedEditor"
 import MultiEditor from "./MultiEditor"
 import { Action, ActionsContainer, ActionsHeader, Container } from "./styles"
+import { webhookUrlRegex } from "../webhook/webhookUrlRegex"
 
 const EditorContainer = styled.div`
   position: relative;
@@ -89,7 +90,7 @@ export default function Editor(props: Props) {
 
   let isDisabled: boolean
   if (sending) isDisabled = true
-  else if (webhookUrl.trim().length === 0) isDisabled = true
+  else if (!webhookUrlRegex.test(webhookUrl)) isDisabled = true
   else if (typeof message.content === "string") isDisabled = false
   else if (message.embeds && message.embeds.length > 0) isDisabled = false
   else if (files.length > 0) isDisabled = false
