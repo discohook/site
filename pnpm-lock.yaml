@@ -4,7 +4,7 @@ dependencies:
   '@emotion/styled': 10.0.23_b72901fefb9c28f220e25710e5576e8f
   '@emotion/styled-base': 10.0.24_b72901fefb9c28f220e25710e5576e8f
   '@koa/router': 8.0.2
-  core-js: 3.4.4
+  core-js: 3.4.5
   emotion-theming: 10.0.19_b72901fefb9c28f220e25710e5576e8f
   highlight.js: 9.16.2
   immer: 5.0.0
@@ -14,6 +14,7 @@ dependencies:
   koa-static: 5.0.0
   react: 16.12.0
   react-dom: 16.12.0_react@16.12.0
+  regenerator-runtime: 0.13.3
   simple-markdown: 0.7.1
 devDependencies:
   '@babel/core': 7.7.4
@@ -892,7 +893,7 @@ packages:
       '@babel/plugin-transform-unicode-regex': 7.7.4_@babel+core@7.7.4
       '@babel/types': 7.7.4
       browserslist: 4.7.3
-      core-js-compat: 3.4.4
+      core-js-compat: 3.4.5
       invariant: 2.2.4
       js-levenshtein: 1.1.6
       semver: 5.7.1
@@ -2795,18 +2796,18 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-7N68eIoQTyudAuxkfPT7HzGoQ+TsmArN/I3HFwG+lVE3FNzqvZKIiaxtYh4o3BIznioxUvx9j26+Rtsc9htQUQ==
-  /core-js-compat/3.4.4:
+  /core-js-compat/3.4.5:
     dependencies:
       browserslist: 4.7.3
       semver: 6.3.0
     dev: true
     resolution:
-      integrity: sha512-hBbxJ6sOkaFSvwAXjJ/t/1usGIPK5gTbtqV8+T+u1pZBkgQ3lDQgAguN1g01PJ0b3eyQxgRIEgxqGoviE1QtIQ==
-  /core-js/3.4.4:
+      integrity: sha512-rYVvzvKJDKoefdAC+q6VP63vp5hMmeVONCi9pVUbU1qRrtVrmAk/nPhnRg+i+XFd775m1hpG2Yd5RY3X45ccuw==
+  /core-js/3.4.5:
     dev: false
     requiresBuild: true
     resolution:
-      integrity: sha512-vKea1DrcLA80Hrfc7AQgfoGvEaByfR5mH08t+zuWOWY94TFBmabdEL56mUbcijvadG9RxsXR2gUUFrfj4/iTcA==
+      integrity: sha512-OuvejWH6vIaUo59Ndlh89purNm4DCIy/v3QoYlcGnn+PkYI8BhNHfCuAESrWX+ZPfq9JccVJ+XXgOMy77PJexg==
   /core-util-is/1.0.2:
     dev: true
     resolution:
@@ -8989,7 +8990,7 @@ specifiers:
   babel-plugin-react-remove-properties: ^0.3.0
   clean-webpack-plugin: ^3.0.0
   copy-webpack-plugin: ^5.0.5
-  core-js: ^3.4.4
+  core-js: ^3.4.5
   cross-env: ^6.0.3
   emotion-theming: ^10.0.19
   eslint: ^6.7.1
@@ -9010,6 +9011,7 @@ specifiers:
   prettier: ^1.19.1
   react: ^16.12.0
   react-dom: ^16.12.0
+  regenerator-runtime: ^0.13.3
   simple-markdown: ^0.7.1
   source-map-loader: ^0.2.4
   typescript: ^3.7.2
