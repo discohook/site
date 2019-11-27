@@ -10,10 +10,7 @@ if (!process.env.NODE_ENV) process.env.NODE_ENV = "production"
 
 /** @type {import("webpack").Configuration} */
 module.exports = {
-  entry: [
-    "regenerator-runtime/runtime",
-    resolve(__dirname, "src/core/server.tsx"),
-  ],
+  entry: resolve(__dirname, "src/core/server.tsx"),
   mode: "production",
   output: {
     filename: "main.js",

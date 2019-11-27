@@ -14,10 +14,7 @@ const development = process.env.NODE_ENV === "development"
 
 /** @type {import("webpack").Configuration} */
 module.exports = {
-  entry: [
-    "regenerator-runtime/runtime",
-    resolve(__dirname, "src/core/client.tsx"),
-  ],
+  entry: resolve(__dirname, "src/core/client.tsx"),
   mode: development ? "development" : "production",
   output: {
     filename: "[name].js?q=[chunkhash]",

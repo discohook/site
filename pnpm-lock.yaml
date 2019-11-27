@@ -1,9 +1,10 @@
 dependencies:
+  '@babel/runtime': 7.7.4
   '@emotion/core': 10.0.22_react@16.12.0
   '@emotion/styled': 10.0.23_b72901fefb9c28f220e25710e5576e8f
   '@emotion/styled-base': 10.0.24_b72901fefb9c28f220e25710e5576e8f
   '@koa/router': 8.0.2
-  core-js: 3.4.3
+  core-js: 3.4.4
   emotion-theming: 10.0.19_b72901fefb9c28f220e25710e5576e8f
   highlight.js: 9.16.2
   immer: 5.0.0
@@ -13,7 +14,6 @@ dependencies:
   koa-static: 5.0.0
   react: 16.12.0
   react-dom: 16.12.0_react@16.12.0
-  regenerator-runtime: 0.13.3
   simple-markdown: 0.7.1
 devDependencies:
   '@babel/core': 7.7.4
@@ -22,6 +22,7 @@ devDependencies:
   '@babel/plugin-proposal-object-rest-spread': 7.7.4_@babel+core@7.7.4
   '@babel/plugin-proposal-optional-chaining': 7.7.4_@babel+core@7.7.4
   '@babel/plugin-syntax-dynamic-import': 7.7.4_@babel+core@7.7.4
+  '@babel/plugin-transform-runtime': 7.7.4_@babel+core@7.7.4
   '@babel/preset-env': 7.7.4_@babel+core@7.7.4
   '@babel/preset-react': 7.7.4_@babel+core@7.7.4
   '@babel/preset-typescript': 7.7.4_@babel+core@7.7.4
@@ -31,7 +32,7 @@ devDependencies:
   '@testing-library/user-event': 7.1.2_@testing-library+dom@6.10.1
   '@types/highlight.js': 9.12.3
   '@types/jest': 24.0.23
-  '@types/koa': 2.0.52
+  '@types/koa': 2.11.0
   '@types/koa-conditional-get': 2.0.0
   '@types/koa-static': 4.0.1
   '@types/koa__router': 8.0.2
@@ -84,7 +85,7 @@ packages:
       debug: 4.1.1
       json5: 2.1.1
       lodash: 4.17.15
-      resolve: 1.13.0
+      resolve: 1.13.1
       semver: 5.7.1
       source-map: 0.5.7
     dev: true
@@ -761,6 +762,18 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-OrPiUB5s5XvkCO1lS7D8ZtHcswIC57j62acAnJZKqGGnHP+TIc/ljQSrgdX/QyOTdEK5COAhuc820Hi1q2UgLQ==
+  /@babel/plugin-transform-runtime/7.7.4_@babel+core@7.7.4:
+    dependencies:
+      '@babel/core': 7.7.4
+      '@babel/helper-module-imports': 7.7.4
+      '@babel/helper-plugin-utils': 7.0.0
+      resolve: 1.13.1
+      semver: 5.7.1
+    dev: true
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-O8kSkS5fP74Ad/8pfsCMGa8sBRdLxYoSReaARRNSz3FbFQj3z/QUvoUmJ28gn9BO93YfnXc3j+Xyaqe8cKDNBQ==
   /@babel/plugin-transform-shorthand-properties/7.7.4_@babel+core@7.7.4:
     dependencies:
       '@babel/core': 7.7.4
@@ -879,7 +892,7 @@ packages:
       '@babel/plugin-transform-unicode-regex': 7.7.4_@babel+core@7.7.4
       '@babel/types': 7.7.4
       browserslist: 4.7.3
-      core-js-compat: 3.4.3
+      core-js-compat: 3.4.4
       invariant: 2.2.4
       js-levenshtein: 1.1.6
       semver: 5.7.1
@@ -1412,30 +1425,30 @@ packages:
       integrity: sha1-/1QEYtL7TQqIRBzq8n0oewHD2Hg=
   /@types/koa-compose/3.2.5:
     dependencies:
-      '@types/koa': 2.0.52
+      '@types/koa': 2.11.0
     dev: true
     resolution:
       integrity: sha512-B8nG/OoE1ORZqCkBVsup/AKcvjdgoHnfi4pZMn5UwAPCbhk/96xyv284eBYW8JlQbQ7zDmnpFr68I/40mFoIBQ==
   /@types/koa-conditional-get/2.0.0:
     dependencies:
-      '@types/koa': 2.0.52
+      '@types/koa': 2.11.0
     dev: true
     resolution:
       integrity: sha512-kzEIakwXkkgiJhQPR/IudINqX+xB2gVS+lJWDSEUP3cMYflcX470OOWrUEqOXlc2cCAOyznMo7fFmwfnvd9wyw==
   /@types/koa-send/4.1.2:
     dependencies:
-      '@types/koa': 2.0.52
+      '@types/koa': 2.11.0
     dev: true
     resolution:
       integrity: sha512-rfqKIv9bFds39Jxvsp8o3YJLnEQVPVriYA14AuO2OY65IHh/4UX4U/iMs5L0wATpcRmm1bbe0BNk23TRwx3VQQ==
   /@types/koa-static/4.0.1:
     dependencies:
-      '@types/koa': 2.0.52
+      '@types/koa': 2.11.0
       '@types/koa-send': 4.1.2
     dev: true
     resolution:
       integrity: sha512-SSpct5fEcAeRkBHa3RiwCIRfDHcD1cZRhwRF///ZfvRt8KhoqRrhK6wpDlYPk/vWHVFE9hPGqh68bhzsHkir4w==
-  /@types/koa/2.0.52:
+  /@types/koa/2.11.0:
     dependencies:
       '@types/accepts': 1.3.5
       '@types/cookies': 0.7.4
@@ -1445,10 +1458,10 @@ packages:
       '@types/node': 12.12.14
     dev: true
     resolution:
-      integrity: sha512-cp/GTOhOYwomlSKqEoG0kaVEVJEzP4ojYmfa7EKaGkmkkRwJ4B/1VBLbQZ49Z+WJNvzXejQB/9GIKqMo9XLgFQ==
+      integrity: sha512-Hgx/1/rVlJvqYBrdeCsS7PDiR2qbxlMt1RnmNWD4Uxi5FF9nwkYqIldo7urjc+dfNpk+2NRGcnAYd4L5xEhCcQ==
   /@types/koa__router/8.0.2:
     dependencies:
-      '@types/koa': 2.0.52
+      '@types/koa': 2.11.0
     dev: true
     resolution:
       integrity: sha512-3ZWfVAEcErHrZA31fWUC2YyZyAgoG4eKtQPy2XwBzdSpQealxjL7GcEEtGY925qPPs1wurW59qDl0KuRB39rrw==
@@ -1781,7 +1794,7 @@ packages:
       integrity: sha512-Il80Qs2WjYlJIBNzNkK6KYqlVMTbZLXgHx2oT0pU/fjRHyEp+PEfEPY0R3WCwAGVOtauxh1hOxNgIf5bv7dQpA==
   /acorn-globals/4.3.4:
     dependencies:
-      acorn: 6.3.0
+      acorn: 6.4.0
       acorn-walk: 6.2.0
     dev: true
     resolution:
@@ -1807,13 +1820,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
-  /acorn/6.3.0:
+  /acorn/6.4.0:
     dev: true
     engines:
       node: '>=0.4.0'
     hasBin: true
     resolution:
-      integrity: sha512-/czfa8BwS88b9gWQVhc8eknunSA2DoJpJyTQkhheIf5E48u1N0R4q/YxxsAeqRrmK9TQ/uYfgLDfZo91UlANIA==
+      integrity: sha512-gac8OEcQ2Li1dxIEWGZzsp2BitJxwkwcOm0zHAJLcPJaVvm58FRnk6RkuLRpU1EujipU2ZFODv2P9DLMfnV8mw==
   /acorn/7.1.0:
     dev: true
     engines:
@@ -2063,10 +2076,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=
-  /aws4/1.8.0:
+  /aws4/1.9.0:
     dev: true
     resolution:
-      integrity: sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
+      integrity: sha512-Uvq6hVe90D0B2WEnUqtdgY1bATGz3mw33nH9Y+dmA+w5DHvUmBgkr5rM/KCHpCsiFNRUfokW/szpPPgMK2hm4A==
   /babel-jest/24.9.0_@babel+core@7.7.4:
     dependencies:
       '@babel/core': 7.7.4
@@ -2143,7 +2156,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.7.4
       cosmiconfig: 6.0.0
-      resolve: 1.13.0
+      resolve: 1.13.1
     resolution:
       integrity: sha512-HNM284amlKSQ6FddI4jLXD+XTqF0cTYOe5uemOIZxHJHnamC+OhFQ57rMF9sgnYhkJQptVl9U1SKVZsV9/GLQQ==
   /babel-plugin-react-remove-properties/0.3.0:
@@ -2782,18 +2795,18 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-7N68eIoQTyudAuxkfPT7HzGoQ+TsmArN/I3HFwG+lVE3FNzqvZKIiaxtYh4o3BIznioxUvx9j26+Rtsc9htQUQ==
-  /core-js-compat/3.4.3:
+  /core-js-compat/3.4.4:
     dependencies:
       browserslist: 4.7.3
       semver: 6.3.0
     dev: true
     resolution:
-      integrity: sha512-HgW7pxjAdq6EMxT5uOhbTfjgZo8fvWn0D6QXVlWs3z1Eerux7tRrJ4gcgnZNn6S0OMPHlClJuIEPp0hnow44Sg==
-  /core-js/3.4.3:
+      integrity: sha512-hBbxJ6sOkaFSvwAXjJ/t/1usGIPK5gTbtqV8+T+u1pZBkgQ3lDQgAguN1g01PJ0b3eyQxgRIEgxqGoviE1QtIQ==
+  /core-js/3.4.4:
     dev: false
     requiresBuild: true
     resolution:
-      integrity: sha512-BVvHidX8uAmLCYPfLpXTEex7jz1uZJ1mW+shhIsBdA716O8Fg6TOwSgenSyO/bvEtnGdOTpKRZPSh4bSVI1k9w==
+      integrity: sha512-vKea1DrcLA80Hrfc7AQgfoGvEaByfR5mH08t+zuWOWY94TFBmabdEL56mUbcijvadG9RxsXR2gUUFrfj4/iTcA==
   /core-util-is/1.0.2:
     dev: true
     resolution:
@@ -3396,7 +3409,7 @@ packages:
   /eslint-import-resolver-node/0.3.2:
     dependencies:
       debug: 2.6.9
-      resolve: 1.13.0
+      resolve: 1.13.1
     dev: true
     resolution:
       integrity: sha512-sfmTqJfPSizWu4aymbPr4Iidp5yKm8yDkHp+Ir3YiTHiiDfxh69mOUsmiqW6RZ9zRXFaF64GtYmN7e+8GHBv6Q==
@@ -3407,7 +3420,7 @@ packages:
       loader-fs-cache: 1.0.2
       loader-utils: 1.2.3
       object-hash: 1.3.1
-      schema-utils: 2.5.0
+      schema-utils: 2.6.0
       webpack: 4.41.2_webpack@4.41.2
     dev: true
     engines:
@@ -3439,7 +3452,7 @@ packages:
       minimatch: 3.0.4
       object.values: 1.1.0
       read-pkg-up: 2.0.0
-      resolve: 1.13.0
+      resolve: 1.13.1
     dev: true
     engines:
       node: '>=4'
@@ -3468,7 +3481,7 @@ packages:
       object.fromentries: 2.0.1
       object.values: 1.1.0
       prop-types: 15.7.2
-      resolve: 1.13.0
+      resolve: 1.13.1
     dev: true
     engines:
       node: '>=4'
@@ -6203,7 +6216,7 @@ packages:
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.8.5
-      resolve: 1.13.0
+      resolve: 1.13.1
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -7287,7 +7300,7 @@ packages:
   /request/2.88.0:
     dependencies:
       aws-sign2: 0.7.0
-      aws4: 1.8.0
+      aws4: 1.9.0
       caseless: 0.12.0
       combined-stream: 1.0.8
       extend: 3.0.2
@@ -7378,11 +7391,11 @@ packages:
     dev: true
     resolution:
       integrity: sha1-IDEU2CrSxe2ejgQRs5ModeiJ6Xs=
-  /resolve/1.13.0:
+  /resolve/1.13.1:
     dependencies:
       path-parse: 1.0.6
     resolution:
-      integrity: sha512-HHZ3hmOrk5SvybTb18xq4Ek2uLqLO5/goFCYUyvn26nWox4hdlKlfC/+dChIZ6qc4ZeYcN9ekTz0yyHsFgumMw==
+      integrity: sha512-CxqObCX8K8YtAhOBRg+lrcdn+LK+WYOS8tSjqSFbjtrI5PnS63QPhZl4+yKfrU9tdsbMu9Anr/amegT87M9Z6w==
   /restore-cursor/3.1.0:
     dependencies:
       onetime: 5.1.0
@@ -7513,7 +7526,7 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g==
-  /schema-utils/2.5.0:
+  /schema-utils/2.6.0:
     dependencies:
       ajv: 6.10.2
       ajv-keywords: 3.4.1_ajv@6.10.2
@@ -7521,7 +7534,7 @@ packages:
     engines:
       node: '>= 8.9.0'
     resolution:
-      integrity: sha512-32ISrwW2scPXHUSusP8qMg5dLUawKkyV+/qIEV9JdXKx+rsM6mi8vZY8khg2M69Qom16rtroWXD3Ybtiws38gQ==
+      integrity: sha512-UlPB1ME4i/71cih/Rv92gK8043CrJTc2mjkyxDp4pdJ7ZfzY0g0hdGjjDB23jX3X+NXSneCdQbScGhn6K2tbpQ==
   /select-hose/2.0.0:
     dev: true
     resolution:
@@ -8686,7 +8699,7 @@ packages:
       '@webassemblyjs/helper-module-context': 1.8.5
       '@webassemblyjs/wasm-edit': 1.8.5
       '@webassemblyjs/wasm-parser': 1.8.5
-      acorn: 6.3.0
+      acorn: 6.4.0
       ajv: 6.10.2
       ajv-keywords: 3.4.1_ajv@6.10.2
       chrome-trace-event: 1.0.2
@@ -8944,9 +8957,11 @@ specifiers:
   '@babel/plugin-proposal-object-rest-spread': ^7.7.4
   '@babel/plugin-proposal-optional-chaining': ^7.7.4
   '@babel/plugin-syntax-dynamic-import': ^7.7.4
+  '@babel/plugin-transform-runtime': ^7.7.4
   '@babel/preset-env': ^7.7.4
   '@babel/preset-react': ^7.7.4
   '@babel/preset-typescript': ^7.7.4
+  '@babel/runtime': ^7.7.4
   '@emotion/core': ^10.0.22
   '@emotion/styled': ^10.0.23
   '@emotion/styled-base': ^10.0.24
@@ -8957,7 +8972,7 @@ specifiers:
   '@testing-library/user-event': ^7.1.2
   '@types/highlight.js': ^9.12.3
   '@types/jest': ^24.0.23
-  '@types/koa': ^2.0.52
+  '@types/koa': ^2.11.0
   '@types/koa-conditional-get': ^2.0.0
   '@types/koa-static': ^4.0.1
   '@types/koa__router': ^8.0.2
@@ -8974,7 +8989,7 @@ specifiers:
   babel-plugin-react-remove-properties: ^0.3.0
   clean-webpack-plugin: ^3.0.0
   copy-webpack-plugin: ^5.0.5
-  core-js: ^3.4.3
+  core-js: ^3.4.4
   cross-env: ^6.0.3
   emotion-theming: ^10.0.19
   eslint: ^6.7.1
@@ -8995,7 +9010,6 @@ specifiers:
   prettier: ^1.19.1
   react: ^16.12.0
   react-dom: ^16.12.0
-  regenerator-runtime: ^0.13.3
   simple-markdown: ^0.7.1
   source-map-loader: ^0.2.4
   typescript: ^3.7.2
