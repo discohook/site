@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/newline-after-import */
 
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { resolve } = require("path")
@@ -59,7 +58,6 @@ module.exports = {
       rel: "preload",
       include: ["main", "vendors-main", "app", "vendors-app"],
     }),
-    new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {
         from: resolve(__dirname, "public"),

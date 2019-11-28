@@ -48,7 +48,6 @@ devDependencies:
   babel-loader: 8.0.6_@babel+core@7.7.4+webpack@4.41.2
   babel-plugin-emotion: 10.0.23
   babel-plugin-react-remove-properties: 0.3.0
-  clean-webpack-plugin: 3.0.0_webpack@4.41.2
   copy-webpack-plugin: 5.0.5_webpack@4.41.2
   cross-env: 6.0.3
   eslint: 6.7.1
@@ -1299,10 +1298,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==
-  /@types/anymatch/1.3.1:
-    dev: true
-    resolution:
-      integrity: sha512-/+CRPXpBDpo2RK9C68N3b2cOvO0Cf5B9aPijHsoDQTHivnGSObdOF2BRQOYjojWTDy6nQvMjmqRXIxH55VjxxA==
   /@types/babel__core/7.1.3:
     dependencies:
       '@babel/parser': 7.7.4
@@ -1510,18 +1505,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-oprSwp094zOglVrXdlo/4bAHtKTAxX6VT8FOZlBKrmyLbNvE1zxZyJ6yikMVtHIvwP45+ZQGJn+FdXGKTozq0g==
-  /@types/source-list-map/0.1.2:
-    dev: true
-    resolution:
-      integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
   /@types/stack-utils/1.0.1:
     dev: true
     resolution:
       integrity: sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
-  /@types/tapable/1.0.4:
-    dev: true
-    resolution:
-      integrity: sha512-78AdXtlhpCHT0K3EytMpn4JNxaf5tbqbLcbIRoQIHzpTIyjpxLQKRoxU55ujBXAtg3Nl2h/XWvfDa9dsMOd0pQ==
   /@types/testing-library__dom/6.10.0:
     dependencies:
       pretty-format: 24.9.0
@@ -1539,31 +1526,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-CIpTxvHwoLEe88deUttZ724SE28hX/x3zAdJIQLoltnngl//akeEKFB5DeNqBOWu7ZCEHFiTqRBMKuswXJqYqg==
-  /@types/uglify-js/3.0.4:
-    dependencies:
-      source-map: 0.6.1
-    dev: true
-    resolution:
-      integrity: sha512-SudIN9TRJ+v8g5pTG8RRCqfqTMNqgWCKKd3vtynhGzkIIjxaicNAMuY5TRadJ6tzDu3Dotf3ngaMILtmOdmWEQ==
-  /@types/webpack-sources/0.1.5:
-    dependencies:
-      '@types/node': 12.12.14
-      '@types/source-list-map': 0.1.2
-      source-map: 0.6.1
-    dev: true
-    resolution:
-      integrity: sha512-zfvjpp7jiafSmrzJ2/i3LqOyTYTuJ7u1KOXlKgDlvsj9Rr0x7ZiYu5lZbXwobL7lmsRNtPXlBfmaUD8eU2Hu8w==
-  /@types/webpack/4.41.0:
-    dependencies:
-      '@types/anymatch': 1.3.1
-      '@types/node': 12.12.14
-      '@types/tapable': 1.0.4
-      '@types/uglify-js': 3.0.4
-      '@types/webpack-sources': 0.1.5
-      source-map: 0.6.1
-    dev: true
-    resolution:
-      integrity: sha512-tWkdf9nO0zFgAY/EumUKwrDUhraHKDqCPhwfFR/R8l0qnPdgb9le0Gzhvb7uzVpouuDGBgiE//ZdY+5jcZy2TA==
   /@types/yargs-parser/13.1.0:
     dev: true
     resolution:
@@ -2567,18 +2529,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-jffHquUf02h06PjQW5GAvBGj/tc=
-  /clean-webpack-plugin/3.0.0_webpack@4.41.2:
-    dependencies:
-      '@types/webpack': 4.41.0
-      del: 4.1.1
-      webpack: 4.41.2_webpack@4.41.2
-    dev: true
-    engines:
-      node: '>=8.9.0'
-    peerDependencies:
-      webpack: '*'
-    resolution:
-      integrity: sha512-MciirUH5r+cYLGCOL5JX/ZLzOZbVr1ot3Fw+KcvbhUb6PM+yycqd9ZhIlcigQ5gl+XhppNmw3bEFuaaMNyLj3A==
   /cli-cursor/3.1.0:
     dependencies:
       restore-cursor: 3.1.0
@@ -3421,7 +3371,7 @@ packages:
       loader-fs-cache: 1.0.2
       loader-utils: 1.2.3
       object-hash: 1.3.1
-      schema-utils: 2.6.0
+      schema-utils: 2.6.1
       webpack: 4.41.2_webpack@4.41.2
     dev: true
     engines:
@@ -7527,7 +7477,7 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g==
-  /schema-utils/2.6.0:
+  /schema-utils/2.6.1:
     dependencies:
       ajv: 6.10.2
       ajv-keywords: 3.4.1_ajv@6.10.2
@@ -7535,7 +7485,7 @@ packages:
     engines:
       node: '>= 8.9.0'
     resolution:
-      integrity: sha512-UlPB1ME4i/71cih/Rv92gK8043CrJTc2mjkyxDp4pdJ7ZfzY0g0hdGjjDB23jX3X+NXSneCdQbScGhn6K2tbpQ==
+      integrity: sha512-0WXHDs1VDJyo+Zqs9TKLKyD/h7yDpHUhEFsM2CzkICFdoX1av+GBq/J2xRTFfsQO5kBfhZzANf2VcIm84jqDbg==
   /select-hose/2.0.0:
     dev: true
     resolution:
@@ -8988,7 +8938,6 @@ specifiers:
   babel-loader: ^8.0.6
   babel-plugin-emotion: ^10.0.23
   babel-plugin-react-remove-properties: ^0.3.0
-  clean-webpack-plugin: ^3.0.0
   copy-webpack-plugin: ^5.0.5
   core-js: ^3.4.5
   cross-env: ^6.0.3
