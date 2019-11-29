@@ -15,7 +15,7 @@ import { RequestProvider } from "./RequestContext"
 const app = new Koa()
 const router = new Router()
 
-const build = resolve(__dirname, "public")
+const build = resolve(__dirname, "../../dist")
 const html = readFileSync(resolve(build, "index.html")).toString()
 const [templateStart, templateEnd] = html
   .replace('<div id="app"></div>', '<div id="app">{app}</div>')
@@ -85,6 +85,7 @@ app.on("error", error => {
   console.error(error)
 })
 
-app.listen(Number(process.env.PORT) || 5000, () => {
-  console.log(`Listening on ${process.env.PORT}`)
+const port = Number(process.env.PORT) || 5000
+app.listen(port, () => {
+  console.log(`Listening on ${port}`)
 })

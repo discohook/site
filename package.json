@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node --max-http-header-size=81920 ./dist/main.js",
+    "start": "cross-env NODE_ENV=production SERVER=true node --max-http-header-size=81920 ./lib/core/server.js",
     "build": "pnpm run build:client && pnpm run build:server",
-    "build:client": "cross-env NODE_ENV=production webpack --config webpack.client.js",
-    "build:server": "cross-env NODE_ENV=production webpack --config webpack.server.js",
-    "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--max-http-header-size=81920' webpack-dev-server --config webpack.client.js",
+    "build:client": "cross-env NODE_ENV=production webpack",
+    "build:server": "babel src -d lib -x '.js,.jsx,.ts,.tsx' -s",
+    "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--max-http-header-size=81920' webpack-dev-server",
     "test": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json",
     "test:watch": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json --watch",
     "test:cov": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json --coverage --collectCoverageFrom=\"src/**/*.{ts,tsx}\"",
@@ -46,6 +46,7 @@
     "simple-markdown": "^0.7.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
@@ -82,7 +83,7 @@
     "eslint": "^6.7.1",
     "eslint-loader": "^3.0.2",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "eslint-plugin-unicorn": "^13.0.0",
     "html-webpack-plugin": "^3.2.0",

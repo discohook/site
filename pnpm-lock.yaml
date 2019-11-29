@@ -17,6 +17,7 @@ dependencies:
   regenerator-runtime: 0.13.3
   simple-markdown: 0.7.1
 devDependencies:
+  '@babel/cli': 7.7.4_@babel+core@7.7.4
   '@babel/core': 7.7.4
   '@babel/plugin-proposal-class-properties': 7.7.4_@babel+core@7.7.4
   '@babel/plugin-proposal-nullish-coalescing-operator': 7.7.4_@babel+core@7.7.4
@@ -53,7 +54,7 @@ devDependencies:
   eslint: 6.7.1
   eslint-loader: 3.0.2_eslint@6.7.1+webpack@4.41.2
   eslint-plugin-import: 2.18.2_eslint@6.7.1
-  eslint-plugin-react: 7.16.0_eslint@6.7.1
+  eslint-plugin-react: 7.17.0_eslint@6.7.1
   eslint-plugin-react-hooks: 2.3.0_eslint@6.7.1
   eslint-plugin-unicorn: 13.0.0_eslint@6.7.1
   html-webpack-plugin: 3.2.0_webpack@4.41.2
@@ -67,6 +68,25 @@ devDependencies:
   webpack-dev-server: 3.9.0_webpack@4.41.2
 lockfileVersion: 5.1
 packages:
+  /@babel/cli/7.7.4_@babel+core@7.7.4:
+    dependencies:
+      '@babel/core': 7.7.4
+      commander: 4.0.1
+      convert-source-map: 1.7.0
+      fs-readdir-recursive: 1.1.0
+      glob: 7.1.6
+      lodash: 4.17.15
+      make-dir: 2.1.0
+      slash: 2.0.0
+      source-map: 0.5.7
+    dev: true
+    hasBin: true
+    optionalDependencies:
+      chokidar: 2.1.8
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-O7mmzaWdm+VabWQmxuM8hqNrWGGihN83KfhPUzp2lAW4kzIMwBxujXkZbD4fMwKMYY9FXTbDvXsJqU+5XHXi4A==
   /@babel/code-frame/7.5.5:
     dependencies:
       '@babel/highlight': 7.5.0
@@ -2187,10 +2207,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==
-  /bluebird/3.7.1:
+  /bluebird/3.7.2:
     dev: true
     resolution:
-      integrity: sha512-DdmyoGCleJnkbp3nkbxTLJ18rjDsE4yCggEwKNXkeV123sPNfOCYeDoeuOY+F2FrSjO1YXcTU+dsy96KMy+gcg==
+      integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
   /bn.js/4.11.8:
     dev: true
     resolution:
@@ -2371,7 +2391,7 @@ packages:
       integrity: sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
   /cacache/12.0.3:
     dependencies:
-      bluebird: 3.7.1
+      bluebird: 3.7.2
       chownr: 1.1.3
       figgy-pudding: 3.5.1
       glob: 7.1.6
@@ -2606,6 +2626,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
+  /commander/4.0.1:
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-IPF4ouhCP+qdlcmCedhxX4xiGBPyigb8v5NeUp+0LyhwLgxMqyp3S0vl7TAPfS/hiP7FC3caI/PB9lTmP8r1NA==
   /commondir/1.0.1:
     dev: true
     resolution:
@@ -3390,6 +3416,16 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-H6DOj+ejw7Tesdgbfs4jeS4YMFrT8uI8xwd1gtQqXssaR0EQ26L+2O/w6wkYFy2MymON0fTwHmXBvvfLNZVZEw==
+  /eslint-plugin-eslint-plugin/2.1.0_eslint@6.7.1:
+    dependencies:
+      eslint: 6.7.1
+    dev: true
+    engines:
+      node: ^6.14.0 || ^8.10.0 || >=9.10.0
+    peerDependencies:
+      eslint: '>=5.0.0'
+    resolution:
+      integrity: sha512-kT3A/ZJftt28gbl/Cv04qezb/NQ1dwYIbi8lyf806XMxkus7DvOVCLIfTXMrorp322Pnoez7+zabXH29tADIDg==
   /eslint-plugin-import/2.18.2_eslint@6.7.1:
     dependencies:
       array-includes: 3.0.3
@@ -3421,11 +3457,12 @@ packages:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-gLKCa52G4ee7uXzdLiorca7JIQZPPXRAQDXV83J4bUEeUuc5pIEyZYAZ45Xnxe5IuupxEqHS+hUhSLIimK1EMw==
-  /eslint-plugin-react/7.16.0_eslint@6.7.1:
+  /eslint-plugin-react/7.17.0_eslint@6.7.1:
     dependencies:
       array-includes: 3.0.3
       doctrine: 2.1.0
       eslint: 6.7.1
+      eslint-plugin-eslint-plugin: 2.1.0_eslint@6.7.1
       has: 1.0.3
       jsx-ast-utils: 2.2.3
       object.entries: 1.1.0
@@ -3439,7 +3476,7 @@ packages:
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
     resolution:
-      integrity: sha512-GacBAATewhhptbK3/vTP09CbFrgUJmBSaaRcWdbQLFvUZy9yVcQxigBNHGPU/KE2AyHpzj3AWXpxoMTsIDiHug==
+      integrity: sha512-ODB7yg6lxhBVMeiH1c7E95FLD4E/TwmFjltiU+ethv7KPdCwgiFuOZg9zNRHyufStTDLl/dEFqI2Q1VPmCd78A==
   /eslint-plugin-unicorn/13.0.0_eslint@6.7.1:
     dependencies:
       ci-info: 2.0.0
@@ -4016,6 +4053,10 @@ packages:
       node: '>=6 <7 || >=8'
     resolution:
       integrity: sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
+  /fs-readdir-recursive/1.1.0:
+    dev: true
+    resolution:
+      integrity: sha512-GNanXlVr2pf02+sPN40XN8HG+ePaNcvM0q5mZBd668Obwb0yD5GiUbZOFgwn8kGMY6I3mdyDJzieUy3PTYyTRA==
   /fs-write-stream-atomic/1.0.10:
     dependencies:
       graceful-fs: 4.2.3
@@ -8902,6 +8943,7 @@ packages:
     resolution:
       integrity: sha512-faQrqNMzcPCHGVC2aaOINk13K+aaBDUPjGWl0teOXywElLjyVAB6Oe2jj62jHYtwsU49jXhScYbvPENK+6zAvQ==
 specifiers:
+  '@babel/cli': ^7.7.4
   '@babel/core': ^7.7.4
   '@babel/plugin-proposal-class-properties': ^7.7.4
   '@babel/plugin-proposal-nullish-coalescing-operator': ^7.7.4
@@ -8945,7 +8987,7 @@ specifiers:
   eslint: ^6.7.1
   eslint-loader: ^3.0.2
   eslint-plugin-import: ^2.18.2
-  eslint-plugin-react: ^7.16.0
+  eslint-plugin-react: ^7.17.0
   eslint-plugin-react-hooks: ^2.3.0
   eslint-plugin-unicorn: ^13.0.0
   highlight.js: ^9.16.2
