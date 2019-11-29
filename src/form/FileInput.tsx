@@ -3,8 +3,13 @@ import React, { useRef } from "react"
 import { SERVER } from "../core/environment"
 import { Container } from "../editor/styles"
 import { FileLike } from "../message/FileLike"
-import Button from "./Button"
-import { InputContainer, InputLabel, InputNote, TextInput } from "./styles"
+import {
+  DefaultButton,
+  InputContainer,
+  InputLabel,
+  InputNote,
+  TextInput,
+} from "./styles"
 
 const maxFileSize = 8388296
 
@@ -31,8 +36,8 @@ const HiddenInput = styled.input`
 `
 HiddenInput.defaultProps = { type: "file", multiple: true }
 
-const RemoveFilesButton = styled(Button)`
-  margin: 8px 0 8px 8px;
+const RemoveFilesButton = styled(DefaultButton)`
+  margin-right: 0;
 `
 
 type Props = {
