@@ -10,7 +10,7 @@ const Container = styled.div<{}, Theme>`
   height: 100%;
   overflow: auto;
 
-  padding: 64px 32px 32px;
+  padding: 64px 32px 0;
 
   ${({ theme }) =>
     theme.mobile &&
@@ -36,7 +36,7 @@ const Paragraph = styled.p<{}, Theme>`
 
 const ErrorDetails = styled.pre<{}, Theme>`
   max-width: 1200px;
-  margin: 6px 0 0;
+  margin-bottom: 32px;
   padding: 7px;
 
   background: ${({ theme }) => theme.background.secondary};

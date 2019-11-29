@@ -13,10 +13,11 @@ import { getUniqueId, id } from "../message/uid"
 import { executeWebhook } from "../webhook/executeWebhook"
 import { getAvatarUrl } from "../webhook/getAvatarUrl"
 import { Webhook } from "../webhook/Webhook"
+import { webhookUrlRegex } from "../webhook/webhookUrlRegex"
+import Actions from "./Actions"
 import EmbedEditor from "./EmbedEditor"
 import MultiEditor from "./MultiEditor"
-import { Action, ActionsContainer, ActionsHeader, Container } from "./styles"
-import { webhookUrlRegex } from "../webhook/webhookUrlRegex"
+import { Container } from "./styles"
 
 const EditorContainer = styled.div`
   position: relative;
@@ -107,15 +108,19 @@ export default function Editor(props: Props) {
           Discohook requires JavaScript to be enabled, please turn it on in your
           browser settings to use this app.
         </JavaScriptWarning>
-        <ActionsContainer>
-          {!theme.mobile && <ActionsHeader>Message editor</ActionsHeader>}
-          <Action onClick={() => setIsBackupModalShown(true)}>Backups</Action>
-          <Action onClick={handleToggleTheme}>Toggle theme</Action>
-          {!theme.mobile && (
-            <Action onClick={handleToggleDisplay}>Toggle display</Action>
-          )}
-          <Action onClick={clearAll}>Clear all</Action>
-        </ActionsContainer>
+        <Actions
+          title={theme.mobile ? undefined : "Message editor"}
+          actions={
+            [
+              { name: "Backups", action: () => setIsBackupModalShown(true) },
+              { name: "Toggle theme", action: handleToggleTheme },
+              theme.mobile
+                ? undefined
+                : { name: "Toggle display", action: handleToggleDisplay },
+              { name: "Clear all", action: clearAll },
+            ].filter(Boolean) as Parameters<typeof Actions>[0]["actions"]
+          }
+        />
         <Container flow="row">
           <InputField
             id="webhook-url"

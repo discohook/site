@@ -1,5 +1,10 @@
 import React, { cloneElement } from "react"
-import { render, userEvent } from "../core/testUtils"
+import {
+  getByText as getByTextFrom,
+  queryByText as queryByTextFrom,
+  render,
+  userEvent,
+} from "../core/testUtils"
 import MultiEditor from "./MultiEditor"
 
 describe("MultiEditor", () => {
@@ -26,6 +31,24 @@ describe("MultiEditor", () => {
   })
 
   it("shows name in editors", () => {
+    const { queryByText } = render(
+      <MultiEditor<number>
+        items={[1, 2, 3]}
+        onChange={() => {}}
+        name="Number"
+        factory={() => 0}
+        keyMapper={number => number}
+      >
+        {item => item}
+      </MultiEditor>,
+    )
+
+    expect(queryByText("Number 1")).toBeInTheDocument()
+    expect(queryByText("Number 2")).toBeInTheDocument()
+    expect(queryByText("Number 3")).toBeInTheDocument()
+  })
+
+  it("shows move up or down buttons when applicable", () => {
     const { getByTestId } = render(
       <MultiEditor<number>
         items={[1, 2, 3]}
@@ -38,32 +61,17 @@ describe("MultiEditor", () => {
       </MultiEditor>,
     )
 
-    expect(getByTestId("multieditor-header--1")).toHaveTextContent("Number 1")
-    expect(getByTestId("multieditor-header--2")).toHaveTextContent("Number 2")
-    expect(getByTestId("multieditor-header--3")).toHaveTextContent("Number 3")
+    const one = getByTestId("multieditor-1")
+    expect(queryByTextFrom(one, "Move Up")).not.toBeInTheDocument()
+    expect(queryByTextFrom(one, "Move Down")).toBeInTheDocument()
 
-    expect(getByTestId("multieditor-add")).toHaveTextContent("Add Number")
-  })
+    const two = getByTestId("multieditor-2")
+    expect(queryByTextFrom(two, "Move Up")).toBeInTheDocument()
+    expect(queryByTextFrom(two, "Move Down")).toBeInTheDocument()
 
-  it("editors have move up or down buttons where needed", () => {
-    const { queryByTestId } = render(
-      <MultiEditor<number>
-        items={[1, 2, 3]}
-        onChange={() => {}}
-        name="Number"
-        factory={() => 0}
-        keyMapper={number => number}
-      >
-        {item => item}
-      </MultiEditor>,
-    )
-
-    expect(queryByTestId("multieditor-up--1")).not.toBeInTheDocument()
-    expect(queryByTestId("multieditor-up--2")).toBeInTheDocument()
-    expect(queryByTestId("multieditor-up--3")).toBeInTheDocument()
-    expect(queryByTestId("multieditor-down--1")).toBeInTheDocument()
-    expect(queryByTestId("multieditor-down--2")).toBeInTheDocument()
-    expect(queryByTestId("multieditor-down--3")).not.toBeInTheDocument()
+    const three = getByTestId("multieditor-3")
+    expect(queryByTextFrom(three, "Move Up")).toBeInTheDocument()
+    expect(queryByTextFrom(three, "Move Down")).not.toBeInTheDocument()
   })
 
   it("handles moving items", () => {
@@ -81,8 +89,9 @@ describe("MultiEditor", () => {
       </MultiEditor>,
     )
 
-    const moveSecondUp = getByTestId("multieditor-up--2")
-    const moveSecondDown = getByTestId("multieditor-down--2")
+    const second = getByTestId("multieditor-2")
+    const moveSecondUp = getByTextFrom(second, "Move Up")
+    const moveSecondDown = getByTextFrom(second, "Move Down")
 
     userEvent.click(moveSecondUp)
     expect(handleChange).toHaveBeenCalledTimes(1)
@@ -108,7 +117,7 @@ describe("MultiEditor", () => {
       </MultiEditor>,
     )
 
-    const deleteSecond = getByTestId("multieditor-delete--2")
+    const deleteSecond = getByTextFrom(getByTestId("multieditor-2"), "Delete")
 
     userEvent.click(deleteSecond)
     expect(handleChange).toHaveBeenCalledTimes(1)
@@ -128,7 +137,7 @@ describe("MultiEditor", () => {
       >
         {(item, handleChange) => (
           <input
-            data-testid={`item--${item}`}
+            data-testid={`item-${item}`}
             type="number"
             value={item}
             onChange={event => handleChange(Number(event.target.value))}
@@ -137,13 +146,13 @@ describe("MultiEditor", () => {
       </MultiEditor>,
     )
 
-    const firstInput = getByTestId("item--1")
+    const firstInput = getByTestId("item-1")
     await userEvent.type(firstInput, "0")
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith([0, 2, 3])
 
-    const secondInput = getByTestId("item--2")
+    const secondInput = getByTestId("item-2")
     await userEvent.type(secondInput, "5")
 
     expect(handleChange).toHaveBeenCalledTimes(2)

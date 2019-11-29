@@ -1,12 +1,7 @@
 import React, { Key, ReactNode } from "react"
 import Button from "../form/Button"
-import {
-  Action,
-  ActionsContainer,
-  ActionsHeader,
-  BoxContainer,
-  Container,
-} from "./styles"
+import Actions from "./Actions"
+import { BoxContainer, Container } from "./styles"
 
 type Props<T> = {
   items: readonly T[]
@@ -46,35 +41,24 @@ export default function MultiEditor<T>(props: Props<T>) {
   const editors = items.map((item, index) => (
     <BoxContainer
       key={getKey(item)}
-      data-testid={`multieditor--${getKey(item)}`}
+      data-testid={`multieditor-${getKey(item)}`}
     >
-      <ActionsContainer>
-        <ActionsHeader data-testid={`multieditor-header--${getKey(item)}`}>
-          {name} {index + 1}
-        </ActionsHeader>
-        <Action
-          onClick={() => removeItem(index)}
-          data-testid={`multieditor-delete--${getKey(item)}`}
-        >
-          Delete
-        </Action>
-        {index > 0 && (
-          <Action
-            onClick={() => moveItem(index, index - 1)}
-            data-testid={`multieditor-up--${getKey(item)}`}
-          >
-            Move Up
-          </Action>
-        )}
-        {items.length - index > 1 && (
-          <Action
-            onClick={() => moveItem(index, index + 1)}
-            data-testid={`multieditor-down--${getKey(item)}`}
-          >
-            Move Down
-          </Action>
-        )}
-      </ActionsContainer>
+      <Actions
+        title={`${name} ${index + 1}`}
+        actions={
+          [
+            { name: "Delete", action: () => removeItem(index) },
+            index > 0 && {
+              name: "Move Up",
+              action: () => moveItem(index, index - 1),
+            },
+            items.length - index > 1 && {
+              name: "Move Down",
+              action: () => moveItem(index, index + 1),
+            },
+          ].filter(Boolean) as Parameters<typeof Actions>[0]["actions"]
+        }
+      />
       {render(item, newItem => {
         modifyItem(index, newItem)
       })}

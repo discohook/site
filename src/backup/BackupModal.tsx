@@ -1,12 +1,8 @@
 import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
-import {
-  Action,
-  ActionsContainer,
-  ActionsHeader,
-  Container,
-} from "../editor/styles"
+import Actions from "../editor/Actions"
+import { Container } from "../editor/styles"
 import Button from "../form/Button"
 import InputField from "../form/InputField"
 import { FileLike } from "../message/FileLike"
@@ -30,12 +26,8 @@ const ModalContainer = styled.div<{}, Theme>`
   overflow-y: scroll;
 `
 
-const ModalActionsContainer = styled(ActionsContainer)`
-  margin: 8px;
-`
-
 const ShareTip = styled.div<{}, Theme>`
-  margin: 8px;
+  margin: 16px 8px 8px;
   padding: 12px;
 
   border: 1px solid ${({ theme }) => theme.accents.primary};
@@ -138,10 +130,10 @@ export default function BackupModal(props: Props) {
 
   return (
     <ModalContainer onClick={event => event.stopPropagation()}>
-      <ModalActionsContainer>
-        <ActionsHeader>Backups</ActionsHeader>
-        <Action onClick={handleClose}>Close</Action>
-      </ModalActionsContainer>
+      <Actions
+        title="Backups"
+        actions={[{ name: "Close", action: handleClose }]}
+      />
       <ShareTip>
         <ShareTipParagraph>
           Want to share a backup with someone else?
