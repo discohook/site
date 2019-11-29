@@ -45,19 +45,22 @@ const ShareTipParagraph = styled.p<{}, Theme>`
 `
 
 const List = styled.ul`
-  margin: 0 0 8px;
+  margin: 8px;
   padding: 0;
+
+  &:not(:empty) {
+    margin-top: 16px;
+  }
 `
 
 const Item = styled.li<{}, Theme>`
   display: flex;
   align-items: center;
 
-  margin: 0 8px;
-  padding: 6px 0;
+  padding: 8px 0;
 
   border: solid ${({ theme }) => theme.backgroundModifier.accent};
-  border-width: 1px 0 1px;
+  border-width: 1px 0;
 
   & + & {
     border-width: 0 0 1px;
