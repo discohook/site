@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react"
 import { Theme } from "../core/themes"
 
 const Container = styled.div<{}, Theme>`
-  height: 20.8px;
+  height: 1.375em;
   display: flex;
   margin: 0 0 0 -80px;
 
@@ -25,6 +25,9 @@ const Container = styled.div<{}, Theme>`
 `
 
 const Avatar = styled.img<{}, Theme>`
+  position: relative;
+  top: 2px;
+
   width: 40px;
   height: 40px;
 
@@ -50,7 +53,6 @@ const HeaderInfo = styled.div<{}, Theme>`
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin: 0;
 
   ${({ theme }) =>
     theme.display === "compact" &&
@@ -62,44 +64,53 @@ const HeaderInfo = styled.div<{}, Theme>`
 const UserName = styled.span<{}, Theme>`
   color: ${({ theme }) => theme.header.primary};
   font-weight: 500;
+  line-height: 1.375em;
+
+  cursor: pointer;
+
+  ${({ theme }) =>
+    theme.color === "light" &&
+    css`
+      font-weight: 600;
+    `}
 `
 
 const BotTag = styled.span<{}, Theme>`
-  position: relative;
-  top: 1px;
+  /* position: relative;
+  top: calc(-0.1em + 1px);
+  min-height: 1.26em; */
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 23px;
-  height: 14px;
-  padding: 1px 2px;
+  padding: 0.072rem 0.275rem;
 
   border-radius: 3px;
-  margin: 0 4.8px;
+  margin: 0.075em 0 0 0.3rem;
 
   background: ${({ theme }) => theme.accents.primary};
 
   color: #ffffff;
   font-size: 0.625em;
   font-weight: 500;
+  line-height: 1.3;
+
+  /* vertical-align: baseline; */
 
   ${({ theme }) =>
     theme.display === "compact" &&
     css`
-      width: 21px;
-      padding: 0;
+      top: -0.218em;
+      margin: 0.075em 0.3rem 0 0;
     `}
 `
 
 const Timestamp = styled.span<{}, Theme>`
-  margin: 1px;
+  margin: 0 0 0 0.3rem;
 
   color: ${({ theme }) => theme.text.muted};
-  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
 
-  text-align: right;
+  position: relative;
+  top: 1px;
 
   &::before {
     content: "Today at ";
@@ -108,8 +119,15 @@ const Timestamp = styled.span<{}, Theme>`
   ${({ theme }) =>
     theme.display === "compact" &&
     css`
-      width: 74px;
-      margin: 0;
+      top: 2px;
+
+      width: calc(20px + 8ch);
+      margin-left: 0;
+
+      font-size: 0.6875rem;
+      text-align: right;
+
+      margin: 0 0.3rem 0 0;
 
       &::before {
         content: "";

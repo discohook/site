@@ -43,6 +43,12 @@ const Container = styled.div<{}, Theme>`
       background: ${({ theme }) => theme.background.tertiary};
     }
   }
+
+  ${({ theme }) =>
+    theme.display === "compact" &&
+    css`
+      margin: 6px 0 0;
+    `}
 `
 
 const EmbedGrid = styled.div<{}, Theme>`

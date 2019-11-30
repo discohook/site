@@ -22,8 +22,6 @@ const Container = styled.div<{}, Theme>`
   margin: 0 0 0 80px;
   padding: 20px 10px 20px 0;
 
-  font-size: 16px;
-
   & > ${MarkupContainer} {
     display: inline;
   }
@@ -34,12 +32,8 @@ const Container = styled.div<{}, Theme>`
       margin: 0 0 0 9ch;
       padding: 10px;
 
-      & > * + * {
-        margin-left: 6px;
-      }
-
       & > ${MarkupContainer} {
-        margin-left: 4px;
+        margin-left: 0.3rem;
       }
     `}
 
