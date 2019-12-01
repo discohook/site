@@ -111,13 +111,12 @@ export default function App() {
 
   const toggleTheme = () =>
     setTheme(theme => {
-      const newTheme =
-        theme.appearance.color === "dark" ? lightTheme : darkTheme
+      const newTheme = theme.appearance.color === "dark" ? "light" : "dark"
       return {
-        ...newTheme,
+        ...(newTheme === "dark" ? darkTheme : lightTheme),
         appearance: {
           ...theme.appearance,
-          color: newTheme.appearance.color,
+          color: newTheme,
         },
       }
     })

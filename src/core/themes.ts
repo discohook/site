@@ -72,10 +72,6 @@ export const darkTheme = {
     ].join(","),
     high: "0 8px 16px rgba(0, 0, 0, 0.24)",
   },
-
-  appearance: {
-    color: "dark" as "dark" | "light",
-  },
 }
 
 export const lightTheme: typeof darkTheme = {
@@ -123,10 +119,6 @@ export const lightTheme: typeof darkTheme = {
       "0 2px 0 rgba(6, 6, 7, 0.025)",
     ].join(","),
     high: "0 8px 16px rgba(0, 0, 0, 0.16)",
-  },
-
-  appearance: {
-    color: "light",
   },
 }
 
