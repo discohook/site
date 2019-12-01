@@ -35,18 +35,24 @@ const TabSwitcher = styled.div<{}, Theme>`
 
 const Tab = styled.button<{ active: boolean }, Theme>`
   height: 40px;
-  padding: 0 12px;
+  padding: 0 16px;
 
   background: transparent;
   border: none;
-  border-bottom: 2px solid
-    ${({ theme, active }) => (active ? theme.accent.primary : theme.text)};
+  border: solid transparent;
+  border-width: 2px 0;
   border-radius: 0;
 
   font-weight: 500;
   font-size: 15px;
   color: ${({ theme }) => theme.header.primary};
   line-height: 38px;
+
+  ${({ theme, active }) =>
+    active &&
+    css`
+      border-bottom-color: ${theme.accent.primary};
+    `}
 `
 Tab.defaultProps = { type: "button" }
 
