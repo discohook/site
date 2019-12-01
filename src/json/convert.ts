@@ -4,8 +4,8 @@ import { toCamelCase, toSnakeCase } from "./objectCasing"
 import { parseJson } from "./parseJson"
 import { isMessage } from "./validation"
 
-export const stringifyMessage = (message: Message) => {
-  return JSON.stringify(toSnakeCase(message), undefined, 2)
+export const stringifyMessage = (message: Message, pretty = true) => {
+  return JSON.stringify(toSnakeCase(message), undefined, pretty ? 2 : undefined)
 }
 
 export const parseMessage = (json: string) => {

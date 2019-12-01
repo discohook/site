@@ -48,7 +48,7 @@ type Props = {
 export default function JsonInput(props: Props) {
   const { message, onChange: handleChange } = props
 
-  const [json, setJson] = useState(stringifyMessage(message))
+  const [json, setJson] = useState(() => stringifyMessage(message))
   useEffect(() => {
     setJson(stringifyMessage(message))
   }, [message])

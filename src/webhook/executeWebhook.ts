@@ -12,7 +12,7 @@ export const executeWebhook = async (
 
   const formData = new FormData()
 
-  const json = stringifyMessage(message)
+  const json = stringifyMessage(message, false)
   if (json !== "{}") formData.append("payload_json", json)
 
   for (const [index, file] of files.entries()) {
