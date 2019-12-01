@@ -13,7 +13,8 @@ import {
   ReactOutputRule,
 } from "simple-markdown"
 import CodeBlock from "../code/CodeBlock"
-import { emojiToName, getEmojiUrl, nameToEmoji } from "./emoji"
+import { convertEmojiToNames } from "./convertEmojiToNames"
+import { getEmojiUrl, nameToEmoji } from "./emoji"
 import { jumbosizeEmojis } from "./jumbosizeEmojis"
 import {
   BlockQuoteContainer,
@@ -26,14 +27,6 @@ import {
 } from "./styles"
 
 type ReactRules = Record<string, ParserRule & ReactOutputRule>
-
-const emojiRegex = new RegExp(
-  Array.from(emojiToName.keys())
-    .join("|")
-    // Asterisk emoji starts with an asterisk and must be escaped
-    .replace("*", "\\*"),
-  "g",
-)
 
 const baseRules: ReactRules = {
   escape: defaultRules.escape,
@@ -77,7 +70,7 @@ const baseRules: ReactRules = {
     order: defaultRules.text.order,
     match: inlineRegex(/^:([^\s:]+?(?:::skin-tone-\d)?):/),
     parse: capture =>
-      nameToEmoji.get(capture[1])
+      nameToEmoji.has(capture[1])
         ? {
             name: capture[1],
             surrogate: nameToEmoji.get(capture[1]),
@@ -130,13 +123,7 @@ const baseRules: ReactRules = {
         ? {
             content: capture[0],
           }
-        : parse(
-            capture[0].replace(
-              emojiRegex,
-              emoji => `:${emojiToName.get(emoji)}:`,
-            ),
-            { ...state, nested: true },
-          ),
+        : parse(convertEmojiToNames(capture[0]), { ...state, nested: true }),
   },
   del: {
     ...defaultRules.del,

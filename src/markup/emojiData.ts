@@ -1,5 +1,3 @@
-import { toSnakeCase } from "../json/objectCasing"
-
 // Flag reference:
 // + = include ::skin-tone-x
 // # = include _tonex
@@ -15,21 +13,21 @@ export type Emoji = {
   }[]
 }
 
-export const toneNumbers = {
-  1: "🏻",
-  2: "🏼",
-  3: "🏽",
-  4: "🏾",
-  5: "🏿",
-}
+export const tones = [
+  ["🏻", 1, "light"],
+  ["🏼", 2, "medium_light"],
+  ["🏽", 3, "medium"],
+  ["🏾", 4, "medium_dark"],
+  ["🏿", 5, "dark"],
+] as const
 
-export const toneNames = toSnakeCase({
-  lightSkinTone: "🏻",
-  mediumLightSkinTone: "🏼",
-  mediumSkinTone: "🏽",
-  mediumDarkSkinTone: "🏾",
-  darkSkinTone: "🏿",
-}) as Record<string, string>
+export const toneNumbers = Object.fromEntries(
+  tones.map(([tone, id]) => [id, tone]),
+)
+
+export const toneNames = Object.fromEntries(
+  tones.map(([tone, , name]) => [name, tone]),
+)
 
 const rawData = `
 😀 grinning
