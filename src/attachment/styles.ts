@@ -13,11 +13,13 @@ export const Container = styled.div<{}, Theme>`
 
   border: 1px solid
     ${({ theme }) =>
-      theme.color === "dark" ? "rgba(47, 49, 54, 0.6)" : "#f6f6f7"};
+      theme.appearance.color === "dark" ? "rgba(47, 49, 54, 0.6)" : "#f6f6f7"};
   border-radius: 3px;
 
   background: ${({ theme }) =>
-    theme.color === "dark" ? "rgba(47, 49, 54, 0.3)" : "transparent"};
+    theme.appearance.color === "dark"
+      ? "rgba(47, 49, 54, 0.3)"
+      : "transparent"};
 `
 
 export const IconContainer = styled.div`

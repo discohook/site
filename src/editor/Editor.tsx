@@ -39,7 +39,7 @@ const JavaScriptWarning = styled.noscript<{}, Theme>`
 
   margin: -8px -8px 16px;
   padding: 16px;
-  background: ${({ theme }) => theme.accents.danger};
+  background: ${({ theme }) => theme.accent.danger};
   color: #ffffff;
 `
 
@@ -109,12 +109,12 @@ export default function Editor(props: Props) {
           browser settings to use this app.
         </JavaScriptWarning>
         <Actions
-          title={theme.mobile ? undefined : "Message editor"}
+          title={theme.appearance.mobile ? undefined : "Message editor"}
           actions={
             [
               { name: "Backups", action: () => setIsBackupModalShown(true) },
               { name: "Toggle theme", action: handleToggleTheme },
-              theme.mobile
+              theme.appearance.mobile
                 ? undefined
                 : { name: "Toggle display", action: handleToggleDisplay },
               { name: "Clear all", action: clearAll },

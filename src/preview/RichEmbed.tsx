@@ -45,7 +45,7 @@ const Container = styled.div<{}, Theme>`
   }
 
   ${({ theme }) =>
-    theme.display === "compact" &&
+    theme.appearance.display === "compact" &&
     css`
       margin: 6px 0 0;
     `}

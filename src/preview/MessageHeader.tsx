@@ -10,7 +10,7 @@ const Container = styled.div<{}, Theme>`
   margin: 0 0 0 -80px;
 
   ${({ theme }) =>
-    theme.display === "compact" &&
+    theme.appearance.display === "compact" &&
     css`
       height: auto;
       display: inline-flex;
@@ -18,7 +18,7 @@ const Container = styled.div<{}, Theme>`
     `}
 
   ${({ theme }) =>
-    theme.mobile &&
+    theme.appearance.mobile &&
     css`
       margin: 0;
     `}
@@ -43,7 +43,7 @@ const Avatar = styled.img<{}, Theme>`
   }
 
   ${({ theme }) =>
-    theme.display === "compact" &&
+    theme.appearance.display === "compact" &&
     css`
       display: none;
     `}
@@ -55,7 +55,7 @@ const HeaderInfo = styled.div<{}, Theme>`
   flex-direction: row;
 
   ${({ theme }) =>
-    theme.display === "compact" &&
+    theme.appearance.display === "compact" &&
     css`
       flex-direction: row-reverse;
     `}
@@ -69,33 +69,27 @@ const UserName = styled.span<{}, Theme>`
   cursor: pointer;
 
   ${({ theme }) =>
-    theme.color === "light" &&
+    theme.appearance.color === "light" &&
     css`
       font-weight: 600;
     `}
 `
 
 const BotTag = styled.span<{}, Theme>`
-  /* position: relative;
-  top: calc(-0.1em + 1px);
-  min-height: 1.26em; */
-
   padding: 0.072rem 0.275rem;
 
   border-radius: 3px;
   margin: 0.075em 0 0 0.3rem;
 
-  background: ${({ theme }) => theme.accents.primary};
+  background: ${({ theme }) => theme.accent.primary};
 
   color: #ffffff;
   font-size: 0.625em;
   font-weight: 500;
   line-height: 1.3;
 
-  /* vertical-align: baseline; */
-
   ${({ theme }) =>
-    theme.display === "compact" &&
+    theme.appearance.display === "compact" &&
     css`
       top: -0.218em;
       margin: 0.075em 0.3rem 0 0;
@@ -117,7 +111,7 @@ const Timestamp = styled.span<{}, Theme>`
   }
 
   ${({ theme }) =>
-    theme.display === "compact" &&
+    theme.appearance.display === "compact" &&
     css`
       top: 2px;
 
@@ -164,7 +158,7 @@ export default function MessageHeader(props: Props) {
 
   return (
     <Container>
-      {theme.display === "cozy" && !theme.mobile && (
+      {theme.appearance.display === "cozy" && !theme.appearance.mobile && (
         <Avatar src={avatarUrl} alt="User avatar" />
       )}
       <HeaderInfo>

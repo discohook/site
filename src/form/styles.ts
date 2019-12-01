@@ -16,7 +16,8 @@ export const TextInput = styled.input<{}, Theme>`
   padding: 6px 8px;
   margin: 8px 0;
 
-  background: ${({ theme }) => theme.textAreaBackground};
+  background: ${({ theme }) =>
+    theme.appearance.color === "dark" ? "#40444b" : "#ebedef"};
   border: 0;
   border-radius: 3px;
   outline: none;
@@ -41,8 +42,8 @@ export const InputNote = styled.div<InputNoteProps, Theme>`
   font-weight: 500;
 
   color: ${({ theme, state }) => {
-    if (state === "error") return theme.accents.danger
-    if (state === "warning") return theme.accents.warning
+    if (state === "error") return theme.accent.danger
+    if (state === "warning") return theme.accent.warning
     return theme.text
   }};
 
@@ -58,7 +59,7 @@ export const DefaultButton = styled.button<{}, Theme>`
   margin: 8px;
   padding: 2px 16px;
 
-  background: ${({ theme }) => theme.accents.primary};
+  background: ${({ theme }) => theme.accent.primary};
   border: none;
   border-radius: 3px;
   outline: none;
@@ -87,7 +88,7 @@ export const DefaultButton = styled.button<{}, Theme>`
 DefaultButton.defaultProps = { type: "button" }
 
 export const ToggleButton = styled(DefaultButton)<{ filled: boolean }, Theme>`
-  border: 1px solid ${({ theme }) => theme.accents.primary};
+  border: 1px solid ${({ theme }) => theme.accent.primary};
 
   &:hover:not(:disabled),
   &:active:not(:disabled) {

@@ -1,39 +1,33 @@
-const common = {
-  accents: {
-    primary: "#7289da",
-    success: "#43b581",
-    warning: "#faa61a",
-    danger: "#f04747",
-  },
+const accents = {
+  primary: "#7289da",
+  success: "#43b581",
+  warning: "#faa61a",
+  danger: "#f04747",
+}
 
-  fonts: {
-    sans: [
-      "Whitney",
-      "Helvetica Neue",
-      "Helvetica",
-      "Arial",
-      "sans-serif",
-    ].join(","),
-    mono: [
-      "Consolas",
-      "Andale Mono WT",
-      "Andale Mono",
-      "Lucida Console",
-      "Lucida Sans Typewriter",
-      "DejaVu Sans Mono",
-      "Bitstream Vera Sans Mono",
-      "Liberation Mono",
-      "Nimbus Mono L",
-      "Monaco",
-      "Courier New",
-      "Courier",
-      "monospace",
-    ].join(","),
-  },
+const fonts = {
+  sans: ["Whitney", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"].join(
+    ",",
+  ),
+  mono: [
+    "Consolas",
+    "Andale Mono WT",
+    "Andale Mono",
+    "Lucida Console",
+    "Lucida Sans Typewriter",
+    "DejaVu Sans Mono",
+    "Bitstream Vera Sans Mono",
+    "Liberation Mono",
+    "Nimbus Mono L",
+    "Monaco",
+    "Courier New",
+    "Courier",
+    "monospace",
+  ].join(","),
 }
 
 export const darkTheme = {
-  ...common,
+  accent: accents,
 
   header: {
     primary: "#ffffff",
@@ -68,6 +62,8 @@ export const darkTheme = {
     accent: "rgba(255, 255, 255, 0.06)",
   },
 
+  font: fonts,
+
   elavation: {
     low: [
       "0 1px 0 rgba(4, 4, 5, 0.2)",
@@ -77,13 +73,13 @@ export const darkTheme = {
     high: "0 8px 16px rgba(0, 0, 0, 0.24)",
   },
 
-  textAreaBackground: "#40444b",
-
-  color: "dark" as "dark" | "light",
+  appearance: {
+    color: "dark" as "dark" | "light",
+  },
 }
 
 export const lightTheme: typeof darkTheme = {
-  ...common,
+  accent: accents,
 
   header: {
     primary: "#060607",
@@ -118,6 +114,8 @@ export const lightTheme: typeof darkTheme = {
     accent: "rgba(6, 6, 7, 0.08)",
   },
 
+  font: fonts,
+
   elavation: {
     low: [
       "0 1px 0 rgba(6, 6, 7, 0.1)",
@@ -127,13 +125,15 @@ export const lightTheme: typeof darkTheme = {
     high: "0 8px 16px rgba(0, 0, 0, 0.16)",
   },
 
-  textAreaBackground: "#ebedef",
-
-  color: "light",
+  appearance: {
+    color: "light",
+  },
 }
 
 export type Theme = typeof darkTheme & {
-  color: "dark" | "light"
-  display: "cozy" | "compact"
-  mobile: boolean
+  appearance: {
+    color: "dark" | "light"
+    display: "cozy" | "compact"
+    mobile: boolean
+  }
 }

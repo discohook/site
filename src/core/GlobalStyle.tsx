@@ -57,7 +57,7 @@ const styles = (theme: Theme) => css`
   button,
   input,
   textarea {
-    font-family: ${theme.fonts.sans};
+    font-family: ${theme.font.sans};
   }
 
   #app {
@@ -66,7 +66,7 @@ const styles = (theme: Theme) => css`
 
   pre,
   code {
-    font-family: ${theme.fonts.mono};
+    font-family: ${theme.font.mono};
   }
 
   a {
@@ -88,7 +88,7 @@ const styles = (theme: Theme) => css`
   * {
     box-sizing: border-box;
 
-    scrollbar-color: ${theme.color === "dark"
+    scrollbar-color: ${theme.appearance.color === "dark"
       ? "#202225 #2f3136"
       : "#e3e5e8 #f6f6f7"};
     scrollbar-width: thin;
@@ -104,14 +104,18 @@ const styles = (theme: Theme) => css`
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${theme.color === "dark" ? "#202225" : "#e3e5e8"};
+      background-color: ${theme.appearance.color === "dark"
+        ? "#202225"
+        : "#e3e5e8"};
       border: 3px solid ${theme.background.primary};
       border-radius: 7px;
       background-clip: padding-box;
     }
 
     &::-webkit-scrollbar-track-piece {
-      background-color: ${theme.color === "dark" ? "#2f3136" : "#f6f6f7"};
+      background-color: ${theme.appearance.color === "dark"
+        ? "#2f3136"
+        : "#f6f6f7"};
       border: 3px solid ${theme.background.primary};
       border-radius: 7px;
     }

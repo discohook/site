@@ -24,7 +24,7 @@ const Error = styled.div<{}, Theme>`
   padding: 4px 0;
 
   font-size: 14px;
-  font-family: ${({ theme }) => theme.fonts.mono};
+  font-family: ${({ theme }) => theme.font.mono};
   line-height: 16px;
 `
 
@@ -32,7 +32,7 @@ const CodeInput = styled(MultilineTextInput)<{}, Theme>`
   min-height: 240px;
 
   font-size: 14px;
-  font-family: ${({ theme }) => theme.fonts.mono};
+  font-family: ${({ theme }) => theme.font.mono};
 `
 
 const SubmitButton = styled(DefaultButton)<{}, Theme>`

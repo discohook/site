@@ -32,7 +32,7 @@ const ToggleContainer = styled.div<{ checked?: boolean }, Theme>`
   border-radius: 14px;
 
   background: ${({ theme, checked }) =>
-    checked ? theme.accents.primary : "#72767d"};
+    checked ? theme.accent.primary : "#72767d"};
 
   transition: 150ms ease-in-out;
 

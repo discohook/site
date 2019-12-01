@@ -11,9 +11,11 @@ const ContextWrapper = (props: { children?: ReactNode }) => (
   <ThemeProvider<Theme>
     theme={{
       ...darkTheme,
-      color: "dark",
-      display: "cozy",
-      mobile: false,
+      appearance: {
+        color: "dark",
+        display: "cozy",
+        mobile: false,
+      },
     }}
   >
     {props.children}

@@ -13,7 +13,7 @@ const Container = styled.div<{}, Theme>`
   padding: 64px 32px 0;
 
   ${({ theme }) =>
-    theme.mobile &&
+    theme.appearance.mobile &&
     css`
       padding: 32px 16px;
     `};
@@ -63,8 +63,11 @@ export default function ErrorPage(props: Props) {
     <ThemeProvider<Theme>
       theme={{
         ...darkTheme,
-        display: "cozy",
-        mobile: /mobile/i.test(navigator.userAgent),
+        appearance: {
+          color: "dark",
+          display: "cozy",
+          mobile: /mobile/i.test(navigator.userAgent),
+        },
       }}
     >
       <GlobalStyle />

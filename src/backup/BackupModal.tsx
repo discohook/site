@@ -30,7 +30,7 @@ const ShareTip = styled.div<{}, Theme>`
   margin: 16px 8px 8px;
   padding: 12px;
 
-  border: 1px solid ${({ theme }) => theme.accents.primary};
+  border: 1px solid ${({ theme }) => theme.accent.primary};
   border-radius: 3px;
 `
 
@@ -79,7 +79,7 @@ const BackupName = styled.a<{}, Theme>`
 
 const DeleteAction = styled.a<{}, Theme>`
   margin: 0 0 0 8px;
-  color: ${({ theme }) => theme.accents.danger};
+  color: ${({ theme }) => theme.accent.danger};
   cursor: pointer;
 `
 

@@ -8,7 +8,7 @@ export const MarkupContainer = styled.div<{}, Theme>`
   line-height: 1.375;
 
   ${({ theme }) =>
-    theme.color === "light" &&
+    theme.appearance.color === "light" &&
     css`
       @media (max-resolution: 1dppx) {
         font-weight: 500;
@@ -37,7 +37,7 @@ export const Emoji = styled.img<{ big?: boolean }, Theme>`
   vertical-align: bottom;
 
   ${({ theme, big }) =>
-    theme.display === "cozy" &&
+    theme.appearance.display === "cozy" &&
     big &&
     css`
       width: 3rem;
@@ -51,22 +51,24 @@ export const Mention = styled.span<{}, Theme>`
   cursor: pointer;
 
   background: ${({ theme }) =>
-    theme.color === "dark" ? "rgba(114, 137, 218, 0.1)" : "#f1f3fb"};
-  color: ${({ theme }) => theme.accents.primary};
+    theme.appearance.color === "dark" ? "rgba(114, 137, 218, 0.1)" : "#f1f3fb"};
+  color: ${({ theme }) => theme.accent.primary};
   font-weight: 500;
 
   &:hover {
     background: ${({ theme }) =>
-      theme.color === "dark"
+      theme.appearance.color === "dark"
         ? "rgba(114, 137, 218, 0.7)"
-        : theme.accents.primary};
+        : theme.accent.primary};
     color: #ffffff;
   }
 `
 
 export const Spoiler = styled.span<{}, Theme>`
   background: ${({ theme }) =>
-    theme.color === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"};
+    theme.appearance.color === "dark"
+      ? "rgba(255, 255, 255, 0.1)"
+      : "rgba(0, 0, 0, 0.1)"};
   border-radius: 3px;
 `
 

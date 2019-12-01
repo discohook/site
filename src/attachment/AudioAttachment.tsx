@@ -76,7 +76,7 @@ const AudioDuration = styled.div<{}, Theme>`
   margin: 4px;
 
   color: #ffffff;
-  font-family: ${({ theme }) => theme.fonts.mono};
+  font-family: ${({ theme }) => theme.font.mono};
   font-size: 12px;
   line-height: 12px;
   font-weight: 500;
@@ -110,7 +110,7 @@ const AudioSeekbarHandle = styled.div<{}, Theme>`
   width: 6px;
   height: 6px;
 
-  background: ${({ theme }) => theme.accents.primary};
+  background: ${({ theme }) => theme.accent.primary};
   border-radius: 3px;
 `
 

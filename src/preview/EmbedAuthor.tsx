@@ -1,5 +1,5 @@
-import styled from "@emotion/styled"
 import { css } from "@emotion/core"
+import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../core/themes"
 import { Author } from "../message/Message"
@@ -30,7 +30,7 @@ const AuthorNameNormal = styled.span<{}, Theme>`
   display: inline-block;
 
   ${({ theme }) =>
-    theme.color === "light" &&
+    theme.appearance.color === "light" &&
     css`
       @media (max-resolution: 1dppx) {
         font-weight: 500;

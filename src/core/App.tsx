@@ -40,7 +40,7 @@ const Tab = styled.button<{ active: boolean }, Theme>`
   background: transparent;
   border: none;
   border-bottom: 2px solid
-    ${({ theme, active }) => (active ? theme.accents.primary : theme.text)};
+    ${({ theme, active }) => (active ? theme.accent.primary : theme.text)};
   border-radius: 0;
 
   font-weight: 500;
@@ -64,7 +64,7 @@ const View = styled.main<{}, Theme>`
   }
 
   ${({ theme }) =>
-    theme.mobile &&
+    theme.appearance.mobile &&
     css`
       margin: 40px 0 0;
       max-height: calc(100% - 40px);
@@ -99,23 +99,35 @@ export default function App() {
 
   const [theme, setTheme] = useState<Theme>({
     ...darkTheme,
-    color: "dark",
-    display: "cozy",
-    mobile: /mobile/i.test(request?.get("User-Agent") ?? navigator.userAgent),
+    appearance: {
+      color: "dark",
+      display: "cozy",
+      mobile: /mobile/i.test(request?.get("User-Agent") ?? navigator.userAgent),
+    },
   })
   useEffect(() => {
-    console.log("Theme set:", theme.color, theme.display)
+    console.log("Theme set:", theme.appearance.color, theme.appearance.display)
   }, [theme])
 
   const toggleTheme = () =>
-    setTheme(theme => ({
-      ...theme,
-      ...(theme.color === "dark" ? lightTheme : darkTheme),
-    }))
+    setTheme(theme => {
+      const newTheme =
+        theme.appearance.color === "dark" ? lightTheme : darkTheme
+      return {
+        ...newTheme,
+        appearance: {
+          ...theme.appearance,
+          color: newTheme.appearance.color,
+        },
+      }
+    })
   const toggleDisplay = () =>
     setTheme(theme => ({
       ...theme,
-      display: theme.display === "cozy" ? "compact" : "cozy",
+      appearance: {
+        ...theme.appearance,
+        display: theme.appearance.display === "cozy" ? "compact" : "cozy",
+      },
     }))
 
   const [webhookUrl, setWebhookUrl] = useState("")
@@ -132,7 +144,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Container>
-        {theme.mobile && (
+        {theme.appearance.mobile && (
           <TabSwitcher>
             <Tab
               active={activeTab === "editor"}
@@ -149,14 +161,14 @@ export default function App() {
           </TabSwitcher>
         )}
         <View>
-          {(!theme.mobile || activeTab === "preview") && (
+          {(!theme.appearance.mobile || activeTab === "preview") && (
             <MessagePreview
               message={backup.message}
               files={backup.files}
               webhook={webhook}
             />
           )}
-          {(!theme.mobile || activeTab === "editor") && (
+          {(!theme.appearance.mobile || activeTab === "editor") && (
             <Editor
               message={backup.message}
               onChange={message =>

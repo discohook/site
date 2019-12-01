@@ -27,7 +27,7 @@ const Container = styled.div<{}, Theme>`
   }
 
   ${({ theme }) =>
-    theme.display === "compact" &&
+    theme.appearance.display === "compact" &&
     css`
       margin: 0 0 0 9ch;
       padding: 10px;
@@ -38,7 +38,7 @@ const Container = styled.div<{}, Theme>`
     `}
 
   ${({ theme }) =>
-    theme.mobile &&
+    theme.appearance.mobile &&
     css`
       margin: 0;
       padding: 16px;
