@@ -76,6 +76,7 @@ export const BlockQuoteContainer = styled.div<{}, Theme>`
 
 export const BlockQuoteDivider = styled.div<{}, Theme>`
   width: 4px;
+  min-width: 4px;
   margin: 8px 0;
   border-radius: 4px;
 
@@ -98,7 +99,7 @@ export const CodeBlockContainer = styled.pre<{}, Theme>`
 
   background: ${({ theme }) => theme.background.secondary};
   border: 1px solid ${({ theme }) => theme.background.tertiary};
-  border-radius: 5px;
+  border-radius: 4px;
 
   color: ${({ theme }) => theme.header.secondary};
   font-size: 0.875rem;
