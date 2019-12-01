@@ -11,7 +11,7 @@ import {
   TextInput,
 } from "./styles"
 
-const maxFileSize = 8388296
+const maxFileSize = 8000000
 
 const FileInputContainer = styled.div`
   position: relative;
