@@ -127,11 +127,11 @@ const baseRules: ReactRules = {
   },
   del: {
     ...defaultRules.del,
-    match: inlineRegex(/^~~([\s\S]+?)~~(?!_)/),
+    match: inlineRegex(/^~~([\S\s]+?)~~(?!_)/),
   },
   spoiler: {
     order: defaultRules.text.order,
-    match: inlineRegex(/^\|\|([\s\S]+?)\|\|/),
+    match: inlineRegex(/^\|\|([\S\s]+?)\|\|/),
     parse: (capture, parse, state) => ({
       content: parse(capture[1], state),
     }),
@@ -144,7 +144,7 @@ const baseRules: ReactRules = {
     match: (source, state, previous) =>
       !/^$|\n *$/.test(previous) || state.inQuote || state.nested
         ? null
-        : /^( *>>> +([\s\S]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
+        : /^( *>>> +([\S\s]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/.exec(
             source,
           ),
     parse: (capture, parse, state) => {
@@ -188,10 +188,11 @@ const blockRules: ReactRules = {
   paragraph: defaultRules.paragraph,
   codeBlock: {
     order: defaultRules.codeBlock.order,
-    match: anyScopeRegex(/^```(?:([a-z0-9-]+?)\n+)?\n*([\s\S]+?)\n*```/i),
+    // eslint-disable-next-line unicorn/regex-shorthand
+    match: anyScopeRegex(/^```(?:([\da-z-]+?)\n+)?\n*([\S\s]+?)\n*```/i),
     parse: (capture, _, state) => ({
-      language: capture[1]?.trim() ?? "",
-      content: capture[2] ?? "",
+      language: capture[1]?.trim(),
+      content: capture[2],
       inQuote: state.inQuote,
     }),
     react: (node, _, state) => (

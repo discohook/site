@@ -24,7 +24,7 @@ export default function ColorInput(props: Props) {
   }, [color])
 
   useEffect(() => {
-    const isHex = /^#[0-9a-f]{6}$/i.test(hex)
+    const isHex = /^#[\da-f]{6}$/i.test(hex)
     const number = isHex ? hexToNumber(hex) : undefined
 
     if (color === null && !isHex) return

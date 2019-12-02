@@ -16,7 +16,7 @@ export const base64Encode = (data: string, safe = false) => {
 
   const encoded = encodeURIComponent(data)
 
-  const escaped = encoded.replace(/%[0-9A-F]{2}/g, hex => {
+  const escaped = encoded.replace(/%[\dA-F]{2}/g, hex => {
     return String.fromCharCode(parseInt(hex.slice(1), 16))
   })
 

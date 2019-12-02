@@ -19,7 +19,7 @@ export default function FooterEditor(props: Props) {
       footer: Object.values(embed.footer ?? {}).some(Boolean)
         ? embed.footer
         : undefined,
-      timestamp: embed.timestamp || undefined,
+      timestamp: embed.timestamp?.length ? embed.timestamp : undefined,
     })
   }
 
@@ -61,7 +61,7 @@ export default function FooterEditor(props: Props) {
           handleChange({
             footer,
             timestamp: timestamp
-              ? `${timestamp.replace(/[^0-9\-:]/g, "T")}:00.000Z`
+              ? `${timestamp.replace(/[^\d-:]/g, "T")}:00.000Z`
               : undefined,
           })
         }

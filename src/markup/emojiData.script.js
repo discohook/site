@@ -25,7 +25,7 @@ const rawData = JSON.parse(
 const flattened = Object.values(rawData).flat()
 
 /** @type {(string: string) => string} */
-const escapeString = string => string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+const escapeString = string => string.replace(/[$()*+.?[\\\]^{|}]/g, "\\$&")
 
 const toneNumberRegExp = /_tone([1-5])$/
 /** @type {(name: string) => RegExp} */

@@ -1,6 +1,6 @@
 import { Language, languages } from "./languages"
 
-export const aliases: Record<string, Language> = {}
+export const aliases: Record<string, Language | undefined> = {}
 
 for (const language of languages) {
   aliases[language.name] = language

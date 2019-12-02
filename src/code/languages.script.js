@@ -1,5 +1,6 @@
 // @ts-check
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 
 const { get } = require("https")
 const hljs = require("highlight.js")
