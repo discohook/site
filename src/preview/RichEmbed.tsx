@@ -63,13 +63,17 @@ const EmbedTitleNormal = styled.span<{}, Theme>`
   margin: 8px 0 0;
   grid-column: 1 / 2;
 
-  font-size: 1rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.header.primary};
+  & > ${MarkupContainer} {
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.header.primary};
+  }
 `
 
 const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
-  color: ${({ theme }) => theme.text.link};
+  & > ${MarkupContainer} {
+    color: ${({ theme }) => theme.text.link};
+  }
 `
 
 const EmbedDescription = styled.div<{}, Theme>`
@@ -78,8 +82,6 @@ const EmbedDescription = styled.div<{}, Theme>`
 
   & > ${MarkupContainer} {
     font-size: 0.875rem;
-    font-weight: 400;
-
     color: ${({ theme }) => theme.text.normal};
 
     line-height: 1.125rem;
