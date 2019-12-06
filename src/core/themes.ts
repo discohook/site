@@ -126,6 +126,7 @@ export type Theme = typeof darkTheme & {
   appearance: {
     color: "dark" | "light"
     display: "cozy" | "compact"
+    fontSize: number
     mobile: boolean
   }
 }

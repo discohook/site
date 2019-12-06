@@ -14,6 +14,7 @@ const ContextWrapper = (props: { children?: ReactNode }) => (
       appearance: {
         color: "dark",
         display: "cozy",
+        fontSize: 16,
         mobile: false,
       },
     }}

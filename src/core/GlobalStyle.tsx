@@ -39,14 +39,15 @@ const styles = (theme: Theme) => css`
     margin: 0;
     padding: 0;
 
+    background: ${theme.background.primary};
+
     line-height: 1;
+    color: ${theme.text.normal};
+    font-size: ${theme.appearance.fontSize}px;
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    background: ${theme.background.primary};
-    color: ${theme.text.normal};
 
     height: 100%;
     overflow: hidden;

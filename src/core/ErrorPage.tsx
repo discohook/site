@@ -66,6 +66,7 @@ export default function ErrorPage(props: Props) {
         appearance: {
           color: "dark",
           display: "cozy",
+          fontSize: 16,
           mobile: /mobile/i.test(navigator.userAgent),
         },
       }}

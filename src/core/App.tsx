@@ -108,6 +108,7 @@ export default function App() {
     appearance: {
       color: "dark",
       display: "cozy",
+      fontSize: 16,
       mobile: /mobile/i.test(request?.get("User-Agent") ?? navigator.userAgent),
     },
   })
