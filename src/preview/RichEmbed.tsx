@@ -152,17 +152,24 @@ export default function RichEmbed(props: Props) {
   const hasThumbnail = /^https?:\/\/.+/i.test(thumbnail?.url ?? "")
   const hasImage = /^https?:\/\/.+/i.test(image?.url ?? "")
 
-  const EmbedTitle = url ? EmbedTitleLink : EmbedTitleNormal
-
   return (
     <Container style={{ borderColor: embedColor }}>
       <EmbedGrid>
         {author && <EmbedAuthor author={author} />}
-        {title && (
-          <EmbedTitle href={url}>
-            <Markup content={title} inline />
-          </EmbedTitle>
-        )}
+        {title &&
+          (url ? (
+            <EmbedTitleLink
+              href={url}
+              rel="noopener noreferrer nofollow ugc"
+              target="_blank"
+            >
+              <Markup content={title} inline />
+            </EmbedTitleLink>
+          ) : (
+            <EmbedTitleNormal>
+              <Markup content={title} inline />
+            </EmbedTitleNormal>
+          ))}
         {description && (
           <EmbedDescription>
             <Markup content={description} />

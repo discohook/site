@@ -49,12 +49,21 @@ export default function EmbedAuthor(props: Props) {
 
   const hasIcon = /^https?:\/\/.+/i.test(iconUrl ?? "")
 
-  const AuthorName = url ? AuthorNameLink : AuthorNameNormal
-
   return (
     <Container>
       {hasIcon && <AuthorImage src={iconUrl} alt="Author image" />}
-      {name && <AuthorName href={url}>{name}</AuthorName>}
+      {name &&
+        (url ? (
+          <AuthorNameLink
+            href={url}
+            rel="noopener noreferrer nofollow ugc"
+            target="_blank"
+          >
+            {name}
+          </AuthorNameLink>
+        ) : (
+          <AuthorNameNormal>{name}</AuthorNameNormal>
+        ))}
     </Container>
   )
 }
