@@ -30,7 +30,7 @@ export default function CodeBlock(props: Props) {
       .catch(() => setHtml(undefined))
   }, [content, language])
 
-  if (process.env.SERVER) {
+  if (SERVER) {
     const safeLanguage = aliases[language]?.name ?? "plaintext"
 
     return (
