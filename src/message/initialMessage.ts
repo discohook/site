@@ -48,7 +48,7 @@ It's very simple:
 - or \`~~\`s to make your text ~~striketrough~~,
 - or \`\` \` \`\`s to make your text \`code\`.
 
-You can combine them in any order, if you want to, just make sure the order matches up:
+Tou can combine multiple styles if you need to, just make sure the order matches up:
 \`__**text**__\` results in __**text**__, but \`__**text__**\` results in __**text__**, which is probably not what you want.
 `.trim(),
       fields: [
