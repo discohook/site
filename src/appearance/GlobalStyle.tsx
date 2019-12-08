@@ -1,7 +1,7 @@
 import { css, Global } from "@emotion/core"
 import { useTheme } from "emotion-theming"
 import React from "react"
-import { Theme } from "./themes"
+import { Theme } from "./Theme"
 
 const getFontFace = (name: string, weight: number, url: string) => css`
   @font-face {

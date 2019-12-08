@@ -2,7 +2,7 @@ import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { useTheme } from "emotion-theming"
 import React, { useEffect, useState } from "react"
-import { Theme } from "../core/themes"
+import { Theme } from "../appearance/Theme"
 
 const Container = styled.div<{}, Theme>`
   height: 1.375em;

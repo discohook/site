@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { Theme } from "../core/themes"
+import { Theme } from "../appearance/Theme"
 
 export const Container = styled.div<{ flow?: "column" | "row" }, Theme>`
   display: flex;

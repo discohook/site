@@ -1,7 +1,7 @@
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../core/themes"
+import { Theme } from "../appearance/Theme"
 import { numberToHex } from "../form/ColorInput"
 import Markup from "../markup/Markup"
 import {

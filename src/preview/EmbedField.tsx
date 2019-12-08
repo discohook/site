@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../core/themes"
+import { Theme } from "../appearance/Theme"
 import Markup from "../markup/Markup"
 import { MarkupContainer } from "../markup/styles"
 import { Field } from "../message/Message"

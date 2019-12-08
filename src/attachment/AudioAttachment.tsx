@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../core/themes"
+import { Theme } from "../appearance/Theme"
 import { FileLike } from "../message/FileLike"
 import AttachmentIcon from "./AttachmentIcon"
 import { getHumanReadableSize } from "./getHumanReadableSize"

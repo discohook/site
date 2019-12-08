@@ -2,8 +2,9 @@ import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
 import React, { ErrorInfo } from "react"
-import GlobalStyle from "./GlobalStyle"
-import { darkTheme, Theme } from "./themes"
+import GlobalStyle from "../appearance/GlobalStyle"
+import { Theme } from "../appearance/Theme"
+import { darkTheme } from "../appearance/themes"
 
 const Container = styled.div<{}, Theme>`
   width: 100%;

@@ -1,6 +1,6 @@
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
-import { Theme } from "../core/themes"
+import { Theme } from "../appearance/Theme"
 
 export const MarkupContainer = styled.div<{}, Theme>`
   white-space: pre-wrap;
