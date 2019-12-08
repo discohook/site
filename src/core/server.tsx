@@ -10,7 +10,6 @@ import { renderToNodeStream } from "react-dom/server"
 import { Transform } from "stream"
 import { createDeflate, createGzip } from "zlib"
 import App from "./App"
-import { RequestProvider } from "./RequestContext"
 
 const app = new Koa()
 const router = new Router()
@@ -55,11 +54,7 @@ router.get("/", async (context, next) => {
   }
 
   await new Promise((resolve, reject) => {
-    const nodeStream = renderToNodeStream(
-      <RequestProvider value={context}>
-        <App />
-      </RequestProvider>,
-    )
+    const nodeStream = renderToNodeStream(<App request={context} />)
 
     nodeStream.on("data", chunk => stream.write(chunk))
     nodeStream.once("end", resolve)

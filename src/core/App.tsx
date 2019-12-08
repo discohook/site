@@ -1,7 +1,8 @@
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { ThemeProvider } from "emotion-theming"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import { Context } from "koa"
+import React, { useEffect, useRef, useState } from "react"
 import GlobalStyle from "../appearance/GlobalStyle"
 import { Theme } from "../appearance/Theme"
 import { darkTheme, lightTheme } from "../appearance/themes"
@@ -11,7 +12,6 @@ import MessagePreview from "../preview/MessagePreview"
 import { fetchWebhookInfo } from "../webhook/fetchWebhookInfo"
 import { Webhook } from "../webhook/Webhook"
 import { SERVER } from "./environment"
-import { RequestContext } from "./RequestContext"
 import { decodeBackup, setUrlToBackup } from "./sharing"
 
 const Container = styled.div`
@@ -78,8 +78,12 @@ const View = styled.main<{}, Theme>`
     `}
 `
 
-export default function App() {
-  const request = useContext(RequestContext)
+type Props = {
+  request?: Context
+}
+
+export default function App(props: Props) {
+  const { request } = props
 
   const [backup, setBackup] = useState(() => {
     const search = SERVER && request ? request.search : location.search

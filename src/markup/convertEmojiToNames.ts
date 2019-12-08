@@ -8,7 +8,7 @@ const getEmoji = (text: string) =>
 
 // Regex extracted from lodash, matches unicode characters unlike Array.from(string)
 // https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L261
-// eslint-disable-next-line unicorn/no-unsafe-regex, no-misleading-character-class
+// eslint-disable-next-line no-misleading-character-class
 const unicodeRegExp = /\ud83c[\udffb-\udfff](?=\ud83c[\udffb-\udfff])|(?:[^\ud800-\udfff][\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]?|[\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\ud800-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]|\ud83c[\udffb-\udfff])?(?:\u200d(?:[^\ud800-\udfff]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]|\ud83c[\udffb-\udfff])?)*/g
 
 export const convertEmojiToNames = (text: string) => {

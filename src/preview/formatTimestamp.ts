@@ -32,17 +32,23 @@ export const formatTimestamp = (timestamp: string, base?: Date) => {
   })
 
   switch (getFormat(date, base)) {
-    case "last-week":
+    case "last-week": {
       return `Last ${weekday} at ${time}`
-    case "yesterday":
+    }
+    case "yesterday": {
       return `Yesterday at ${time}`
-    case "today":
+    }
+    case "today": {
       return `Today at ${time}`
-    case "tomorrow":
+    }
+    case "tomorrow": {
       return `Tomorrow at ${time}`
-    case "this-week":
+    }
+    case "this-week": {
       return `${weekday} at ${time}`
-    default:
+    }
+    default: {
       return `${day}/${month}/${year}`
+    }
   }
 }

@@ -11,22 +11,10 @@ type State = {
 }
 
 export default class ErrorBoundary extends Component<Props, State> {
-  state: State = {
-    error: undefined,
-    info: undefined,
-  }
-
-  shouldComponentUpdate(_: Props, nextState: State) {
-    if (!this.state.error && nextState.error) return true
-
-    return false
-  }
+  state: State = {}
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    this.setState({
-      error,
-      info,
-    })
+    this.setState({ error, info })
   }
 
   render() {

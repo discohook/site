@@ -111,7 +111,7 @@ describe("applyIds", () => {
         expect(field).toHaveProperty([id])
       }
 
-      const ids = (embed.fields ?? []).map(field => field[id])
+      const ids = embed.fields?.map(field => field[id]) ?? []
       expect(new Set(ids).size).toBe(ids.length)
     }
   })

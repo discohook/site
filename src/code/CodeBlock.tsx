@@ -8,9 +8,7 @@ import { importLanguage } from "./importLanguage"
 import { languages } from "./languages"
 
 if (SERVER) {
-  Promise.all(
-    languages.map(async language => importLanguage(language.name)),
-  ).catch(error => {
+  Promise.all(languages.map(importLanguage)).catch(error => {
     console.error("Error importing language", error)
   })
 }

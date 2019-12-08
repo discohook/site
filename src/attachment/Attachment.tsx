@@ -16,7 +16,7 @@ export default function Attachment(props: Props) {
 
   const type = getAttachmentType(name, mime)
   useEffect(() => {
-    console.log(`Attachment type for ${name} (${mime || "no mime"}):`, type)
+    console.log(`Attachment type for ${name} (${mime || "undefined"}):`, type)
   }, [mime, name, type])
 
   if (!SERVER && file instanceof File && type === "image") {

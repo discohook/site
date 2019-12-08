@@ -3,7 +3,15 @@ import { useTheme } from "emotion-theming"
 import React from "react"
 import { Theme } from "./Theme"
 
-const getFontFace = (name: string, weight: number, url: string) => css`
+const getFontFace = ({
+  name,
+  weight,
+  url,
+}: {
+  name: string
+  weight: number
+  url: string
+}) => css`
   @font-face {
     font-family: ${name};
     font-style: normal;
@@ -32,7 +40,7 @@ const fonts = [
 })
 
 const styles = (theme: Theme) => css`
-  ${fonts.map(font => getFontFace(font.name, font.weight, font.url))};
+  ${fonts.map(getFontFace)};
 
   html,
   body {
