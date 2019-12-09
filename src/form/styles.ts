@@ -1,4 +1,3 @@
-import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { Theme } from "../appearance/Theme"
 
@@ -86,19 +85,3 @@ export const DefaultButton = styled.button<{}, Theme>`
   }
 `
 DefaultButton.defaultProps = { type: "button" }
-
-export const ToggleButton = styled(DefaultButton)<{ filled: boolean }, Theme>`
-  border: 1px solid ${({ theme }) => theme.accent.primary};
-
-  &:hover:not(:disabled),
-  &:active:not(:disabled) {
-    color: #ffffff;
-  }
-
-  ${({ theme, filled }) =>
-    !filled &&
-    css`
-      color: ${theme.header.primary};
-      background: transparent;
-    `}
-`
