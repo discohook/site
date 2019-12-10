@@ -1,7 +1,8 @@
 import styled from "@emotion/styled"
 import { useTheme } from "emotion-theming"
 import React, { useState } from "react"
-import { Theme } from "../appearance/Theme"
+import AppearanceModal from "../appearance/AppearanceModal"
+import { Appearance, Theme } from "../appearance/Theme"
 import BackupModal from "../backup/BackupModal"
 import Button from "../form/Button"
 import FileInput from "../form/FileInput"
@@ -48,8 +49,7 @@ type Props = {
   onChange: (message: Message) => void
   files: readonly (File | FileLike)[]
   onFilesChange: (files: readonly (File | FileLike)[]) => void
-  onToggleTheme: () => void
-  onToggleDisplay: () => void
+  onAppearanceChange: (appearance: Appearance) => void
   webhookUrl: string
   onWebhookUrlChange: (webhookUrl: string) => void
   webhook?: Webhook
@@ -61,8 +61,7 @@ export default function Editor(props: Props) {
     onChange: handleChange,
     files,
     onFilesChange: handleFilesChange,
-    onToggleTheme: handleToggleTheme,
-    onToggleDisplay: handleToggleDisplay,
+    onAppearanceChange: handleAppearanceChange,
     webhookUrl,
     onWebhookUrlChange: handleWebhookUrlChange,
     webhook,
@@ -98,6 +97,7 @@ export default function Editor(props: Props) {
   else isDisabled = true
 
   const [isBackupModalShown, setIsBackupModalShown] = useState(false)
+  const [isAppearanceModalShown, setIsAppearanceModalShown] = useState(false)
 
   return (
     <EditorContainer>
@@ -110,16 +110,20 @@ export default function Editor(props: Props) {
         </JavaScriptWarning>
         <Actions
           title={theme.appearance.mobile ? undefined : "Message editor"}
-          actions={
-            [
-              { name: "Backups", action: () => setIsBackupModalShown(true) },
-              { name: "Toggle theme", action: handleToggleTheme },
-              theme.appearance.mobile
-                ? undefined
-                : { name: "Toggle display", action: handleToggleDisplay },
-              { name: "Clear all", action: clearAll },
-            ].filter(Boolean) as Parameters<typeof Actions>[0]["actions"]
-          }
+          actions={[
+            {
+              name: "Backups",
+              action: () => setIsBackupModalShown(true),
+            },
+            {
+              name: "Appearance",
+              action: () => setIsAppearanceModalShown(true),
+            },
+            {
+              name: "Clear all",
+              action: clearAll,
+            },
+          ]}
         />
         <Container flow="row">
           <InputField
@@ -202,6 +206,12 @@ export default function Editor(props: Props) {
             handleFilesChange(backup.files)
           }}
           onClose={() => setIsBackupModalShown(false)}
+        />
+      )}
+      {isAppearanceModalShown && (
+        <AppearanceModal
+          onAppearanceChange={handleAppearanceChange}
+          onClose={() => setIsAppearanceModalShown(false)}
         />
       )}
     </EditorContainer>

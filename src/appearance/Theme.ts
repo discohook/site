@@ -43,11 +43,13 @@ export type ColorTheme = {
   }
 }
 
+export type Appearance = {
+  color: "dark" | "light"
+  display: "cozy" | "compact"
+  fontSize: number
+  mobile: boolean
+}
+
 export type Theme = ColorTheme & {
-  appearance: {
-    color: "dark" | "light"
-    display: "cozy" | "compact"
-    fontSize: number
-    mobile: boolean
-  }
+  appearance: Appearance
 }

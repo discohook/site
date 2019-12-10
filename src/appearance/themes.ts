@@ -1,4 +1,4 @@
-import { ColorTheme } from "./Theme"
+import { ColorTheme, Theme } from "./Theme"
 
 const accents = {
   primary: "#7289da",
@@ -111,4 +111,9 @@ export const lightTheme: ColorTheme = {
     ].join(","),
     high: "0 8px 16px rgba(0, 0, 0, 0.16)",
   },
+}
+
+export const themes: Record<Theme["appearance"]["color"], ColorTheme> = {
+  dark: darkTheme,
+  light: lightTheme,
 }

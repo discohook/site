@@ -4,8 +4,8 @@ import { ThemeProvider } from "emotion-theming"
 import { Context } from "koa"
 import React, { useEffect, useRef, useState } from "react"
 import GlobalStyle from "../appearance/GlobalStyle"
-import { Theme } from "../appearance/Theme"
-import { darkTheme, lightTheme } from "../appearance/themes"
+import { Appearance, Theme } from "../appearance/Theme"
+import { darkTheme, themes } from "../appearance/themes"
 import Editor from "../editor/Editor"
 import { initialMessage } from "../message/initialMessage"
 import MessagePreview from "../preview/MessagePreview"
@@ -121,25 +121,12 @@ export default function App(props: Props) {
     console.log("Theme set:", theme.appearance.color, theme.appearance.display)
   }, [theme])
 
-  const toggleTheme = () =>
-    setTheme(theme => {
-      const newTheme = theme.appearance.color === "dark" ? "light" : "dark"
-      return {
-        ...(newTheme === "dark" ? darkTheme : lightTheme),
-        appearance: {
-          ...theme.appearance,
-          color: newTheme,
-        },
-      }
+  const handleAppearanceChange = (appearance: Appearance) => {
+    setTheme({
+      ...themes[appearance.color],
+      appearance,
     })
-  const toggleDisplay = () =>
-    setTheme(theme => ({
-      ...theme,
-      appearance: {
-        ...theme.appearance,
-        display: theme.appearance.display === "cozy" ? "compact" : "cozy",
-      },
-    }))
+  }
 
   const [webhookUrl, setWebhookUrl] = useState("")
   const [webhook, setWebhook] = useState<Webhook>()
@@ -189,8 +176,7 @@ export default function App(props: Props) {
               onFilesChange={files =>
                 setBackup(backup => ({ ...backup, files }))
               }
-              onToggleTheme={toggleTheme}
-              onToggleDisplay={toggleDisplay}
+              onAppearanceChange={handleAppearanceChange}
               webhookUrl={webhookUrl}
               onWebhookUrlChange={setWebhookUrl}
               webhook={webhook}

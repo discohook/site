@@ -9,6 +9,7 @@ export const InputContainer = styled.div`
 
 export const InputLabel = styled.label`
   margin-bottom: 2px;
+  font-size: 16px;
 `
 
 export const TextInput = styled.input<{}, Theme>`
@@ -85,3 +86,22 @@ export const DefaultButton = styled.button<{}, Theme>`
   }
 `
 DefaultButton.defaultProps = { type: "button" }
+
+export const OutlineButton = styled(DefaultButton)<{}, Theme>`
+  padding: 2px 15px;
+
+  background: transparent;
+  border: 1px solid rgba(114, 137, 218, 0.3);
+
+  color: ${({ theme }) => theme.accent.primary};
+
+  &:hover:not(:disabled) {
+    background: transparent;
+    border-color: rgba(114, 137, 218, 0.6);
+  }
+
+  &:active:not(:disabled) {
+    background: rgba(114, 137, 218, 0.1);
+    border-color: ${({ theme }) => theme.accent.primary};
+  }
+`
