@@ -53,7 +53,19 @@ export default function AppearanceModal(props: Props) {
     <ModalContainer onClick={event => event.stopPropagation()}>
       <Actions
         title="Appearance"
-        actions={[{ name: "Close", action: handleClose }]}
+        actions={[
+          {
+            name: "Reset",
+            action: () =>
+              handleAppearanceChange({
+                ...appearance,
+                color: "dark",
+                display: "cozy",
+                fontSize: 16,
+              }),
+          },
+          { name: "Close", action: handleClose },
+        ]}
       />
       <AppearanceTypeHeader>Color theme</AppearanceTypeHeader>
       <Container flow="row">
