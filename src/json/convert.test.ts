@@ -93,21 +93,12 @@ describe("parseMessage", () => {
     `)
 
     expect(invalidMessage.errors).not.toHaveLength(0)
-    expect(invalidMessage.message).toEqual({
-      content: "",
-      embeds: [
-        {
-          [id]: expect.any(Number),
-          title: "The message content is empty",
-          description: "Very scary",
-        },
-      ],
-    })
+    expect(invalidMessage.message).toBeUndefined()
 
     const invalidType = parseMessage("null")
 
     expect(invalidType.errors).not.toHaveLength(0)
-    expect(invalidType.message).toBeNull()
+    expect(invalidType.message).toBeUndefined()
   })
 
   it("does not return a message for json errors", () => {
