@@ -3,5 +3,12 @@
   "transform": {
     "\\.[jt]sx?$": "babel-jest"
   },
-  "rootDir": "src"
+  "rootDir": "src",
+  "globals": {
+    "ENV": "test",
+    "PROD": true,
+    "DEV": false,
+    "TEST": true,
+    "SERVER": true
+  }
 }
