@@ -11,7 +11,6 @@ import { initialMessage } from "../message/initialMessage"
 import MessagePreview from "../preview/MessagePreview"
 import { fetchWebhookInfo } from "../webhook/fetchWebhookInfo"
 import { Webhook } from "../webhook/Webhook"
-import { SERVER } from "./environment"
 import { decodeBackup, setUrlToBackup } from "./sharing"
 
 const Container = styled.div`

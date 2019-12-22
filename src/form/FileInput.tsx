@@ -1,7 +1,6 @@
 import styled from "@emotion/styled"
 import React, { useRef } from "react"
 import { Theme } from "../appearance/Theme"
-import { SERVER } from "../core/environment"
 import { Container } from "../editor/styles"
 import { FileLike } from "../message/FileLike"
 import {

@@ -1,5 +1,6 @@
 import Router from "@koa/router"
 import { readFileSync } from "fs"
+import "highlight.js"
 import isBot from "isbot"
 import Koa from "koa"
 import conditional from "koa-conditional-get"
@@ -10,6 +11,14 @@ import { renderToNodeStream } from "react-dom/server"
 import { Transform } from "stream"
 import { createDeflate, createGzip } from "zlib"
 import App from "./App"
+
+Object.assign(global, {
+  ENV: process.env.NODE_ENV ?? "production",
+  PROD: process.env.NODE_ENV === "production",
+  DEV: process.env.NODE_ENV === "development",
+  TEST: process.env.NODE_ENV === "test",
+  SERVER: true,
+})
 
 const app = new Koa()
 const router = new Router()

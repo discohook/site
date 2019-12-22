@@ -1,5 +1,3 @@
-import { SERVER } from "../core/environment"
-
 export const base64Encode = (data: string, safe = false) => {
   if (SERVER) {
     let base64 = Buffer.from(data, "utf8").toString("base64")

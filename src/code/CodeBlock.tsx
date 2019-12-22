@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { SERVER } from "../core/environment"
 import { CodeBlockContainer } from "../markup/styles"
 import { aliases } from "./aliases"
 import { highlightCode } from "./highlightCode"
 import { hljs } from "./hljs"
-import { importLanguage } from "./importLanguage"
-import { languages } from "./languages"
-
-if (SERVER) {
-  Promise.all(languages.map(importLanguage)).catch(error => {
-    console.error("Error importing language", error)
-  })
-}
 
 type Props = {
   content: string

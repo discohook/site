@@ -1,5 +1,4 @@
 import React, { useEffect } from "react"
-import { SERVER } from "../core/environment"
 import { FileLike } from "../message/FileLike"
 import AudioAttachment from "./AudioAttachment"
 import DefaultAttachment from "./DefaultAttachment"

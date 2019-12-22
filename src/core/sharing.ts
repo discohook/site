@@ -2,7 +2,6 @@ import { Backup } from "../backup/Backup"
 import { base64Decode, base64Encode } from "../backup/base64"
 import { parseJson } from "../json/parseJson"
 import { applyIds } from "../message/applyIds"
-import { SERVER } from "./environment"
 
 export const setUrlToBackup = (backup: Backup) => {
   const files = backup.files.map(file => ({

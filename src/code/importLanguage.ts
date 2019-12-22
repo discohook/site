@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 
-import { SERVER } from "../core/environment"
 import { aliases } from "./aliases"
 import { hljs } from "./hljs"
 import { importRawLanguage } from "./importRawLanguage"
 import { Language } from "./languages"
 
 export const importLanguage = async (lang: string | Language) => {
-  const language = typeof lang === "object" ? lang : aliases[name]
+  const language = typeof lang === "object" ? lang : aliases[lang]
   if (!language) return
 
   const langPromise = importRawLanguage(language.name)

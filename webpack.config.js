@@ -65,8 +65,11 @@ module.exports = {
       },
     ]),
     new DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-      "process.env.SERVER": JSON.stringify(false),
+      ENV: JSON.stringify(process.env.NODE_ENV),
+      PROD: !development,
+      DEV: !development,
+      TEST: false,
+      SERVER: false,
     }),
   ],
   devServer: {
