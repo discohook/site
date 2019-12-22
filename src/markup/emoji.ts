@@ -110,8 +110,6 @@ for (const [toneA, idA, nameA] of tones) {
   }
 }
 
-console.log(emojiToName)
-
 export const getEmojiUrl = (emoji: string) => {
   const file = [...emoji]
     .map(character => character.codePointAt(0)?.toString(16))
