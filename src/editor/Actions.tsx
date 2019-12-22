@@ -29,7 +29,8 @@ const Action = styled.button<{}, Theme>`
   font-weight: 500;
   line-height: 20px;
 
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 

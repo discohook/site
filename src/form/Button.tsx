@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react"
-import { DefaultButton, OutlineButton } from "./styles"
+import { FilledButton, OutlineButton } from "./styles"
 
 type Props = {
   children?: ReactNode
@@ -12,7 +12,7 @@ type Props = {
 export default function Button(props: Props) {
   const { children, onClick: handleClick, disabled, filled = true } = props
 
-  const Component = filled ? DefaultButton : OutlineButton
+  const Component = filled ? FilledButton : OutlineButton
 
   return (
     <Component

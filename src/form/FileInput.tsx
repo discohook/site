@@ -4,7 +4,7 @@ import { SERVER } from "../core/environment"
 import { Container } from "../editor/styles"
 import { FileLike } from "../message/FileLike"
 import {
-  DefaultButton,
+  FilledButton,
   InputContainer,
   InputLabel,
   InputNote,
@@ -36,7 +36,7 @@ const HiddenInput = styled.input`
 `
 HiddenInput.defaultProps = { type: "file", multiple: true }
 
-const RemoveFilesButton = styled(DefaultButton)`
+const RemoveFilesButton = styled(FilledButton)`
   margin-right: 0;
 `
 

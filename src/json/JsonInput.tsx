@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
 import { Theme } from "../appearance/Theme"
 import {
-  DefaultButton,
+  FilledButton,
   InputContainer,
   InputLabel,
   MultilineTextInput,
@@ -35,7 +35,7 @@ const CodeInput = styled(MultilineTextInput)<{}, Theme>`
   font-family: ${({ theme }) => theme.font.mono};
 `
 
-const SubmitButton = styled(DefaultButton)<{}, Theme>`
+const SubmitButton = styled(FilledButton)<{}, Theme>`
   margin: 8px 0 16px;
   align-self: flex-end;
 `

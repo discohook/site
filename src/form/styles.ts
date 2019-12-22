@@ -18,13 +18,17 @@ export const TextInput = styled.input<{}, Theme>`
 
   background: ${({ theme }) =>
     theme.appearance.color === "dark" ? "#40444b" : "#ebedef"};
-  border: 0;
+  border: none;
   border-radius: 3px;
   outline: none;
 
   color: ${({ theme }) => theme.text.normal};
   font-size: 15px;
   line-height: 20px;
+
+  &:focus {
+    box-shadow: ${({ theme }) => theme.elavation.low};
+  }
 `
 TextInput.defaultProps = { type: "text" }
 
@@ -52,7 +56,7 @@ export const InputNote = styled.div<InputNoteProps, Theme>`
   }
 `
 
-export const DefaultButton = styled.button<{}, Theme>`
+export const FilledButton = styled.button<{}, Theme>`
   min-width: 60px;
   min-height: 32px;
   max-height: 32px;
@@ -72,7 +76,8 @@ export const DefaultButton = styled.button<{}, Theme>`
 
   transition: 167ms;
 
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
     background: #677bc4;
   }
 
@@ -85,9 +90,9 @@ export const DefaultButton = styled.button<{}, Theme>`
     opacity: 0.5;
   }
 `
-DefaultButton.defaultProps = { type: "button" }
+FilledButton.defaultProps = { type: "button" }
 
-export const OutlineButton = styled(DefaultButton)<{}, Theme>`
+export const OutlineButton = styled(FilledButton)<{}, Theme>`
   padding: 2px 15px;
 
   background: transparent;
@@ -95,7 +100,8 @@ export const OutlineButton = styled(DefaultButton)<{}, Theme>`
 
   color: ${({ theme }) => theme.accent.primary};
 
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
     background: transparent;
     border-color: rgba(114, 137, 218, 0.6);
   }
