@@ -320,7 +320,7 @@ export const languages: Language[] = [
   },
   {
     name: "javascript",
-    aliases: ["js", "jsx"],
+    aliases: ["cjs", "js", "jsx", "mjs"],
   },
   {
     name: "jboss-cli",
