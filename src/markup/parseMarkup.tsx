@@ -190,6 +190,7 @@ const blockRules: ReactRules = {
     // eslint-disable-next-line unicorn/regex-shorthand
     match: anyScopeRegex(/^```(?:([\da-z-]+?)\n+)?\n*([\S\s]+?)\n*```/i),
     parse: (capture, _, state) => ({
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       language: capture[1]?.trim(),
       content: capture[2],
       inQuote: state.inQuote,
