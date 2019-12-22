@@ -22,6 +22,10 @@ const ToggleLabel = styled.label<{}, Theme>`
   line-height: 24px;
 
   cursor: pointer;
+
+  ${Container}:focus-within > & {
+    text-decoration: underline;
+  }
 `
 
 const ToggleContainer = styled.div<{ checked?: boolean }, Theme>`
