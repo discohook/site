@@ -28,7 +28,7 @@ export const formatTimestamp = (timestamp: string, base?: Date) => {
   const time = date.toLocaleString("en-US", {
     hour: "2-digit",
     minute: "numeric",
-    hour12: false,
+    hour12: true,
   })
 
   switch (getFormat(date, base)) {
