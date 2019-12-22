@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import React, { useRef } from "react"
+import { Theme } from "../appearance/Theme"
 import { SERVER } from "../core/environment"
 import { Container } from "../editor/styles"
 import { FileLike } from "../message/FileLike"
@@ -18,11 +19,15 @@ const FileInputContainer = styled.div`
   margin: 0 8px 0 0;
 `
 
-const FakeInput = styled(TextInput.withComponent("div"))`
+const FakeInput = styled(TextInput.withComponent("div"))<{}, Theme>`
   position: absolute;
 
   height: 32px;
   width: 100%;
+
+  ${FileInputContainer}:focus-within > & {
+    box-shadow: ${({ theme }) => theme.elavation.low};
+  }
 `
 
 const HiddenInput = styled.input`
