@@ -86,7 +86,7 @@ export default function JsonInput(props: Props) {
       />
       <SubmitButton
         disabled={errors.length > 0}
-        onClick={() => handleChange(parseMessage(json).message as Message)}
+        onClick={() => handleChange(parseMessage(json).message ?? {})}
       >
         Submit
       </SubmitButton>
