@@ -98,7 +98,6 @@
     "no-script-url": "warn",
     "no-self-assign": "warn",
     "no-self-compare": "warn",
-    "no-throw-literal": "warn",
     "no-unmodified-loop-condition": "warn",
     "no-useless-call": "warn",
     "no-useless-catch": "warn",
@@ -258,6 +257,7 @@
     "@typescript-eslint/no-non-null-assertion": "warn",
     "@typescript-eslint/no-parameter-properties": "warn",
     "@typescript-eslint/no-this-alias": "warn",
+    "@typescript-eslint/no-throw-literal": "warn",
     "@typescript-eslint/no-unnecessary-condition": [
       "warn",
       { "ignoreRhs": true }
@@ -316,6 +316,7 @@
     "unicorn/prefer-event-key": "warn",
     "unicorn/prefer-flat-map": "warn",
     "unicorn/prefer-includes": "warn",
+    "unicorn/prefer-modern-dom-apis": "warn",
     "unicorn/prefer-node-append": "warn",
     "unicorn/prefer-node-remove": "warn",
     "unicorn/prefer-query-selector": "warn",
