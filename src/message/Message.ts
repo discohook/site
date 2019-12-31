@@ -1,3 +1,4 @@
+import { Color } from "../color/Color"
 import { id } from "./uid"
 
 export type Message = {
@@ -17,7 +18,7 @@ export type Embed = {
   readonly description?: string
   readonly url?: string
   readonly timestamp?: string
-  readonly color?: number | null
+  readonly color?: Color
   readonly footer?: Footer
   readonly image?: Image
   readonly thumbnail?: Image

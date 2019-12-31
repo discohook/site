@@ -1,5 +1,5 @@
 import React from "react"
-import ColorInput from "../form/ColorInput"
+import ColorInput from "../color/ColorInput"
 import InputField from "../form/InputField"
 import { Embed, Field } from "../message/Message"
 import { getUniqueId, id } from "../message/uid"

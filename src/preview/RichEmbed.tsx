@@ -2,7 +2,6 @@ import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import React from "react"
 import { Theme } from "../appearance/Theme"
-import { numberToHex } from "../form/ColorInput"
 import Markup from "../markup/Markup"
 import {
   BlockQuoteContent,
@@ -18,6 +17,7 @@ import EmbedFooter from "./EmbedFooter"
 import EmbedGallery from "./EmbedGallery"
 import { EmbedWithGallery } from "./getEmbedsWithGallery"
 import { getFieldsWithWidths } from "./getFieldsWithWidths"
+import { numberToHex } from "../color/math"
 
 const Container = styled.div<{}, Theme>`
   max-width: 520px;
