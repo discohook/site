@@ -75,8 +75,6 @@ type Props = {
 export default function ColorPicker(props: Props) {
   const { color, onChange } = props
 
-  console.log("ColorPicker render")
-
   const hsvRef = useRef<HsvColor>({
     hue: 0,
     saturation: Infinity,
