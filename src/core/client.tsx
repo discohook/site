@@ -1,16 +1,11 @@
 import React from "react"
 import { hydrate, render } from "react-dom"
-import ErrorBoundary from "./ErrorBoundary"
 
 const main = async () => {
-  const { default: App } = await import(/* webpackChunkName: "app" */ "./App")
+  const { default: Main } = await import(/* webpackChunkName: "app" */ "./Main")
   const container = document.querySelector("#app")
 
-  const app = (
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  )
+  const app = <Main />
 
   if (container?.hasChildNodes()) {
     hydrate(app, container)
