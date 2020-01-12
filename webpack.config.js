@@ -16,8 +16,8 @@ module.exports = {
   entry: resolve(__dirname, "src/core/client.tsx"),
   mode: development ? "development" : "production",
   output: {
-    filename: "[name].[chunkhash].js",
-    chunkFilename: "[name].[chunkhash].js",
+    filename: "[name].[contenthash:8].js",
+    chunkFilename: "[name].[contenthash:8].js",
     path: resolve(__dirname, "dist"),
   },
   module: {
