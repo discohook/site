@@ -5,6 +5,8 @@ import React, { ErrorInfo } from "react"
 import GlobalStyle from "../appearance/GlobalStyle"
 import { Theme } from "../appearance/Theme"
 import { darkTheme } from "../appearance/themes"
+import Markup from "../markup/Markup"
+import { CodeBlockContainer } from "../markup/styles"
 
 const Container = styled.div<{}, Theme>`
   width: 100%;
@@ -28,27 +30,18 @@ const Header = styled.h1<{}, Theme>`
   font-weight: 600;
 `
 
-const Paragraph = styled.p<{}, Theme>`
-  max-width: 500px;
+const Message = styled.p<{}, Theme>`
+  margin: 16px 0 24px;
+
+  max-width: 600px;
 
   font-size: 16px;
   line-height: 1.375;
 `
 
-const ErrorDetails = styled.pre<{}, Theme>`
+const ErrorDetails = styled(CodeBlockContainer)`
   max-width: 1200px;
   margin-bottom: 32px;
-  padding: 7px;
-
-  background: ${({ theme }) => theme.background.secondary};
-  border: 1px solid ${({ theme }) => theme.background.tertiary};
-  border-radius: 5px;
-
-  color: ${({ theme }) => theme.header.secondary};
-  font-size: 0.875rem;
-  line-height: 1.125rem;
-
-  white-space: pre-wrap;
 `
 
 type Props = {
@@ -75,18 +68,18 @@ export default function ErrorPage(props: Props) {
       <GlobalStyle />
       <Container>
         <Header>An error occurred</Header>
-        <Paragraph>
-          An uncaught error was thrown. I don&apos;t know what happened, but
-          it&apos;s likely not your fault.
-        </Paragraph>
-        <Paragraph>
-          Please get in contact as soon as possible. You can create an issue on{" "}
-          <a href="https://github.com/jaylineko/discohook/issues/">
-            the GitHub repository
-          </a>{" "}
-          , or talk to me on Discord (@jay.#1111).
-        </Paragraph>
-        <Paragraph>More details are provided below:</Paragraph>
+        <Message>
+          <Markup
+            content={[
+              "An uncaught error was thrown. I don't know what happened, but it's likely not your fault.",
+              [
+                "Please get in contact as soon as possible. You can talk to me on Discord (@jay.#1111),",
+                "or create an issue on [the GitHub repository](https://github.com/jaylineko/discohook/issues/).",
+              ].join(" "),
+              "More details are provided below:",
+            ].join("\n\n")}
+          />
+        </Message>
         <ErrorDetails>
           {error.toString()}
           {"\n"}
