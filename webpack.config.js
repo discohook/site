@@ -42,7 +42,57 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: chunk => !/^hljs-[\w-]+$/.test(chunk.name),
+      minSize: 0,
+      maxInitialRequests: Infinity,
       automaticNameDelimiter: "-",
+      cacheGroups: {
+        polyfill: {
+          test: new RegExp(
+            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
+              "core-js",
+              "regenerator-runtime",
+              "@babel",
+              "object-assign",
+            ].join("|")})[/\\\\]`,
+          ),
+          name: "polyfill",
+        },
+        react: {
+          test: new RegExp(
+            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
+              "react",
+              "react-dom",
+              "react-is",
+              "prop-types",
+              "scheduler",
+            ].join("|")})[/\\\\]`,
+          ),
+          name: "react",
+        },
+        markdown: {
+          test: new RegExp(
+            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
+              "simple-markdown",
+              "highlight.js",
+            ].join("|")})[/\\\\]`,
+          ),
+          name: "markdown",
+        },
+        css: {
+          test: new RegExp(
+            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
+              "@emotion",
+              "emotion-theming",
+            ].join("|")})[/\\\\]`,
+          ),
+          name: "css",
+        },
+        vendor: {
+          test: /[/\\]node_modules[/\\]/,
+          name: "vendor",
+          priority: -1,
+        },
+      },
     },
   },
   plugins: [
@@ -56,7 +106,15 @@ module.exports = {
     }),
     new PreloadWebpackPlugin({
       rel: "preload",
-      include: ["main", "vendors-main", "app", "vendors-app"],
+      include: [
+        "main",
+        "app",
+        "vendor",
+        "polyfill",
+        "react",
+        "markdown",
+        "css",
+      ],
     }),
     new CopyWebpackPlugin([
       {
@@ -78,6 +136,7 @@ module.exports = {
   },
   devtool: "source-map",
   performance: {
-    assetFilter: name => name.endsWith(".js"),
+    maxEntrypointSize: Infinity,
+    maxAssetSize: Infinity,
   },
 }
