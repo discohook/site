@@ -81,8 +81,8 @@ module.exports = {
         css: {
           test: new RegExp(
             `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
+              "styled-components",
               "@emotion",
-              "emotion-theming",
             ].join("|")})[/\\\\]`,
           ),
           name: "css",

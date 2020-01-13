@@ -1,14 +1,11 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
-import { ThemeProvider } from "emotion-theming"
 import React, { ErrorInfo } from "react"
+import styled, { css, ThemeProvider } from "styled-components"
 import GlobalStyle from "../appearance/GlobalStyle"
-import { Theme } from "../appearance/Theme"
 import { darkTheme } from "../appearance/themes"
 import Markup from "../markup/Markup"
 import { CodeBlockContainer } from "../markup/styles"
 
-const Container = styled.div<{}, Theme>`
+const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -22,7 +19,7 @@ const Container = styled.div<{}, Theme>`
     `};
 `
 
-const Header = styled.h1<{}, Theme>`
+const Header = styled.h1`
   margin: 0;
 
   color: ${({ theme }) => theme.header.primary};
@@ -30,7 +27,7 @@ const Header = styled.h1<{}, Theme>`
   font-weight: 600;
 `
 
-const Message = styled.p<{}, Theme>`
+const Message = styled.p`
   margin: 16px 0 24px;
 
   max-width: 600px;
@@ -54,7 +51,7 @@ export default function ErrorPage(props: Props) {
   console.log(props)
 
   return (
-    <ThemeProvider<Theme>
+    <ThemeProvider
       theme={{
         ...darkTheme,
         appearance: {

@@ -1,10 +1,8 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
-import { useTheme } from "emotion-theming"
 import React, { useEffect, useState } from "react"
-import { Theme } from "../appearance/Theme"
+import styled, { css } from "styled-components"
+import { useTheme } from "../appearance/useTheme"
 
-const Container = styled.div<{}, Theme>`
+const Container = styled.div`
   height: 1.375em;
   display: flex;
   margin: 0 0 0 -80px;
@@ -24,7 +22,7 @@ const Container = styled.div<{}, Theme>`
     `}
 `
 
-const Avatar = styled.img<{}, Theme>`
+const Avatar = styled.img`
   position: relative;
   top: 2px;
 
@@ -49,7 +47,7 @@ const Avatar = styled.img<{}, Theme>`
     `}
 `
 
-const HeaderInfo = styled.div<{}, Theme>`
+const HeaderInfo = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -61,7 +59,7 @@ const HeaderInfo = styled.div<{}, Theme>`
     `}
 `
 
-const UserName = styled.span<{}, Theme>`
+const UserName = styled.span`
   color: ${({ theme }) => theme.header.primary};
   font-weight: 500;
   line-height: 1.375em;
@@ -75,7 +73,7 @@ const UserName = styled.span<{}, Theme>`
     `}
 `
 
-const BotTag = styled.span<{}, Theme>`
+const BotTag = styled.span`
   padding: 0.072rem 0.275rem;
 
   border-radius: 3px;
@@ -96,7 +94,7 @@ const BotTag = styled.span<{}, Theme>`
     `}
 `
 
-const Timestamp = styled.span<{}, Theme>`
+const Timestamp = styled.span`
   margin: 0 0 0 0.3rem;
 
   color: ${({ theme }) => theme.text.muted};
@@ -154,7 +152,7 @@ export default function MessageHeader(props: Props) {
     return () => clearInterval(interval)
   }, [])
 
-  const theme = useTheme<Theme>()
+  const theme = useTheme()
 
   return (
     <Container>

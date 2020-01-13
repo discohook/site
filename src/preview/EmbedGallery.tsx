@@ -1,6 +1,5 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
 import React from "react"
+import styled, { css } from "styled-components"
 import { id } from "../message/uid"
 import { ImageWithId } from "./getEmbedsWithGallery"
 

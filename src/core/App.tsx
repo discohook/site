@@ -1,8 +1,6 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
-import { ThemeProvider } from "emotion-theming"
 import { Context } from "koa"
 import React, { useEffect, useRef, useState } from "react"
+import styled, { css, ThemeProvider } from "styled-components"
 import GlobalStyle from "../appearance/GlobalStyle"
 import { Appearance, Theme } from "../appearance/Theme"
 import { darkTheme, themes } from "../appearance/themes"
@@ -20,7 +18,7 @@ const Container = styled.div`
   height: 100%;
 `
 
-const TabSwitcher = styled.div<{}, Theme>`
+const TabSwitcher = styled.div`
   display: flex;
 
   background: ${({ theme }) => theme.background.secondary};
@@ -33,7 +31,7 @@ const TabSwitcher = styled.div<{}, Theme>`
   z-index: 1;
 `
 
-const Tab = styled.button<{ active: boolean }, Theme>`
+const Tab = styled.button.attrs({ type: "button" })<{ active: boolean }>`
   height: 40px;
   padding: 0 16px;
 
@@ -48,15 +46,14 @@ const Tab = styled.button<{ active: boolean }, Theme>`
   color: ${({ theme }) => theme.header.primary};
   line-height: 38px;
 
-  ${({ theme, active }) =>
+  ${({ active }) =>
     active &&
     css`
-      border-bottom-color: ${theme.accent.primary};
+      border-bottom-color: ${({ theme }) => theme.accent.primary};
     `}
 `
-Tab.defaultProps = { type: "button" }
 
-const View = styled.main<{}, Theme>`
+const View = styled.main`
   display: flex;
   flex-direction: row-reverse;
   align-items: stretch;

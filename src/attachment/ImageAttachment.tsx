@@ -1,5 +1,5 @@
-import styled from "@emotion/styled"
 import React, { useLayoutEffect, useState } from "react"
+import styled from "styled-components"
 import DefaultAttachment from "./DefaultAttachment"
 
 type Props = {

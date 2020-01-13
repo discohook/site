@@ -1,7 +1,5 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled, { css } from "styled-components"
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +11,7 @@ const Container = styled.div`
   user-select: none;
 `
 
-const ToggleLabel = styled.label<{}, Theme>`
+const ToggleLabel = styled.label`
   flex: 1;
 
   color: ${({ theme }) => theme.header.primary};
@@ -28,7 +26,7 @@ const ToggleLabel = styled.label<{}, Theme>`
   }
 `
 
-const ToggleContainer = styled.div<{ checked?: boolean }, Theme>`
+const ToggleContainer = styled.div<{ checked?: boolean }>`
   position: relative;
 
   width: 42px;
@@ -65,7 +63,7 @@ const ToggleContainer = styled.div<{ checked?: boolean }, Theme>`
   }
 `
 
-const ToggleInput = styled.input`
+const ToggleInput = styled.input.attrs({ type: "checkbox " })`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -75,7 +73,6 @@ const ToggleInput = styled.input`
 
   cursor: pointer;
 `
-ToggleInput.defaultProps = { type: "checkbox" }
 
 type Props = {
   id: string

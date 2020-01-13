@@ -1,6 +1,5 @@
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 import Markup from "../markup/Markup"
 import { MarkupContainer } from "../markup/styles"
 import { Field } from "../message/Message"
@@ -10,7 +9,7 @@ const Container = styled.div`
   line-height: 1.125rem;
 `
 
-const FieldName = styled.div<{}, Theme>`
+const FieldName = styled.div`
   margin: 0 0 1px;
 
   font-size: 0.875rem;
@@ -18,7 +17,7 @@ const FieldName = styled.div<{}, Theme>`
   color: ${({ theme }) => theme.text.muted};
 `
 
-const FieldValue = styled.div<{}, Theme>`
+const FieldValue = styled.div`
   & > ${MarkupContainer} {
     font-size: 0.875rem;
     line-height: 1.125rem;

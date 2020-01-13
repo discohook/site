@@ -1,6 +1,5 @@
-import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 import Actions from "../editor/Actions"
 import { Container } from "../editor/styles"
 import Button from "../form/Button"
@@ -10,7 +9,7 @@ import { Message } from "../message/Message"
 import { Backup } from "./Backup"
 import { deleteBackup, getBackup, getBackups, setBackup } from "./backupStorage"
 
-const ModalContainer = styled.div<{}, Theme>`
+const ModalContainer = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -26,7 +25,7 @@ const ModalContainer = styled.div<{}, Theme>`
   overflow-y: scroll;
 `
 
-const ShareTip = styled.div<{}, Theme>`
+const ShareTip = styled.div`
   margin: 16px 8px 8px;
   padding: 12px;
 
@@ -34,7 +33,7 @@ const ShareTip = styled.div<{}, Theme>`
   border-radius: 3px;
 `
 
-const ShareTipParagraph = styled.p<{}, Theme>`
+const ShareTipParagraph = styled.p`
   color: ${({ theme }) => theme.header.primary};
 
   margin: 0;
@@ -53,7 +52,7 @@ const List = styled.ul`
   }
 `
 
-const Item = styled.li<{}, Theme>`
+const Item = styled.li`
   display: flex;
   align-items: center;
 
@@ -67,7 +66,7 @@ const Item = styled.li<{}, Theme>`
   }
 `
 
-const BackupName = styled.a<{}, Theme>`
+const BackupName = styled.a`
   margin: 0 auto 0 0;
 
   color: ${({ theme }) => theme.header.primary};
@@ -77,7 +76,7 @@ const BackupName = styled.a<{}, Theme>`
   cursor: pointer;
 `
 
-const DeleteAction = styled.a<{}, Theme>`
+const DeleteAction = styled.a`
   margin: 0 0 0 8px;
   color: ${({ theme }) => theme.accent.danger};
   cursor: pointer;

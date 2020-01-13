@@ -1,8 +1,6 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
-import { Theme } from "../appearance/Theme"
+import styled, { css } from "styled-components"
 
-export const MarkupContainer = styled.div<{}, Theme>`
+export const MarkupContainer = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
   line-height: 1.375;
@@ -16,7 +14,7 @@ export const MarkupContainer = styled.div<{}, Theme>`
     `}
 `
 
-export const Code = styled.code<{}, Theme>`
+export const Code = styled.code`
   padding: 0.2em;
   margin: -0.2em 0;
 
@@ -29,7 +27,7 @@ export const Code = styled.code<{}, Theme>`
   white-space: pre-wrap;
 `
 
-export const Emoji = styled.img<{ big?: boolean }, Theme>`
+export const Emoji = styled.img<{ big?: boolean }>`
   width: 1.375em;
   height: 1.375em;
 
@@ -46,7 +44,7 @@ export const Emoji = styled.img<{ big?: boolean }, Theme>`
     `}
 `
 
-export const Mention = styled.span<{}, Theme>`
+export const Mention = styled.span`
   padding: 0 2px;
   cursor: pointer;
 
@@ -64,7 +62,7 @@ export const Mention = styled.span<{}, Theme>`
   }
 `
 
-export const Spoiler = styled.span<{}, Theme>`
+export const Spoiler = styled.span`
   background: ${({ theme }) =>
     theme.appearance.color === "dark"
       ? "rgba(255, 255, 255, 0.1)"
@@ -72,11 +70,11 @@ export const Spoiler = styled.span<{}, Theme>`
   border-radius: 3px;
 `
 
-export const BlockQuoteContainer = styled.div<{}, Theme>`
+export const BlockQuoteContainer = styled.div`
   display: flex;
 `
 
-export const BlockQuoteDivider = styled.div<{}, Theme>`
+export const BlockQuoteDivider = styled.div`
   width: 4px;
   min-width: 4px;
   margin: 8px 0;
@@ -85,7 +83,7 @@ export const BlockQuoteDivider = styled.div<{}, Theme>`
   background: ${({ theme }) => theme.interactive.muted};
 `
 
-export const BlockQuoteContent = styled.blockquote<{}, Theme>`
+export const BlockQuoteContent = styled.blockquote`
   text-indent: 0;
 
   max-width: 90%;
@@ -94,7 +92,7 @@ export const BlockQuoteContent = styled.blockquote<{}, Theme>`
   padding: 0 8px 0 12px;
 `
 
-export const CodeBlockContainer = styled.pre<{}, Theme>`
+export const CodeBlockContainer = styled.pre`
   max-width: 90%;
   margin: 6px 0 0;
   padding: 7px;

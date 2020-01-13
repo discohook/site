@@ -1,12 +1,12 @@
-import styled from "@emotion/styled"
-import { useTheme } from "emotion-theming"
 import React from "react"
+import styled from "styled-components"
 import Actions from "../editor/Actions"
 import { Container } from "../editor/styles"
 import Button from "../form/Button"
-import { Appearance, Theme } from "./Theme"
+import { Appearance } from "./Theme"
+import { useTheme } from "./useTheme"
 
-const ModalContainer = styled.div<{}, Theme>`
+const ModalContainer = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -22,7 +22,7 @@ const ModalContainer = styled.div<{}, Theme>`
   overflow-y: scroll;
 `
 
-const AppearanceTypeHeader = styled.div<{}, Theme>`
+const AppearanceTypeHeader = styled.div`
   margin: 16px 8px 2px;
 
   color: ${({ theme }) => theme.header.secondary};
@@ -46,7 +46,7 @@ export default function AppearanceModal(props: Props) {
     onClose: handleClose,
   } = props
 
-  const { appearance } = useTheme<Theme>()
+  const { appearance } = useTheme()
   const { mobile } = appearance
 
   return (

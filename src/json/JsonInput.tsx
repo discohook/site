@@ -1,6 +1,5 @@
-import styled from "@emotion/styled"
 import React, { useEffect, useState } from "react"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 import {
   FilledButton,
   InputContainer,
@@ -20,7 +19,7 @@ const ErrorContainer = styled.div`
   color: #ffffff;
 `
 
-const Error = styled.div<{}, Theme>`
+const Error = styled.div`
   padding: 4px 0;
 
   font-size: 14px;
@@ -28,14 +27,14 @@ const Error = styled.div<{}, Theme>`
   line-height: 16px;
 `
 
-const CodeInput = styled(MultilineTextInput)<{}, Theme>`
+const CodeInput = styled(MultilineTextInput)`
   min-height: 240px;
 
   font-size: 14px;
   font-family: ${({ theme }) => theme.font.mono};
 `
 
-const SubmitButton = styled(FilledButton)<{}, Theme>`
+const SubmitButton = styled(FilledButton)`
   margin: 8px 0 16px;
   align-self: flex-end;
 `

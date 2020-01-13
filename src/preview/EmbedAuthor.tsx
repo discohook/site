@@ -1,7 +1,5 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled, { css } from "styled-components"
 import { Author } from "../message/Message"
 
 const Container = styled.div`
@@ -21,7 +19,7 @@ const AuthorImage = styled.img`
   border-radius: 50%;
 `
 
-const AuthorNameNormal = styled.span<{}, Theme>`
+const AuthorNameNormal = styled.span`
   font-size: 0.875rem;
   font-weight: 500;
   color: ${({ theme }) => theme.header.primary};

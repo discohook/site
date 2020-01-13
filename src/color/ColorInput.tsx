@@ -1,5 +1,5 @@
-import styled from "@emotion/styled"
 import React, { useEffect, useRef, useState } from "react"
+import styled from "styled-components"
 import { Container } from "../editor/styles"
 import InputField from "../form/InputField"
 import { Color } from "./Color"

@@ -1,11 +1,10 @@
-import styled from "@emotion/styled"
 import React, { useLayoutEffect, useRef } from "react"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 import { Color, HsvColor } from "./Color"
 import { hsvToNumber, numberToHex, numberToHsv } from "./math"
 import { useDragArea } from "./useDragArea"
 
-const Container = styled.div<{}, Theme>`
+const Container = styled.div`
   display: flex;
 
   padding: 12px;

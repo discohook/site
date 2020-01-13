@@ -1,6 +1,5 @@
-import styled from "@emotion/styled"
 import React, { useRef } from "react"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 import { Container } from "../editor/styles"
 import { FileLike } from "../message/FileLike"
 import {
@@ -18,7 +17,7 @@ const FileInputContainer = styled.div`
   margin: 0 8px 0 0;
 `
 
-const FakeInput = styled(TextInput.withComponent("div"))<{}, Theme>`
+const FakeInput = styled(TextInput.withComponent("div"))`
   position: absolute;
 
   height: 32px;
@@ -29,7 +28,7 @@ const FakeInput = styled(TextInput.withComponent("div"))<{}, Theme>`
   }
 `
 
-const HiddenInput = styled.input`
+const HiddenInput = styled.input.attrs({ type: "file", multiple: true })`
   position: absolute;
   top: 8px;
 
@@ -38,7 +37,6 @@ const HiddenInput = styled.input`
 
   opacity: 0;
 `
-HiddenInput.defaultProps = { type: "file", multiple: true }
 
 const RemoveFilesButton = styled(FilledButton)`
   margin-right: 0;

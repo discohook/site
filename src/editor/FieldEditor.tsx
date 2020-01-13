@@ -1,5 +1,5 @@
-import styled from "@emotion/styled"
 import React from "react"
+import styled from "styled-components"
 import InputField from "../form/InputField"
 import Toggle from "../form/Toggle"
 import { Field } from "../message/Message"

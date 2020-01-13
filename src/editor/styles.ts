@@ -1,7 +1,6 @@
-import styled from "@emotion/styled"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 
-export const Container = styled.div<{ flow?: "column" | "row" }, Theme>`
+export const Container = styled.div<{ flow?: "column" | "row" }>`
   display: flex;
   flex-direction: ${({ flow }) => flow ?? "column"};
   flex-wrap: ${({ flow }) => (flow === "row" ? "wrap" : "nowrap")};
@@ -15,7 +14,7 @@ export const Container = styled.div<{ flow?: "column" | "row" }, Theme>`
   }
 `
 
-export const BoxContainer = styled.div<{}, Theme>`
+export const BoxContainer = styled.div`
   display: flex;
   flex-direction: column;
 

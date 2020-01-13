@@ -1,6 +1,5 @@
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 import { FileLike } from "../message/FileLike"
 import AttachmentIcon from "./AttachmentIcon"
 import { getHumanReadableSize } from "./getHumanReadableSize"
@@ -58,7 +57,7 @@ const AudioDownloadButton = styled(DownloadButton)`
   }
 `
 
-const AudioControls = styled.div<{}, Theme>`
+const AudioControls = styled.div`
   display: flex;
   align-items: center;
 
@@ -71,7 +70,7 @@ const AudioControls = styled.div<{}, Theme>`
   border-radius: 3px;
 `
 
-const AudioDuration = styled.div<{}, Theme>`
+const AudioDuration = styled.div`
   display: flex;
   margin: 4px;
 
@@ -98,7 +97,7 @@ const AudioSeekbarContainer = styled.div`
   cursor: pointer;
 `
 
-const AudioSeekbar = styled.div<{}, Theme>`
+const AudioSeekbar = styled.div`
   width: 100%;
   height: 6px;
 
@@ -106,7 +105,7 @@ const AudioSeekbar = styled.div<{}, Theme>`
   border-radius: 3px;
 `
 
-const AudioSeekbarHandle = styled.div<{}, Theme>`
+const AudioSeekbarHandle = styled.div`
   width: 6px;
   height: 6px;
 
@@ -114,7 +113,7 @@ const AudioSeekbarHandle = styled.div<{}, Theme>`
   border-radius: 3px;
 `
 
-const AudioControlButton = styled.div<{}, Theme>`
+const AudioControlButton = styled.div`
   width: 24px;
   height: 24px;
   margin: 4px;

@@ -1,5 +1,4 @@
-import styled from "@emotion/styled"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 
 export const InputContainer = styled.div`
   display: flex;
@@ -12,7 +11,9 @@ export const InputLabel = styled.label`
   font-size: 16px;
 `
 
-export const TextInput = styled.input<{}, Theme>`
+export const TextInput = styled.input.attrs(({ type }) => ({
+  type: type ?? "text",
+}))`
   padding: 6px 8px;
   margin: 8px 0;
 
@@ -30,16 +31,15 @@ export const TextInput = styled.input<{}, Theme>`
     box-shadow: ${({ theme }) => theme.elavation.low};
   }
 `
-TextInput.defaultProps = { type: "text" }
 
-export const MultilineTextInput = styled(TextInput.withComponent("textarea"))`
+export const MultilineTextInput = styled(
+  TextInput.withComponent("textarea"),
+).attrs({ rows: 3 })`
   resize: vertical;
   min-height: 32px;
 `
-MultilineTextInput.defaultProps = { rows: 3 }
 
-type InputNoteProps = { state?: "normal" | "warning" | "error" }
-export const InputNote = styled.div<InputNoteProps, Theme>`
+export const InputNote = styled.div<{ state?: "normal" | "warning" | "error" }>`
   margin: 3px 1px 0 0;
 
   font-size: 13px;
@@ -56,7 +56,7 @@ export const InputNote = styled.div<InputNoteProps, Theme>`
   }
 `
 
-export const FilledButton = styled.button<{}, Theme>`
+export const FilledButton = styled.button.attrs({ type: "button" })`
   min-width: 60px;
   min-height: 32px;
   max-height: 32px;
@@ -90,9 +90,8 @@ export const FilledButton = styled.button<{}, Theme>`
     opacity: 0.5;
   }
 `
-FilledButton.defaultProps = { type: "button" }
 
-export const OutlineButton = styled(FilledButton)<{}, Theme>`
+export const OutlineButton = styled(FilledButton)`
   padding: 2px 15px;
 
   background: transparent;

@@ -1,7 +1,6 @@
-import styled from "@emotion/styled"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 
-export const Container = styled.div<{}, Theme>`
+export const Container = styled.div`
   width: 100%;
   max-width: 520px;
 
@@ -47,7 +46,7 @@ export const FileName = styled.div`
   overflow: hidden;
 `
 
-export const FileNameInner = styled.span<{}, Theme>`
+export const FileNameInner = styled.span`
   color: ${({ theme }) => theme.text.link};
   font-size: 16px;
 
@@ -58,14 +57,14 @@ export const FileNameInner = styled.span<{}, Theme>`
   }
 `
 
-export const FileSize = styled.div<{}, Theme>`
+export const FileSize = styled.div`
   color: #72767d;
   font-size: 12px;
   line-height: 16px;
   font-weight: 300;
 `
 
-export const DownloadButton = styled.div<{}, Theme>`
+export const DownloadButton = styled.div`
   cursor: pointer;
 
   color: #4f545c;

@@ -1,7 +1,6 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled, { css } from "styled-components"
+import { numberToHex } from "../color/math"
 import Markup from "../markup/Markup"
 import {
   BlockQuoteContent,
@@ -17,9 +16,8 @@ import EmbedFooter from "./EmbedFooter"
 import EmbedGallery from "./EmbedGallery"
 import { EmbedWithGallery } from "./getEmbedsWithGallery"
 import { getFieldsWithWidths } from "./getFieldsWithWidths"
-import { numberToHex } from "../color/math"
 
-const Container = styled.div<{}, Theme>`
+const Container = styled.div`
   max-width: 520px;
   margin: 8px 0 0;
   display: inline;
@@ -51,14 +49,14 @@ const Container = styled.div<{}, Theme>`
     `}
 `
 
-const EmbedGrid = styled.div<{}, Theme>`
+const EmbedGrid = styled.div`
   padding: 8px 16px 16px;
   display: inline-grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
 `
 
-const EmbedTitleNormal = styled.span<{}, Theme>`
+const EmbedTitleNormal = styled.span`
   display: inline-block;
   margin: 8px 0 0;
   grid-column: 1 / 2;
@@ -70,13 +68,13 @@ const EmbedTitleNormal = styled.span<{}, Theme>`
   }
 `
 
-const EmbedTitleLink = styled(EmbedTitleNormal.withComponent("a"))`
+const EmbedTitleLink = styled(EmbedTitleNormal)`
   & > ${MarkupContainer} {
     color: ${({ theme }) => theme.text.link};
   }
 `
 
-const EmbedDescription = styled.div<{}, Theme>`
+const EmbedDescription = styled.div`
   margin: 8px 0 0;
   grid-column: 1 / 2;
 
@@ -161,6 +159,7 @@ export default function RichEmbed(props: Props) {
         {title &&
           (url ? (
             <EmbedTitleLink
+              as="a"
               href={url}
               rel="noopener noreferrer nofollow ugc"
               target="_blank"

@@ -1,7 +1,4 @@
-import { css, Global } from "@emotion/core"
-import { useTheme } from "emotion-theming"
-import React from "react"
-import { Theme } from "./Theme"
+import { createGlobalStyle, css } from "styled-components"
 
 const getFontFace = ({
   name,
@@ -34,12 +31,11 @@ const fonts = [
     weights: [500, 600],
     url: "/fonts/source-code-pro",
   },
-].flatMap(font => {
-  const { weights, ...rest } = font
-  return weights.map(weight => ({ ...rest, weight }))
-})
+].flatMap(({ weights, ...font }) =>
+  weights.map(weight => ({ ...font, weight })),
+)
 
-const styles = (theme: Theme) => css`
+const GlobalStyle = createGlobalStyle`
   ${fonts.map(getFontFace)};
 
   html,
@@ -47,11 +43,12 @@ const styles = (theme: Theme) => css`
     margin: 0;
     padding: 0;
 
-    background: ${theme.background.primary};
+    background: ${({ theme }) => theme.background.primary};
 
     line-height: 1;
-    color: ${theme.text.normal};
-    font-size: ${theme.appearance.fontSize}px;
+    color: ${({ theme }) => theme.text.normal};
+    font-family: ${({ theme }) => theme.font.sans};
+    font-size: ${({ theme }) => theme.appearance.fontSize}px;
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -61,12 +58,10 @@ const styles = (theme: Theme) => css`
     overflow: hidden;
   }
 
-  html,
-  body,
   button,
   input,
   textarea {
-    font-family: ${theme.font.sans};
+    font-family: inherit;
   }
 
   #app {
@@ -75,11 +70,11 @@ const styles = (theme: Theme) => css`
 
   pre,
   code {
-    font-family: ${theme.font.mono};
+    font-family: ${({ theme }) => theme.font.mono};
   }
 
   a {
-    color: ${theme.text.link};
+    color: ${({ theme }) => theme.text.link};
 
     text-decoration: none;
 
@@ -97,15 +92,16 @@ const styles = (theme: Theme) => css`
   * {
     box-sizing: border-box;
 
-    scrollbar-color: ${theme.appearance.color === "dark"
-      ? "#202225 #2f3136"
-      : "#e3e5e8 #f6f6f7"};
+    scrollbar-color: ${({ theme }) =>
+      theme.appearance.color === "dark"
+        ? "#202225 #2f3136"
+        : "#e3e5e8 #f6f6f7"};
     scrollbar-width: thin;
 
     &::-webkit-scrollbar {
       width: 14px;
       height: 14px;
-      background-color: ${theme.background.primary};
+      background-color: ${({ theme }) => theme.background.primary};
     }
 
     &::-webkit-scroll-corner {
@@ -113,30 +109,24 @@ const styles = (theme: Theme) => css`
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${theme.appearance.color === "dark"
-        ? "#202225"
-        : "#e3e5e8"};
-      border: 3px solid ${theme.background.primary};
+      background-color: ${({ theme }) =>
+        theme.appearance.color === "dark" ? "#202225" : "#e3e5e8"};
+      border: 3px solid ${({ theme }) => theme.background.primary};
       border-radius: 7px;
       background-clip: padding-box;
     }
 
     &::-webkit-scrollbar-track-piece {
-      background-color: ${theme.appearance.color === "dark"
-        ? "#2f3136"
-        : "#f6f6f7"};
-      border: 3px solid ${theme.background.primary};
+      background-color: ${({ theme }) =>
+        theme.appearance.color === "dark" ? "#2f3136" : "#f6f6f7"};
+      border: 3px solid ${({ theme }) => theme.background.primary};
       border-radius: 7px;
     }
 
     &::-webkit-resizer {
-      background-color: ${theme.background.primary};
+      background-color: ${({ theme }) => theme.background.primary};
     }
   }
 `
 
-export default function GlobalStyle() {
-  const theme = useTheme<Theme>()
-
-  return <Global styles={styles(theme)} />
-}
+export default GlobalStyle

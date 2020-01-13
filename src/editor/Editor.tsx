@@ -1,8 +1,8 @@
-import styled from "@emotion/styled"
-import { useTheme } from "emotion-theming"
 import React, { useState } from "react"
+import styled from "styled-components"
 import AppearanceModal from "../appearance/AppearanceModal"
-import { Appearance, Theme } from "../appearance/Theme"
+import { Appearance } from "../appearance/Theme"
+import { useTheme } from "../appearance/useTheme"
 import BackupModal from "../backup/BackupModal"
 import Button from "../form/Button"
 import FileInput from "../form/FileInput"
@@ -35,7 +35,7 @@ const EditorInnerContainer = styled(Container)`
   }
 `
 
-const JavaScriptWarning = styled.noscript<{}, Theme>`
+const JavaScriptWarning = styled.noscript`
   display: block;
 
   margin: -8px -8px 16px;
@@ -67,7 +67,7 @@ export default function Editor(props: Props) {
     webhook,
   } = props
 
-  const theme = useTheme<Theme>()
+  const theme = useTheme()
 
   const [sending, setSending] = useState(false)
   const sendMessage = async () => {

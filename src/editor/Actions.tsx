@@ -1,13 +1,12 @@
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled from "styled-components"
 
 const ActionsContainer = styled.div`
   display: flex;
   margin: 8px;
 `
 
-const ActionsHeader = styled.span<{}, Theme>`
+const ActionsHeader = styled.span`
   flex: 1;
 
   color: ${({ theme }) => theme.header.primary};
@@ -16,7 +15,7 @@ const ActionsHeader = styled.span<{}, Theme>`
   line-height: 20px;
 `
 
-const Action = styled.button<{}, Theme>`
+const Action = styled.button.attrs({ type: "button" })`
   padding: 0;
 
   background: none;
@@ -38,7 +37,6 @@ const Action = styled.button<{}, Theme>`
     margin-left: 16px;
   }
 `
-Action.defaultProps = { type: "button" }
 
 type Props = {
   title?: string

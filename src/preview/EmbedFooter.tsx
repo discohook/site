@@ -1,7 +1,5 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled, { css } from "styled-components"
 import { Footer } from "../message/Message"
 import { formatTimestamp } from "./formatTimestamp"
 
@@ -31,7 +29,7 @@ const FooterImage = styled.img`
   border-radius: 50%;
 `
 
-const FooterText = styled.span<{}, Theme>`
+const FooterText = styled.span`
   font-size: 0.75rem;
   color: ${({ theme }) => theme.text.muted};
   line-height: 1rem;
@@ -45,7 +43,7 @@ const FooterText = styled.span<{}, Theme>`
     `}
 `
 
-const FooterSeparator = styled.span<{}, Theme>`
+const FooterSeparator = styled.span`
   display: inline-block;
   margin: 0 4px;
 

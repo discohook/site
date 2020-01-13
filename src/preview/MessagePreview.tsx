@@ -1,7 +1,5 @@
-import { css } from "@emotion/core"
-import styled from "@emotion/styled"
 import React from "react"
-import { Theme } from "../appearance/Theme"
+import styled, { css } from "styled-components"
 import Attachment from "../attachment/Attachment"
 import Markup from "../markup/Markup"
 import { MarkupContainer } from "../markup/styles"
@@ -18,7 +16,7 @@ const ScrollContainer = styled.div`
   overflow-y: scroll;
 `
 
-const Container = styled.div<{}, Theme>`
+const Container = styled.div`
   margin: 0 0 0 80px;
   padding: 20px 10px 20px 0;
 
