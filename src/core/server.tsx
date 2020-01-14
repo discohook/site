@@ -64,11 +64,9 @@ router.get("/", async (context, next) => {
   }
 
   await new Promise((resolve, reject) => {
-    const app = <App request={context} />
-
     const sheet = new ServerStyleSheet()
-    sheet.collectStyles(app)
-    const nodeStream = sheet.interleaveWithNodeStream(renderToNodeStream(app))
+    const jsx = sheet.collectStyles(<App request={context} />)
+    const nodeStream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx))
 
     nodeStream.on("data", chunk => stream.write(chunk))
     nodeStream.once("end", resolve)
