@@ -11,6 +11,7 @@ import { renderToNodeStream } from "react-dom/server"
 import { Transform } from "stream"
 import { ServerStyleSheet } from "styled-components"
 import { createDeflate, createGzip } from "zlib"
+import { resetLastId } from "../message/uid"
 import App from "./App"
 
 Object.assign(global, {
@@ -45,6 +46,8 @@ app.use(conditional())
 app.use(serve(build, { defer: true }))
 
 router.get("/", async (context, next) => {
+  resetLastId()
+
   context.set("Content-Type", "text/html; charset=utf-8")
 
   const encoding = context.acceptsEncodings(Object.keys(encodings)) as
