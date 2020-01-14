@@ -1,11 +1,13 @@
+import { rgb, rgba } from "polished"
 import { ColorTheme, Theme } from "./Theme"
 
 const accents = {
-  primary: "#7289da",
-  success: "#43b581",
-  warning: "#faa61a",
-  danger: "#f04747",
+  primary: rgb(114, 137, 218),
+  success: rgb(67, 181, 129),
+  warning: rgb(250, 166, 26),
+  danger: rgb(240, 71, 71),
 }
+
 const fonts = {
   sans: [
     "Whitney",
@@ -34,82 +36,82 @@ const fonts = {
 export const darkTheme: ColorTheme = {
   accent: accents,
   header: {
-    primary: "#ffffff",
-    secondary: "#b9bbbe",
+    primary: rgb(255, 255, 255),
+    secondary: rgb(185, 187, 190),
   },
   text: {
-    normal: "#dcddde",
-    muted: "#72767d",
-    link: "#00b0f4",
+    normal: rgb(220, 221, 222),
+    muted: rgb(114, 118, 125),
+    link: rgb(0, 176, 244),
   },
   interactive: {
-    normal: "#b9bbbe",
-    hover: "#dcddde",
-    active: "#ffffff",
-    muted: "#4f545c",
+    normal: rgb(185, 187, 190),
+    hover: rgb(220, 221, 222),
+    active: rgb(255, 255, 255),
+    muted: rgb(79, 84, 92),
   },
   background: {
-    primary: "#36393f",
-    secondary: "#2f3136",
-    tertiary: "#202225",
-    accent: "#4f545c",
-    floating: "#18191c",
+    primary: rgb(54, 57, 63),
+    secondary: rgb(47, 49, 54),
+    tertiary: rgb(32, 34, 37),
+    accent: rgb(79, 84, 92),
+    floating: rgb(24, 25, 28),
   },
   backgroundModifier: {
-    hover: "rgba(79, 84, 92, 0.16)",
-    active: "rgba(79, 84, 92, 0.24)",
-    selected: "rgba(79, 84, 92, 0.32)",
-    accent: "rgba(255, 255, 255, 0.06)",
+    hover: rgba(79, 84, 92, 0.16),
+    active: rgba(79, 84, 92, 0.24),
+    selected: rgba(79, 84, 92, 0.32),
+    accent: rgba(255, 255, 255, 0.06),
   },
   font: fonts,
   elavation: {
     low: [
-      "0 1px 0 rgba(4, 4, 5, 0.2)",
-      "0 1.5px 0 rgba(6, 6, 7, 0.05)",
-      "0 2px 0 rgba(4, 4, 5, 0.05)",
+      `0 1px 0 ${rgba(4, 4, 5, 0.2)}`,
+      `0 1.5px 0 ${rgba(6, 6, 7, 0.05)}`,
+      `0 2px 0 ${rgba(4, 4, 5, 0.05)}`,
     ].join(","),
-    high: "0 8px 16px rgba(0, 0, 0, 0.24)",
+    high: `0 8px 16px ${rgba(0, 0, 0, 0.24)}`,
   },
 }
 
 export const lightTheme: ColorTheme = {
   accent: accents,
   header: {
-    primary: "#060607",
-    secondary: "#4f5660",
+    primary: rgb(6, 6, 7),
+    secondary: rgb(79, 86, 96),
   },
   text: {
-    normal: "#2e3338",
-    muted: "#747f8d",
-    link: "#0067e0",
+    normal: rgb(46, 51, 56),
+    muted: rgb(116, 127, 141),
+    link: rgb(0, 103, 224),
   },
   interactive: {
-    normal: "#4f5660",
-    hover: "#2e3338",
-    active: "#060607",
-    muted: "#c7ccd1",
+    normal: rgb(79, 86, 96),
+    hover: rgb(46, 51, 56),
+    active: rgb(6, 6, 7),
+    muted: rgb(199, 204, 209),
   },
   background: {
-    primary: "#ffffff",
-    secondary: "#f2f3f5",
-    tertiary: "#e3e5e8",
-    accent: "#747f8d",
-    floating: "#ffffff",
+    primary: rgb(255, 255, 255),
+    secondary: rgb(242, 243, 245),
+    tertiary: rgb(227, 229, 232),
+    accent: rgb(116, 127, 141),
+    floating: rgb(255, 255, 255),
   },
   backgroundModifier: {
-    hover: "rgba(116, 127, 141, 0.08)",
-    active: "rgba(116, 127, 141, 0.16)",
-    selected: "rgba(116, 127, 141, 0.24)",
-    accent: "rgba(6, 6, 7, 0.08)",
+    hover: rgba(116, 127, 141, 0.08),
+    active: rgba(116, 127, 141, 0.16),
+    selected: rgba(116, 127, 141, 0.24),
+    accent: rgba(6, 6, 7, 0.08),
   },
   font: fonts,
   elavation: {
     low: [
-      "0 1px 0 rgba(6, 6, 7, 0.1)",
-      "0 1.5px 0 rgba(6, 6, 7, 0.025)",
-      "0 2px 0 rgba(6, 6, 7, 0.025)",
+      `0 1px 0 ${rgba(6, 6, 7, 0.1)}`,
+      `0 1.5px 0 ${rgba(6, 6, 7, 0.025)}`,
+      `0 2px 0 ${rgba(6, 6, 7, 0.025)}`,
     ].join(","),
-    high: "0 8px 16px rgba(0, 0, 0, 0.16)",
+    high: `0 8px 16px ${rgba(0, 0, 0, 0.16)}`,
   },
 }
 

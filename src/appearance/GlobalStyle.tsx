@@ -1,48 +1,35 @@
-import { createGlobalStyle, css } from "styled-components"
-
-const getFontFace = ({
-  name,
-  weight,
-  url,
-}: {
-  name: string
-  weight: number
-  url: string
-}) => css`
-  @font-face {
-    font-family: ${name};
-    font-style: normal;
-    font-weight: ${weight};
-    font-display: swap;
-    src: ${["woff", "woff2"]
-      .map(format => `url("${url}-${weight}.${format}") format("${format}")`)
-      .join(",")};
-  }
-`
+import { fontFace } from "polished"
+import { createGlobalStyle } from "styled-components"
 
 const fonts = [
   {
-    name: "Whitney",
-    weights: [300, 400, 500, 600, 700],
-    url: "/fonts/whitney",
+    fontFamily: "Whitney",
+    fontFilePath: "/fonts/whitney",
+    fontWeights: [300, 400, 500, 600, 700],
   },
   {
-    name: "SourceCodePro",
-    weights: [500, 600],
-    url: "/fonts/source-code-pro",
+    fontFamily: "SourceCodePro",
+    fontFilePath: "/fonts/source-code-pro",
+    fontWeights: [500, 600],
   },
-].flatMap(({ weights, ...font }) =>
-  weights.map(weight => ({ ...font, weight })),
+].flatMap(({ fontWeights, fontFilePath, ...font }) =>
+  fontWeights.map(fontWeight => ({
+    ...font,
+    fontStyle: "normal",
+    fontWeight: String(fontWeight),
+    fontFilePath: `${fontFilePath}-${fontWeight}`,
+    fileFormats: ["woff2", "woff"],
+    fontDisplay: "swap",
+  })),
 )
 
 const GlobalStyle = createGlobalStyle`
-  ${fonts.map(getFontFace)};
+  ${fonts.map(fontFace)};
 
   html,
   body {
-    margin: 0;
     padding: 0;
-
+    margin: 0;
     background: ${({ theme }) => theme.background.primary};
 
     line-height: 1;
@@ -53,6 +40,7 @@ const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 
     height: 100%;
     overflow: hidden;
@@ -93,9 +81,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
 
     scrollbar-color: ${({ theme }) =>
-      theme.appearance.color === "dark"
-        ? "#202225 #2f3136"
-        : "#e3e5e8 #f6f6f7"};
+      [theme.background.tertiary, theme.background.secondary].join(" ")};
     scrollbar-width: thin;
 
     &::-webkit-scrollbar {
@@ -109,16 +95,14 @@ const GlobalStyle = createGlobalStyle`
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) =>
-        theme.appearance.color === "dark" ? "#202225" : "#e3e5e8"};
+      background-color: ${({ theme }) => theme.background.tertiary};
       border: 3px solid ${({ theme }) => theme.background.primary};
       border-radius: 7px;
       background-clip: padding-box;
     }
 
     &::-webkit-scrollbar-track-piece {
-      background-color: ${({ theme }) =>
-        theme.appearance.color === "dark" ? "#2f3136" : "#f6f6f7"};
+      background-color: ${({ theme }) => theme.background.secondary};
       border: 3px solid ${({ theme }) => theme.background.primary};
       border-radius: 7px;
     }

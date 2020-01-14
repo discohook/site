@@ -1,5 +1,7 @@
+import { transparentize } from "polished"
 import React from "react"
 import styled from "styled-components"
+import { darkTheme } from "../appearance/themes"
 import { FileLike } from "../message/FileLike"
 import AttachmentIcon from "./AttachmentIcon"
 import { getHumanReadableSize } from "./getHumanReadableSize"
@@ -66,7 +68,7 @@ const AudioControls = styled.div`
   width: 378px;
   height: 32px;
 
-  background: rgba(0, 0, 0, 0.6);
+  background: ${transparentize(0.4, "black")};
   border-radius: 3px;
 `
 
@@ -74,7 +76,7 @@ const AudioDuration = styled.div`
   display: flex;
   margin: 4px;
 
-  color: #ffffff;
+  color: ${darkTheme.header.primary};
   font-family: ${({ theme }) => theme.font.mono};
   font-size: 12px;
   line-height: 12px;
@@ -101,7 +103,7 @@ const AudioSeekbar = styled.div`
   width: 100%;
   height: 6px;
 
-  background: rgba(185, 187, 190, 0.3);
+  background: ${transparentize(0.7, darkTheme.interactive.normal)};
   border-radius: 3px;
 `
 

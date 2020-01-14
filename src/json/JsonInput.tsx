@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+import { darkTheme } from "../appearance/themes"
 import {
   FilledButton,
   InputContainer,
@@ -13,10 +14,10 @@ const ErrorContainer = styled.div`
   margin: 10px 0 4px;
   padding: 8px 12px;
 
-  background: #f04747;
+  background: ${({ theme }) => theme.accent.danger};
   border-radius: 3px;
 
-  color: #ffffff;
+  color: ${darkTheme.header.primary};
 `
 
 const Error = styled.div`

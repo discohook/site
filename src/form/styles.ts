@@ -1,4 +1,6 @@
+import { rgb, shade, transparentize } from "polished"
 import styled from "styled-components"
+import { darkTheme } from "../appearance/themes"
 
 export const InputContainer = styled.div`
   display: flex;
@@ -18,7 +20,7 @@ export const TextInput = styled.input.attrs(({ type }) => ({
   margin: 8px 0;
 
   background: ${({ theme }) =>
-    theme.appearance.color === "dark" ? "#40444b" : "#ebedef"};
+    theme.appearance.color === "dark" ? rgb(64, 68, 75) : rgb(235, 237, 239)};
   border: none;
   border-radius: 3px;
   outline: none;
@@ -69,7 +71,7 @@ export const FilledButton = styled.button.attrs({ type: "button" })`
   outline: none;
   cursor: pointer;
 
-  color: #ffffff;
+  color: ${darkTheme.header.primary};
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -78,11 +80,11 @@ export const FilledButton = styled.button.attrs({ type: "button" })`
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
-    background: #677bc4;
+    background: ${({ theme }) => shade(0.1, theme.accent.primary)};
   }
 
   &:active:not(:disabled) {
-    background: #5b6eae;
+    background: ${({ theme }) => shade(0.2, theme.accent.primary)};
   }
 
   &:disabled {
@@ -95,18 +97,18 @@ export const OutlineButton = styled(FilledButton)`
   padding: 2px 15px;
 
   background: transparent;
-  border: 1px solid rgba(114, 137, 218, 0.3);
+  border: 1px solid ${({ theme }) => transparentize(0.7, theme.accent.primary)};
 
   color: ${({ theme }) => theme.accent.primary};
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     background: transparent;
-    border-color: rgba(114, 137, 218, 0.6);
+    border-color: ${({ theme }) => transparentize(0.4, theme.accent.primary)};
   }
 
   &:active:not(:disabled) {
-    background: rgba(114, 137, 218, 0.1);
+    background: ${({ theme }) => transparentize(0.9, theme.accent.primary)};
     border-color: ${({ theme }) => theme.accent.primary};
   }
 `

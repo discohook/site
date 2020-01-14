@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
+import { darkTheme } from "../appearance/themes"
 import { useTheme } from "../appearance/useTheme"
 
 const Container = styled.div`
@@ -81,7 +82,7 @@ const BotTag = styled.span`
 
   background: ${({ theme }) => theme.accent.primary};
 
-  color: #ffffff;
+  color: ${darkTheme.header.primary};
   font-size: 0.625em;
   font-weight: 500;
   line-height: 1.3;

@@ -1,4 +1,6 @@
+import { rgb, transparentize } from "polished"
 import styled from "styled-components"
+import { darkTheme } from "../appearance/themes"
 
 export const Container = styled.div`
   width: 100%;
@@ -12,12 +14,14 @@ export const Container = styled.div`
 
   border: 1px solid
     ${({ theme }) =>
-      theme.appearance.color === "dark" ? "rgba(47, 49, 54, 0.6)" : "#f6f6f7"};
+      theme.appearance.color === "dark"
+        ? transparentize(0.4, theme.background.secondary)
+        : rgb(246, 246, 247)};
   border-radius: 3px;
 
   background: ${({ theme }) =>
     theme.appearance.color === "dark"
-      ? "rgba(47, 49, 54, 0.3)"
+      ? transparentize(0.7, theme.background.secondary)
       : "transparent"};
 `
 
@@ -58,7 +62,7 @@ export const FileNameInner = styled.span`
 `
 
 export const FileSize = styled.div`
-  color: #72767d;
+  color: ${darkTheme.text.muted};
   font-size: 12px;
   line-height: 16px;
   font-weight: 300;
@@ -67,10 +71,10 @@ export const FileSize = styled.div`
 export const DownloadButton = styled.div`
   cursor: pointer;
 
-  color: #4f545c;
+  color: ${darkTheme.interactive.muted};
 
   &:hover {
-    color: rgba(114, 118, 125, 0.6);
+    color: ${({ theme }) => transparentize(0.4, theme.text.muted)};
   }
 
   & > svg {

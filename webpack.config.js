@@ -82,6 +82,7 @@ module.exports = {
           test: new RegExp(
             `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
               "styled-components",
+              "polished",
               "@emotion",
             ].join("|")})[/\\\\]`,
           ),

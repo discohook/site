@@ -1,4 +1,6 @@
+import { tint, transparentize } from "polished"
 import styled, { css } from "styled-components"
+import { darkTheme } from "../appearance/themes"
 
 export const MarkupContainer = styled.div`
   white-space: pre-wrap;
@@ -45,28 +47,32 @@ export const Emoji = styled.img<{ big?: boolean }>`
 `
 
 export const Mention = styled.span`
+  border-radius: 3px;
   padding: 0 2px;
+
   cursor: pointer;
 
   background: ${({ theme }) =>
-    theme.appearance.color === "dark" ? "rgba(114, 137, 218, 0.1)" : "#f1f3fb"};
+    theme.appearance.color === "dark"
+      ? transparentize(0.9, theme.accent.primary)
+      : tint(0.9, theme.accent.primary)};
+
   color: ${({ theme }) => theme.accent.primary};
   font-weight: 500;
 
   &:hover {
     background: ${({ theme }) =>
       theme.appearance.color === "dark"
-        ? "rgba(114, 137, 218, 0.7)"
+        ? transparentize(0.3, theme.accent.primary)
         : theme.accent.primary};
-    color: #ffffff;
+
+    color: ${darkTheme.header.primary};
   }
 `
 
 export const Spoiler = styled.span`
   background: ${({ theme }) =>
-    theme.appearance.color === "dark"
-      ? "rgba(255, 255, 255, 0.1)"
-      : "rgba(0, 0, 0, 0.1)"};
+    transparentize(0.9, theme.appearance.color === "dark" ? "white" : "black")};
   border-radius: 3px;
 `
 

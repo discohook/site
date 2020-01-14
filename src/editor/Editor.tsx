@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import AppearanceModal from "../appearance/AppearanceModal"
 import { Appearance } from "../appearance/Theme"
+import { darkTheme } from "../appearance/themes"
 import { useTheme } from "../appearance/useTheme"
 import BackupModal from "../backup/BackupModal"
 import Button from "../form/Button"
@@ -41,7 +42,7 @@ const JavaScriptWarning = styled.noscript`
   margin: -8px -8px 16px;
   padding: 16px;
   background: ${({ theme }) => theme.accent.danger};
-  color: #ffffff;
+  color: ${darkTheme.header.primary};
 `
 
 type Props = {

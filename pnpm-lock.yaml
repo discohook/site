@@ -8,6 +8,7 @@ dependencies:
   koa: 2.11.0
   koa-conditional-get: 2.0.0
   koa-static: 5.0.0
+  polished: 3.4.2
   react: 16.12.0
   react-dom: 16.12.0_react@16.12.0
   regenerator-runtime: 0.13.3
@@ -1004,6 +1005,12 @@ packages:
       regenerator-runtime: 0.13.3
     resolution:
       integrity: sha512-uCnC2JEVAu8AKB5do1WRIsvrdJ0flYx/A/9f/6chdacnEZ7LmavjdsDXr5ksYBegxtuTPR5Va9/+13QF/kFkCA==
+  /@babel/runtime/7.8.3:
+    dependencies:
+      regenerator-runtime: 0.13.3
+    dev: false
+    resolution:
+      integrity: sha512-fVHx1rzEmwB130VTkLnxR+HmxcTjGzH12LYQcFFoBwakMd3aOMD4OsRN7tGG/UOYE2ektgFrS8uACAoRk1CY0w==
   /@babel/template/7.7.4:
     dependencies:
       '@babel/code-frame': 7.5.5
@@ -6830,6 +6837,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
+  /polished/3.4.2:
+    dependencies:
+      '@babel/runtime': 7.8.3
+    dev: false
+    resolution:
+      integrity: sha512-9Rch6iMZckABr6EFCLPZsxodeBpXMo9H4fRlfR/9VjMEyy5xpo1/WgXlJGgSjPyVhEZNycbW7UmYMNyWS5MI0g==
   /portfinder/1.0.25:
     dependencies:
       async: 2.6.3
@@ -9047,6 +9060,7 @@ specifiers:
   koa: ^2.11.0
   koa-conditional-get: ^2.0.0
   koa-static: ^5.0.0
+  polished: ^3.4.2
   preload-webpack-plugin: ^3.0.0-beta.4
   prettier: ^1.19.1
   react: ^16.12.0
