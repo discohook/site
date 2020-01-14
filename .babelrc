@@ -14,7 +14,10 @@
   ],
   "env": {
     "production": {
-      "plugins": ["babel-plugin-react-remove-properties"]
+      "plugins": [
+        "babel-plugin-react-remove-properties",
+        ["babel-plugin-styled-components", { "displayName": false }]
+      ]
     }
   }
 }

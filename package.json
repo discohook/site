@@ -6,7 +6,7 @@
     "start": "cross-env NODE_ENV=production SERVER=true node --max-http-header-size=81920 ./lib/core/server.js",
     "build": "pnpm run build:client && pnpm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack",
-    "build:server": "babel src -d lib -x '.js,.jsx,.ts,.tsx' -s",
+    "build:server": "cross-env NODE_ENV=production babel src -d lib -x '.js,.jsx,.ts,.tsx' -s",
     "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--max-http-header-size=81920' webpack-dev-server",
     "test": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json",
     "test:watch": "cross-env TZ=UTC NODE_ENV=test jest --config .jestrc.json --watch",
