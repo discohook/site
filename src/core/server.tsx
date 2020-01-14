@@ -9,6 +9,7 @@ import { resolve } from "path"
 import React from "react"
 import { renderToNodeStream } from "react-dom/server"
 import { Transform } from "stream"
+import { ServerStyleSheet } from "styled-components"
 import { createDeflate, createGzip } from "zlib"
 import App from "./App"
 
@@ -63,7 +64,11 @@ router.get("/", async (context, next) => {
   }
 
   await new Promise((resolve, reject) => {
-    const nodeStream = renderToNodeStream(<App request={context} />)
+    const app = <App request={context} />
+
+    const sheet = new ServerStyleSheet()
+    sheet.collectStyles(app)
+    const nodeStream = sheet.interleaveWithNodeStream(renderToNodeStream(app))
 
     nodeStream.on("data", chunk => stream.write(chunk))
     nodeStream.once("end", resolve)
