@@ -3,8 +3,9 @@ import { Message } from "./Message"
 
 export const initialMessage: Message = applyIds({
   content: `
-Hey, this is Discohook, a message builder for Discord webhooks. <:discohook:645409602393079819>
-You can read through my not-so-small introduction to this project below, or click the **Clear all** button on the top to get started.
+Hey, this is Discohook, a message and embed builder for Discord webhooks. <:discohook:645409602393079819>
+You can read more about how to use Discohook below, or click **Clear all** on the top to start out blank.
+Have questions? Discohook has a server at <https://discohook.jaylineko.com/discord>.
 `.trim(),
   embeds: [
     {
@@ -187,7 +188,7 @@ Discohook is not affiliated with Discord in any way, shape, or form.
 
 The source code of this project is [available on GitHub](https://github.com/jaylineko/discohook), under the MIT license.
 
-If you want to contact me, message me on Discord (jay.#1111) or send an email to jaylineko@gmail.com.
+If you want to contact me, join the [Discohook server](https://discohook.jaylineko.com/discord), message me on Discord (@jay.#1111), or send an email to <jaylineko@gmail.com>.
 `.trim(),
     },
   ],

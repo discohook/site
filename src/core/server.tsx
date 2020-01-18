@@ -87,6 +87,12 @@ router.get("/", async (context, next) => {
   return next()
 })
 
+router.get("/discord", async (context, next) => {
+  context.redirect("https://discord.gg/84HGwPZ")
+
+  return next()
+})
+
 app.use(router.middleware())
 
 app.on("error", error => {
