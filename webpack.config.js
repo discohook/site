@@ -56,6 +56,7 @@ module.exports = {
             ].join("|")})[/\\\\]`,
           ),
           name: "polyfill",
+          priority: 1,
         },
         react: {
           test: new RegExp(
@@ -68,6 +69,7 @@ module.exports = {
             ].join("|")})[/\\\\]`,
           ),
           name: "react",
+          priority: 1,
         },
         markdown: {
           test: new RegExp(
@@ -77,6 +79,7 @@ module.exports = {
             ].join("|")})[/\\\\]`,
           ),
           name: "markdown",
+          priority: 1,
         },
         css: {
           test: new RegExp(
@@ -87,11 +90,23 @@ module.exports = {
             ].join("|")})[/\\\\]`,
           ),
           name: "css",
+          priority: 1,
+        },
+        emoji: {
+          test: new RegExp(
+            `[/\\\\]src[/\\\\].*[/\\\\](${[
+              "emoji",
+              "emojiData",
+              "jumbosizeEmojis",
+              "convertEmojiToNames",
+            ].join("|")}).tsx?`,
+          ),
+          name: "emoji",
+          priority: 1,
         },
         vendor: {
           test: /[/\\]node_modules[/\\]/,
           name: "vendor",
-          priority: -1,
         },
       },
     },
