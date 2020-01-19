@@ -107,15 +107,7 @@ module.exports = {
     }),
     new PreloadWebpackPlugin({
       rel: "preload",
-      include: [
-        "main",
-        "app",
-        "vendor",
-        "polyfill",
-        "react",
-        "markdown",
-        "css",
-      ],
+      include: ["main", "vendor", "polyfill", "react", "markdown", "css"],
     }),
     new CopyWebpackPlugin([
       {
