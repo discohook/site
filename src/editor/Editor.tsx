@@ -153,7 +153,7 @@ export default function Editor(props: Props) {
         </Container>
         {isOverDiscordCharacterLimit && (
           <DisabledReason>
-            The message body is over Discord's 6000 character limit
+            The message body is over Discord&apos;s 6000 character limit
           </DisabledReason>
         )}
         <InputField
