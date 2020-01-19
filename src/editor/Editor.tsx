@@ -18,6 +18,7 @@ import { Webhook } from "../webhook/Webhook"
 import { webhookUrlRegex } from "../webhook/webhookUrlRegex"
 import Actions from "./Actions"
 import EmbedEditor from "./EmbedEditor"
+import { getTotalCharacterCount } from "./getTotalCharacterCount"
 import MultiEditor from "./MultiEditor"
 import { Container } from "./styles"
 
@@ -43,6 +44,15 @@ const JavaScriptWarning = styled.noscript`
   padding: 16px;
   background: ${({ theme }) => theme.accent.danger};
   color: ${darkTheme.header.primary};
+`
+
+const DisabledReason = styled.div`
+  margin: 0 8px 16px;
+
+  color: ${({ theme }) => theme.accent.danger};
+  font-size: 14px;
+
+  text-align: end;
 `
 
 type Props = {
@@ -89,11 +99,14 @@ export default function Editor(props: Props) {
     handleFilesChange([])
   }
 
+  const isOverDiscordCharacterLimit = getTotalCharacterCount(message) > 6000
+
   let isDisabled: boolean
   if (sending) isDisabled = true
   else if (!webhookUrlRegex.test(webhookUrl)) isDisabled = true
+  else if (isOverDiscordCharacterLimit) isDisabled = true
   else if (typeof message.content === "string") isDisabled = false
-  else if (message.embeds && message.embeds.length > 0) isDisabled = false
+  else if ((message.embeds?.length ?? 0) > 0) isDisabled = false
   else if (files.length > 0) isDisabled = false
   else isDisabled = true
 
@@ -138,6 +151,11 @@ export default function Editor(props: Props) {
             Send
           </Button>
         </Container>
+        {isOverDiscordCharacterLimit && (
+          <DisabledReason>
+            The message body is over Discord's 6000 character limit
+          </DisabledReason>
+        )}
         <InputField
           id="message-content"
           value={message.content}
