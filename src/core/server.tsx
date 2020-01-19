@@ -39,7 +39,8 @@ const [templateStartBots, templateEndBots] = html
 const encodings = {
   gzip: createGzip,
   deflate: createDeflate,
-  identity: () => new Transform({ transform: (data, _, fn) => fn(null, data) }),
+  identity: () =>
+    new Transform({ transform: (chunk, _, fn) => fn(null, chunk) }),
 } as const
 
 app.use(conditional())

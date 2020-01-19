@@ -1,6 +1,6 @@
-export const base64Encode = (data: string, safe = false) => {
+export const base64Encode = (utf8: string, safe = false) => {
   if (SERVER) {
-    let base64 = Buffer.from(data, "utf8").toString("base64")
+    let base64 = Buffer.from(utf8, "utf8").toString("base64")
 
     if (safe) {
       base64 = base64
@@ -12,7 +12,7 @@ export const base64Encode = (data: string, safe = false) => {
     return base64
   }
 
-  const encoded = encodeURIComponent(data)
+  const encoded = encodeURIComponent(utf8)
 
   const escaped = encoded.replace(/%[\dA-F]{2}/g, hex => {
     return String.fromCharCode(parseInt(hex.slice(1), 16))
@@ -30,15 +30,15 @@ export const base64Encode = (data: string, safe = false) => {
   return base64
 }
 
-export const base64Decode = (base64: string) => {
-  const data = base64.replace(/-/g, "+").replace(/_/g, "/")
+export const base64Decode = (urlSafeBase64: string) => {
+  const base64 = urlSafeBase64.replace(/-/g, "+").replace(/_/g, "/")
 
   if (SERVER) {
-    return Buffer.from(data, "base64").toString("utf8")
+    return Buffer.from(base64, "base64").toString("utf8")
   }
 
   try {
-    const encoded = atob(data)
+    const encoded = atob(base64)
       .split("")
       .map(char => char.charCodeAt(0).toString(16))
       .map(hex => `%${hex.padStart(2, "0").slice(-2)}`)
@@ -46,6 +46,6 @@ export const base64Decode = (base64: string) => {
 
     return decodeURIComponent(encoded)
   } catch {
-    // do nothing
+    return undefined
   }
 }

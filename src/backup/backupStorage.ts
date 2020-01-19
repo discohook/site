@@ -55,7 +55,7 @@ export const getBackups = async () => {
     })
 
     request.addEventListener("error", () => {
-      throw request.error
+      throw new Error(String(request.error))
     })
   })
 

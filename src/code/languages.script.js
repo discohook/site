@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 
-const { get } = require("https")
 const hljs = require("highlight.js")
+const { get } = require("https")
 
 /** @typedef {import("http").IncomingMessage} IncomingMessage */
 /** @typedef {import("./languages").Language} Language */
@@ -19,7 +19,7 @@ async function getDependencies(language) {
   )
 
   let source = ""
-  message.on("data", data => (source += data))
+  message.on("data", chunk => (source += chunk))
 
   await new Promise(resolve => message.once("end", resolve))
 

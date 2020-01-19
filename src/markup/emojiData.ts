@@ -1788,8 +1788,8 @@ const rawData = `
 🏿 skin-tone-5
 `.trim()
 
-export const emojiData: Emoji[] = rawData.split("\n").map(data => {
-  const [emoji, ...names] = data.split(" ")
+export const emojiData: Emoji[] = rawData.split("\n").map(line => {
+  const [emoji, ...names] = line.split(" ")
 
   return {
     emoji: emoji.split("/")[0],

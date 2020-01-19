@@ -6,8 +6,7 @@ type Props = {
   onClick?: () => void
   disabled?: boolean
   filled?: boolean
-  "data-testid"?: string
-}
+} & { "data-testid"?: string }
 
 export default function Button(props: Props) {
   const { children, onClick: handleClick, disabled, filled = true } = props
