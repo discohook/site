@@ -1,6 +1,7 @@
 import React from "react"
 import InputField from "../form/InputField"
 import { Embed, Footer } from "../message/Message"
+import TimestampInput from "../timestamp/TimestampInput"
 import { InputGroup } from "./styles"
 
 type Props = {
@@ -54,19 +55,10 @@ export default function FooterEditor(props: Props) {
         }
         label="Footer Icon"
       />
-      <InputField
+      <TimestampInput
         id={`message-embed${embedId}-footer-timestamp`}
-        value={timestamp?.replace(/[a-z]/gi, " ").slice(0, -8)}
-        onChange={timestamp =>
-          handleChange({
-            footer,
-            timestamp: timestamp
-              ? `${timestamp.replace(/[^\d-:]/g, "T")}:00.000Z`
-              : undefined,
-          })
-        }
-        label="Timestamp (UTC)"
-        placeholder="YYYY-MM-DD hh:mm"
+        timestamp={timestamp}
+        onChange={timestamp => handleChange({ footer, timestamp })}
       />
     </InputGroup>
   )

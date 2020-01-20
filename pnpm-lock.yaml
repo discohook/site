@@ -2,6 +2,7 @@ dependencies:
   '@babel/runtime': 7.8.3
   '@koa/router': 8.0.5
   core-js: 3.6.4
+  date-fns: 2.9.0
   highlight.js: 9.17.1
   immer: 5.3.2
   isbot: 2.5.4
@@ -2905,6 +2906,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-YTWYI9se1P55u58gL5GkQHW4P6VJBJ5iBT+B5a7i2Tjadhv52paJG0qHX4A0OR6/t52odI64KP2YvFpkDOi3eQ==
+  /date-fns/2.9.0:
+    dev: false
+    resolution:
+      integrity: sha512-khbFLu/MlzLjEzy9Gh8oY1hNt/Dvxw3J6Rbc28cVoYWQaC1S3YI4xwkF9ZWcjDLscbZlY9hISMr66RFzZagLsA==
   /debug/2.6.9:
     dependencies:
       ms: 2.0.0
@@ -8969,6 +8974,7 @@ specifiers:
   copy-webpack-plugin: ^5.1.1
   core-js: ^3.6.4
   cross-env: ^6.0.3
+  date-fns: ^2.9.0
   eslint: ^6.8.0
   eslint-import-resolver-node: ^0.3.3
   eslint-loader: ^3.0.3
