@@ -6,11 +6,6 @@ import { useDragArea } from "./useDragArea"
 
 const Container = styled.div`
   display: flex;
-
-  padding: 12px;
-
-  background: ${({ theme }) => theme.background.floating};
-  border-radius: 4px;
 `
 
 const Picker = styled.div`

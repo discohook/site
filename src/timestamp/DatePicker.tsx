@@ -7,13 +7,8 @@ import MonthYearPicker from "./MonthYearPicker"
 import { subTimezoneOffset } from "./timezoneOffset"
 
 const Container = styled.div`
-  width: 100%;
-
   display: flex;
   flex-direction: column;
-
-  background: ${({ theme }) => theme.background.floating};
-  border-radius: 4px;
 `
 
 type Props = {

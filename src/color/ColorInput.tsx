@@ -8,15 +8,22 @@ import { hexToNumber, numberToHex } from "./math"
 
 const ColorInputContainer = styled(Container)`
   position: relative;
+  flex-flow: row-reverse;
 `
 
 const PopoverContainer = styled.div`
   position: absolute;
-
   top: 76px;
   z-index: 1;
 
   width: 100%;
+  min-width: 280px;
+  max-width: 320px;
+
+  padding: 12px;
+
+  background: ${({ theme }) => theme.background.floating};
+  border-radius: 4px;
 `
 
 type Props = {
