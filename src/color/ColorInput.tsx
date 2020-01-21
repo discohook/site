@@ -41,6 +41,8 @@ export default function ColorInput(props: Props) {
   }, [color])
 
   const [isPickerShown, setPickerShown] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
   const lastPickerUseRef = useRef(0)
 
   useEffect(() => {
@@ -63,7 +65,14 @@ export default function ColorInput(props: Props) {
     <ColorInputContainer
       flow="row"
       onFocus={() => setPickerShown(true)}
-      onBlur={() => setPickerShown(false)}
+      onBlur={() => {
+        setTimeout(() => {
+          if (!containerRef.current?.contains(document.activeElement)) {
+            setPickerShown(false)
+          }
+        }, 10)
+      }}
+      ref={containerRef}
     >
       <InputField
         id={id}
