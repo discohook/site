@@ -206,13 +206,14 @@ describe("getTotalCharacterCount", () => {
   })
 
   it("counts multiple fields over multiple embeds", () => {
+    const getFields = () =>
+      new Array(25).fill(undefined).map(() => ({ name: "Test field" }))
+
     expect(
       getTotalCharacterCount({
         embeds: new Array(10).fill(undefined).map(() => ({
           title: "Test embed",
-          fields: new Array(25)
-            .fill(undefined)
-            .map(() => ({ name: "Test field" })),
+          fields: getFields(),
         })),
       }),
     ).toEqual(2600)
