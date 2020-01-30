@@ -19,7 +19,7 @@ import { getFieldsWithWidths } from "./getFieldsWithWidths"
 
 const Container = styled.div`
   max-width: 520px;
-  margin: 8px 0 0;
+  margin: 2px 0;
   display: inline;
 
   background: ${({ theme }) => theme.background.secondary};
@@ -50,7 +50,7 @@ const Container = styled.div`
 `
 
 const EmbedGrid = styled.div`
-  padding: 8px 16px 16px;
+  padding: 8px 16px 16px 12px;
   display: inline-grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
