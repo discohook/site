@@ -6,13 +6,13 @@ import {
   getMinutes,
   getMonth,
   getSeconds,
-  isMonday,
   isSameDay,
   isSameMonth,
+  isSunday,
   isValid,
   set,
-  startOfISOWeek,
   startOfMonth,
+  startOfWeek,
   subWeeks,
 } from "date-fns"
 import React from "react"
@@ -76,7 +76,7 @@ export default function DayPicker(props: Props) {
   const { date, onChange: handleChange, month: monthDate } = props
 
   const month = startOfMonth(isValid(monthDate) ? monthDate ?? 0 : Date.now())
-  const firstDay = isMonday(month) ? subWeeks(month, 1) : startOfISOWeek(month)
+  const firstDay = isSunday(month) ? subWeeks(month, 1) : startOfWeek(month)
 
   const days = new Array(7 * 6).fill(undefined).map((_, days) =>
     set(addDays(firstDay, days), {
@@ -89,7 +89,7 @@ export default function DayPicker(props: Props) {
 
   return (
     <CalendarGrid>
-      {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(weekday => (
+      {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(weekday => (
         <WeekdayCell key={weekday}>{weekday}</WeekdayCell>
       ))}
       {days.map(day => (
