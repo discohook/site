@@ -32,12 +32,15 @@ type Props = {
   onChange: (timestamp?: string) => void
 }
 
-const formatTimestamp = (iso: string | undefined) =>
-  iso &&
-  subTimezoneOffset(new Date(iso))
+const formatTimestamp = (iso: string | undefined) => {
+  const date = new Date(iso ?? NaN)
+  if (!isValid(date)) return undefined
+
+  return subTimezoneOffset(date)
     .toISOString()
     .replace("T", " ")
     .slice(0, -8)
+}
 
 export default function TimestampInput(props: Props) {
   const { id, timestamp, onChange } = props
