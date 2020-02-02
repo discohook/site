@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { darkTheme } from "../appearance/themes"
-import {
-  FilledButton,
-  InputContainer,
-  InputLabel,
-  MultilineTextInput,
-} from "../form/styles"
+import Button from "../form/Button"
+import { InputContainer, InputLabel, MultilineTextInput } from "../form/styles"
 import { Message } from "../message/Message"
 import { parseMessage, stringifyMessage } from "./convert"
 
@@ -35,7 +31,7 @@ const CodeInput = styled(MultilineTextInput)`
   font-family: ${({ theme }) => theme.font.mono};
 `
 
-const SubmitButton = styled(FilledButton)`
+const SubmitButton = styled(Button)`
   margin: 8px 0 16px;
   align-self: flex-end;
 `
