@@ -51,6 +51,11 @@ const ExtrasContainer = styled.div`
   row-gap: 0.25rem;
 
   padding: 0.125rem 0;
+
+  & > * {
+    justify-self: start;
+    align-self: start;
+  }
 `
 
 export type MessagePreviewProps = {
