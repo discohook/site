@@ -12,14 +12,16 @@ const MULTILINE_QUOTE_RE = /^ *>>> ?/
 export const blockQuote: MarkdownRule = {
   ...defaultRules.blockQuote,
   match: (source, state) => {
-    const { nested, inQuote, prevCapture: lookbehind = "" } = state
+    if (source.startsWith(">")) console.log(source, state)
+
+    const { nested, inQuote, prevCapture: lookbehind } = state
 
     // Prevents having multiple layers of quote blocks
     if (nested) return null
     if (inQuote) return null
 
     // Makes sure that quotes can only start on the beginning of a line
-    if (!BEGINNING_OF_LINE_RE.test(lookbehind)) return null
+    if (!BEGINNING_OF_LINE_RE.test(lookbehind?.[0] ?? "")) return null
 
     return BLOCK_QUOTE_RE.exec(source)
   },
