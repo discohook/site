@@ -12,8 +12,6 @@ const MULTILINE_QUOTE_RE = /^ *>>> ?/
 export const blockQuote: MarkdownRule = {
   ...defaultRules.blockQuote,
   match: (source, state) => {
-    if (source.startsWith(">")) console.log(source, state)
-
     const { nested, inQuote, prevCapture: lookbehind } = state
 
     // Prevents having multiple layers of quote blocks

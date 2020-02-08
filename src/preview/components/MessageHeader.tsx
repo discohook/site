@@ -4,66 +4,75 @@ import { useTheme } from "../../appearance/hooks/useTheme"
 import { darkTheme } from "../../appearance/themes/darkTheme"
 
 const Container = styled.div`
-  height: 1.375em;
-  display: flex;
-  margin: 0 0 0 -80px;
+  ${({ theme }) =>
+    theme.appearance.display === "cozy" &&
+    css`
+      position: relative;
+
+      height: 1.375em;
+
+      margin-left: -4.5rem;
+      padding-left: 4.5rem;
+
+      ${({ theme }) =>
+        theme.appearance.fontSize > 16 &&
+        css`
+          margin-left: -72px;
+          padding-left: 72px;
+        `}
+    `}
 
   ${({ theme }) =>
     theme.appearance.display === "compact" &&
     css`
-      height: auto;
-      display: inline-flex;
-      margin: 0 0 0 -9ch;
-    `}
-
-  ${({ theme }) =>
-    theme.appearance.mobile &&
-    css`
-      margin: 0;
+      display: inline;
+      display: contents;
     `}
 `
 
 const Avatar = styled.img`
-  position: relative;
-  top: 2px;
+  position: absolute;
+  left: 0;
+  top: 0.125rem;
 
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  margin: 0 1rem;
 
   border-radius: 50%;
-  margin: 0 20px;
+  object-fit: cover;
 
   cursor: pointer;
 
-  object-fit: cover;
-
   &:hover {
-    opacity: 0.8;
+    box-shadow: ${({ theme }) => theme.elavation.medium};
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 
   ${({ theme }) =>
-    theme.appearance.display === "compact" &&
+    theme.appearance.fontSize > 16 &&
     css`
-      display: none;
+      width: 40px;
+      height: 40px;
+
+      margin: 0 16px;
     `}
 `
 
-const HeaderInfo = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+const Username = styled.span`
+  display: inline;
+  vertical-align: baseline;
 
-  ${({ theme }) =>
-    theme.appearance.display === "compact" &&
-    css`
-      flex-direction: row-reverse;
-    `}
-`
+  margin: 0 0.25rem 0 0;
 
-const UserName = styled.span`
   color: ${({ theme }) => theme.header.primary};
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 1.375em;
+  line-height: 1.375rem;
 
   cursor: pointer;
 
@@ -75,35 +84,31 @@ const UserName = styled.span`
 `
 
 const BotTag = styled.span`
+  position: relative;
+  top: -0.1rem;
+
+  min-height: 1.28em;
+  max-height: 1.28em;
+
+  margin: 0.075em 0.25rem 0 0;
   padding: 0.072rem 0.275rem;
 
   border-radius: 3px;
-  margin: 0.075em 0 0 0.3rem;
-
   background: ${({ theme }) => theme.accent.primary};
 
   color: ${darkTheme.header.primary};
   font-size: 0.625em;
   font-weight: 500;
   line-height: 1.3;
-
-  ${({ theme }) =>
-    theme.appearance.display === "compact" &&
-    css`
-      top: -0.218em;
-      margin: 0.075em 0.3rem 0 0;
-    `}
+  vertical-align: baseline;
 `
 
 const Timestamp = styled.span`
-  margin: 0 0 0 0.3rem;
+  margin: 0 0 0 0.25rem;
 
   color: ${({ theme }) => theme.text.muted};
   font-size: 0.75rem;
   font-weight: 500;
-
-  position: relative;
-  top: 1px;
 
   &::before {
     content: "Today at ";
@@ -160,11 +165,9 @@ export function MessageHeader(props: MessageHeaderProps) {
       {theme.appearance.display === "cozy" && !theme.appearance.mobile && (
         <Avatar src={avatarUrl} alt="User avatar" />
       )}
-      <HeaderInfo>
-        <UserName>{username}</UserName>
-        <BotTag>BOT</BotTag>
-        <Timestamp>{timestamp}</Timestamp>
-      </HeaderInfo>
+      <Username>{username}</Username>
+      <BotTag>BOT</BotTag>
+      <Timestamp>{timestamp}</Timestamp>
     </Container>
   )
 }

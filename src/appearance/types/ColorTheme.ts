@@ -38,7 +38,9 @@ export type ColorTheme = {
     mono: string
   }
   elavation: {
+    stroke: string
     low: string
+    medium: string
     high: string
   }
 }

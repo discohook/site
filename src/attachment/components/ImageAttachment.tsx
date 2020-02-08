@@ -8,7 +8,6 @@ const Image = styled.img`
   max-width: 400px;
   max-height: 300px;
 
-  margin: 8px 0 0;
   border-radius: 3px;
   cursor: pointer;
 `

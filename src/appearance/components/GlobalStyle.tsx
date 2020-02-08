@@ -25,9 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: ${({ theme }) => theme.appearance.fontSize}px;
 
     text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 
     height: 100%;
     overflow: hidden;

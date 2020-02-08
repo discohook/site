@@ -33,11 +33,13 @@ export const darkTheme: ColorTheme = {
     accent: rgba(255, 255, 255, 0.06),
   },
   elavation: {
+    stroke: `0 0 0 1px ${rgba(4, 4, 5, 0.15)}`,
     low: [
       `0 1px 0 ${rgba(4, 4, 5, 0.2)}`,
       `0 1.5px 0 ${rgba(6, 6, 7, 0.05)}`,
       `0 2px 0 ${rgba(4, 4, 5, 0.05)}`,
     ].join(","),
+    medium: `0 4px 4px ${rgba(0, 0, 0, 0.16)}`,
     high: `0 8px 16px ${rgba(0, 0, 0, 0.24)}`,
   },
 }

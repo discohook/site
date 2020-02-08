@@ -6,7 +6,6 @@ export const AttachmentContainer = styled.div`
   width: 100%;
   max-width: 520px;
 
-  margin: 8px 0 0;
   padding: 10px;
 
   display: flex;
@@ -43,7 +42,7 @@ export const AttachmentInfo = styled.div`
 `
 
 export const AttachmentFileName = styled.div`
-  line-height: 16px;
+  line-height: 1em;
 
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -52,9 +51,11 @@ export const AttachmentFileName = styled.div`
 
 export const AttachmentFileNameInner = styled.span`
   color: ${({ theme }) => theme.text.link};
-  font-size: 16px;
+  font-size: 1em;
 
   cursor: pointer;
+
+  opacity: 0.85;
 
   &:hover {
     text-decoration: underline;
@@ -64,14 +65,16 @@ export const AttachmentFileNameInner = styled.span`
 export const AttachmentFileSize = styled.div`
   color: ${darkTheme.text.muted};
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33333em;
   font-weight: 300;
 `
 
 export const AttachmentDownloadButton = styled.div`
-  cursor: pointer;
+  height: 25px;
 
   color: ${darkTheme.interactive.muted};
+
+  cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => transparentize(0.4, theme.text.muted)};

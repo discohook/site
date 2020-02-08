@@ -2,7 +2,6 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { Attachment } from "../../attachment/components/Attachment"
 import { Markdown } from "../../markdown/components/Markdown"
-import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
 import { getEmbedsWithGallery } from "../../message/helpers/getEmbedsWithGallery"
 import { id } from "../../message/helpers/getUniqueId"
 import { FileLike } from "../../message/types/FileLike"
@@ -17,38 +16,41 @@ const ScrollContainer = styled.div`
 `
 
 const Container = styled.div`
-  margin: 0 0 0 80px;
-  padding: 20px 10px 20px 0;
+  position: relative;
+  flex: 0 0 auto;
 
-  & > ${MarkdownContainer} {
-    display: inline;
-  }
+  ${({ theme }) =>
+    theme.appearance.display === "cozy" &&
+    css`
+      margin-top: 1rem;
+      padding: 0.125rem 16px 0.125rem 4.5rem;
+
+      min-height: 2.75rem;
+
+      ${({ theme }) =>
+        theme.appearance.fontSize > 16 &&
+        css`
+          padding-left: 72px;
+        `};
+    `};
 
   ${({ theme }) =>
     theme.appearance.display === "compact" &&
     css`
-      margin: 0 0 0 9ch;
-      padding: 10px;
+      padding: 0.125rem 1rem 0.125rem 80px;
 
-      & > ${MarkdownContainer} {
-        margin-left: 0.3rem;
-      }
-    `}
+      min-height: 1.375rem;
 
-  ${({ theme }) =>
-    theme.appearance.mobile &&
-    css`
-      margin: 0;
-      padding: 16px;
+      text-indent: calc(-80px + 1rem);
     `}
 `
 
-const EmbedsContainer = styled.div`
-  margin: 0 0 8px;
-  padding: 0 4px 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+const ExtrasContainer = styled.div`
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 0.25rem;
+
+  padding: 0.125rem 0;
 `
 
 export type MessagePreviewProps = {
@@ -69,16 +71,18 @@ export function MessagePreview(props: MessagePreviewProps) {
           avatarUrl={avatarUrl ?? (webhook && getAvatarUrl(webhook))}
         />
         {content && <Markdown content={content} type="message-content" />}
-        {embeds && (
-          <EmbedsContainer>
-            {getEmbedsWithGallery(embeds).map(embed => (
-              <RichEmbed key={embed[id]} embed={embed} />
-            ))}
-          </EmbedsContainer>
+        {((embeds?.length ?? 0) > 0 || files.length > 0) && (
+          <ExtrasContainer>
+            {[
+              ...files.map(file => (
+                <Attachment key={`file:${file.name}`} file={file} />
+              )),
+              ...getEmbedsWithGallery(embeds ?? []).map(embed => (
+                <RichEmbed key={`embed:${embed[id]}`} embed={embed} />
+              )),
+            ]}
+          </ExtrasContainer>
         )}
-        {files.map(file => (
-          <Attachment file={file} key={file.name} />
-        ))}
       </Container>
     </ScrollContainer>
   )

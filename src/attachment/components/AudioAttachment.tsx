@@ -18,6 +18,8 @@ import {
 export const AudioContainer = styled(AttachmentContainer)`
   flex-direction: column;
   width: 400px;
+
+  font-size: 16px;
 `
 
 export const AudioMetadata = styled.div`
@@ -35,11 +37,14 @@ export const AudioIconContainer = styled(AttachmentIconContainer)`
 
 export const AudioFileNameInner = styled(AttachmentFileNameInner)`
   font-weight: 500;
+
+  opacity: 1;
 `
 
 export const AudioFileSize = styled(AttachmentFileSize)`
-  margin: 2px 0 0;
-  font-weight: 400;
+  margin: 3px 0 0;
+
+  font-weight: 500;
 `
 
 export const AudioDownloadButton = styled(AttachmentDownloadButton)`
@@ -47,7 +52,6 @@ export const AudioDownloadButton = styled(AttachmentDownloadButton)`
   margin: -2px 0 0;
 
   display: flex;
-  height: 25px;
   align-items: center;
 
   & > svg {

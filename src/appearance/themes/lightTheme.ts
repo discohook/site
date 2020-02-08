@@ -33,11 +33,13 @@ export const lightTheme: ColorTheme = {
     accent: rgba(6, 6, 7, 0.08),
   },
   elavation: {
+    stroke: `0 0 0 1px ${rgba(6, 6, 7, 0.08)}`,
     low: [
       `0 1px 0 ${rgba(6, 6, 7, 0.1)}`,
       `0 1.5px 0 ${rgba(6, 6, 7, 0.025)}`,
       `0 2px 0 ${rgba(6, 6, 7, 0.025)}`,
     ].join(","),
+    medium: `0 4px 4px ${rgba(0, 0, 0, 0.08)}`,
     high: `0 8px 16px ${rgba(0, 0, 0, 0.16)}`,
   },
 }
