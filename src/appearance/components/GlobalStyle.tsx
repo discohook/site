@@ -1,30 +1,17 @@
 import { fontFace } from "polished"
 import { createGlobalStyle } from "styled-components"
 
-const fonts = [
-  {
-    fontFamily: "Whitney",
-    fontFilePath: "/fonts/whitney",
-    fontWeights: [300, 400, 500, 600, 700],
-  },
-  {
-    fontFamily: "SourceCodePro",
-    fontFilePath: "/fonts/source-code-pro",
-    fontWeights: [500, 600],
-  },
-].flatMap(({ fontWeights, fontFilePath, ...font }) =>
-  fontWeights.map(fontWeight => ({
-    ...font,
-    fontStyle: "normal",
-    fontWeight: String(fontWeight),
-    fontFilePath: `${fontFilePath}-${fontWeight}`,
-    fileFormats: ["woff2", "woff"],
-    fontDisplay: "swap",
-  })),
-)
-
 export const GlobalStyle = createGlobalStyle`
-  ${fonts.map(fontFace)};
+  ${[300, 400, 500, 600, 700].map(weight =>
+    fontFace({
+      fontFamily: "Whitney",
+      fontStyle: "normal",
+      fontWeight: String(weight),
+      fontFilePath: `/fonts/whitney-${weight}`,
+      fileFormats: ["woff2", "woff"],
+      fontDisplay: "swap",
+    }),
+  )};
 
   html,
   body {
