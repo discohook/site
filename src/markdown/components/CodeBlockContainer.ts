@@ -4,7 +4,7 @@ import { RichEmbedContainer } from "../../preview/components/RichEmbedContainer"
 export const CodeBlockContainer = styled.pre`
   max-width: 90%;
   margin: 6px 0 0;
-  padding: 7px;
+  padding: 0.5em;
 
   background: ${({ theme }) => theme.background.secondary};
   border: 1px solid ${({ theme }) => theme.background.tertiary};
@@ -18,7 +18,9 @@ export const CodeBlockContainer = styled.pre`
 
   ${RichEmbedContainer} & {
     max-width: 100%;
+
     background: ${({ theme }) => theme.background.tertiary};
+    border: none;
   }
 
   & .hljs-comment,

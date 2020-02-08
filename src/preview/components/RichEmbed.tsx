@@ -13,7 +13,7 @@ import { EmbedGallery } from "./EmbedGallery"
 import { RichEmbedContainer } from "./RichEmbedContainer"
 
 const EmbedGrid = styled.div`
-  padding: 8px 16px 16px 12px;
+  padding: 0.5rem 1rem 1rem 0.75rem;
   display: inline-grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
