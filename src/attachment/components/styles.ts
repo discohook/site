@@ -1,0 +1,83 @@
+import { rgb, transparentize } from "polished"
+import styled from "styled-components"
+import { darkTheme } from "../../appearance/themes/darkTheme"
+
+export const AttachmentContainer = styled.div`
+  width: 100%;
+  max-width: 520px;
+
+  margin: 8px 0 0;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid
+    ${({ theme }) =>
+      theme.appearance.color === "dark"
+        ? transparentize(0.4, theme.background.secondary)
+        : rgb(246, 246, 247)};
+  border-radius: 3px;
+
+  background: ${({ theme }) =>
+    theme.appearance.color === "dark"
+      ? transparentize(0.7, theme.background.secondary)
+      : "none"};
+`
+
+export const AttachmentIconContainer = styled.div`
+  width: 30px;
+  height: 40px;
+  margin: 0 8px 0 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const AttachmentInfo = styled.div`
+  flex: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
+export const AttachmentFileName = styled.div`
+  line-height: 16px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
+export const AttachmentFileNameInner = styled.span`
+  color: ${({ theme }) => theme.text.link};
+  font-size: 16px;
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+export const AttachmentFileSize = styled.div`
+  color: ${darkTheme.text.muted};
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 300;
+`
+
+export const AttachmentDownloadButton = styled.div`
+  cursor: pointer;
+
+  color: ${darkTheme.interactive.muted};
+
+  &:hover {
+    color: ${({ theme }) => transparentize(0.4, theme.text.muted)};
+  }
+
+  & > svg {
+    fill: currentColor;
+  }
+`

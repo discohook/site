@@ -12,4 +12,4 @@ jobs:
           node-version: "12.x"
       - run: npm add --global pnpm
       - run: pnpm install
-      - run: pnpm run test
+      - run: pnpm run test:verbose

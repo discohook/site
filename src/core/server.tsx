@@ -11,9 +11,10 @@ import { renderToNodeStream } from "react-dom/server"
 import { Transform } from "stream"
 import { ServerStyleSheet } from "styled-components"
 import { createDeflate, createGzip } from "zlib"
-import { resetLastId } from "../message/uid"
-import App from "./App"
+import { resetLastId } from "../message/helpers/getUniqueId"
+import { App } from "./components/App"
 
+/* eslint-disable @typescript-eslint/naming-convention */
 Object.assign(global, {
   ENV: process.env.NODE_ENV ?? "production",
   PROD: process.env.NODE_ENV === "production",
@@ -21,6 +22,7 @@ Object.assign(global, {
   TEST: process.env.NODE_ENV === "test",
   SERVER: true,
 })
+/* eslint-enable @typescript-eslint/naming-convention */
 
 const app = new Koa()
 const router = new Router()

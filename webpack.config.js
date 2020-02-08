@@ -1,4 +1,5 @@
 // @ts-check
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/newline-after-import */
 
@@ -24,6 +25,7 @@ module.exports = {
     rules: [
       {
         test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
         use: [
           "babel-loader?cacheDirectory",
           { loader: "eslint-loader", options: { cache: true } },
