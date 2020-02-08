@@ -2,6 +2,7 @@ import React from "react"
 import styled, { css } from "styled-components"
 import { Attachment } from "../../attachment/components/Attachment"
 import { Markdown } from "../../markdown/components/Markdown"
+import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
 import { getEmbedsWithGallery } from "../../message/helpers/getEmbedsWithGallery"
 import { id } from "../../message/helpers/getUniqueId"
 import { FileLike } from "../../message/types/FileLike"
@@ -19,10 +20,11 @@ const Container = styled.div`
   position: relative;
   flex: 0 0 auto;
 
+  margin-top: 1rem;
+
   ${({ theme }) =>
     theme.appearance.display === "cozy" &&
     css`
-      margin-top: 1rem;
       padding: 0.125rem 16px 0.125rem 4.5rem;
 
       min-height: 2.75rem;
@@ -41,7 +43,12 @@ const Container = styled.div`
 
       min-height: 1.375rem;
 
-      text-indent: calc(-80px + 1rem);
+      text-indent: calc(1rem - 80px);
+
+      & > ${MarkdownContainer} {
+        display: inline;
+        display: contents;
+      }
     `}
 `
 
@@ -51,6 +58,8 @@ const ExtrasContainer = styled.div`
   row-gap: 0.25rem;
 
   padding: 0.125rem 0;
+
+  text-indent: 0;
 
   & > * {
     justify-self: start;
