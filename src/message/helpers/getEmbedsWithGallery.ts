@@ -1,9 +1,9 @@
 import { Draft, produce } from "immer"
+import { ID } from "../constants/id"
 import { Embed } from "../types/Embed"
 import { Image } from "../types/Image"
-import { id } from "./getUniqueId"
 
-export type ImageWithId = Image & { [id]: number }
+export type ImageWithId = Image & { [ID]: number }
 export type EmbedWithGallery = Embed & { readonly gallery?: ImageWithId[] }
 
 export const getEmbedsWithGallery = (
@@ -20,7 +20,7 @@ export const getEmbedsWithGallery = (
           if (lastEmbed.image) {
             lastEmbed.gallery.push({
               ...lastEmbed.image,
-              [id]: lastEmbed[id],
+              [ID]: lastEmbed[ID],
             })
           }
         }
@@ -28,7 +28,7 @@ export const getEmbedsWithGallery = (
         if (embed.image && (lastEmbed.gallery?.length ?? 0) < 4) {
           lastEmbed.gallery?.push({
             ...embed.image,
-            [id]: embed[id],
+            [ID]: embed[ID],
           })
         }
 

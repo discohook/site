@@ -1,4 +1,4 @@
-import { id } from "../../message/helpers/getUniqueId"
+import { ID } from "../../message/constants/id"
 import { stringifyMessage } from "./stringifyMessage"
 
 describe("stringifyMessage", () => {
@@ -7,7 +7,7 @@ describe("stringifyMessage", () => {
       stringifyMessage({
         embeds: [
           {
-            [id]: 0,
+            [ID]: 0,
             author: {
               iconUrl: "https://discohook.jaylineko.com/snake_case_test",
             },

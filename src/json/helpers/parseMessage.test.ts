@@ -1,4 +1,4 @@
-import { id } from "../../message/helpers/getUniqueId"
+import { ID } from "../../message/constants/id"
 import { parseMessage } from "./parseMessage"
 
 describe("parseMessage", () => {
@@ -42,7 +42,7 @@ describe("parseMessage", () => {
       content: "Hello",
       embeds: [
         {
-          [id]: expect.any(Number),
+          [ID]: expect.any(Number),
           title: "Test embed",
           description: "Test embed",
           author: {
@@ -51,17 +51,17 @@ describe("parseMessage", () => {
           },
           fields: [
             {
-              [id]: expect.any(Number),
+              [ID]: expect.any(Number),
               name: "Test field",
               value: "test.",
             },
             {
-              [id]: expect.any(Number),
+              [ID]: expect.any(Number),
               name: "Another one",
               value: "Yeah!!",
             },
             {
-              [id]: expect.any(Number),
+              [ID]: expect.any(Number),
               name: "This one's inline",
               value: "Isn't that cool",
               inline: true,
@@ -69,7 +69,7 @@ describe("parseMessage", () => {
           ],
         },
         {
-          [id]: expect.any(Number),
+          [ID]: expect.any(Number),
           title: "Another test embed",
           description: "This one is quite boring though",
         },

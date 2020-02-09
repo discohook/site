@@ -1,5 +1,5 @@
+import { ID } from "../constants/id"
 import { applyIds } from "./applyIds"
-import { id } from "./getUniqueId"
 
 describe("applyIds", () => {
   it("does not modify message", () => {
@@ -78,10 +78,10 @@ describe("applyIds", () => {
     expect.assertions(3)
 
     for (const embed of withIds.embeds ?? []) {
-      expect(embed).toHaveProperty([id])
+      expect(embed).toHaveProperty([ID])
     }
 
-    const ids = withIds.embeds?.map(embed => embed[id]) ?? []
+    const ids = withIds.embeds?.map(embed => embed[ID]) ?? []
     expect(new Set(ids).size).toBe(ids.length)
   })
 
@@ -108,10 +108,10 @@ describe("applyIds", () => {
 
     for (const embed of withIds.embeds ?? []) {
       for (const field of embed.fields ?? []) {
-        expect(field).toHaveProperty([id])
+        expect(field).toHaveProperty([ID])
       }
 
-      const ids = embed.fields?.map(field => field[id]) ?? []
+      const ids = embed.fields?.map(field => field[ID]) ?? []
       expect(new Set(ids).size).toBe(ids.length)
     }
   })
@@ -126,12 +126,12 @@ describe("applyIds", () => {
     const messageWithoutFields = { embeds: [{ description: "This is embed" }] }
     expect(applyIds(messageWithoutFields)).toEqual({
       ...messageWithoutFields,
-      embeds: [{ ...messageWithoutFields.embeds[0], [id]: expect.anything() }],
+      embeds: [{ ...messageWithoutFields.embeds[0], [ID]: expect.anything() }],
     })
 
     const messageWithZeroFields = { embeds: [{ fields: [] }] }
     expect(applyIds(messageWithZeroFields)).toEqual({
-      embeds: [{ ...messageWithZeroFields.embeds[0], [id]: expect.anything() }],
+      embeds: [{ ...messageWithZeroFields.embeds[0], [ID]: expect.anything() }],
     })
   })
 })

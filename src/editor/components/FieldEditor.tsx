@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { InputField } from "../../form/components/InputField"
 import { Toggle } from "../../form/components/Toggle"
-import { id } from "../../message/helpers/getUniqueId"
+import { ID } from "../../message/constants/id"
 import { Field } from "../../message/types/Field"
 import { FlexContainer } from "./Container"
 
@@ -39,7 +39,7 @@ export function FieldEditor(props: FieldEditorProps) {
     <FlexContainer>
       <TopRowContainer flow="row">
         <InputField
-          id={`message-embed${embedId}-field${field[id]}-name`}
+          id={`message-embed${embedId}-field${field[ID]}-name`}
           value={field.name}
           onChange={name =>
             handleChange({
@@ -52,7 +52,7 @@ export function FieldEditor(props: FieldEditorProps) {
         />
         <ToggleContainer>
           <Toggle
-            id={`message-embed${embedId}-field${field[id]}-inline`}
+            id={`message-embed${embedId}-field${field[ID]}-inline`}
             label="Inline"
             value={field.inline ?? false}
             onChange={inline =>
@@ -65,7 +65,7 @@ export function FieldEditor(props: FieldEditorProps) {
         </ToggleContainer>
       </TopRowContainer>
       <InputField
-        id={`message-embed${embedId}-field${field[id]}-value`}
+        id={`message-embed${embedId}-field${field[ID]}-value`}
         value={field.value}
         onChange={value =>
           handleChange({

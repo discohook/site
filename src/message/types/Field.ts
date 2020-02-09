@@ -1,7 +1,7 @@
-import { id } from "../helpers/getUniqueId"
+import { ID } from "../constants/id"
 
 export type Field = {
-  readonly [id]: number
+  readonly [ID]: number
   readonly name?: string
   readonly value?: string
   readonly inline?: boolean

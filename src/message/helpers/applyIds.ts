@@ -1,15 +1,16 @@
 import { Draft, produce } from "immer"
+import { ID } from "../constants/id"
 import { Message } from "../types/Message"
 import { MessageWithoutIds } from "../types/MessageWithoutIds"
-import { getUniqueId, id } from "./getUniqueId"
+import { getUniqueId } from "./getUniqueId"
 
 export const applyIds = produce<(message: MessageWithoutIds) => Message>(
   (message: Draft<Message>) => {
     for (const embed of message.embeds ?? []) {
-      embed[id] = getUniqueId()
+      embed[ID] = getUniqueId()
 
       for (const field of embed.fields ?? []) {
-        field[id] = getUniqueId()
+        field[ID] = getUniqueId()
       }
     }
 

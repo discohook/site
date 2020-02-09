@@ -3,8 +3,8 @@ import styled, { css } from "styled-components"
 import { Attachment } from "../../attachment/components/Attachment"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
+import { ID } from "../../message/constants/id"
 import { getEmbedsWithGallery } from "../../message/helpers/getEmbedsWithGallery"
-import { id } from "../../message/helpers/getUniqueId"
 import { FileLike } from "../../message/types/FileLike"
 import { Message } from "../../message/types/Message"
 import { getAvatarUrl } from "../../webhook/helpers/getAvatarUrl"
@@ -92,7 +92,7 @@ export function MessagePreview(props: MessagePreviewProps) {
                 <Attachment key={`file:${file.name}`} file={file} />
               )),
               ...getEmbedsWithGallery(embeds ?? []).map(embed => (
-                <RichEmbed key={`embed:${embed[id]}`} embed={embed} />
+                <RichEmbed key={`embed:${embed[ID]}`} embed={embed} />
               )),
             ]}
           </ExtrasContainer>

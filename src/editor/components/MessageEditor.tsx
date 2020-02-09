@@ -1,7 +1,8 @@
 import React from "react"
 import { FileInput } from "../../form/components/FileInput"
 import { InputField } from "../../form/components/InputField"
-import { getUniqueId, id } from "../../message/helpers/getUniqueId"
+import { ID } from "../../message/constants/id"
+import { getUniqueId } from "../../message/helpers/getUniqueId"
 import { Embed } from "../../message/types/Embed"
 import { FileLike } from "../../message/types/FileLike"
 import { Message } from "../../message/types/Message"
@@ -53,8 +54,8 @@ export function MessageEditor(props: MessageEditorProps) {
         }
         name="Embed"
         limit={10}
-        factory={() => ({ [id]: getUniqueId() })}
-        keyMapper={embed => embed[id]}
+        factory={() => ({ [ID]: getUniqueId() })}
+        keyMapper={embed => embed[ID]}
       >
         {(embed, onChange) => <EmbedEditor embed={embed} onChange={onChange} />}
       </MultiEditor>

@@ -2,7 +2,8 @@ import React from "react"
 import { ColorInput } from "../../color/components/ColorInput"
 import { InputField } from "../../form/components/InputField"
 import { InputGroup } from "../../form/components/InputGroup"
-import { getUniqueId, id } from "../../message/helpers/getUniqueId"
+import { ID } from "../../message/constants/id"
+import { getUniqueId } from "../../message/helpers/getUniqueId"
 import { Embed } from "../../message/types/Embed"
 import { Field } from "../../message/types/Field"
 import { AuthorEditor } from "./AuthorEditor"
@@ -23,7 +24,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
     <FlexContainer>
       <InputGroup>
         <InputField
-          id={`message-embed${embed[id]}-title`}
+          id={`message-embed${embed[ID]}-title`}
           value={embed.title}
           onChange={title =>
             handleChange({
@@ -35,7 +36,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
           maxLength={256}
         />
         <InputField
-          id={`message-embed${embed[id]}-url`}
+          id={`message-embed${embed[ID]}-url`}
           value={embed.url}
           onChange={url =>
             handleChange({
@@ -47,7 +48,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
         />
       </InputGroup>
       <InputField
-        id={`message-embed${embed[id]}-description`}
+        id={`message-embed${embed[ID]}-description`}
         value={embed.description}
         onChange={description =>
           handleChange({
@@ -60,7 +61,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
         maxLength={2048}
       />
       <AuthorEditor
-        id={embed[id]}
+        id={embed[ID]}
         author={embed.author}
         onChange={author =>
           handleChange({
@@ -70,7 +71,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
         }
       />
       <FooterEditor
-        id={embed[id]}
+        id={embed[ID]}
         footer={embed.footer}
         timestamp={embed.timestamp}
         onChange={partial =>
@@ -82,7 +83,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
       />
       <InputGroup>
         <InputField
-          id={`message-embed${embed[id]}-image`}
+          id={`message-embed${embed[ID]}-image`}
           value={embed.image?.url}
           onChange={url =>
             handleChange({
@@ -93,7 +94,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
           label="Image"
         />
         <InputField
-          id={`message-embed${embed[id]}-thumbnail`}
+          id={`message-embed${embed[ID]}-thumbnail`}
           value={embed.thumbnail?.url}
           onChange={url =>
             handleChange({
@@ -104,7 +105,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
           label="Thumbnail"
         />
         <ColorInput
-          id={`message-embed${embed[id]}-color`}
+          id={`message-embed${embed[ID]}-color`}
           color={embed.color}
           onChange={color =>
             handleChange({
@@ -124,11 +125,11 @@ export function EmbedEditor(props: EmbedEditorProps) {
         }
         name="Field"
         limit={25}
-        factory={() => ({ [id]: getUniqueId() })}
-        keyMapper={field => field[id]}
+        factory={() => ({ [ID]: getUniqueId() })}
+        keyMapper={field => field[ID]}
       >
         {(field, onChange) => (
-          <FieldEditor id={embed[id]} field={field} onChange={onChange} />
+          <FieldEditor id={embed[ID]} field={field} onChange={onChange} />
         )}
       </MultiEditor>
     </FlexContainer>

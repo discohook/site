@@ -42,3 +42,15 @@ export const TONE_NUMBERS = Object.fromEntries(
 export const TONE_NAMES = Object.fromEntries(
   SKIN_TONES.map(tone => [tone.name, tone.unicode]),
 )
+
+export const EMOJI_CDN_BASE_URL = "https://twemoji.maxcdn.com/v/12.1.3/svg"
+export const CUSTOM_EMOJI_CDN_BASE_URL = "https://cdn.discordapp.com/emojis"
+
+export const DISCOHOOK_EMOJI_ID = "645409602393079819"
+export const DISCOHOOK_EMOJI_URL =
+  "https://discohook.jaylineko.com/assets/discohook-emoji.png"
+
+// Matches string symbols instead of code points
+// Regex extracted from lodash: https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L261
+// eslint-disable-next-line no-misleading-character-class
+export const UNICODE_CHARACTER_RE = /\ud83c[\udffb-\udfff](?=\ud83c[\udffb-\udfff])|(?:[^\ud800-\udfff][\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]?|[\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\ud800-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]|\ud83c[\udffb-\udfff])?(?:\u200d(?:[^\ud800-\udfff]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff])[\ufe0e\ufe0f]?(?:[\u0300-\u036f\u20d0-\u20ff\ufe20-\ufe2f]|\ud83c[\udffb-\udfff])?)*/g

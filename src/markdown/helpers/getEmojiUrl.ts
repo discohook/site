@@ -1,3 +1,5 @@
+import { EMOJI_CDN_BASE_URL } from "../constants/constants"
+
 export const getEmojiUrl = (emoji: string) => {
   const file = [...emoji]
     .map(character => character.codePointAt(0)?.toString(16))
@@ -5,5 +7,5 @@ export const getEmojiUrl = (emoji: string) => {
     .filter(codePoint => codePoint !== "fe0f")
     .join("-")
 
-  return `https://twemoji.maxcdn.com/v/12.1.3/svg/${file}.svg`
+  return `${EMOJI_CDN_BASE_URL}/${file}.svg`
 }

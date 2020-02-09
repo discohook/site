@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
+import { ID } from "../../message/constants/id"
 import { ImageWithId } from "../../message/helpers/getEmbedsWithGallery"
-import { id } from "../../message/helpers/getUniqueId"
 
 const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
   grid-column: 1 / 2;
@@ -56,7 +56,7 @@ export function EmbedGallery(props: EmbedGalleryProps) {
   return (
     <EmbedGalleryWrapper>
       {gallery.map((image, index) => (
-        <EmbedGalleryCell key={image[id]} length={gallery.length} index={index}>
+        <EmbedGalleryCell key={image[ID]} length={gallery.length} index={index}>
           <EmbedGalleryImage src={image.url} alt="Image" />
         </EmbedGalleryCell>
       ))}

@@ -3,9 +3,9 @@ import styled, { css } from "styled-components"
 import { numberToHex } from "../../color/helpers/numberToHex"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
+import { ID } from "../../message/constants/id"
 import { EmbedWithGallery } from "../../message/helpers/getEmbedsWithGallery"
 import { getFieldsWithWidths } from "../../message/helpers/getFieldsWithWidths"
-import { id } from "../../message/helpers/getUniqueId"
 import { EmbedAuthor } from "./EmbedAuthor"
 import { EmbedField } from "./EmbedField"
 import { EmbedFooter } from "./EmbedFooter"
@@ -141,7 +141,7 @@ export function RichEmbed(props: RichEmbedProps) {
         {fields && (
           <EmbedFields>
             {getFieldsWithWidths(fields).map(({ width, ...field }) => (
-              <EmbedField key={field[id]} field={field} width={width} />
+              <EmbedField key={field[ID]} field={field} width={width} />
             ))}
           </EmbedFields>
         )}

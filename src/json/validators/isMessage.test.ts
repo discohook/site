@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { INITIAL_MESSAGE } from "../../message/constants"
+import { INITIAL_MESSAGE } from "../../message/constants/constants"
 import { isMessage } from "./isMessage"
 
 describe("isMessage", () => {

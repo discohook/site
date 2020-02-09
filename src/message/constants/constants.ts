@@ -1,7 +1,6 @@
-import { applyIds } from "./helpers/applyIds"
-import { Message } from "./types/Message"
+import { applyIds } from "../helpers/applyIds"
 
-export const INITIAL_MESSAGE: Message = applyIds({
+export const INITIAL_MESSAGE = applyIds({
   content: `
 Hey, this is Discohook, a message and embed builder for Discord webhooks. <:discohook:645409602393079819>
 You can read more about how to use Discohook below, or click **Clear all** on the top to start out blank.

@@ -1,12 +1,12 @@
 import { Color } from "../../color/types/Color"
-import { id } from "../helpers/getUniqueId"
+import { ID } from "../constants/id"
 import { Author } from "./Author"
 import { Field } from "./Field"
 import { Footer } from "./Footer"
 import { Image } from "./Image"
 
 export type Embed = {
-  readonly [id]: number
+  readonly [ID]: number
   readonly title?: string
   readonly description?: string
   readonly url?: string
