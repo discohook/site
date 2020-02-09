@@ -1,13 +1,14 @@
 // @ts-check
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable import/newline-after-import */
 
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { resolve } = require("path")
 const PreloadWebpackPlugin = require("preload-webpack-plugin")
-const { DefinePlugin } = require("webpack")
+const { DefinePlugin, HashedModuleIdsPlugin } = require("webpack")
 
 if (!process.env.NODE_ENV) process.env.NODE_ENV = "development"
 const development = process.env.NODE_ENV === "development"
@@ -43,77 +44,71 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: chunk => !/^hljs-[\w-]+$/.test(chunk.name),
+      chunks: chunk => !/^vendor\.hljs\.[\w-]+$/.test(chunk.name),
       minSize: 0,
       maxInitialRequests: Infinity,
       automaticNameDelimiter: "-",
       cacheGroups: {
-        polyfill: {
-          test: new RegExp(
-            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
-              "core-js",
-              "regenerator-runtime",
-              "@babel",
-              "object-assign",
-            ].join("|")})[/\\\\]`,
-          ),
-          name: "polyfill",
-          priority: 1,
-        },
-        react: {
-          test: new RegExp(
-            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
-              "react",
-              "react-dom",
-              "react-is",
-              "prop-types",
-              "scheduler",
-            ].join("|")})[/\\\\]`,
-          ),
-          name: "react",
-          priority: 1,
-        },
-        markdown: {
-          test: new RegExp(
-            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
-              "simple-markdown",
-              "highlight.js",
-            ].join("|")})[/\\\\]`,
-          ),
-          name: "markdown",
-          priority: 1,
-        },
-        css: {
-          test: new RegExp(
-            `[/\\\\]node_modules[/\\\\].*[/\\\\](${[
-              "styled-components",
-              "polished",
-              "@emotion",
-            ].join("|")})[/\\\\]`,
-          ),
-          name: "css",
-          priority: 1,
-        },
-        emoji: {
-          test: new RegExp(
-            `[/\\\\]src[/\\\\].*[/\\\\](${[
-              "emoji",
-              "emojiData",
-              "jumbosizeEmojis",
-              "convertEmojiToNames",
-            ].join("|")}).tsx?`,
-          ),
-          name: "emoji",
-          priority: 1,
+        main: {
+          test: /src/,
+          name: module => {
+            const path =
+              module.constructor.name === "NormalModule"
+                ? module.userRequest.replace(__dirname, "")
+                : module.context.replace(__dirname, "")
+
+            if (/[/\\]constants\.ts|[/\\]constants[/\\]/.test(path)) {
+              return "main.data"
+            }
+
+            return "main"
+          },
         },
         vendor: {
-          test: /[/\\]node_modules[/\\]/,
-          name: "vendor",
+          test: /node_modules/,
+          name: module => {
+            const re = /node_modules[/\\](?:\.pnpm[/\\][^/\\]+[/\\])?(@[^/\\]+[/\\][^/\\]+|[^/\\]+)(?:[/\\]|$)/
+            const path = module.context.replace(__dirname, "")
+            const [, package] = re.exec(path) || []
+
+            const cacheGroups = {
+              polyfill: [
+                "core-js",
+                "regenerator-runtime",
+                "@babel/runtime",
+                "tslib",
+                "object-assign",
+              ],
+              react: [
+                "react",
+                "react-dom",
+                "react-is",
+                "prop-types",
+                "scheduler",
+              ],
+              css: [
+                "styled-components",
+                "@emotion/is-prop-valid",
+                "@emotion/memoize",
+                "@emotion/stylis",
+                "@emotion/unitless",
+                "polished",
+              ],
+              markdown: ["simple-markdown", "highlight.js"],
+            }
+
+            for (const [group, packages] of Object.entries(cacheGroups)) {
+              if (packages.includes(package)) return `vendor.${group}`
+            }
+
+            return "vendor"
+          },
         },
       },
     },
   },
   plugins: [
+    new HashedModuleIdsPlugin(),
     new HtmlWebpackPlugin({
       filename: resolve(__dirname, "dist/index.html"),
       template: resolve(__dirname, "public/index.html"),
@@ -124,7 +119,7 @@ module.exports = {
     }),
     new PreloadWebpackPlugin({
       rel: "preload",
-      include: ["main", "vendor", "polyfill", "react", "markdown", "css"],
+      include: "initial",
     }),
     new CopyWebpackPlugin([
       {
@@ -149,4 +144,5 @@ module.exports = {
     maxEntrypointSize: Infinity,
     maxAssetSize: Infinity,
   },
+  node: false,
 }
