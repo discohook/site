@@ -54,14 +54,21 @@ module.exports = {
           name: module => {
             const path =
               module.constructor.name === "NormalModule"
-                ? module.userRequest.replace(__dirname, "")
+                ? module.resource.replace(__dirname, "")
                 : module.context.replace(__dirname, "")
 
-            if (/[/\\]constants\.ts|[/\\]constants[/\\]/.test(path)) {
-              return "main.data"
+            let name = "main"
+
+            const chunks = module.getChunks()
+            if (!chunks.some(chunk => chunk.name === "main")) {
+              name += `.${chunks[0].name}`
             }
 
-            return "main"
+            if (/[/\\]constants\.ts|[/\\]constants[/\\]/.test(path)) {
+              name += ".data"
+            }
+
+            return name
           },
         },
         vendor: {
