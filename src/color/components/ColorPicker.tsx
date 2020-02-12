@@ -153,6 +153,7 @@ export function ColorPicker(props: ColorPickerProps) {
           style={{
             ...linearGradient({
               colorStops: [rgb(255, 255, 255), rgba(255, 255, 255, 0)],
+              fallback: rgba(0, 0, 0, 0),
               toDirection: "to right",
             }),
           }}
@@ -161,6 +162,7 @@ export function ColorPicker(props: ColorPickerProps) {
             style={{
               ...linearGradient({
                 colorStops: [rgba(0, 0, 0, 0), rgb(0, 0, 0)],
+                fallback: rgba(0, 0, 0, 0),
                 toDirection: "to bottom",
               }),
             }}
