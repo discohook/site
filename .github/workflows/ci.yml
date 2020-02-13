@@ -1,0 +1,38 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm add --global pnpm
+      - run: pnpm install
+      - run: pnpm run build:client
+      - run: pnpm run build:server
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm add --global pnpm
+      - run: pnpm install
+      - run: pnpm run test:verbose
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm add --global pnpm
+      - run: pnpm install
+      - run: pnpm run lint:error
+      - run: pnpm run typecheck
+      - run: pnpm run format:check
