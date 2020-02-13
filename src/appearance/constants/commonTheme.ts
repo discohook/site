@@ -1,7 +1,7 @@
 import { rgb } from "polished"
 import { Theme } from "../types/Theme"
 
-export const commonTheme: Pick<Theme, "accent" | "font"> = {
+export const COMMON_THEME: Pick<Theme, "accent" | "font"> = {
   accent: {
     primary: rgb(114, 137, 218),
     success: rgb(67, 181, 129),

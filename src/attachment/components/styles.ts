@@ -1,6 +1,6 @@
 import { rgb, transparentize } from "polished"
 import styled from "styled-components"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 
 export const AttachmentContainer = styled.div`
   width: 100%;
@@ -63,7 +63,7 @@ export const AttachmentFileNameInner = styled.span`
 `
 
 export const AttachmentFileSize = styled.div`
-  color: ${darkTheme.text.muted};
+  color: ${DARK_THEME.text.muted};
   font-size: 12px;
   line-height: 1.33333em;
   font-weight: 300;
@@ -72,7 +72,7 @@ export const AttachmentFileSize = styled.div`
 export const AttachmentDownloadButton = styled.div`
   height: 25px;
 
-  color: ${darkTheme.interactive.muted};
+  color: ${DARK_THEME.interactive.muted};
 
   cursor: pointer;
 

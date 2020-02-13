@@ -1,7 +1,7 @@
 import { transparentize } from "polished"
 import React from "react"
 import styled from "styled-components"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { play } from "../icons/play"
 import { volume } from "../icons/volume"
 
@@ -22,7 +22,7 @@ const AudioDuration = styled.div`
   display: flex;
   margin: 4px;
 
-  color: ${darkTheme.header.primary};
+  color: ${DARK_THEME.header.primary};
   font-family: ${({ theme }) => theme.font.mono};
   font-size: 12px;
   line-height: 12px;
@@ -49,7 +49,7 @@ const AudioSeekbar = styled.div`
   width: 100%;
   height: 6px;
 
-  background: ${transparentize(0.7, darkTheme.interactive.normal)};
+  background: ${transparentize(0.7, DARK_THEME.interactive.normal)};
   border-radius: 3px;
 `
 

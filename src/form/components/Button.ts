@@ -1,6 +1,6 @@
 import { shade, transparentize } from "polished"
 import styled, { css } from "styled-components"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 
 export const Button = styled.button.attrs({ type: "button" })<{
   filled?: boolean
@@ -41,7 +41,7 @@ export const Button = styled.button.attrs({ type: "button" })<{
       background: ${({ theme }) => theme.accent.primary};
       border-color: ${({ theme }) => theme.accent.primary};
 
-      color: ${darkTheme.header.primary};
+      color: ${DARK_THEME.header.primary};
 
       &:hover:not(:disabled),
       &:focus:not(:disabled) {

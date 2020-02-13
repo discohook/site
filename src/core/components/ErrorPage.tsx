@@ -1,7 +1,7 @@
 import React, { ErrorInfo } from "react"
 import styled, { css, ThemeProvider } from "styled-components"
 import { GlobalStyle } from "../../appearance/components/GlobalStyle"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { CodeBlockContainer } from "../../markdown/components/CodeBlockContainer"
 import { Markdown } from "../../markdown/components/Markdown"
 
@@ -53,7 +53,7 @@ export function ErrorPage(props: ErrorPageProps) {
   return (
     <ThemeProvider
       theme={{
-        ...darkTheme,
+        ...DARK_THEME,
         appearance: {
           color: "dark",
           display: "cozy",

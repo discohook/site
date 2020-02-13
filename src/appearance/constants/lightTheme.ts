@@ -1,9 +1,9 @@
 import { rgb, rgba } from "polished"
 import { ColorTheme } from "../types/ColorTheme"
-import { commonTheme } from "./commonTheme"
+import { COMMON_THEME } from "./commonTheme"
 
-export const lightTheme: ColorTheme = {
-  ...commonTheme,
+export const LIGHT_THEME: ColorTheme = {
+  ...COMMON_THEME,
   header: {
     primary: rgb(6, 6, 7),
     secondary: rgb(79, 86, 96),

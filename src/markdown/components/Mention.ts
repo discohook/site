@@ -1,6 +1,6 @@
 import { tint, transparentize } from "polished"
 import styled from "styled-components"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 
 export const Mention = styled.span`
   border-radius: 3px;
@@ -22,6 +22,6 @@ export const Mention = styled.span`
         ? transparentize(0.3, theme.accent.primary)
         : theme.accent.primary};
 
-    color: ${darkTheme.header.primary};
+    color: ${DARK_THEME.header.primary};
   }
 `

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react"
 import styled, { css, ThemeProvider } from "styled-components"
 import { GlobalStyle } from "../../appearance/components/GlobalStyle"
 import { THEMES } from "../../appearance/constants"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { Appearance } from "../../appearance/types/Appearance"
 import { Theme } from "../../appearance/types/Theme"
 import { decodeBackup } from "../../backup/helpers/decodeBackup"
@@ -107,7 +107,7 @@ export function App(props: AppProps) {
   }, [backup])
 
   const [theme, setTheme] = useState<Theme>({
-    ...darkTheme,
+    ...DARK_THEME,
     appearance: {
       color: "dark",
       display: "cozy",

@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import { AppearanceModal } from "../../appearance/components/AppearanceModal"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
-import { darkTheme } from "../../appearance/themes/darkTheme"
 import { Appearance } from "../../appearance/types/Appearance"
 import { BackupModal } from "../../backup/components/BackupModal"
 import { Button } from "../../form/components/Button"
@@ -39,7 +39,7 @@ const JavaScriptWarning = styled.noscript`
   margin: -8px -8px 16px;
   padding: 16px;
   background: ${({ theme }) => theme.accent.danger};
-  color: ${darkTheme.header.primary};
+  color: ${DARK_THEME.header.primary};
 `
 
 const DisabledReason = styled.div`

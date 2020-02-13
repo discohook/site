@@ -1,13 +1,13 @@
 import "@testing-library/jest-dom/extend-expect"
 import React, { ReactNode } from "react"
 import { ThemeProvider } from "styled-components"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 
 export function ContextWrapper(props: { children?: ReactNode }) {
   return (
     <ThemeProvider
       theme={{
-        ...darkTheme,
+        ...DARK_THEME,
         appearance: {
           color: "dark",
           display: "cozy",

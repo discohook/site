@@ -1,7 +1,7 @@
 import { transparentize } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ const ToggleContainer = styled.div<{ checked?: boolean }>`
   border-radius: 14px;
 
   background: ${({ theme, checked }) =>
-    checked ? theme.accent.primary : darkTheme.text.muted};
+    checked ? theme.accent.primary : DARK_THEME.text.muted};
 
   transition: 150ms ease-in-out;
 
@@ -51,7 +51,7 @@ const ToggleContainer = styled.div<{ checked?: boolean }>`
     height: 18px;
     border-radius: 9px;
 
-    background-color: ${darkTheme.interactive.active};
+    background-color: ${DARK_THEME.interactive.active};
     box-shadow: 0 2px 4px ${transparentize(0.7, "black")};
     transition: 150ms ease-in-out;
 

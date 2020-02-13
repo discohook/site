@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-import { darkTheme } from "../../appearance/themes/darkTheme"
+import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { Button } from "../../form/components/Button"
 import { InputContainer } from "../../form/components/InputContainer"
 import { InputLabel } from "../../form/components/InputLabel"
@@ -16,7 +16,7 @@ const ErrorContainer = styled.div`
   background: ${({ theme }) => theme.accent.danger};
   border-radius: 3px;
 
-  color: ${darkTheme.header.primary};
+  color: ${DARK_THEME.header.primary};
 `
 
 const Error = styled.div`
