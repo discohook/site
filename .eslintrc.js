@@ -23,20 +23,17 @@ module.exports = {
       { accessibility: "no-public" },
     ],
     "@typescript-eslint/naming-convention": [
-      "error",
-      { format: ["strictCamelCase"], selector: "default" },
-      { format: ["strictCamelCase"], selector: "variableLike" },
+      "warn",
+      { format: ["strictCamelCase", "StrictPascalCase"], selector: "default" },
       {
         format: ["strictCamelCase", "StrictPascalCase", "UPPER_CASE"],
         selector: "variable",
       },
-      { format: ["strictCamelCase", "StrictPascalCase"], selector: "function" },
       {
         format: ["strictCamelCase", "StrictPascalCase"],
         leadingUnderscore: "allow",
         selector: "parameter",
       },
-      { format: ["strictCamelCase"], selector: "memberLike" },
       { format: ["StrictPascalCase"], selector: "typeLike" },
     ],
     "@typescript-eslint/no-array-constructor": "warn",
