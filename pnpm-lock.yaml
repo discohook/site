@@ -13,9 +13,10 @@ dependencies:
   punycode: 2.1.1
   react: 16.12.0
   react-dom: 16.12.0_react@16.12.0
+  react-is: 16.12.0
   regenerator-runtime: 0.13.3
   simple-markdown: 0.7.2
-  styled-components: 5.0.1_364bfd245d2fd32e75bbcba4856a80df
+  styled-components: 5.0.1_a8d5e5baba948cbc1c7c92fec988ddbc
   url: 0.11.0
 devDependencies:
   '@babel/cli': 7.8.4_@babel+core@7.8.4
@@ -2186,7 +2187,7 @@ packages:
       '@babel/helper-module-imports': 7.8.3
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.15
-      styled-components: 5.0.1_364bfd245d2fd32e75bbcba4856a80df
+      styled-components: 5.0.1_a8d5e5baba948cbc1c7c92fec988ddbc
     peerDependencies:
       styled-components: '>= 2'
     resolution:
@@ -5404,6 +5405,9 @@ packages:
       node: '>=6'
     peerDependencies:
       jest-resolve: '*'
+    peerDependenciesMeta:
+      jest-resolve:
+        optional: true
     resolution:
       integrity: sha512-pgFw2tm54fzgYvc/OHrnysABEObZCUNFnhjoRjaVOCN8NYc032/gVjPaHD4Aq6ApkSieWtfKAFQtmDKAmhupnQ==
   /jest-regex-util/25.1.0:
@@ -8331,7 +8335,7 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-VTyMAUfdm047mwKl+u79WIdrZxtFtn+nBxHeb844XBQ9uMNTuTHdx2hc5RiAJYqwTj3wc/xe5HLSdJSkJ+WfZw==
-  /styled-components/5.0.1_364bfd245d2fd32e75bbcba4856a80df:
+  /styled-components/5.0.1_a8d5e5baba948cbc1c7c92fec988ddbc:
     dependencies:
       '@babel/helper-module-imports': 7.8.3
       '@babel/traverse': 7.8.4
@@ -8343,6 +8347,7 @@ packages:
       hoist-non-react-statics: 3.3.2
       react: 16.12.0
       react-dom: 16.12.0_react@16.12.0
+      react-is: 16.12.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
     peerDependencies:
@@ -9362,6 +9367,7 @@ specifiers:
   punycode: ^2.1.1
   react: ^16.12.0
   react-dom: ^16.12.0
+  react-is: ^16.12.0
   regenerator-runtime: ^0.13.3
   simple-markdown: ^0.7.2
   source-map-loader: ^0.2.4
