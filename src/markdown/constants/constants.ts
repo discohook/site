@@ -48,7 +48,7 @@ export const CUSTOM_EMOJI_CDN_BASE_URL = "https://cdn.discordapp.com/emojis"
 
 export const DISCOHOOK_EMOJI_ID = "645409602393079819"
 export const DISCOHOOK_EMOJI_URL =
-  "https://discohook.jaylineko.com/assets/discohook-emoji.png"
+  "https://discohook.org/assets/discohook-emoji.png"
 
 // Matches string symbols instead of code points
 // Regex extracted from lodash: https://github.com/lodash/lodash/blob/4.17.15/lodash.js#L261

@@ -7,7 +7,7 @@ export const INITIAL_MESSAGE_DATA: MessageData = {
   content: `
 Hey, this is Discohook, a message and embed builder for Discord webhooks. <:discohook:645409602393079819>
 You can read more about how to use Discohook below, or click **Clear all** on the top to start out blank.
-Have questions? Discohook has a server at <https://discohook.jaylineko.com/discord>.
+Have questions? Discohook has a server at <https://discohook.org/discord>.
 `.trim(),
   embeds: [
     {
@@ -116,8 +116,7 @@ You can use them using Reddit-style syntax: \`[text](https://example.com/)\` tur
     {
       author: {
         name: "Author",
-        iconUrl:
-          "https://discohook.jaylineko.com/assets/discord-avatar-red.png",
+        iconUrl: "https://discohook.org/assets/discord-avatar-red.png",
       },
       title: "Demo embed",
       url: "https://discordapp.com/",
@@ -151,13 +150,12 @@ You can even have inline fields, like the ones below! :arrow_down:
       ],
       footer: {
         text: "There's also footers, and timestamps",
-        iconUrl:
-          "https://discohook.jaylineko.com/assets/discord-avatar-red.png",
+        iconUrl: "https://discohook.org/assets/discord-avatar-red.png",
       },
       timestamp: "2019-04-22T11:02:04.000Z",
       color: 0xf04747,
       thumbnail: {
-        url: "https://discohook.jaylineko.com/assets/discord-avatar-red.png",
+        url: "https://discohook.org/assets/discord-avatar-red.png",
       },
     },
     {
@@ -190,7 +188,7 @@ Discohook is not affiliated with Discord in any way, shape, or form.
 
 The source code of this project is [available on GitHub](https://github.com/jaylineko/discohook), under the MIT license.
 
-If you want to contact me, join the [Discohook server](https://discohook.jaylineko.com/discord), message me on Discord (@jay.#1111), or send an email to <hello@jaylineko.com>.
+If you want to contact me, join the [Discohook server](https://discohook.org/discord), message me on Discord (@jay.#1111), or send an email to <hello@jaylineko.com>.
 `.trim(),
     },
   ],

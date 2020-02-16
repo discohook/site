@@ -7,7 +7,7 @@ describe("stringifyMessage", () => {
         embeds: [
           {
             author: {
-              iconUrl: "https://discohook.jaylineko.com/snake_case_test",
+              iconUrl: "https://discohook.org/snake_case_test",
             },
           },
         ],
@@ -18,7 +18,7 @@ describe("stringifyMessage", () => {
         '  "embeds": [\n' +
         "    {\n" +
         '      "author": {\n' +
-        '        "icon_url": "https://discohook.jaylineko.com/snake_case_test"\n' +
+        '        "icon_url": "https://discohook.org/snake_case_test"\n' +
         "      }\n" +
         "    }\n" +
         "  ]\n" +

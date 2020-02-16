@@ -162,7 +162,7 @@ export type MessageHeaderProps = {
 export function MessageHeader(props: MessageHeaderProps) {
   const {
     username = "Discohook",
-    avatarUrl = "https://discohook.jaylineko.com/assets/discord-avatar.png",
+    avatarUrl = "https://discohook.org/assets/discord-avatar.png",
   } = props
 
   const [timestamp, setTimestamp] = useState(getTimestamp)
