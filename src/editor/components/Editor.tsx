@@ -4,7 +4,6 @@ import { AppearanceModal } from "../../appearance/components/AppearanceModal"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
 import { Appearance } from "../../appearance/types/Appearance"
-import { BackupModal } from "../../backup/components/BackupModal"
 import { Button } from "../../form/components/Button"
 import { InputField } from "../../form/components/InputField"
 import { JsonInput } from "../../json/components/JsonInput"
@@ -95,17 +94,12 @@ export function Editor(props: EditorProps) {
   else if (message.files.length > 0) isDisabled = false
   else isDisabled = true
 
-  const [isBackupModalShown, setIsBackupModalShown] = useState(false)
   const [isAppearanceModalShown, setIsAppearanceModalShown] = useState(false)
 
   return (
     <EditorContainer>
       <EditorInnerContainer
-        style={
-          isBackupModalShown || isAppearanceModalShown
-            ? { overflow: "hidden" }
-            : undefined
-        }
+        style={isAppearanceModalShown ? { overflow: "hidden" } : undefined}
       >
         <JavaScriptWarning>
           Discohook requires JavaScript to be enabled, please turn it on in your
@@ -114,10 +108,6 @@ export function Editor(props: EditorProps) {
         <Actions
           title={theme.appearance.mobile ? undefined : "Message editor"}
           actions={[
-            {
-              name: "Backups",
-              action: () => setIsBackupModalShown(true),
-            },
             {
               name: "Appearance",
               action: () => setIsAppearanceModalShown(true),
@@ -148,12 +138,6 @@ export function Editor(props: EditorProps) {
         <MessageEditor message={message} webhook={webhook} />
         <JsonInput message={message} />
       </EditorInnerContainer>
-      {isBackupModalShown && (
-        <BackupModal
-          message={message}
-          onClose={() => setIsBackupModalShown(false)}
-        />
-      )}
       {isAppearanceModalShown && (
         <AppearanceModal
           onAppearanceChange={handleAppearanceChange}

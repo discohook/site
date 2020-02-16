@@ -6,8 +6,6 @@ import { THEMES } from "../../appearance/constants"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { Appearance } from "../../appearance/types/Appearance"
 import { Theme } from "../../appearance/types/Theme"
-import { decodeMessage } from "../../backup/helpers/decodeMessage"
-import { setUrlToMessage } from "../../backup/helpers/setUrlToMessage"
 import { Editor } from "../../editor/components/Editor"
 import { Message } from "../../message/classes/Message"
 import { INITIAL_MESSAGE_DATA } from "../../message/constants"
@@ -15,6 +13,8 @@ import { MessagePreview } from "../../preview/components/MessagePreview"
 import { useAutorun } from "../../state/hooks/useAutorun"
 import { fetchWebhookInfo } from "../../webhook/helpers/fetchWebhookInfo"
 import { Webhook } from "../../webhook/types/Webhook"
+import { decodeMessage } from "../helpers/decodeMessage"
+import { setUrlToMessage } from "../helpers/setUrlToMessage"
 
 const Container = styled.div`
   display: flex;
