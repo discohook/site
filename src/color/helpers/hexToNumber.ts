@@ -1,3 +1,1 @@
-import { Color } from "../types/Color"
-
-export const hexToNumber = (hex: string): Color => parseInt(hex.slice(1), 16)
+export const hexToNumber = (hex: string) => parseInt(hex.slice(1), 16)

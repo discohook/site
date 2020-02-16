@@ -1,4 +1,3 @@
-import { ID } from "../../message/constants/id"
 import { stringifyMessage } from "./stringifyMessage"
 
 describe("stringifyMessage", () => {
@@ -7,7 +6,6 @@ describe("stringifyMessage", () => {
       stringifyMessage({
         embeds: [
           {
-            [ID]: 0,
             author: {
               iconUrl: "https://discohook.jaylineko.com/snake_case_test",
             },

@@ -1,7 +1,6 @@
 /* eslint-disable id-length */
 
 import { HsvColor } from "../types/HsvColor"
-import { hexToNumber } from "./hexToNumber"
 
 // https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_RGB_alternative
 export const hsvToNumber = (color: HsvColor) => {
@@ -13,14 +12,8 @@ export const hsvToNumber = (color: HsvColor) => {
   }
 
   const red = Math.round(f(5) * 255)
-    .toString(16)
-    .padStart(2, "0")
   const green = Math.round(f(3) * 255)
-    .toString(16)
-    .padStart(2, "0")
   const blue = Math.round(f(1) * 255)
-    .toString(16)
-    .padStart(2, "0")
 
-  return hexToNumber(`#${red}${green}${blue}`)
+  return red * 0x010000 + green * 0x000100 + blue
 }

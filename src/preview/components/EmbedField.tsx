@@ -1,8 +1,9 @@
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled from "styled-components"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
-import { Field } from "../../message/types/Field"
+import { Field } from "../../message/classes/Field"
 
 const Container = styled.div`
   font-size: 0.875rem;
@@ -28,14 +29,13 @@ const FieldValue = styled.div`
 
 export type EmbedFieldProps = {
   field: Field
-  width: string
 }
 
 export function EmbedField(props: EmbedFieldProps) {
-  const { field, width } = props
+  const { field } = props
 
-  return (
-    <Container style={{ gridColumn: width }}>
+  return useObserver(() => (
+    <Container style={{ gridColumn: field.width }}>
       <FieldName>
         <Markdown content={field.name ?? ""} type="embed-header" />
       </FieldName>
@@ -43,5 +43,5 @@ export function EmbedField(props: EmbedFieldProps) {
         <Markdown content={field.value ?? ""} type="embed-content" />
       </FieldValue>
     </Container>
-  )
+  ))
 }

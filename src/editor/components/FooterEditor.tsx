@@ -1,66 +1,43 @@
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import { InputField } from "../../form/components/InputField"
 import { InputGroup } from "../../form/components/InputGroup"
-import { Embed } from "../../message/types/Embed"
-import { Footer } from "../../message/types/Footer"
+import { Embed } from "../../message/classes/Embed"
 import { TimestampInput } from "../../timestamp/components/TimestampInput"
 
 export type FooterEditorProps = {
-  id: number
-  footer: Footer | undefined
-  timestamp: string | undefined
-  onChange: (embed: Pick<Embed, "footer" | "timestamp">) => void
+  embed: Embed
 }
 
 export function FooterEditor(props: FooterEditorProps) {
-  const { id: embedId, footer = {}, timestamp, onChange } = props
-  const { text, iconUrl } = footer
+  const { embed } = props
 
-  const handleChange = (embed: Pick<Embed, "footer" | "timestamp">) => {
-    onChange({
-      footer: Object.values(embed.footer ?? {}).some(Boolean)
-        ? embed.footer
-        : undefined,
-      timestamp: embed.timestamp?.length ? embed.timestamp : undefined,
-    })
-  }
-
-  return (
+  return useObserver(() => (
     <InputGroup>
       <InputField
-        id={`message-embed${embedId}-footer-text`}
-        value={text}
-        onChange={text =>
-          handleChange({
-            footer: {
-              ...footer,
-              text,
-            },
-            timestamp,
-          })
-        }
+        id={`message-embed${embed.id}-footer-text`}
+        value={embed.footer}
+        onChange={footer => {
+          embed.footer = footer || undefined
+        }}
         label="Footer Text"
         maxLength={2048}
       />
       <InputField
-        id={`message-embed${embedId}-footer-icon`}
-        value={iconUrl}
-        onChange={iconUrl =>
-          handleChange({
-            footer: {
-              ...footer,
-              iconUrl,
-            },
-            timestamp,
-          })
-        }
+        id={`message-embed${embed.id}-footer-icon`}
+        value={embed.footerIcon}
+        onChange={footerIcon => {
+          embed.footerIcon = footerIcon || undefined
+        }}
         label="Footer Icon"
       />
       <TimestampInput
-        id={`message-embed${embedId}-footer-timestamp`}
-        timestamp={timestamp}
-        onChange={timestamp => handleChange({ footer, timestamp })}
+        id={`message-embed${embed.id}-footer-timestamp`}
+        timestamp={embed.timestamp}
+        onChange={timestamp => {
+          embed.timestamp = timestamp
+        }}
       />
     </InputGroup>
-  )
+  ))
 }

@@ -1,12 +1,10 @@
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled, { css } from "styled-components"
 import { Attachment } from "../../attachment/components/Attachment"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
-import { ID } from "../../message/constants/id"
-import { getEmbedsWithGallery } from "../../message/helpers/getEmbedsWithGallery"
-import { FileLike } from "../../message/types/FileLike"
-import { Message } from "../../message/types/Message"
+import { Message } from "../../message/classes/Message"
 import { getAvatarUrl } from "../../webhook/helpers/getAvatarUrl"
 import { Webhook } from "../../webhook/types/Webhook"
 import { MessageHeader } from "./MessageHeader"
@@ -69,35 +67,35 @@ const ExtrasContainer = styled.div`
 
 export type MessagePreviewProps = {
   message: Message
-  files: readonly (File | FileLike)[]
   webhook?: Webhook
 }
 
 export function MessagePreview(props: MessagePreviewProps) {
-  const { message, files, webhook } = props
-  const { content, embeds, username, avatarUrl } = message
+  const { message, webhook } = props
 
-  return (
+  return useObserver(() => (
     <ScrollContainer>
       <Container>
         <MessageHeader
-          username={username ?? webhook?.name}
-          avatarUrl={avatarUrl ?? (webhook && getAvatarUrl(webhook))}
+          username={message.username ?? webhook?.name}
+          avatarUrl={message.avatar ?? (webhook && getAvatarUrl(webhook))}
         />
-        {content && <Markdown content={content} type="message-content" />}
-        {((embeds?.length ?? 0) > 0 || files.length > 0) && (
+        {message.content && (
+          <Markdown content={message.content} type="message-content" />
+        )}
+        {(message.embeds.length > 0 || message.files.length > 0) && (
           <ExtrasContainer>
             {[
-              ...files.map(file => (
+              ...message.files.map(file => (
                 <Attachment key={`file:${file.name}`} file={file} />
               )),
-              ...getEmbedsWithGallery(embeds ?? []).map(embed => (
-                <RichEmbed key={`embed:${embed[ID]}`} embed={embed} />
+              ...message.embeds.map(embed => (
+                <RichEmbed key={`embed:${embed.id}`} embed={embed} />
               )),
             ]}
           </ExtrasContainer>
         )}
       </Container>
     </ScrollContainer>
-  )
+  ))
 }

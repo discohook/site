@@ -4,7 +4,7 @@ import { HLJSStatic, IModeBase } from "highlight.js"
 import { getLanguageFromAlias } from "./getLanguageFromAlias"
 const hljs = require("highlight.js/lib/highlight") as typeof import("highlight.js")
 
-export const importRawLanguage = async (name: string) =>
+const importRawLanguage = async (name: string) =>
   import(
     `highlight.js/lib/languages/${name}`
     /* webpackChunkName: "vendor.hljs.[request]" */

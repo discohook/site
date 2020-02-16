@@ -1,9 +1,8 @@
 import { base64Decode } from "../../base64/helpers/base64Decode"
 import { parseJson } from "../../json/helpers/parseJson"
-import { applyIds } from "../../message/helpers/applyIds"
-import { Backup } from "../types/Backup"
+import { MessageData } from "../../message/types/MessageData"
 
-export const decodeBackup = (base64: string) => {
+export const decodeMessage = (base64: string) => {
   if (!base64) return
 
   const json = base64Decode(base64)
@@ -20,11 +19,7 @@ export const decodeBackup = (base64: string) => {
     return
   }
 
-  const backup = parsedJson as Backup
-  const message = applyIds(backup.message)
+  const backup = parsedJson as { message: MessageData }
 
-  return {
-    ...backup,
-    message,
-  }
+  return backup.message
 }

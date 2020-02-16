@@ -1,12 +1,11 @@
 import React, { useEffect } from "react"
-import { FileLike } from "../../message/types/FileLike"
 import { getAttachmentType } from "../helpers/getAttachmentType"
 import { AudioAttachment } from "./AudioAttachment"
 import { DefaultAttachment } from "./DefaultAttachment"
 import { ImageAttachment } from "./ImageAttachment"
 
 export type AttachmentProps = {
-  file: File | FileLike
+  file: File
 }
 
 export function Attachment(props: AttachmentProps) {
@@ -18,13 +17,15 @@ export function Attachment(props: AttachmentProps) {
     console.log(`Attachment type for ${name} (${mime || "undefined"}):`, type)
   }, [mime, name, type])
 
-  if (!SERVER && file instanceof File && type === "image") {
-    return <ImageAttachment file={file} />
+  switch (type) {
+    case "image": {
+      return <ImageAttachment file={file} />
+    }
+    case "audio": {
+      return <AudioAttachment file={file} />
+    }
+    default: {
+      return <DefaultAttachment file={file} type={type} />
+    }
   }
-
-  if (type === "audio") {
-    return <AudioAttachment file={file} />
-  }
-
-  return <DefaultAttachment file={file} type={type} />
 }

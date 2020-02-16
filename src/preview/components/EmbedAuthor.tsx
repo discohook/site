@@ -1,6 +1,7 @@
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled, { css } from "styled-components"
-import { Author } from "../../message/types/Author"
+import { Embed } from "../../message/classes/Embed"
 
 const Container = styled.div`
   display: flex;
@@ -39,29 +40,29 @@ const AuthorNameNormal = styled.span`
 const AuthorNameLink = AuthorNameNormal.withComponent("a")
 
 export type EmbedAuthorProps = {
-  author: Author
+  embed: Embed
 }
 
 export function EmbedAuthor(props: EmbedAuthorProps) {
-  const { name, url, iconUrl } = props.author
+  const { embed } = props
 
-  const hasIcon = /^https?:\/\/.+/i.test(iconUrl ?? "")
-
-  return (
+  return useObserver(() => (
     <Container>
-      {hasIcon && <AuthorImage src={iconUrl} alt="Author image" />}
-      {name &&
-        (url ? (
+      {embed.authorIcon && (
+        <AuthorImage src={embed.authorIcon} alt="Author image" />
+      )}
+      {embed.author &&
+        (embed.authorUrl ? (
           <AuthorNameLink
-            href={url}
+            href={embed.authorUrl}
             rel="noopener noreferrer nofollow ugc"
             target="_blank"
           >
-            {name}
+            {embed.author}
           </AuthorNameLink>
         ) : (
-          <AuthorNameNormal>{name}</AuthorNameNormal>
+          <AuthorNameNormal>{embed.author}</AuthorNameNormal>
         ))}
     </Container>
-  )
+  ))
 }

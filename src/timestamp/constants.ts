@@ -1,1 +1,1 @@
-export const TIMEZONE_OFFSET = new Date().getTimezoneOffset() * 60000
+export const TIMESTAMP_FORMAT_RE = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/

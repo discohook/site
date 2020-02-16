@@ -1,8 +1,8 @@
-import { Color } from "../types/Color"
+import { DiscordColor } from "../types/DiscordColor"
 import { numberToHex } from "./numberToHex"
 
 // https://en.wikipedia.org/wiki/HSL_and_HSV#From_RGB
-export const numberToHsv = (color: Color) => {
+export const numberToHsv = (color: DiscordColor) => {
   const [, red = 0, green = 0, blue = 0] =
     /#(\w{2})(\w{2})(\w{2})/
       .exec(numberToHex(color))

@@ -1,11 +1,10 @@
+import { observable } from "mobx"
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import { FileInput } from "../../form/components/FileInput"
 import { InputField } from "../../form/components/InputField"
-import { ID } from "../../message/constants/id"
-import { getUniqueId } from "../../message/helpers/getUniqueId"
-import { Embed } from "../../message/types/Embed"
-import { FileLike } from "../../message/types/FileLike"
-import { Message } from "../../message/types/Message"
+import { Embed } from "../../message/classes/Embed"
+import { Message } from "../../message/classes/Message"
 import { getAvatarUrl } from "../../webhook/helpers/getAvatarUrl"
 import { Webhook } from "../../webhook/types/Webhook"
 import { FlexContainer } from "./Container"
@@ -14,79 +13,60 @@ import { MultiEditor } from "./MultiEditor"
 
 export type MessageEditorProps = {
   message: Message
-  onChange: (message: Message) => void
-  files: readonly (File | FileLike)[]
-  onFilesChange: (files: readonly (File | FileLike)[]) => void
   webhook?: Webhook
 }
 
 export function MessageEditor(props: MessageEditorProps) {
-  const {
-    message,
-    onChange: handleChange,
-    files,
-    onFilesChange: handleFilesChange,
-    webhook,
-  } = props
+  const { message, webhook } = props
 
-  return (
+  return useObserver(() => (
     <>
       <InputField
         id="message-content"
         value={message.content}
-        onChange={content =>
-          handleChange({
-            ...message,
-            content: content || undefined,
-          })
-        }
+        onChange={content => {
+          message.content = content || undefined
+        }}
         label="Message content"
         type="multiline"
         maxLength={2000}
       />
       <MultiEditor<Embed>
-        items={message.embeds ?? []}
-        onChange={embeds =>
-          handleChange({
-            ...message,
-            embeds: embeds.length > 0 ? embeds : undefined,
-          })
-        }
+        items={message.embeds}
         name="Embed"
         limit={10}
-        factory={() => ({ [ID]: getUniqueId() })}
-        keyMapper={embed => embed[ID]}
+        factory={() => new Embed(message)}
+        keyMapper={embed => embed.id}
       >
-        {(embed, onChange) => <EmbedEditor embed={embed} onChange={onChange} />}
+        {embed => <EmbedEditor embed={embed} />}
       </MultiEditor>
       <FlexContainer flow="row">
         <InputField
           id="message-username"
           value={message.username}
-          onChange={username =>
-            handleChange({
-              ...message,
-              username: username || undefined,
-            })
-          }
+          onChange={username => {
+            message.username = username || undefined
+          }}
           label="Override username"
           placeholder={webhook?.name}
           maxLength={32}
         />
         <InputField
           id="message-avatar"
-          value={message.avatarUrl}
-          onChange={avatarUrl =>
-            handleChange({
-              ...message,
-              avatarUrl: avatarUrl || undefined,
-            })
-          }
+          value={message.avatar}
+          onChange={avatar => {
+            message.avatar = avatar || undefined
+          }}
           label="Override avatar"
           placeholder={webhook && getAvatarUrl(webhook)}
         />
       </FlexContainer>
-      <FileInput files={files} onChange={handleFilesChange} />
+      <FileInput
+        files={message.files}
+        onChange={files => {
+          message.files = observable.array([...files])
+        }}
+      />
     </>
-  )
+  ))
 }

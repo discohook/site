@@ -1,6 +1,10 @@
-import { Message } from "../../message/types/Message"
+import { MessageData } from "../../message/types/MessageData"
 import { toSnakeCase } from "./toSnakeCase"
 
-export const stringifyMessage = (message: Message, pretty = true) => {
-  return JSON.stringify(toSnakeCase(message), undefined, pretty ? 2 : undefined)
+export const stringifyMessage = (message: MessageData, pretty = true) => {
+  return JSON.stringify(
+    toSnakeCase(message),
+    (key, value) => (key === "files" ? undefined : value),
+    pretty ? 2 : undefined,
+  )
 }

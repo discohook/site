@@ -10,6 +10,7 @@ module.exports = api => {
 
   const plugins = [
     ["@babel/plugin-transform-runtime"],
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
     ["@babel/plugin-proposal-class-properties", { loose: true }],
     [
       "babel-plugin-styled-components",

@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { FileLike } from "../../message/types/FileLike"
 import { getAttachmentIcon } from "../helpers/getAttachmentIcon"
 import { getHumanReadableSize } from "../helpers/getHumanReadableSize"
 import { download } from "../icons/download"
@@ -15,14 +14,14 @@ import {
   AttachmentInfo,
 } from "./styles"
 
-export const AudioContainer = styled(AttachmentContainer)`
+const AudioContainer = styled(AttachmentContainer)`
   flex-direction: column;
   width: 400px;
 
   font-size: 16px;
 `
 
-export const AudioMetadata = styled.div`
+const AudioMetadata = styled.div`
   display: flex;
 
   margin: 2px 0 0;
@@ -31,23 +30,23 @@ export const AudioMetadata = styled.div`
   height: 40.5px;
 `
 
-export const AudioIconContainer = styled(AttachmentIconContainer)`
+const AudioIconContainer = styled(AttachmentIconContainer)`
   margin: -4px 15px 0 -3px;
 `
 
-export const AudioFileNameInner = styled(AttachmentFileNameInner)`
+const AudioFileNameInner = styled(AttachmentFileNameInner)`
   font-weight: 500;
 
   opacity: 1;
 `
 
-export const AudioFileSize = styled(AttachmentFileSize)`
+const AudioFileSize = styled(AttachmentFileSize)`
   margin: 3px 0 0;
 
   font-weight: 500;
 `
 
-export const AudioDownloadButton = styled(AttachmentDownloadButton)`
+const AudioDownloadButton = styled(AttachmentDownloadButton)`
   align-self: flex-start;
   margin: -2px 0 0;
 
@@ -60,7 +59,7 @@ export const AudioDownloadButton = styled(AttachmentDownloadButton)`
 `
 
 export type AudioAttachmentProps = {
-  file: FileLike
+  file: File
 }
 
 export function AudioAttachment(props: AudioAttachmentProps) {

@@ -1,16 +1,18 @@
 import { Context } from "koa"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import styled, { css, ThemeProvider } from "styled-components"
 import { GlobalStyle } from "../../appearance/components/GlobalStyle"
 import { THEMES } from "../../appearance/constants"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { Appearance } from "../../appearance/types/Appearance"
 import { Theme } from "../../appearance/types/Theme"
-import { decodeBackup } from "../../backup/helpers/decodeBackup"
-import { setUrlToBackup } from "../../backup/helpers/setUrlToBackup"
+import { decodeMessage } from "../../backup/helpers/decodeMessage"
+import { setUrlToMessage } from "../../backup/helpers/setUrlToMessage"
 import { Editor } from "../../editor/components/Editor"
-import { INITIAL_MESSAGE } from "../../message/constants/constants"
+import { Message } from "../../message/classes/Message"
+import { INITIAL_MESSAGE_DATA } from "../../message/constants"
 import { MessagePreview } from "../../preview/components/MessagePreview"
+import { useAutorun } from "../../state/hooks/useAutorun"
 import { fetchWebhookInfo } from "../../webhook/helpers/fetchWebhookInfo"
 import { Webhook } from "../../webhook/types/Webhook"
 
@@ -83,28 +85,22 @@ export type AppProps = {
 export function App(props: AppProps) {
   const { request } = props
 
-  const [backup, setBackup] = useState(() => {
+  const [message] = useState(() => {
     const search = SERVER && request ? request.search : location.search
     const parameters = new URLSearchParams(search)
-    const encodedBackup = parameters.get("backup")
+    const encodedBackup = parameters.get("message") ?? parameters.get("backup")
 
-    const backup = decodeBackup(encodedBackup ?? "")
+    const backup = decodeMessage(encodedBackup ?? "")
     if (backup && !SERVER) {
-      console.log("Loaded with shared backup:", backup)
+      console.log("Loaded with message:", backup)
     }
 
-    return backup ?? { message: INITIAL_MESSAGE, files: [] }
+    return new Message(backup ?? INITIAL_MESSAGE_DATA)
   })
 
-  const lastUrlChangeRef = useRef(0)
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      lastUrlChangeRef.current = Date.now()
-      setUrlToBackup(backup)
-    }, Math.max(1000 - (Date.now() - lastUrlChangeRef.current), 0))
-
-    return () => clearTimeout(timeoutId)
-  }, [backup])
+  useAutorun(() => {
+    setUrlToMessage(message.toJS())
+  })
 
   const [theme, setTheme] = useState<Theme>({
     ...DARK_THEME,
@@ -158,22 +154,11 @@ export function App(props: AppProps) {
         )}
         <View>
           {(!theme.appearance.mobile || activeTab === "preview") && (
-            <MessagePreview
-              message={backup.message}
-              files={backup.files}
-              webhook={webhook}
-            />
+            <MessagePreview message={message} webhook={webhook} />
           )}
           {(!theme.appearance.mobile || activeTab === "editor") && (
             <Editor
-              message={backup.message}
-              onChange={message =>
-                setBackup(backup => ({ ...backup, message }))
-              }
-              files={backup.files}
-              onFilesChange={files =>
-                setBackup(backup => ({ ...backup, files }))
-              }
+              message={message}
               onAppearanceChange={handleAppearanceChange}
               webhookUrl={webhookUrl}
               onWebhookUrlChange={setWebhookUrl}

@@ -4,13 +4,11 @@ import { Actions } from "../../editor/components/Actions"
 import { FlexContainer } from "../../editor/components/Container"
 import { Button } from "../../form/components/Button"
 import { InputField } from "../../form/components/InputField"
-import { FileLike } from "../../message/types/FileLike"
-import { Message } from "../../message/types/Message"
+import { Message } from "../../message/classes/Message"
 import { deleteBackup } from "../helpers/deleteBackup"
 import { getBackup } from "../helpers/getBackup"
 import { listBackups } from "../helpers/listBackups"
 import { setBackup } from "../helpers/setBackup"
-import { Backup } from "../types/Backup"
 
 const ModalContainer = styled.div`
   position: absolute;
@@ -87,13 +85,11 @@ const DeleteAction = styled.a`
 
 export type BackupModalProps = {
   message: Message
-  files: readonly FileLike[]
-  onLoad: (backup: Backup) => void
   onClose: () => void
 }
 
 export function BackupModal(props: BackupModalProps) {
-  const { message, files, onLoad, onClose: handleClose } = props
+  const { message, onClose: handleClose } = props
 
   const [backups, setBackups] = useState<string[]>([])
   const getAllBackups = async () => setBackups(await listBackups())
@@ -105,7 +101,7 @@ export function BackupModal(props: BackupModalProps) {
 
   const handleLoad = async (name: string) => {
     const backup = await getBackup(name)
-    if (backup) onLoad(backup)
+    if (backup) message.apply(backup)
   }
 
   const handleDelete = async (backup: string) => {
@@ -116,14 +112,7 @@ export function BackupModal(props: BackupModalProps) {
   const [newBackupName, setNewBackupName] = useState("")
 
   const handleCreate = () => {
-    setBackup(newBackupName.trim().replace(/\s+/gu, " "), {
-      message,
-      files: files.map(file => ({
-        name: file.name,
-        type: file.type,
-        size: file.size,
-      })),
-    })
+    setBackup(newBackupName.trim().replace(/\s+/gu, " "), message.toJS())
       .then(async () => {
         await getAllBackups()
         setNewBackupName("")

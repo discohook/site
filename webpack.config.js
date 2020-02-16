@@ -93,6 +93,7 @@ module.exports = {
                 "prop-types",
                 "scheduler",
               ],
+              mobx: ["mobx", "mobx-react", "mobx-react-lite"],
               css: [
                 "styled-components",
                 "@emotion/is-prop-valid",

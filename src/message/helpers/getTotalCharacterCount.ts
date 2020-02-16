@@ -1,6 +1,6 @@
-import { MessageWithoutIds } from "../types/MessageWithoutIds"
+import { MessageData } from "../types/MessageData"
 
-export const getTotalCharacterCount = (message: MessageWithoutIds) => {
+export const getTotalCharacterCount = (message: MessageData) => {
   let count = message.content?.length ?? 0
 
   for (const embed of message.embeds ?? []) {

@@ -1,6 +1,9 @@
-import { applyIds } from "../helpers/applyIds"
+import { MessageData } from "./types/MessageData"
 
-export const INITIAL_MESSAGE = applyIds({
+export const MAX_FIELDS_PER_ROW = 3
+export const FIELD_GRID_SIZE = 12
+
+export const INITIAL_MESSAGE_DATA: MessageData = {
   content: `
 Hey, this is Discohook, a message and embed builder for Discord webhooks. <:discohook:645409602393079819>
 You can read more about how to use Discohook below, or click **Clear all** on the top to start out blank.
@@ -191,4 +194,4 @@ If you want to contact me, join the [Discohook server](https://discohook.jayline
 `.trim(),
     },
   ],
-})
+}

@@ -1,7 +1,9 @@
+import { isValid } from "date-fns"
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled, { css } from "styled-components"
+import { Embed } from "../../message/classes/Embed"
 import { formatTimestamp } from "../../message/helpers/formatTimestamp"
-import { Footer } from "../../message/types/Footer"
 
 const Container = styled.div<{ hasThumbnail?: boolean }>`
   margin: 8px 0 0;
@@ -52,25 +54,24 @@ const FooterSeparator = styled.span`
 `
 
 export type EmbedFooterProps = {
-  footer?: Footer
-  timestamp?: string
-  hasThumbnail?: boolean
+  embed: Embed
 }
 
 export function EmbedFooter(props: EmbedFooterProps) {
-  const { footer = {}, timestamp, hasThumbnail } = props
-  const { text, iconUrl } = footer
+  const { embed } = props
 
-  const hasIcon = /https?:\/\/.+/i.test(iconUrl ?? "")
-
-  return (
-    <Container hasThumbnail={hasThumbnail}>
-      {hasIcon && <FooterImage src={iconUrl} alt="Footer image" />}
+  return useObserver(() => (
+    <Container hasThumbnail={Boolean(embed.thumbnail)}>
+      {embed.footerIcon && (
+        <FooterImage src={embed.footerIcon} alt="Footer image" />
+      )}
       <FooterText>
-        {text}
-        {text && timestamp && <FooterSeparator>•</FooterSeparator>}
-        {timestamp && formatTimestamp(timestamp)}
+        {embed.footer}
+        {embed.footer && isValid(embed.timestamp) && (
+          <FooterSeparator>•</FooterSeparator>
+        )}
+        {isValid(embed.timestamp) && formatTimestamp(embed.timestamp)}
       </FooterText>
     </Container>
-  )
+  ))
 }

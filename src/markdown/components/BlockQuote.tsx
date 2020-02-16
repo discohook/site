@@ -2,11 +2,11 @@ import React, { ReactNode } from "react"
 import styled from "styled-components"
 import { RichEmbedContainer } from "../../preview/components/RichEmbedContainer"
 
-export const BlockQuoteContainer = styled.div`
+const BlockQuoteContainer = styled.div`
   display: flex;
 `
 
-export const BlockQuoteDivider = styled.div`
+const BlockQuoteDivider = styled.div`
   min-width: 4px;
   max-width: 4px;
   border-radius: 4px;
@@ -14,7 +14,7 @@ export const BlockQuoteDivider = styled.div`
   background: ${({ theme }) => theme.interactive.muted};
 `
 
-export const BlockQuoteContent = styled.blockquote`
+const BlockQuoteContent = styled.blockquote`
   max-width: 90%;
   padding: 0 8px 0 12px;
   margin: 0;

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { Button } from "../../form/components/Button"
 import { InputContainer } from "../../form/components/InputContainer"
 import { InputLabel } from "../../form/components/InputLabel"
 import { MultilineTextInput } from "../../form/components/MultilineTextInput"
-import { Message } from "../../message/types/Message"
+import { Message } from "../../message/classes/Message"
+import { useAutorun } from "../../state/hooks/useAutorun"
 import { parseMessage } from "../helpers/parseMessage"
 import { stringifyMessage } from "../helpers/stringifyMessage"
 
@@ -41,16 +42,21 @@ const SubmitButton = styled(Button)`
 
 export type JsonInputProps = {
   message: Message
-  onChange: (message: Message) => void
 }
 
 export function JsonInput(props: JsonInputProps) {
-  const { message, onChange: handleChange } = props
+  const { message } = props
 
-  const [json, setJson] = useState(() => stringifyMessage(message))
-  useEffect(() => {
-    setJson(stringifyMessage(message))
-  }, [message])
+  const [json, setJson] = useState("{}")
+
+  const lastMessageRef = useRef(json)
+  useAutorun(() => {
+    const newMessage = stringifyMessage(message.toJS(), false)
+    if (newMessage !== lastMessageRef.current) {
+      setJson(stringifyMessage(message.toJS()))
+      lastMessageRef.current = newMessage
+    }
+  })
 
   const [errors, setErrors] = useState<string[]>([])
   useEffect(() => {
@@ -85,7 +91,12 @@ export function JsonInput(props: JsonInputProps) {
       />
       <SubmitButton
         disabled={errors.length > 0}
-        onClick={() => handleChange(parseMessage(json).message ?? {})}
+        onClick={() => {
+          message.apply({
+            ...parseMessage(json).message,
+            files: message.files.slice(),
+          })
+        }}
       >
         Submit
       </SubmitButton>

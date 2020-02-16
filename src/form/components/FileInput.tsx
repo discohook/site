@@ -1,7 +1,6 @@
 import React, { useRef } from "react"
 import styled from "styled-components"
 import { FlexContainer } from "../../editor/components/Container"
-import { FileLike } from "../../message/types/FileLike"
 import { MAX_FILE_SIZE } from "../constants"
 import { Button } from "./Button"
 import { InputContainer } from "./InputContainer"
@@ -40,8 +39,8 @@ const RemoveFilesButton = styled(Button)`
 `
 
 export type FileInputProps = {
-  files: readonly (File | FileLike)[]
-  onChange: (files: readonly (File | FileLike)[]) => void
+  files: readonly File[]
+  onChange: (files: readonly File[]) => void
 }
 
 export function FileInput(props: FileInputProps) {

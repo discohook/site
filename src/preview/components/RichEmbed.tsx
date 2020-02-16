@@ -1,11 +1,10 @@
+import { isValid } from "date-fns"
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled, { css } from "styled-components"
-import { numberToHex } from "../../color/helpers/numberToHex"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
-import { ID } from "../../message/constants/id"
-import { EmbedWithGallery } from "../../message/helpers/getEmbedsWithGallery"
-import { getFieldsWithWidths } from "../../message/helpers/getFieldsWithWidths"
+import { Embed } from "../../message/classes/Embed"
 import { EmbedAuthor } from "./EmbedAuthor"
 import { EmbedField } from "./EmbedField"
 import { EmbedFooter } from "./EmbedFooter"
@@ -92,81 +91,60 @@ const EmbedThumbnail = styled.img`
 `
 
 export type RichEmbedProps = {
-  embed: EmbedWithGallery
+  embed: Embed
 }
 
 export function RichEmbed(props: RichEmbedProps) {
-  const {
-    title,
-    description,
-    url,
-    timestamp,
-    color,
-    footer,
-    image,
-    thumbnail,
-    author,
-    fields,
-    gallery,
-  } = props.embed
+  const { embed } = props
 
-  const embedColor = numberToHex(color)
-
-  const hasThumbnail = /^https?:\/\/.+/i.test(thumbnail?.url ?? "")
-  const hasImage = /^https?:\/\/.+/i.test(image?.url ?? "")
-
-  return (
-    <RichEmbedContainer style={{ borderColor: embedColor }}>
+  return useObserver(() => (
+    <RichEmbedContainer style={{ borderColor: embed.color?.hex }}>
       <EmbedGrid>
-        {author && <EmbedAuthor author={author} />}
-        {title &&
-          (url ? (
+        {embed.author && <EmbedAuthor embed={embed} />}
+        {embed.title &&
+          (embed.url ? (
             <EmbedTitleLink
-              href={url}
+              href={embed.url}
               rel="noopener noreferrer nofollow ugc"
               target="_blank"
             >
-              <Markdown content={title} type="embed-header" />
+              <Markdown content={embed.title} type="embed-header" />
             </EmbedTitleLink>
           ) : (
             <EmbedTitleNormal>
-              <Markdown content={title} type="embed-header" />
+              <Markdown content={embed.title} type="embed-header" />
             </EmbedTitleNormal>
           ))}
-        {description && (
+        {embed.description && (
           <EmbedDescription>
-            <Markdown content={description} type="embed-content" />
+            <Markdown content={embed.description} type="embed-content" />
           </EmbedDescription>
         )}
-        {fields && (
+        {embed.fields.length > 0 && (
           <EmbedFields>
-            {getFieldsWithWidths(fields).map(({ width, ...field }) => (
-              <EmbedField key={field[ID]} field={field} width={width} />
+            {embed.fields.map(field => (
+              <EmbedField key={field.id} field={field} />
             ))}
           </EmbedFields>
         )}
-        {gallery ? (
-          <EmbedGallery gallery={gallery} />
-        ) : hasImage ? (
+        {embed.gallery ? (
+          <EmbedGallery gallery={embed.gallery} />
+        ) : embed.image ? (
           <EmbedImage
-            src={image?.url}
+            src={embed.image}
             alt="Image"
-            hasThumbnail={hasThumbnail}
+            hasThumbnail={Boolean(embed.thumbnail)}
           />
         ) : (
           undefined
         )}
-        {(footer ?? timestamp) && (
-          <EmbedFooter
-            footer={footer}
-            timestamp={timestamp}
-            hasThumbnail={hasThumbnail}
-          />
+        {(embed.footer ?? isValid(embed.timestamp)) && (
+          <EmbedFooter embed={embed} />
         )}
-        {hasThumbnail && (
-          <EmbedThumbnail src={thumbnail?.url} alt="Thumbnail" />
+        {embed.thumbnail && (
+          <EmbedThumbnail src={embed.thumbnail} alt="Thumbnail" />
         )}
       </EmbedGrid>
     </RichEmbedContainer>
-  )
+  ))
 }

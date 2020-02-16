@@ -1,12 +1,17 @@
+import { act } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import React, { cloneElement } from "react"
+import { reaction } from "mobx"
+import React from "react"
 import { render } from "../../testing/helpers/render"
+import { Color } from "../classes/Color"
 import { ColorInput } from "./ColorInput"
 
 describe("ColorInput", () => {
   it("shows hex value", () => {
+    const color = new Color(0xff00ff)
+
     const { getByLabelText } = render(
-      <ColorInput id="color-input" color={0xff00ff} onChange={() => {}} />,
+      <ColorInput id="color-input" color={color} />,
     )
 
     const input = getByLabelText("Color")
@@ -15,10 +20,16 @@ describe("ColorInput", () => {
   })
 
   it("handles input changes", async () => {
+    const color = new Color(null)
+
     const handleChange = jest.fn()
+    reaction(
+      () => color.color,
+      number => handleChange(number),
+    )
 
     const { getByLabelText } = render(
-      <ColorInput id="color-input" color={undefined} onChange={handleChange} />,
+      <ColorInput id="color-input" color={color} />,
     )
 
     const input = getByLabelText("Color")
@@ -33,10 +44,16 @@ describe("ColorInput", () => {
   })
 
   it("handles emptying input", async () => {
+    const color = new Color(0xff0000)
+
     const handleChange = jest.fn()
+    reaction(
+      () => color.color,
+      number => handleChange(number),
+    )
 
     const { getByLabelText } = render(
-      <ColorInput id="color-input" color={0xff0000} onChange={handleChange} />,
+      <ColorInput id="color-input" color={color} />,
     )
 
     const input = getByLabelText("Color")
@@ -48,19 +65,21 @@ describe("ColorInput", () => {
     await userEvent.type(input, "", { allAtOnce: true })
 
     expect(handleChange).toHaveBeenCalledTimes(1)
-    expect(handleChange).toHaveBeenCalledWith(undefined)
+    expect(handleChange).toHaveBeenCalledWith(null)
   })
 
   it("handles changes from parent component", () => {
-    const element = (
-      <ColorInput id="color-input" color={0xff0000} onChange={() => {}} />
-    )
+    const color = new Color(0xff00ff)
 
-    const { rerender, getByLabelText } = render(element)
+    const { getByLabelText } = render(
+      <ColorInput id="color-input" color={color} />,
+    )
 
     const input = getByLabelText("Color")
 
-    rerender(cloneElement(element, { color: 0x00ff00 }))
+    act(() => {
+      color.color = 0x00ff00
+    })
 
     expect(input).toHaveValue("#00ff00")
   })

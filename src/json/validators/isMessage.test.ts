@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { INITIAL_MESSAGE } from "../../message/constants/constants"
+import { INITIAL_MESSAGE_DATA } from "../../message/constants"
+import { toSnakeCase } from "../helpers/toSnakeCase"
 import { isMessage } from "./isMessage"
 
 describe("isMessage", () => {
   it("validates discord message objects", () => {
     const valid = [
-      INITIAL_MESSAGE,
+      toSnakeCase(INITIAL_MESSAGE_DATA),
       { content: "Hey" },
       { embeds: [{ description: "Embed" }] },
       { username: "Someone", content: "Hey" },

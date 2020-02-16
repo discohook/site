@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useObserver } from "mobx-react-lite"
+import React, { useRef, useState } from "react"
 import styled from "styled-components"
 import { FlexContainer } from "../../editor/components/Container"
 import { InputField } from "../../form/components/InputField"
-import { hexToNumber } from "../helpers/hexToNumber"
-import { numberToHex } from "../helpers/numberToHex"
-import { Color } from "../types/Color"
+import { useAutorun } from "../../state/hooks/useAutorun"
+import { Color } from "../classes/Color"
 import { ColorPicker } from "./ColorPicker"
 
 const ColorInputContainer = styled(FlexContainer)`
@@ -30,39 +30,20 @@ const PopoverContainer = styled.div`
 export type ColorInputProps = {
   id: string
   color: Color
-  onChange: (color: Color) => void
 }
 
 export function ColorInput(props: ColorInputProps) {
-  const { id, color, onChange: handleChange } = props
+  const { id, color } = props
 
-  const [hex, setHex] = useState(() => numberToHex(color))
-  useEffect(() => {
-    setHex(numberToHex(color))
-  }, [color])
+  const [hex, setHex] = useState(() => color.hex ?? "")
+  useAutorun(() => {
+    if (!hex || /^#[\da-f]{6}$/i.test(hex)) setHex(color.hex ?? "")
+  })
 
   const [isPickerShown, setPickerShown] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const lastPickerUseRef = useRef(0)
-
-  useEffect(() => {
-    const isHex = /^#[\da-f]{6}$/i.test(hex)
-    const number = isHex ? hexToNumber(hex) : undefined
-
-    if (lastPickerUseRef.current + 500 > Date.now()) return
-    if (color === null && !isHex) return
-    if (hex === "" && color === undefined) return
-    if (number === color) return
-
-    if (isHex) {
-      handleChange(number)
-    } else if (hex === "") {
-      handleChange(undefined)
-    }
-  }, [color, handleChange, hex])
-
-  return (
+  return useObserver(() => (
     <ColorInputContainer
       flow="row"
       onFocus={() => setPickerShown(true)}
@@ -78,21 +59,23 @@ export function ColorInput(props: ColorInputProps) {
       <InputField
         id={id}
         value={hex}
-        onChange={color => setHex(color.toLowerCase().trim())}
+        onChange={hex => {
+          setHex(hex.toLowerCase())
+
+          if (/^#[\da-f]{6}$/i.test(hex)) {
+            color.hex = hex
+          } else if (!hex) {
+            color.invalidate()
+          }
+        }}
         label="Color"
         placeholder="#rrggbb"
       />
       {isPickerShown && (
         <PopoverContainer>
-          <ColorPicker
-            color={color}
-            onChange={color => {
-              lastPickerUseRef.current = Date.now()
-              handleChange(color)
-            }}
-          />
+          <ColorPicker color={color} />
         </PopoverContainer>
       )}
     </ColorInputContainer>
-  )
+  ))
 }

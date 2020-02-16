@@ -1,59 +1,43 @@
+import { useObserver } from "mobx-react-lite"
 import React from "react"
 import { InputField } from "../../form/components/InputField"
 import { InputGroup } from "../../form/components/InputGroup"
-import { Author } from "../../message/types/Author"
+import { Embed } from "../../message/classes/Embed"
 
 export type AuthorEditorProps = {
-  id: number
-  author: Author | undefined
-  onChange: (author: Author | undefined) => void
+  embed: Embed
 }
 
 export function AuthorEditor(props: AuthorEditorProps) {
-  const { id: embedId, author = {} } = props
-  const { name, url, iconUrl } = author
+  const { embed } = props
 
-  const handleChange = (author: Author) =>
-    Object.values(author).some(Boolean)
-      ? props.onChange(author)
-      : props.onChange(undefined)
-
-  return (
+  return useObserver(() => (
     <InputGroup>
       <InputField
-        id={`message-embed${embedId}-author-name`}
-        value={name}
-        onChange={name =>
-          handleChange({
-            ...author,
-            name,
-          })
-        }
+        id={`message-embed${embed.id}-author-name`}
+        value={embed.author}
+        onChange={author => {
+          embed.author = author || undefined
+        }}
         label="Author Name"
         maxLength={256}
       />
       <InputField
-        id={`message-embed${embedId}-author-url`}
-        value={url}
-        onChange={url =>
-          handleChange({
-            ...author,
-            url,
-          })
-        }
+        id={`message-embed${embed.id}-author-url`}
+        value={embed.authorUrl}
+        onChange={authorUrl => {
+          embed.authorUrl = authorUrl || undefined
+        }}
         label="Author URL"
       />
       <InputField
-        id={`message-embed${embedId}-author-icon`}
-        value={iconUrl}
-        onChange={iconUrl =>
-          handleChange({
-            ...author,
-            iconUrl,
-          })
-        }
+        id={`message-embed${embed.id}-author-icon`}
+        value={embed.authorIcon}
+        onChange={authorIcon => {
+          embed.authorIcon = authorIcon || undefined
+        }}
         label="Author Icon"
       />
     </InputGroup>
-  )
+  ))
 }

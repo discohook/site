@@ -8,9 +8,8 @@ import { BackupModal } from "../../backup/components/BackupModal"
 import { Button } from "../../form/components/Button"
 import { InputField } from "../../form/components/InputField"
 import { JsonInput } from "../../json/components/JsonInput"
+import { Message } from "../../message/classes/Message"
 import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
-import { FileLike } from "../../message/types/FileLike"
-import { Message } from "../../message/types/Message"
 import { WEBHOOK_URL_RE } from "../../webhook/constants"
 import { executeWebhook } from "../../webhook/helpers/executeWebhook"
 import { Webhook } from "../../webhook/types/Webhook"
@@ -53,9 +52,6 @@ const DisabledReason = styled.div`
 
 export type EditorProps = {
   message: Message
-  onChange: (message: Message) => void
-  files: readonly (File | FileLike)[]
-  onFilesChange: (files: readonly (File | FileLike)[]) => void
   onAppearanceChange: (appearance: Appearance) => void
   webhookUrl: string
   onWebhookUrlChange: (webhookUrl: string) => void
@@ -65,9 +61,6 @@ export type EditorProps = {
 export function Editor(props: EditorProps) {
   const {
     message,
-    onChange: handleChange,
-    files,
-    onFilesChange: handleFilesChange,
     onAppearanceChange: handleAppearanceChange,
     webhookUrl,
     onWebhookUrlChange: handleWebhookUrlChange,
@@ -82,7 +75,7 @@ export function Editor(props: EditorProps) {
     setSending(true)
 
     try {
-      await executeWebhook(webhookUrl, message, files)
+      await executeWebhook(webhookUrl, message.toJS())
     } catch (error) {
       console.error("Error executing webhook:", error)
     }
@@ -90,20 +83,16 @@ export function Editor(props: EditorProps) {
     setSending(false)
   }
 
-  const clearAll = () => {
-    handleChange({})
-    handleFilesChange([])
-  }
-
-  const isOverDiscordCharacterLimit = getTotalCharacterCount(message) > 6000
+  const isOverDiscordCharacterLimit =
+    getTotalCharacterCount(message.toJS()) > 6000
 
   let isDisabled: boolean
   if (sending) isDisabled = true
   else if (!WEBHOOK_URL_RE.test(webhookUrl)) isDisabled = true
   else if (isOverDiscordCharacterLimit) isDisabled = true
   else if (typeof message.content === "string") isDisabled = false
-  else if ((message.embeds?.length ?? 0) > 0) isDisabled = false
-  else if (files.length > 0) isDisabled = false
+  else if (message.embeds.length > 0) isDisabled = false
+  else if (message.files.length > 0) isDisabled = false
   else isDisabled = true
 
   const [isBackupModalShown, setIsBackupModalShown] = useState(false)
@@ -135,7 +124,7 @@ export function Editor(props: EditorProps) {
             },
             {
               name: "Clear all",
-              action: clearAll,
+              action: () => message.apply({}),
             },
           ]}
         />
@@ -156,23 +145,12 @@ export function Editor(props: EditorProps) {
             The message body is over Discord&apos;s 6000 character limit
           </DisabledReason>
         )}
-        <MessageEditor
-          message={message}
-          onChange={handleChange}
-          files={files}
-          onFilesChange={handleFilesChange}
-          webhook={webhook}
-        />
-        <JsonInput message={message} onChange={handleChange} />
+        <MessageEditor message={message} webhook={webhook} />
+        <JsonInput message={message} />
       </EditorInnerContainer>
       {isBackupModalShown && (
         <BackupModal
           message={message}
-          files={files}
-          onLoad={backup => {
-            handleChange(backup.message)
-            handleFilesChange(backup.files)
-          }}
           onClose={() => setIsBackupModalShown(false)}
         />
       )}

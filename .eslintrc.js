@@ -35,6 +35,7 @@ module.exports = {
         selector: "parameter",
       },
       { format: ["StrictPascalCase"], selector: "typeLike" },
+      { filter: "toJS", format: ["camelCase"], selector: "memberLike" },
     ],
     "@typescript-eslint/no-array-constructor": "warn",
     "@typescript-eslint/no-dupe-class-members": "warn",

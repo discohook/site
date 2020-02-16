@@ -1,7 +1,6 @@
 import React from "react"
 import styled, { css } from "styled-components"
-import { ID } from "../../message/constants/id"
-import { ImageWithId } from "../../message/helpers/getEmbedsWithGallery"
+import { Gallery } from "../../message/types/Gallery"
 
 const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
   grid-column: 1 / 2;
@@ -24,7 +23,7 @@ const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
     `}
 `
 
-const EmbedGalleryCell = styled.div<{ length?: number; index?: number }>`
+const EmbedGalleryCell = styled.div<{ index?: number; length?: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +46,7 @@ const EmbedGalleryImage = styled.img`
 `
 
 export type EmbedGalleryProps = {
-  gallery: ImageWithId[]
+  gallery: Gallery
 }
 
 export function EmbedGallery(props: EmbedGalleryProps) {
@@ -55,9 +54,9 @@ export function EmbedGallery(props: EmbedGalleryProps) {
 
   return (
     <EmbedGalleryWrapper>
-      {gallery.map((image, index) => (
-        <EmbedGalleryCell key={image[ID]} length={gallery.length} index={index}>
-          <EmbedGalleryImage src={image.url} alt="Image" />
+      {gallery.map((item, index) => (
+        <EmbedGalleryCell key={item.id} index={index} length={gallery.length}>
+          <EmbedGalleryImage src={item.image} alt="Image" />
         </EmbedGalleryCell>
       ))}
     </EmbedGalleryWrapper>

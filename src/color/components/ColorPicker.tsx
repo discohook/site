@@ -1,12 +1,11 @@
 import { linearGradient, rgb, rgba } from "polished"
-import React, { useLayoutEffect, useRef } from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
+import { useAutorun } from "../../state/hooks/useAutorun"
+import { Color } from "../classes/Color"
 import { hsvToNumber } from "../helpers/hsvToNumber"
 import { numberToHex } from "../helpers/numberToHex"
-import { numberToHsv } from "../helpers/numberToHsv"
 import { useDragArea } from "../hooks/useDragArea"
-import { Color } from "../types/Color"
-import { HsvColor } from "../types/HsvColor"
 
 const Container = styled.div`
   display: flex;
@@ -69,17 +68,10 @@ const SliderKnob = styled.div`
 
 export type ColorPickerProps = {
   color: Color
-  onChange: (color: Color) => void
 }
 
 export function ColorPicker(props: ColorPickerProps) {
-  const { color, onChange } = props
-
-  const hsvRef = useRef<HsvColor>({
-    hue: 0,
-    saturation: NaN,
-    value: NaN,
-  })
+  const { color } = props
 
   const pickerRef = useRef<HTMLDivElement>(null)
   const pickerKnobRef = useRef<HTMLDivElement>(null)
@@ -94,56 +86,42 @@ export function ColorPicker(props: ColorPickerProps) {
 
     if (!picker || !pickerKnob || !slider || !sliderKnob) return
 
-    const { hue, saturation, value } = hsvRef.current
-    const pureColor = hsvToNumber({ hue, saturation: 1, value: 1 })
-
     const {
       width: pickerWidth,
       height: pickerHeight,
     } = picker.getBoundingClientRect()
     const { height: sliderHeight } = slider.getBoundingClientRect()
 
+    const pureColor = hsvToNumber({
+      hue: color.hue || 0,
+      saturation: 1,
+      value: 1,
+    })
     picker.style.backgroundColor = numberToHex(pureColor)
 
     pickerKnob.style.transform = [
-      `translateX(${saturation * pickerWidth - 6}px)`,
-      `translateY(${(1 - value) * pickerHeight - 6}px)`,
+      `translateX(${color.saturation * pickerWidth - 6}px)`,
+      `translateY(${(1 - color.value) * pickerHeight - 6}px)`,
     ].join(" ")
-    pickerKnob.style.backgroundColor = numberToHex(
-      hsvToNumber({ hue, saturation, value }),
-    )
+    pickerKnob.style.backgroundColor = color.hex ?? rgb(0, 0, 0)
 
-    const normalHue = hue / 360
+    const normalHue = (color.hue || 0) / 360
     sliderKnob.style.transform = [
       "translateX(-2px)",
       `translateY(${normalHue * sliderHeight - 4}px)`,
     ].join(" ")
   }
 
-  useLayoutEffect(setPickerStyles, [])
-  if (hsvToNumber(hsvRef.current) !== color) {
-    hsvRef.current = numberToHsv(color)
-    setPickerStyles()
-  }
-
-  const handleChange = () => {
-    const color = hsvToNumber(hsvRef.current)
-    onChange(color)
-  }
+  useAutorun(() => setPickerStyles())
 
   useDragArea(pickerRef, (mouseX, mouseY) => {
-    hsvRef.current.saturation = mouseX
-    hsvRef.current.value = 1 - mouseY
-
-    setPickerStyles()
-    handleChange()
+    if (Number.isNaN(color.hue)) color.hue = 0
+    color.saturation = mouseX
+    color.value = 1 - mouseY
   })
 
-  useDragArea(sliderRef, (_, mouseY) => {
-    hsvRef.current.hue = mouseY * 360
-
-    setPickerStyles()
-    handleChange()
+  useDragArea(sliderRef, (mouseX, mouseY) => {
+    color.hue = mouseY * 360
   })
 
   return (

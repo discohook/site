@@ -1,5 +1,4 @@
 import React from "react"
-import { FileLike } from "../../message/types/FileLike"
 import { getAttachmentIcon } from "../helpers/getAttachmentIcon"
 import { getHumanReadableSize } from "../helpers/getHumanReadableSize"
 import { download } from "../icons/download"
@@ -15,7 +14,7 @@ import {
 } from "./styles"
 
 export type DefaultAttachmentProps = {
-  file: FileLike
+  file: File
   type: AttachmentType
 }
 

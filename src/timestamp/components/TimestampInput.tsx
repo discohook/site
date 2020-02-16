@@ -1,11 +1,10 @@
-import { isValid } from "date-fns"
+import { getTime } from "date-fns"
 import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { FlexContainer } from "../../editor/components/Container"
 import { InputField } from "../../form/components/InputField"
-import { addTimezoneOffset } from "../helpers/addTimezoneOffset"
+import { TIMESTAMP_FORMAT_RE } from "../constants"
 import { getDateTimeString } from "../helpers/getDateTimeString"
-import { subTimezoneOffset } from "../helpers/subTimezoneOffset"
 import { DatePicker } from "./DatePicker"
 
 const TimestampInputContainer = styled(FlexContainer)`
@@ -30,56 +29,48 @@ const PopoverContainer = styled.div`
 
 export type TimestampInputProps = {
   id: string
-  timestamp?: string
-  onChange: (timestamp?: string) => void
+  timestamp: Date
+  onChange: (timestamp: Date) => void
 }
 
 export function TimestampInput(props: TimestampInputProps) {
-  const { id, timestamp, onChange } = props
-
-  const date = subTimezoneOffset(new Date(timestamp ?? NaN))
+  const { id, timestamp, onChange: handleChange } = props
 
   const [isPickerShown, setPickerShown] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const [formatted, setFormatted] = useState(getDateTimeString(timestamp))
+  const [input, setInput] = useState(() => getDateTimeString(timestamp) ?? "")
+
+  const lastDateRef = useRef<number>(timestamp.getTime())
   useEffect(() => {
-    const isTimestamp = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(timestamp ?? "")
-    const next = getDateTimeString(timestamp)
+    // Object.is considers NaN to be equal to NaN
+    if (!Object.is(lastDateRef.current, getTime(timestamp))) {
+      setInput(getDateTimeString(timestamp) ?? "")
+    }
 
-    if (!isTimestamp) return
-    if (!formatted && !next) return
+    lastDateRef.current = getTime(timestamp)
+  }, [timestamp])
 
-    setFormatted(next)
-  }, [formatted, timestamp])
-
-  const handleChange = (value: string) => {
-    setFormatted(value)
+  const handleInputChange = (value: string) => {
+    setInput(value)
 
     if (!value) {
-      onChange(undefined)
+      handleChange(new Date(NaN))
       return
     }
 
-    if (!/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(value)) return
+    const match = TIMESTAMP_FORMAT_RE.exec(value)
+    if (!match) return
 
-    const date = new Date(`${value.replace(" ", "T")}:00.000Z`)
-    const offsetAdjusted = addTimezoneOffset(date)
-
-    onChange(offsetAdjusted.toISOString())
-  }
-
-  const handleDateChange = (date: Date | undefined) => {
-    if (!date || !isValid(date)) {
-      handleChange("")
-      return
-    }
-
+    const [, year, month, day, hours, minutes] = match
     handleChange(
-      date
-        .toISOString()
-        .replace("T", " ")
-        .slice(0, -8),
+      new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hours),
+        Number(minutes),
+      ),
     )
   }
 
@@ -98,14 +89,14 @@ export function TimestampInput(props: TimestampInputProps) {
     >
       <InputField
         id={id}
-        value={formatted}
-        onChange={handleChange}
+        value={input}
+        onChange={handleInputChange}
         label="Timestamp"
         placeholder="YYYY-MM-DD hh:mm"
       />
       {isPickerShown && (
         <PopoverContainer onMouseDown={event => event.preventDefault()}>
-          <DatePicker date={date} onChange={handleDateChange} />
+          <DatePicker date={timestamp} onChange={handleChange} />
         </PopoverContainer>
       )}
     </TimestampInputContainer>
