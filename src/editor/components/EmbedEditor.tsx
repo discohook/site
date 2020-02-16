@@ -22,7 +22,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
     <FlexContainer>
       <InputGroup>
         <InputField
-          id={`message-embed${embed.id}-title`}
+          id={`e${embed.id}.title`}
           value={embed.title}
           onChange={title => {
             embed.title = title || undefined
@@ -31,7 +31,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
           maxLength={256}
         />
         <InputField
-          id={`message-embed${embed.id}-url`}
+          id={`e${embed.id}.url`}
           value={embed.url}
           onChange={url => {
             embed.url = url || undefined
@@ -40,7 +40,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
         />
       </InputGroup>
       <InputField
-        id={`message-embed${embed.id}-description`}
+        id={`e${embed.id}.desc`}
         value={embed.description}
         onChange={description => {
           embed.description = description || undefined
@@ -53,7 +53,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
       <FooterEditor embed={embed} />
       <InputGroup>
         <InputField
-          id={`message-embed${embed.id}-image`}
+          id={`e${embed.id}.img`}
           value={embed.image}
           onChange={image => {
             embed.image = image || undefined
@@ -61,14 +61,14 @@ export function EmbedEditor(props: EmbedEditorProps) {
           label="Image"
         />
         <InputField
-          id={`message-embed${embed.id}-thumbnail`}
+          id={`e${embed.id}.thumb`}
           value={embed.thumbnail}
           onChange={thumbnail => {
             embed.thumbnail = thumbnail || undefined
           }}
           label="Thumbnail"
         />
-        <ColorInput id={`message-embed${embed.id}-color`} color={embed.color} />
+        <ColorInput id={`e${embed.id}.color`} color={embed.color} />
       </InputGroup>
       <MultiEditor<Field>
         items={embed.fields}
@@ -77,7 +77,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
         factory={() => new Field(embed)}
         keyMapper={field => field.id}
       >
-        {field => <FieldEditor embedId={embed.id} field={field} />}
+        {field => <FieldEditor field={field} />}
       </MultiEditor>
     </FlexContainer>
   ))

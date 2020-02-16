@@ -14,7 +14,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
   return useObserver(() => (
     <InputGroup>
       <InputField
-        id={`message-embed${embed.id}-author-name`}
+        id={`e${embed.id}.author`}
         value={embed.author}
         onChange={author => {
           embed.author = author || undefined
@@ -23,7 +23,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
         maxLength={256}
       />
       <InputField
-        id={`message-embed${embed.id}-author-url`}
+        id={`e${embed.id}.authorurl`}
         value={embed.authorUrl}
         onChange={authorUrl => {
           embed.authorUrl = authorUrl || undefined
@@ -31,7 +31,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
         label="Author URL"
       />
       <InputField
-        id={`message-embed${embed.id}-author-icon`}
+        id={`e${embed.id}.authoricon`}
         value={embed.authorIcon}
         onChange={authorIcon => {
           embed.authorIcon = authorIcon || undefined

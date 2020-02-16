@@ -27,18 +27,17 @@ const ToggleContainer = styled.div`
 `
 
 export type FieldEditorProps = {
-  embedId: number
   field: Field
 }
 
 export function FieldEditor(props: FieldEditorProps) {
-  const { embedId, field } = props
+  const { field } = props
 
   return useObserver(() => (
     <FlexContainer>
       <TopRowContainer flow="row">
         <InputField
-          id={`message-embed${embedId}-field${field.id}-name`}
+          id={`f${field.id}.name`}
           value={field.name}
           onChange={name => {
             field.name = name || undefined
@@ -48,7 +47,7 @@ export function FieldEditor(props: FieldEditorProps) {
         />
         <ToggleContainer>
           <Toggle
-            id={`message-embed${embedId}-field${field.id}-inline`}
+            id={`f${field.id}.inline`}
             label="Inline"
             value={field.inline}
             onChange={inline => {
@@ -58,7 +57,7 @@ export function FieldEditor(props: FieldEditorProps) {
         </ToggleContainer>
       </TopRowContainer>
       <InputField
-        id={`message-embed${embedId}-field${field.id}-value`}
+        id={`f${field.id}.value`}
         value={field.value}
         onChange={value => {
           field.value = value || undefined

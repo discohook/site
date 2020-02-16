@@ -15,7 +15,7 @@ export function FooterEditor(props: FooterEditorProps) {
   return useObserver(() => (
     <InputGroup>
       <InputField
-        id={`message-embed${embed.id}-footer-text`}
+        id={`e${embed.id}.footer`}
         value={embed.footer}
         onChange={footer => {
           embed.footer = footer || undefined
@@ -24,7 +24,7 @@ export function FooterEditor(props: FooterEditorProps) {
         maxLength={2048}
       />
       <InputField
-        id={`message-embed${embed.id}-footer-icon`}
+        id={`e${embed.id}.footericon`}
         value={embed.footerIcon}
         onChange={footerIcon => {
           embed.footerIcon = footerIcon || undefined
@@ -32,7 +32,7 @@ export function FooterEditor(props: FooterEditorProps) {
         label="Footer Icon"
       />
       <TimestampInput
-        id={`message-embed${embed.id}-footer-timestamp`}
+        id={`e${embed.id}.timestamp`}
         timestamp={embed.timestamp}
         onChange={timestamp => {
           embed.timestamp = timestamp
