@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: npm add --global pnpm
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm install
       - run: pnpm run build:client
       - run: pnpm run build:server
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: npm add --global pnpm
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm install
       - run: pnpm run test:verbose
   lint:
@@ -31,7 +31,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: npm add --global pnpm
+      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm install
       - run: pnpm run lint:error
       - run: pnpm run typecheck
