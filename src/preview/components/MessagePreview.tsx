@@ -32,6 +32,12 @@ const Container = styled.div`
         css`
           padding-left: 72px;
         `};
+
+      ${({ theme }) =>
+        theme.appearance.mobile &&
+        css`
+          padding-left: 16px;
+        `}
     `};
 
   ${({ theme }) =>
