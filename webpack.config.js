@@ -146,6 +146,8 @@ module.exports = {
   devServer: {
     host: "localhost",
     port: 3000,
+    historyApiFallback: true,
+    contentBase: resolve(__dirname, "public"),
   },
   devtool: "source-map",
   performance: {

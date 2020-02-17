@@ -8,6 +8,7 @@ dependencies:
   isbot: 2.5.6
   koa: 2.11.0
   koa-conditional-get: 2.0.0
+  koa-etag: 3.0.0
   koa-static: 5.0.0
   mobx: 5.15.4
   mobx-react: 6.1.8_mobx@5.15.4+react@16.12.0
@@ -38,6 +39,7 @@ devDependencies:
   '@types/jest': 25.1.2
   '@types/koa': 2.11.1
   '@types/koa-conditional-get': 2.0.0
+  '@types/koa-etag': 3.0.0
   '@types/koa-static': 4.0.1
   '@types/koa__router': 8.0.2
   '@types/node': 13.7.1
@@ -1400,6 +1402,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
+  /@types/etag/1.8.0:
+    dependencies:
+      '@types/node': 13.7.1
+    dev: true
+    resolution:
+      integrity: sha512-EdSN0x+Y0/lBv7YAb8IU4Jgm6DWM+Bqtz7o5qozl96fzaqdqbdfHS5qjdpFeIv7xQ8jSLyjMMNShgYtMajEHyQ==
   /@types/events/3.0.0:
     dev: true
     resolution:
@@ -1486,6 +1494,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-kzEIakwXkkgiJhQPR/IudINqX+xB2gVS+lJWDSEUP3cMYflcX470OOWrUEqOXlc2cCAOyznMo7fFmwfnvd9wyw==
+  /@types/koa-etag/3.0.0:
+    dependencies:
+      '@types/etag': 1.8.0
+      '@types/koa': 2.11.1
+    dev: true
+    resolution:
+      integrity: sha512-gXQUtKGEnCy0sZLG+uE3wL4mvY1CBPcb6ECjpAoD8RGYy/8ACY1B084k8LTFPIdVcmy7GD6Y4n3up3jnupofcQ==
   /@types/koa-send/4.1.2:
     dependencies:
       '@types/koa': 2.11.1
@@ -3752,7 +3767,6 @@ packages:
     resolution:
       integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
   /etag/1.8.1:
-    dev: true
     engines:
       node: '>= 0.6'
     resolution:
@@ -5807,6 +5821,13 @@ packages:
       node: '>= 4'
     resolution:
       integrity: sha1-2kCHXfSd4FOQmNFwC1CCDOvNIdA=
+  /koa-etag/3.0.0:
+    dependencies:
+      etag: 1.8.1
+      mz: 2.7.0
+    dev: false
+    resolution:
+      integrity: sha1-nvc4Ld1agqsN6xU0FckVg293HT8=
   /koa-send/5.0.0:
     dependencies:
       debug: 3.2.6
@@ -9371,6 +9392,7 @@ specifiers:
   '@types/jest': ^25.1.2
   '@types/koa': ^2.11.1
   '@types/koa-conditional-get': ^2.0.0
+  '@types/koa-etag': ^3.0.0
   '@types/koa-static': ^4.0.1
   '@types/koa__router': ^8.0.2
   '@types/node': ^13.7.1
@@ -9404,6 +9426,7 @@ specifiers:
   jest: ^25.1.0
   koa: ^2.11.0
   koa-conditional-get: ^2.0.0
+  koa-etag: ^3.0.0
   koa-static: ^5.0.0
   mobx: ^5.15.4
   mobx-react: ^6.1.8
