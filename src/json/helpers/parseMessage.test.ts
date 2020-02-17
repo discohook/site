@@ -11,7 +11,7 @@ describe("parseMessage", () => {
             "description": "Test embed",
             "author": {
               "name": "Authors have the dreaded snake case icon_url",
-              "icon_url": "https://discohook.org/icons/icon-256.png"
+              "icon_url": "https://discohook.org/assets/icon-256.png"
             },
             "fields": [
               {
@@ -45,7 +45,7 @@ describe("parseMessage", () => {
           description: "Test embed",
           author: {
             name: "Authors have the dreaded snake case icon_url",
-            iconUrl: "https://discohook.org/icons/icon-256.png",
+            iconUrl: "https://discohook.org/assets/icon-256.png",
           },
           fields: [
             {

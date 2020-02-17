@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
       fontFamily: "Whitney",
       fontStyle: "normal",
       fontWeight: String(weight),
-      fontFilePath: `/fonts/whitney-${weight}`,
+      fontFilePath: `/assets/whitney-${weight}`,
       fileFormats: ["woff2", "woff"],
       fontDisplay: "swap",
     }),
