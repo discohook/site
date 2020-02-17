@@ -5,6 +5,7 @@ import isBot from "isbot"
 import Koa from "koa"
 import conditional from "koa-conditional-get"
 import serve from "koa-static"
+import { useStaticRendering } from "mobx-react-lite"
 import { resolve } from "path"
 import React from "react"
 import { renderToNodeStream } from "react-dom/server"
@@ -23,6 +24,10 @@ Object.assign(global, {
   SERVER: true,
 })
 /* eslint-enable @typescript-eslint/naming-convention */
+
+// Not a hook: https://mobx-react.js.org/recipes-ssr
+// eslint-disable-next-line react-hooks/rules-of-hooks
+useStaticRendering(true)
 
 const app = new Koa()
 const router = new Router()
