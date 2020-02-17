@@ -1,3 +1,4 @@
+import { cover, size } from "polished"
 import React from "react"
 import styled from "styled-components"
 import { Actions } from "../../editor/components/Actions"
@@ -8,14 +9,8 @@ import { useTheme } from "../hooks/useTheme"
 import { Appearance } from "../types/Appearance"
 
 const ModalContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
+  ${cover()}
+  ${size("100%")}
 
   background: ${({ theme }) => theme.background.primary};
   border-radius: 3px;

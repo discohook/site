@@ -1,4 +1,5 @@
 import { useObserver } from "mobx-react-lite"
+import { rem, size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { Embed } from "../../message/classes/Embed"
@@ -11,8 +12,7 @@ const Container = styled.div`
 `
 
 const AuthorImage = styled.img`
-  width: 24px;
-  height: 24px;
+  ${size(24)};
 
   margin: 0 8px 0 0;
 
@@ -21,7 +21,7 @@ const AuthorImage = styled.img`
 `
 
 const AuthorNameNormal = styled.span`
-  font-size: 0.875rem;
+  font-size: ${rem(14)};
   font-weight: 500;
   color: ${({ theme }) => theme.header.primary};
 

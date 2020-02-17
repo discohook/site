@@ -1,4 +1,5 @@
 import { addMonths, getMonth, getYear, isValid, subMonths } from "date-fns"
+import { size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { chevronLeft } from "../icons/chevronLeft"
@@ -16,10 +17,9 @@ const Container = styled.div`
 `
 
 const CycleMonthButton = styled.div<{ disabled?: boolean }>`
-  cursor: pointer;
+  ${size(24)}
 
-  width: 24px;
-  height: 24px;
+  cursor: pointer;
 
   color: ${({ theme }) => theme.interactive.normal};
 

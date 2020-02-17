@@ -1,4 +1,5 @@
 import { useObserver } from "mobx-react-lite"
+import { rem } from "polished"
 import React from "react"
 import styled from "styled-components"
 import { Markdown } from "../../markdown/components/Markdown"
@@ -6,22 +7,22 @@ import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
 import { Field } from "../../message/classes/Field"
 
 const Container = styled.div`
-  font-size: 0.875rem;
-  line-height: 1.125rem;
+  font-size: ${rem(14)};
+  line-height: ${rem(18)};
 `
 
 const FieldName = styled.div`
   margin: 0 0 1px;
 
-  font-size: 0.875rem;
+  font-size: ${rem(14)};
   font-weight: 500;
   color: ${({ theme }) => theme.text.muted};
 `
 
 const FieldValue = styled.div`
   & > ${MarkdownContainer} {
-    font-size: 0.875rem;
-    line-height: 1.125rem;
+    font-size: ${rem(14)};
+    line-height: ${rem(18)};
     color: ${({ theme }) => theme.text.normal};
     white-space: pre-line;
   }

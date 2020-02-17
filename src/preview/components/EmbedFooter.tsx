@@ -1,5 +1,6 @@
 import { isValid } from "date-fns"
 import { useObserver } from "mobx-react-lite"
+import { rem, size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { Embed } from "../../message/classes/Embed"
@@ -22,8 +23,7 @@ const Container = styled.div<{ hasThumbnail?: boolean }>`
 `
 
 const FooterImage = styled.img`
-  width: 20px;
-  height: 20px;
+  ${size(20)};
 
   margin: 0 8px 0 0;
 
@@ -32,9 +32,9 @@ const FooterImage = styled.img`
 `
 
 const FooterText = styled.span`
-  font-size: 0.75rem;
+  font-size: ${rem(12)};
   color: ${({ theme }) => theme.text.muted};
-  line-height: 1rem;
+  line-height: ${rem(16)};
 
   ${({ theme }) =>
     theme.appearance.color === "light" &&

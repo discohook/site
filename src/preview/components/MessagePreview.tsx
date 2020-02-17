@@ -1,4 +1,5 @@
 import { useObserver } from "mobx-react-lite"
+import { rem } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { Attachment } from "../../attachment/components/Attachment"
@@ -18,14 +19,14 @@ const Container = styled.div`
   position: relative;
   flex: 0 0 auto;
 
-  margin-top: 1rem;
+  margin-top: ${rem(16)};
 
   ${({ theme }) =>
     theme.appearance.display === "cozy" &&
     css`
-      padding: 0.125rem 16px 0.125rem 4.5rem;
+      padding: ${rem(2)} 16px ${rem(2)} ${rem(72)};
 
-      min-height: 2.75rem;
+      min-height: ${rem(44)};
 
       ${({ theme }) =>
         theme.appearance.fontSize > 16 &&
@@ -43,11 +44,11 @@ const Container = styled.div`
   ${({ theme }) =>
     theme.appearance.display === "compact" &&
     css`
-      padding: 0.125rem 1rem 0.125rem 80px;
+      padding: ${rem(2)} ${rem(16)} ${rem(2)} 80px;
 
-      min-height: 1.375rem;
+      min-height: ${rem(22)};
 
-      text-indent: calc(1rem - 80px);
+      text-indent: calc(${rem(16)} - 80px);
 
       & > ${MarkdownContainer} {
         display: inline;
@@ -59,9 +60,9 @@ const Container = styled.div`
 const ExtrasContainer = styled.div`
   display: grid;
   grid-auto-flow: row;
-  row-gap: 0.25rem;
+  row-gap: ${rem(4)};
 
-  padding: 0.125rem 0;
+  padding: ${rem(2)} 0;
 
   text-indent: 0;
 

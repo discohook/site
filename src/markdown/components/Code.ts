@@ -1,15 +1,16 @@
+import { em, rem } from "polished"
 import styled from "styled-components"
 import { RichEmbedContainer } from "../../preview/components/RichEmbedContainer"
 
 export const Code = styled.code`
-  padding: 0.2em;
-  margin: -0.2em 0;
+  padding: ${em(3.2)};
+  margin: ${em(-3.2)} 0;
 
   border-radius: 3px;
   background: ${({ theme }) => theme.background.secondary};
 
-  font-size: 0.85em;
-  line-height: 1.125rem;
+  font-size: ${em(13.6)};
+  line-height: ${rem(18)};
 
   white-space: pre-wrap;
 

@@ -1,4 +1,4 @@
-import { linearGradient, rgb, rgba } from "polished"
+import { linearGradient, rgb, rgba, size } from "polished"
 import React, { useRef } from "react"
 import styled from "styled-components"
 import { useAutorun } from "../../state/hooks/useAutorun"
@@ -19,15 +19,13 @@ const Picker = styled.div`
 `
 
 const PickerLayer = styled.div`
-  width: 100%;
-  height: 100%;
+  ${size("100%")};
 
   border-radius: 4px;
 `
 
 const PickerKnob = styled.div`
-  width: 11px;
-  height: 11px;
+  ${size(11)};
 
   border-radius: 50%;
 

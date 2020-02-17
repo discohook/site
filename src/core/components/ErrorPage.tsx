@@ -1,3 +1,4 @@
+import { size } from "polished"
 import React, { ErrorInfo } from "react"
 import styled, { css, ThemeProvider } from "styled-components"
 import { GlobalStyle } from "../../appearance/components/GlobalStyle"
@@ -6,8 +7,8 @@ import { CodeBlockContainer } from "../../markdown/components/CodeBlockContainer
 import { Markdown } from "../../markdown/components/Markdown"
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
+  ${size("100%")};
+
   overflow: auto;
 
   padding: 64px 32px 0;
@@ -48,7 +49,6 @@ export type ErrorPageProps = {
 
 export function ErrorPage(props: ErrorPageProps) {
   const { error, info } = props
-  console.log(props)
 
   return (
     <ThemeProvider

@@ -1,3 +1,4 @@
+import { em, rem, size } from "polished"
 import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
@@ -9,10 +10,10 @@ const Container = styled.div`
     css`
       position: relative;
 
-      height: 1.375em;
+      height: ${em(22)};
 
-      margin-left: -4.5rem;
-      padding-left: 4.5rem;
+      margin-left: ${rem(-72)};
+      padding-left: ${rem(72)};
 
       ${({ theme }) =>
         theme.appearance.fontSize > 16 &&
@@ -31,14 +32,13 @@ const Container = styled.div`
 `
 
 const Avatar = styled.img`
+  ${size(rem(40))}
+
   position: absolute;
   left: 0;
-  top: 0.125rem;
+  top: ${rem(2)};
 
-  width: 2.5rem;
-  height: 2.5rem;
-
-  margin: 0 1rem;
+  margin: 0 ${rem(16)};
 
   border-radius: 50%;
   object-fit: cover;
@@ -56,8 +56,7 @@ const Avatar = styled.img`
   ${({ theme }) =>
     theme.appearance.fontSize > 16 &&
     css`
-      width: 40px;
-      height: 40px;
+      ${size(40)};
 
       margin: 0 16px;
     `}
@@ -67,19 +66,19 @@ const Username = styled.span`
   display: inline;
   vertical-align: baseline;
 
-  margin-right: 0.25rem;
+  margin-right: ${rem(4)};
 
   color: ${({ theme }) => theme.header.primary};
-  font-size: 1rem;
+  font-size: ${rem(16)};
   font-weight: 500;
-  line-height: 1.375rem;
+  line-height: ${rem(22)};
 
   cursor: pointer;
 
   ${({ theme }) =>
     theme.appearance.display === "compact" &&
     css`
-      margin-right: 0.5rem;
+      margin-right: ${rem(8)};
     `}
 
   ${({ theme }) =>
@@ -91,19 +90,19 @@ const Username = styled.span`
 
 const BotTag = styled.span`
   position: relative;
-  top: -0.1rem;
+  top: ${rem(-1.6)};
 
-  min-height: 1.28em;
-  max-height: 1.28em;
+  min-height: ${em(20.4)};
+  max-height: ${em(20.4)};
 
-  margin: 0.075em 0.25rem 0 0;
-  padding: 0.072rem 0.275rem;
+  margin: ${em(1.2)} ${rem(4)} 0 0;
+  padding: ${rem(1.15)} ${rem(4.4)};
 
   border-radius: 3px;
   background: ${({ theme }) => theme.accent.primary};
 
   color: ${DARK_THEME.header.primary};
-  font-size: 0.625em;
+  font-size: ${em(10)};
   font-weight: 500;
   line-height: 1.3;
   vertical-align: baseline;
@@ -111,18 +110,18 @@ const BotTag = styled.span`
 
 const Timestamp = styled.span`
   display: inline-block;
-  height: 1.25rem;
+  height: ${rem(20)};
 
   color: ${({ theme }) => theme.text.muted};
 
   ${({ theme }) =>
     theme.appearance.display === "cozy" &&
     css`
-      margin-left: 0.25rem;
+      margin-left: ${rem(4)};
 
-      font-size: 0.75rem;
+      font-size: ${rem(12)};
       font-weight: 500;
-      line-height: 1.375rem;
+      line-height: ${rem(22)};
       vertical-align: baseline;
 
       &::before {
@@ -133,11 +132,11 @@ const Timestamp = styled.span`
   ${({ theme }) =>
     theme.appearance.display === "compact" &&
     css`
-      width: 3rem;
-      margin-right: 0.5rem;
+      width: ${rem(48)};
+      margin-right: ${rem(8)};
 
-      font-size: 0.6875rem;
-      line-height: 1.375rem;
+      font-size: ${rem(11)};
+      line-height: ${rem(22)};
       text-align: right;
       text-indent: 0;
 

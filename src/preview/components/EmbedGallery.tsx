@@ -1,3 +1,4 @@
+import { size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { Gallery } from "../../message/types/Gallery"
@@ -39,8 +40,7 @@ const EmbedGalleryCell = styled.div<{ index?: number; length?: number }>`
 `
 
 const EmbedGalleryImage = styled.img`
-  width: 100%;
-  height: 100%;
+  ${size("100%")};
 
   object-fit: cover;
 `

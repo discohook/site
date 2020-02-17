@@ -1,9 +1,9 @@
+import { em, rem, size } from "polished"
 import styled, { css } from "styled-components"
 import { RichEmbedContainer } from "../../preview/components/RichEmbedContainer"
 
 export const Emoji = styled.img.attrs({ draggable: false })<{ big?: boolean }>`
-  width: 1.375em;
-  height: 1.375em;
+  ${size(em(22))};
 
   object-fit: contain;
   vertical-align: bottom;
@@ -12,13 +12,12 @@ export const Emoji = styled.img.attrs({ draggable: false })<{ big?: boolean }>`
     theme.appearance.display === "cozy" &&
     big &&
     css`
-      width: 3rem;
-      height: 3rem;
-      min-height: 3rem;
+      ${size(rem(48))};
+
+      min-height: ${rem(48)};
     `}
 
   ${RichEmbedContainer} & {
-    width: 18px;
-    height: 18px;
+    ${size(18)};
   }
 `

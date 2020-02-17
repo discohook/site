@@ -1,5 +1,6 @@
 import { isValid } from "date-fns"
 import { useObserver } from "mobx-react-lite"
+import { rem, size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { Markdown } from "../../markdown/components/Markdown"
@@ -12,7 +13,7 @@ import { EmbedGallery } from "./EmbedGallery"
 import { RichEmbedContainer } from "./RichEmbedContainer"
 
 const EmbedGrid = styled.div`
-  padding: 0.5rem 1rem 1rem 0.75rem;
+  padding: ${rem(8)} ${rem(16)} ${rem(16)} ${rem(12)};
   display: inline-grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
@@ -24,7 +25,7 @@ const EmbedTitleNormal = styled.span`
   grid-column: 1 / 2;
 
   & > ${MarkdownContainer} {
-    font-size: 1rem;
+    font-size: ${rem(16)};
     font-weight: 600;
     color: ${({ theme }) => theme.header.primary};
   }
@@ -41,10 +42,10 @@ const EmbedDescription = styled.div`
   grid-column: 1 / 2;
 
   & > ${MarkdownContainer} {
-    font-size: 0.875rem;
+    font-size: ${rem(14)};
     color: ${({ theme }) => theme.text.normal};
 
-    line-height: 1.125rem;
+    line-height: ${rem(18)};
     white-space: pre-line;
   }
 `
@@ -76,8 +77,8 @@ const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
 `
 
 const EmbedThumbnail = styled.img`
-  width: 80px;
-  height: 80px;
+  ${size(80)};
+
   margin: 8px 0 0 16px;
 
   border-radius: 4px;

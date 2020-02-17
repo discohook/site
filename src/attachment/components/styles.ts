@@ -1,4 +1,4 @@
-import { rgb, transparentize } from "polished"
+import { ellipsis, em, rgb, transparentize } from "polished"
 import styled from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 
@@ -42,16 +42,16 @@ export const AttachmentInfo = styled.div`
 `
 
 export const AttachmentFileName = styled.div`
-  line-height: 1em;
+  ${ellipsis()}
 
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  display: block;
+
+  line-height: ${em(16)};
 `
 
 export const AttachmentFileNameInner = styled.span`
   color: ${({ theme }) => theme.text.link};
-  font-size: 1em;
+  font-size: ${em(16)};
 
   cursor: pointer;
 
@@ -65,7 +65,7 @@ export const AttachmentFileNameInner = styled.span`
 export const AttachmentFileSize = styled.div`
   color: ${DARK_THEME.text.muted};
   font-size: 12px;
-  line-height: 1.33333em;
+  line-height: ${em(21 + 1 / 3)};
   font-weight: 300;
 `
 

@@ -1,4 +1,4 @@
-import { fontFace } from "polished"
+import { fontFace, size } from "polished"
 import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
@@ -70,8 +70,8 @@ export const GlobalStyle = createGlobalStyle`
     scrollbar-width: thin;
 
     &::-webkit-scrollbar {
-      width: 14px;
-      height: 14px;
+      ${size(14)};
+
       background-color: ${({ theme }) => theme.background.primary};
     }
 

@@ -1,4 +1,4 @@
-import { transparentize } from "polished"
+import { size, transparentize } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
@@ -43,12 +43,12 @@ const ToggleContainer = styled.div<{ checked?: boolean }>`
   cursor: pointer;
 
   &::after {
+    ${size(18)};
+
     position: absolute;
     content: "";
     margin: 3px;
 
-    width: 18px;
-    height: 18px;
     border-radius: 9px;
 
     background-color: ${DARK_THEME.interactive.active};
@@ -66,9 +66,9 @@ const ToggleContainer = styled.div<{ checked?: boolean }>`
 `
 
 const ToggleInput = styled.input.attrs({ type: "checkbox" })`
+  ${size("100%")};
+
   position: absolute;
-  width: 100%;
-  height: 100%;
   padding: 0;
   margin: 0;
   opacity: 0;

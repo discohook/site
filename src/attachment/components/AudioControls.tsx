@@ -1,4 +1,4 @@
-import { transparentize } from "polished"
+import { size, transparentize } from "polished"
 import React from "react"
 import styled from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
@@ -54,16 +54,15 @@ const AudioSeekbar = styled.div`
 `
 
 const AudioSeekbarHandle = styled.div`
-  width: 6px;
-  height: 6px;
+  ${size(6)};
 
   background: ${({ theme }) => theme.accent.primary};
   border-radius: 3px;
 `
 
 const AudioControlButton = styled.div`
-  width: 24px;
-  height: 24px;
+  ${size(24)};
+
   margin: 4px;
 
   cursor: hover;

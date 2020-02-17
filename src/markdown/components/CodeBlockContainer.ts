@@ -1,18 +1,19 @@
+import { em, rem } from "polished"
 import styled from "styled-components"
 import { RichEmbedContainer } from "../../preview/components/RichEmbedContainer"
 
 export const CodeBlockContainer = styled.pre`
   max-width: 90%;
   margin: 6px 0 0;
-  padding: 0.5em;
+  padding: ${em(8)};
 
   background: ${({ theme }) => theme.background.secondary};
   border: 1px solid ${({ theme }) => theme.background.tertiary};
   border-radius: 4px;
 
   color: ${({ theme }) => theme.header.secondary};
-  font-size: 0.875rem;
-  line-height: 1.125rem;
+  font-size: ${rem(14)};
+  line-height: ${rem(18)};
 
   white-space: pre-wrap;
 
