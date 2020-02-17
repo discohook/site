@@ -158,6 +158,7 @@ You can even have inline fields, like the ones below! :arrow_down:
         url: "https://discohook.org/assets/discord-avatar-red.png",
       },
     },
+    /*
     {
       title: "Backups!",
       description: `
@@ -179,8 +180,9 @@ If you want to keep your backups when clearing your browser data, use the share 
       ],
       color: 0x747f8d,
     },
+    */
     {
-      title: "Small disclaimer",
+      title: "Disclaimer",
       description: `
 Discohook makes use of some assets derived or extracted from Discord's application.
 This is to make visuals as accurate as possible, and not to infringe on their copyright.
