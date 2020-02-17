@@ -20,7 +20,7 @@ module.exports = {
   output: {
     filename: "[name].[contenthash:8].js",
     chunkFilename: "[name].[contenthash:8].js",
-    path: resolve(__dirname, "dist"),
+    path: resolve(__dirname, "dist/static"),
   },
   module: {
     rules: [
@@ -132,6 +132,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: resolve(__dirname, "public"),
+        to: resolve(__dirname, "dist"),
         ignore: [resolve(__dirname, "public/index.html")],
       },
     ]),
