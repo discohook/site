@@ -20,7 +20,7 @@ module.exports = {
   output: {
     filename: "[name].[contenthash:8].js",
     chunkFilename: "[name].[contenthash:8].js",
-    path: resolve(__dirname, "dist/static"),
+    path: resolve(__dirname, development ? "dist" : "dist/static"),
   },
   module: {
     rules: [
@@ -129,13 +129,14 @@ module.exports = {
       rel: "preload",
       include: "initial",
     }),
-    new CopyWebpackPlugin([
-      {
-        from: resolve(__dirname, "public"),
-        to: resolve(__dirname, "dist"),
-        ignore: [resolve(__dirname, "public/index.html")],
-      },
-    ]),
+    !development &&
+      new CopyWebpackPlugin([
+        {
+          from: resolve(__dirname, "public"),
+          to: resolve(__dirname, "dist"),
+          ignore: [resolve(__dirname, "public/index.html")],
+        },
+      ]),
     new DefinePlugin({
       ENV: JSON.stringify(process.env.NODE_ENV),
       PROD: !development,
@@ -143,7 +144,7 @@ module.exports = {
       TEST: false,
       SERVER: false,
     }),
-  ],
+  ].filter(plugin => typeof plugin === "object"),
   devServer: {
     host: "localhost",
     port: 3000,
