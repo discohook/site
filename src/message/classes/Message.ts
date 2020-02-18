@@ -4,10 +4,10 @@ import { Embed } from "./Embed"
 
 export class Message {
   @observable content?: string
-  @observable embeds = observable.array<Embed>()
+  @observable embeds: Embed[] = []
   @observable username?: string
   @observable avatar?: string
-  @observable files = observable.array<File>()
+  @observable files: File[] = []
 
   constructor(message: MessageData = {}) {
     this.apply(message)
@@ -15,14 +15,10 @@ export class Message {
 
   @action apply(message: MessageData) {
     this.content = message.content
-    this.embeds.clear()
-    this.embeds.push(
-      ...(message.embeds?.map(embed => new Embed(this, embed)) ?? []),
-    )
+    this.embeds = message.embeds?.map(embed => new Embed(this, embed)) ?? []
     this.username = message.username
     this.avatar = message.avatarUrl
-    this.files.clear()
-    this.files.push(...(message.files ?? []))
+    this.files = Array.from(message.files ?? [])
   }
 
   toJS(): MessageData {
@@ -34,7 +30,7 @@ export class Message {
           : undefined,
       username: this.username,
       avatarUrl: this.avatar,
-      files: this.files.length > 0 ? this.files.toJS() : undefined,
+      files: this.files.length > 0 ? Array.from(this.files) : undefined,
     }
   }
 }

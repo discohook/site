@@ -17,7 +17,7 @@ export class Embed {
   @observable description?: string
   @observable url?: string
   @observable color = new Color(null)
-  @observable fields = observable.array<Field>()
+  @observable fields: Field[] = []
   @observable author?: string
   @observable authorUrl?: string
   @observable authorIcon?: string
@@ -37,10 +37,7 @@ export class Embed {
     this.description = embed.description
     this.url = embed.url
     this.color = new Color(embed.color ?? null)
-    this.fields.clear()
-    this.fields.push(
-      ...(embed.fields?.map(field => new Field(this, field)) ?? []),
-    )
+    this.fields = embed.fields?.map(field => new Field(this, field)) ?? []
     this.author = embed.author?.name
     this.authorUrl = embed.author?.url
     this.authorIcon = embed.author?.iconUrl
