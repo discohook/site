@@ -47,7 +47,7 @@ export type JsonInputProps = {
 export function JsonInput(props: JsonInputProps) {
   const { message } = props
 
-  const [json, setJson] = useState("{}")
+  const [json, setJson] = useState(() => stringifyMessage(message.toJS()))
 
   const lastMessageRef = useRef(json)
   useAutorun(() => {
