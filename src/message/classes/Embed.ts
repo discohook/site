@@ -48,7 +48,8 @@ export class Embed {
     this.thumbnail = embed.thumbnail?.url
   }
 
-  @computed get gallery() {
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  @computed.struct get gallery() {
     return getEmbedGallery(this)
   }
 
