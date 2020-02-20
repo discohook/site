@@ -41,7 +41,7 @@ const RemoveFilesButton = styled(Button)`
 export type FileInputProps = {
   id: string
   files: readonly File[]
-  onChange: (files: readonly File[]) => void
+  onChange: (files: File[]) => void
 }
 
 export function FileInput(props: FileInputProps) {
@@ -83,7 +83,9 @@ export function FileInput(props: FileInputProps) {
           <FakeInput>{files.map(file => file.name).join(", ")}</FakeInput>
           <HiddenInput
             id={id}
-            onChange={event => handleChange([...event.target.files])}
+            onChange={event => {
+              handleChange(Array.from(event.target.files ?? []))
+            }}
             ref={inputRef}
           />
         </FileInputContainer>
