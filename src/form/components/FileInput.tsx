@@ -39,12 +39,13 @@ const RemoveFilesButton = styled(Button)`
 `
 
 export type FileInputProps = {
+  id: string
   files: readonly File[]
   onChange: (files: readonly File[]) => void
 }
 
 export function FileInput(props: FileInputProps) {
-  const { files, onChange: handleChange } = props
+  const { id, files, onChange: handleChange } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -70,7 +71,7 @@ export function FileInput(props: FileInputProps) {
   return (
     <InputContainer>
       <FlexContainer flow="row">
-        <InputLabel htmlFor="file">Files</InputLabel>
+        <InputLabel htmlFor={id}>Files</InputLabel>
         {errors.length > 0 && (
           <InputNote state="error">
             {errors.join(", ").replace(/^\w/, letter => letter.toUpperCase())}
@@ -81,7 +82,7 @@ export function FileInput(props: FileInputProps) {
         <FileInputContainer>
           <FakeInput>{files.map(file => file.name).join(", ")}</FakeInput>
           <HiddenInput
-            id="file"
+            id={id}
             onChange={event => handleChange([...event.target.files])}
             ref={inputRef}
           />

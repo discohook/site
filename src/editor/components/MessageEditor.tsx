@@ -22,7 +22,7 @@ export function MessageEditor(props: MessageEditorProps) {
   return useObserver(() => (
     <>
       <InputField
-        id="message-content"
+        id="m.content"
         value={message.content}
         onChange={content => {
           message.content = content || undefined
@@ -42,7 +42,7 @@ export function MessageEditor(props: MessageEditorProps) {
       </MultiEditor>
       <FlexContainer flow="row">
         <InputField
-          id="message-username"
+          id="m.username"
           value={message.username}
           onChange={username => {
             message.username = username || undefined
@@ -52,7 +52,7 @@ export function MessageEditor(props: MessageEditorProps) {
           maxLength={32}
         />
         <InputField
-          id="message-avatar"
+          id="m.avatar"
           value={message.avatar}
           onChange={avatar => {
             message.avatar = avatar || undefined
@@ -62,6 +62,7 @@ export function MessageEditor(props: MessageEditorProps) {
         />
       </FlexContainer>
       <FileInput
+        id="m.files"
         files={message.files}
         onChange={files => {
           message.files = observable.array([...files])
