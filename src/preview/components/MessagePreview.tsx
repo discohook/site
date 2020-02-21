@@ -84,8 +84,8 @@ export function MessagePreview(props: MessagePreviewProps) {
     <ScrollContainer>
       <Container>
         <MessageHeader
-          username={message.username ?? webhook?.name}
-          avatarUrl={message.avatar ?? (webhook && getAvatarUrl(webhook))}
+          username={message.username || webhook?.name}
+          avatarUrl={message.avatar || (webhook && getAvatarUrl(webhook))}
         />
         {message.content && (
           <Markdown content={message.content} type="message-content" />

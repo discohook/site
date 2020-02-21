@@ -38,10 +38,10 @@ export function EmbedField(props: EmbedFieldProps) {
   return useObserver(() => (
     <Container style={{ gridColumn: field.width }}>
       <FieldName>
-        <Markdown content={field.name ?? ""} type="embed-header" />
+        <Markdown content={field.name} type="embed-header" />
       </FieldName>
       <FieldValue>
-        <Markdown content={field.value ?? ""} type="embed-content" />
+        <Markdown content={field.value} type="embed-content" />
       </FieldValue>
     </Container>
   ))
