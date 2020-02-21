@@ -139,7 +139,7 @@ export function RichEmbed(props: RichEmbedProps) {
         ) : (
           undefined
         )}
-        {(embed.footer ?? isValid(embed.timestamp)) && (
+        {(embed.footer || isValid(embed.timestamp)) && (
           <EmbedFooter embed={embed} />
         )}
         {embed.thumbnail && (
