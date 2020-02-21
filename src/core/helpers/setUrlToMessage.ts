@@ -5,5 +5,5 @@ export const setUrlToMessage = (message: MessageData) => {
   const json = JSON.stringify({ message: { ...message, files: undefined } })
   const base64 = base64UrlEncode(json)
 
-  history.replaceState(undefined, "", `?backup=${base64}`)
+  history.replaceState(undefined, "", `?message=${base64}`)
 }
