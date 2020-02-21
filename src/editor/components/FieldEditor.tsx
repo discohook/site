@@ -40,7 +40,7 @@ export function FieldEditor(props: FieldEditorProps) {
           id={`f${field.id}.name`}
           value={field.name}
           onChange={name => {
-            field.name = name || undefined
+            field.name = name
           }}
           label="Field Name"
           maxLength={256}
@@ -60,7 +60,7 @@ export function FieldEditor(props: FieldEditorProps) {
         id={`f${field.id}.value`}
         value={field.value}
         onChange={value => {
-          field.value = value || undefined
+          field.value = value
         }}
         label="Field Value"
         type="multiline"

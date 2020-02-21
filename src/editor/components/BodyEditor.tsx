@@ -18,7 +18,7 @@ export function BodyEditor(props: BodyEditorProps) {
           id={`e${embed.id}.title`}
           value={embed.title}
           onChange={title => {
-            embed.title = title || undefined
+            embed.title = title
           }}
           label="Title"
           maxLength={256}
@@ -27,7 +27,7 @@ export function BodyEditor(props: BodyEditorProps) {
           id={`e${embed.id}.url`}
           value={embed.url}
           onChange={url => {
-            embed.url = url || undefined
+            embed.url = url
           }}
           label="URL"
         />
@@ -36,7 +36,7 @@ export function BodyEditor(props: BodyEditorProps) {
         id={`e${embed.id}.desc`}
         value={embed.description}
         onChange={description => {
-          embed.description = description || undefined
+          embed.description = description
         }}
         label="Description"
         type="multiline"

@@ -18,7 +18,7 @@ export function DecorationEditor(props: DecorationEditorProps) {
         id={`e${embed.id}.img`}
         value={embed.image}
         onChange={image => {
-          embed.image = image || undefined
+          embed.image = image
         }}
         label="Image"
       />
@@ -26,7 +26,7 @@ export function DecorationEditor(props: DecorationEditorProps) {
         id={`e${embed.id}.thumb`}
         value={embed.thumbnail}
         onChange={thumbnail => {
-          embed.thumbnail = thumbnail || undefined
+          embed.thumbnail = thumbnail
         }}
         label="Thumbnail"
       />

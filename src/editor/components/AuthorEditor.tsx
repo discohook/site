@@ -17,7 +17,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
         id={`e${embed.id}.author`}
         value={embed.author}
         onChange={author => {
-          embed.author = author || undefined
+          embed.author = author
         }}
         label="Author Name"
         maxLength={256}
@@ -26,7 +26,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
         id={`e${embed.id}.authorurl`}
         value={embed.authorUrl}
         onChange={authorUrl => {
-          embed.authorUrl = authorUrl || undefined
+          embed.authorUrl = authorUrl
         }}
         label="Author URL"
       />
@@ -34,7 +34,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
         id={`e${embed.id}.authoricon`}
         value={embed.authorIcon}
         onChange={authorIcon => {
-          embed.authorIcon = authorIcon || undefined
+          embed.authorIcon = authorIcon
         }}
         label="Author Icon"
       />

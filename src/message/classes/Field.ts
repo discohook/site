@@ -10,8 +10,8 @@ export class Field {
 
   readonly embed: Embed
 
-  @observable name?: string
-  @observable value?: string
+  @observable name = ""
+  @observable value = ""
   @observable inline = false
 
   constructor(embed: Embed, field: FieldData = {}) {
@@ -20,8 +20,8 @@ export class Field {
   }
 
   @action apply(field: FieldData) {
-    this.name = field.name
-    this.value = field.value
+    this.name = field.name ?? ""
+    this.value = field.value ?? ""
     this.inline = field.inline ?? false
   }
 
@@ -31,8 +31,8 @@ export class Field {
 
   toJS(): FieldData {
     return {
-      name: this.name,
-      value: this.value,
+      name: this.name || undefined,
+      value: this.value || undefined,
       inline: this.inline || undefined,
     }
   }

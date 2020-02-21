@@ -18,7 +18,7 @@ export function FooterEditor(props: FooterEditorProps) {
         id={`e${embed.id}.footer`}
         value={embed.footer}
         onChange={footer => {
-          embed.footer = footer || undefined
+          embed.footer = footer
         }}
         label="Footer Text"
         maxLength={2048}
@@ -27,7 +27,7 @@ export function FooterEditor(props: FooterEditorProps) {
         id={`e${embed.id}.footericon`}
         value={embed.footerIcon}
         onChange={footerIcon => {
-          embed.footerIcon = footerIcon || undefined
+          embed.footerIcon = footerIcon
         }}
         label="Footer Icon"
       />

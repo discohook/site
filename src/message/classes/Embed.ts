@@ -13,19 +13,19 @@ export class Embed {
 
   readonly message: Message
 
-  @observable title?: string
-  @observable description?: string
-  @observable url?: string
+  @observable title = ""
+  @observable description = ""
+  @observable url = ""
   @observable color = new Color(null)
   @observable fields: Field[] = []
-  @observable author?: string
-  @observable authorUrl?: string
-  @observable authorIcon?: string
-  @observable footer?: string
-  @observable footerIcon?: string
-  @observable timestamp: Date = new Date(NaN)
-  @observable image?: string
-  @observable thumbnail?: string
+  @observable author = ""
+  @observable authorUrl = ""
+  @observable authorIcon = ""
+  @observable footer = ""
+  @observable footerIcon = ""
+  @observable timestamp = new Date(NaN)
+  @observable image = ""
+  @observable thumbnail = ""
 
   constructor(message: Message, embed: EmbedData = {}) {
     this.message = message
@@ -33,19 +33,19 @@ export class Embed {
   }
 
   @action apply(embed: EmbedData) {
-    this.title = embed.title
-    this.description = embed.description
-    this.url = embed.url
+    this.title = embed.title ?? ""
+    this.description = embed.description ?? ""
+    this.url = embed.url ?? ""
     this.color = new Color(embed.color ?? null)
     this.fields = embed.fields?.map(field => new Field(this, field)) ?? []
-    this.author = embed.author?.name
-    this.authorUrl = embed.author?.url
-    this.authorIcon = embed.author?.iconUrl
-    this.footer = embed.footer?.text
-    this.footerIcon = embed.footer?.iconUrl
+    this.author = embed.author?.name ?? ""
+    this.authorUrl = embed.author?.url ?? ""
+    this.authorIcon = embed.author?.iconUrl ?? ""
+    this.footer = embed.footer?.text ?? ""
+    this.footerIcon = embed.footer?.iconUrl ?? ""
     this.timestamp = new Date(embed.timestamp ?? NaN)
-    this.image = embed.image?.url
-    this.thumbnail = embed.thumbnail?.url
+    this.image = embed.image?.url ?? ""
+    this.thumbnail = embed.thumbnail?.url ?? ""
   }
 
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -55,9 +55,9 @@ export class Embed {
 
   toJS(): EmbedData {
     return {
-      title: this.title,
-      description: this.description,
-      url: this.url,
+      title: this.title || undefined,
+      description: this.description || undefined,
+      url: this.url || undefined,
       color: this.color.toJS() ?? undefined,
       fields:
         this.fields.length > 0

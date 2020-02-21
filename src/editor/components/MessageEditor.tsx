@@ -26,7 +26,7 @@ export function MessageEditor(props: MessageEditorProps) {
             id="m.content"
             value={message.content}
             onChange={content => {
-              message.content = content || undefined
+              message.content = content
             }}
             label="Message content"
             type="multiline"
@@ -50,7 +50,7 @@ export function MessageEditor(props: MessageEditorProps) {
               id="m.username"
               value={message.username}
               onChange={username => {
-                message.username = username || undefined
+                message.username = username
               }}
               label="Override username"
               placeholder={webhook?.name}
@@ -60,7 +60,7 @@ export function MessageEditor(props: MessageEditorProps) {
               id="m.avatar"
               value={message.avatar}
               onChange={avatar => {
-                message.avatar = avatar || undefined
+                message.avatar = avatar
               }}
               label="Override avatar"
               placeholder={webhook && getAvatarUrl(webhook)}

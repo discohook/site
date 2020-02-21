@@ -8,7 +8,7 @@ import { TextInput } from "./TextInput"
 
 export type InputFieldProps = {
   id: string
-  value: string | undefined
+  value: string
   onChange: (value: string) => void
   label: string
   type?: string
@@ -19,7 +19,7 @@ export type InputFieldProps = {
 export function InputField(props: InputFieldProps) {
   const {
     id,
-    value = "",
+    value,
     onChange: handleChange,
     label,
     type,
