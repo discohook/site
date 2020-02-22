@@ -11,7 +11,7 @@
     "test": "cross-env TZ=UTC NODE_ENV=test jest",
     "test:watch": "pnpm run test -- --watch",
     "test:cov": "pnpm run test -- --coverage",
-    "test:verbose": "pnpm run test -- --verbose",
+    "test:verbose": "pnpm run test:cov -- --verbose",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "pnpm run lint -- --fix",
     "lint:error": "pnpm run lint -- --max-warnings 0",
