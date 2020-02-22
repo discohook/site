@@ -7,7 +7,6 @@ import { emote } from "../rules/emote"
 import { emphasis } from "../rules/emphasis"
 import { escape } from "../rules/escape"
 import { inlineCode } from "../rules/inlineCode"
-import { link } from "../rules/link"
 import { spoiler } from "../rules/spoiler"
 import { strikethrough } from "../rules/strikethrough"
 import { strong } from "../rules/strong"
@@ -24,7 +23,6 @@ export const parseEmbedHeader = createParser({
   emphasis,
   escape,
   inlineCode,
-  link,
   spoiler,
   strikethrough,
   strong,

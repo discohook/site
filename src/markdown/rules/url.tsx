@@ -1,6 +1,7 @@
 import { defaultRules } from "simple-markdown"
 import { parseLink } from "../helpers/parseLink"
 import { MarkdownRule } from "../types/MarkdownRule"
+import { link } from "./link"
 
 export const url: MarkdownRule = {
   ...defaultRules.url,
@@ -27,4 +28,5 @@ export const url: MarkdownRule = {
     return [href, href]
   },
   parse: parseLink,
+  react: link.react,
 }

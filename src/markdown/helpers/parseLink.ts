@@ -14,7 +14,6 @@ export const parseLink: ParseFunction = capture => {
   }
 
   return {
-    type: "link",
     content: [{ type: "text", content: url }],
     target: url,
   }
