@@ -6,8 +6,8 @@ export const getHtmlTemplate = (userAgent: string) => {
 
   if (isBot(userAgent)) {
     template = template
-      .replace(/<script type="[^"]*" src="[^"]*"><\/script>/g, "<!-- $& -->")
-      .replace(/<link [^>]* rel="preload">/g, "<!-- $& -->")
+      .replace(/<script [^>]*><\/script>/g, "<!-- $& -->")
+      .replace(/<link [^>]*rel="preload"[^>]*>/g, "<!-- $& -->")
   }
 
   return template
