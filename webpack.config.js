@@ -7,7 +7,7 @@
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { resolve } = require("path")
-const PreloadWebpackPlugin = require("preload-webpack-plugin")
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin")
 const { DefinePlugin, HashedModuleIdsPlugin } = require("webpack")
 
 if (!process.env.NODE_ENV) process.env.NODE_ENV = "development"
@@ -125,9 +125,12 @@ module.exports = {
         removeComments: true,
       },
     }),
-    new PreloadWebpackPlugin({
-      rel: "preload",
-      include: "initial",
+    new ScriptExtHtmlWebpackPlugin({
+      async: /\.js$/,
+      preload: {
+        test: /\.js$/,
+        chunks: "initial",
+      },
     }),
     !development &&
       new CopyWebpackPlugin([
@@ -140,7 +143,7 @@ module.exports = {
     new DefinePlugin({
       ENV: JSON.stringify(process.env.NODE_ENV),
       PROD: !development,
-      DEV: !development,
+      DEV: development,
       TEST: false,
       SERVER: false,
     }),
