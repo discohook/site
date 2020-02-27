@@ -32,8 +32,6 @@ const TabSwitcher = styled.div`
   top: 0;
   left: 0;
   right: 0;
-
-  z-index: 1;
 `
 
 const Tab = styled.button.attrs({ type: "button" })<{ active: boolean }>`

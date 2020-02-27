@@ -1,6 +1,7 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useRef, useState } from "react"
 import styled from "styled-components"
+import { Z_INDEX_POPOVERS } from "../../core/constants"
 import { FlexContainer } from "../../editor/components/Container"
 import { InputField } from "../../form/components/InputField"
 import { useAutorun } from "../../state/hooks/useAutorun"
@@ -15,7 +16,7 @@ const ColorInputContainer = styled(FlexContainer)`
 const PopoverContainer = styled.div`
   position: absolute;
   top: 76px;
-  z-index: 1;
+  z-index: ${Z_INDEX_POPOVERS};
 
   width: 100%;
   min-width: 280px;
