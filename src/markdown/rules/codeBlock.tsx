@@ -3,7 +3,7 @@ import { anyScopeRegex, defaultRules } from "simple-markdown"
 import { CodeBlock } from "../components/CodeBlock"
 import { MarkdownRule } from "../types/MarkdownRule"
 
-const CODE_BLOCK_RE = /^```(?:([\w+\-.]+?)\n)?\n*([^\n][\S\s]*?)\n*```/i
+const CODE_BLOCK_RE = /^```(?:([\w+.-]+?)\n)?\n*([^\n][\S\s]*?)\n*```/i
 
 export const codeBlock: MarkdownRule = {
   order: defaultRules.codeBlock.order,

@@ -44,7 +44,7 @@ describe("ColorInput", () => {
     expect(handleChange).toHaveBeenCalledWith(0xff0000)
   })
 
-  it("handles emptying input", async () => {
+  it("handles emptying input", () => {
     const color = new Color(0xff0000)
 
     const handleChange = jest.fn()

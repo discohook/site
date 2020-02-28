@@ -125,7 +125,7 @@ describe("MultiEditor", () => {
     expect(handleChange).toHaveBeenCalledWith([1, 3])
   })
 
-  it("handles changes from children", async () => {
+  it("handles changes from children", () => {
     const handleChange = jest.fn()
 
     const { getByTestId } = render(
