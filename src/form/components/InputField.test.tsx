@@ -18,7 +18,7 @@ describe("InputField", () => {
 
     const input = getByLabelText("Message")
 
-    await userEvent.type(input, "Hello!", { allAtOnce: true })
+    await userEvent.type(input, "!")
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith("Hello!")

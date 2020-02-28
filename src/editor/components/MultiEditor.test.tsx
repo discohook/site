@@ -1,4 +1,5 @@
 import {
+  fireEvent,
   getByText as getByTextFrom,
   queryByText as queryByTextFrom,
 } from "@testing-library/react"
@@ -147,13 +148,13 @@ describe("MultiEditor", () => {
     )
 
     const firstInput = getByTestId("item-1")
-    await userEvent.type(firstInput, "0")
+    fireEvent.change(firstInput, { target: { value: "0" } })
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith([0, 2, 3])
 
     const secondInput = getByTestId("item-2")
-    await userEvent.type(secondInput, "5")
+    fireEvent.change(secondInput, { target: { value: "5" } })
 
     expect(handleChange).toHaveBeenCalledTimes(2)
     expect(handleChange).toHaveBeenCalledWith([1, 5, 3])

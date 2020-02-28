@@ -1,4 +1,4 @@
-import { act } from "@testing-library/react"
+import { act, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { reaction } from "mobx"
 import React from "react"
@@ -35,9 +35,10 @@ describe("ColorInput", () => {
     const input = getByLabelText("Color")
 
     await userEvent.type(input, "#ff000")
+
     expect(handleChange).toHaveBeenCalledTimes(0)
 
-    await userEvent.type(input, "#ff0000", { allAtOnce: true })
+    await userEvent.type(input, "0")
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith(0xff0000)
@@ -58,11 +59,11 @@ describe("ColorInput", () => {
 
     const input = getByLabelText("Color")
 
-    await userEvent.type(input, "#", { allAtOnce: true })
+    fireEvent.change(input, { target: { value: "#" } })
 
     expect(handleChange).toHaveBeenCalledTimes(0)
 
-    await userEvent.type(input, "", { allAtOnce: true })
+    fireEvent.change(input, { target: { value: "" } })
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith(null)
