@@ -67,10 +67,10 @@ export function AppearanceModal(props: AppearanceModalProps) {
         {COLOR_THEMES.map(color => (
           <Button
             key={color}
+            variant={appearance.color === color ? "filled" : "outline"}
             onClick={() => {
               handleAppearanceChange({ ...appearance, color })
             }}
-            filled={appearance.color === color}
           >
             {color.replace(/^\w/, letter => letter.toUpperCase())} theme
           </Button>
@@ -83,10 +83,10 @@ export function AppearanceModal(props: AppearanceModalProps) {
             {DISPLAY_THEMES.map(display => (
               <Button
                 key={display}
+                variant={appearance.display === display ? "filled" : "outline"}
                 onClick={() => {
                   handleAppearanceChange({ ...appearance, display })
                 }}
-                filled={appearance.display === display}
               >
                 {display.replace(/^\w/, letter => letter.toUpperCase())} mode
               </Button>
@@ -99,10 +99,10 @@ export function AppearanceModal(props: AppearanceModalProps) {
         {FONT_SIZES.map(fontSize => (
           <Button
             key={fontSize}
+            variant={appearance.fontSize === fontSize ? "filled" : "outline"}
             onClick={() => {
               handleAppearanceChange({ ...appearance, fontSize })
             }}
-            filled={appearance.fontSize === fontSize}
           >
             {fontSize} pixels
           </Button>
