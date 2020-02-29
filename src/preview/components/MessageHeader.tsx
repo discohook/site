@@ -32,7 +32,7 @@ const Container = styled.div`
 `
 
 const Avatar = styled.img`
-  ${size(rem(40))}
+  ${size(rem(40))};
 
   position: absolute;
   left: 0;

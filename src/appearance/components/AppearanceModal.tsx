@@ -9,8 +9,8 @@ import { useTheme } from "../hooks/useTheme"
 import { Appearance } from "../types/Appearance"
 
 const ModalContainer = styled.div`
-  ${cover()}
-  ${size("100%")}
+  ${cover()};
+  ${size("100%")};
 
   background: ${({ theme }) => theme.background.primary};
   border-radius: 3px;

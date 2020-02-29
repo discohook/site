@@ -17,7 +17,7 @@ const Container = styled.div`
 `
 
 const CycleMonthButton = styled.div<{ disabled?: boolean }>`
-  ${size(24)}
+  ${size(24)};
 
   cursor: pointer;
 
