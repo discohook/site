@@ -9,6 +9,7 @@ import { InputField } from "../../form/components/InputField"
 import { JsonInput } from "../../json/components/JsonInput"
 import { Message } from "../../message/classes/Message"
 import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
+import { useStores } from "../../state/hooks/useStores"
 import { WEBHOOK_URL_RE } from "../../webhook/constants"
 import { executeWebhook } from "../../webhook/helpers/executeWebhook"
 import { Webhook } from "../../webhook/types/Webhook"
@@ -95,6 +96,8 @@ export function Editor(props: EditorProps) {
   else isDisabled = true
 
   const [isAppearanceModalShown, setIsAppearanceModalShown] = useState(false)
+
+  const { modalStore } = useStores()
 
   return (
     <EditorContainer>
