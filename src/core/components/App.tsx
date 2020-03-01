@@ -6,6 +6,7 @@ import { GlobalStyle } from "../../appearance/components/GlobalStyle"
 import { Message } from "../../message/classes/Message"
 import { INITIAL_MESSAGE_DATA } from "../../message/constants"
 import { ModalOverlay } from "../../modal/components/ModalOverlay"
+import { PopoverOverlay } from "../../popover/components/PopoverOverlay"
 import { useAutorun } from "../../state/hooks/useAutorun"
 import { useStores } from "../../state/hooks/useStores"
 import { fetchWebhookInfo } from "../../webhook/helpers/fetchWebhookInfo"
@@ -60,6 +61,7 @@ export function App(props: AppProps) {
         webhook={webhook}
       />
       <ModalOverlay />
+      <PopoverOverlay />
     </ThemeProvider>
   )
 }

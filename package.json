@@ -33,6 +33,7 @@
   "dependencies": {
     "@babel/runtime": "^7.8.4",
     "@koa/router": "^8.0.8",
+    "@popperjs/core": "^2.0.6",
     "core-js": "^3.6.4",
     "date-fns": "^2.10.0",
     "highlight.js": "^9.18.1",

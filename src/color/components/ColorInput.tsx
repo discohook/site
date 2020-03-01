@@ -1,9 +1,9 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useRef, useState } from "react"
 import styled from "styled-components"
-import { Z_INDEX_POPOVERS } from "../../core/constants"
 import { FlexContainer } from "../../editor/components/Container"
 import { InputField } from "../../form/components/InputField"
+import { usePopover } from "../../popover/hooks/usePopover"
 import { useAutorun } from "../../state/hooks/useAutorun"
 import { Color } from "../classes/Color"
 import { ColorPicker } from "./ColorPicker"
@@ -11,21 +11,6 @@ import { ColorPicker } from "./ColorPicker"
 const ColorInputContainer = styled(FlexContainer)`
   position: relative;
   flex-flow: row-reverse;
-`
-
-const PopoverContainer = styled.div`
-  position: absolute;
-  top: 76px;
-  z-index: ${Z_INDEX_POPOVERS};
-
-  width: 100%;
-  min-width: 280px;
-  max-width: 320px;
-
-  padding: 12px;
-
-  background: ${({ theme }) => theme.background.floating};
-  border-radius: 4px;
 `
 
 export type ColorInputProps = {
@@ -41,19 +26,19 @@ export function ColorInput(props: ColorInputProps) {
     if (!hex || /^#[\da-f]{6}$/i.test(hex)) setHex(color.hex ?? "")
   })
 
-  const [isPickerShown, setPickerShown] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const popover = usePopover({
+    render: () => <ColorPicker color={color} />,
+    placement: "bottom-end",
+    ref: containerRef,
+  })
 
   return useObserver(() => (
     <ColorInputContainer
       flow="row"
-      onFocus={() => setPickerShown(true)}
-      onBlur={() => {
-        setTimeout(() => {
-          if (!containerRef.current?.contains(document.activeElement)) {
-            setPickerShown(false)
-          }
-        }, 10)
+      onClick={() => {
+        popover.spawn()
       }}
       ref={containerRef}
     >
@@ -72,11 +57,6 @@ export function ColorInput(props: ColorInputProps) {
         label="Color"
         placeholder="#rrggbb"
       />
-      {isPickerShown && (
-        <PopoverContainer>
-          <ColorPicker color={color} />
-        </PopoverContainer>
-      )}
     </ColorInputContainer>
   ))
 }

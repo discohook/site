@@ -1,6 +1,7 @@
 dependencies:
   '@babel/runtime': 7.8.4
   '@koa/router': 8.0.8
+  '@popperjs/core': 2.0.6
   core-js: 3.6.4
   date-fns: 2.10.0
   highlight.js: 9.18.1
@@ -1277,6 +1278,10 @@ packages:
       node: '>= 8.0.0'
     resolution:
       integrity: sha512-FnT93N4NUehnXr+juupDmG2yfi0JnWdCmNEuIXpCG4TtG+9xvtrLambBH3RclycopVUOEYAim2lydiNBI7IRVg==
+  /@popperjs/core/2.0.6:
+    dev: false
+    resolution:
+      integrity: sha512-zj7Gw8QC4jmR92eKUvtrZUEpl2ypRbq+qlE4pwf9n2hnUO9BOAcWUs4/Ht+gNIbFt98xtqhLvccdCfD469MzpQ==
   /@sheerun/mutationobserver-shim/0.3.2:
     dev: true
     resolution:
@@ -9477,6 +9482,7 @@ specifiers:
   '@babel/preset-typescript': ^7.8.3
   '@babel/runtime': ^7.8.4
   '@koa/router': ^8.0.8
+  '@popperjs/core': ^2.0.6
   '@testing-library/dom': ^6.12.2
   '@testing-library/jest-dom': ^5.1.1
   '@testing-library/react': ^9.4.1

@@ -260,7 +260,6 @@ module.exports = {
     "react/no-direct-mutation-state": "warn",
     "react/no-find-dom-node": "warn",
     "react/no-is-mounted": "warn",
-    "react/no-multi-comp": "warn",
     "react/no-redundant-should-component-update": "warn",
     "react/no-render-return-value": "warn",
     "react/no-string-refs": "warn",

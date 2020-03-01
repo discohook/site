@@ -13,6 +13,7 @@ const Container = styled.div`
 
 const Picker = styled.div`
   flex: 1;
+  width: 240px;
   height: 150px;
 
   border-radius: 4px;
@@ -76,7 +77,7 @@ export function ColorPicker(props: ColorPickerProps) {
   const sliderRef = useRef<HTMLDivElement>(null)
   const sliderKnobRef = useRef<HTMLDivElement>(null)
 
-  const setPickerStyles = () => {
+  useAutorun(() => {
     const { current: picker } = pickerRef
     const { current: pickerKnob } = pickerKnobRef
     const { current: slider } = sliderRef
@@ -108,9 +109,7 @@ export function ColorPicker(props: ColorPickerProps) {
       "translateX(-2px)",
       `translateY(${normalHue * sliderHeight - 4}px)`,
     ].join(" ")
-  }
-
-  useAutorun(() => setPickerStyles())
+  })
 
   useDragArea(pickerRef, (mouseX, mouseY) => {
     if (Number.isNaN(color.hue)) color.hue = 0
