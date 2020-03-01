@@ -79,6 +79,9 @@ export const Button = styled.button.attrs({ type: "button" })<{
   ${({ variant }) =>
     variant === "borderless" &&
     css`
+      transition: none;
+      color: ${({ theme }) => theme.interactive.active};
+
       &:hover:not(:disabled),
       &:focus:not(:disabled),
       &:active:not(:disabled) {

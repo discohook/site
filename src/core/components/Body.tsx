@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import styled, { css, useTheme } from "styled-components"
-import { Appearance } from "../../appearance/types/Appearance"
 import { Editor } from "../../editor/components/Editor"
 import { Message } from "../../message/classes/Message"
 import { MessagePreview } from "../../preview/components/MessagePreview"
@@ -71,7 +70,6 @@ export type BodyProps = {
   webhookUrl: string
   onWebhookUrlChange: (webhookUrl: string) => void
   webhook: Webhook | undefined
-  onAppearanceChange: (appearance: Appearance) => void
 }
 
 export function Body(props: BodyProps) {
@@ -80,7 +78,6 @@ export function Body(props: BodyProps) {
     webhookUrl,
     onWebhookUrlChange: handleWebhookUrlChange,
     webhook,
-    onAppearanceChange: handleAppearanceChange,
   } = props
 
   const theme = useTheme()
@@ -112,7 +109,6 @@ export function Body(props: BodyProps) {
         {(!theme.appearance.mobile || activeTab === "editor") && (
           <Editor
             message={message}
-            onAppearanceChange={handleAppearanceChange}
             webhookUrl={webhookUrl}
             onWebhookUrlChange={handleWebhookUrlChange}
             webhook={webhook}

@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { AppearanceModal } from "../../appearance/components/AppearanceModal"
+import { spawnAppearanceModal } from "../../appearance/actions/spawnAppearanceModal"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
-import { Appearance } from "../../appearance/types/Appearance"
 import { Button } from "../../form/components/Button"
 import { InputField } from "../../form/components/InputField"
 import { JsonInput } from "../../json/components/JsonInput"
 import { Message } from "../../message/classes/Message"
 import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
+import { useManager } from "../../state/hooks/useManager"
 import { WEBHOOK_URL_RE } from "../../webhook/constants"
 import { executeWebhook } from "../../webhook/helpers/executeWebhook"
 import { Webhook } from "../../webhook/types/Webhook"
@@ -51,7 +51,6 @@ const DisabledReason = styled.div`
 
 export type EditorProps = {
   message: Message
-  onAppearanceChange: (appearance: Appearance) => void
   webhookUrl: string
   onWebhookUrlChange: (webhookUrl: string) => void
   webhook?: Webhook
@@ -60,11 +59,12 @@ export type EditorProps = {
 export function Editor(props: EditorProps) {
   const {
     message,
-    onAppearanceChange: handleAppearanceChange,
     webhookUrl,
     onWebhookUrlChange: handleWebhookUrlChange,
     webhook,
   } = props
+
+  const manager = useManager()
 
   const theme = useTheme()
 
@@ -94,13 +94,9 @@ export function Editor(props: EditorProps) {
   else if (message.files.length > 0) isDisabled = false
   else isDisabled = true
 
-  const [isAppearanceModalShown, setIsAppearanceModalShown] = useState(false)
-
   return (
     <EditorContainer>
-      <EditorInnerContainer
-        style={isAppearanceModalShown ? { overflow: "hidden" } : undefined}
-      >
+      <EditorInnerContainer>
         <JavaScriptWarning>
           Discohook requires JavaScript to be enabled, please turn it on in your
           browser settings to use this app.
@@ -110,7 +106,7 @@ export function Editor(props: EditorProps) {
           actions={[
             {
               name: "Appearance",
-              action: () => setIsAppearanceModalShown(true),
+              action: () => spawnAppearanceModal(manager),
             },
             {
               name: "Clear all",
@@ -138,12 +134,6 @@ export function Editor(props: EditorProps) {
         <MessageEditor message={message} webhook={webhook} />
         <JsonInput message={message} />
       </EditorInnerContainer>
-      {isAppearanceModalShown && (
-        <AppearanceModal
-          onAppearanceChange={handleAppearanceChange}
-          onClose={() => setIsAppearanceModalShown(false)}
-        />
-      )}
     </EditorContainer>
   )
 }

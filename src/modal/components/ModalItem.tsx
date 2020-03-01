@@ -1,9 +1,7 @@
 import { cover, rgb } from "polished"
 import React from "react"
-import { TransitionStatus } from "react-transition-group/Transition"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import { Z_INDEX_MODALS } from "../../core/constants"
-import { useWindowEvent } from "../../dom/hooks/useWindowEvent"
 import { useStores } from "../../state/hooks/useStores"
 import { MODAL_ANIMATION_DURATION } from "../constants"
 import { Modal } from "../types/Modal"
@@ -14,24 +12,23 @@ const Container = styled.div`
   z-index: ${Z_INDEX_MODALS};
 `
 
-const Filter = styled.div<{ state: TransitionStatus }>`
+const Filter = styled.div`
   ${cover()};
 
   background: ${rgb(0, 0, 0)};
-  opacity: 0;
+  opacity: 0.85;
 
   pointer-events: all;
 
-  transition: ${MODAL_ANIMATION_DURATION}ms ease;
+  transition: ${MODAL_ANIMATION_DURATION}ms;
 
-  ${({ state }) =>
-    ["entering", "entered"].includes(state) &&
-    css`
-      opacity: 0.85;
-    `}
+  .enter > &,
+  .exit-active > & {
+    opacity: 0;
+  }
 `
 
-const Content = styled.div<{ state: TransitionStatus }>`
+const Content = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
@@ -40,45 +37,38 @@ const Content = styled.div<{ state: TransitionStatus }>`
   justify-content: center;
   align-items: center;
 
-  opacity: 0;
-  transform: scale(0.75);
+  transition: ${MODAL_ANIMATION_DURATION}ms;
 
-  transition: ${MODAL_ANIMATION_DURATION}ms ease;
+  .enter > &,
+  .exit-active > & {
+    opacity: 0;
+    transform: scale(0.75);
+  }
 
   pointer-events: none;
 
   & > * {
     pointer-events: all;
   }
-
-  ${({ state }) =>
-    ["entering", "entered"].includes(state) &&
-    css`
-      opacity: 1;
-      transform: scale(1);
-    `}
 `
 
 export type ModalItemProps = {
   modal: Modal
-  state: TransitionStatus
 }
 
 export function ModalItem(props: ModalItemProps) {
-  const { modal, state } = props
+  const { modal } = props
 
   const { modalStore } = useStores()
 
-  useWindowEvent("keydown", event => {
-    if (event.key === "Escape") {
-      modalStore.dismissLast()
-    }
-  })
-
   return (
     <Container>
-      <Filter onClick={() => modalStore.dismiss(modal.name)} state={state} />
-      <Content state={state}>{modal.render()}</Content>
+      <Filter
+        onClick={() => {
+          modalStore.dismiss(modal.name)
+        }}
+      />
+      <Content>{modal.render()}</Content>
     </Container>
   )
 }
