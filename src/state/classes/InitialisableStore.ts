@@ -2,7 +2,7 @@
 
 import { Manager } from "../types/Manager"
 
-export class InitializableStore {
+export class InitialisableStore {
   manager: Manager
 
   constructor(manager: Manager) {
