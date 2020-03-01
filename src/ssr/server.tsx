@@ -4,11 +4,14 @@ import Koa from "koa"
 import conditional from "koa-conditional-get"
 import etag from "koa-etag"
 import { useStaticRendering } from "mobx-react-lite"
-import React from "react"
+import React, { ReactNode } from "react"
 import { renderToNodeStream } from "react-dom/server"
 import { ServerStyleSheet } from "styled-components"
 import { App } from "../core/components/App"
 import { resetLastId } from "../message/helpers/getUniqueId"
+import { StoreManager } from "../state/classes/StoreManager"
+import { ManagerProvider } from "../state/contexts/ManagerContext"
+import { stores } from "../state/stores"
 import { SUPPORTED_ENCODINGS } from "./constants"
 import { getHtmlTemplate } from "./helpers/getHtmlTemplate"
 import { assignEnvironmentVariables } from "./middleware/assignEnvironmentVariables"
@@ -50,10 +53,21 @@ router.get("/", async context => {
   const stream = SUPPORTED_ENCODINGS[encoding]()
   context.body = stream
 
+  const manager = new StoreManager(stores)
+  await manager.initialise()
+
+  const { appearanceStore } = manager.stores
+
+  appearanceStore.mobile = /mobile/i.test(context.get("User-Agent"))
+
+  const withManager = (node: ReactNode) => (
+    <ManagerProvider value={manager}>{node}</ManagerProvider>
+  )
+
   stream.write(templateStart)
 
   const sheet = new ServerStyleSheet()
-  const app = sheet.collectStyles(<App request={context} />)
+  const app = sheet.collectStyles(withManager(<App request={context} />))
   const appStream = sheet.interleaveWithNodeStream(renderToNodeStream(app))
 
   appStream.pipe(stream, { end: false })
