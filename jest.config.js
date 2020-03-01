@@ -13,7 +13,7 @@ module.exports = {
     TEST: true,
     SERVER: true,
   },
-  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  setupFilesAfterEnv: ["<rootDir>/testing/setup.ts"],
   collectCoverageFrom: ["**/*"],
   coverageDirectory: "../coverage",
 }
