@@ -5,7 +5,7 @@ import styled, { css } from "styled-components"
 import { Attachment } from "../../attachment/components/Attachment"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
-import { Message } from "../../message/classes/Message"
+import { useStores } from "../../state/hooks/useStores"
 import { getAvatarUrl } from "../../webhook/helpers/getAvatarUrl"
 import { Webhook } from "../../webhook/types/Webhook"
 import { MessageHeader } from "./MessageHeader"
@@ -73,12 +73,14 @@ const ExtrasContainer = styled.div`
 `
 
 export type MessagePreviewProps = {
-  message: Message
   webhook?: Webhook
 }
 
 export function MessagePreview(props: MessagePreviewProps) {
-  const { message, webhook } = props
+  const { webhook } = props
+
+  const { messageStore } = useStores()
+  const message = useObserver(() => messageStore.message)
 
   return useObserver(() => (
     <ScrollContainer>

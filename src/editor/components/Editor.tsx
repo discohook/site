@@ -1,20 +1,17 @@
-import React, { useState } from "react"
+import { useObserver } from "mobx-react-lite"
+import React from "react"
 import styled from "styled-components"
 import { spawnAppearanceModal } from "../../appearance/actions/spawnAppearanceModal"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
-import { Button } from "../../form/components/Button"
-import { InputField } from "../../form/components/InputField"
 import { JsonInput } from "../../json/components/JsonInput"
-import { Message } from "../../message/classes/Message"
-import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
 import { useManager } from "../../state/hooks/useManager"
-import { WEBHOOK_URL_RE } from "../../webhook/constants"
-import { executeWebhook } from "../../webhook/helpers/executeWebhook"
+import { useStores } from "../../state/hooks/useStores"
 import { Webhook } from "../../webhook/types/Webhook"
 import { Actions } from "./Actions"
 import { FlexContainer } from "./Container"
 import { MessageEditor } from "./MessageEditor"
+import { WebhookControls } from "./WebhookControls"
 
 const EditorContainer = styled.div`
   position: relative;
@@ -40,17 +37,7 @@ const JavaScriptWarning = styled.noscript`
   color: ${DARK_THEME.header.primary};
 `
 
-const DisabledReason = styled.div`
-  margin: 0 8px 16px;
-
-  color: ${({ theme }) => theme.accent.danger};
-  font-size: 14px;
-
-  text-align: end;
-`
-
 export type EditorProps = {
-  message: Message
   webhookUrl: string
   onWebhookUrlChange: (webhookUrl: string) => void
   webhook?: Webhook
@@ -58,7 +45,6 @@ export type EditorProps = {
 
 export function Editor(props: EditorProps) {
   const {
-    message,
     webhookUrl,
     onWebhookUrlChange: handleWebhookUrlChange,
     webhook,
@@ -66,35 +52,11 @@ export function Editor(props: EditorProps) {
 
   const manager = useManager()
 
+  const { messageStore } = useStores()
+
   const theme = useTheme()
 
-  const [sending, setSending] = useState(false)
-  const sendMessage = async () => {
-    if (sending) return
-    setSending(true)
-
-    try {
-      await executeWebhook(webhookUrl, message.toJS())
-    } catch (error) {
-      console.error("Error executing webhook:", error)
-    }
-
-    setSending(false)
-  }
-
-  const isOverDiscordCharacterLimit =
-    getTotalCharacterCount(message.toJS()) > 6000
-
-  let isDisabled: boolean
-  if (sending) isDisabled = true
-  else if (!WEBHOOK_URL_RE.test(webhookUrl)) isDisabled = true
-  else if (isOverDiscordCharacterLimit) isDisabled = true
-  else if (typeof message.content === "string") isDisabled = false
-  else if (message.embeds.length > 0) isDisabled = false
-  else if (message.files.length > 0) isDisabled = false
-  else isDisabled = true
-
-  return (
+  return useObserver(() => (
     <EditorContainer>
       <EditorInnerContainer>
         <JavaScriptWarning>
@@ -104,36 +66,17 @@ export function Editor(props: EditorProps) {
         <Actions
           title={theme.appearance.mobile ? undefined : "Message editor"}
           actions={[
-            {
-              name: "Appearance",
-              action: () => spawnAppearanceModal(manager),
-            },
-            {
-              name: "Clear all",
-              action: () => message.apply({}),
-            },
+            { name: "Appearance", action: () => spawnAppearanceModal(manager) },
+            { name: "Clear all", action: () => messageStore.message.apply({}) },
           ]}
         />
-        <FlexContainer flow="row">
-          <InputField
-            id="webhook-url"
-            value={webhookUrl}
-            onChange={handleWebhookUrlChange}
-            label="Webhook URL"
-            placeholder="https://discordapp.com/api/webhooks/..."
-          />
-          <Button disabled={isDisabled} onClick={sendMessage}>
-            Send
-          </Button>
-        </FlexContainer>
-        {isOverDiscordCharacterLimit && (
-          <DisabledReason>
-            The message body is over Discord&apos;s 6000 character limit
-          </DisabledReason>
-        )}
-        <MessageEditor message={message} webhook={webhook} />
-        <JsonInput message={message} />
+        <WebhookControls
+          webhookUrl={webhookUrl}
+          onWebhookUrlChange={handleWebhookUrlChange}
+        />
+        <MessageEditor message={messageStore.message} webhook={webhook} />
+        <JsonInput message={messageStore.message} />
       </EditorInnerContainer>
     </EditorContainer>
-  )
+  ))
 }

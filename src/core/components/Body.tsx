@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import styled, { css, useTheme } from "styled-components"
 import { Editor } from "../../editor/components/Editor"
-import { Message } from "../../message/classes/Message"
 import { MessagePreview } from "../../preview/components/MessagePreview"
 import { Webhook } from "../../webhook/types/Webhook"
 
@@ -66,7 +65,6 @@ const View = styled.main`
 `
 
 export type BodyProps = {
-  message: Message
   webhookUrl: string
   onWebhookUrlChange: (webhookUrl: string) => void
   webhook: Webhook | undefined
@@ -74,7 +72,6 @@ export type BodyProps = {
 
 export function Body(props: BodyProps) {
   const {
-    message,
     webhookUrl,
     onWebhookUrlChange: handleWebhookUrlChange,
     webhook,
@@ -104,11 +101,10 @@ export function Body(props: BodyProps) {
       )}
       <View>
         {(!theme.appearance.mobile || activeTab === "preview") && (
-          <MessagePreview message={message} webhook={webhook} />
+          <MessagePreview webhook={webhook} />
         )}
         {(!theme.appearance.mobile || activeTab === "editor") && (
           <Editor
-            message={message}
             webhookUrl={webhookUrl}
             onWebhookUrlChange={handleWebhookUrlChange}
             webhook={webhook}
