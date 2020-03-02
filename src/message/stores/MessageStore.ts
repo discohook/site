@@ -8,13 +8,14 @@ export class MessageStore extends InitialisableStore {
   @observable message!: Message
 
   initialise() {
-    if (SERVER) return
+    const { ssrStore } = this.manager.stores
 
-    const parameters = new URLSearchParams(location.search)
+    const search = ssrStore.context ? ssrStore.context.search : location.search
+    const parameters = new URLSearchParams(search)
     const encodedBackup = parameters.get("message") ?? parameters.get("backup")
 
     const messageData = decodeMessage(encodedBackup ?? "")
-    if (messageData) console.log("Loaded with message:", messageData)
+    if (!SERVER && messageData) console.log("Loaded with message:", messageData)
 
     this.message = new Message(messageData ?? INITIAL_MESSAGE_DATA)
   }

@@ -54,11 +54,9 @@ router.get("/", async context => {
   context.body = stream
 
   const manager = new StoreManager(stores)
+  manager.stores.ssrStore.context = context
+
   await manager.initialise()
-
-  const { appearanceStore } = manager.stores
-
-  appearanceStore.mobile = /mobile/i.test(context.get("User-Agent"))
 
   const withManager = (node: ReactNode) => (
     <ManagerProvider value={manager}>{node}</ManagerProvider>
@@ -67,7 +65,7 @@ router.get("/", async context => {
   stream.write(templateStart)
 
   const sheet = new ServerStyleSheet()
-  const app = sheet.collectStyles(withManager(<App request={context} />))
+  const app = sheet.collectStyles(withManager(<App />))
   const appStream = sheet.interleaveWithNodeStream(renderToNodeStream(app))
 
   appStream.pipe(stream, { end: false })

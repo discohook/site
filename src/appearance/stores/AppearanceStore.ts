@@ -10,6 +10,14 @@ export class AppearanceStore extends InitialisableStore {
   @observable fontSize: Appearance["fontSize"] = 16
   @observable mobile: Appearance["mobile"] = false
 
+  initialise() {
+    const { ssrStore } = this.manager.stores
+    const userAgent = ssrStore.context
+      ? ssrStore.context.get("User-Agent")
+      : navigator.userAgent
+    this.mobile = /mobile/i.test(userAgent)
+  }
+
   @computed get theme(): Theme {
     return {
       ...THEMES[this.color],

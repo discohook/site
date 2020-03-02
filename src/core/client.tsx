@@ -10,8 +10,6 @@ const initialise = async () => {
   const manager = new StoreManager(stores)
   await manager.initialise()
 
-  manager.stores.appearanceStore.mobile = /mobile/i.test(navigator.userAgent)
-
   if (DEV) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const global = window as any
