@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import styled, { css, useTheme } from "styled-components"
 import { Editor } from "../../editor/components/Editor"
 import { MessagePreview } from "../../preview/components/MessagePreview"
-import { Webhook } from "../../webhook/types/Webhook"
 
 const Container = styled.div`
   display: flex;
@@ -64,26 +63,15 @@ const View = styled.main`
     `}
 `
 
-export type BodyProps = {
-  webhookUrl: string
-  onWebhookUrlChange: (webhookUrl: string) => void
-  webhook: Webhook | undefined
-}
-
-export function Body(props: BodyProps) {
-  const {
-    webhookUrl,
-    onWebhookUrlChange: handleWebhookUrlChange,
-    webhook,
-  } = props
-
+export function Body() {
   const theme = useTheme()
+  const { mobile } = theme.appearance
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
   return (
     <Container>
-      {theme.appearance.mobile && (
+      {mobile && (
         <TabSwitcher>
           <Tab
             active={activeTab === "editor"}
@@ -100,16 +88,8 @@ export function Body(props: BodyProps) {
         </TabSwitcher>
       )}
       <View>
-        {(!theme.appearance.mobile || activeTab === "preview") && (
-          <MessagePreview webhook={webhook} />
-        )}
-        {(!theme.appearance.mobile || activeTab === "editor") && (
-          <Editor
-            webhookUrl={webhookUrl}
-            onWebhookUrlChange={handleWebhookUrlChange}
-            webhook={webhook}
-          />
-        )}
+        {(!mobile || activeTab === "preview") && <MessagePreview />}
+        {(!mobile || activeTab === "editor") && <Editor />}
       </View>
     </Container>
   )

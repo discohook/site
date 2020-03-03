@@ -4,19 +4,12 @@ import { FileInput } from "../../form/components/FileInput"
 import { InputField } from "../../form/components/InputField"
 import { InputGroup } from "../../form/components/InputGroup"
 import { Embed } from "../../message/classes/Embed"
-import { Message } from "../../message/classes/Message"
-import { getAvatarUrl } from "../../webhook/helpers/getAvatarUrl"
-import { Webhook } from "../../webhook/types/Webhook"
+import { useStores } from "../../state/hooks/useStores"
 import { EmbedEditor } from "./EmbedEditor"
 import { MultiEditor } from "./MultiEditor"
 
-export type MessageEditorProps = {
-  message: Message
-  webhook?: Webhook
-}
-
-export function MessageEditor(props: MessageEditorProps) {
-  const { message, webhook } = props
+export function MessageEditor() {
+  const { messageStore, webhookStore } = useStores()
 
   return useObserver(() => (
     <>
@@ -24,9 +17,9 @@ export function MessageEditor(props: MessageEditorProps) {
         {() => (
           <InputField
             id="m.content"
-            value={message.content}
+            value={messageStore.message.content}
             onChange={content => {
-              message.content = content
+              messageStore.message.content = content
             }}
             label="Message content"
             type="multiline"
@@ -35,10 +28,10 @@ export function MessageEditor(props: MessageEditorProps) {
         )}
       </Observer>
       <MultiEditor<Embed>
-        items={message.embeds}
+        items={messageStore.message.embeds}
         name="Embed"
         limit={10}
-        factory={() => new Embed(message)}
+        factory={() => new Embed(messageStore.message)}
         keyMapper={embed => embed.id}
       >
         {embed => <EmbedEditor embed={embed} />}
@@ -48,31 +41,31 @@ export function MessageEditor(props: MessageEditorProps) {
           <InputGroup>
             <InputField
               id="m.username"
-              value={message.username}
+              value={messageStore.message.username}
               onChange={username => {
-                message.username = username
+                messageStore.message.username = username
               }}
               label="Override username"
-              placeholder={webhook?.name}
+              placeholder={webhookStore?.name}
               maxLength={32}
             />
             <InputField
               id="m.avatar"
-              value={message.avatar}
+              value={messageStore.message.avatar}
               onChange={avatar => {
-                message.avatar = avatar
+                messageStore.message.avatar = avatar
               }}
               label="Override avatar"
-              placeholder={webhook && getAvatarUrl(webhook)}
+              placeholder={webhookStore.avatarUrl}
             />
           </InputGroup>
         )}
       </Observer>
       <FileInput
         id="m.files"
-        files={message.files}
+        files={messageStore.message.files}
         onChange={files => {
-          message.files = files
+          messageStore.message.files = files
         }}
       />
     </>

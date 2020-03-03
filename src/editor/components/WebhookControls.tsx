@@ -18,15 +18,8 @@ const DisabledReason = styled.div`
   text-align: end;
 `
 
-export type WebhookControlsProps = {
-  webhookUrl: string
-  onWebhookUrlChange: (webhookUrl: string) => void
-}
-
-export function WebhookControls(props: WebhookControlsProps) {
-  const { webhookUrl, onWebhookUrlChange: handleWebhookUrlChange } = props
-
-  const { messageStore } = useStores()
+export function WebhookControls() {
+  const { messageStore, webhookStore } = useStores()
   const message = useObserver(() => messageStore.message)
 
   const [sending, setSending] = useState(false)
@@ -35,7 +28,7 @@ export function WebhookControls(props: WebhookControlsProps) {
     setSending(true)
 
     try {
-      await executeWebhook(webhookUrl, message.toJS())
+      await executeWebhook(webhookStore.url, message.toJS())
     } catch (error) {
       console.error("Error executing webhook:", error)
     }
@@ -49,7 +42,7 @@ export function WebhookControls(props: WebhookControlsProps) {
 
     let isDisabled: boolean
     if (sending) isDisabled = true
-    else if (!WEBHOOK_URL_RE.test(webhookUrl)) isDisabled = true
+    else if (!WEBHOOK_URL_RE.test(webhookStore.url)) isDisabled = true
     else if (isOverDiscordCharacterLimit) isDisabled = true
     else if (typeof message.content === "string") isDisabled = false
     else if (message.embeds.length > 0) isDisabled = false
@@ -61,8 +54,10 @@ export function WebhookControls(props: WebhookControlsProps) {
         <FlexContainer flow="row">
           <InputField
             id="webhook-url"
-            value={webhookUrl}
-            onChange={handleWebhookUrlChange}
+            value={webhookStore.url}
+            onChange={url => {
+              webhookStore.url = url
+            }}
             label="Webhook URL"
             placeholder="https://discordapp.com/api/webhooks/..."
           />

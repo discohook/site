@@ -6,8 +6,6 @@ import { Attachment } from "../../attachment/components/Attachment"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
 import { useStores } from "../../state/hooks/useStores"
-import { getAvatarUrl } from "../../webhook/helpers/getAvatarUrl"
-import { Webhook } from "../../webhook/types/Webhook"
 import { MessageHeader } from "./MessageHeader"
 import { RichEmbed } from "./RichEmbed"
 
@@ -72,33 +70,30 @@ const ExtrasContainer = styled.div`
   }
 `
 
-export type MessagePreviewProps = {
-  webhook?: Webhook
-}
-
-export function MessagePreview(props: MessagePreviewProps) {
-  const { webhook } = props
-
-  const { messageStore } = useStores()
-  const message = useObserver(() => messageStore.message)
+export function MessagePreview() {
+  const { messageStore, webhookStore } = useStores()
 
   return useObserver(() => (
     <ScrollContainer>
       <Container>
         <MessageHeader
-          username={message.username || webhook?.name}
-          avatarUrl={message.avatar || (webhook && getAvatarUrl(webhook))}
+          username={webhookStore.displayName}
+          avatarUrl={webhookStore.displayAvatarUrl}
         />
-        {message.content && (
-          <Markdown content={message.content} type="message-content" />
+        {messageStore.message.content && (
+          <Markdown
+            content={messageStore.message.content}
+            type="message-content"
+          />
         )}
-        {(message.embeds.length > 0 || message.files.length > 0) && (
+        {(messageStore.message.embeds.length > 0 ||
+          messageStore.message.files.length > 0) && (
           <ExtrasContainer>
             {[
-              ...message.files.map(file => (
+              ...messageStore.message.files.map(file => (
                 <Attachment key={`file:${file.name}`} file={file} />
               )),
-              ...message.embeds.map(embed => (
+              ...messageStore.message.embeds.map(embed => (
                 <RichEmbed key={`embed:${embed.id}`} embed={embed} />
               )),
             ]}

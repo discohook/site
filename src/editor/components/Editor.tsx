@@ -7,7 +7,6 @@ import { useTheme } from "../../appearance/hooks/useTheme"
 import { JsonInput } from "../../json/components/JsonInput"
 import { useManager } from "../../state/hooks/useManager"
 import { useStores } from "../../state/hooks/useStores"
-import { Webhook } from "../../webhook/types/Webhook"
 import { Actions } from "./Actions"
 import { FlexContainer } from "./Container"
 import { MessageEditor } from "./MessageEditor"
@@ -37,19 +36,7 @@ const JavaScriptWarning = styled.noscript`
   color: ${DARK_THEME.header.primary};
 `
 
-export type EditorProps = {
-  webhookUrl: string
-  onWebhookUrlChange: (webhookUrl: string) => void
-  webhook?: Webhook
-}
-
-export function Editor(props: EditorProps) {
-  const {
-    webhookUrl,
-    onWebhookUrlChange: handleWebhookUrlChange,
-    webhook,
-  } = props
-
+export function Editor() {
   const manager = useManager()
 
   const { messageStore } = useStores()
@@ -70,11 +57,8 @@ export function Editor(props: EditorProps) {
             { name: "Clear all", action: () => messageStore.message.apply({}) },
           ]}
         />
-        <WebhookControls
-          webhookUrl={webhookUrl}
-          onWebhookUrlChange={handleWebhookUrlChange}
-        />
-        <MessageEditor message={messageStore.message} webhook={webhook} />
+        <WebhookControls />
+        <MessageEditor />
         <JsonInput message={messageStore.message} />
       </EditorInnerContainer>
     </EditorContainer>
