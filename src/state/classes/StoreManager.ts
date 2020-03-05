@@ -14,7 +14,7 @@ export class StoreManager<T extends Record<string, InitialisableStore>> {
   async initialise() {
     await Promise.all(
       Object.values(this.stores).map(async store => {
-        await store.initialise()
+        await store.initialiseStore()
       }),
     )
   }

@@ -10,8 +10,10 @@ export class AppearanceStore extends InitialisableStore {
   @observable fontSize: Appearance["fontSize"] = 16
   @observable mobile: Appearance["mobile"] = false
 
-  initialise() {
+  async initialise() {
     const { ssrStore } = this.manager.stores
+    await ssrStore.initialised
+
     const userAgent = ssrStore.context
       ? ssrStore.context.get("User-Agent")
       : navigator.userAgent
