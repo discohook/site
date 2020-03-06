@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { spawnAppearanceModal } from "../../appearance/actions/spawnAppearanceModal"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
+import { spawnBackupsModal } from "../../backup/actions/spawnBackupModal"
 import { JsonInput } from "../../json/components/JsonInput"
 import { useManager } from "../../state/hooks/useManager"
 import { useStores } from "../../state/hooks/useStores"
@@ -53,6 +54,7 @@ export function Editor() {
         <Actions
           title={theme.appearance.mobile ? undefined : "Message editor"}
           actions={[
+            { name: "Backups", action: () => spawnBackupsModal(manager) },
             { name: "Appearance", action: () => spawnAppearanceModal(manager) },
             { name: "Clear all", action: () => messageStore.message.apply({}) },
           ]}

@@ -4,7 +4,7 @@ import { Manager } from "../types/Manager"
 
 export class InitialisableStore {
   initialised: Promise<void>
-  protected markAsInitialised!: () => void
+  private markAsInitialised!: () => void
 
   protected manager: Manager
 

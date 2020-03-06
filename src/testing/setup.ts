@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom/extend-expect"
+import "fake-indexeddb/auto"
 import { StoreManager } from "../state/classes/StoreManager"
 import { stores } from "../state/stores"
 
