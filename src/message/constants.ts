@@ -158,29 +158,25 @@ You can even have inline fields, like the ones below! :arrow_down:
         url: "https://discohook.org/assets/discord-avatar-red.png",
       },
     },
-    /*
     {
       title: "Backups!",
       description: `
-As a small extra, you can back up your messages in here.
-To get started using them, click on the **Backups** button on the top of the editor!
+Discohook also has a backups feature, to get started click on the **Backups** button on the top of the editor!
 
-If you want to share a backup with someone else (or to yourself), you can copy the URL in the address bar.
-When you open the URL at a later time, the message will be restored.
+Alongside that, the message in the URL bar is a permanent link to your message.
+You can use it to share a message or backup with someone else.
 `.trim(),
       fields: [
         {
           name: ":warning: Warning",
           value: `
 Backups are stored in the browser, and will always be stored there.
-This means that if you clear your browsers data your backups will be lost forever!
-If you want to keep your backups when clearing your browser data, use the share functionality to copy your backups and store them somewhere safe.
+This means that if you or your browser clears the data of this site, all backups will be lost forever.
 `.trim(),
         },
       ],
       color: 0x747f8d,
     },
-    */
     {
       title: "Disclaimer",
       description: `
