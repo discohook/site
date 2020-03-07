@@ -16,7 +16,7 @@ export function BackupsModal() {
   return useObserver(() => (
     <BaseModal>
       <BaseModalHeader>Backups</BaseModalHeader>
-      {!databaseStore.persisted && (
+      {databaseStore.shouldShowPersistenceWarning && (
         <BaseModalBody>
           <PersistentStorageWarning />
         </BaseModalBody>

@@ -2,7 +2,9 @@ import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled from "styled-components"
 import { Button } from "../../form/components/Button"
+import { useManager } from "../../state/hooks/useManager"
 import { useStores } from "../../state/hooks/useStores"
+import { spawnPushNotificationModal } from "../actions/spawnPushNotificationModal"
 
 const Warning = styled.div`
   margin: 8px;
@@ -12,36 +14,55 @@ const Warning = styled.div`
   border-radius: 3px;
 `
 
+const Header = styled.h5`
+  margin: 8px;
+
+  color: ${({ theme }) => theme.header.primary};
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 1.375;
+`
+
 const Text = styled.p`
   margin: 8px;
 
-  color: ${({ theme }) => theme.interactive.active};
   line-height: 1.375;
 `
 
 export function PersistentStorageWarning() {
+  const manager = useManager()
+
   const { databaseStore } = useStores()
 
   return useObserver(() => (
     <Warning>
+      <Header>Warning</Header>
       <Text>
-        Persistent data storage permission was not granted by the browser.
-        Stored data may be cleared by the browser under storage pressure, such
-        as low disk space.
+        Data may be deleted by the browser under conditions such as low disk
+        space. To ensure data will be kept, you can grant permission to
+        persistent storage.
       </Text>
-      {"chrome" in window && (
-        <Text>
-          Because of a limitation in your browser, notification access is
-          required to persist storage. Discohook will never send any
-          notifications to you.
-        </Text>
-      )}
       <Button
+        variant="outline"
+        accent="warning"
         onClick={async () => {
-          await databaseStore.requestPersistence()
+          if ("chrome" in window) {
+            spawnPushNotificationModal(manager)
+          } else {
+            await databaseStore.requestPersistence()
+          }
         }}
       >
         Request permission
+      </Button>
+      <Button
+        variant="outline"
+        accent="warning"
+        onClick={() => {
+          databaseStore.persistenceMessageDismissed = true
+        }}
+      >
+        Dismiss
       </Button>
     </Warning>
   ))

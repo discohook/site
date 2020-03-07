@@ -17,6 +17,8 @@ const Container = styled.ul`
 
 const NoBackupsNotice = styled.div`
   margin: 8px;
+
+  line-height: 1.375;
   font-style: italic;
 `
 
@@ -32,7 +34,8 @@ export function BackupList() {
       </Container>
     ) : (
       <NoBackupsNotice>
-        No backups were found. Make the first one!
+        You haven&apos;t made any backups yet. Enter a name below and click on
+        the Save button to make the first!
       </NoBackupsNotice>
     ),
   )

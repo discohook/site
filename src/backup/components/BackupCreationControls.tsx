@@ -20,10 +20,9 @@ export function BackupCreationControls() {
       />
       <Button
         style={{ width: "80px" }}
-        onClick={() => {
-          backupStore.saveBackup(backupName).catch(error => {
-            console.error("Failed saving backup:", error)
-          })
+        onClick={async () => {
+          await backupStore.saveBackup(backupName)
+          setBackupName("")
         }}
       >
         {backupStore.backupList.some(backup => backup.name === backupName)

@@ -1,5 +1,5 @@
 import { IDBPDatabase, openDB } from "idb"
-import { observable } from "mobx"
+import { computed, observable } from "mobx"
 import { InitialisableStore } from "../../state/classes/InitialisableStore"
 import { Schema } from "../types/Schema"
 
@@ -7,6 +7,8 @@ export class DatabaseStore extends InitialisableStore {
   database!: IDBPDatabase<Schema>
 
   @observable persisted = false
+
+  @observable persistenceMessageDismissed = false
 
   async initialise() {
     if (SERVER) return
@@ -41,5 +43,9 @@ export class DatabaseStore extends InitialisableStore {
     if (oldVersion < 1) {
       database.createObjectStore("backups")
     }
+  }
+
+  @computed get shouldShowPersistenceWarning() {
+    return !this.persisted && !this.persistenceMessageDismissed
   }
 }
