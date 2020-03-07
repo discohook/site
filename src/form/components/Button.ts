@@ -1,10 +1,12 @@
 import { shade, transparentize } from "polished"
 import styled, { css } from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
+import { Theme } from "../../appearance/types/Theme"
 
 export const Button = styled.button.attrs({ type: "button" })<{
   variant?: "filled" | "outline" | "borderless"
   size?: "small" | "medium"
+  accent?: keyof Theme["accent"]
 }>`
   ${({ size = "small" }) =>
     size === "small" &&
@@ -31,7 +33,7 @@ export const Button = styled.button.attrs({ type: "button" })<{
   outline: none;
   cursor: pointer;
 
-  color: ${({ theme }) => theme.accent.primary};
+  color: ${({ theme, accent = "primary" }) => theme.accent[accent]};
 
   font-size: 14px;
   font-weight: 500;
@@ -39,40 +41,40 @@ export const Button = styled.button.attrs({ type: "button" })<{
 
   transition: 167ms;
 
-  ${({ variant = "filled" }) =>
+  ${({ variant = "filled", accent = "primary" }) =>
     variant === "filled" &&
     css`
-      background: ${({ theme }) => theme.accent.primary};
-      border-color: ${({ theme }) => theme.accent.primary};
+      background: ${({ theme }) => theme.accent[accent]};
+      border-color: ${({ theme }) => theme.accent[accent]};
 
       color: ${DARK_THEME.header.primary};
 
       &:hover:not(:disabled),
       &:focus:not(:disabled) {
-        background: ${({ theme }) => shade(0.1, theme.accent.primary)};
-        border-color: ${({ theme }) => shade(0.1, theme.accent.primary)};
+        background: ${({ theme }) => shade(0.1, theme.accent[accent])};
+        border-color: ${({ theme }) => shade(0.1, theme.accent[accent])};
       }
 
       &:active:not(:disabled) {
-        background: ${({ theme }) => shade(0.2, theme.accent.primary)};
-        border-color: ${({ theme }) => shade(0.2, theme.accent.primary)};
+        background: ${({ theme }) => shade(0.2, theme.accent[accent])};
+        border-color: ${({ theme }) => shade(0.2, theme.accent[accent])};
       }
     `}
 
-  ${({ variant }) =>
+  ${({ variant, accent = "primary" }) =>
     variant === "outline" &&
     css`
-      border-color: ${({ theme }) => transparentize(0.7, theme.accent.primary)};
+      border-color: ${({ theme }) => transparentize(0.7, theme.accent[accent])};
 
       &:hover:not(:disabled),
       &:focus:not(:disabled) {
         border-color: ${({ theme }) =>
-          transparentize(0.4, theme.accent.primary)};
+          transparentize(0.4, theme.accent[accent])};
       }
 
       &:active:not(:disabled) {
-        background: ${({ theme }) => transparentize(0.9, theme.accent.primary)};
-        border-color: ${({ theme }) => theme.accent.primary};
+        background: ${({ theme }) => transparentize(0.9, theme.accent[accent])};
+        border-color: ${({ theme }) => theme.accent[accent]};
       }
     `}
 
