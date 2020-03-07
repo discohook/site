@@ -1,9 +1,14 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useState } from "react"
+import styled from "styled-components"
 import { FlexContainer } from "../../editor/components/Container"
 import { Button } from "../../form/components/Button"
 import { InputField } from "../../form/components/InputField"
 import { useStores } from "../../state/hooks/useStores"
+
+const CreateBackupButton = styled(Button)`
+  width: 80px;
+`
 
 export function BackupCreationControls() {
   const { backupStore } = useStores()
@@ -18,17 +23,19 @@ export function BackupCreationControls() {
         onChange={setBackupName}
         label="Backup name"
       />
-      <Button
-        style={{ width: "80px" }}
+      <CreateBackupButton
+        disabled={backupName.length === 0}
         onClick={async () => {
-          await backupStore.saveBackup(backupName)
+          await backupStore.saveBackup(backupName.trim())
           setBackupName("")
         }}
       >
-        {backupStore.backupList.some(backup => backup.name === backupName)
+        {backupStore.backupList.some(
+          backup => backup.name === backupName.trim(),
+        )
           ? "Update"
           : "Save"}
-      </Button>
+      </CreateBackupButton>
     </FlexContainer>
   ))
 }
