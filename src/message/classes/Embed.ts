@@ -1,5 +1,5 @@
 import { isValid } from "date-fns"
-import { action, computed, observable } from "mobx"
+import { computed, observable } from "mobx"
 import { Color } from "../../color/classes/Color"
 import { getEmbedGallery } from "../helpers/getEmbedGallery"
 import { getUniqueId } from "../helpers/getUniqueId"
@@ -29,10 +29,7 @@ export class Embed {
 
   constructor(message: Message, embed: EmbedData = {}) {
     this.message = message
-    this.apply(embed)
-  }
 
-  @action apply(embed: EmbedData) {
     this.title = embed.title ?? ""
     this.description = embed.description ?? ""
     this.url = embed.url ?? ""

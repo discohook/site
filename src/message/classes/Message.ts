@@ -1,4 +1,4 @@
-import { action, observable } from "mobx"
+import { observable } from "mobx"
 import { MessageData } from "../types/MessageData"
 import { Embed } from "./Embed"
 
@@ -10,10 +10,6 @@ export class Message {
   @observable files: File[] = []
 
   constructor(message: MessageData = {}) {
-    this.apply(message)
-  }
-
-  @action apply(message: MessageData) {
     this.content = message.content ?? ""
     this.embeds = message.embeds?.map(embed => new Embed(this, embed)) ?? []
     this.username = message.username ?? ""

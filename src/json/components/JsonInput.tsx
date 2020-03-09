@@ -7,6 +7,7 @@ import { InputLabel } from "../../form/components/InputLabel"
 import { MultilineTextInput } from "../../form/components/MultilineTextInput"
 import { Message } from "../../message/classes/Message"
 import { useAutorun } from "../../state/hooks/useAutorun"
+import { useStores } from "../../state/hooks/useStores"
 import { parseMessage } from "../helpers/parseMessage"
 import { stringifyMessage } from "../helpers/stringifyMessage"
 
@@ -40,20 +41,18 @@ const SubmitButton = styled(Button)`
   align-self: flex-end;
 `
 
-export type JsonInputProps = {
-  message: Message
-}
 
-export function JsonInput(props: JsonInputProps) {
-  const { message } = props
 
-  const [json, setJson] = useState(() => stringifyMessage(message.toJS()))
+export function JsonInput() {
+const { messageStore } = useStores()
+
+  const [json, setJson] = useState(() => stringifyMessage(messageStore.message.toJS()))
 
   const lastMessageRef = useRef(json)
   useAutorun(() => {
-    const newMessage = stringifyMessage(message.toJS(), false)
+    const newMessage = stringifyMessage(messageStore.message.toJS(), false)
     if (newMessage !== lastMessageRef.current) {
-      setJson(stringifyMessage(message.toJS()))
+      setJson(stringifyMessage(messageStore.message.toJS()))
       lastMessageRef.current = newMessage
     }
   })
@@ -92,9 +91,8 @@ export function JsonInput(props: JsonInputProps) {
       <SubmitButton
         disabled={errors.length > 0}
         onClick={() => {
-          message.apply({
-            ...parseMessage(json).message,
-            files: message.files.slice(),
+          messageStore.message = new Message({
+            files: messageStore.message.files
           })
         }}
       >

@@ -6,6 +6,7 @@ import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
 import { spawnBackupsModal } from "../../backup/actions/spawnBackupModal"
 import { JsonInput } from "../../json/components/JsonInput"
+import { Message } from "../../message/classes/Message"
 import { useManager } from "../../state/hooks/useManager"
 import { useStores } from "../../state/hooks/useStores"
 import { Actions } from "./Actions"
@@ -54,14 +55,29 @@ export function Editor() {
         <Actions
           title={theme.appearance.mobile ? undefined : "Message editor"}
           actions={[
-            { name: "Backups", action: () => spawnBackupsModal(manager) },
-            { name: "Appearance", action: () => spawnAppearanceModal(manager) },
-            { name: "Clear all", action: () => messageStore.message.apply({}) },
+            {
+              name: "Backups",
+              action: () => {
+                spawnBackupsModal(manager)
+              },
+            },
+            {
+              name: "Appearance",
+              action: () => {
+                spawnAppearanceModal(manager)
+              },
+            },
+            {
+              name: "Clear all",
+              action: () => {
+                messageStore.message = new Message()
+              },
+            },
           ]}
         />
         <WebhookControls />
         <MessageEditor />
-        <JsonInput message={messageStore.message} />
+        <JsonInput />
       </EditorInnerContainer>
     </EditorContainer>
   ))

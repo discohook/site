@@ -1,4 +1,4 @@
-import { action, computed, observable } from "mobx"
+import { computed, observable } from "mobx"
 import { getFieldWidth } from "../helpers/getFieldWidth"
 import { getUniqueId } from "../helpers/getUniqueId"
 import { FieldData } from "../types/FieldData"
@@ -16,10 +16,7 @@ export class Field {
 
   constructor(embed: Embed, field: FieldData = {}) {
     this.embed = embed
-    this.apply(field)
-  }
 
-  @action apply(field: FieldData) {
     this.name = field.name ?? ""
     this.value = field.value ?? ""
     this.inline = field.inline ?? false
