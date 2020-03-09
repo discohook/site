@@ -48,4 +48,12 @@ export class Embed {
   @computed.struct get gallery() {
     return getEmbedGallery(this)
   }
+
+  @computed get shouldRender() {
+    const embedIndex = this.message.embeds.indexOf(this)
+    if (embedIndex < 1) return true
+
+    const lastEmbed = this.message.embeds[embedIndex - 1]
+    return lastEmbed.url === this.url
+  }
 }

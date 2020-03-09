@@ -98,54 +98,58 @@ export type RichEmbedProps = {
 export function RichEmbed(props: RichEmbedProps) {
   const { embed } = props
 
-  return useObserver(() => (
-    <RichEmbedContainer style={{ borderColor: embed.color?.hex }}>
-      <EmbedGrid>
-        {embed.author && <EmbedAuthor embed={embed} />}
-        {embed.title &&
-          (embed.url ? (
-            <EmbedTitleLink
-              href={embed.url}
-              rel="noopener noreferrer nofollow ugc"
-              target="_blank"
-            >
-              <Markdown content={embed.title} type="embed-header" />
-            </EmbedTitleLink>
-          ) : (
-            <EmbedTitleNormal>
-              <Markdown content={embed.title} type="embed-header" />
-            </EmbedTitleNormal>
-          ))}
-        {embed.description && (
-          <EmbedDescription>
-            <Markdown content={embed.description} type="embed-content" />
-          </EmbedDescription>
-        )}
-        {embed.fields.length > 0 && (
-          <EmbedFields>
-            {embed.fields.map(field => (
-              <EmbedField key={field.id} field={field} />
+  return useObserver(() => {
+    if (!embed.shouldRender) return null
+
+    return (
+      <RichEmbedContainer style={{ borderColor: embed.color?.hex }}>
+        <EmbedGrid>
+          {embed.author && <EmbedAuthor embed={embed} />}
+          {embed.title &&
+            (embed.url ? (
+              <EmbedTitleLink
+                href={embed.url}
+                rel="noopener noreferrer nofollow ugc"
+                target="_blank"
+              >
+                <Markdown content={embed.title} type="embed-header" />
+              </EmbedTitleLink>
+            ) : (
+              <EmbedTitleNormal>
+                <Markdown content={embed.title} type="embed-header" />
+              </EmbedTitleNormal>
             ))}
-          </EmbedFields>
-        )}
-        {embed.gallery ? (
-          <EmbedGallery gallery={embed.gallery} />
-        ) : embed.image ? (
-          <EmbedImage
-            src={embed.image}
-            alt="Image"
-            hasThumbnail={Boolean(embed.thumbnail)}
-          />
-        ) : (
-          undefined
-        )}
-        {(embed.footer || isValid(embed.timestamp)) && (
-          <EmbedFooter embed={embed} />
-        )}
-        {embed.thumbnail && (
-          <EmbedThumbnail src={embed.thumbnail} alt="Thumbnail" />
-        )}
-      </EmbedGrid>
-    </RichEmbedContainer>
-  ))
+          {embed.description && (
+            <EmbedDescription>
+              <Markdown content={embed.description} type="embed-content" />
+            </EmbedDescription>
+          )}
+          {embed.fields.length > 0 && (
+            <EmbedFields>
+              {embed.fields.map(field => (
+                <EmbedField key={field.id} field={field} />
+              ))}
+            </EmbedFields>
+          )}
+          {embed.gallery ? (
+            <EmbedGallery gallery={embed.gallery} />
+          ) : embed.image ? (
+            <EmbedImage
+              src={embed.image}
+              alt="Image"
+              hasThumbnail={Boolean(embed.thumbnail)}
+            />
+          ) : (
+            undefined
+          )}
+          {(embed.footer || isValid(embed.timestamp)) && (
+            <EmbedFooter embed={embed} />
+          )}
+          {embed.thumbnail && (
+            <EmbedThumbnail src={embed.thumbnail} alt="Thumbnail" />
+          )}
+        </EmbedGrid>
+      </RichEmbedContainer>
+    )
+  })
 }
