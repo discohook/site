@@ -13,7 +13,7 @@ export function App() {
   const { appearanceStore, messageStore } = useStores()
 
   useAutorun(() => {
-    setUrlToMessage(messageStore.message.toJS())
+    setUrlToMessage(messageStore.message.getMessageData())
   })
 
   const theme = useObserver(() => appearanceStore.theme)

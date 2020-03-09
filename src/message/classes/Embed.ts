@@ -1,4 +1,3 @@
-import { isValid } from "date-fns"
 import { computed, observable } from "mobx"
 import { Color } from "../../color/classes/Color"
 import { getEmbedGallery } from "../helpers/getEmbedGallery"
@@ -48,34 +47,5 @@ export class Embed {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   @computed.struct get gallery() {
     return getEmbedGallery(this)
-  }
-
-  toJS(): EmbedData {
-    return {
-      title: this.title || undefined,
-      description: this.description || undefined,
-      url: this.url || undefined,
-      color: this.color.toJS() ?? undefined,
-      fields:
-        this.fields.length > 0
-          ? this.fields.map(field => field.toJS())
-          : undefined,
-      author: this.author
-        ? {
-            name: this.author,
-            url: this.authorUrl,
-            iconUrl: this.authorIcon,
-          }
-        : undefined,
-      footer: this.footer
-        ? {
-            text: this.footer,
-            iconUrl: this.footerIcon,
-          }
-        : undefined,
-      timestamp: isValid(this.timestamp) ? this.timestamp.toJSON() : undefined,
-      image: this.image ? { url: this.image } : undefined,
-      thumbnail: this.thumbnail ? { url: this.thumbnail } : undefined,
-    }
   }
 }

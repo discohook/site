@@ -45,14 +45,18 @@ export function JsonInput() {
   const { messageStore } = useStores()
 
   const [json, setJson] = useState(() =>
-    stringifyMessage(messageStore.message.toJS()),
+    stringifyMessage(messageStore.message.getMessageData()),
   )
 
   const lastMessageRef = useRef(json)
   useAutorun(() => {
-    const newMessage = stringifyMessage(messageStore.message.toJS(), false)
+    const newMessage = stringifyMessage(
+      messageStore.message.getMessageData(),
+      false,
+    )
+
     if (newMessage !== lastMessageRef.current) {
-      setJson(stringifyMessage(messageStore.message.toJS()))
+      setJson(stringifyMessage(messageStore.message.getMessageData()))
       lastMessageRef.current = newMessage
     }
   })

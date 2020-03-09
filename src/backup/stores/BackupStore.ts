@@ -43,7 +43,7 @@ export class BackupStore extends InitialisableStore {
     const { databaseStore, messageStore } = this.manager.stores
 
     const message = {
-      ...messageStore.message.toJS(),
+      ...messageStore.message.getMessageData(),
       files: undefined,
     }
 

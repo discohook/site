@@ -25,12 +25,4 @@ export class Field {
   @computed get width() {
     return getFieldWidth(this)
   }
-
-  toJS(): FieldData {
-    return {
-      name: this.name || undefined,
-      value: this.value || undefined,
-      inline: this.inline || undefined,
-    }
-  }
 }

@@ -24,7 +24,7 @@ describe("ColorInput", () => {
 
     const handleChange = jest.fn()
     reaction(
-      () => color.color,
+      () => color.raw,
       number => handleChange(number),
     )
 
@@ -49,7 +49,7 @@ describe("ColorInput", () => {
 
     const handleChange = jest.fn()
     reaction(
-      () => color.color,
+      () => color.raw,
       number => handleChange(number),
     )
 
@@ -79,7 +79,7 @@ describe("ColorInput", () => {
     const input = getByLabelText("Color")
 
     act(() => {
-      color.color = 0x00ff00
+      color.raw = 0x00ff00
     })
 
     expect(input).toHaveValue("#00ff00")

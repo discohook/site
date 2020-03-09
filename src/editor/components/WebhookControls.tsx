@@ -28,7 +28,7 @@ export function WebhookControls() {
     setSending(true)
 
     try {
-      await executeWebhook(webhookStore.url, message.toJS())
+      await executeWebhook(webhookStore.url, message.getMessageData())
     } catch (error) {
       console.error("Error executing webhook:", error)
     }
@@ -38,7 +38,7 @@ export function WebhookControls() {
 
   return useObserver(() => {
     const isOverDiscordCharacterLimit =
-      getTotalCharacterCount(message.toJS()) > 6000
+      getTotalCharacterCount(message.getMessageData()) > 6000
 
     let isDisabled: boolean
     if (sending) isDisabled = true

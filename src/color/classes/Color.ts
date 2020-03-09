@@ -11,7 +11,7 @@ export class Color {
   @observable value = 0
 
   constructor(color: DiscordColor) {
-    this.color = color
+    this.raw = color
   }
 
   @computed get valid() {
@@ -48,7 +48,7 @@ export class Color {
     this.value = hsv.value
   }
 
-  @computed get color(): DiscordColor {
+  @computed get raw() {
     if (!this.valid) return null
 
     return hsvToNumber({
@@ -57,11 +57,7 @@ export class Color {
       value: this.value,
     })
   }
-  set color(value) {
+  set raw(value) {
     this.hex = numberToHex(value)
-  }
-
-  toJS(): DiscordColor {
-    return this.color
   }
 }
