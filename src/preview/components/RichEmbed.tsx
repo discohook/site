@@ -101,8 +101,10 @@ export function RichEmbed(props: RichEmbedProps) {
   return useObserver(() => {
     if (!embed.shouldRender) return null
 
+    const color = embed.color.raw === 0xffffff ? undefined : embed.color.hex
+
     return (
-      <RichEmbedContainer style={{ borderColor: embed.color?.hex }}>
+      <RichEmbedContainer style={{ borderColor: color }}>
         <EmbedGrid>
           {embed.author && <EmbedAuthor embed={embed} />}
           {embed.title &&
