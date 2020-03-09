@@ -41,12 +41,12 @@ const SubmitButton = styled(Button)`
   align-self: flex-end;
 `
 
-
-
 export function JsonInput() {
-const { messageStore } = useStores()
+  const { messageStore } = useStores()
 
-  const [json, setJson] = useState(() => stringifyMessage(messageStore.message.toJS()))
+  const [json, setJson] = useState(() =>
+    stringifyMessage(messageStore.message.toJS()),
+  )
 
   const lastMessageRef = useRef(json)
   useAutorun(() => {
@@ -92,7 +92,7 @@ const { messageStore } = useStores()
         disabled={errors.length > 0}
         onClick={() => {
           messageStore.message = new Message({
-            files: messageStore.message.files
+            files: messageStore.message.files,
           })
         }}
       >
