@@ -59,8 +59,8 @@ const EmbedFields = styled.div`
 `
 
 const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
-  max-width: 256px;
-  max-height: 256px;
+  max-width: 400px;
+  max-height: 300px;
 
   margin: 16px 0 0;
   border-radius: 4px;
