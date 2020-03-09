@@ -54,6 +54,6 @@ export class Embed {
     if (embedIndex < 1) return true
 
     const lastEmbed = this.message.embeds[embedIndex - 1]
-    return lastEmbed.url === this.url
+    return lastEmbed.url !== this.url
   }
 }
