@@ -50,6 +50,8 @@ export class Embed {
   }
 
   @computed get shouldRender() {
+    if (!this.url) return true
+
     const embedIndex = this.message.embeds.indexOf(this)
     if (embedIndex < 1) return true
 
