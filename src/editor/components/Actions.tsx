@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { PopoverContainer } from "../../popover/components/PopoverContainer"
 
 const Container = styled.div`
   display: flex;
@@ -7,10 +8,14 @@ const Container = styled.div`
 
   flex-wrap: wrap;
   justify-content: flex-end;
+
+  ${PopoverContainer} & {
+    margin: 0 0 4px;
+  }
 `
 
 const Header = styled.span`
-  margin: 8px 0 0;
+  margin-top: 8px;
 
   flex: 1;
 
@@ -20,6 +25,10 @@ const Header = styled.span`
   line-height: 20px;
 
   white-space: nowrap;
+
+  ${PopoverContainer} & {
+    margin: 0 0 8px;
+  }
 `
 
 const ActionsContainer = styled.div`
@@ -28,6 +37,10 @@ const ActionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
+
+  ${PopoverContainer} & {
+    margin: 0 4px 4px;
+  }
 `
 
 const Action = styled.button.attrs({ type: "button" })`
@@ -49,6 +62,10 @@ const Action = styled.button.attrs({ type: "button" })`
   &:hover,
   &:focus {
     text-decoration: underline;
+  }
+
+  ${PopoverContainer} & {
+    margin: 0 0 4px 16px;
   }
 `
 
