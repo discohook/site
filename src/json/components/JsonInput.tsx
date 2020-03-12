@@ -96,11 +96,12 @@ export function JsonInput() {
         disabled={errors.length > 0}
         onClick={() => {
           messageStore.message = new Message({
+            ...parseMessage(json).message,
             files: messageStore.message.files,
           })
         }}
       >
-        Submit
+        Apply JSON data
       </SubmitButton>
     </InputContainer>
   )
