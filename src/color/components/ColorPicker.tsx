@@ -1,18 +1,15 @@
 import { linearGradient, rgb, rgba, size } from "polished"
 import React, { useRef } from "react"
 import styled from "styled-components"
+import { Actions } from "../../editor/components/Actions"
+import { FlexContainer } from "../../editor/components/Container"
 import { useAutorun } from "../../state/hooks/useAutorun"
 import { Color } from "../classes/Color"
 import { hsvToNumber } from "../helpers/hsvToNumber"
 import { numberToHex } from "../helpers/numberToHex"
 import { useDragArea } from "../hooks/useDragArea"
 
-const Container = styled.div`
-  display: flex;
-`
-
 const Picker = styled.div`
-  flex: 1;
   width: 240px;
   height: 150px;
 
@@ -54,6 +51,10 @@ const HueSlider = styled.div`
   height: 150px;
 
   border-radius: 4px;
+
+  && {
+    flex: 0 0 auto;
+  }
 `
 
 const SliderKnob = styled.div`
@@ -122,33 +123,45 @@ export function ColorPicker(props: ColorPickerProps) {
   })
 
   return (
-    <Container>
-      <Picker ref={pickerRef}>
-        <PickerLayer
-          style={{
-            ...linearGradient({
-              colorStops: [rgb(255, 255, 255), rgba(255, 255, 255, 0)],
-              fallback: rgba(0, 0, 0, 0),
-              toDirection: "to right",
-            }),
-          }}
-        >
+    <FlexContainer>
+      <Actions
+        actions={[
+          {
+            name: "Clear",
+            action: () => {
+              color.invalidate()
+            },
+          },
+        ]}
+      />
+      <FlexContainer flow="row">
+        <Picker ref={pickerRef}>
           <PickerLayer
             style={{
               ...linearGradient({
-                colorStops: [rgba(0, 0, 0, 0), rgb(0, 0, 0)],
+                colorStops: [rgb(255, 255, 255), rgba(255, 255, 255, 0)],
                 fallback: rgba(0, 0, 0, 0),
-                toDirection: "to bottom",
+                toDirection: "to right",
               }),
             }}
           >
-            <PickerKnob ref={pickerKnobRef} />
+            <PickerLayer
+              style={{
+                ...linearGradient({
+                  colorStops: [rgba(0, 0, 0, 0), rgb(0, 0, 0)],
+                  fallback: rgba(0, 0, 0, 0),
+                  toDirection: "to bottom",
+                }),
+              }}
+            >
+              <PickerKnob ref={pickerKnobRef} />
+            </PickerLayer>
           </PickerLayer>
-        </PickerLayer>
-      </Picker>
-      <HueSlider ref={sliderRef}>
-        <SliderKnob ref={sliderKnobRef} />
-      </HueSlider>
-    </Container>
+        </Picker>
+        <HueSlider ref={sliderRef}>
+          <SliderKnob ref={sliderKnobRef} />
+        </HueSlider>
+      </FlexContainer>
+    </FlexContainer>
   )
 }
