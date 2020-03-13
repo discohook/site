@@ -54,6 +54,14 @@ export function BackupItem(props: BackupItemProps) {
       <Button
         variant="borderless"
         onClick={async () => {
+          await backupStore.exportBackup(backup.name)
+        }}
+      >
+        Export
+      </Button>
+      <Button
+        variant="borderless"
+        onClick={async () => {
           await backupStore.loadBackup(backup.name)
         }}
       >

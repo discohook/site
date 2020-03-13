@@ -1,5 +1,5 @@
 import { useObserver } from "mobx-react-lite"
-import React from "react"
+import React, { useRef } from "react"
 import { PersistentStorageWarning } from "../../database/components/PersistentStorageWarning"
 import { Button } from "../../form/components/Button"
 import { BaseModal } from "../../modal/components/BaseModal"
@@ -11,7 +11,9 @@ import { BackupCreationControls } from "./BackupCreationControls"
 import { BackupList } from "./BackupList"
 
 export function BackupsModal() {
-  const { databaseStore, modalStore } = useStores()
+  const { backupStore, databaseStore, modalStore } = useStores()
+
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   return useObserver(() => (
     <BaseModal>
@@ -28,6 +30,27 @@ export function BackupsModal() {
         <BackupCreationControls />
       </BaseModalBody>
       <BaseModalFooter>
+        <input
+          ref={fileInputRef}
+          type="file"
+          style={{ display: "none" }}
+          onChange={async event => {
+            const file = event.target.files?.item(0)?.slice()
+            event.target.files = null
+            if (file) {
+              await backupStore.importBackups(file)
+            }
+          }}
+        />
+        <Button
+          variant="borderless"
+          size="medium"
+          onClick={() => {
+            fileInputRef.current?.click()
+          }}
+        >
+          Import
+        </Button>
         <Button
           size="medium"
           onClick={() => {

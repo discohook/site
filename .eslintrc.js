@@ -56,7 +56,7 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
     "@typescript-eslint/no-unnecessary-condition": [
       "warn",
-      { ignoreRhs: true },
+      { allowConstantLoopConditions: true, ignoreRhs: true },
     ],
     "@typescript-eslint/no-unnecessary-qualifier": "warn",
     "@typescript-eslint/no-unnecessary-type-arguments": "warn",
@@ -135,7 +135,6 @@ module.exports = {
     "no-class-assign": "warn",
     "no-compare-neg-zero": "warn",
     "no-cond-assign": "warn",
-    "no-constant-condition": "warn",
     "no-constructor-return": "warn",
     "no-control-regex": "warn",
     "no-delete-var": "warn",
