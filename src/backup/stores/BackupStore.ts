@@ -1,5 +1,7 @@
 import { observable, runInAction } from "mobx"
 import { downloadBlob } from "../../dom/helpers/downloadBlob"
+import { toCamelCase } from "../../json/helpers/toCamelCase"
+import { toSnakeCase } from "../../json/helpers/toSnakeCase"
 import { Message } from "../../message/classes/Message"
 import { MessageData } from "../../message/types/MessageData"
 import { InitialisableStore } from "../../state/classes/InitialisableStore"
@@ -80,9 +82,9 @@ export class BackupStore extends InitialisableStore {
       .get(name)
 
     const backup: ExportData = {
-      version: 1,
+      version: 2,
       name,
-      message: messageData ?? {},
+      message: toSnakeCase(messageData ?? {}),
     }
 
     const blob = new Blob([JSON.stringify(backup, undefined, 2)], {
@@ -117,6 +119,11 @@ export class BackupStore extends InitialisableStore {
             exportData.message,
           )
           break
+        case 2:
+          await this.saveBackup(
+            this.getSafeBackupName(exportData.name),
+            toCamelCase(exportData.message),
+          )
       }
     } catch {
       // do nothing
