@@ -4,11 +4,11 @@ import { toCamelCase } from "../../json/helpers/toCamelCase"
 import { toSnakeCase } from "../../json/helpers/toSnakeCase"
 import { Message } from "../../message/classes/Message"
 import { MessageData } from "../../message/types/MessageData"
-import { InitialisableStore } from "../../state/classes/InitialisableStore"
+import { InitializableStore } from "../../state/classes/InitializableStore"
 import { BackupData } from "../types/BackupData"
 import { ExportData } from "../types/ExportData"
 
-export class BackupStore extends InitialisableStore {
+export class BackupStore extends InitializableStore {
   @observable backupList: BackupData[] = []
 
   async initialise() {

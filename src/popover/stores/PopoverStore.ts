@@ -1,8 +1,8 @@
 import { action, observable } from "mobx"
-import { InitialisableStore } from "../../state/classes/InitialisableStore"
+import { InitializableStore } from "../../state/classes/InitializableStore"
 import { Popover } from "../types/Popover"
 
-export class PopoverStore extends InitialisableStore {
+export class PopoverStore extends InitializableStore {
   @observable popovers: Popover[] = []
 
   @action spawn(popover: Popover) {

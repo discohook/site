@@ -2,7 +2,7 @@
 
 import { Manager } from "../types/Manager"
 
-export class InitialisableStore {
+export class InitializableStore {
   initialised: Promise<void>
   private markAsInitialised!: () => void
 

@@ -1,6 +1,6 @@
 import { Context } from "koa"
-import { InitialisableStore } from "../../state/classes/InitialisableStore"
+import { InitializableStore } from "../../state/classes/InitializableStore"
 
-export class SsrStore extends InitialisableStore {
+export class SsrStore extends InitializableStore {
   context?: Context
 }

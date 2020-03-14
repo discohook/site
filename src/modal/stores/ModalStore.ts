@@ -1,8 +1,8 @@
 import { action, observable } from "mobx"
-import { InitialisableStore } from "../../state/classes/InitialisableStore"
+import { InitializableStore } from "../../state/classes/InitializableStore"
 import { Modal } from "../types/Modal"
 
-export class ModalStore extends InitialisableStore {
+export class ModalStore extends InitializableStore {
   @observable modals: Modal[] = []
 
   @action spawn(modal: Modal) {
