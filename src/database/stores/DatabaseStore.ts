@@ -1,9 +1,10 @@
 import { IDBPDatabase, openDB } from "idb"
 import { computed, observable } from "mobx"
 import { InitializableStore } from "../../state/classes/InitializableStore"
+import { Stores } from "../../state/types/Stores"
 import { Schema } from "../types/Schema"
 
-export class DatabaseStore extends InitializableStore {
+export class DatabaseStore extends InitializableStore<Stores> {
   database!: IDBPDatabase<Schema>
 
   @observable persisted = false

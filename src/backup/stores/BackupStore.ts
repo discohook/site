@@ -5,10 +5,11 @@ import { toSnakeCase } from "../../json/helpers/toSnakeCase"
 import { Message } from "../../message/classes/Message"
 import { MessageData } from "../../message/types/MessageData"
 import { InitializableStore } from "../../state/classes/InitializableStore"
+import { Stores } from "../../state/types/Stores"
 import { BackupData } from "../types/BackupData"
 import { ExportData } from "../types/ExportData"
 
-export class BackupStore extends InitializableStore {
+export class BackupStore extends InitializableStore<Stores> {
   @observable backupList: BackupData[] = []
 
   async initialize() {

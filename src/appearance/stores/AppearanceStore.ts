@@ -1,10 +1,11 @@
 import { computed, observable } from "mobx"
 import { InitializableStore } from "../../state/classes/InitializableStore"
+import { Stores } from "../../state/types/Stores"
 import { THEMES } from "../constants"
 import { Appearance } from "../types/Appearance"
 import { Theme } from "../types/Theme"
 
-export class AppearanceStore extends InitializableStore {
+export class AppearanceStore extends InitializableStore<Stores> {
   @observable color: Appearance["color"] = "dark"
   @observable display: Appearance["display"] = "cozy"
   @observable fontSize: Appearance["fontSize"] = 16

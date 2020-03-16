@@ -1,13 +1,13 @@
-import { InitializableStore } from "./InitializableStore"
-
-export class StoreManager<T extends Record<string, InitializableStore>> {
-  stores: T = {} as T
+export class StoreManager<
+  S extends Record<string, import("./InitializableStore").InitializableStore<S>>
+> {
+  stores: S = {} as S
 
   constructor(
-    factories: { [K in keyof T]: (manager: StoreManager<T>) => T[K] },
+    factories: { [K in keyof S]: (manager: StoreManager<S>) => S[K] },
   ) {
     for (const [name, factory] of Object.entries(factories)) {
-      this.stores[name as keyof T] = factory(this)
+      this.stores[name as keyof S] = factory(this)
     }
   }
 

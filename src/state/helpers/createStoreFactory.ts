@@ -1,8 +1,12 @@
 import { InitializableStore } from "../classes/InitializableStore"
-import { Manager } from "../types/Manager"
+import { StoreManager } from "../classes/StoreManager"
 
-export const createStoreFactory = <S extends InitializableStore>(
-  Store: new (manager: Manager) => S,
+export const createStoreFactory = <
+  S extends Record<string, InitializableStore<S>>,
+  M extends StoreManager<S>,
+  T extends InitializableStore<S>
+>(
+  Store: new (manager: M) => T,
 ) => {
-  return (manager: Manager) => new Store(manager)
+  return (manager: M) => new Store(manager)
 }

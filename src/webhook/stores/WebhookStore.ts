@@ -1,6 +1,7 @@
 import { action, computed, observable, reaction, runInAction } from "mobx"
 import { toCamelCase } from "../../json/helpers/toCamelCase"
 import { InitializableStore } from "../../state/classes/InitializableStore"
+import { Stores } from "../../state/types/Stores"
 import {
   DEFAULT_AVATAR_URL,
   DEFAULT_DISPLAY_NAME,
@@ -9,7 +10,7 @@ import {
 } from "../constants"
 import { WebhookData } from "../types/WebhookData"
 
-export class WebhookStore extends InitializableStore {
+export class WebhookStore extends InitializableStore<Stores> {
   @observable url = ""
 
   @observable id?: string

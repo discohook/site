@@ -1,10 +1,11 @@
 import { observable } from "mobx"
 import { decodeMessage } from "../../core/helpers/decodeMessage"
 import { InitializableStore } from "../../state/classes/InitializableStore"
+import { Stores } from "../../state/types/Stores"
 import { Message } from "../classes/Message"
 import { INITIAL_MESSAGE_DATA } from "../constants"
 
-export class MessageStore extends InitializableStore {
+export class MessageStore extends InitializableStore<Stores> {
   @observable message!: Message
 
   async initialize() {

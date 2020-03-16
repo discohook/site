@@ -1,14 +1,17 @@
 /* eslint-disable class-methods-use-this */
 
-import { Manager } from "../types/Manager"
+import { StoreManager } from "./StoreManager"
 
-export class InitializableStore {
+export class InitializableStore<
+  S extends Record<string, InitializableStore<S, M>>,
+  M extends StoreManager<S> = StoreManager<S>
+> {
+  protected manager: M
+
   initialized: Promise<void>
   private markAsInitialized!: () => void
 
-  protected manager: Manager
-
-  constructor(manager: Manager) {
+  constructor(manager: M) {
     this.manager = manager
 
     this.initialized = new Promise(resolve => {
