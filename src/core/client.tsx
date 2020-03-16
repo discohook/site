@@ -6,9 +6,9 @@ import { stores } from "../state/stores"
 import { App } from "./components/App"
 import { ErrorBoundary } from "./components/ErrorBoundary"
 
-const initialise = async () => {
+const initialize = async () => {
   const manager = new StoreManager(stores)
-  await manager.initialise()
+  await manager.initialize()
 
   if (DEV) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,6 +32,6 @@ const initialise = async () => {
   }
 }
 
-initialise().catch(error => {
+initialize().catch(error => {
   console.error("Error initialising app:", error)
 })

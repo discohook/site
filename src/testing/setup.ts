@@ -5,7 +5,7 @@ import { stores } from "../state/stores"
 
 beforeAll(async () => {
   const manager = new StoreManager(stores)
-  await manager.initialise()
+  await manager.initialize()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ;(global as any).manager = manager
 })

@@ -7,9 +7,9 @@ import { INITIAL_MESSAGE_DATA } from "../constants"
 export class MessageStore extends InitializableStore {
   @observable message!: Message
 
-  async initialise() {
+  async initialize() {
     const { ssrStore } = this.manager.stores
-    await ssrStore.initialised
+    await ssrStore.initialized
 
     const search = ssrStore.context ? ssrStore.context.search : location.search
     const parameters = new URLSearchParams(search)

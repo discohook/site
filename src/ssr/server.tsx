@@ -56,7 +56,7 @@ router.get("/", async context => {
   const manager = new StoreManager(stores)
   manager.stores.ssrStore.context = context
 
-  await manager.initialise()
+  await manager.initialize()
 
   const withManager = (node: ReactNode) => (
     <ManagerProvider value={manager}>{node}</ManagerProvider>

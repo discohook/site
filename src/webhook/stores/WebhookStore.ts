@@ -19,7 +19,7 @@ export class WebhookStore extends InitializableStore {
   @observable guildId?: string
   @observable token?: string
 
-  initialise() {
+  initialize() {
     reaction(
       () => this.url,
       () => {

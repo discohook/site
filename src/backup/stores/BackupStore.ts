@@ -11,11 +11,11 @@ import { ExportData } from "../types/ExportData"
 export class BackupStore extends InitializableStore {
   @observable backupList: BackupData[] = []
 
-  async initialise() {
+  async initialize() {
     if (SERVER) return
 
     const { databaseStore } = this.manager.stores
-    await databaseStore.initialised
+    await databaseStore.initialized
 
     await this.loadBackupList()
   }

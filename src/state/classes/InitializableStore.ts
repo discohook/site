@@ -3,23 +3,23 @@
 import { Manager } from "../types/Manager"
 
 export class InitializableStore {
-  initialised: Promise<void>
-  private markAsInitialised!: () => void
+  initialized: Promise<void>
+  private markAsInitialized!: () => void
 
   protected manager: Manager
 
   constructor(manager: Manager) {
     this.manager = manager
 
-    this.initialised = new Promise(resolve => {
-      this.markAsInitialised = resolve
+    this.initialized = new Promise(resolve => {
+      this.markAsInitialized = resolve
     })
   }
 
-  async initialiseStore() {
-    await this.initialise()
-    this.markAsInitialised()
+  async initializeStore() {
+    await this.initialize()
+    this.markAsInitialized()
   }
 
-  protected initialise(): void | Promise<void> {}
+  protected initialize(): void | Promise<void> {}
 }

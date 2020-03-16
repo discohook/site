@@ -10,7 +10,7 @@ export class DatabaseStore extends InitializableStore {
 
   @observable persistenceMessageDismissed = false
 
-  async initialise() {
+  async initialize() {
     if (SERVER) return
 
     this.persisted =

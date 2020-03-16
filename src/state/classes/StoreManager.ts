@@ -4,17 +4,17 @@ export class StoreManager<T extends Record<string, InitializableStore>> {
   stores: T = {} as T
 
   constructor(
-    instantiators: { [K in keyof T]: (manager: StoreManager<T>) => T[K] },
+    factories: { [K in keyof T]: (manager: StoreManager<T>) => T[K] },
   ) {
-    for (const [name, instantiate] of Object.entries(instantiators)) {
-      this.stores[name as keyof T] = instantiate(this)
+    for (const [name, factory] of Object.entries(factories)) {
+      this.stores[name as keyof T] = factory(this)
     }
   }
 
-  async initialise() {
+  async initialize() {
     await Promise.all(
       Object.values(this.stores).map(async store => {
-        await store.initialiseStore()
+        await store.initializeStore()
       }),
     )
   }
