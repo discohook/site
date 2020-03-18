@@ -210,7 +210,7 @@ describe("MultiEditor", () => {
     userEvent.click(duplicateSecond)
 
     expect(handleChange).toHaveBeenCalledTimes(1)
-    expect(handleChange).toHaveBeenCalledWith([1, 4, 2, 3])
+    expect(handleChange).toHaveBeenCalledWith([1, 2, 4, 3])
 
     expect(handleDuplicate).toHaveBeenCalledTimes(1)
     expect(handleDuplicate).toHaveBeenCalledWith(2)

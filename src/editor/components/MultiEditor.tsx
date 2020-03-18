@@ -58,10 +58,10 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
     if (!duplicate) return
     if (onChange) {
       const newItems = [...items]
-      newItems.splice(index, 0, duplicate(items[index]))
+      newItems.splice(index + 1, 0, duplicate(items[index]))
       onChange(newItems)
     } else {
-      items.splice(index, 0, duplicate(items[index]))
+      items.splice(index + 1, 0, duplicate(items[index]))
     }
   }
 
