@@ -33,6 +33,13 @@ export function MessageEditor() {
         limit={10}
         factory={() => new Embed(messageStore.message)}
         keyMapper={embed => embed.id}
+        duplicate={embed => {
+          const { message } = messageStore
+          const embedIndex = message.embeds.indexOf(embed)
+          const embedData = message.getMessageData().embeds?.[embedIndex]
+
+          return new Embed(message, embedData)
+        }}
       >
         {embed => <EmbedEditor embed={embed} />}
       </MultiEditor>
