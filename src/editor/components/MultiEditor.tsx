@@ -22,7 +22,7 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
     onChange,
     children: render,
     name,
-    limit,
+    limit = Infinity,
     factory,
     keyMapper: getKey,
     duplicate,
@@ -56,6 +56,8 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
 
   const duplicateItem = (index: number) => {
     if (!duplicate) return
+    if (items.length >= limit) return
+
     if (onChange) {
       const newItems = [...items]
       newItems.splice(index + 1, 0, duplicate(items[index]))
@@ -78,11 +80,15 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
           title={`${name} ${index + 1}`}
           actions={
             [
-              duplicate && {
-                name: "Duplicate",
-                action: () => duplicateItem(index),
+              duplicate &&
+                items.length < limit && {
+                  name: "Duplicate",
+                  action: () => duplicateItem(index),
+                },
+              {
+                name: "Delete",
+                action: () => removeItem(index),
               },
-              { name: "Delete", action: () => removeItem(index) },
               index > 0 && {
                 name: "Move Up",
                 action: () => moveItem(index, index - 1),
@@ -104,7 +110,7 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
       <FlexContainer>
         {editors}
         <Button
-          disabled={typeof limit === "number" && items.length >= limit}
+          disabled={items.length >= limit}
           onClick={addItem}
           data-testid="multieditor-add"
         >

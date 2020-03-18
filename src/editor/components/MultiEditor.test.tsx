@@ -216,7 +216,7 @@ describe("MultiEditor", () => {
     expect(handleDuplicate).toHaveBeenCalledWith(2)
   })
 
-  it("prevents disables add when limit is reached", () => {
+  it("disables add when limit is reached", () => {
     const editor = (
       <MultiEditor<number>
         items={[1, 2, 3, 4]}
@@ -239,5 +239,29 @@ describe("MultiEditor", () => {
     rerender(cloneElement(editor, { items: [1, 2, 3, 4, 5] }))
 
     expect(addButton).toBeDisabled()
+  })
+
+  it("disables duplicate when limit is reached", () => {
+    const editor = (
+      <MultiEditor<number>
+        items={[1, 2, 3, 4]}
+        onChange={() => {}}
+        name="Number"
+        limit={5}
+        factory={() => 0}
+        keyMapper={number => number}
+        duplicate={() => 0}
+      >
+        {item => item}
+      </MultiEditor>
+    )
+
+    const { rerender, queryAllByText } = render(editor)
+
+    expect(queryAllByText("Duplicate")).not.toHaveLength(0)
+
+    rerender(cloneElement(editor, { items: [1, 2, 3, 4, 5] }))
+
+    expect(queryAllByText("Duplicate")).toHaveLength(0)
   })
 })
