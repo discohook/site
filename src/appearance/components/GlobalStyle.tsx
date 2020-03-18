@@ -1,7 +1,7 @@
 import { fontFace, size } from "polished"
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle, css } from "styled-components"
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`${css`
   ${[300, 400, 500, 600, 700].map(weight =>
     fontFace({
       fontFamily: "Whitney",
@@ -96,4 +96,4 @@ export const GlobalStyle = createGlobalStyle`
       background-color: ${({ theme }) => theme.background.primary};
     }
   }
-`
+`}`
