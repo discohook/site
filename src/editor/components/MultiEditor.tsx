@@ -1,7 +1,7 @@
 import { useObserver } from "mobx-react-lite"
 import React, { Key, ReactNode } from "react"
 import { Button } from "../../form/components/Button"
-import { Actions } from "./Actions"
+import { Actions, ActionsProps } from "./Actions"
 import { BoxContainer } from "./BoxContainer"
 import { FlexContainer } from "./Container"
 
@@ -13,6 +13,7 @@ export type MultiEditorProps<T> = {
   limit?: number
   factory: () => T
   keyMapper: (item: T) => Key
+  duplicate?: (item: T) => T
 }
 
 export function MultiEditor<T>(props: MultiEditorProps<T>) {
@@ -24,6 +25,7 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
     limit,
     factory,
     keyMapper: getKey,
+    duplicate,
   } = props
 
   const addItem = () => {
@@ -52,6 +54,17 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
     }
   }
 
+  const duplicateItem = (index: number) => {
+    if (!duplicate) return
+    if (onChange) {
+      const newItems = [...items]
+      newItems.splice(index, 0, duplicate(items[index]))
+      onChange(newItems)
+    } else {
+      items.splice(index, 0, duplicate(items[index]))
+    }
+  }
+
   const modifyItem = (index: number, item: T) =>
     onChange?.([...items.slice(0, index), item, ...items.slice(index + 1)])
 
@@ -65,6 +78,10 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
           title={`${name} ${index + 1}`}
           actions={
             [
+              duplicate && {
+                name: "Duplicate",
+                action: () => duplicateItem(index),
+              },
               { name: "Delete", action: () => removeItem(index) },
               index > 0 && {
                 name: "Move Up",
@@ -74,7 +91,7 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
                 name: "Move Down",
                 action: () => moveItem(index, index + 1),
               },
-            ].filter(Boolean) as Parameters<typeof Actions>[0]["actions"]
+            ].filter(Boolean) as ActionsProps["actions"]
           }
         />
         {render(item, newItem => {
