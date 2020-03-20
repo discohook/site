@@ -56,6 +56,12 @@ export function Editor() {
           title={theme.appearance.mobile ? undefined : "Message editor"}
           actions={[
             {
+              name: "Support server",
+              action: () => {
+                location.replace("/discord")
+              },
+            },
+            {
               name: "Backups",
               action: () => {
                 spawnBackupsModal(manager)
