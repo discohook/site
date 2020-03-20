@@ -1,4 +1,3 @@
-import { isValid } from "date-fns"
 import { useObserver } from "mobx-react-lite"
 import { rem, size } from "polished"
 import React from "react"
@@ -106,8 +105,8 @@ export function RichEmbed(props: RichEmbedProps) {
     return (
       <RichEmbedContainer style={{ borderColor: color }}>
         <EmbedGrid>
-          {embed.author && <EmbedAuthor embed={embed} />}
-          {embed.title &&
+          {embed.hasAuthor && <EmbedAuthor embed={embed} />}
+          {embed.hasTitle &&
             (embed.url ? (
               <EmbedTitleLink
                 href={embed.url}
@@ -121,7 +120,7 @@ export function RichEmbed(props: RichEmbedProps) {
                 <Markdown content={embed.title} type="embed-header" />
               </EmbedTitleNormal>
             ))}
-          {embed.description && (
+          {embed.hasDescription && (
             <EmbedDescription>
               <Markdown content={embed.description} type="embed-content" />
             </EmbedDescription>
@@ -144,9 +143,7 @@ export function RichEmbed(props: RichEmbedProps) {
           ) : (
             undefined
           )}
-          {(embed.footer || isValid(embed.timestamp)) && (
-            <EmbedFooter embed={embed} />
-          )}
+          {embed.hasFooter && <EmbedFooter embed={embed} />}
           {embed.thumbnail && (
             <EmbedThumbnail src={embed.thumbnail} alt="Thumbnail" />
           )}

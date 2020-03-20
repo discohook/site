@@ -1,3 +1,4 @@
+import { isValid } from "date-fns"
 import { computed, observable } from "mobx"
 import { Color } from "../../color/classes/Color"
 import { getEmbedGallery } from "../helpers/getEmbedGallery"
@@ -57,5 +58,21 @@ export class Embed {
 
     const lastEmbed = this.message.embeds[embedIndex - 1]
     return lastEmbed.url !== this.url
+  }
+
+  @computed get hasTitle() {
+    return this.title.trim().length > 0
+  }
+
+  @computed get hasDescription() {
+    return this.description.trim().length > 0
+  }
+
+  @computed get hasAuthor() {
+    return this.author.trim().length > 0
+  }
+
+  @computed get hasFooter() {
+    return this.footer.trim().length > 0 || isValid(this.timestamp)
   }
 }
