@@ -58,7 +58,7 @@ export function Editor() {
             {
               name: "Support server",
               action: () => {
-                location.replace("/discord")
+                open("/discord", "_blank", "noopener")
               },
             },
             {
