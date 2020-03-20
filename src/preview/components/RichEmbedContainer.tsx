@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 
 export const RichEmbedContainer = styled.div`
   max-width: 520px;
-  display: inline;
+  display: grid;
 
   background: ${({ theme }) => theme.background.secondary};
 
