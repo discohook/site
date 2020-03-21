@@ -11,3 +11,10 @@ export type ExportData =
       name: string
       message: object
     }
+  | {
+      version: 3
+      backups: {
+        name: string
+        message: object
+      }[]
+    }

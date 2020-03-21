@@ -83,9 +83,13 @@ export class BackupStore extends InitializableStore<Stores> {
       .get(name)
 
     const backup: ExportData = {
-      version: 2,
-      name,
-      message: toSnakeCase(messageData ?? {}),
+      version: 3,
+      backups: [
+        {
+          name,
+          message: toSnakeCase(messageData ?? {}),
+        },
+      ],
     }
 
     const blob = new Blob([JSON.stringify(backup, undefined, 2)], {
@@ -114,17 +118,31 @@ export class BackupStore extends InitializableStore<Stores> {
       const exportData = JSON.parse(json) as ExportData
 
       switch (exportData.version) {
-        case 1:
+        case 1: {
           await this.saveBackup(
             this.getSafeBackupName(exportData.name),
             exportData.message,
           )
           break
-        case 2:
+        }
+        case 2: {
           await this.saveBackup(
             this.getSafeBackupName(exportData.name),
             toCamelCase(exportData.message),
           )
+          break
+        }
+        case 3: {
+          await Promise.all(
+            exportData.backups.map(async backup =>
+              this.saveBackup(
+                this.getSafeBackupName(backup.name),
+                toCamelCase(backup.message),
+              ),
+            ),
+          )
+          break
+        }
       }
     } catch {
       // do nothing
