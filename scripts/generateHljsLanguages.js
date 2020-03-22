@@ -33,7 +33,7 @@ async function getDependencies(language) {
     .slice("Requires:".length)
     .split(",")
     .map(file => file.trim().replace(".js", ""))
-    .sort((first, second) => ((first > second ? 1 : -1)))
+    .sort((first, second) => (first > second ? 1 : -1))
 }
 
 /** @type {(language: string) => Promise<Language>} */
@@ -44,7 +44,7 @@ async function getLanguage(language) {
     .map(alias => alias.toLowerCase())
     .filter(alias => alias !== language)
     .filter((alias, index, array) => array.indexOf(alias) === index)
-    .sort((first, second) => ((first > second ? 1 : -1)))
+    .sort((first, second) => (first > second ? 1 : -1))
 
   const dependencies = (await getDependencies(language)) || []
 
@@ -59,7 +59,7 @@ async function getLanguage(language) {
 function* getAllLanguages() {
   const languages = hljs
     .listLanguages()
-    .sort((first, second) => ((first > second ? 1 : -1)))
+    .sort((first, second) => (first > second ? 1 : -1))
 
   for (const language of languages) {
     yield getLanguage(language)

@@ -72,7 +72,7 @@ devDependencies:
   fake-indexeddb: 3.0.0_regenerator-runtime@0.13.3
   html-webpack-plugin: 3.2.0_webpack@4.42.0
   jest: 25.1.0
-  prettier: 1.19.1
+  prettier: 2.0.1
   script-ext-html-webpack-plugin: 2.1.4_f9f57bd8a148b6edc3192202e3fa66cb
   source-map-loader: 0.2.4
   typescript: 3.8.3
@@ -7219,13 +7219,13 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
-  /prettier/1.19.1:
+  /prettier/2.0.1:
     dev: true
     engines:
-      node: '>=4'
+      node: '>=10.13.0'
     hasBin: true
     resolution:
-      integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
+      integrity: sha512-piXGBcY1zoFOG0MvHpNE5reAGseLmaCRifQ/fmfF49BcYkInEs/naD/unxGNAeOKFA5+JxVrPyMvMlpzcd20UA==
   /pretty-error/2.1.1:
     dependencies:
       renderkid: 2.0.3
@@ -9636,7 +9636,7 @@ specifiers:
   mobx-react: ^6.1.8
   mobx-react-lite: ^1.5.2
   polished: ^3.5.0
-  prettier: ^1.19.1
+  prettier: ^2.0.1
   punycode: ^2.1.1
   react: ^16.13.1
   react-dom: ^16.13.1

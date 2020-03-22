@@ -140,9 +140,7 @@ export function RichEmbed(props: RichEmbedProps) {
               alt="Image"
               hasThumbnail={Boolean(embed.thumbnail)}
             />
-          ) : (
-            undefined
-          )}
+          ) : undefined}
           {embed.hasFooter && <EmbedFooter embed={embed} />}
           {embed.thumbnail && (
             <EmbedThumbnail src={embed.thumbnail} alt="Thumbnail" />

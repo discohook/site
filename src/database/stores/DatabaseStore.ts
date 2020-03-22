@@ -29,9 +29,7 @@ export class DatabaseStore extends InitializableStore<Stores> {
   async requestPersistence() {
     if ("chrome" in window) {
       await new Promise((resolve, reject) => {
-        Notification.requestPermission(resolve)
-          .then(resolve)
-          .catch(reject)
+        Notification.requestPermission(resolve).then(resolve).catch(reject)
       })
     }
 
