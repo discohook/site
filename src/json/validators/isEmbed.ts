@@ -1,4 +1,4 @@
-import { Validator } from "../types/Validator"
+import type { Validator } from "../types/Validator"
 import { between } from "./between"
 import { contains } from "./contains"
 import { first } from "./first"

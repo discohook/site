@@ -2,7 +2,7 @@ import React from "react"
 import { getAttachmentIcon } from "../helpers/getAttachmentIcon"
 import { getHumanReadableSize } from "../helpers/getHumanReadableSize"
 import { download } from "../icons/download"
-import { AttachmentType } from "../types/AttachmentType"
+import type { AttachmentType } from "../types/AttachmentType"
 import {
   AttachmentContainer,
   AttachmentDownloadButton,

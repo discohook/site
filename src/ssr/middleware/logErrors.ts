@@ -1,4 +1,4 @@
-import { Middleware } from "koa"
+import type { Middleware } from "koa"
 
 const middleware: Middleware = async (context, next) => {
   try {

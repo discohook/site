@@ -1,6 +1,6 @@
 /* eslint-disable import/newline-after-import */
 
-import { HLJSStatic, IModeBase } from "highlight.js"
+import type { HLJSStatic, IModeBase } from "highlight.js"
 import { getLanguageFromAlias } from "./getLanguageFromAlias"
 const hljs = require("highlight.js/lib/highlight") as typeof import("highlight.js")
 

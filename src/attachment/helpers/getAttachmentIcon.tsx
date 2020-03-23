@@ -1,6 +1,6 @@
 import React from "react"
 import { ATTACHMENT_ICONS } from "../constants"
-import { AttachmentType } from "../types/AttachmentType"
+import type { AttachmentType } from "../types/AttachmentType"
 
 export const getAttachmentIcon = (type: AttachmentType) => {
   return (

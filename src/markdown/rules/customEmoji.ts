@@ -1,6 +1,6 @@
 import { defaultRules, inlineRegex } from "simple-markdown"
 import { getCustomEmojiUrl } from "../helpers/getCustomEmojiUrl"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 const CUSTOM_EMOJI_RE = /^<a?:(\w+):(\d+)>/
 

@@ -1,7 +1,7 @@
 import { observable } from "mobx"
 import { decodeMessage } from "../../core/helpers/decodeMessage"
 import { InitializableStore } from "../../state/classes/InitializableStore"
-import { Stores } from "../../state/types/Stores"
+import type { Stores } from "../../state/types/Stores"
 import { Message } from "../classes/Message"
 import { INITIAL_MESSAGE_DATA } from "../constants"
 

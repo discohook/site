@@ -1,9 +1,8 @@
 import { computed, observable } from "mobx"
 import { getFieldWidth } from "../helpers/getFieldWidth"
 import { getUniqueId } from "../helpers/getUniqueId"
-import { FieldData } from "../types/FieldData"
-
-type Embed = import("./Embed").Embed
+import type { FieldData } from "../types/FieldData"
+import type { Embed } from "./Embed"
 
 export class Field {
   readonly id = getUniqueId()

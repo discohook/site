@@ -11,8 +11,8 @@ import { spreadsheet } from "./icons/spreadsheet"
 import { unknown } from "./icons/unknown"
 import { video } from "./icons/video"
 import { webcode } from "./icons/webcode"
-import { AttachmentType } from "./types/AttachmentType"
-import { AttachmentTypeMatcher } from "./types/AttachmentTypeMatcher"
+import type { AttachmentType } from "./types/AttachmentType"
+import type { AttachmentTypeMatcher } from "./types/AttachmentTypeMatcher"
 
 export const ATTACHMENT_ICONS: Record<AttachmentType, JSX.Element> = {
   acrobat,

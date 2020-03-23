@@ -1,7 +1,7 @@
 import React from "react"
-import { Manager } from "../../state/types/Manager"
+import type { Manager } from "../../state/types/Manager"
 import { DeletionConfirmationModal } from "../components/DeletionConfirmationModal"
-import { BackupData } from "../types/BackupData"
+import type { BackupData } from "../types/BackupData"
 
 export const spawnDeletionConfirmationModal = (
   manager: Manager,

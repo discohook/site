@@ -7,8 +7,8 @@ import { PopoverStore } from "../popover/stores/PopoverStore"
 import { SsrStore } from "../ssr/stores/SsrStore"
 import { WebhookStore } from "../webhook/stores/WebhookStore"
 import { createStoreFactory } from "./helpers/createStoreFactory"
-import { Manager } from "./types/Manager"
-import { Stores } from "./types/Stores"
+import type { Manager } from "./types/Manager"
+import type { Stores } from "./types/Stores"
 
 export const stores: {
   [K in keyof Stores]: (manager: Manager) => Stores[K]

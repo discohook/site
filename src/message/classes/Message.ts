@@ -1,6 +1,6 @@
 import { isValid } from "date-fns"
 import { observable } from "mobx"
-import { MessageData } from "../types/MessageData"
+import type { MessageData } from "../types/MessageData"
 import { Embed } from "./Embed"
 
 export class Message {

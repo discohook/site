@@ -1,4 +1,4 @@
-import { ParseFunction } from "simple-markdown"
+import type { ParseFunction } from "simple-markdown"
 import { depunycode } from "./depunycode"
 
 export const parseLink: ParseFunction = capture => {

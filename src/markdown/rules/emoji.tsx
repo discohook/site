@@ -4,7 +4,7 @@ import { Emoji } from "../components/Emoji"
 import { PLAINTEXT_EMOJIS } from "../constants/constants"
 import { NAME_TO_EMOJI } from "../constants/emojiMaps"
 import { getEmojiUrl } from "../helpers/getEmojiUrl"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 const EMOJI_NAME_RE = /^:([^\s:]+?(?:::skin-tone-\d)?):/
 

@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import { Manager } from "../types/Manager"
+import type { Manager } from "../types/Manager"
 
 export const ManagerContext = createContext<Manager | undefined>(undefined)
 

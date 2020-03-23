@@ -1,4 +1,4 @@
-import { AttachmentType } from "./AttachmentType"
+import type { AttachmentType } from "./AttachmentType"
 
 export type AttachmentTypeMatcher = {
   check: "mime" | "name"

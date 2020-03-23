@@ -1,5 +1,5 @@
 import React from "react"
-import { Manager } from "../../state/types/Manager"
+import type { Manager } from "../../state/types/Manager"
 import { PushNotificationModal } from "../components/PushNotificationModal"
 
 export const spawnPushNotificationModal = (manager: Manager) => {

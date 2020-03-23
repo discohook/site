@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { Validator } from "../types/Validator"
+import type { Validator } from "../types/Validator"
 import { first } from "./first"
 import { isShape } from "./isShape"
 import { isString } from "./isString"

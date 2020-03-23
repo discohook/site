@@ -1,5 +1,5 @@
 import { outputFor, parserFor, SingleASTNode } from "simple-markdown"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 export const createParser = (
   rules: Record<string, MarkdownRule>,

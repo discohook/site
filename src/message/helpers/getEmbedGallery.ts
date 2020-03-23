@@ -1,6 +1,5 @@
-import { Gallery } from "../types/Gallery"
-
-type Embed = import("../classes/Embed").Embed
+import type { Embed } from "../classes/Embed"
+import type { Gallery } from "../types/Gallery"
 
 export const getEmbedGallery = (embed: Embed) => {
   if (!embed.url) return

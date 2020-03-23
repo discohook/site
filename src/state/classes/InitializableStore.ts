@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-import { StoreManager } from "./StoreManager"
+import type { StoreManager } from "./StoreManager"
 
 export class InitializableStore<
   S extends Record<string, InitializableStore<S, M>>,

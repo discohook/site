@@ -2,7 +2,7 @@ import { createPopper } from "@popperjs/core"
 import React, { useLayoutEffect, useRef } from "react"
 import { useWindowEvent } from "../../dom/hooks/useWindowEvent"
 import { useStores } from "../../state/hooks/useStores"
-import { Popover } from "../types/Popover"
+import type { Popover } from "../types/Popover"
 import { PopoverContainer } from "./PopoverContainer"
 
 export type PopoverItemProps = {

@@ -1,7 +1,7 @@
 import React from "react"
 import { anyScopeRegex, defaultRules } from "simple-markdown"
 import { CodeBlock } from "../components/CodeBlock"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 const CODE_BLOCK_RE = /^```(?:([\w+.-]+?)\n)?\n*([^\n][\S\s]*?)\n*```/i
 

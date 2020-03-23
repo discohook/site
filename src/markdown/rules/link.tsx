@@ -1,7 +1,7 @@
 import React from "react"
 import { defaultRules, unescapeUrl } from "simple-markdown"
 import { depunycode } from "../helpers/depunycode"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 export const link: MarkdownRule = {
   ...defaultRules.link,

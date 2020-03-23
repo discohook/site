@@ -1,6 +1,6 @@
-export class StoreManager<
-  S extends Record<string, import("./InitializableStore").InitializableStore<S>>
-> {
+import type { InitializableStore } from "./InitializableStore"
+
+export class StoreManager<S extends Record<string, InitializableStore<S>>> {
   stores: S = {} as S
 
   constructor(

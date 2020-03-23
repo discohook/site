@@ -1,5 +1,5 @@
 import React from "react"
-import { Manager } from "../../state/types/Manager"
+import type { Manager } from "../../state/types/Manager"
 import { AppearanceModal } from "../components/AppearanceModal"
 
 export const spawnAppearanceModal = (manager: Manager) => {

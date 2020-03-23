@@ -1,5 +1,5 @@
-import { InitializableStore } from "../classes/InitializableStore"
-import { StoreManager } from "../classes/StoreManager"
+import type { InitializableStore } from "../classes/InitializableStore"
+import type { StoreManager } from "../classes/StoreManager"
 
 export const createStoreFactory = <
   S extends Record<string, InitializableStore<S>>,

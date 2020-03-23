@@ -1,4 +1,4 @@
-import { Validator } from "../types/Validator"
+import type { Validator } from "../types/Validator"
 import { first } from "./first"
 import { maxLength } from "./maxLength"
 import { minLength } from "./minLength"

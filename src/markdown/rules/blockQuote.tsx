@@ -1,7 +1,7 @@
 import React from "react"
 import { defaultRules } from "simple-markdown"
 import { BlockQuote } from "../components/BlockQuote"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 const BEGINNING_OF_LINE_RE = /^$|\n *$/
 const BLOCK_QUOTE_RE = /^( *>>> +([\S\s]*))|^( *>(?!>>) +[^\n]*(\n *>(?!>>) +[^\n]*)*\n?)/

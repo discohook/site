@@ -1,7 +1,7 @@
 import { size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import { Gallery } from "../../message/types/Gallery"
+import type { Gallery } from "../../message/types/Gallery"
 
 const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
   grid-column: 1 / 2;

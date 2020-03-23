@@ -1,5 +1,5 @@
 import { rgb } from "polished"
-import { Theme } from "../types/Theme"
+import type { Theme } from "../types/Theme"
 
 export const COMMON_THEME: Pick<Theme, "accent" | "font"> = {
   accent: {

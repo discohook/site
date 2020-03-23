@@ -3,10 +3,9 @@ import { computed, observable } from "mobx"
 import { Color } from "../../color/classes/Color"
 import { getEmbedGallery } from "../helpers/getEmbedGallery"
 import { getUniqueId } from "../helpers/getUniqueId"
-import { EmbedData } from "../types/EmbedData"
+import type { EmbedData } from "../types/EmbedData"
 import { Field } from "./Field"
-
-type Message = import("./Message").Message
+import type { Message } from "./Message"
 
 export class Embed {
   readonly id = getUniqueId()

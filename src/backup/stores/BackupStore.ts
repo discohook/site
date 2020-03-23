@@ -3,11 +3,11 @@ import { downloadBlob } from "../../dom/helpers/downloadBlob"
 import { toCamelCase } from "../../json/helpers/toCamelCase"
 import { toSnakeCase } from "../../json/helpers/toSnakeCase"
 import { Message } from "../../message/classes/Message"
-import { MessageData } from "../../message/types/MessageData"
+import type { MessageData } from "../../message/types/MessageData"
 import { InitializableStore } from "../../state/classes/InitializableStore"
-import { Stores } from "../../state/types/Stores"
-import { BackupData } from "../types/BackupData"
-import { ExportData } from "../types/ExportData"
+import type { Stores } from "../../state/types/Stores"
+import type { BackupData } from "../types/BackupData"
+import type { ExportData } from "../types/ExportData"
 
 export class BackupStore extends InitializableStore<Stores> {
   @observable backupList: BackupData[] = []

@@ -1,7 +1,7 @@
 import React from "react"
 import { defaultRules } from "simple-markdown"
 import { Code } from "../components/Code"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 export const inlineCode: MarkdownRule = {
   ...defaultRules.inlineCode,

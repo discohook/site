@@ -1,4 +1,4 @@
-import { Language } from "../types/Language"
+import type { Language } from "../types/Language"
 
 export const LANGUAGES: Language[] = [
   { name: "1c" },

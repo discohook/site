@@ -3,7 +3,7 @@ import { hexToNumber } from "../helpers/hexToNumber"
 import { hsvToNumber } from "../helpers/hsvToNumber"
 import { numberToHex } from "../helpers/numberToHex"
 import { numberToHsv } from "../helpers/numberToHsv"
-import { DiscordColor } from "../types/DiscordColor"
+import type { DiscordColor } from "../types/DiscordColor"
 
 export class Color {
   @observable hue = 0

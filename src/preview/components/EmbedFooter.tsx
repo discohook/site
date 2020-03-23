@@ -3,7 +3,7 @@ import { useObserver } from "mobx-react-lite"
 import { rem, size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import { Embed } from "../../message/classes/Embed"
+import type { Embed } from "../../message/classes/Embed"
 import { formatTimestamp } from "../../message/helpers/formatTimestamp"
 
 const Container = styled.div<{ hasThumbnail?: boolean }>`

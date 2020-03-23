@@ -6,7 +6,7 @@ import { Button } from "../../form/components/Button"
 import { useManager } from "../../state/hooks/useManager"
 import { useStores } from "../../state/hooks/useStores"
 import { spawnDeletionConfirmationModal } from "../actions/spawnDeletionConfirmationModal"
-import { BackupData } from "../types/BackupData"
+import type { BackupData } from "../types/BackupData"
 
 const Container = styled.li`
   height: 40px;

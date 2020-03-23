@@ -1,5 +1,5 @@
 import { stringifyMessage } from "../../json/helpers/stringifyMessage"
-import { MessageData } from "../../message/types/MessageData"
+import type { MessageData } from "../../message/types/MessageData"
 
 export const executeWebhook = async (
   webhookUrl: string,

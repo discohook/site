@@ -1,7 +1,7 @@
 import { shade, transparentize } from "polished"
 import styled, { css } from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
-import { Theme } from "../../appearance/types/Theme"
+import type { Theme } from "../../appearance/types/Theme"
 
 export const Button = styled.button.attrs({ type: "button" })<{
   variant?: "filled" | "outline" | "borderless"

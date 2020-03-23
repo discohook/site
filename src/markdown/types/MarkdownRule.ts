@@ -1,3 +1,3 @@
-import { ParserRule, ReactOutputRule } from "simple-markdown"
+import type { ParserRule, ReactOutputRule } from "simple-markdown"
 
 export type MarkdownRule = ParserRule & ReactOutputRule

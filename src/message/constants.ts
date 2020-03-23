@@ -1,4 +1,4 @@
-import { MessageData } from "./types/MessageData"
+import type { MessageData } from "./types/MessageData"
 
 export const MAX_FIELDS_PER_ROW = 3
 export const FIELD_GRID_SIZE = 12

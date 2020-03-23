@@ -1,6 +1,6 @@
 import { defaultRules } from "simple-markdown"
 import { parseLink } from "../helpers/parseLink"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 import { link } from "./link"
 
 export const url: MarkdownRule = {

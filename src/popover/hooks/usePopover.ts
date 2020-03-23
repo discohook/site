@@ -1,4 +1,4 @@
-import { Placement } from "@popperjs/core"
+import type { Placement } from "@popperjs/core"
 import { ReactNode, RefObject, useCallback, useEffect, useState } from "react"
 import { getUniqueId } from "../../message/helpers/getUniqueId"
 import { useStores } from "../../state/hooks/useStores"

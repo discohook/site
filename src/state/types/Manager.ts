@@ -1,3 +1,4 @@
-export type Manager = import("../classes/StoreManager").StoreManager<
-  import("./Stores").Stores
->
+import type { StoreManager } from "../classes/StoreManager"
+import type { Stores } from "./Stores"
+
+export type Manager = StoreManager<Stores>

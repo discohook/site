@@ -4,7 +4,7 @@ import React from "react"
 import styled from "styled-components"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
-import { Field } from "../../message/classes/Field"
+import type { Field } from "../../message/classes/Field"
 
 const Container = styled.div`
   font-size: ${rem(14)};

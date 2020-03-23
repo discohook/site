@@ -1,4 +1,4 @@
-import { Validator } from "../types/Validator"
+import type { Validator } from "../types/Validator"
 
 export const isObject: Validator = (value, key) =>
   typeof value === "object" &&

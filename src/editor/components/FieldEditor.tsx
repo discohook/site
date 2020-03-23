@@ -3,7 +3,7 @@ import React from "react"
 import styled from "styled-components"
 import { InputField } from "../../form/components/InputField"
 import { Toggle } from "../../form/components/Toggle"
-import { Field } from "../../message/classes/Field"
+import type { Field } from "../../message/classes/Field"
 import { FlexContainer } from "./Container"
 
 const TopRowContainer = styled(FlexContainer)`

@@ -1,4 +1,4 @@
-import { Emoji } from "../types/Emoji"
+import type { Emoji } from "../types/Emoji"
 import { RAW_EMOJI_DATA } from "./rawEmojiData"
 
 export const EMOJI: Emoji[] = RAW_EMOJI_DATA.split("\n").map(line => {

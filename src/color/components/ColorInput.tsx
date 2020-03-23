@@ -5,7 +5,7 @@ import { FlexContainer } from "../../editor/components/Container"
 import { InputField } from "../../form/components/InputField"
 import { usePopover } from "../../popover/hooks/usePopover"
 import { useAutorun } from "../../state/hooks/useAutorun"
-import { Color } from "../classes/Color"
+import type { Color } from "../classes/Color"
 import { ColorPicker } from "./ColorPicker"
 
 const ColorInputContainer = styled(FlexContainer)`

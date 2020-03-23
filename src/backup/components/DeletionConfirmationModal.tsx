@@ -7,7 +7,7 @@ import { BaseModalBody } from "../../modal/components/BaseModalBody"
 import { BaseModalFooter } from "../../modal/components/BaseModalFooter"
 import { BaseModalHeader } from "../../modal/components/BaseModalHeader"
 import { useStores } from "../../state/hooks/useStores"
-import { BackupData } from "../types/BackupData"
+import type { BackupData } from "../types/BackupData"
 
 const Warning = styled.div`
   margin: 8px;

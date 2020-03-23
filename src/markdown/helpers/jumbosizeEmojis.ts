@@ -1,5 +1,5 @@
 import { produce } from "immer"
-import { SingleASTNode } from "simple-markdown"
+import type { SingleASTNode } from "simple-markdown"
 
 export const jumbosizeEmojis = (ast: SingleASTNode[]): SingleASTNode[] => {
   // Gets all nodes of type 'emoji' or 'customEmoji'

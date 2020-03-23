@@ -1,4 +1,4 @@
-import { EmbedData } from "./EmbedData"
+import type { EmbedData } from "./EmbedData"
 
 export type MessageData = {
   readonly content?: string

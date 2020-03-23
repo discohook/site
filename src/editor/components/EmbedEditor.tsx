@@ -1,6 +1,6 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
-import { Embed } from "../../message/classes/Embed"
+import type { Embed } from "../../message/classes/Embed"
 import { Field } from "../../message/classes/Field"
 import { AuthorEditor } from "./AuthorEditor"
 import { BodyEditor } from "./BodyEditor"

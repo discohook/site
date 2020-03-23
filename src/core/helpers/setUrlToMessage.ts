@@ -1,5 +1,5 @@
 import { base64UrlEncode } from "../../base64/helpers/base64UrlEncode"
-import { MessageData } from "../../message/types/MessageData"
+import type { MessageData } from "../../message/types/MessageData"
 
 export const setUrlToMessage = (message: MessageData) => {
   const json = JSON.stringify({ message: { ...message, files: undefined } })

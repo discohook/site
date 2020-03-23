@@ -1,7 +1,7 @@
 import { DARK_THEME } from "./constants/darkTheme"
 import { LIGHT_THEME } from "./constants/lightTheme"
-import { Appearance } from "./types/Appearance"
-import { ColorTheme } from "./types/ColorTheme"
+import type { Appearance } from "./types/Appearance"
+import type { ColorTheme } from "./types/ColorTheme"
 
 export const COLOR_THEMES = ["dark", "light"] as const
 

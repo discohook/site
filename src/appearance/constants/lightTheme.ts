@@ -1,5 +1,5 @@
 import { rgb, rgba } from "polished"
-import { ColorTheme } from "../types/ColorTheme"
+import type { ColorTheme } from "../types/ColorTheme"
 import { COMMON_THEME } from "./commonTheme"
 
 export const LIGHT_THEME: ColorTheme = {

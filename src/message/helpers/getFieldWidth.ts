@@ -1,6 +1,5 @@
+import type { Field } from "../classes/Field"
 import { FIELD_GRID_SIZE, MAX_FIELDS_PER_ROW } from "../constants"
-
-type Field = import("../classes/Field").Field
 
 export const getFieldWidth = (field: Field) => {
   if (!field.inline) return `1 / ${FIELD_GRID_SIZE + 1}`

@@ -1,6 +1,6 @@
 /* eslint-disable id-length */
 
-import { HsvColor } from "../types/HsvColor"
+import type { HsvColor } from "../types/HsvColor"
 
 // https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_RGB_alternative
 export const hsvToNumber = (color: HsvColor) => {

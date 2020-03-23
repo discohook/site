@@ -1,5 +1,5 @@
 import { defaultRules, inlineRegex } from "simple-markdown"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 export const emote: MarkdownRule = {
   order: defaultRules.text.order,

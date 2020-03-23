@@ -1,7 +1,7 @@
 import React from "react"
 import { defaultRules, inlineRegex } from "simple-markdown"
 import { Spoiler } from "../components/Spoiler"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 export const spoiler: MarkdownRule = {
   order: defaultRules.text.order,

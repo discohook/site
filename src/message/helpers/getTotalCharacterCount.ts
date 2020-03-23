@@ -1,4 +1,4 @@
-import { MessageData } from "../types/MessageData"
+import type { MessageData } from "../types/MessageData"
 
 export const getTotalCharacterCount = (message: MessageData) => {
   let count = message.content?.length ?? 0

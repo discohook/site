@@ -1,5 +1,5 @@
 import { render as _render, RenderOptions } from "@testing-library/react"
-import { ReactElement } from "react"
+import type { ReactElement } from "react"
 import { ContextWrapper } from "../components/ContextWrapper"
 
 export const render = (ui: ReactElement, options?: RenderOptions) =>

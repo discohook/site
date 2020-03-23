@@ -2,7 +2,7 @@ import { useObserver } from "mobx-react-lite"
 import React from "react"
 import { InputField } from "../../form/components/InputField"
 import { InputGroup } from "../../form/components/InputGroup"
-import { Embed } from "../../message/classes/Embed"
+import type { Embed } from "../../message/classes/Embed"
 
 export type BodyEditorProps = {
   embed: Embed

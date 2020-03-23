@@ -1,4 +1,4 @@
-import { DiscordColor } from "../types/DiscordColor"
+import type { DiscordColor } from "../types/DiscordColor"
 import { numberToHex } from "./numberToHex"
 
 // https://en.wikipedia.org/wiki/HSL_and_HSV#From_RGB

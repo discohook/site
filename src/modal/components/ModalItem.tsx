@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { Z_INDEX_MODALS } from "../../core/constants"
 import { useStores } from "../../state/hooks/useStores"
 import { MODAL_ANIMATION_DURATION } from "../constants"
-import { Modal } from "../types/Modal"
+import type { Modal } from "../types/Modal"
 
 const Container = styled.div`
   ${cover()};

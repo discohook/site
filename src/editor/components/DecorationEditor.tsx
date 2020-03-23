@@ -3,7 +3,7 @@ import React from "react"
 import { ColorInput } from "../../color/components/ColorInput"
 import { InputField } from "../../form/components/InputField"
 import { InputGroup } from "../../form/components/InputGroup"
-import { Embed } from "../../message/classes/Embed"
+import type { Embed } from "../../message/classes/Embed"
 
 export type DecorationEditorProps = {
   embed: Embed

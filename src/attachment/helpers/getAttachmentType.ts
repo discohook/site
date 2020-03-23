@@ -1,5 +1,5 @@
 import { ATTACHMENT_TYPE_MATCHERS } from "../constants"
-import { AttachmentType } from "../types/AttachmentType"
+import type { AttachmentType } from "../types/AttachmentType"
 
 export const getAttachmentType = (
   name: string,

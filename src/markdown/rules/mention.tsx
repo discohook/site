@@ -2,7 +2,7 @@ import React from "react"
 import { defaultRules, inlineRegex } from "simple-markdown"
 import { Mention } from "../components/Mention"
 import { MENTION_TYPES } from "../constants/constants"
-import { MarkdownRule } from "../types/MarkdownRule"
+import type { MarkdownRule } from "../types/MarkdownRule"
 
 const MENTION_RE = /^<(@!?|@&|#)\d+>|^@(everyone|here)/
 
