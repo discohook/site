@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+
 import { observable, runInAction } from "mobx"
 import { downloadBlob } from "../../dom/helpers/downloadBlob"
 import { toCamelCase } from "../../json/helpers/toCamelCase"
@@ -133,14 +135,12 @@ export class BackupStore extends InitializableStore<Stores> {
           break
         }
         case 3: {
-          await Promise.all(
-            exportData.backups.map(async backup =>
-              this.saveBackup(
-                this.getSafeBackupName(backup.name),
-                toCamelCase(backup.message),
-              ),
-            ),
-          )
+          for (const backup of exportData.backups) {
+            await this.saveBackup(
+              this.getSafeBackupName(backup.name),
+              toCamelCase(backup.message),
+            )
+          }
           break
         }
       }
