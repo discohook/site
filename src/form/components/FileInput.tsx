@@ -71,7 +71,7 @@ export function FileInput(props: FileInputProps) {
   return (
     <InputContainer>
       <FlexContainer flow="row">
-        <InputLabel htmlFor={id}>Files</InputLabel>
+        <InputLabel htmlFor={id}>Files (max 8MB)</InputLabel>
         {errors.length > 0 && (
           <InputNote state="error">
             {errors.join(", ").replace(/^\w/, letter => letter.toUpperCase())}
