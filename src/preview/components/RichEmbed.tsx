@@ -1,5 +1,5 @@
 import { useObserver } from "mobx-react-lite"
-import { rem, size } from "polished"
+import { rem } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import { Markdown } from "../../markdown/components/Markdown"
@@ -76,7 +76,8 @@ const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
 `
 
 const EmbedThumbnail = styled.img`
-  ${size(80)};
+  max-width: 80px;
+  max-height: 80px;
 
   margin: 8px 0 0 16px;
 
