@@ -9,7 +9,7 @@ const { get } = require("https")
 /** @typedef {import("../src/markdown/types/Language").Language} Language */
 
 const HLJS_GIT_RAW_LANGUAGES_BASE_URL =
-  "https://raw.githubusercontent.com/highlightjs/highlight.js/master/src/languages"
+  "https://raw.githubusercontent.com/highlightjs/highlight.js/9-18-stable/src/languages"
 
 /** @type {(language: string) => Promise<string[] | undefined>} */
 async function getDependencies(language) {

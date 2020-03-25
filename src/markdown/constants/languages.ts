@@ -40,7 +40,6 @@ export const LANGUAGES: Language[] = [
   {
     name: "cpp",
     aliases: ["c", "c++", "cc", "cxx", "h", "h++", "hh", "hpp", "hxx"],
-    dependencies: ["c-like"],
   },
   { name: "crmsh", aliases: ["crm", "pcmk"] },
   { name: "crystal", aliases: ["cr"] },
