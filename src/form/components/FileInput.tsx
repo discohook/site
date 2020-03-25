@@ -1,12 +1,18 @@
 import React, { useRef } from "react"
 import styled from "styled-components"
+import { useTheme } from "../../appearance/hooks/useTheme"
 import { FlexContainer } from "../../editor/components/Container"
 import { MAX_FILE_SIZE } from "../constants"
 import { Button } from "./Button"
 import { InputContainer } from "./InputContainer"
 import { InputLabel } from "./InputLabel"
 import { InputNote } from "./InputNote"
+import { PasteFileButton } from "./PasteFileButton"
 import { TextInput } from "./TextInput"
+
+const Container = styled(InputContainer)`
+  margin-right: 0;
+`
 
 const FileInputContainer = styled.div`
   position: relative;
@@ -34,10 +40,6 @@ const HiddenInput = styled.input.attrs({ type: "file", multiple: true })`
   opacity: 0;
 `
 
-const RemoveFilesButton = styled(Button)`
-  margin-right: 0;
-`
-
 export type FileInputProps = {
   id: string
   files: readonly File[]
@@ -56,6 +58,8 @@ export function FileInput(props: FileInputProps) {
     handleChange([])
   }
 
+  const theme = useTheme()
+
   const errors: string[] = []
   if (
     files.length > 0 &&
@@ -69,7 +73,7 @@ export function FileInput(props: FileInputProps) {
   }
 
   return (
-    <InputContainer>
+    <Container>
       <FlexContainer flow="row">
         <InputLabel htmlFor={id}>Files (max 8MB)</InputLabel>
         {errors.length > 0 && (
@@ -89,10 +93,11 @@ export function FileInput(props: FileInputProps) {
             ref={inputRef}
           />
         </FileInputContainer>
-        <RemoveFilesButton onClick={handleRemoveFiles}>
-          Remove files
-        </RemoveFilesButton>
+        {!theme.appearance.mobile && (
+          <PasteFileButton onChange={handleChange} />
+        )}
+        <Button onClick={handleRemoveFiles}>Remove files</Button>
       </FlexContainer>
-    </InputContainer>
+    </Container>
   )
 }
