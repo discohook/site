@@ -7,6 +7,8 @@ import type { Embed } from "../../message/classes/Embed"
 import { formatTimestamp } from "../../message/helpers/formatTimestamp"
 
 const Container = styled.div<{ hasThumbnail?: boolean }>`
+  min-width: 0;
+
   margin: 8px 0 0;
 
   display: flex;

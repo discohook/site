@@ -5,6 +5,8 @@ import styled, { css } from "styled-components"
 import type { Embed } from "../../message/classes/Embed"
 
 const Container = styled.div`
+  min-width: 0;
+
   display: flex;
   align-items: center;
   grid-column: 1 / 2;

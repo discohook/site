@@ -7,11 +7,15 @@ import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
 import type { Field } from "../../message/classes/Field"
 
 const Container = styled.div`
+  min-width: 0;
+
   font-size: ${rem(14)};
   line-height: ${rem(18)};
 `
 
 const FieldName = styled.div`
+  min-width: 0;
+
   margin: 0 0 1px;
 
   font-size: ${rem(14)};
@@ -20,6 +24,8 @@ const FieldName = styled.div`
 `
 
 const FieldValue = styled.div`
+  min-width: 0;
+
   & > ${MarkdownContainer} {
     font-size: ${rem(14)};
     line-height: ${rem(18)};
