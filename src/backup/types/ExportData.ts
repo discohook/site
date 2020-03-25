@@ -15,6 +15,7 @@ export type ExportData =
       version: 3
       backups: {
         name: string
+        webhookUrl?: string
         message: object
       }[]
     }

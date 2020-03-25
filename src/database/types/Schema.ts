@@ -3,6 +3,10 @@ import type { MessageData } from "../../message/types/MessageData"
 export type Schema = {
   backups: {
     key: string
-    value: MessageData
+    value: {
+      name: string
+      webhookUrl?: string
+      message: MessageData
+    }
   }
 }

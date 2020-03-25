@@ -5,9 +5,9 @@ import { downloadBlob } from "../../dom/helpers/downloadBlob"
 import { toCamelCase } from "../../json/helpers/toCamelCase"
 import { toSnakeCase } from "../../json/helpers/toSnakeCase"
 import { Message } from "../../message/classes/Message"
-import type { MessageData } from "../../message/types/MessageData"
 import { InitializableStore } from "../../state/classes/InitializableStore"
 import type { Stores } from "../../state/types/Stores"
+import type { Backup } from "../types/Backup"
 import type { BackupData } from "../types/BackupData"
 import type { ExportData } from "../types/ExportData"
 
@@ -37,30 +37,37 @@ export class BackupStore extends InitializableStore<Stores> {
   }
 
   async loadBackup(name: string) {
-    const { databaseStore, messageStore } = this.manager.stores
+    const { databaseStore, messageStore, webhookStore } = this.manager.stores
 
-    const messageData = await databaseStore.database
+    const backup = await databaseStore.database
       .transaction("backups")
       .objectStore("backups")
       .get(name)
 
-    messageStore.message = new Message(messageData)
+    if (!backup) return
+
+    messageStore.message = new Message(backup.message)
+    webhookStore.url = backup.webhookUrl ?? ""
   }
 
-  async saveBackup(name: string, message?: MessageData) {
-    const { databaseStore, messageStore } = this.manager.stores
+  async saveBackup(name: string, backup?: Backup) {
+    const { databaseStore, messageStore, webhookStore } = this.manager.stores
 
-    if (!message) {
-      message = {
-        ...messageStore.message.getMessageData(),
-        files: undefined,
+    if (!backup) {
+      backup = {
+        name,
+        webhookUrl: webhookStore.url || undefined,
+        message: {
+          ...messageStore.message.getMessageData(),
+          files: undefined,
+        },
       }
     }
 
     await databaseStore.database
       .transaction("backups", "readwrite")
       .objectStore("backups")
-      .put(message, name)
+      .put(backup, name)
 
     await this.loadBackupList()
   }
@@ -79,22 +86,19 @@ export class BackupStore extends InitializableStore<Stores> {
   async exportBackup(name: string) {
     const { databaseStore } = this.manager.stores
 
-    const messageData = await databaseStore.database
+    const backup = await databaseStore.database
       .transaction("backups")
       .objectStore("backups")
       .get(name)
 
-    const backup: ExportData = {
+    if (!backup) return
+
+    const backupData: ExportData = {
       version: 3,
-      backups: [
-        {
-          name,
-          message: toSnakeCase(messageData ?? {}),
-        },
-      ],
+      backups: [{ ...backup, message: toSnakeCase(backup.message) }],
     }
 
-    const blob = new Blob([JSON.stringify(backup, undefined, 2)], {
+    const blob = new Blob([JSON.stringify(backupData, undefined, 2)], {
       type: "application/json",
     })
 
@@ -120,32 +124,26 @@ export class BackupStore extends InitializableStore<Stores> {
       const exportData = JSON.parse(json) as ExportData
 
       switch (exportData.version) {
-        case 1: {
-          await this.saveBackup(
-            this.getSafeBackupName(exportData.name),
-            exportData.message,
-          )
-          break
-        }
+        case 1:
         case 2: {
-          await this.saveBackup(
-            this.getSafeBackupName(exportData.name),
-            toCamelCase(exportData.message),
-          )
+          await this.saveBackup(this.getSafeBackupName(exportData.name), {
+            name: exportData.name,
+            message: toCamelCase(exportData.message),
+          })
           break
         }
         case 3: {
           for (const backup of exportData.backups) {
-            await this.saveBackup(
-              this.getSafeBackupName(backup.name),
-              toCamelCase(backup.message),
-            )
+            await this.saveBackup(this.getSafeBackupName(backup.name), {
+              ...backup,
+              message: toCamelCase(backup.message),
+            })
           }
           break
         }
       }
-    } catch {
-      // do nothing
+    } catch (error) {
+      console.error("Error importing backups:", error)
     }
   }
 }
