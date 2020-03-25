@@ -5,6 +5,7 @@ import styled, { css } from "styled-components"
 import { Markdown } from "../../markdown/components/Markdown"
 import { MarkdownContainer } from "../../markdown/components/MarkdownContainer"
 import type { Embed } from "../../message/classes/Embed"
+import { useReaction } from "../../state/hooks/useReaction"
 import { EmbedAuthor } from "./EmbedAuthor"
 import { EmbedField } from "./EmbedField"
 import { EmbedFooter } from "./EmbedFooter"
@@ -110,6 +111,16 @@ export function RichEmbed(props: RichEmbedProps) {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
+
+  useReaction(
+    () => embed.image,
+    () => {
+      const { current: container } = containerRef
+      if (!container) return
+
+      container.style.maxWidth = ""
+    },
+  )
 
   return useObserver(() => {
     if (!embed.shouldRender) return null
