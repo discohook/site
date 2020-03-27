@@ -71,15 +71,12 @@ const ExtrasContainer = styled.div`
 `
 
 export function MessagePreview() {
-  const { messageStore, webhookStore } = useStores()
+  const { messageStore } = useStores()
 
   return useObserver(() => (
     <ScrollContainer>
       <Container>
-        <MessageHeader
-          username={webhookStore.displayName}
-          avatarUrl={webhookStore.displayAvatarUrl}
-        />
+        <MessageHeader />
         {messageStore.message.content && (
           <Markdown
             content={messageStore.message.content}

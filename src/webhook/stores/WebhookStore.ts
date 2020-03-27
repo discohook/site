@@ -57,7 +57,9 @@ export class WebhookStore extends InitializableStore<Stores> {
   }
 
   @computed get displayName() {
-    return this.name ?? DEFAULT_DISPLAY_NAME
+    const { messageStore } = this.manager.stores
+
+    return messageStore.message.username || (this.name ?? DEFAULT_DISPLAY_NAME)
   }
 
   @computed get avatarUrl() {
@@ -66,6 +68,8 @@ export class WebhookStore extends InitializableStore<Stores> {
   }
 
   @computed get displayAvatarUrl() {
-    return this.avatarUrl ?? DEFAULT_AVATAR_URL
+    const { messageStore } = this.manager.stores
+
+    return messageStore.message.avatar || (this.avatarUrl ?? DEFAULT_AVATAR_URL)
   }
 }

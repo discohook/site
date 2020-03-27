@@ -1,8 +1,10 @@
+import { useObserver } from "mobx-react-lite"
 import { em, rem, size } from "polished"
 import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
+import { useStores } from "../../state/hooks/useStores"
 
 const Container = styled.div`
   ${({ theme }) =>
@@ -153,19 +155,10 @@ const getTimestamp = () =>
     hour12: true,
   })
 
-export type MessageHeaderProps = {
-  username?: string
-  avatarUrl?: string
-}
-
-export function MessageHeader(props: MessageHeaderProps) {
-  const {
-    username = "Discohook",
-    avatarUrl = "https://discohook.org/assets/discord-avatar.png",
-  } = props
+export function MessageHeader() {
+  const { webhookStore } = useStores()
 
   const [timestamp, setTimestamp] = useState(getTimestamp)
-
   useEffect(() => {
     const interval = setInterval(() => setTimestamp(getTimestamp()), 1000)
     return () => clearInterval(interval)
@@ -173,20 +166,22 @@ export function MessageHeader(props: MessageHeaderProps) {
 
   const theme = useTheme()
 
-  let info = [
-    <Username key="username">{username}</Username>,
-    <BotTag key="bot-tag">BOT</BotTag>,
-    <Timestamp key="timestamp">{timestamp}</Timestamp>,
-  ]
+  return useObserver(() => {
+    let info = [
+      <Username key="username">{webhookStore.displayName}</Username>,
+      <BotTag key="bot-tag">BOT</BotTag>,
+      <Timestamp key="timestamp">{timestamp}</Timestamp>,
+    ]
 
-  if (theme.appearance.display === "compact") info = info.reverse()
+    if (theme.appearance.display === "compact") info = info.reverse()
 
-  return (
-    <Container>
-      {theme.appearance.display === "cozy" && !theme.appearance.mobile && (
-        <Avatar src={avatarUrl} alt="User avatar" />
-      )}
-      {info}
-    </Container>
-  )
+    return (
+      <Container>
+        {theme.appearance.display === "cozy" && !theme.appearance.mobile && (
+          <Avatar src={webhookStore.displayAvatarUrl} alt="User avatar" />
+        )}
+        {info}
+      </Container>
+    )
+  })
 }
