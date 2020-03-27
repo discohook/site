@@ -6,9 +6,8 @@ import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import { useTheme } from "../../appearance/hooks/useTheme"
 import { spawnBackupsModal } from "../../backup/actions/spawnBackupModal"
 import { JsonInput } from "../../json/components/JsonInput"
-import { Message } from "../../message/classes/Message"
 import { useManager } from "../../state/hooks/useManager"
-import { useStores } from "../../state/hooks/useStores"
+import { spawnClearAllConfirmationModal } from "../actions/spawnClearAllConfirmationModal"
 import { Actions } from "./Actions"
 import { FlexContainer } from "./Container"
 import { MessageEditor } from "./MessageEditor"
@@ -40,8 +39,6 @@ const JavaScriptWarning = styled.noscript`
 
 export function Editor() {
   const manager = useManager()
-
-  const { messageStore } = useStores()
 
   const theme = useTheme()
 
@@ -76,7 +73,7 @@ export function Editor() {
             {
               name: "Clear all",
               action: () => {
-                messageStore.message = new Message()
+                spawnClearAllConfirmationModal(manager)
               },
             },
           ]}
