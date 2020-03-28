@@ -39,14 +39,14 @@ export class Message {
               author: embed.author
                 ? {
                     name: embed.author,
-                    url: embed.authorUrl,
-                    iconUrl: embed.authorIcon,
+                    url: embed.authorUrl || undefined,
+                    iconUrl: embed.authorIcon || undefined,
                   }
                 : undefined,
               footer: embed.footer
                 ? {
                     text: embed.footer,
-                    iconUrl: embed.footerIcon,
+                    iconUrl: embed.footerIcon || undefined,
                   }
                 : undefined,
               timestamp: isValid(embed.timestamp)
