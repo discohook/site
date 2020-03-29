@@ -1,8 +1,8 @@
 export const MENTION_TYPES = {
-  "@": "user",
-  "@!": "user",
-  "@&": "role",
-  "#": "channel",
+  "@": "@unknown-user",
+  "@!": "@unknown-user",
+  "@&": "@unknown-role",
+  "#": "#unknown-channel",
 }
 
 export const PLAINTEXT_EMOJIS = ["™", "™️", "©", "©️", "®", "®️"]

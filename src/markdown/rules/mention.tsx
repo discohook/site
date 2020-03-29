@@ -11,6 +11,7 @@ export const mention: MarkdownRule = {
   match: inlineRegex(MENTION_RE),
   parse: capture => {
     const [, type, everyoneOrHere] = capture
+
     if (everyoneOrHere) {
       return {
         content: `@${everyoneOrHere}`,
@@ -18,7 +19,7 @@ export const mention: MarkdownRule = {
     }
 
     return {
-      content: `@unknown-${MENTION_TYPES[type as keyof typeof MENTION_TYPES]}`,
+      content: MENTION_TYPES[type as keyof typeof MENTION_TYPES],
     }
   },
   react: (node, output, state) => (
