@@ -11,6 +11,7 @@ import { PasteFileButton } from "./PasteFileButton"
 import { TextInput } from "./TextInput"
 
 const Container = styled(InputContainer)`
+  position: relative;
   margin-right: 0;
 `
 
