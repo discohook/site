@@ -46,7 +46,7 @@ export const TONE_NAMES = Object.fromEntries(
 export const EMOJI_CDN_BASE_URL = "https://twemoji.maxcdn.com/v/12.1.3/svg"
 export const CUSTOM_EMOJI_CDN_BASE_URL = "https://cdn.discordapp.com/emojis"
 
-export const DISCOHOOK_EMOJI_ID = "645409602393079819"
+export const DISCOHOOK_EMOJI_ID = "694095642712080394"
 export const DISCOHOOK_EMOJI_URL =
   "https://discohook.org/assets/discohook-emoji.png"
 
