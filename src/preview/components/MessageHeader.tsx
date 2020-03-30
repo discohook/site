@@ -64,11 +64,11 @@ const Avatar = styled.img`
     `}
 `
 
-const Username = styled.span`
+const Username = styled.h1`
   display: inline;
   vertical-align: baseline;
 
-  margin-right: ${rem(4)};
+  margin: 0 ${rem(4)} 0 0;
 
   color: ${({ theme }) => theme.header.primary};
   font-size: ${rem(16)};
