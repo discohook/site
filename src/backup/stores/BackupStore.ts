@@ -102,7 +102,38 @@ export class BackupStore extends InitializableStore<Stores> {
       type: "application/json",
     })
 
-    downloadBlob(blob, name)
+    downloadBlob(blob, `${name}.json`)
+  }
+
+  async exportAll() {
+    const { databaseStore } = this.manager.stores
+
+    const backups: Backup[] = []
+
+    let cursor = await databaseStore.database
+      .transaction("backups")
+      .objectStore("backups")
+      .openCursor()
+
+    while (cursor) {
+      backups.push({
+        ...cursor.value,
+        message: toSnakeCase(cursor.value.message),
+      })
+
+      cursor = await cursor.continue()
+    }
+
+    const backupData: ExportData = {
+      version: 3,
+      backups,
+    }
+
+    const blob = new Blob([JSON.stringify(backupData, undefined, 2)], {
+      type: "application/json",
+    })
+
+    downloadBlob(blob, "backups.json")
   }
 
   private getSafeBackupName(name: string) {

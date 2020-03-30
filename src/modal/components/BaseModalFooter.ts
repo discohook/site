@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Button } from "../../form/components/Button"
 
 export const BaseModalFooter = styled.div`
   background: ${({ theme }) => theme.background.secondary};
@@ -10,8 +9,4 @@ export const BaseModalFooter = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  & ${Button} {
-    margin: 0;
-  }
 `

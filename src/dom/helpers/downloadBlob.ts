@@ -5,7 +5,7 @@ export const downloadBlob = (blob: Blob, name: string) => {
   document.body.append(anchor)
 
   anchor.href = url
-  anchor.download = `${name}.json`
+  anchor.download = name
 
   anchor.click()
 

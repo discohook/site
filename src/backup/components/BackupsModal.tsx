@@ -45,6 +45,15 @@ export function BackupsModal() {
         <Button
           variant="borderless"
           size="medium"
+          onClick={async () => {
+            await backupStore.exportAll()
+          }}
+        >
+          Export all
+        </Button>
+        <Button
+          variant="borderless"
+          size="medium"
           onClick={() => {
             fileInputRef.current?.click()
           }}

@@ -2,6 +2,7 @@ import { shade, transparentize } from "polished"
 import styled, { css } from "styled-components"
 import { DARK_THEME } from "../../appearance/constants/darkTheme"
 import type { Theme } from "../../appearance/types/Theme"
+import { BaseModalFooter } from "../../modal/components/BaseModalFooter"
 
 export const Button = styled.button.attrs({ type: "button" })<{
   variant?: "filled" | "outline" | "borderless"
@@ -94,5 +95,16 @@ export const Button = styled.button.attrs({ type: "button" })<{
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  ${BaseModalFooter} & {
+    margin: 0 0 0 16px;
+
+    ${({ variant }) =>
+      variant === "borderless" &&
+      css`
+        min-width: 0;
+        margin: 0;
+      `}
   }
 `
