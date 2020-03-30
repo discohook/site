@@ -6,7 +6,7 @@ export const FIELD_GRID_SIZE = 12
 
 export const INITIAL_MESSAGE_DATA: MessageData = {
   content: `
-Hey, this is Discohook, a message and embed builder for Discord webhooks. <:discohook_sm:${DISCOHOOK_EMOJI_ID}>
+Hey, this is Discohook, a message and embed builder for Discord webhooks. <:discohook:${DISCOHOOK_EMOJI_ID}>
 You can read more about how to use Discohook below, or click **Clear all** on the top to start out blank.
 Have questions? Discohook has a server at <https://discohook.org/discord>.
 `.trim(),
