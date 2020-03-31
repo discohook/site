@@ -187,7 +187,7 @@ Discohook is not affiliated with Discord in any way, shape, or form.
 
 The source code of this project is [available on GitHub](https://github.com/jaylineko/discohook), under the MIT license.
 
-If you want to contact me, join the [Discohook server](https://discohook.org/discord), message me on Discord (@jay.#1111), or send an email to <hello@jaylineko.com>.
+If you want to contact me, join the [Discohook server](https://discohook.org/discord) or send an email to <hello@discohook.org>.
 `.trim(),
     },
   ],
