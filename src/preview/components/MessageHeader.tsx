@@ -12,8 +12,6 @@ const Container = styled.div`
     css`
       position: relative;
 
-      height: ${em(22)};
-
       margin-left: ${rem(-72)};
       padding-left: ${rem(72)};
 
@@ -74,6 +72,8 @@ const Username = styled.h1`
   font-size: ${rem(16)};
   font-weight: 500;
   line-height: ${rem(22)};
+
+  word-wrap: break-word;
 
   cursor: pointer;
 
