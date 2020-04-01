@@ -54,7 +54,7 @@ export function MessageEditor() {
               }}
               label="Override username"
               placeholder={webhookStore?.name}
-              maxLength={32}
+              maxLength={80}
             />
             <InputField
               id="m.avatar"
