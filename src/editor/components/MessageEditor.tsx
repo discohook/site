@@ -64,6 +64,9 @@ export function MessageEditor() {
               }}
               label="Override avatar"
               placeholder={webhookStore.avatarUrl}
+              validate={url =>
+                /^https?:\/\//.test(url) ? undefined : "Invalid URL"
+              }
             />
           </InputGroup>
         )}

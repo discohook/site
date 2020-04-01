@@ -30,6 +30,9 @@ export function BodyEditor(props: BodyEditorProps) {
             embed.url = url
           }}
           label="URL"
+          validate={url =>
+            /^https?:\/\//.test(url) ? undefined : "Invalid URL"
+          }
         />
       </InputGroup>
       <InputField

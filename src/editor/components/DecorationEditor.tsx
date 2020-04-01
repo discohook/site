@@ -21,6 +21,7 @@ export function DecorationEditor(props: DecorationEditorProps) {
           embed.image = image
         }}
         label="Image"
+        validate={url => (/^https?:\/\//.test(url) ? undefined : "Invalid URL")}
       />
       <InputField
         id={`e${embed.id}.thumb`}
@@ -29,6 +30,7 @@ export function DecorationEditor(props: DecorationEditorProps) {
           embed.thumbnail = thumbnail
         }}
         label="Thumbnail"
+        validate={url => (/^https?:\/\//.test(url) ? undefined : "Invalid URL")}
       />
       <ColorInput id={`e${embed.id}.color`} color={embed.color} />
     </InputGroup>

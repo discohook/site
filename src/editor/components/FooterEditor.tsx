@@ -30,6 +30,7 @@ export function FooterEditor(props: FooterEditorProps) {
           embed.footerIcon = footerIcon
         }}
         label="Footer Icon"
+        validate={url => (/^https?:\/\//.test(url) ? undefined : "Invalid URL")}
       />
       <TimestampInput
         id={`e${embed.id}.timestamp`}

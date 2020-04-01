@@ -29,6 +29,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
           embed.authorUrl = authorUrl
         }}
         label="Author URL"
+        validate={url => (/^https?:\/\//.test(url) ? undefined : "Invalid URL")}
       />
       <InputField
         id={`e${embed.id}.authoricon`}
@@ -37,6 +38,7 @@ export function AuthorEditor(props: AuthorEditorProps) {
           embed.authorIcon = authorIcon
         }}
         label="Author Icon"
+        validate={url => (/^https?:\/\//.test(url) ? undefined : "Invalid URL")}
       />
     </InputGroup>
   ))
