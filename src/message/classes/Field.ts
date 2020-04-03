@@ -9,9 +9,9 @@ export class Field {
 
   readonly embed: Embed
 
-  @observable name = ""
-  @observable value = ""
-  @observable inline = false
+  @observable name: string
+  @observable value: string
+  @observable inline: boolean
 
   constructor(embed: Embed, field: FieldData = {}) {
     this.embed = embed

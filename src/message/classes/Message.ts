@@ -4,11 +4,11 @@ import type { MessageData } from "../types/MessageData"
 import { Embed } from "./Embed"
 
 export class Message {
-  @observable content = ""
-  @observable embeds: Embed[] = []
-  @observable username = ""
-  @observable avatar = ""
-  @observable files: File[] = []
+  @observable content: string
+  @observable embeds: Embed[]
+  @observable username: string
+  @observable avatar: string
+  @observable files: File[]
 
   constructor(message: MessageData = {}) {
     this.content = message.content ?? ""

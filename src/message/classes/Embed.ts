@@ -12,19 +12,19 @@ export class Embed {
 
   readonly message: Message
 
-  @observable title = ""
-  @observable description = ""
-  @observable url = ""
-  @observable color = new Color(null)
-  @observable fields: Field[] = []
-  @observable author = ""
-  @observable authorUrl = ""
-  @observable authorIcon = ""
-  @observable footer = ""
-  @observable footerIcon = ""
-  @observable timestamp = new Date(NaN)
-  @observable image = ""
-  @observable thumbnail = ""
+  @observable title: string
+  @observable description: string
+  @observable url: string
+  @observable color: Color
+  @observable fields: Field[]
+  @observable author: string
+  @observable authorUrl: string
+  @observable authorIcon: string
+  @observable footer: string
+  @observable footerIcon: string
+  @observable timestamp: Date
+  @observable image: string
+  @observable thumbnail: string
 
   constructor(message: Message, embed: EmbedData = {}) {
     this.message = message
