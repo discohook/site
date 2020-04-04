@@ -6,7 +6,7 @@ export const numberToHsv = (color: DiscordColor) => {
   const [, red = 0, green = 0, blue = 0] =
     /#(\w{2})(\w{2})(\w{2})/
       .exec(numberToHex(color))
-      ?.map(hex => parseInt(hex, 16)) ?? []
+      ?.map(hex => Number.parseInt(hex, 16)) ?? []
 
   const max = Math.max(red, blue, green)
   const min = Math.min(red, blue, green)

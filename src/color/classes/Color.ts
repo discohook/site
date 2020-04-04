@@ -19,7 +19,7 @@ export class Color {
   }
 
   @action invalidate() {
-    this.hue = NaN
+    this.hue = Number.NaN
     this.saturation = 0
     this.value = 0
   }

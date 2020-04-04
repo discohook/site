@@ -89,6 +89,6 @@ describe("formatTimestamp", () => {
   })
 
   it("returns invalid on bad timestamps", () => {
-    expect(formatTimestamp(new Date(NaN))).toEqual("Invalid date")
+    expect(formatTimestamp(new Date(Number.NaN))).toEqual("Invalid date")
   })
 })

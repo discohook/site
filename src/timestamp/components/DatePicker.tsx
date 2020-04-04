@@ -37,7 +37,7 @@ export function DatePicker(props: DatePickerProps) {
           },
           {
             name: "Clear",
-            action: () => handleChange(new Date(NaN)),
+            action: () => handleChange(new Date(Number.NaN)),
           },
         ]}
       />

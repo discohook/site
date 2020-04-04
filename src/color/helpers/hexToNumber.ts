@@ -1,1 +1,1 @@
-export const hexToNumber = (hex: string) => parseInt(hex.slice(1), 16)
+export const hexToNumber = (hex: string) => Number.parseInt(hex.slice(1), 16)

@@ -13,7 +13,7 @@ describe("isObject", () => {
     expect(isObject("still a string", "$")).not.toHaveLength(0)
     expect(isObject(1, "$")).not.toHaveLength(0)
     expect(isObject(Infinity, "$")).not.toHaveLength(0)
-    expect(isObject(NaN, "$")).not.toHaveLength(0)
+    expect(isObject(Number.NaN, "$")).not.toHaveLength(0)
     expect(isObject(false, "$")).not.toHaveLength(0)
     expect(isObject([], "$")).not.toHaveLength(0)
     expect(isObject(null, "$")).not.toHaveLength(0)

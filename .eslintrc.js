@@ -181,11 +181,6 @@ module.exports = {
     "no-proto": "warn",
     "no-prototype-builtins": "warn",
     "no-regex-spaces": "warn",
-    "no-restricted-globals": [
-      "warn",
-      { message: "Please use Number.isNaN instead.", name: "isNaN" },
-      { message: "Please use Number.isFinite instead.", name: "isFinite" },
-    ],
     "no-restricted-properties": [
       "warn",
       {
@@ -307,9 +302,11 @@ module.exports = {
     "unicorn/prefer-modern-dom-apis": "warn",
     "unicorn/prefer-node-append": "warn",
     "unicorn/prefer-node-remove": "warn",
+    "unicorn/prefer-number-properties": "warn",
     "unicorn/prefer-query-selector": "warn",
     "unicorn/prefer-reflect-apply": "warn",
     // "unicorn/prefer-replace-all": "warn",
+    "unicorn/prefer-set-has": "warn",
     "unicorn/prefer-string-slice": "warn",
     "unicorn/prefer-text-content": "warn",
     "unicorn/prefer-type-error": "warn",

@@ -6,7 +6,7 @@ describe("isNumber", () => {
     expect(isNumber(2, "$")).toHaveLength(0)
     expect(isNumber(Infinity, "$")).toHaveLength(0)
     expect(isNumber(-Infinity, "$")).toHaveLength(0)
-    expect(isNumber(NaN, "$")).toHaveLength(0)
+    expect(isNumber(Number.NaN, "$")).toHaveLength(0)
   })
 
   it("can validate if a value is not a number", () => {

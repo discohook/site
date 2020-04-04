@@ -39,7 +39,7 @@ export class Embed {
     this.authorIcon = embed.author?.iconUrl ?? ""
     this.footer = embed.footer?.text ?? ""
     this.footerIcon = embed.footer?.iconUrl ?? ""
-    this.timestamp = new Date(embed.timestamp ?? NaN)
+    this.timestamp = new Date(embed.timestamp ?? Number.NaN)
     this.image = embed.image?.url ?? ""
     this.thumbnail = embed.thumbnail?.url ?? ""
   }

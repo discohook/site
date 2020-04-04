@@ -38,7 +38,7 @@ export function TimestampInput(props: TimestampInputProps) {
     setInput(value)
 
     if (!value) {
-      handleChange(new Date(NaN))
+      handleChange(new Date(Number.NaN))
       return
     }
 

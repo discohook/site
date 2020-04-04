@@ -6,7 +6,7 @@ export const base64Encode = (utf8: string) => {
   const encoded = encodeURIComponent(utf8)
 
   const escaped = encoded.replace(/%[\dA-F]{2}/g, hex => {
-    return String.fromCharCode(parseInt(hex.slice(1), 16))
+    return String.fromCharCode(Number.parseInt(hex.slice(1), 16))
   })
 
   return btoa(escaped)
