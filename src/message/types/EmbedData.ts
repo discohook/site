@@ -1,5 +1,5 @@
 import type { DiscordColor } from "../../color/types/DiscordColor"
-import type { Author } from "./Author"
+import type { AuthorData } from "./AuthorData"
 import type { FieldData } from "./FieldData"
 import type { FooterData } from "./FooterData"
 import type { Image } from "./Image"
@@ -13,6 +13,6 @@ export type EmbedData = {
   readonly footer?: FooterData
   readonly image?: Image
   readonly thumbnail?: Image
-  readonly author?: Author
+  readonly author?: AuthorData
   readonly fields?: readonly FieldData[]
 }
