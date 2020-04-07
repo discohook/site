@@ -26,9 +26,11 @@ export class Message {
   }
 
   getMessageData(): MessageData {
+    const embeds = this.embeds.flatMap(embed => embed.getEmbedsData())
+
     return {
       content: this.content || undefined,
-      embeds: this.embeds.flatMap(embed => embed.getEmbedsData()),
+      embeds: embeds.length > 0 ? embeds : undefined,
       username: this.username || undefined,
       avatarUrl: this.avatar || undefined,
       files: this.files.length > 0 ? Array.from(this.files) : undefined,
