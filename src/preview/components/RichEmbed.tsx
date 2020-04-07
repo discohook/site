@@ -113,7 +113,7 @@ export function RichEmbed(props: RichEmbedProps) {
   const imageRef = useRef<HTMLImageElement>(null)
 
   useReaction(
-    () => embed.image,
+    () => `${embed.gallery.length} ${embed.gallery[0]}`,
     () => {
       const { current: container } = containerRef
       if (!container) return
@@ -123,8 +123,6 @@ export function RichEmbed(props: RichEmbedProps) {
   )
 
   return useObserver(() => {
-    if (!embed.shouldRender) return null
-
     const color = embed.color.raw === 0xffffff ? undefined : embed.color.hex
 
     return (
@@ -157,11 +155,11 @@ export function RichEmbed(props: RichEmbedProps) {
               ))}
             </EmbedFields>
           )}
-          {embed.gallery ? (
-            <EmbedGallery gallery={embed.gallery} />
-          ) : embed.image ? (
+          {embed.gallery.length > 1 ? (
+            <EmbedGallery embed={embed} />
+          ) : embed.gallery.length === 1 ? (
             <EmbedImage
-              src={embed.image}
+              src={embed.gallery[0]}
               alt="Image"
               hasThumbnail={Boolean(embed.thumbnail)}
               ref={imageRef}

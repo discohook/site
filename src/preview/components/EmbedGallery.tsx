@@ -1,7 +1,8 @@
+import { useObserver } from "mobx-react-lite"
 import { size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import type { Gallery } from "../../message/types/Gallery"
+import type { Embed } from "../../message/classes/Embed"
 
 const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
   grid-column: 1 / 2;
@@ -46,19 +47,24 @@ const EmbedGalleryImage = styled.img`
 `
 
 export type EmbedGalleryProps = {
-  gallery: Gallery
+  embed: Embed
 }
 
 export function EmbedGallery(props: EmbedGalleryProps) {
-  const { gallery } = props
+  const { embed } = props
 
-  return (
+  return useObserver(() => (
     <EmbedGalleryWrapper>
-      {gallery.map((item, index) => (
-        <EmbedGalleryCell key={item.id} index={index} length={gallery.length}>
-          <EmbedGalleryImage src={item.image} alt="Image" />
+      {embed.gallery.map((url, index) => (
+        <EmbedGalleryCell
+          // eslint-disable-next-line react/no-array-index-key
+          key={`${index}-${url}`}
+          index={index}
+          length={embed.gallery.length}
+        >
+          <EmbedGalleryImage src={url} alt="Image" />
         </EmbedGalleryCell>
       ))}
     </EmbedGalleryWrapper>
-  )
+  ))
 }

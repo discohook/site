@@ -1,9 +1,17 @@
-import { useObserver } from "mobx-react-lite"
 import React from "react"
+import styled from "styled-components"
 import { ColorInput } from "../../color/components/ColorInput"
-import { InputField } from "../../form/components/InputField"
-import { InputGroup } from "../../form/components/InputGroup"
+import { Button } from "../../form/components/Button"
 import type { Embed } from "../../message/classes/Embed"
+import { useManager } from "../../state/hooks/useManager"
+import { spawnImagesEditorModal } from "../actions/spawnImagesEditorModal"
+import { FlexContainer } from "./Container"
+
+const Container = styled(FlexContainer)`
+  & > *:not(button) {
+    flex-grow: 0;
+  }
+`
 
 export type DecorationEditorProps = {
   embed: Embed
@@ -12,27 +20,18 @@ export type DecorationEditorProps = {
 export function DecorationEditor(props: DecorationEditorProps) {
   const { embed } = props
 
-  return useObserver(() => (
-    <InputGroup>
-      <InputField
-        id={`e${embed.id}.img`}
-        value={embed.image}
-        onChange={image => {
-          embed.image = image
-        }}
-        label="Image"
-        validate={url => (/^https?:\/\//.test(url) ? undefined : "Invalid URL")}
-      />
-      <InputField
-        id={`e${embed.id}.thumb`}
-        value={embed.thumbnail}
-        onChange={thumbnail => {
-          embed.thumbnail = thumbnail
-        }}
-        label="Thumbnail"
-        validate={url => (/^https?:\/\//.test(url) ? undefined : "Invalid URL")}
-      />
+  const manager = useManager()
+
+  return (
+    <Container flow="row">
       <ColorInput id={`e${embed.id}.color`} color={embed.color} />
-    </InputGroup>
-  ))
+      <Button
+        onClick={() => {
+          spawnImagesEditorModal(manager, embed)
+        }}
+      >
+        Edit images
+      </Button>
+    </Container>
+  )
 }

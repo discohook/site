@@ -30,9 +30,17 @@ export function BodyEditor(props: BodyEditorProps) {
             embed.url = url
           }}
           label="URL"
-          validate={url =>
-            /^https?:\/\//.test(url) ? undefined : "Invalid URL"
-          }
+          validate={url => {
+            if (!/^https?:\/\//.test(url)) return "Invalid URL"
+
+            const embedIndex = embed.message.embeds.indexOf(embed)
+            if (embedIndex <= 0) return
+
+            const previousEmbed = embed.message.embeds[embedIndex - 1]
+            if (previousEmbed.url === url) {
+              return "Cannot be the same as previous embed"
+            }
+          }}
         />
       </InputGroup>
       <InputField

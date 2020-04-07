@@ -187,7 +187,7 @@ describe("MultiEditor", () => {
 
   it("can duplicate items", () => {
     const handleChange = jest.fn()
-    const handleDuplicate = jest.fn(() => 4)
+    const handleClone = jest.fn(() => 4)
 
     const { getByTestId } = render(
       <MultiEditor<number>
@@ -196,7 +196,7 @@ describe("MultiEditor", () => {
         name="Number"
         factory={() => 0}
         keyMapper={number => number}
-        duplicate={handleDuplicate}
+        clone={handleClone}
       >
         {item => item}
       </MultiEditor>,
@@ -212,8 +212,8 @@ describe("MultiEditor", () => {
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith([1, 2, 4, 3])
 
-    expect(handleDuplicate).toHaveBeenCalledTimes(1)
-    expect(handleDuplicate).toHaveBeenCalledWith(2)
+    expect(handleClone).toHaveBeenCalledTimes(1)
+    expect(handleClone).toHaveBeenCalledWith(2)
   })
 
   it("disables add when limit is reached", () => {
@@ -250,7 +250,7 @@ describe("MultiEditor", () => {
         limit={5}
         factory={() => 0}
         keyMapper={number => number}
-        duplicate={() => 0}
+        clone={() => 0}
       >
         {item => item}
       </MultiEditor>

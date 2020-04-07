@@ -2,8 +2,9 @@ import { observable } from "mobx"
 import { decodeMessage } from "../../core/helpers/decodeMessage"
 import { InitializableStore } from "../../state/classes/InitializableStore"
 import type { Stores } from "../../state/types/Stores"
-import { Message } from "../classes/Message"
+import type { Message } from "../classes/Message"
 import { INITIAL_MESSAGE_DATA } from "../constants"
+import { getMessageFromData } from "../helpers/getMessageFromData"
 
 export class MessageStore extends InitializableStore<Stores> {
   @observable message!: Message
@@ -19,6 +20,6 @@ export class MessageStore extends InitializableStore<Stores> {
     const messageData = decodeMessage(encodedBackup ?? "")
     if (!SERVER && messageData) console.log("Loaded with message:", messageData)
 
-    this.message = new Message(messageData ?? INITIAL_MESSAGE_DATA)
+    this.message = getMessageFromData(messageData ?? INITIAL_MESSAGE_DATA)
   }
 }

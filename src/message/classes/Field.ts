@@ -1,7 +1,6 @@
 import { computed, observable } from "mobx"
 import { getFieldWidth } from "../helpers/getFieldWidth"
 import { getUniqueId } from "../helpers/getUniqueId"
-import type { FieldData } from "../types/FieldData"
 import type { Embed } from "./Embed"
 
 export class Field {
@@ -9,16 +8,18 @@ export class Field {
 
   readonly embed: Embed
 
-  @observable name: string
-  @observable value: string
-  @observable inline: boolean
+  @observable name = ""
+  @observable value = ""
+  @observable inline = false
 
-  constructor(embed: Embed, field: FieldData = {}) {
+  constructor(embed: Embed, field?: Field) {
     this.embed = embed
 
-    this.name = field.name ?? ""
-    this.value = field.value ?? ""
-    this.inline = field.inline ?? false
+    if (field) {
+      this.name = field.name
+      this.value = field.value
+      this.inline = field.inline
+    }
   }
 
   @computed get width() {

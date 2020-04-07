@@ -5,7 +5,7 @@ import { Button } from "../../form/components/Button"
 import { InputContainer } from "../../form/components/InputContainer"
 import { InputLabel } from "../../form/components/InputLabel"
 import { MultilineTextInput } from "../../form/components/MultilineTextInput"
-import { Message } from "../../message/classes/Message"
+import { getMessageFromData } from "../../message/helpers/getMessageFromData"
 import { useAutorun } from "../../state/hooks/useAutorun"
 import { useStores } from "../../state/hooks/useStores"
 import { parseMessage } from "../helpers/parseMessage"
@@ -95,7 +95,7 @@ export function JsonInput() {
       <SubmitButton
         disabled={errors.length > 0}
         onClick={() => {
-          messageStore.message = new Message({
+          messageStore.message = getMessageFromData({
             ...parseMessage(json).message,
             files: messageStore.message.files,
           })

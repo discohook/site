@@ -4,7 +4,7 @@ import { observable, runInAction } from "mobx"
 import { downloadBlob } from "../../dom/helpers/downloadBlob"
 import { toCamelCase } from "../../json/helpers/toCamelCase"
 import { toSnakeCase } from "../../json/helpers/toSnakeCase"
-import { Message } from "../../message/classes/Message"
+import { getMessageFromData } from "../../message/helpers/getMessageFromData"
 import { InitializableStore } from "../../state/classes/InitializableStore"
 import type { Stores } from "../../state/types/Stores"
 import type { Backup } from "../types/Backup"
@@ -46,7 +46,7 @@ export class BackupStore extends InitializableStore<Stores> {
 
     if (!backup) return
 
-    messageStore.message = new Message(backup.message)
+    messageStore.message = getMessageFromData(backup.message)
     webhookStore.url = backup.webhookUrl ?? ""
   }
 

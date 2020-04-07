@@ -13,7 +13,8 @@ export type MultiEditorProps<T> = {
   limit?: number
   factory: () => T
   keyMapper: (item: T) => Key
-  duplicate?: (item: T) => T
+  clone?: (item: T) => T
+  canDuplicate?: (item: T) => boolean
 }
 
 export function MultiEditor<T>(props: MultiEditorProps<T>) {
@@ -25,7 +26,8 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
     limit = Infinity,
     factory,
     keyMapper: getKey,
-    duplicate,
+    clone,
+    canDuplicate = () => Boolean(clone),
   } = props
 
   const addItem = () => {
@@ -55,15 +57,15 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
   }
 
   const duplicateItem = (index: number) => {
-    if (!duplicate) return
+    if (!clone) return
     if (items.length >= limit) return
 
     if (onChange) {
       const newItems = [...items]
-      newItems.splice(index + 1, 0, duplicate(items[index]))
+      newItems.splice(index + 1, 0, clone(items[index]))
       onChange(newItems)
     } else {
-      items.splice(index + 1, 0, duplicate(items[index]))
+      items.splice(index + 1, 0, clone(items[index]))
     }
   }
 
@@ -80,7 +82,7 @@ export function MultiEditor<T>(props: MultiEditorProps<T>) {
           title={`${name} ${index + 1}`}
           actions={
             [
-              duplicate &&
+              canDuplicate(item) &&
                 items.length < limit && {
                   name: "Duplicate",
                   action: () => duplicateItem(index),

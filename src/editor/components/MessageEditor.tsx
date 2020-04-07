@@ -27,22 +27,28 @@ export function MessageEditor() {
           />
         )}
       </Observer>
-      <MultiEditor<Embed>
-        items={messageStore.message.embeds}
-        name="Embed"
-        limit={10}
-        factory={() => new Embed(messageStore.message)}
-        keyMapper={embed => embed.id}
-        duplicate={embed => {
-          const { message } = messageStore
-          const embedIndex = message.embeds.indexOf(embed)
-          const embedData = message.getMessageData().embeds?.[embedIndex]
+      <Observer>
+        {() => (
+          <MultiEditor<Embed>
+            items={messageStore.message.embeds}
+            name="Embed"
+            limit={messageStore.message.embedLimit}
+            factory={() => new Embed(messageStore.message)}
+            keyMapper={embed => embed.id}
+            clone={embed => new Embed(embed.message, embed)}
+            canDuplicate={embed => {
+              const realEmbeds = messageStore.message.embeds.reduce(
+                (total, embed) => total + embed.weight,
+                0,
+              )
 
-          return new Embed(message, embedData)
-        }}
-      >
-        {embed => <EmbedEditor embed={embed} />}
-      </MultiEditor>
+              return realEmbeds + embed.weight <= 10
+            }}
+          >
+            {embed => <EmbedEditor embed={embed} />}
+          </MultiEditor>
+        )}
+      </Observer>
       <Observer>
         {() => (
           <InputGroup>

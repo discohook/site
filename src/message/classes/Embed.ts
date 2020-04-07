@@ -1,7 +1,6 @@
 import { isValid } from "date-fns"
 import { computed, observable } from "mobx"
 import { Color } from "../../color/classes/Color"
-import { getEmbedGallery } from "../helpers/getEmbedGallery"
 import { getUniqueId } from "../helpers/getUniqueId"
 import type { EmbedData } from "../types/EmbedData"
 import { Field } from "./Field"
@@ -12,51 +11,42 @@ export class Embed {
 
   readonly message: Message
 
-  @observable title: string
-  @observable description: string
-  @observable url: string
-  @observable color: Color
-  @observable fields: Field[]
-  @observable author: string
-  @observable authorUrl: string
-  @observable authorIcon: string
-  @observable footer: string
-  @observable footerIcon: string
-  @observable timestamp: Date
-  @observable image: string
-  @observable thumbnail: string
+  @observable title = ""
+  @observable description = ""
+  @observable url = ""
+  @observable color = new Color()
+  @observable fields: Field[] = []
+  @observable author = ""
+  @observable authorUrl = ""
+  @observable authorIcon = ""
+  @observable footer = ""
+  @observable footerIcon = ""
+  @observable timestamp = new Date(Number.NaN)
+  @observable gallery: string[] = []
+  @observable thumbnail = ""
 
-  constructor(message: Message, embed: EmbedData = {}) {
+  constructor(message: Message, embed?: Embed) {
     this.message = message
 
-    this.title = embed.title ?? ""
-    this.description = embed.description ?? ""
-    this.url = embed.url ?? ""
-    this.color = new Color(embed.color ?? null)
-    this.fields = embed.fields?.map(field => new Field(this, field)) ?? []
-    this.author = embed.author?.name ?? ""
-    this.authorUrl = embed.author?.url ?? ""
-    this.authorIcon = embed.author?.iconUrl ?? ""
-    this.footer = embed.footer?.text ?? ""
-    this.footerIcon = embed.footer?.iconUrl ?? ""
-    this.timestamp = new Date(embed.timestamp ?? Number.NaN)
-    this.image = embed.image?.url ?? ""
-    this.thumbnail = embed.thumbnail?.url ?? ""
+    if (embed) {
+      this.title = embed.title
+      this.description = embed.description
+      this.url = embed.url
+      this.color.raw = embed.color.raw
+      this.fields = embed.fields.map(field => new Field(embed, field))
+      this.author = embed.author
+      this.authorUrl = embed.authorUrl
+      this.authorIcon = embed.authorIcon
+      this.footer = embed.footer
+      this.footerIcon = embed.footerIcon
+      this.timestamp = new Date(embed.timestamp)
+      this.gallery = [...embed.gallery]
+      this.thumbnail = embed.thumbnail
+    }
   }
 
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  @computed.struct get gallery() {
-    return getEmbedGallery(this)
-  }
-
-  @computed get shouldRender() {
-    if (!this.url) return true
-
-    const embedIndex = this.message.embeds.indexOf(this)
-    if (embedIndex < 1) return true
-
-    const lastEmbed = this.message.embeds[embedIndex - 1]
-    return lastEmbed.url !== this.url
+  @computed get weight() {
+    return this.gallery.length || 1
   }
 
   @computed get hasTitle() {
@@ -73,5 +63,57 @@ export class Embed {
 
   @computed get hasFooter() {
     return this.footer.trim().length > 0 || isValid(this.timestamp)
+  }
+
+  getEmbedsData() {
+    const fields =
+      this.fields.length > 0
+        ? this.fields.map(field => ({
+            name: field.name || undefined,
+            value: field.value || undefined,
+            inline: field.inline || undefined,
+          }))
+        : undefined
+
+    const author = this.author
+      ? {
+          name: this.author,
+          url: this.authorUrl || undefined,
+          iconUrl: this.authorIcon || undefined,
+        }
+      : undefined
+
+    const footer = this.footer
+      ? {
+          text: this.footer,
+          iconUrl: this.footerIcon || undefined,
+        }
+      : undefined
+
+    const embeds: EmbedData[] = [
+      {
+        title: this.title || undefined,
+        description: this.description || undefined,
+        url: this.url || undefined,
+        color: this.color.raw ?? undefined,
+        fields,
+        author,
+        footer,
+        timestamp: isValid(this.timestamp)
+          ? this.timestamp.toJSON()
+          : undefined,
+        image: this.gallery.length > 0 ? { url: this.gallery[0] } : undefined,
+        thumbnail: this.thumbnail ? { url: this.thumbnail } : undefined,
+      },
+    ]
+
+    for (const image of this.gallery.slice(1)) {
+      embeds.push({
+        url: this.url,
+        image: { url: image },
+      })
+    }
+
+    return embeds as readonly EmbedData[]
   }
 }

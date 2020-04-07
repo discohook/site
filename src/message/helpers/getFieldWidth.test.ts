@@ -7,7 +7,7 @@ describe("getFieldWidth", () => {
   it("returns full width for non inline fields", () => {
     const message = new Message()
     const embed = new Embed(message)
-    const first = new Field(embed, { inline: false })
+    const first = new Field(embed)
     embed.fields.push(first)
 
     expect(getFieldWidth(first)).toBe("1 / 13")
@@ -16,7 +16,8 @@ describe("getFieldWidth", () => {
   it("returns full width for single inline field", () => {
     const message = new Message()
     const embed = new Embed(message)
-    const first = new Field(embed, { inline: true })
+    const first = new Field(embed)
+    first.inline = true
     embed.fields.push(first)
 
     expect(getFieldWidth(first)).toBe("1 / 13")
@@ -25,8 +26,10 @@ describe("getFieldWidth", () => {
   it("returns half width for 2 adjacent fields", () => {
     const message = new Message()
     const embed = new Embed(message)
-    const first = new Field(embed, { inline: true })
-    const second = new Field(embed, { inline: true })
+    const first = new Field(embed)
+    first.inline = true
+    const second = new Field(embed)
+    second.inline = true
     embed.fields.push(first, second)
 
     expect(getFieldWidth(first)).toBe("1 / 7")
@@ -36,9 +39,12 @@ describe("getFieldWidth", () => {
   it("returns third width for 3 adjacent fields", () => {
     const message = new Message()
     const embed = new Embed(message)
-    const first = new Field(embed, { inline: true })
-    const second = new Field(embed, { inline: true })
-    const third = new Field(embed, { inline: true })
+    const first = new Field(embed)
+    first.inline = true
+    const second = new Field(embed)
+    second.inline = true
+    const third = new Field(embed)
+    third.inline = true
     embed.fields.push(first, second, third)
 
     expect(getFieldWidth(first)).toBe("1 / 5")
@@ -49,13 +55,20 @@ describe("getFieldWidth", () => {
   it("does not put more than 3 fields on one row", () => {
     const message = new Message()
     const embed = new Embed(message)
-    const first = new Field(embed, { inline: true })
-    const second = new Field(embed, { inline: true })
-    const third = new Field(embed, { inline: true })
-    const fourth = new Field(embed, { inline: true })
-    const fifth = new Field(embed, { inline: true })
-    const sixth = new Field(embed, { inline: true })
-    const seventh = new Field(embed, { inline: true })
+    const first = new Field(embed)
+    first.inline = true
+    const second = new Field(embed)
+    second.inline = true
+    const third = new Field(embed)
+    third.inline = true
+    const fourth = new Field(embed)
+    fourth.inline = true
+    const fifth = new Field(embed)
+    fifth.inline = true
+    const sixth = new Field(embed)
+    sixth.inline = true
+    const seventh = new Field(embed)
+    seventh.inline = true
     embed.fields.push(first, second, third, fourth, fifth, sixth, seventh)
 
     expect(getFieldWidth(first)).toBe("1 / 5")
@@ -70,11 +83,15 @@ describe("getFieldWidth", () => {
   it("does not put a non inline field on a row with an inline field", () => {
     const message = new Message()
     const embed = new Embed(message)
-    const first = new Field(embed, { inline: true })
-    const second = new Field(embed, { inline: true })
-    const third = new Field(embed, { inline: false })
-    const fourth = new Field(embed, { inline: true })
-    const fifth = new Field(embed, { inline: true })
+    const first = new Field(embed)
+    first.inline = true
+    const second = new Field(embed)
+    second.inline = true
+    const third = new Field(embed)
+    const fourth = new Field(embed)
+    fourth.inline = true
+    const fifth = new Field(embed)
+    fifth.inline = true
     embed.fields.push(first, second, third, fourth, fifth)
 
     expect(getFieldWidth(first)).toBe("1 / 7")

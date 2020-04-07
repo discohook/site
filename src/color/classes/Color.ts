@@ -10,7 +10,7 @@ export class Color {
   @observable saturation = 0
   @observable value = 0
 
-  constructor(color: DiscordColor) {
+  constructor(color: DiscordColor = null) {
     this.raw = color
   }
 
