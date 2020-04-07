@@ -94,6 +94,10 @@ export const GlobalStyle = createGlobalStyle`${css`
 
     &::-webkit-resizer {
       background-color: ${({ theme }) => theme.background.primary};
+      background-image: url("/assets/resizer-${({ theme }) =>
+        theme.appearance.color}.svg");
+      background-repeat: no-repeat;
+      background-position: bottom right;
     }
   }
 `}`
