@@ -76,7 +76,7 @@ router.get("/", async context => {
 })
 
 router.get("/discord", context => {
-  context.redirect("https://discord.gg/84HGwPZ")
+  context.redirect("https://discord.gg/dtPGCsm")
   context.status = 302
 })
 
