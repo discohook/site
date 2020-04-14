@@ -113,7 +113,7 @@ export function RichEmbed(props: RichEmbedProps) {
   const imageRef = useRef<HTMLImageElement>(null)
 
   useReaction(
-    () => `${embed.gallery.length} ${embed.gallery[0]}`,
+    () => embed.gallery.length === 1 && embed.gallery[0],
     () => {
       const { current: container } = containerRef
       if (!container) return
