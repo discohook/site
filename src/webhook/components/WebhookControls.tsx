@@ -1,13 +1,15 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useState } from "react"
 import styled from "styled-components"
+import { FlexContainer } from "../../editor/components/Container"
 import { Button } from "../../form/components/Button"
 import { InputField } from "../../form/components/InputField"
 import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
+import { useManager } from "../../state/hooks/useManager"
 import { useStores } from "../../state/hooks/useStores"
-import { WEBHOOK_URL_RE } from "../../webhook/constants"
-import { executeWebhook } from "../../webhook/helpers/executeWebhook"
-import { FlexContainer } from "./Container"
+import { spawnNetworkErrorModal } from "../actions/spawnNetworkErrorModal"
+import { WEBHOOK_URL_RE } from "../constants"
+import { executeWebhook } from "../helpers/executeWebhook"
 
 const DisabledReason = styled.div`
   margin: 0 8px 16px;
@@ -19,7 +21,10 @@ const DisabledReason = styled.div`
 `
 
 export function WebhookControls() {
+  const manager = useManager()
+
   const { messageStore, webhookStore } = useStores()
+
   const message = useObserver(() => messageStore.message)
 
   const [sending, setSending] = useState(false)
@@ -30,7 +35,8 @@ export function WebhookControls() {
     try {
       await executeWebhook(webhookStore.url, message.getMessageData())
     } catch (error) {
-      console.error("Error executing webhook:", error)
+      spawnNetworkErrorModal(manager)
+      console.error("Network error while executing webhook:", error)
     }
 
     setSending(false)

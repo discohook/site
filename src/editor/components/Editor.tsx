@@ -7,11 +7,11 @@ import { useTheme } from "../../appearance/hooks/useTheme"
 import { spawnBackupsModal } from "../../backup/actions/spawnBackupModal"
 import { JsonInput } from "../../json/components/JsonInput"
 import { useManager } from "../../state/hooks/useManager"
+import { WebhookControls } from "../../webhook/components/WebhookControls"
 import { spawnClearAllConfirmationModal } from "../actions/spawnClearAllConfirmationModal"
 import { Actions } from "./Actions"
 import { FlexContainer } from "./Container"
 import { MessageEditor } from "./MessageEditor"
-import { WebhookControls } from "./WebhookControls"
 
 const EditorContainer = styled.div`
   position: relative;
