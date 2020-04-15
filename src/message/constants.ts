@@ -41,12 +41,12 @@ export const INITIAL_MESSAGE_DATA: MessageData = {
       color: 16426522,
       fields: [
         {
-          name: "Image galleries",
+          name: "**Image galleries**",
           value:
             'With some special magic, you can have up to 4 images in a single embed. This feature is exclusive to webhooks, so don\'t expect to make it work on a traditional bot.\n\nAll you need is to give your embed a URL and click on the "Edit images" button inside any embed to get started.',
         },
         {
-          name: "Backups",
+          name: "**Backups**",
           value:
             "Not only can Discohook send messages, but Discohook can also save them for later use. For when your message wasn't quite right.\nFor convenience, backups also contain the webhook URL.\n\nBackups will not be sent to the Discohook, and will always be stored offline. If you clear your browsing data, your backups will be lost *forever*!\n\nIf you want to keep your backups somewhere else, you can export backups to get a saved copy. Do keep in mind that they also include the stored webhook URL, so don't share it with anyone you don't trust.",
         },
