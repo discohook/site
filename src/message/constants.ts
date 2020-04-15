@@ -1,194 +1,62 @@
-import { DISCOHOOK_EMOJI_ID } from "../markdown/constants/constants"
 import type { MessageData } from "./types/MessageData"
 
 export const MAX_FIELDS_PER_ROW = 3
 export const FIELD_GRID_SIZE = 12
 
 export const INITIAL_MESSAGE_DATA: MessageData = {
-  content: `
-Hey, this is Discohook, a message and embed builder for Discord webhooks. <:discohook:${DISCOHOOK_EMOJI_ID}>
-You can read more about how to use Discohook below, or click **Clear all** on the top to start out blank.
-Have questions? Discohook has a server at <https://discohook.org/discord>.
-`.trim(),
+  content:
+    "Welcome to <:discohook:694285995394203759>Discohook, a free message and embed builder for Discord!\nThere's additional info in the embeds below, or you can use the *Clear all* button in the editor to start making embeds.\nHave questions? Discohook has a support server at <https://discohook.org/discord>.",
   embeds: [
     {
-      title: "What is this?",
-      description: `
-Yeah uhh, this is __Discohook__.
-
-This can help you create and send messages for Discord's webhooks, which you can read more about on the [support article](https://support.discordapp.com/hc/en-us/articles/228383668).
-Webhooks got introduced to send messages to a Discord channel from third party applications, without going trough the hassle of setting up a bot.
-
-If you have the "Manage webhooks" permission for a channel, you can create one in the channel settings.
-After that, you can copy the link in here and start sending cool and shiny messages.
-
-This application can help you create unique messages that stand out!
-These messages can contain a lot more than just text, but also up to 10 embeds like this one! :sparkles:
-`.trim(),
-      color: 0x7289da,
+      title: "What's all this?",
+      description:
+        "Discohook is a free tool that allows you to build Discord messages and embeds for use in your server.\n\nDiscohook sends messages using *webhooks*, an API feature that allows third-party services to *blindly* send messages into text channels. While webhooks can send messages, they cannot respond to user interactions such as messages.",
+      color: 7506394,
     },
     {
-      title: "What's an embed?",
-      description: `
-Originally, embeds got introduced to give everyone reading the chat a hint on what a link will be about,
-however since then Discord has expanded the feature and started allowing bots and webhooks to take advantage of this feature, too.
-In fact, this entire message can be sent to any Discord channel, given you have permission to create a webhook.
-
-Embeds have many shiny features, like the title and description you're reading right now, but also up to 25 "fields", authors, footers, and even more!
-On the editor on your left you can set all properties that embeds can have with ease.
-
-Discord also has a few advanced text formatting features, which are explained below :point_down:
-`.trim(),
-      color: 0x43b581,
-    },
-    {
-      title: "Markdown",
-      description: `
-Discord has support for [__***markdown***__](https://support.discordapp.com/hc/en-us/articles/210298617), which lets you format text in unique ways.
-It's very simple:
-- surround your text with \`*\`s to make your text *italic*,
-- or use \`**\`s to make your text **bold**,
-- or \`__\`s to make your text __underlined__,
-- or \`~~\`s to make your text ~~striketrough~~,
-- or \`\` \` \`\`s to make your text \`code\`.
-
-Tou can combine multiple styles if you need to, just make sure the order matches up:
-\`__**text**__\` results in __**text**__, but \`__**text__**\` results in __**text__**, which is probably not what you want.
-`.trim(),
+      title: "Text formatting how-tos",
+      description:
+        "There are a few basic styles you can take advantage of:\n*Italics*, by surrounding text in asterisks (\\*);\n**Bold**, by surrounding text in double asterisks (\\*\\*);\n__Underline__, by using double underscores (\\_\\_);\n~~Strikethrough~~, by using double tildes (\\~\\~);\n`Code`, by using backticks (\\`).",
+      color: 4437377,
       fields: [
         {
-          name: "(Custom) Emoji",
-          value: `
-You can use (custom) emoji in Discohook too.
-
-To use regular emoji, you can use the emoji shortcode (like \`:closed_umbrella:\`) or copy paste a literal emoji (\`🌂\`)
-:closed_umbrella: :closed_umbrella: :closed_umbrella:
-
-You can also use a custom emoji by putting a backslash (\\\\) infront of the emoji when sending a message.
-Discord will send your message with the raw formatting required to use emoji in webhooks.
-`.trim(),
-        },
-        {
-          name: "Mentioning users, roles, and channels",
-          value: `
-You can also mention your members, or tag a channel by using this syntax:
-\`<@!user-id>\`, \`<@&role-id>\`, or \`<#channel-id>\`.
-As an example, to mention someone: \`<@!143419667677970434>\`. Don't include the user, role, or channel name.
-If done correctly, it should show <@!1>, <@&1>, or <#1>. Sadly it's impossible to get the channel name inside of Discohook right now, so make sure the ID is correct!
-
-You can get these IDs by going into Discord's appearance settings, and enabling developer mode.
-After you enabled that setting, you can right click on a user, role, or channel to copy it's ID!
-`.trim(),
-        },
-        {
-          name: "Code blocks",
-          value: `
-Discord also has support for code blocks. Just wrap your code in 3 backticks (\\\`\\\`\\\`).
-It also supports the same basic syntax highlighting options Discord has, by adding a language identifier after the first 3 backticks.
-\`\`\`
-Code goes here, supposedly
-\`\`\`
-`.trim(),
-        },
-        {
-          name: "Spoiler tags",
-          value: `
-Discord has support for ||[spoiler tags](https://support.discordapp.com/hc/en-us/articles/360022320632)|| to help you hide your secrets.
-Use them by surrounding your text with 2 vertical bars: \`||Your text||\`.
-`.trim(),
-        },
-        {
-          name: "Block quotes",
-          value: `
-> In a more recent update, discord also got support for block quotes like this one,
-> use them by inserting a "> " before your line like this: \`> Your text\`.
-`.trim(),
-        },
-        {
-          name: "Masked links",
-          value: `
-This feature is super exclusive, being restricted to bots and webhooks only.
-You can use them using Reddit-style syntax: \`[text](https://example.com/)\` turns into [text](https://example.com/)!
-`.trim(),
-        },
-      ],
-      color: 0xfaa61a,
-    },
-    {
-      author: {
-        name: "Author",
-        iconUrl: "https://discohook.org/assets/discord-avatar-red.png",
-      },
-      title: "Demo embed",
-      url: "https://discordapp.com/",
-      description: `
-This embed is only here to demonstrate how extensively embeds can be used.
-There's not a lot useful words here, only looking.
-`.trim(),
-      fields: [
-        {
-          name: "Embeds can have fields",
-          value: `
-Crazy right?
-You can even have inline fields, like the ones below! :arrow_down:
-`.trim(),
-        },
-        {
-          name: "Inline fields",
-          value: "If you have enough room,",
-          inline: true,
-        },
-        {
-          name: "are cool!",
-          value: "they appear next to each other",
-          inline: true,
-        },
-        {
-          name: "Embeds can even have images",
+          name: "**Advanced formatting**",
           value:
-            "But they're too bulky for this demo embed, so there isn't one.",
+            "Beyond these basic styles, you can also start a blockquote with a right-pointing angle bracket (>):\n> Hello.\nOr mark sensitive content behind a spoiler using two vertical bars (\\||):\n||This is hidden until clicked||",
+        },
+        {
+          name: "**Using server emoji**",
+          value:
+            "While default emoji work like you would expect them to, server emotes are a bit more complicated.\n\nTo send a server emoji with a webhook, you must use a specific formatting code to do so. To find it, send that emoji in your server, but put a backslash (\\\\) in front of it.\n\nFor example: sending `\\:my_emoji:` would send `<:my_emoji:12345>` into chat. If you copy the output into Discohook, the emoji will show up properly.",
+        },
+        {
+          name: "**Pinging users and roles, linking to channels**",
+          value:
+            "First of all, you must have enabled developer mode in Discord's settings. To do so, open Discord settings and navigate to Appearance. There will be a Developer Mode toggle under the Advanced section, which you must enable.\n\nHaving developer mode enabled, you can now right-click your target to copy their ID. Keep in mind that for users, you must right click their *avatar*, not the message.\n\nTo mention them, you have to use Discord's mention syntax:\n*`<@!user_id>`*, *`<@&role_id>`*, or *`<#channel_id>`*. If done correctly, they will appear as <@!143419667677970434> in the preview.",
         },
       ],
-      footer: {
-        text: "There's also footers, and timestamps",
-        iconUrl: "https://discohook.org/assets/discord-avatar-red.png",
-      },
-      timestamp: "2019-04-22T11:02:04.000Z",
-      color: 0xf04747,
-      thumbnail: {
-        url: "https://discohook.org/assets/discord-avatar-red.png",
-      },
     },
     {
-      title: "Backups!",
-      description: `
-Discohook also has a backups feature, to get started click on the **Backups** button on the top of the editor!
-
-Alongside that, the message in the URL bar is a permanent link to your message.
-You can use it to share a message or backup with someone else.
-`.trim(),
+      title: "Additional magic",
+      color: 16426522,
       fields: [
         {
-          name: ":warning: Warning",
-          value: `
-Backups are stored in the browser, and will always be stored there.
-This means that if you or your browser clears the data of this site, all backups will be lost forever.
-`.trim(),
+          name: "Image galleries",
+          value:
+            'With some special magic, you can have up to 4 images in a single embed. This feature is exclusive to webhooks, so don\'t expect to make it work on a traditional bot.\n\nAll you need is to give your embed a URL and click on the "Edit images" button inside any embed to get started.',
+        },
+        {
+          name: "Backups",
+          value:
+            "Not only can Discohook send messages, but Discohook can also save them for later use. For when your message wasn't quite right.\nFor convenience, backups also contain the webhook URL.\n\nBackups will not be sent to the Discohook, and will always be stored offline. If you clear your browsing data, your backups will be lost *forever*!\n\nIf you want to keep your backups somewhere else, you can export backups to get a saved copy. Do keep in mind that they also include the stored webhook URL, so don't share it with anyone you don't trust.",
         },
       ],
-      color: 0x747f8d,
     },
     {
-      title: "Disclaimer",
-      description: `
-Discohook makes use of some assets derived or extracted from Discord's application.
-This is to make visuals as accurate as possible, and not to infringe on their copyright.
-Discohook is not affiliated with Discord in any way, shape, or form.
-
-The source code of this project is [available on GitHub](https://github.com/jaylineko/discohook), under the MIT license.
-
-If you want to contact me, join the [Discohook server](https://discohook.org/discord) or send an email to <hello@discohook.org>.
-`.trim(),
+      title: "Legal things",
+      description:
+        'To make Discohook as helpful as it can be, we use some assets derived from Discord\'s application. Discohook has no affiliation with Discord in any way, shape, or form.\n\nThe source code to this app is [available on GitHub](https://github.com/jaylineko/discohook) under the MIT license.\nIf you need to contact me, you can join the [support server](https://discohook.org/discord), or send an email to "hello" at discohook.org.',
+      color: 15746887,
     },
   ],
 }
