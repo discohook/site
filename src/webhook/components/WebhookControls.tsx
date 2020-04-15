@@ -7,9 +7,8 @@ import { InputField } from "../../form/components/InputField"
 import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
 import { useManager } from "../../state/hooks/useManager"
 import { useStores } from "../../state/hooks/useStores"
-import { spawnNetworkErrorModal } from "../actions/spawnNetworkErrorModal"
+import { executeWebhook } from "../actions/executeWebhook"
 import { WEBHOOK_URL_RE } from "../constants"
-import { executeWebhook } from "../helpers/executeWebhook"
 
 const DisabledReason = styled.div`
   margin: 0 8px 16px;
@@ -31,14 +30,7 @@ export function WebhookControls() {
   const sendMessage = async () => {
     if (sending) return
     setSending(true)
-
-    try {
-      await executeWebhook(webhookStore.url, message.getMessageData())
-    } catch (error) {
-      spawnNetworkErrorModal(manager)
-      console.error("Network error while executing webhook:", error)
-    }
-
+    await executeWebhook(manager)
     setSending(false)
   }
 
