@@ -127,7 +127,7 @@ module.exports = {
       },
     }),
     new ScriptExtHtmlWebpackPlugin({
-      async: /\.js$/,
+      defer: /\.js$/,
       preload: {
         test: /\.js$/,
         chunks: "initial",
