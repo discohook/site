@@ -62,9 +62,9 @@ export function ImagesEditorModal(props: ImagesEditorModalProps) {
             <FlexContainer flow="row">
               {embed.gallery.length >= 1 && !embed.url && (
                 <GalleryNotice>
-                  Adding up to 4 images is possible when this embed has an URL.
-                  Beware that every image after first will use up an additional
-                  embed internally.
+                  Adding up to 4 images is possible when this embed has a title
+                  URL. Beware that every image after first will use up an
+                  additional embed internally.
                 </GalleryNotice>
               )}
               <Button

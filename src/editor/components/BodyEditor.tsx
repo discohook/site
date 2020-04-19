@@ -29,7 +29,7 @@ export function BodyEditor(props: BodyEditorProps) {
           onChange={url => {
             embed.url = url
           }}
-          label="URL"
+          label="Title URL"
           validate={url => {
             if (!/^https?:\/\//.test(url)) return "Invalid URL"
 
