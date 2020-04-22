@@ -3,7 +3,7 @@ module.exports = api => {
   api.cache.using(() => production)
 
   const presets = [
-    ["@babel/preset-env", { useBuiltIns: "usage", corejs: 3 }],
+    ["@babel/preset-env"],
     ["@babel/preset-react", { pragma: "React.createElement" }],
     ["@babel/preset-typescript"],
   ]
