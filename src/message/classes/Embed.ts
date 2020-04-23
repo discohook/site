@@ -36,7 +36,7 @@ export class Embed {
       this.description = embed.description
       this.url = embed.url
       this.color.raw = embed.color.raw
-      this.fields = embed.fields.map(field => new Field(embed, field))
+      this.fields = embed.fields.map(field => new Field(this, field))
       this.author = embed.author
       this.authorUrl = embed.authorUrl
       this.authorIcon = embed.authorIcon
