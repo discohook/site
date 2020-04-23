@@ -69,12 +69,13 @@ export function ErrorPage(props: ErrorPageProps) {
           <Markdown
             type="message-content"
             content={[
-              "An uncaught error was thrown. I don't know what happened, but it's likely not your fault.",
+              "An uncaught error was thrown. We don't know what happened, but it's likely not your fault.",
               [
-                "Please get in contact as soon as possible. You can talk to me on Discord (@jay.#1111),",
+                "Please get in contact as soon as possible. You can talk to me on the [support server](https://discohook.org/discord),",
+                "send an email to [hello@discohook.org](mailto:hello@discohook.org)",
                 "or create an issue on [the GitHub repository](https://github.com/jaylineko/discohook/issues/).",
               ].join(" "),
-              "More details are provided below:",
+              "Error details are provided below:",
             ].join("\n\n")}
           />
         </Message>
