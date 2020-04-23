@@ -1,4 +1,4 @@
 export type FooterData = {
   readonly text?: string
-  readonly iconUrl?: string
+  readonly icon_url?: string
 }

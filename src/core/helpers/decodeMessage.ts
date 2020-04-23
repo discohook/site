@@ -1,5 +1,6 @@
 import { base64Decode } from "../../base64/helpers/base64Decode"
 import { parseJson } from "../../json/helpers/parseJson"
+import { toSnakeCase } from "../../json/helpers/toSnakeCase"
 import type { MessageData } from "../../message/types/MessageData"
 
 export const decodeMessage = (base64: string) => {
@@ -19,7 +20,7 @@ export const decodeMessage = (base64: string) => {
     return
   }
 
-  const backup = parsedJson as { message: MessageData }
+  const backup = parsedJson as { message: object }
 
-  return backup.message
+  return toSnakeCase(backup.message) as MessageData
 }

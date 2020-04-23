@@ -3,7 +3,7 @@ export type WebhookData = {
   id: string
   name: string
   avatar: string | null
-  channelId: string
-  guildId: string
+  channel_id: string
+  guild_id: string
   token: string
 }

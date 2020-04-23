@@ -1,5 +1,4 @@
 import { action, computed, observable, reaction, runInAction } from "mobx"
-import { toCamelCase } from "../../json/helpers/toCamelCase"
 import { InitializableStore } from "../../state/classes/InitializableStore"
 import type { Stores } from "../../state/types/Stores"
 import {
@@ -44,14 +43,14 @@ export class WebhookStore extends InitializableStore<Stores> {
     const response = await fetch(this.url)
     if (response.status !== 200) return
 
-    const webhook = toCamelCase(await response.json()) as WebhookData
+    const webhook = (await response.json()) as WebhookData
 
     runInAction(() => {
       this.id = webhook.id
       this.name = webhook.name
       this.avatar = webhook.avatar
-      this.channelId = webhook.channelId
-      this.guildId = webhook.guildId
+      this.channelId = webhook.channel_id
+      this.guildId = webhook.guild_id
       this.token = webhook.token
     })
   }

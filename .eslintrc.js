@@ -22,21 +22,6 @@ module.exports = {
       "warn",
       { accessibility: "no-public" },
     ],
-    "@typescript-eslint/naming-convention": [
-      "warn",
-      { format: ["strictCamelCase", "StrictPascalCase"], selector: "default" },
-      {
-        format: ["strictCamelCase", "StrictPascalCase", "UPPER_CASE"],
-        selector: "variable",
-      },
-      {
-        format: ["strictCamelCase", "StrictPascalCase"],
-        leadingUnderscore: "allow",
-        selector: "parameter",
-      },
-      { format: ["StrictPascalCase"], selector: "typeLike" },
-      { filter: "toJS", format: ["camelCase"], selector: "memberLike" },
-    ],
     "@typescript-eslint/no-array-constructor": "warn",
     "@typescript-eslint/no-dupe-class-members": "warn",
     "@typescript-eslint/no-empty-interface": "warn",

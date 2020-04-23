@@ -32,7 +32,7 @@ export class Message {
       content: this.content || undefined,
       embeds: embeds.length > 0 ? embeds : undefined,
       username: this.username || undefined,
-      avatarUrl: this.avatar || undefined,
+      avatar_url: this.avatar || undefined,
       files: this.files.length > 0 ? Array.from(this.files) : undefined,
     }
   }

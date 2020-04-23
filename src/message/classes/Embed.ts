@@ -2,7 +2,10 @@ import { isValid } from "date-fns"
 import { computed, observable } from "mobx"
 import { Color } from "../../color/classes/Color"
 import { getUniqueId } from "../helpers/getUniqueId"
+import type { AuthorData } from "../types/AuthorData"
 import type { EmbedData } from "../types/EmbedData"
+import type { FieldData } from "../types/FieldData"
+import type { FooterData } from "../types/FooterData"
 import { Field } from "./Field"
 import type { Message } from "./Message"
 
@@ -66,7 +69,7 @@ export class Embed {
   }
 
   getEmbedsData() {
-    const fields =
+    const fields: FieldData[] | undefined =
       this.fields.length > 0
         ? this.fields.map(field => ({
             name: field.name || undefined,
@@ -75,18 +78,18 @@ export class Embed {
           }))
         : undefined
 
-    const author = this.author
+    const author: AuthorData | undefined = this.author
       ? {
           name: this.author,
           url: this.authorUrl || undefined,
-          iconUrl: this.authorIcon || undefined,
+          icon_url: this.authorIcon || undefined,
         }
       : undefined
 
-    const footer = this.footer
+    const footer: FooterData | undefined = this.footer
       ? {
           text: this.footer,
-          iconUrl: this.footerIcon || undefined,
+          icon_url: this.footerIcon || undefined,
         }
       : undefined
 

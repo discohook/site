@@ -2,7 +2,7 @@ import { parseMessage } from "./parseMessage"
 
 describe("parseMessage", () => {
   it("can parse messages", () => {
-    const message = parseMessage(`
+    const { message, errors } = parseMessage(`
       {
         "content": "Hello",
         "embeds": [
@@ -37,7 +37,7 @@ describe("parseMessage", () => {
       }
     `)
 
-    expect(message.message).toEqual({
+    expect(message).toEqual({
       content: "Hello",
       embeds: [
         {
@@ -45,7 +45,7 @@ describe("parseMessage", () => {
           description: "Test embed",
           author: {
             name: "Authors have the dreaded snake case icon_url",
-            iconUrl: "https://discohook.org/assets/icon-256.png",
+            icon_url: "https://discohook.org/assets/icon-256.png",
           },
           fields: [
             {
@@ -70,7 +70,7 @@ describe("parseMessage", () => {
       ],
     })
 
-    expect(message.errors).toHaveLength(0)
+    expect(errors).toHaveLength(0)
   })
 
   it("returns validation errors", () => {

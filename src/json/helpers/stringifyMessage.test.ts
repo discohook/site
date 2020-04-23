@@ -6,9 +6,7 @@ describe("stringifyMessage", () => {
       stringifyMessage({
         embeds: [
           {
-            author: {
-              iconUrl: "https://discohook.org/snake_case_test",
-            },
+            title: "Hello",
           },
         ],
       }),
@@ -17,9 +15,7 @@ describe("stringifyMessage", () => {
         "{\n" +
         '  "embeds": [\n' +
         "    {\n" +
-        '      "author": {\n' +
-        '        "icon_url": "https://discohook.org/snake_case_test"\n' +
-        "      }\n" +
+        '      "title": "Hello"\n' +
         "    }\n" +
         "  ]\n" +
         "}",

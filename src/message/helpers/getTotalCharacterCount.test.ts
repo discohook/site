@@ -136,7 +136,7 @@ describe("getTotalCharacterCount", () => {
   it("does not count message avatar", () => {
     expect(
       getTotalCharacterCount({
-        avatarUrl: "https://example.com/image.png",
+        avatar_url: "https://example.com/image.png",
       }),
     ).toEqual(0)
   })
@@ -144,7 +144,7 @@ describe("getTotalCharacterCount", () => {
   it("does not count author avatar", () => {
     expect(
       getTotalCharacterCount({
-        embeds: [{ author: { iconUrl: "https://example.com/image.png" } }],
+        embeds: [{ author: { icon_url: "https://example.com/image.png" } }],
       }),
     ).toEqual(0)
   })
@@ -168,7 +168,7 @@ describe("getTotalCharacterCount", () => {
   it("does not count footer icon", () => {
     expect(
       getTotalCharacterCount({
-        embeds: [{ footer: { iconUrl: "https://example.com/image.png" } }],
+        embeds: [{ footer: { icon_url: "https://example.com/image.png" } }],
       }),
     ).toEqual(0)
   })

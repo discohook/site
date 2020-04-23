@@ -26,10 +26,10 @@ export function BackupList() {
   const { backupStore } = useStores()
 
   return useObserver(() =>
-    backupStore.backupList.length > 0 ? (
+    backupStore.backups.length > 0 ? (
       <Container>
-        {backupStore.backupList.map(backup => (
-          <BackupItem key={backup.name} backup={backup} />
+        {backupStore.backups.map(backup => (
+          <BackupItem key={backup.id} backup={backup} />
         ))}
       </Container>
     ) : (

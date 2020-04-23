@@ -8,7 +8,7 @@ export const getMessageFromData = (messageData: MessageData) => {
 
   message.content = messageData.content ?? ""
   message.username = messageData.username ?? ""
-  message.avatar = messageData.avatarUrl ?? ""
+  message.avatar = messageData.avatar_url ?? ""
 
   for (const embedData of messageData.embeds ?? []) {
     let embed =
@@ -33,14 +33,14 @@ export const getMessageFromData = (messageData: MessageData) => {
     if (typeof embedData.color === "number") embed.color.raw = embedData.color
     if (embedData.author?.name) embed.author = embedData.author.name
     if (embedData.author?.url) embed.authorUrl = embedData.author.url
-    if (embedData.author?.iconUrl) embed.authorIcon = embedData.author.iconUrl
+    if (embedData.author?.icon_url) embed.authorIcon = embedData.author.icon_url
     if (embedData.footer?.text) embed.footer = embedData.footer.text
-    if (embedData.footer?.iconUrl) embed.footerIcon = embedData.footer.iconUrl
+    if (embedData.footer?.icon_url) embed.footerIcon = embedData.footer.icon_url
     embed.timestamp = new Date(embedData.timestamp ?? Number.NaN)
     if (embedData.image?.url) embed.gallery.push(embedData.image.url)
     if (embedData.thumbnail?.url) embed.thumbnail = embedData.thumbnail.url
 
-    for (const fieldData of embedData?.fields ?? []) {
+    for (const fieldData of embedData.fields ?? []) {
       const field = new Field(embed)
       embed.fields.push(field)
 

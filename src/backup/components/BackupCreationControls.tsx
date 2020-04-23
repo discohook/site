@@ -30,9 +30,7 @@ export function BackupCreationControls() {
           setBackupName("")
         }}
       >
-        {backupStore.backupList.some(
-          backup => backup.name === backupName.trim(),
-        )
+        {backupStore.backups.some(backup => backup.name === backupName.trim())
           ? "Update"
           : "Save"}
       </CreateBackupButton>

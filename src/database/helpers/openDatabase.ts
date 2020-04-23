@@ -4,7 +4,7 @@ import { showUpgradeBlockedMessage } from "./showUpgradeBlockedMessage"
 import { upgradeDatabase } from "./upgradeDatabase"
 
 export const openDatabase = async () => {
-  return openDB<Schema>("discohook", 2, {
+  return openDB<Schema>("discohook", 3, {
     upgrade: (database, oldVersion, newVersion, transaction) => {
       // Casting to unknown schema, because upgrades shouldn't assume how the
       // schema looks at that time
