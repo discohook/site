@@ -20,7 +20,7 @@ export const decodeMessage = (base64: string) => {
     return
   }
 
-  const backup = parsedJson as { message: object }
+  const backup = parsedJson as { message?: object }
 
-  return toSnakeCase(backup.message) as MessageData
+  return toSnakeCase(backup.message ?? {}) as MessageData
 }
