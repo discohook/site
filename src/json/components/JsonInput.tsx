@@ -63,18 +63,14 @@ export function JsonInput() {
 
   const [errors, setErrors] = useState<string[]>([])
   useEffect(() => {
-    const { message, errors: rawErrors } = parseMessage(json)
+    let { errors } = parseMessage(json)
 
-    const errors = rawErrors.filter(
+    errors = errors.filter(
       error =>
         error !== '$: Expected one of following keys: "content", "embeds"',
     )
 
     setErrors(errors)
-
-    if (errors.length > 0) {
-      console.log("JSON validation errors occurred:", errors, message)
-    }
   }, [json])
 
   return (
