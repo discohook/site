@@ -18,7 +18,6 @@ export class MessageStore extends InitializableStore<Stores> {
     const encodedBackup = parameters.get("message") ?? parameters.get("backup")
 
     const messageData = decodeMessage(encodedBackup ?? "")
-    if (!SERVER && messageData) console.log("Loaded with message:", messageData)
 
     this.message = getMessageFromData(messageData ?? INITIAL_MESSAGE_DATA)
   }

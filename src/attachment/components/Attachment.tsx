@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { getAttachmentType } from "../helpers/getAttachmentType"
 import { AudioAttachment } from "./AudioAttachment"
 import { DefaultAttachment } from "./DefaultAttachment"
@@ -13,9 +13,6 @@ export function Attachment(props: AttachmentProps) {
   const { name, type: mime } = file
 
   const type = getAttachmentType(name, mime)
-  useEffect(() => {
-    console.log(`Attachment type for ${name} (${mime || "undefined"}):`, type)
-  }, [mime, name, type])
 
   switch (type) {
     case "image": {
