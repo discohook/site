@@ -5,9 +5,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node --max-http-header-size=81920 ./lib/ssr/server.js",
     "build": "pnpm run build:client && pnpm run build:server",
-    "build:client": "cross-env NODE_ENV=production webpack",
+    "build:client": "cross-env NODE_ENV=production webpack --progress",
     "build:server": "cross-env NODE_ENV=production babel src -d lib -x '.js,.jsx,.ts,.tsx' -s",
-    "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--max-http-header-size=81920' webpack-dev-server",
+    "dev": "cross-env NODE_ENV=development NODE_OPTIONS='--max-http-header-size=81920' webpack-dev-server --progress",
     "test": "cross-env TZ=UTC NODE_ENV=test jest",
     "test:watch": "pnpm run test -- --watch",
     "test:cov": "pnpm run test -- --coverage",
