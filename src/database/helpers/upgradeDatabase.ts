@@ -31,18 +31,31 @@ export const upgradeDatabase = async (
     backupStore.createIndex("name", "name", {
       unique: true,
     })
+  }
 
-    if (oldVersion >= 1) {
-      let cursor = await transaction.objectStore("backups").openCursor()
+  if (oldVersion < 4 && oldVersion >= 1) {
+    const backupStore = transaction.objectStore("backup")
 
-      while (cursor) {
+    const existingBackups = new Set<IDBValidKey>()
+    let nameCursor = await backupStore.index("name").openKeyCursor()
+
+    while (nameCursor) {
+      existingBackups.add(nameCursor.key)
+      nameCursor = await nameCursor.continue()
+    }
+
+    let cursor = await transaction.objectStore("backups").openCursor()
+
+    while (cursor) {
+      if (!existingBackups.has(cursor.key)) {
         await backupStore.put({
           ...cursor.value,
+          name: cursor.key,
           message: toSnakeCase(cursor.value.message),
         })
-
-        cursor = await cursor.continue()
       }
+
+      cursor = await cursor.continue()
     }
   }
 }

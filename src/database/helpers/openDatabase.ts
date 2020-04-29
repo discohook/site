@@ -4,7 +4,7 @@ import { showUpgradeBlockedMessage } from "./showUpgradeBlockedMessage"
 import { upgradeDatabase } from "./upgradeDatabase"
 
 export const openDatabase = async () => {
-  return openDB<Schema>("discohook", 3, {
+  return openDB<Schema>("discohook", 4, {
     upgrade: (database, oldVersion, newVersion, transaction) => {
       // Casting to unknown schema, because upgrades shouldn't assume how the
       // schema looks at that time
@@ -14,6 +14,7 @@ export const openDatabase = async () => {
         oldVersion,
       )
         .then(() => {
+          localStorage.setItem("database-upgraded-version", "4")
           document.querySelector("#db-upgrade-blocked")?.remove()
         })
         .catch(error => {
