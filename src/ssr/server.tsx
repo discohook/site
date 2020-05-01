@@ -82,7 +82,7 @@ router.get("/discord", context => {
 
 app.use(router.middleware())
 
-const port = Number(process.env.PORT) || 5000
+const port = Number(process.env.APP_PORT ?? process.env.PORT) || 5000
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
 })

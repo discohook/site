@@ -1,0 +1,6 @@
+.git/
+node_modules/
+lib/
+dist/
+coverage/
+pnpm-debug.log
