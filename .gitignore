@@ -3,3 +3,4 @@ lib
 dist
 coverage
 pnpm-debug.log
+docker-compose.override.yml
