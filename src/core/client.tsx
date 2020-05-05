@@ -1,3 +1,4 @@
+import "mobx-react-lite/batchingForReactDom"
 import React from "react"
 import { hydrate, render } from "react-dom"
 import { StoreManager } from "../state/classes/StoreManager"
