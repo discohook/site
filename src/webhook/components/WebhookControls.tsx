@@ -57,7 +57,7 @@ export function WebhookControls() {
               webhookStore.url = url
             }}
             label="Webhook URL"
-            placeholder="https://discordapp.com/api/webhooks/..."
+            placeholder="https://discord.com/api/webhooks/..."
           />
           <Button disabled={isDisabled} onClick={sendMessage}>
             Send
