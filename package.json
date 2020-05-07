@@ -25,7 +25,7 @@
     "url": "git+https://github.com/jaylineko/discohook.git"
   },
   "author": "Jay <jaylineko@gmail.com>",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/jaylineko/discohook/issues"
   },
