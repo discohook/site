@@ -20,19 +20,19 @@ export const INITIAL_MESSAGE_DATA: MessageData = {
       color: 4437377,
       fields: [
         {
-          name: "**Advanced formatting**",
+          name: "Advanced formatting",
           value:
             "Beyond these basic styles, you can also start a blockquote with a right-pointing angle bracket (>):\n> Hello.\nOr mark sensitive content behind a spoiler using two vertical bars (\\||):\n||This is hidden until clicked||",
         },
         {
-          name: "**Using server emoji**",
+          name: "Using server emoji",
           value:
             "While default emoji work like you would expect them to, server emotes are a bit more complicated.\n\nTo send a server emoji with a webhook, you must use a specific formatting code to do so. To find it, send that emoji in your server, but put a backslash (\\\\) in front of it.\n\nFor example: sending `\\:my_emoji:` would send `<:my_emoji:12345>` into chat. If you copy the output into Discohook, the emoji will show up properly.",
         },
         {
-          name: "**Pinging users and roles, linking to channels**",
+          name: "Pinging users and roles, linking to channels",
           value:
-            "First of all, you must have enabled developer mode in Discord's settings. To do so, open Discord settings and navigate to Appearance. There will be a Developer Mode toggle under the Advanced section, which you must enable.\n\nHaving developer mode enabled, you can now right-click your target to copy their ID. Keep in mind that for users, you must right click their *avatar*, not the message.\n\nTo mention them, you have to use Discord's mention syntax:\n*`<@!user_id>`*, *`<@&role_id>`*, or *`<#channel_id>`*. If done correctly, they will appear as <@!143419667677970434> in the preview.",
+            "First of all, you must have enabled developer mode in Discord's settings. To do so, open Discord settings and navigate to Appearance. There will be a Developer Mode toggle under the Advanced section, which you must enable.\n\nHaving developer mode enabled, you can now right-click your target to copy their ID. Keep in mind that for users, you must right click their *avatar*, not the message.\n\nTo mention them, you have to use Discord's mention syntax:\n`<@!user_id>`, `<@&role_id>`, or `<#channel_id>`. If done correctly, they will appear as <@!143419667677970434> in the preview.",
         },
       ],
     },
@@ -41,12 +41,12 @@ export const INITIAL_MESSAGE_DATA: MessageData = {
       color: 16426522,
       fields: [
         {
-          name: "**Image galleries**",
+          name: "Image galleries",
           value:
             'With some special magic, you can have up to 4 images in a single embed. This feature is exclusive to webhooks, so don\'t expect to make it work on a traditional bot.\n\nAll you need is to give your embed a URL and click on the "Edit images" button inside any embed to get started.',
         },
         {
-          name: "**Backups**",
+          name: "Backups",
           value:
             "Not only can Discohook send messages, but Discohook can also save them for later use. For when your message wasn't quite right.\nFor convenience, backups also contain the webhook URL.\n\nBackups will not be sent to the Discohook, and will always be stored offline. If you clear your browsing data, your backups will be lost *forever*!\n\nIf you want to keep your backups somewhere else, you can export backups to get a saved copy. Do keep in mind that they also include the stored webhook URL, so don't share it with anyone you don't trust.",
         },
