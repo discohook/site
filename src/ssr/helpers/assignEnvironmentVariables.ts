@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+export const assignEnvironmentVariables = () => {
+  const ENV = process.env.NODE_ENV ?? "production"
 
-export const assignEnvironmentVariables = () =>
-  Object.assign(global, {
-    ENV: process.env.NODE_ENV ?? "production",
-    PROD: process.env.NODE_ENV === "production",
-    DEV: process.env.NODE_ENV === "development",
-    TEST: process.env.NODE_ENV === "test",
+  return Object.assign(global, {
+    ENV,
+    PROD: ENV === "production",
+    DEV: ENV === "development",
+    TEST: ENV === "test",
     SERVER: true,
   })
+}
