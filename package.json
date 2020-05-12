@@ -22,14 +22,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jaylineko/discohook.git"
+    "url": "git+https://github.com/discohook/discohook.git"
   },
-  "author": "Jay <jaylineko@gmail.com>",
+  "author": "Discohook authors <hello@discohook.org>",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/jaylineko/discohook/issues"
+    "url": "https://github.com/discohook/discohook/issues"
   },
-  "homepage": "https://github.com/jaylineko/discohook#readme",
+  "homepage": "https://discohook.org/",
   "dependencies": {
     "@babel/runtime": "^7.9.2",
     "@koa/router": "^8.0.8",

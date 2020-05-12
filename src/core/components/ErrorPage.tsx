@@ -73,7 +73,7 @@ export function ErrorPage(props: ErrorPageProps) {
               [
                 "Please get in contact as soon as possible. You can talk to me on the [support server](https://discohook.org/discord),",
                 "send an email to [hello@discohook.org](mailto:hello@discohook.org)",
-                "or create an issue on [the GitHub repository](https://github.com/jaylineko/discohook/issues/).",
+                "or create an issue on [the GitHub repository](https://github.com/discohook/discohook/issues/).",
               ].join(" "),
               "Error details are provided below:",
             ].join("\n\n")}
