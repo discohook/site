@@ -80,9 +80,9 @@ export function ErrorPage(props: ErrorPageProps) {
           />
         </Message>
         <ErrorDetails>
-          {error.toString()}
+          {String(error)}
           {"\n"}
-          {error.stack?.replace(error.toString(), "").replace(/^\n|\n$/g, "")}
+          {error.stack?.replace(String(error), "").replace(/^\n|\n$/g, "")}
           {info.componentStack}
         </ErrorDetails>
       </Container>
