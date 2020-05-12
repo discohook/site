@@ -259,7 +259,7 @@ module.exports = {
     "react/style-prop-object": "warn",
     "require-atomic-updates": "warn",
     "require-yield": "warn",
-    "spaced-comment": "warn",
+    "spaced-comment": ["warn", "always", { markers: ["/"] }],
     "symbol-description": "warn",
     "unicorn/better-regex": "warn",
     "unicorn/catch-error-name": "warn",

@@ -17,5 +17,5 @@
     "experimentalDecorators": true,
     "importsNotUsedAsValues": "error"
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./scripts/**/*"]
 }
