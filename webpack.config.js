@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable import/newline-after-import */

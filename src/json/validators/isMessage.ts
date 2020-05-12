@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import type { Validator } from "../types/Validator"
 import { contains } from "./contains"
 import { first } from "./first"

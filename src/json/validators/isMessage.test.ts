@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import { INITIAL_MESSAGE_DATA } from "../../message/constants"
 import { isMessage } from "./isMessage"
 

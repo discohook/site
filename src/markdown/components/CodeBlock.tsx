@@ -27,7 +27,6 @@ export function CodeBlock(props: CodeBlockProps) {
     return (
       <CodeBlockContainer
         dangerouslySetInnerHTML={{
-          // eslint-disable-next-line @typescript-eslint/naming-convention
           __html: hljs.highlight(safeLanguage, content).value,
         }}
       />
@@ -41,7 +40,6 @@ export function CodeBlock(props: CodeBlockProps) {
   return (
     <CodeBlockContainer
       dangerouslySetInnerHTML={{
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         __html: html,
       }}
     />

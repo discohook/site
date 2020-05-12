@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 module.exports = {
   moduleFileExtensions: ["js", "jsx", "ts", "tsx", "json"],
   transform: {

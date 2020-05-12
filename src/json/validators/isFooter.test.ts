@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import { isFooter } from "./isFooter"
 
 describe("isFooter", () => {
