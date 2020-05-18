@@ -12,8 +12,7 @@ jobs:
           node-version: "12.x"
       - run: curl -L https://unpkg.com/@pnpm/self-installer | node
       - run: pnpm install
-      - run: pnpm run build:client
-      - run: pnpm run build:server
+      - run: pnpm run build
   test:
     runs-on: ubuntu-latest
     steps:
