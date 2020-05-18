@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts-alpine AS builder
 
 RUN npm i -g pnpm
 
@@ -6,18 +6,29 @@ WORKDIR /app
 RUN chown -R node:node /app
 USER node
 
-COPY package.json pnpm-lock.yaml /app/
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 
-COPY . /app/
+COPY . .
+
 RUN pnpm run build
 
 RUN pnpm prune --prod
 
-ENV APP_PORT 8000
+FROM node:lts-alpine
+
+WORKDIR /app
+RUN chown -R node:node /app
+USER node
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/public ./public
+
 ENV NODE_ENV production
 ENV NODE_OPTIONS --max-http-header-size=81920
 
-EXPOSE 8000
+EXPOSE 3000
 
-CMD [ "node", "./lib/ssr/server.js" ]
+CMD [ "node_modules/.bin/next", "start" ]

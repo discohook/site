@@ -3,16 +3,7 @@ module.exports = {
   transform: {
     "\\.[jt]sx?$": "babel-jest",
   },
-  rootDir: "src",
-  globals: {
-    ENV: "test",
-    PROD: true,
-    DEV: false,
-    TEST: true,
-    SERVER: true,
-  },
   setupFilesAfterEnv: ["<rootDir>/testing/setup.ts"],
-  collectCoverageFrom: ["**/*"],
+  collectCoverageFrom: ["**/*.ts", "**/*.tsx"],
   coveragePathIgnorePatterns: ["/node_modules/", ".d.ts$"],
-  coverageDirectory: "../coverage",
 }

@@ -2,7 +2,7 @@
 
 module.exports = {
   extends: [],
-  ignorePatterns: ["node_modules", "lib", "dist", "coverage", "!.eslintrc.js"],
+  ignorePatterns: ["node_modules", "build", "coverage", "!.eslintrc.js"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     createDefaultProgram: true,
@@ -258,6 +258,7 @@ module.exports = {
     "unicorn/no-hex-escape": "warn",
     "unicorn/no-new-buffer": "error",
     "unicorn/no-unused-properties": "warn",
+    // "unicorn/no-useless-undefined": "warn",
     "unicorn/prefer-add-event-listener": "error",
     "unicorn/prefer-dataset": "error",
     "unicorn/prefer-event-key": "error",
@@ -266,6 +267,7 @@ module.exports = {
     "unicorn/prefer-node-append": "warn",
     "unicorn/prefer-node-remove": "warn",
     "unicorn/prefer-number-properties": "warn",
+    // "unicorn/prefer-optional-catch-binding": "warn",
     "unicorn/prefer-query-selector": "warn",
     "unicorn/prefer-reflect-apply": "warn",
     // "unicorn/prefer-replace-all": "warn",
@@ -278,7 +280,7 @@ module.exports = {
   },
   settings: {
     "import/extensions": [".ts", ".tsx", ".d.ts", ".js", ".jsx"],
-    "import/external-module-folders": ["node_modules", "node_modules/@types"],
+    "import/external-module-folders": ["node_modules"],
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx", ".d.ts"],
     },
