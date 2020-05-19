@@ -1,28 +1,35 @@
 import { easeCubicInOut } from "d3-ease"
 import { useObserver } from "mobx-react-lite"
+import { useRouter } from "next/router"
 import { cover, rgb } from "polished"
 import React from "react"
 import { animated, useTransition } from "react-spring"
-import styled, { css } from "styled-components"
+import styled, { css, useTheme } from "styled-components"
 import { Z_INDEX_MODALS } from "../constants"
 import { useWindowEvent } from "../dom/useWindowEvent"
 import { useRequiredContext } from "../state/useRequiredContext"
 import { ModalProvider } from "./ModalContext"
 import { ModalManagerContext } from "./ModalManagerContext"
 
-const Container = styled.div<{ active?: boolean }>`
+const Container = styled.div<{ side?: "left" | "right" }>`
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 
-  width: 50%;
+  width: 100%;
 
-  ${({ theme }) =>
-    theme.appearance.mobile &&
+  ${({ side }) =>
+    side &&
     css`
-      width: 100%;
+      width: 50%;
+    `}
+
+  ${({ side }) =>
+    side === "right" &&
+    css`
+      left: 50%;
     `}
 
   pointer-events: none;
@@ -98,8 +105,14 @@ export function ModalOverlay() {
     },
   })
 
+  const router = useRouter()
+  const { appearance } = useTheme()
+
+  let side: undefined | "left" | "right" = "left"
+  if (appearance.mobile && router.route === "/") side = undefined
+
   return (
-    <Container>
+    <Container side={side}>
       {transitions.map(transition => (
         <ModalProvider key={transition.key} value={transition.item}>
           <Item>
