@@ -3,6 +3,7 @@ import dynamic from "next/dynamic"
 import { em, rem, size } from "polished"
 import React, { Key, useContext } from "react"
 import styled, { css, useTheme } from "styled-components"
+import { SCREEN_SMALL } from "../../../common/breakpoints"
 import { DARK_THEME } from "../../../common/style/themes/darkTheme"
 import { EditorManagerContext } from "../../editor/EditorManagerContext"
 
@@ -65,6 +66,10 @@ const Avatar = styled.img`
 
       margin: 0 16px;
     `}
+
+  ${SCREEN_SMALL} {
+    display: none;
+  }
 `
 
 const Username = styled.h1`
@@ -142,7 +147,7 @@ export function MessageHeader(props: MessageHeaderProps) {
 
     return (
       <Container>
-        {theme.appearance.display === "cozy" && !theme.appearance.mobile && (
+        {theme.appearance.display === "cozy" && (
           <Avatar src={avatarUrl} alt="User avatar" />
         )}
         {info}

@@ -2,6 +2,7 @@ import { Observer, useObserver } from "mobx-react-lite"
 import { rem } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
+import { SCREEN_SMALL } from "../../common/breakpoints"
 import { Markdown } from "../markdown/Markdown"
 import { MarkdownContainer } from "../markdown/styles/MarkdownContainer"
 import type { Message } from "./Message"
@@ -27,11 +28,9 @@ const Container = styled.div`
           padding-left: 72px;
         `};
 
-      ${({ theme }) =>
-        theme.appearance.mobile &&
-        css`
-          padding-left: 16px;
-        `}
+      ${SCREEN_SMALL} {
+        padding-left: 16px;
+      }
     `};
 
   ${({ theme }) =>

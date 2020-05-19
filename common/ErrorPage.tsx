@@ -2,8 +2,9 @@ import Head from "next/head"
 import Link from "next/link"
 import Router from "next/router"
 import React, { ErrorInfo } from "react"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import { CodeBlockContainer } from "../modules/markdown/styles/CodeBlockContainer"
+import { SCREEN_SMALL } from "./breakpoints"
 import { Button } from "./input/Button"
 
 const Container = styled.div`
@@ -13,11 +14,9 @@ const Container = styled.div`
 
   padding: 64px 32px 0;
 
-  ${({ theme }) =>
-    theme.appearance.mobile &&
-    css`
-      padding: 32px 16px;
-    `};
+  ${SCREEN_SMALL} {
+    padding: 32px 16px;
+  }
 `
 
 const Header = styled.h1`
