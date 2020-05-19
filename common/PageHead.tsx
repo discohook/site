@@ -92,7 +92,6 @@ export function PageHead(props: PageHeadProps) {
         content="Discohook"
       />
       <meta key="theme-color" name="theme-color" content="#7289da" />
-      <link key="manifest" rel="manifest" href="/static/manifest.webmanifest" />
       <meta key="color-scheme" name="color-scheme" content="dark light" />
     </Head>
   )
