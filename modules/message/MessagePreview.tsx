@@ -44,7 +44,6 @@ const Container = styled.div`
 
       & > ${MarkdownContainer} {
         display: inline;
-        display: contents;
       }
     `}
 `
