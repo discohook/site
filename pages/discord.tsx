@@ -16,7 +16,7 @@ const DISCORD_INVITE = "https://discord.gg/dtPGCsm"
 export default function Discord() {
   useEffect(() => {
     if (typeof window !== "undefined") {
-      window.location.href = DISCORD_INVITE
+      window.location.replace(DISCORD_INVITE)
     }
   })
 
