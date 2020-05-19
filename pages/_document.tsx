@@ -1,6 +1,12 @@
 import "highlight.js"
 import { useStaticRendering } from "mobx-react-lite"
-import Document, { DocumentContext } from "next/document"
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document"
 import React from "react"
 import { ServerStyleSheet } from "styled-components"
 
@@ -32,5 +38,18 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal()
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  render() {
+    return (
+      <Html lang="en">
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
   }
 }
