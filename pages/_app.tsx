@@ -1,3 +1,4 @@
+import { Observer } from "mobx-react-lite"
 import "mobx-react-lite/batchingForReactDom"
 import App, { AppProps } from "next/app"
 import React from "react"
@@ -46,20 +47,24 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props
 
     return (
-      <ThemeProvider theme={this.appearanceManager.theme}>
-        <GlobalStyle />
-        <ErrorBoundary>
-          <AppearanceManagerProvider value={this.appearanceManager}>
-            <ModalManagerProvider value={this.modalManager}>
-              <PopoverManagerProvider value={this.popoverManager}>
-                <Component {...pageProps} />
-                <ModalOverlay />
-                <PopoverOverlay />
-              </PopoverManagerProvider>
-            </ModalManagerProvider>
-          </AppearanceManagerProvider>
-        </ErrorBoundary>
-      </ThemeProvider>
+      <Observer>
+        {() => (
+          <ThemeProvider theme={this.appearanceManager.theme}>
+            <GlobalStyle />
+            <ErrorBoundary>
+              <AppearanceManagerProvider value={this.appearanceManager}>
+                <ModalManagerProvider value={this.modalManager}>
+                  <PopoverManagerProvider value={this.popoverManager}>
+                    <Component {...pageProps} />
+                    <ModalOverlay />
+                    <PopoverOverlay />
+                  </PopoverManagerProvider>
+                </ModalManagerProvider>
+              </AppearanceManagerProvider>
+            </ErrorBoundary>
+          </ThemeProvider>
+        )}
+      </Observer>
     )
   }
 }
