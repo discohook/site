@@ -3,7 +3,7 @@ import type { GetServerSidePropsContext } from "next"
 import Head from "next/head"
 import Router from "next/router"
 import React, { useEffect, useState } from "react"
-import styled, { css } from "styled-components"
+import styled, { css, ThemeProvider } from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
 import { PageHead } from "../common/PageHead"
 import { useAutorun } from "../common/state/useAutorun"
@@ -117,45 +117,52 @@ export default function Main(props: MainProps) {
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
   return useObserver(() => (
-    <EditorManagerProvider value={editorManager}>
-      <PageHead
-        title="Discohook | A message and embed generator for Discord webhooks"
-        description="An easy-to-use tool for building and sending Discord messages and embeds using webhooks."
-      />
-      <Head>
-        <meta key="referrer" name="referrer" content="strict-origin" />
-      </Head>
-      <Container>
-        {mobile && (
-          <TabSwitcher>
-            <Tab
-              active={activeTab === "editor"}
-              onClick={() => setActiveTab("editor")}
-            >
-              Editor
-            </Tab>
-            <Tab
-              active={activeTab === "preview"}
-              onClick={() => setActiveTab("preview")}
-            >
-              Preview
-            </Tab>
-          </TabSwitcher>
-        )}
-        <View>
-          {(!mobile || activeTab === "preview") && (
-            <ScrollContainer>
-              <Preview message={editorManager.message} />
-            </ScrollContainer>
+    <ThemeProvider
+      theme={theme => ({
+        ...theme,
+        appearance: { ...theme.appearance, mobile },
+      })}
+    >
+      <EditorManagerProvider value={editorManager}>
+        <PageHead
+          title="Discohook | A message and embed generator for Discord webhooks"
+          description="An easy-to-use tool for building and sending Discord messages and embeds using webhooks."
+        />
+        <Head>
+          <meta key="referrer" name="referrer" content="strict-origin" />
+        </Head>
+        <Container>
+          {mobile && (
+            <TabSwitcher>
+              <Tab
+                active={activeTab === "editor"}
+                onClick={() => setActiveTab("editor")}
+              >
+                Editor
+              </Tab>
+              <Tab
+                active={activeTab === "preview"}
+                onClick={() => setActiveTab("preview")}
+              >
+                Preview
+              </Tab>
+            </TabSwitcher>
           )}
-          {(!mobile || activeTab === "editor") && (
-            <ScrollContainer>
-              <Editor />
-            </ScrollContainer>
-          )}
-        </View>
-      </Container>
-    </EditorManagerProvider>
+          <View>
+            {(!mobile || activeTab === "preview") && (
+              <ScrollContainer>
+                <Preview message={editorManager.message} />
+              </ScrollContainer>
+            )}
+            {(!mobile || activeTab === "editor") && (
+              <ScrollContainer>
+                <Editor />
+              </ScrollContainer>
+            )}
+          </View>
+        </Container>
+      </EditorManagerProvider>
+    </ThemeProvider>
   ))
 }
 
