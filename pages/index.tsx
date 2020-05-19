@@ -2,12 +2,14 @@ import { useObserver } from "mobx-react-lite"
 import type { GetServerSidePropsContext } from "next"
 import Head from "next/head"
 import Router from "next/router"
-import React, { useState } from "react"
-import styled, { css, useTheme } from "styled-components"
+import React, { useEffect, useState } from "react"
+import styled, { css } from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
 import { PageHead } from "../common/PageHead"
 import { useAutorun } from "../common/state/useAutorun"
 import { useLazyValue } from "../common/state/useLazyValue"
+import { useRequiredContext } from "../common/state/useRequiredContext"
+import { AppearanceManagerContext } from "../common/style/AppearanceManagerContext"
 import { Editor } from "../modules/editor/Editor"
 import { EditorManager } from "../modules/editor/EditorManager"
 import { EditorManagerProvider } from "../modules/editor/EditorManagerContext"
@@ -87,13 +89,11 @@ const Preview = styled(MessagePreview)`
 
 export type MainProps = {
   message: MessageData
+  mobile: boolean
 }
 
 export default function Main(props: MainProps) {
-  const { message } = props
-
-  const theme = useTheme()
-  const { mobile } = theme.appearance
+  const { message, mobile } = props
 
   const editorManager = useLazyValue(() => new EditorManager(message))
 
@@ -107,6 +107,11 @@ export default function Main(props: MainProps) {
         shallow: true,
       }).catch(() => {})
     }
+  })
+
+  const appearanceManager = useRequiredContext(AppearanceManagerContext)
+  useEffect(() => {
+    appearanceManager.mobile = mobile
   })
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
@@ -160,9 +165,12 @@ export const getServerSideProps = (
   const message =
     decodeMessage(String(context.query.message ?? "")) ?? INITIAL_MESSAGE_DATA
 
+  const mobile = /mobile/i.test(context.req.headers["user-agent"] ?? "")
+
   return {
     props: {
       message,
+      mobile,
     },
   }
 }
