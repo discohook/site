@@ -1,4 +1,4 @@
-import { easeCubicInOut } from "d3-ease"
+import { easeQuadInOut } from "d3-ease"
 import { useObserver } from "mobx-react-lite"
 import { useRouter } from "next/router"
 import { cover, rgb } from "polished"
@@ -82,15 +82,15 @@ export function ModalOverlay() {
 
   const transitions = useTransition(modals, modal => modal.id, {
     config: {
-      duration: 200,
-      easing: easeCubicInOut,
+      duration: 150,
+      easing: easeQuadInOut,
     },
     contentOpacity: 0,
-    contentTransform: "scale(0.75)",
+    contentTransform: "scale(0.9)",
     filterOpacity: 0,
     from: {
       contentOpacity: 0,
-      contentTransform: "scale(0.75)",
+      contentTransform: "scale(0.9)",
       filterOpacity: 0,
     },
     enter: {
@@ -100,7 +100,7 @@ export function ModalOverlay() {
     },
     leave: {
       contentOpacity: 0,
-      contentTransform: "scale(0.75)",
+      contentTransform: "scale(0.9)",
       filterOpacity: 0,
     },
   })
