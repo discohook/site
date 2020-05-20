@@ -3,10 +3,10 @@ import { useObserver } from "mobx-react-lite"
 import { useRouter } from "next/router"
 import { cover, rgb } from "polished"
 import React from "react"
+import { FocusOn } from "react-focus-on"
 import { animated, useTransition } from "react-spring"
 import styled, { css, useTheme } from "styled-components"
 import { Z_INDEX_MODALS } from "../constants"
-import { useWindowEvent } from "../dom/useWindowEvent"
 import { useRequiredContext } from "../state/useRequiredContext"
 import { ModalProvider } from "./ModalContext"
 import { ModalManagerContext } from "./ModalManagerContext"
@@ -39,6 +39,15 @@ const Item = styled.div`
   ${cover()};
 
   z-index: ${Z_INDEX_MODALS};
+
+  & > .focus-on {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 const Filter = styled(animated.div)`
@@ -68,15 +77,6 @@ const Content = styled(animated.div)`
 
 export function ModalOverlay() {
   const manager = useRequiredContext(ModalManagerContext)
-
-  useWindowEvent("keydown", event => {
-    if (event.key === "Escape") {
-      if (manager.modals.length === 0) return
-
-      const lastModal = manager.modals[manager.modals.length - 1]
-      lastModal.dismiss()
-    }
-  })
 
   const modals = useObserver(() => manager.modals.slice())
 
@@ -116,20 +116,22 @@ export function ModalOverlay() {
       {transitions.map(transition => (
         <ModalProvider key={transition.key} value={transition.item}>
           <Item>
-            <Filter
-              style={{
-                opacity: transition.props.filterOpacity,
-              }}
-              onClick={() => transition.item.dismiss()}
-            />
-            <Content
-              style={{
-                opacity: transition.props.contentOpacity,
-                transform: transition.props.contentTransform,
-              }}
+            <Filter style={{ opacity: transition.props.filterOpacity }} />
+            <FocusOn
+              className="focus-on"
+              onClickOutside={() => transition.item.dismiss()}
+              onEscapeKey={() => transition.item.dismiss()}
             >
-              {transition.item.render()}
-            </Content>
+              <Content
+                role="dialog"
+                style={{
+                  opacity: transition.props.contentOpacity,
+                  transform: transition.props.contentTransform,
+                }}
+              >
+                {transition.item.render()}
+              </Content>
+            </FocusOn>
           </Item>
         </ModalProvider>
       ))}

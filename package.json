@@ -41,6 +41,7 @@
     "punycode": "^2.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-focus-on": "^3.4.1",
     "react-is": "^16.13.1",
     "react-spring": "^8.0.27",
     "simple-markdown": "^0.7.2",
