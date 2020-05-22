@@ -128,15 +128,16 @@ export type MessageHeaderProps = {
 export function MessageHeader(props: MessageHeaderProps) {
   let { username, avatarUrl } = props
 
-  const editorManager = useContext(EditorManagerContext)
-  if (editorManager) {
-    if (!username) username = editorManager.webhook.displayName
-    if (!avatarUrl) avatarUrl = editorManager.webhook.displayAvatarUrl
-  }
-
   const theme = useTheme()
 
+  const editorManager = useContext(EditorManagerContext)
+
   return useObserver(() => {
+    if (editorManager) {
+      username = editorManager.webhook.displayName
+      avatarUrl = editorManager.webhook.displayAvatarUrl
+    }
+
     let info = [
       <Username key="username">{username}</Username>,
       <BotTag key="bot-tag">BOT</BotTag>,
