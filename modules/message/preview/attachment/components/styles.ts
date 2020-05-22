@@ -1,4 +1,4 @@
-import { ellipsis, em, rgb, transparentize } from "polished"
+import { ellipsis, em } from "polished"
 import styled from "styled-components"
 import { DARK_THEME } from "../../../../../common/style/themes/darkTheme"
 
@@ -11,17 +11,10 @@ export const AttachmentContainer = styled.div`
   display: flex;
   align-items: center;
 
-  border: 1px solid
-    ${({ theme }) =>
-      theme.appearance.color === "dark"
-        ? transparentize(0.4, theme.background.secondary)
-        : rgb(246, 246, 247)};
+  border: 1px solid ${({ theme }) => theme.background.secondaryAlt};
   border-radius: 3px;
 
-  background: ${({ theme }) =>
-    theme.appearance.color === "dark"
-      ? transparentize(0.7, theme.background.secondary)
-      : "none"};
+  background: ${({ theme }) => theme.background.secondary};
 `
 
 export const AttachmentIconContainer = styled.div`
@@ -51,11 +44,8 @@ export const AttachmentFileName = styled.div`
 
 export const AttachmentFileNameInner = styled.span`
   color: ${({ theme }) => theme.text.link};
-  font-size: ${em(16)};
 
   cursor: pointer;
-
-  opacity: 0.85;
 
   &:hover {
     text-decoration: underline;
@@ -70,14 +60,12 @@ export const AttachmentFileSize = styled.div`
 `
 
 export const AttachmentDownloadButton = styled.div`
-  height: 25px;
-
-  color: ${DARK_THEME.interactive.muted};
+  color: ${({ theme }) => theme.interactive.normal};
 
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => transparentize(0.4, theme.text.muted)};
+    color: ${({ theme }) => theme.interactive.hover};
   }
 
   & > svg {

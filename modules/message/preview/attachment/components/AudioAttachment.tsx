@@ -7,51 +7,75 @@ import { AudioControls } from "./AudioControls"
 import {
   AttachmentContainer,
   AttachmentDownloadButton,
-  AttachmentFileName,
-  AttachmentFileNameInner,
-  AttachmentFileSize,
   AttachmentIconContainer,
-  AttachmentInfo,
 } from "./styles"
 
 const AudioContainer = styled(AttachmentContainer)`
-  flex-direction: column;
   width: 400px;
 
-  font-size: 16px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
 `
 
 const AudioMetadata = styled.div`
   display: flex;
-
-  margin: 2px 0 0;
-
-  width: 378px;
-  height: 40.5px;
 `
 
 const AudioIconContainer = styled(AttachmentIconContainer)`
-  margin: -4px 15px 0 -3px;
+  width: 26px;
+  height: 40px;
+
+  margin: -4px 1px 0 -1px;
+
+  & > svg {
+    width: 26px;
+    height: 40px;
+  }
 `
 
-const AudioFileNameInner = styled(AttachmentFileNameInner)`
-  font-weight: 500;
+const AudioAttachmentInfo = styled.div`
+  padding: 0 8px;
+  flex: 1 1 auto;
 
-  opacity: 1;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
-const AudioFileSize = styled(AttachmentFileSize)`
-  margin: 3px 0 0;
+const AudioFileName = styled.span`
+  color: ${({ theme }) => theme.text.link};
 
+  font-size: 16px;
+  line-height: 20px;
   font-weight: 500;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+const AudioFileSize = styled.div`
+  color: ${({ theme }) => theme.text.muted};
+
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  opacity: 0.7;
 `
 
 const AudioDownloadButton = styled(AttachmentDownloadButton)`
-  align-self: flex-start;
-  margin: -2px 0 0;
-
-  display: flex;
-  align-items: center;
+  flex: 0;
 
   & > svg {
     height: 25px;
@@ -69,12 +93,10 @@ export function AudioAttachment(props: AudioAttachmentProps) {
     <AudioContainer>
       <AudioMetadata>
         <AudioIconContainer>{getAttachmentIcon("audio")}</AudioIconContainer>
-        <AttachmentInfo>
-          <AttachmentFileName>
-            <AudioFileNameInner>{name}</AudioFileNameInner>
-          </AttachmentFileName>
+        <AudioAttachmentInfo>
+          <AudioFileName>{name}</AudioFileName>
           <AudioFileSize>{getHumanReadableSize(size)}</AudioFileSize>
-        </AttachmentInfo>
+        </AudioAttachmentInfo>
         <AudioDownloadButton>{download}</AudioDownloadButton>
       </AudioMetadata>
       <AudioControls />

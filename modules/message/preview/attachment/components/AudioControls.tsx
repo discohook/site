@@ -9,9 +9,8 @@ const AudioControlsContainer = styled.div`
   display: flex;
   align-items: center;
 
-  margin: 2px 0 0;
+  margin: 8px 0 0;
 
-  width: 378px;
   height: 32px;
 
   background: ${transparentize(0.4, "black")};
