@@ -5,6 +5,7 @@ import Router from "next/router"
 import React, { useEffect, useState } from "react"
 import styled, { css, ThemeProvider } from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
+import { useWindowEvent } from "../common/dom/useWindowEvent"
 import { PageHead } from "../common/PageHead"
 import { useAutorun } from "../common/state/useAutorun"
 import { useLazyValue } from "../common/state/useLazyValue"
@@ -115,6 +116,11 @@ export default function Main(props: MainProps) {
   }, [appearanceManager, mobile])
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
+
+  useWindowEvent("beforeunload", event => {
+    event.preventDefault()
+    event.returnValue = ""
+  })
 
   return useObserver(() => (
     <ThemeProvider
