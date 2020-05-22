@@ -112,7 +112,7 @@ export default function Main(props: MainProps) {
   const appearanceManager = useRequiredContext(AppearanceManagerContext)
   useEffect(() => {
     appearanceManager.mobile = mobile
-  })
+  }, [appearanceManager, mobile])
 
   const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
 
