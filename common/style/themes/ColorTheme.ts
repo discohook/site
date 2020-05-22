@@ -23,6 +23,7 @@ export type ColorTheme = {
   background: {
     primary: string
     secondary: string
+    secondaryAlt: string
     tertiary: string
     accent: string
     floating: string

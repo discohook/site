@@ -22,6 +22,7 @@ export const LIGHT_THEME: ColorTheme = {
   background: {
     primary: rgb(255, 255, 255),
     secondary: rgb(242, 243, 245),
+    secondaryAlt: rgb(235, 237, 239),
     tertiary: rgb(227, 229, 232),
     accent: rgb(116, 127, 141),
     floating: rgb(255, 255, 255),

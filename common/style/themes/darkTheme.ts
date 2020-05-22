@@ -22,6 +22,7 @@ export const DARK_THEME: ColorTheme = {
   background: {
     primary: rgb(54, 57, 63),
     secondary: rgb(47, 49, 54),
+    secondaryAlt: rgb(41, 43, 47),
     tertiary: rgb(32, 34, 37),
     accent: rgb(79, 84, 92),
     floating: rgb(24, 25, 28),
