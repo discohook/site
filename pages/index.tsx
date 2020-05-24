@@ -2,7 +2,7 @@ import { useObserver } from "mobx-react-lite"
 import type { GetServerSidePropsContext } from "next"
 import Head from "next/head"
 import Router from "next/router"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styled, { css, ThemeProvider } from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
 import { useWindowEvent } from "../common/dom/useWindowEvent"
@@ -18,6 +18,7 @@ import type { MessageData } from "../modules/message/data/MessageData"
 import { decodeMessage } from "../modules/message/helpers/decodeMessage"
 import { INITIAL_MESSAGE_DATA } from "../modules/message/initialMessageData"
 import { MessagePreview } from "../modules/message/MessagePreview"
+import { timeout } from "../modules/message/timeout"
 
 const Container = styled.div`
   display: flex;
@@ -98,16 +99,22 @@ export default function Main(props: MainProps) {
 
   const editorManager = useLazyValue(() => new EditorManager(message))
 
+  const cancelRef = useRef<() => void>()
   useAutorun(() => {
     const message = editorManager.message.getMessageData()
     const json = JSON.stringify({ message: { ...message, files: undefined } })
     const base64 = base64UrlEncode(json)
 
-    if (Router.query.message !== base64) {
-      Router.replace(`/?message=${base64}`, `/?message=${base64}`, {
-        shallow: true,
-      }).catch(() => {})
-    }
+    const { current: cancel } = cancelRef
+    if (cancel) cancel()
+
+    cancelRef.current = timeout(async () => {
+      if (Router.query.message !== base64) {
+        await Router.replace(`/?message=${base64}`, `/?message=${base64}`, {
+          shallow: true,
+        })
+      }
+    }, 500)
   })
 
   const appearanceManager = useRequiredContext(AppearanceManagerContext)
