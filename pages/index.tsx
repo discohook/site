@@ -1,6 +1,5 @@
 import { useObserver } from "mobx-react-lite"
 import type { GetServerSidePropsContext } from "next"
-import Head from "next/head"
 import Router from "next/router"
 import React, { useEffect, useRef, useState } from "react"
 import styled, { css, ThemeProvider } from "styled-components"
@@ -140,11 +139,10 @@ export default function Main(props: MainProps) {
         <PageHead
           title="Discohook | A message and embed generator for Discord webhooks"
           description="An easy-to-use tool for building and sending Discord messages and embeds using webhooks."
-        />
-        <Head>
+        >
           <meta key="referrer" name="referrer" content="strict-origin" />
-        </Head>
-        <Container>
+        </PageHead>
+        <Container translate="no">
           {mobile && (
             <TabSwitcher>
               <Tab

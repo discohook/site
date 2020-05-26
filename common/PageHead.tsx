@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
-import React from "react"
+import React, { ReactNode } from "react"
 
 const links = [
   {
@@ -47,10 +47,11 @@ const links = [
 export type PageHeadProps = {
   title: string
   description: string
+  children?: ReactNode
 }
 
 export function PageHead(props: PageHeadProps) {
-  const { title, description } = props
+  const { title, description, children } = props
 
   const router = useRouter()
 
@@ -93,6 +94,8 @@ export function PageHead(props: PageHeadProps) {
       />
       <meta key="theme-color" name="theme-color" content="#7289da" />
       <meta key="color-scheme" name="color-scheme" content="dark light" />
+      <meta key="google" name="google" content="notranslate" />
+      {children}
     </Head>
   )
 }
