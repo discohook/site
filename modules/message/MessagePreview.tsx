@@ -1,4 +1,5 @@
 import { Observer, useObserver } from "mobx-react-lite"
+import dynamic from "next/dynamic"
 import { rem } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
@@ -6,9 +7,13 @@ import { SCREEN_SMALL } from "../../common/breakpoints"
 import { Markdown } from "../markdown/Markdown"
 import { MarkdownContainer } from "../markdown/styles/MarkdownContainer"
 import type { Message } from "./Message"
-import { Attachment } from "./preview/attachment/Attachment"
+import type { AttachmentProps } from "./preview/attachment/Attachment"
 import { MessageHeader } from "./preview/MessageHeader"
 import { RichEmbed } from "./preview/RichEmbed"
+
+const Attachment = dynamic<AttachmentProps>(async () =>
+  import("./preview/attachment/Attachment").then(module => module.Attachment),
+)
 
 const Container = styled.div`
   position: relative;
