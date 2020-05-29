@@ -29,7 +29,9 @@
   },
   "homepage": "https://discohook.org/",
   "dependencies": {
+    "@babel/runtime": "^7.10.1",
     "@popperjs/core": "^2.4.0",
+    "core-js": "^3.6.5",
     "d3-ease": "^1.0.6",
     "date-fns": "^2.13.0",
     "highlight.js": "^9.18.1",
@@ -44,6 +46,7 @@
     "react-focus-on": "^3.4.1",
     "react-is": "^16.13.1",
     "react-spring": "^8.0.27",
+    "regenerator-runtime": "^0.13.5",
     "simple-markdown": "^0.7.2",
     "styled-components": "^5.1.0",
     "url": "^0.11.0"
@@ -80,7 +83,6 @@
     "fake-indexeddb": "^3.0.0",
     "jest": "^26.0.1",
     "prettier": "^2.0.5",
-    "regenerator-runtime": "^0.13.5",
     "typescript": "^3.9.2"
   }
 }

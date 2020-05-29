@@ -1,5 +1,7 @@
 dependencies:
+  '@babel/runtime': 7.10.1
   '@popperjs/core': 2.4.0
+  core-js: 3.6.5
   d3-ease: 1.0.6
   date-fns: 2.13.0
   highlight.js: 9.18.1
@@ -14,6 +16,7 @@ dependencies:
   react-focus-on: 3.4.1_58ada4f344753973cec6c48efae47dbd
   react-is: 16.13.1
   react-spring: 8.0.27_react-dom@16.13.1+react@16.13.1
+  regenerator-runtime: 0.13.5
   simple-markdown: 0.7.2
   styled-components: 5.1.0_76774460972571dd87acc5dd719e1ff2
   url: 0.11.0
@@ -49,7 +52,6 @@ devDependencies:
   fake-indexeddb: 3.0.0_36240cd8ed7802daeebcfbe459243d80
   jest: 26.0.1
   prettier: 2.0.5
-  regenerator-runtime: 0.13.5
   typescript: 3.9.2
 lockfileVersion: 5.1
 packages:
@@ -1228,6 +1230,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-6toWAfaALQjt3KMZQc6fABqZwUDDuWzz+cAfPhqyEnzxvdWOAkjwPNxgF8xlmo7OWLsSjaKjsskpKHRLaMArOA==
+  /@babel/runtime/7.10.1:
+    dependencies:
+      regenerator-runtime: 0.13.5
+    dev: false
+    resolution:
+      integrity: sha512-nQbbCbQc9u/rpg1XCxoMYQTbSMVZjCDxErQ1ClCn9Pvcmv1lGads19ep0a2VsEiIJeHqjZley6EQGEC3Yo1xMA==
   /@babel/runtime/7.9.6:
     dependencies:
       regenerator-runtime: 0.13.5
@@ -3212,6 +3220,11 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
+  /core-js/3.6.5:
+    dev: false
+    requiresBuild: true
+    resolution:
+      integrity: sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
   /core-util-is/1.0.2:
     resolution:
       integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
@@ -9975,6 +9988,7 @@ packages:
 specifiers:
   '@babel/plugin-proposal-class-properties': ^7.8.3
   '@babel/plugin-proposal-decorators': ^7.8.3
+  '@babel/runtime': ^7.10.1
   '@next/bundle-analyzer': ^9.4.1
   '@popperjs/core': ^2.4.0
   '@testing-library/dom': ^7.5.6
@@ -9994,6 +10008,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^2.33.0
   '@typescript-eslint/parser': ^2.33.0
   babel-plugin-styled-components: ^1.10.7
+  core-js: ^3.6.5
   core-js-bundle: ^3.6.5
   cross-env: ^7.0.2
   d3-ease: ^1.0.6
