@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS builder
+FROM node:12-alpine AS builder
 
 RUN npm i -g pnpm
 
@@ -15,7 +15,7 @@ RUN pnpm run build
 
 RUN pnpm prune --prod
 
-FROM node:lts-alpine
+FROM node:12-alpine
 
 WORKDIR /app
 RUN chown -R node:node /app
