@@ -12,9 +12,10 @@ Requires Node.js 12 and pnpm package manager installed
 # Install dependencies
 pnpm install
 
-# Build project
-pnpm run build
+# Run a development server
+pnpm run dev
 
-# Run web server
+# Run a production server
+pnpm run build
 pnpm run start
 ```
