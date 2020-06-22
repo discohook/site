@@ -6,7 +6,7 @@ const hljs = require("highlight.js")
 const { get } = require("https")
 
 /** @typedef {import("http").IncomingMessage} IncomingMessage */
-/** @typedef {import("../src/markdown/types/Language").Language} Language */
+/** @typedef {import("../modules/markdown/code/Language").Language} Language */
 
 const HLJS_GIT_RAW_LANGUAGES_BASE_URL =
   "https://raw.githubusercontent.com/highlightjs/highlight.js/9-18-stable/src/languages"
