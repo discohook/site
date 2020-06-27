@@ -19,8 +19,8 @@ const FieldName = styled.div`
   margin: 0 0 1px;
 
   font-size: ${rem(14)};
-  font-weight: 500;
-  color: ${({ theme }) => theme.text.muted};
+  font-weight: 600;
+  color: ${({ theme }) => theme.header.primary};
 `
 
 const FieldValue = styled.div`

@@ -35,7 +35,7 @@ const FooterImage = styled.img`
 
 const FooterText = styled.span`
   font-size: ${rem(12)};
-  color: ${({ theme }) => theme.text.muted};
+  color: ${({ theme }) => theme.text.normal};
   line-height: ${rem(16)};
 
   ${({ theme }) =>
@@ -51,8 +51,8 @@ const FooterSeparator = styled.span`
   display: inline-block;
   margin: 0 4px;
 
-  font-weight: 700;
-  color: ${({ theme }) => theme.backgroundModifier.accent};
+  font-weight: 500;
+  color: ${({ theme }) => theme.text.normal};
 `
 
 export type EmbedFooterProps = {
