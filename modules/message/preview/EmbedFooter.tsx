@@ -1,10 +1,16 @@
 import { isValid } from "date-fns"
 import { useObserver } from "mobx-react-lite"
+import dynamic from "next/dynamic"
 import { rem, size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
 import type { Embed } from "../Embed"
-import { formatTimestamp } from "./formatTimestamp"
+import type { EmbedTimestampProps } from "./EmbedTimestamp"
+
+const EmbedTimestamp = dynamic<EmbedTimestampProps>(
+  async () => import("./EmbedTimestamp").then(module => module.EmbedTimestamp),
+  { ssr: false },
+)
 
 const Container = styled.div<{ hasThumbnail?: boolean }>`
   min-width: 0;
@@ -70,7 +76,9 @@ export function EmbedFooter(props: EmbedFooterProps) {
         {embed.footer && isValid(embed.timestamp) && (
           <FooterSeparator>•</FooterSeparator>
         )}
-        {isValid(embed.timestamp) && formatTimestamp(embed.timestamp)}
+        {isValid(embed.timestamp) && (
+          <EmbedTimestamp timestamp={embed.timestamp} />
+        )}
       </FooterText>
     </Container>
   ))
