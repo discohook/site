@@ -3,6 +3,7 @@ import { first } from "../../../common/validation/first"
 import { isArray } from "../../../common/validation/isArray"
 import { isShape } from "../../../common/validation/isShape"
 import { isString } from "../../../common/validation/isString"
+import { isUrl } from "../../../common/validation/isUrl"
 import { length } from "../../../common/validation/length"
 import { optional } from "../../../common/validation/optional"
 import { requiresKey } from "../../../common/validation/requiresKey"
@@ -15,6 +16,6 @@ export const isMessage: Validator = first(
     content: optional(first(isString, length(1, 2000))),
     embeds: optional(first(isArray, length(1, 10), contains(isEmbed))),
     username: optional(first(isString, length(1, 256))),
-    avatar_url: optional(isString),
+    avatar_url: optional(isUrl),
   }),
 )

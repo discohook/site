@@ -1,6 +1,7 @@
 import { first } from "../../../common/validation/first"
 import { isShape } from "../../../common/validation/isShape"
 import { isString } from "../../../common/validation/isString"
+import { isUrl } from "../../../common/validation/isUrl"
 import { length } from "../../../common/validation/length"
 import { optional } from "../../../common/validation/optional"
 import { requiresKey } from "../../../common/validation/requiresKey"
@@ -10,6 +11,6 @@ export const isFooter: Validator = first(
   requiresKey("text"),
   isShape({
     text: first(isString, length(1, 2048)),
-    icon_url: optional(isString),
+    icon_url: optional(isUrl),
   }),
 )

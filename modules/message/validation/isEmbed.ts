@@ -5,6 +5,7 @@ import { isArray } from "../../../common/validation/isArray"
 import { isDate } from "../../../common/validation/isDate"
 import { isShape } from "../../../common/validation/isShape"
 import { isString } from "../../../common/validation/isString"
+import { isUrl } from "../../../common/validation/isUrl"
 import { length } from "../../../common/validation/length"
 import { nullable } from "../../../common/validation/nullable"
 import { optional } from "../../../common/validation/optional"
@@ -30,12 +31,12 @@ export const isEmbed: Validator = first(
   isShape({
     title: optional(first(isString, length(1, 256))),
     description: optional(first(isString, length(1, 2048))),
-    url: optional(isString),
+    url: optional(isUrl),
     timestamp: optional(isDate),
     color: optional(nullable(between(0, 0xffffff))),
     footer: optional(isFooter),
-    image: optional(first(requiresKey("url"), isShape({ url: isString }))),
-    thumbnail: optional(first(requiresKey("url"), isShape({ url: isString }))),
+    image: optional(first(requiresKey("url"), isShape({ url: isUrl }))),
+    thumbnail: optional(first(requiresKey("url"), isShape({ url: isUrl }))),
     author: optional(isAuthor),
     fields: optional(first(isArray, length(1, 25), contains(isField))),
   }),
