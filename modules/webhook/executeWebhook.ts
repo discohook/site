@@ -1,5 +1,5 @@
-import { stringifyMessage } from "../../message/helpers/stringifyMessage"
-import type { EditorManager } from "../EditorManager"
+import type { EditorManager } from "../editor/EditorManager"
+import { stringifyMessage } from "../message/helpers/stringifyMessage"
 
 export const executeWebhook = async (editorManager: EditorManager) => {
   let body: string | FormData = stringifyMessage(

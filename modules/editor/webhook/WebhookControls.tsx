@@ -6,10 +6,10 @@ import { InputField } from "../../../common/input/InputField"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
 import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
+import { WEBHOOK_URL_RE } from "../../webhook/constants"
+import { executeWebhook } from "../../webhook/executeWebhook"
 import { EditorManagerContext } from "../EditorManagerContext"
 import { FlexContainer } from "../styles/FlexContainer"
-import { WEBHOOK_URL_RE } from "./constants"
-import { executeWebhook } from "./executeWebhook"
 import { NetworkErrorModal } from "./NetworkErrorModal"
 
 const DisabledReason = styled.div`
