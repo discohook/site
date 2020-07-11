@@ -21,8 +21,6 @@ const AppearanceTypeHeader = styled.h5`
   text-transform: uppercase;
 `
 
-export type AppearanceModalProps = {}
-
 export function AppearanceModal() {
   const modal = useRequiredContext(ModalContext)
   const appearanceManager = useRequiredContext(AppearanceManagerContext)

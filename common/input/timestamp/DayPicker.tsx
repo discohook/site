@@ -78,7 +78,7 @@ export function DayPicker(props: DayPickerProps) {
   const month = startOfMonth(isValid(monthDate) ? monthDate ?? 0 : Date.now())
   const firstDay = isSunday(month) ? subWeeks(month, 1) : startOfWeek(month)
 
-  const days = new Array(7 * 6).fill(undefined).map((_, days) =>
+  const days = new Array(7 * 6).fill(0).map((_, days) =>
     set(addDays(firstDay, days), {
       hours: getHours(date) || 0,
       minutes: getMinutes(date) || 0,

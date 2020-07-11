@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/newline-after-import */
 
 import { getLanguageFromAlias } from "./getLanguageFromAlias"

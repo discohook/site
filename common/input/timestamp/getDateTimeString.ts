@@ -9,7 +9,7 @@ import {
 
 export const getDateTimeString = (date: Date) => {
   if (!isValid(date)) {
-    return undefined
+    return
   }
 
   const day = [

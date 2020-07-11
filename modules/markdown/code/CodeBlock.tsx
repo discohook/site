@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/newline-after-import */
 
 import React, { useEffect, useState } from "react"
@@ -14,11 +15,11 @@ export type CodeBlockProps = {
 export function CodeBlock(props: CodeBlockProps) {
   const { content, language = "" } = props
 
-  const [html, setHtml] = useState<string>()
+  const [html, setHtml] = useState("")
   useEffect(() => {
     highlightCode(language, content)
-      .then(setHtml)
-      .catch(() => setHtml(undefined))
+      .then(html => setHtml(html ?? ""))
+      .catch(() => setHtml(""))
   }, [content, language])
 
   if (typeof window === "undefined") {

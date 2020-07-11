@@ -14,6 +14,6 @@ export const base64Decode = (urlSafeBase64: string) => {
 
     return decodeURIComponent(encoded)
   } catch {
-    return undefined
+    // return nothing
   }
 }

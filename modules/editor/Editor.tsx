@@ -4,7 +4,6 @@ import React from "react"
 import styled, { useTheme } from "styled-components"
 import { ModalManagerContext } from "../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../common/state/useRequiredContext"
-import type { AppearanceModalProps } from "../../common/style/AppearanceModal"
 import { DARK_THEME } from "../../common/style/themes/darkTheme"
 import type { BackupsModalProps } from "../database/backup/modal/BackupsModal"
 import { Actions } from "./Actions"
@@ -15,7 +14,7 @@ import { MessageEditor } from "./message/MessageEditor"
 import { FlexContainer } from "./styles/FlexContainer"
 import { WebhookControls } from "./webhook/WebhookControls"
 
-const AppearanceModal = dynamic<AppearanceModalProps>(async () =>
+const AppearanceModal = dynamic<Record<never, unknown>>(async () =>
   import("../../common/style/AppearanceModal").then(
     module => module.AppearanceModal,
   ),

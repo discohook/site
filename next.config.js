@@ -13,6 +13,6 @@ try {
   })
 
   module.exports = withBundleAnalyzer(config)
-} catch (error) {
+} catch {
   module.exports = config
 }

@@ -6,7 +6,10 @@ export const requiresKey = (...keys: string[]): Validator =>
   first(isObject, (value, key) =>
     keys
       .map(requiredKey =>
-        Object.prototype.hasOwnProperty.call(value as object, requiredKey),
+        Object.prototype.hasOwnProperty.call(
+          value as Record<string, unknown>,
+          requiredKey,
+        ),
       )
       .some(result => result)
       ? []

@@ -17,6 +17,6 @@ export const depunycodeUrl = (link: string) => {
       protocol,
     })
   } catch {
-    return undefined
+    // return nothing
   }
 }

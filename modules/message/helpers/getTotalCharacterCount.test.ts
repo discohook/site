@@ -184,7 +184,7 @@ describe("getTotalCharacterCount", () => {
   it("counts multiple embeds", () => {
     expect(
       getTotalCharacterCount({
-        embeds: new Array(10).fill(undefined).map(() => ({
+        embeds: new Array(10).fill(0).map(() => ({
           title: "Test embed",
         })),
       }),
@@ -196,9 +196,7 @@ describe("getTotalCharacterCount", () => {
       getTotalCharacterCount({
         embeds: [
           {
-            fields: new Array(25)
-              .fill(undefined)
-              .map(() => ({ name: "Test field" })),
+            fields: new Array(25).fill(0).map(() => ({ name: "Test field" })),
           },
         ],
       }),
@@ -207,11 +205,11 @@ describe("getTotalCharacterCount", () => {
 
   it("counts multiple fields over multiple embeds", () => {
     const getFields = () =>
-      new Array(25).fill(undefined).map(() => ({ name: "Test field" }))
+      new Array(25).fill(0).map(() => ({ name: "Test field" }))
 
     expect(
       getTotalCharacterCount({
-        embeds: new Array(10).fill(undefined).map(() => ({
+        embeds: new Array(10).fill(0).map(() => ({
           title: "Test embed",
           fields: getFields(),
         })),

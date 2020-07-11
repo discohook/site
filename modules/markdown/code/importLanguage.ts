@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/newline-after-import */
 
 import type { HLJSStatic, IModeBase } from "highlight.js"

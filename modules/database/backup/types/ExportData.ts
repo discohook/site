@@ -5,7 +5,8 @@ export type ExportData =
   | {
       version: 1
       name: string
-      message: object
+      // camel case
+      message: Record<string, unknown>
     }
   | {
       version: 2

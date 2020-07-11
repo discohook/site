@@ -4,6 +4,7 @@ import { observable, runInAction } from "mobx"
 import { downloadBlob } from "../../../common/dom/downloadBlob"
 import { toSnakeCase } from "../../../common/object/toSnakeCase"
 import type { EditorManager } from "../../editor/EditorManager"
+import type { MessageData } from "../../message/data/MessageData"
 import { Message } from "../../message/Message"
 import type { DatabaseManager } from "../DatabaseManager"
 import type { Backup } from "./types/Backup"
@@ -184,7 +185,7 @@ export class BackupManager {
         const name = await this.getSafeBackupName(exportData.name)
         await this.saveBackup({
           name,
-          message: toSnakeCase(exportData.message),
+          message: toSnakeCase(exportData.message) as MessageData,
         })
         break
       }

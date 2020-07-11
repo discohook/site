@@ -1,6 +1,6 @@
 import { jumbosizeEmojis } from "./jumbosizeEmojis"
 
-const array = (size: number) => new Array(size).fill(undefined)
+const array = (size: number) => new Array(size).fill(0)
 
 describe("jumbosizeEmojis", () => {
   it("jumbosizes a single emoji", () => {

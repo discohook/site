@@ -20,7 +20,7 @@ export class Color {
   }
 
   @computed get hex() {
-    if (!this.valid) return undefined
+    if (!this.valid) return
 
     return `#${this.raw?.toString(16).padStart(6, "0")}`
   }
