@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const InputNote = styled.div<{ state?: "normal" | "warning" | "error" }>`
-  margin: 3px 1px 0 0;
+  margin: 3px 1px 0 0.25em;
 
   font-size: 13px;
   font-weight: 500;

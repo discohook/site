@@ -43,6 +43,7 @@ export function FieldEditor(props: FieldEditorProps) {
             field.name = name
           }}
           label="Field Name"
+          required
           maxLength={256}
         />
         <ToggleContainer>
@@ -64,6 +65,7 @@ export function FieldEditor(props: FieldEditorProps) {
         }}
         label="Field Value"
         type="multiline"
+        required
         maxLength={1024}
       />
     </FlexContainer>
