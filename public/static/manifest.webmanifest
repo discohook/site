@@ -5,22 +5,10 @@
   "start_url": "/",
   "description": "An easy-to-use tool for building and sending Discord messages and embeds using webhooks.",
   "display": "standalone",
-  "background_color": "#36393f",
-  "theme_color": "#7289da",
+  "background_color": "#1d252a",
+  "theme_color": "#58b9ff",
   "lang": "en-US",
   "icons": [
-    {
-      "src": "/static/favicon-16.png",
-      "sizes": "16x16",
-      "type": "image/png",
-      "purpose": "badge"
-    },
-    {
-      "src": "/static/favicon-32.png",
-      "sizes": "32x32",
-      "type": "image/png",
-      "purpose": "badge"
-    },
     {
       "src": "/static/icon-64.png",
       "sizes": "64x64",
@@ -50,6 +38,18 @@
       "sizes": "256x256",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/static/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/static/mask-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "monochrome"
     }
   ]
 }
