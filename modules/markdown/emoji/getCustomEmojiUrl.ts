@@ -2,7 +2,7 @@ const CUSTOM_EMOJI_CDN_BASE_URL = "https://cdn.discordapp.com/emojis"
 
 const EXCEPTIONS = new Map(
   Object.entries({
-    "694285995394203759": "/static/discohook-emoji.png",
+    "735474274458140705": "/static/discohook-emoji.png",
   }),
 )
 

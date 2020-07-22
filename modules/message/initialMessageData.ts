@@ -2,7 +2,7 @@ import type { MessageData } from "./data/MessageData"
 
 export const INITIAL_MESSAGE_DATA: MessageData = {
   content:
-    "Welcome to <:discohook:694285995394203759>Discohook, a free message and embed builder for Discord!\nThere's additional info in the embeds below, or you can use the *Clear all* button in the editor to start making embeds.\nHave questions? Discohook has a support server at <https://discohook.org/discord>.",
+    "Welcome to <:discohook:735474274458140705>Discohook, a free message and embed builder for Discord!\nThere's additional info in the embeds below, or you can use the *Clear all* button in the editor to start making embeds.\nHave questions? Discohook has a support server at <https://discohook.org/discord>.",
   embeds: [
     {
       title: "What's all this?",
