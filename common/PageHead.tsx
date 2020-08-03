@@ -5,42 +5,42 @@ import React, { ReactNode } from "react"
 const links = [
   {
     rel: "shortcut icon",
-    href: "/favicon.ico",
+    href: "/favicon.ico?1",
     sizes: "16x16 32x32",
     type: "image/x-icon",
   },
   [16, 32].map(size => ({
     rel: "icon",
-    href: `/static/favicon-${size}.png`,
+    href: `/static/favicon-${size}.png?1`,
     sizes: `${size}x${size}`,
     type: "image/png",
   })),
   {
     rel: "icon",
-    href: "/static/favicon.svg",
+    href: "/static/favicon.svg?1",
     sizes: "any",
     type: "image/svg+xml",
   },
   [64, 96, 128, 192, 256].map(size => ({
     rel: "apple-touch-icon",
-    href: `/static/icon-${size}.png`,
+    href: `/static/icon-${size}.png?1`,
     sizes: `${size}x${size}`,
     type: "image/png",
   })),
   {
     rel: "apple-touch-icon",
-    href: "/static/icon.svg",
+    href: "/static/icon.svg?1",
     sizes: "any",
     type: "image/svg+xml",
   },
   {
     rel: "mask-icon",
-    href: "/static/mask-icon.svg",
+    href: "/static/mask-icon.svg?1",
     type: "image/svg+xml",
   },
   {
     rel: "manifest",
-    href: "/static/manifest.webmanifest",
+    href: "/static/manifest.webmanifest?1",
   },
 ].flat()
 
@@ -67,7 +67,11 @@ export function PageHead(props: PageHeadProps) {
       <meta key="description" name="description" content={description} />
       <meta key="og:title" property="og:title" content={title} />
       <meta key="og:type" property="og:type" content="website" />
-      <meta key="og:image" property="og:image" content="/static/icon-256.png" />
+      <meta
+        key="og:image"
+        property="og:image"
+        content="/static/icon-256.png?1"
+      />
       <meta
         key="og:url"
         property="og:url"
