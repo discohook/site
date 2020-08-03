@@ -22,7 +22,7 @@ export default function Discord() {
 
   return (
     <Container>
-      <PageHead title="Discord Support Server" description="" />
+      <PageHead title="Discohook Support Server" description="" />
       <Header>You are being redirected</Header>
       <p>
         If nothing is happenning, please navigate to{" "}
