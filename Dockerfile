@@ -2,9 +2,11 @@ FROM node:12-alpine
 
 WORKDIR /app
 
-COPY . .
-
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn ./.yarn
 RUN yarn install
+
+COPY . .
 RUN yarn run build
 
 USER node
