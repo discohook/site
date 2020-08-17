@@ -10,9 +10,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
-      - run: pnpm run build
+      - run: yarn install
+      - run: yarn run build
   test:
     runs-on: ubuntu-latest
     steps:
@@ -20,9 +19,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
-      - run: pnpm run test:verbose
+      - run: yarn install
+      - run: yarn run test:verbose
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -30,8 +28,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - run: curl -L https://unpkg.com/@pnpm/self-installer | node
-      - run: pnpm install
-      - run: pnpm run lint:error
-      - run: pnpm run typecheck
-      - run: pnpm run format:check
+      - run: yarn install
+      - run: yarn run lint:error
+      - run: yarn run typecheck
+      - run: yarn run format:check
