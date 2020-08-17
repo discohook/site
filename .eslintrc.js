@@ -198,7 +198,10 @@ module.exports = {
     "prefer-template": "warn",
     "quote-props": ["warn", "consistent-as-needed"],
     "radix": "warn",
-    "react-hooks/exhaustive-deps": "error",
+    "react-hooks/exhaustive-deps": [
+      "error",
+      { additionalHooks: "(useIsomorphicLayoutEffect)" },
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-boolean-value": "warn",
     "react/jsx-curly-brace-presence": "warn",
