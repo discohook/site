@@ -6,16 +6,16 @@ Live instance is available at <https://discohook.org/>.
 
 ## Setup
 
-Requires Node.js 12 and pnpm package manager installed
+Requires Node.js 12 and the Yarn package manager installed
 
 ```sh
 # Install dependencies
-pnpm install
+yarn install
 
 # Run a development server
-pnpm run dev
+yarn run dev
 
 # Run a production server
-pnpm run build
-pnpm run start
+yarn run build
+yarn run start
 ```
