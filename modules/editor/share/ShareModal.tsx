@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import styled from "styled-components"
 import { copyTextToClipboard } from "../../../common/dom/copyTextToClipboard"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
@@ -16,10 +15,6 @@ import { remove } from "../../../icons/remove"
 import { Markdown } from "../../markdown/Markdown"
 import type { EditorManagerLike } from "../EditorManager"
 import { getEditorUrl } from "../getEditorUrl"
-
-const Content = styled.div`
-  line-height: 1.5;
-`
 
 export type ShareModalProps = {
   editorManager: EditorManagerLike

@@ -1,6 +1,6 @@
 import { useRef } from "react"
 
-const UNINITIALISED = Symbol()
+const UNINITIALISED = Symbol("UNINITIALISED")
 
 export const useLazyValue = <T>(initializer: () => T) => {
   const ref = useRef((UNINITIALISED as unknown) as T)
