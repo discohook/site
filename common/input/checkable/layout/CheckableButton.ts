@@ -7,7 +7,7 @@ export const CheckableButton = styled.div`
 
   background: ${({ theme }) => theme.background.secondaryAlt};
   border: 2px solid ${({ theme }) => theme.background.secondaryAlt};
-  color: ${({theme}) => theme.interactive.active};
+  color: ${({ theme }) => theme.interactive.active};
 
   pointer-events: none;
 
