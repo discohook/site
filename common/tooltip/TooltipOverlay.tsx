@@ -7,7 +7,9 @@ import { TooltipItem } from "./TooltipItem"
 import { TooltipManagerContext } from "./TooltipManagerContext"
 
 const Wrapper = styled.div`
-  z-index: ${Z_INDEX_TOOLTIPS};
+  & > * {
+    z-index: ${Z_INDEX_TOOLTIPS};
+  }
 `
 
 export function TooltipOverlay() {
