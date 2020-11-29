@@ -1,14 +1,18 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useRef } from "react"
-import { Button } from "../../../../common/input/Button"
+import { PrimaryButton } from "../../../../common/input/button/PrimaryButton"
+import { SecondaryButton } from "../../../../common/input/button/SecondaryButton"
+import { ModalAction } from "../../../../common/modal/layout/ModalAction"
+import { ModalBody } from "../../../../common/modal/layout/ModalBody"
+import { ModalContainer } from "../../../../common/modal/layout/ModalContainer"
+import { ModalFooter } from "../../../../common/modal/layout/ModalFooter"
+import { ModalHeader } from "../../../../common/modal/layout/ModalHeader"
+import { ModalTitle } from "../../../../common/modal/layout/ModalTitle"
 import { ModalContext } from "../../../../common/modal/ModalContext"
-import { BaseModal } from "../../../../common/modal/styles/BaseModal"
-import { BaseModalBody } from "../../../../common/modal/styles/BaseModalBody"
-import { BaseModalFooter } from "../../../../common/modal/styles/BaseModalFooter"
-import { BaseModalHeader } from "../../../../common/modal/styles/BaseModalHeader"
 import { useLazyValue } from "../../../../common/state/useLazyValue"
 import { useRequiredContext } from "../../../../common/state/useRequiredContext"
-import type { EditorManager } from "../../../editor/EditorManager"
+import { remove } from "../../../../icons/remove"
+import type { EditorManagerLike } from "../../../editor/EditorManager"
 import { DatabaseManager } from "../../DatabaseManager"
 import { DatabaseManagerProvider } from "../../DatabaseManagerContext"
 import { PersistentStorageWarning } from "../../persist/PersistentStorageWarning"
@@ -18,7 +22,7 @@ import { BackupCreationControls } from "./BackupCreationControls"
 import { BackupList } from "./BackupList"
 
 export type BackupsModalProps = {
-  editorManager: EditorManager
+  editorManager: EditorManagerLike
 }
 
 export function BackupsModal(props: BackupsModalProps) {
@@ -36,53 +40,48 @@ export function BackupsModal(props: BackupsModalProps) {
   return useObserver(() => (
     <DatabaseManagerProvider value={databaseManager}>
       <BackupManagerProvider value={backupManager}>
-        <BaseModal>
-          <BaseModalHeader>Backups</BaseModalHeader>
-          {databaseManager.shouldShowPersistenceWarning && (
-            <BaseModalBody>
-              <PersistentStorageWarning />
-            </BaseModalBody>
-          )}
-          <BaseModalBody>
-            <BackupList />
-          </BaseModalBody>
-          <BaseModalBody>
-            <BackupCreationControls />
-          </BaseModalBody>
-          <BaseModalFooter>
-            <Button
-              variant="borderless"
-              size="medium"
-              onClick={async () => {
-                await backupManager.exportAll()
-              }}
-            >
-              Export all
-            </Button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              style={{ display: "none" }}
-              onChange={async event => {
-                const file = event.target.files?.item(0)?.slice()
-                event.target.files = null
-                if (file) {
-                  await backupManager.importBackups(file)
-                }
-              }}
+        <ModalContainer>
+          <input
+            ref={fileInputRef}
+            type="file"
+            style={{ display: "none" }}
+            onChange={async event => {
+              const file = event.target.files?.item(0)?.slice()
+              event.target.files = null
+              if (file) {
+                await backupManager.importBackups(file)
+              }
+            }}
+          />
+          <ModalHeader>
+            <ModalTitle>Backups</ModalTitle>
+            <ModalAction
+              icon={remove}
+              label="Close"
+              onClick={() => modal.dismiss()}
             />
-            <Button
-              variant="borderless"
-              size="medium"
-              onClick={() => fileInputRef.current?.click()}
-            >
+          </ModalHeader>
+          {databaseManager.shouldShowPersistenceWarning && (
+            <ModalBody>
+              <PersistentStorageWarning />
+            </ModalBody>
+          )}
+          <ModalBody>
+            <BackupList />
+          </ModalBody>
+          <ModalBody>
+            <BackupCreationControls />
+          </ModalBody>
+          <ModalFooter>
+            <SecondaryButton onClick={async () => backupManager.exportAll()}>
+              Export All
+            </SecondaryButton>
+            <SecondaryButton onClick={() => fileInputRef.current?.click()}>
               Import
-            </Button>
-            <Button size="medium" onClick={() => modal.dismiss()}>
-              Close
-            </Button>
-          </BaseModalFooter>
-        </BaseModal>
+            </SecondaryButton>
+            <PrimaryButton onClick={() => modal.dismiss()}>Close</PrimaryButton>
+          </ModalFooter>
+        </ModalContainer>
       </BackupManagerProvider>
     </DatabaseManagerProvider>
   ))

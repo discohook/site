@@ -1,7 +1,7 @@
 import { size, transparentize } from "polished"
 import React from "react"
 import styled from "styled-components"
-import { DARK_THEME } from "../../../../../common/style/themes/darkTheme"
+import { DARK_THEME } from "../../../../../common/theming/darkTheme"
 import { play } from "../icons/play"
 import { volume } from "../icons/volume"
 
@@ -55,7 +55,7 @@ const AudioSeekbar = styled.div`
 const AudioSeekbarHandle = styled.div`
   ${size(6)};
 
-  background: ${({ theme }) => theme.accent.primary};
+  background: ${({ theme }) => theme.discord.primary};
   border-radius: 3px;
 `
 

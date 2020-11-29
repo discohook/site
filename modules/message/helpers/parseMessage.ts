@@ -1,6 +1,6 @@
 import { parseJson } from "../../../common/object/parseJson"
-import type { MessageData } from "../data/MessageData"
-import { isMessage } from "../validation/isMessage"
+import { isMessage } from "../../editor/data/validation/isMessage"
+import type { MessageData } from "../state/data/MessageData"
 
 export const parseMessage = (json: string) => {
   const { value: parsedJson, error } = parseJson(json)

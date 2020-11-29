@@ -21,7 +21,7 @@ const Timestamp = styled.span`
       &::before {
         content: "Today at ";
       }
-    `}
+    `};
 
   ${({ theme }) =>
     theme.appearance.display === "compact" &&
@@ -37,7 +37,7 @@ const Timestamp = styled.span`
       &::before {
         content: "";
       }
-    `}
+    `};
 `
 
 const getTime = () =>

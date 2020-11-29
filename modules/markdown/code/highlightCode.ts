@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/newline-after-import */
 
+import hljs from "highlight.js/lib/core"
 import { getLanguageFromAlias } from "./getLanguageFromAlias"
 import { importLanguage } from "./importLanguage"
-const hljs = require("highlight.js/lib/highlight") as typeof import("highlight.js")
 
 export const highlightCode = async (languageAlias: string, content: string) => {
   const language = getLanguageFromAlias(languageAlias)
-
   if (!language) return
 
   if (!hljs.getLanguage(language.name)) {

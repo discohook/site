@@ -1,18 +1,18 @@
-import { easeQuadInOut } from "d3-ease"
+import { animated, useTransition } from "@react-spring/web"
 import { useObserver } from "mobx-react-lite"
-import { useRouter } from "next/router"
 import { cover, rgb } from "polished"
 import React from "react"
 import { FocusOn } from "react-focus-on"
-import { animated, useTransition } from "react-spring"
-import styled, { css, useTheme } from "styled-components"
-import { Z_INDEX_MODALS } from "../constants"
+import styled from "styled-components"
+import { Z_INDEX_MODALS } from "../layout/constants"
 import { useRequiredContext } from "../state/useRequiredContext"
 import { ModalProvider } from "./ModalContext"
 import { ModalManagerContext } from "./ModalManagerContext"
 
-const Container = styled.div<{ side?: "left" | "right" }>`
+const Container = styled.div`
   position: fixed;
+  z-index: ${Z_INDEX_MODALS};
+
   top: 0;
   right: 0;
   bottom: 0;
@@ -20,34 +20,20 @@ const Container = styled.div<{ side?: "left" | "right" }>`
 
   width: 100%;
 
-  ${({ side }) =>
-    side &&
-    css`
-      width: 50%;
-    `}
-
-  ${({ side }) =>
-    side === "right" &&
-    css`
-      left: 50%;
-    `}
-
   pointer-events: none;
 `
 
 const Item = styled.div`
   ${cover()};
+`
 
-  z-index: ${Z_INDEX_MODALS};
+const Focus = styled(FocusOn)`
+  width: 100%;
+  height: 100%;
 
-  & > .focus-on {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Filter = styled(animated.div)`
@@ -80,58 +66,46 @@ export function ModalOverlay() {
 
   const modals = useObserver(() => manager.modals.slice())
 
-  const transitions = useTransition(modals, modal => modal.id, {
-    config: {
-      duration: 150,
-      easing: easeQuadInOut,
-    },
-    contentOpacity: 0,
-    contentTransform: "scale(0.9)",
-    filterOpacity: 0,
+  const transition = useTransition(modals, {
+    key: modal => modal.id,
+    config: { friction: 15, tension: 300, clamp: true },
     from: {
-      contentOpacity: 0,
-      contentTransform: "scale(0.9)",
-      filterOpacity: 0,
+      contentOpacity: (0 as unknown) as undefined,
+      contentScale: 0.9,
+      filterOpacity: (0 as unknown) as undefined,
     },
     enter: {
-      contentOpacity: 1,
-      contentTransform: "scale(1)",
-      filterOpacity: 0.85,
+      contentOpacity: (1 as unknown) as undefined,
+      contentScale: 1,
+      filterOpacity: (0.85 as unknown) as undefined,
     },
     leave: {
-      contentOpacity: 0,
-      contentTransform: "scale(0.9)",
-      filterOpacity: 0,
+      contentOpacity: (0 as unknown) as undefined,
+      contentScale: 0.9,
+      filterOpacity: (0 as unknown) as undefined,
     },
   })
 
-  const router = useRouter()
-  const { appearance } = useTheme()
-
-  let side: undefined | "left" | "right" = "left"
-  if (appearance.mobile && router.route === "/") side = undefined
-
   return (
-    <Container side={side}>
-      {transitions.map(transition => (
-        <ModalProvider key={transition.key} value={transition.item}>
+    <Container>
+      {transition((style, item) => (
+        <ModalProvider value={item}>
           <Item>
-            <Filter style={{ opacity: transition.props.filterOpacity }} />
-            <FocusOn
-              className="focus-on"
-              onClickOutside={() => transition.item.dismiss()}
-              onEscapeKey={() => transition.item.dismiss()}
+            <Filter style={{ opacity: style.filterOpacity }} />
+            <Focus
+              onClickOutside={() => item.dismiss()}
+              onEscapeKey={() => item.dismiss()}
             >
               <Content
                 role="dialog"
                 style={{
-                  opacity: transition.props.contentOpacity,
-                  transform: transition.props.contentTransform,
+                  opacity: style.contentOpacity,
+                  scale: style.contentScale,
                 }}
               >
-                {transition.item.render()}
+                {item.render()}
               </Content>
-            </FocusOn>
+            </Focus>
           </Item>
         </ModalProvider>
       ))}

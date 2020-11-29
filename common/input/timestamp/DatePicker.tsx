@@ -1,7 +1,7 @@
 import { isValid, startOfMinute, startOfMonth } from "date-fns"
 import React, { useState } from "react"
 import styled from "styled-components"
-import { Actions } from "../../../modules/editor/Actions"
+import { Clickable } from "../Clickable"
 import { DayPicker } from "./DayPicker"
 import { MonthYearPicker } from "./MonthYearPicker"
 
@@ -10,6 +10,28 @@ const Container = styled.div`
   flex-direction: column;
 
   width: 260px;
+`
+
+const Actions = styled.div`
+  display: flex;
+  justify-content: end;
+
+  margin-bottom: 12px;
+`
+
+const Action = styled(Clickable)`
+  font-weight: 500;
+  color: ${({ theme }) => theme.interactive.active};
+
+  cursor: pointer;
+
+  & + & {
+    margin-left: 16px;
+  }
+
+  &:focus {
+    text-decoration: underline;
+  }
 `
 
 export type DatePickerProps = {
@@ -26,21 +48,19 @@ export function DatePicker(props: DatePickerProps) {
 
   return (
     <Container>
-      <Actions
-        actions={[
-          {
-            name: "Today",
-            action: () => {
-              handleChange(startOfMinute(Date.now()))
-              setMonth(startOfMonth(Date.now()))
-            },
-          },
-          {
-            name: "Clear",
-            action: () => handleChange(new Date(Number.NaN)),
-          },
-        ]}
-      />
+      <Actions>
+        <Action
+          onClick={() => {
+            handleChange(startOfMinute(Date.now()))
+            setMonth(startOfMonth(Date.now()))
+          }}
+        >
+          Today
+        </Action>
+        <Action onClick={() => handleChange(new Date(Number.NaN))}>
+          Clear
+        </Action>
+      </Actions>
       <MonthYearPicker date={month} onChange={setMonth} />
       <DayPicker date={date} onChange={handleChange} month={month} />
     </Container>

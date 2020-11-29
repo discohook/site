@@ -9,19 +9,21 @@ const { get } = require("https")
 /** @typedef {import("../modules/markdown/code/Language").Language} Language */
 
 const HLJS_GIT_RAW_LANGUAGES_BASE_URL =
-  "https://raw.githubusercontent.com/highlightjs/highlight.js/9-18-stable/src/languages"
+  "https://raw.githubusercontent.com/highlightjs/highlight.js/master/src/languages"
 
 /** @type {(language: string) => Promise<string[] | undefined>} */
 async function getDependencies(language) {
   /** @type {IncomingMessage} */
-  const message = await new Promise(resolve =>
-    get(`${HLJS_GIT_RAW_LANGUAGES_BASE_URL}/${language}.js`, resolve),
-  )
+  const message = await new Promise(resolve => {
+    get(`${HLJS_GIT_RAW_LANGUAGES_BASE_URL}/${language}.js`, resolve)
+  })
 
   let source = ""
   message.on("data", chunk => (source += chunk))
 
-  await new Promise(resolve => message.once("end", resolve))
+  await new Promise(resolve => {
+    message.once("end", resolve)
+  })
 
   const requires = source
     .split(/\n|\r/g)
@@ -39,6 +41,8 @@ async function getDependencies(language) {
 /** @type {(language: string) => Promise<Language>} */
 async function getLanguage(language) {
   const hljsLanguage = hljs.getLanguage(language)
+  if (!hljsLanguage)
+    throw new Error(`Language ${JSON.stringify(language)} not found.`)
 
   const aliases = (hljsLanguage.aliases || [])
     .map(alias => alias.toLowerCase())

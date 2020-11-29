@@ -1,26 +1,32 @@
+import "@reach/slider/styles.css"
+import "@reach/tabs/styles.css"
+import { autorun } from "mobx"
 import { Observer } from "mobx-react-lite"
-import "mobx-react-lite/batchingForReactDom"
 import App, { AppProps } from "next/app"
 import React from "react"
 import { ThemeProvider } from "styled-components"
-import { ErrorBoundary } from "../common/ErrorBoundary"
 import { ModalManager } from "../common/modal/ModalManager"
 import { ModalManagerProvider } from "../common/modal/ModalManagerContext"
 import { ModalOverlay } from "../common/modal/ModalOverlay"
+import { ErrorBoundary } from "../common/page/ErrorBoundary"
 import { PopoverManager } from "../common/popover/PopoverManager"
 import { PopoverManagerProvider } from "../common/popover/PopoverManagerContext"
 import { PopoverOverlay } from "../common/popover/PopoverOverlay"
-import { AppearanceManager } from "../common/style/AppearanceManager"
-import { AppearanceManagerProvider } from "../common/style/AppearanceManagerContext"
-import { GlobalStyle } from "../common/style/GlobalStyle"
-import { resetNextId } from "../common/uid"
+import { PreferenceManager } from "../common/settings/PreferenceManager"
+import { PreferenceManagerProvider } from "../common/settings/PreferenceManagerContext"
+import { resetNextId } from "../common/state/uid"
+import { GlobalStyle } from "../common/theming/GlobalStyle"
+import { TooltipManager } from "../common/tooltip/TooltipManager"
+import { TooltipManagerProvider } from "../common/tooltip/TooltipManagerContext"
+import { TooltipOverlay } from "../common/tooltip/TooltipOverlay"
 
-export default class MyApp extends App {
-  private readonly appearanceManager = new AppearanceManager()
+export default class Application extends App {
+  private readonly preferenceManager = new PreferenceManager()
   private readonly modalManager = new ModalManager()
   private readonly popoverManager = new PopoverManager()
+  private readonly tooltipManager = new TooltipManager()
 
-  private lastRoute: string
+  private readonly disposers: (() => void)[] = []
 
   constructor(props: Readonly<AppProps>) {
     super(props)
@@ -28,19 +34,22 @@ export default class MyApp extends App {
     if (typeof window === "undefined") {
       resetNextId()
     }
-
-    this.lastRoute = props.router.route
   }
 
-  shouldComponentUpdate(nextProps: Readonly<AppProps>) {
-    const nextRoute = nextProps.router.route
+  componentDidMount() {
+    this.preferenceManager.load()
 
-    if (this.lastRoute === "/" && nextRoute === "/") {
-      return false
+    this.disposers.push(
+      autorun(() => this.preferenceManager.dump(), {
+        delay: 500,
+      }),
+    )
+  }
+
+  componentWillUnmount() {
+    for (const disposer of this.disposers) {
+      disposer()
     }
-
-    this.lastRoute = nextRoute
-    return true
   }
 
   render() {
@@ -49,18 +58,21 @@ export default class MyApp extends App {
     return (
       <Observer>
         {() => (
-          <ThemeProvider theme={this.appearanceManager.theme}>
+          <ThemeProvider theme={this.preferenceManager.theme}>
             <GlobalStyle />
             <ErrorBoundary>
-              <AppearanceManagerProvider value={this.appearanceManager}>
+              <PreferenceManagerProvider value={this.preferenceManager}>
                 <ModalManagerProvider value={this.modalManager}>
                   <PopoverManagerProvider value={this.popoverManager}>
-                    <Component {...pageProps} />
-                    <ModalOverlay />
-                    <PopoverOverlay />
+                    <TooltipManagerProvider value={this.tooltipManager}>
+                      <Component {...pageProps} />
+                      <ModalOverlay />
+                      <PopoverOverlay />
+                      <TooltipOverlay />
+                    </TooltipManagerProvider>
                   </PopoverManagerProvider>
                 </ModalManagerProvider>
-              </AppearanceManagerProvider>
+              </PreferenceManagerProvider>
             </ErrorBoundary>
           </ThemeProvider>
         )}

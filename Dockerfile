@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn ./.yarn
+COPY patches ./patches
 RUN yarn install
 
 COPY . .

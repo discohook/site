@@ -1,8 +1,11 @@
-import type { MessageData } from "../../../message/data/MessageData"
+import type { MessageData } from "../../../message/state/data/MessageData"
 
 export type Backup = {
   id?: number
   name: string
-  webhookUrl?: string
-  message: MessageData
+  messages: MessageData[]
+  target: {
+    url?: string
+    message?: string
+  }
 }

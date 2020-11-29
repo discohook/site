@@ -1,6 +1,6 @@
 import type { NextPageContext } from "next"
 import React from "react"
-import { ErrorPage } from "../common/ErrorPage"
+import { ErrorPage } from "../common/page/ErrorPage"
 
 export type ErrorProps = {
   statusCode?: number

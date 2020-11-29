@@ -1,22 +1,20 @@
-import { useObserver } from "mobx-react-lite"
 import React from "react"
-import styled from "styled-components"
-import { Button } from "../../../common/input/Button"
+import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
+import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
+import { ModalAction } from "../../../common/modal/layout/ModalAction"
+import { ModalBody } from "../../../common/modal/layout/ModalBody"
+import { ModalContainer } from "../../../common/modal/layout/ModalContainer"
+import { ModalFooter } from "../../../common/modal/layout/ModalFooter"
+import { ModalHeader } from "../../../common/modal/layout/ModalHeader"
+import { ModalTitle } from "../../../common/modal/layout/ModalTitle"
 import { ModalContext } from "../../../common/modal/ModalContext"
-import { BaseModal } from "../../../common/modal/styles/BaseModal"
-import { BaseModalBody } from "../../../common/modal/styles/BaseModalBody"
-import { BaseModalFooter } from "../../../common/modal/styles/BaseModalFooter"
-import { BaseModalHeader } from "../../../common/modal/styles/BaseModalHeader"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
-import { Message } from "../../message/Message"
-import type { EditorManager } from "../EditorManager"
-
-const Warning = styled.div`
-  margin: 8px;
-`
+import { remove } from "../../../icons/remove"
+import { Markdown } from "../../markdown/Markdown"
+import type { EditorManagerLike } from "../EditorManager"
 
 export type ClearAllConfirmationModalProps = {
-  editorManager: EditorManager
+  editorManager: EditorManagerLike
 }
 
 export function ClearAllConfirmationModal(
@@ -26,32 +24,37 @@ export function ClearAllConfirmationModal(
 
   const modal = useRequiredContext(ModalContext)
 
-  return useObserver(() => (
-    <BaseModal>
-      <BaseModalHeader>Clear all</BaseModalHeader>
-      <BaseModalBody>
-        <Warning>
-          Are you sure you want to clear all? This action cannot be undone.
-        </Warning>
-      </BaseModalBody>
-      <BaseModalFooter>
-        <Button
-          variant="borderless"
-          size="medium"
+  return (
+    <ModalContainer>
+      <ModalHeader>
+        <ModalTitle>Clear All</ModalTitle>
+        <ModalAction
+          icon={remove}
+          label="Close"
           onClick={() => modal.dismiss()}
-        >
+        />
+      </ModalHeader>
+      <ModalBody>
+        <Markdown
+          content={
+            "This action removes all content from the message. Are you sure" +
+            " you want to continue? This action cannot be reverted."
+          }
+        />
+      </ModalBody>
+      <ModalFooter>
+        <SecondaryButton onClick={() => modal.dismiss()}>
           Cancel
-        </Button>
-        <Button
-          size="medium"
+        </SecondaryButton>
+        <PrimaryButton
           onClick={() => {
-            editorManager.message = new Message()
+            editorManager.clear()
             modal.dismiss()
           }}
         >
           Clear all
-        </Button>
-      </BaseModalFooter>
-    </BaseModal>
-  ))
+        </PrimaryButton>
+      </ModalFooter>
+    </ModalContainer>
+  )
 }

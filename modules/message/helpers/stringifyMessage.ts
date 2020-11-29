@@ -1,4 +1,4 @@
-import type { MessageData } from "../data/MessageData"
+import type { MessageData } from "../state/data/MessageData"
 
 export const stringifyMessage = (message: MessageData, pretty = true) => {
   return JSON.stringify(

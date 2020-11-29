@@ -1,13 +1,13 @@
 import { useObserver } from "mobx-react-lite"
 import dynamic from "next/dynamic"
 import { em, rem, size } from "polished"
-import React, { Key, useContext } from "react"
+import React, { useContext } from "react"
 import styled, { css, useTheme } from "styled-components"
-import { SCREEN_SMALL } from "../../../common/breakpoints"
-import { DARK_THEME } from "../../../common/style/themes/darkTheme"
+import { SCREEN_SMALL } from "../../../common/layout/breakpoints"
+import { DARK_THEME } from "../../../common/theming/darkTheme"
 import { EditorManagerContext } from "../../editor/EditorManagerContext"
 
-const Clock = dynamic<{ key: Key }>(
+const Clock = dynamic<Record<never, unknown>>(
   async () => import("./Clock").then(module => module.Clock),
   { ssr: false },
 )
@@ -26,15 +26,15 @@ const Container = styled.div`
         css`
           margin-left: -72px;
           padding-left: 72px;
-        `}
-    `}
+        `};
+    `};
 
   ${({ theme }) =>
     theme.appearance.display === "compact" &&
     css`
       display: inline;
       display: contents;
-    `}
+    `};
 `
 
 const Avatar = styled.img`
@@ -65,7 +65,7 @@ const Avatar = styled.img`
       ${size(40)};
 
       margin: 0 16px;
-    `}
+    `};
 
   ${SCREEN_SMALL} {
     display: none;
@@ -91,13 +91,13 @@ const Username = styled.h1`
     theme.appearance.display === "compact" &&
     css`
       margin-right: ${rem(8)};
-    `}
+    `};
 
   ${({ theme }) =>
     theme.appearance.color === "light" &&
     css`
       font-weight: 600;
-    `}
+    `};
 `
 
 const BotTag = styled.span`
@@ -111,7 +111,7 @@ const BotTag = styled.span`
   padding: ${rem(1.15)} ${rem(4.4)};
 
   border-radius: 3px;
-  background: ${({ theme }) => theme.accent.primary};
+  background: ${({ theme }) => theme.discord.primary};
 
   color: ${DARK_THEME.header.primary};
   font-size: ${em(10)};
@@ -134,8 +134,8 @@ export function MessageHeader(props: MessageHeaderProps) {
 
   return useObserver(() => {
     if (editorManager) {
-      if (!username) username = editorManager.webhook.displayName
-      if (!avatarUrl) avatarUrl = editorManager.webhook.displayAvatarUrl
+      if (!username) username = editorManager.target.displayName
+      if (!avatarUrl) avatarUrl = editorManager.target.displayAvatarUrl
     }
 
     let info = [

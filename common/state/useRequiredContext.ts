@@ -4,7 +4,7 @@ export const useRequiredContext = <T>(context: Context<T>) => {
   const value = useContext(context)
 
   if (value == null) {
-    const displayName = context.displayName ?? "Context"
+    const displayName = context.displayName ?? "(unknown context)"
     throw new Error(`${displayName} is not available in the component tree.`)
   }
 

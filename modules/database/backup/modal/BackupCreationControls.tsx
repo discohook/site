@@ -1,15 +1,9 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useState } from "react"
-import styled from "styled-components"
-import { Button } from "../../../../common/input/Button"
-import { InputField } from "../../../../common/input/InputField"
+import { PrimaryButton } from "../../../../common/input/button/PrimaryButton"
+import { InputField } from "../../../../common/input/text/InputField"
 import { useRequiredContext } from "../../../../common/state/useRequiredContext"
-import { FlexContainer } from "../../../editor/styles/FlexContainer"
 import { BackupManagerContext } from "../BackupManagerContext"
-
-const CreateBackupButton = styled(Button)`
-  width: 80px;
-`
 
 export function BackupCreationControls() {
   const backupManager = useRequiredContext(BackupManagerContext)
@@ -17,14 +11,13 @@ export function BackupCreationControls() {
   const [backupName, setBackupName] = useState("")
 
   return useObserver(() => (
-    <FlexContainer flow="row">
-      <InputField
-        id="backup-name"
-        value={backupName}
-        onChange={setBackupName}
-        label="Backup name"
-      />
-      <CreateBackupButton
+    <InputField
+      id="backup-name"
+      value={backupName}
+      onChange={setBackupName}
+      label="Backup name"
+    >
+      <PrimaryButton
         disabled={backupName.length === 0}
         onClick={async () => {
           await backupManager.saveBackup(backupName.trim())
@@ -32,9 +25,9 @@ export function BackupCreationControls() {
         }}
       >
         {backupManager.backups.some(backup => backup.name === backupName.trim())
-          ? "Update"
+          ? "Overwrite"
           : "Save"}
-      </CreateBackupButton>
-    </FlexContainer>
+      </PrimaryButton>
+    </InputField>
   ))
 }

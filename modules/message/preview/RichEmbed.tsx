@@ -5,7 +5,7 @@ import styled, { css } from "styled-components"
 import { useReaction } from "../../../common/state/useReaction"
 import { Markdown } from "../../markdown/Markdown"
 import { MarkdownContainer } from "../../markdown/styles/MarkdownContainer"
-import type { Embed } from "../Embed"
+import type { EmbedLike } from "../state/models/EmbedModel"
 import { EmbedAuthor } from "./EmbedAuthor"
 import { EmbedField } from "./EmbedField"
 import { EmbedFooter } from "./EmbedFooter"
@@ -82,7 +82,7 @@ const EmbedImage = styled.img<{ hasThumbnail?: boolean }>`
     hasThumbnail &&
     css`
       grid-column: 1 / 3;
-    `}
+    `};
 `
 
 const EmbedThumbnailContainer = styled.div`
@@ -103,7 +103,7 @@ const EmbedThumbnail = styled.img`
 `
 
 export type RichEmbedProps = {
-  embed: Embed
+  embed: EmbedLike
 }
 
 export function RichEmbed(props: RichEmbedProps) {
@@ -126,7 +126,7 @@ export function RichEmbed(props: RichEmbedProps) {
     const color = embed.color.raw === 0xffffff ? undefined : embed.color.hex
 
     return (
-      <RichEmbedContainer style={{ borderColor: color }} ref={containerRef}>
+      <RichEmbedContainer ref={containerRef} style={{ borderColor: color }}>
         <EmbedGrid>
           {embed.hasAuthor && <EmbedAuthor embed={embed} />}
           {embed.hasTitle &&
@@ -159,10 +159,10 @@ export function RichEmbed(props: RichEmbedProps) {
             <EmbedGallery embed={embed} />
           ) : embed.gallery.length === 1 ? (
             <EmbedImage
+              ref={imageRef}
               src={embed.gallery[0]}
               alt="Image"
               hasThumbnail={Boolean(embed.thumbnail)}
-              ref={imageRef}
               onLoad={() => {
                 const { current: container } = containerRef
                 const { current: image } = imageRef

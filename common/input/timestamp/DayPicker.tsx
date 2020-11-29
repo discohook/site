@@ -57,13 +57,13 @@ const DayCell = styled.div<{ muted?: boolean; selected?: boolean }>`
     muted &&
     css`
       color: ${({ theme }) => theme.interactive.muted};
-    `}
+    `};
 
   ${({ selected }) =>
     selected &&
     css`
       background: ${({ theme }) => theme.background.secondary};
-    `}
+    `};
 `
 
 export type DayPickerProps = {

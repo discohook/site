@@ -1,11 +1,10 @@
-import type { MessageData } from "../../../message/data/MessageData"
-import type { Backup } from "./Backup"
+import type { MessageData } from "../../../message/state/data/MessageData"
 
 export type ExportData =
   | {
       version: 1
       name: string
-      // camel case
+      // camel case version of MessageData
       message: Record<string, unknown>
     }
   | {
@@ -15,5 +14,28 @@ export type ExportData =
     }
   | {
       version: 3
-      backups: Backup[]
+      backups: {
+        name: string
+        webhookUrl?: string
+        message: MessageData
+      }[]
+    }
+  | {
+      version: 4
+      backups: {
+        name: string
+        webhookUrl?: string
+        messages: MessageData[]
+      }[]
+    }
+  | {
+      version: 5
+      backups: {
+        name: string
+        messages: MessageData[]
+        target: {
+          url?: string
+          message?: string
+        }
+      }[]
     }

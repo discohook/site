@@ -2,7 +2,7 @@ import { useObserver } from "mobx-react-lite"
 import { size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import type { Embed } from "../Embed"
+import type { EmbedLike } from "../state/models/EmbedModel"
 
 const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
   grid-column: 1 / 2;
@@ -22,7 +22,7 @@ const EmbedGalleryWrapper = styled.div<{ hasThumbnail?: boolean }>`
     hasThumbnail &&
     css`
       grid-column: 1 / 3;
-    `}
+    `};
 `
 
 const EmbedGalleryCell = styled.div<{ index?: number; length?: number }>`
@@ -37,7 +37,7 @@ const EmbedGalleryCell = styled.div<{ index?: number; length?: number }>`
     (length === 1 || length === 2 || (length === 3 && index === 0)) &&
     css`
       grid-row: span 2;
-    `}
+    `};
 `
 
 const EmbedGalleryImage = styled.img`
@@ -47,7 +47,7 @@ const EmbedGalleryImage = styled.img`
 `
 
 export type EmbedGalleryProps = {
-  embed: Embed
+  embed: EmbedLike
 }
 
 export function EmbedGallery(props: EmbedGalleryProps) {

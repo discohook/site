@@ -1,22 +1,25 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled from "styled-components"
-import { Button } from "../../../common/input/Button"
+import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
+import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
+import { ButtonRow } from "../../../common/layout/ButtonRow"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
+import { Markdown } from "../../markdown/Markdown"
 import { DatabaseManagerContext } from "../DatabaseManagerContext"
 import { PushNotificationModal } from "./PushNotificationModal"
 
-const Warning = styled.div`
-  margin: 8px;
-  padding: 8px;
+const Container = styled.div`
+  margin-top: 16px;
+  padding: 16px;
 
-  border: 1px solid ${({ theme }) => theme.accent.warning};
+  background: ${({ theme }) => theme.background.secondary};
   border-radius: 3px;
 `
 
 const Header = styled.h5`
-  margin: 8px;
+  margin: 0 0 8px;
 
   color: ${({ theme }) => theme.header.primary};
   font-size: 1em;
@@ -24,10 +27,8 @@ const Header = styled.h5`
   line-height: 1.375;
 `
 
-const Text = styled.p`
-  margin: 8px;
-
-  line-height: 1.375;
+const Buttons = styled(ButtonRow)`
+  margin-top: 16px;
 `
 
 export function PersistentStorageWarning() {
@@ -35,39 +36,39 @@ export function PersistentStorageWarning() {
   const databaseManager = useRequiredContext(DatabaseManagerContext)
 
   return useObserver(() => (
-    <Warning>
+    <Container>
       <Header>Warning</Header>
-      <Text>
-        Data may be deleted by the browser under conditions such as low disk
-        space. To ensure data will be kept, you can grant permission to
-        persistent storage.
-      </Text>
-      <Button
-        variant="outline"
-        accent="warning"
-        onClick={async () => {
-          if ("chrome" in window) {
-            modalManager.spawn({
-              render: () => (
-                <PushNotificationModal databaseManager={databaseManager} />
-              ),
-            })
-          } else {
-            await databaseManager.requestPersistence()
-          }
-        }}
-      >
-        Request permission
-      </Button>
-      <Button
-        variant="outline"
-        accent="warning"
-        onClick={() => {
-          databaseManager.persistenceMessageDismissed = true
-        }}
-      >
-        Dismiss
-      </Button>
-    </Warning>
+      <Markdown
+        content={
+          "Your browser did not grant permission to use persistent storage" +
+          " for this site. Data stored might be deleted by the browser when" +
+          " this permission is not granted."
+        }
+      />
+      <Buttons>
+        <PrimaryButton
+          onClick={async () => {
+            if ("chrome" in window) {
+              modalManager.spawn({
+                render: () => (
+                  <PushNotificationModal databaseManager={databaseManager} />
+                ),
+              })
+            } else {
+              await databaseManager.requestPersistence()
+            }
+          }}
+        >
+          Request permission
+        </PrimaryButton>
+        <SecondaryButton
+          onClick={() => {
+            databaseManager.persistenceMessageDismissed = true
+          }}
+        >
+          Dismiss
+        </SecondaryButton>
+      </Buttons>
+    </Container>
   ))
 }

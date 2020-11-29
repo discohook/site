@@ -1,23 +1,22 @@
 import { useObserver } from "mobx-react-lite"
+import { getSnapshot, SnapshotOut } from "mobx-state-tree"
 import type { GetServerSidePropsContext } from "next"
-import Router from "next/router"
-import React, { useEffect, useRef, useState } from "react"
-import styled, { css, ThemeProvider } from "styled-components"
+import React, { useRef, useState } from "react"
+import styled from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
-import { useWindowEvent } from "../common/dom/useWindowEvent"
-import { PageHead } from "../common/PageHead"
+import { ModalManagerContext } from "../common/modal/ModalManagerContext"
+import { Header } from "../common/page/Header"
+import { PageHead } from "../common/page/PageHead"
+import { PreferencesModal } from "../common/settings/PreferencesModal"
 import { useAutorun } from "../common/state/useAutorun"
 import { useLazyValue } from "../common/state/useLazyValue"
 import { useRequiredContext } from "../common/state/useRequiredContext"
-import { AppearanceManagerContext } from "../common/style/AppearanceManagerContext"
+import { timeout } from "../common/utilities/timeout"
 import { Editor } from "../modules/editor/Editor"
 import { EditorManager } from "../modules/editor/EditorManager"
 import { EditorManagerProvider } from "../modules/editor/EditorManagerContext"
-import type { MessageData } from "../modules/message/data/MessageData"
-import { decodeMessage } from "../modules/message/helpers/decodeMessage"
-import { INITIAL_MESSAGE_DATA } from "../modules/message/initialMessageData"
-import { MessagePreview } from "../modules/message/MessagePreview"
-import { timeout } from "../modules/message/timeout"
+import { getEditorManagerFromQuery } from "../modules/editor/getEditorManagerFromQuery"
+import { Preview } from "../modules/message/preview/Preview"
 
 const Container = styled.div`
   display: flex;
@@ -26,169 +25,102 @@ const Container = styled.div`
   height: 100%;
 `
 
-const TabSwitcher = styled.div`
-  display: flex;
+const View = styled.main.attrs({ translate: "no" })`
+  max-height: calc(100% - 48px);
 
-  background: ${({ theme }) => theme.background.secondary};
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-`
-
-const Tab = styled.button.attrs({ type: "button" })<{ active: boolean }>`
-  height: 40px;
-  padding: 0 16px;
-
-  background: none;
-  border: solid transparent;
-  border-width: 2px 0;
-  border-radius: 0;
-
-  font-weight: 500;
-  font-size: 15px;
-  color: ${({ theme }) => theme.header.primary};
-  line-height: 38px;
-
-  ${({ active }) =>
-    active &&
-    css`
-      border-bottom-color: ${({ theme }) => theme.accent.primary};
-    `}
-`
-
-const View = styled.main`
   display: flex;
   flex-direction: row-reverse;
   align-items: stretch;
 
   flex: 1;
 
-  max-height: 100%;
-
   & > * {
     flex: 1;
+    height: 100%;
+    overflow-y: scroll;
   }
-
-  ${({ theme }) =>
-    theme.appearance.mobile &&
-    css`
-      margin: 40px 0 0;
-      max-height: calc(100% - 40px);
-    `}
-`
-
-const ScrollContainer = styled.div`
-  height: 100%;
-  overflow-y: scroll;
-`
-
-const Preview = styled(MessagePreview)`
-  flex: 0 0 auto;
 `
 
 export type MainProps = {
-  message: MessageData
+  state: SnapshotOut<typeof EditorManager>
   mobile: boolean
 }
 
 export default function Main(props: MainProps) {
-  const { message, mobile } = props
+  const { state, mobile } = props
 
-  const editorManager = useLazyValue(() => new EditorManager(message))
+  const editorManager = useLazyValue(() => EditorManager.create(state))
 
   const cancelRef = useRef<() => void>()
   useAutorun(() => {
-    const message = editorManager.message.getMessageData()
-    const json = JSON.stringify({ message: { ...message, files: undefined } })
-    const base64 = base64UrlEncode(json)
+    const messages = editorManager.messages.map(message => ({
+      data: message.data,
+    }))
 
-    const { current: cancel } = cancelRef
-    if (cancel) cancel()
+    cancelRef.current?.()
+    cancelRef.current = timeout(() => {
+      const json = JSON.stringify({ messages })
+      const base64 = base64UrlEncode(json)
 
-    cancelRef.current = timeout(async () => {
-      if (Router.query.message !== base64) {
-        await Router.replace(`/?message=${base64}`, `/?message=${base64}`, {
-          shallow: true,
-        })
-      }
+      history.replaceState({ __N: false }, "", `/?data=${base64}`)
     }, 500)
   })
 
-  const appearanceManager = useRequiredContext(AppearanceManagerContext)
-  useEffect(() => {
-    appearanceManager.mobile = mobile
-  }, [appearanceManager, mobile])
+  const [activeTab, setActiveTab] = useState<"Preview" | "Editor">("Preview")
 
-  const [activeTab, setActiveTab] = useState<"preview" | "editor">("preview")
-
-  useWindowEvent("beforeunload", event => {
-    event.preventDefault()
-    event.returnValue = ""
-  })
+  const modalManager = useRequiredContext(ModalManagerContext)
+  const spawnSettingsModal = () =>
+    modalManager.spawn({ render: () => <PreferencesModal /> })
 
   return useObserver(() => (
-    <ThemeProvider
-      theme={theme => ({
-        ...theme,
-        appearance: { ...theme.appearance, mobile },
-      })}
-    >
-      <EditorManagerProvider value={editorManager}>
-        <PageHead
-          title="Discohook | A message and embed generator for Discord webhooks"
-          description="An easy-to-use tool for building and sending Discord messages and embeds using webhooks."
-        >
-          <meta key="referrer" name="referrer" content="strict-origin" />
-        </PageHead>
-        <Container translate="no">
-          {mobile && (
-            <TabSwitcher>
-              <Tab
-                active={activeTab === "editor"}
-                onClick={() => setActiveTab("editor")}
-              >
-                Editor
-              </Tab>
-              <Tab
-                active={activeTab === "preview"}
-                onClick={() => setActiveTab("preview")}
-              >
-                Preview
-              </Tab>
-            </TabSwitcher>
+    <EditorManagerProvider value={editorManager}>
+      <PageHead
+        title="Discohook"
+        description="The easiest way to build and send Discord messages using webhooks."
+      >
+        <meta key="referrer" name="referrer" content="strict-origin" />
+      </PageHead>
+      <Container>
+        <Header
+          items={[
+            { name: "Support Server", to: "/discord", newWindow: true },
+            { name: "Discord Bot", to: "/bot", newWindow: true },
+            { name: "Settings", handler: spawnSettingsModal },
+          ]}
+          tabs={
+            mobile
+              ? {
+                  items: ["Editor", "Preview"],
+                  current: activeTab,
+                  onChange: setActiveTab,
+                }
+              : undefined
+          }
+        />
+        <View>
+          {(!mobile || activeTab === "Preview") && (
+            <div>
+              <Preview />
+            </div>
           )}
-          <View>
-            {(!mobile || activeTab === "preview") && (
-              <ScrollContainer>
-                <Preview message={editorManager.message} />
-              </ScrollContainer>
-            )}
-            {(!mobile || activeTab === "editor") && (
-              <ScrollContainer>
-                <Editor />
-              </ScrollContainer>
-            )}
-          </View>
-        </Container>
-      </EditorManagerProvider>
-    </ThemeProvider>
+          {(!mobile || activeTab === "Editor") && (
+            <div>
+              <Editor />
+            </div>
+          )}
+        </View>
+      </Container>
+    </EditorManagerProvider>
   ))
 }
 
 export const getServerSideProps = (
   context: GetServerSidePropsContext,
 ): { props: MainProps } => {
-  const message =
-    decodeMessage(String(context.query.message ?? "")) ?? INITIAL_MESSAGE_DATA
-
-  const mobile = /mobile/i.test(context.req.headers["user-agent"] ?? "")
-
   return {
     props: {
-      message,
-      mobile,
+      state: getSnapshot(getEditorManagerFromQuery(context.query)),
+      mobile: /mobile/i.test(context.req.headers["user-agent"] ?? ""),
     },
   }
 }

@@ -2,7 +2,7 @@ import { useObserver } from "mobx-react-lite"
 import { rem, size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import type { Embed } from "../Embed"
+import type { EmbedLike } from "../state/models/EmbedModel"
 
 const Container = styled.div`
   min-width: 0;
@@ -36,13 +36,13 @@ const AuthorNameNormal = styled.span`
       @media (max-resolution: 1dppx) {
         font-weight: 500;
       }
-    `}
+    `};
 `
 
 const AuthorNameLink = AuthorNameNormal.withComponent("a")
 
 export type EmbedAuthorProps = {
-  embed: Embed
+  embed: EmbedLike
 }
 
 export function EmbedAuthor(props: EmbedAuthorProps) {

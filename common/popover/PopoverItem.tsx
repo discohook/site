@@ -1,9 +1,9 @@
 import { createPopper } from "@popperjs/core"
 import React, { useLayoutEffect, useRef } from "react"
-import { useWindowEvent } from "../dom/useWindowEvent"
+import { FocusOn } from "react-focus-on"
 import { useRequiredContext } from "../state/useRequiredContext"
 import type { Popover } from "./Popover"
-import { PopoverContainer } from "./PopoverContainer"
+import { PopoverProvider } from "./PopoverContext"
 import { PopoverManagerContext } from "./PopoverManagerContext"
 
 export type PopoverItemProps = {
@@ -12,9 +12,10 @@ export type PopoverItemProps = {
 
 export function PopoverItem(props: PopoverItemProps) {
   const { popover } = props
+
   const manager = useRequiredContext(PopoverManagerContext)
 
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLElement>(null)
 
   useLayoutEffect(() => {
     const { current: element } = ref
@@ -22,6 +23,14 @@ export function PopoverItem(props: PopoverItemProps) {
 
     const popper = createPopper(popover.anchor, element, {
       placement: popover.placement,
+      modifiers: [
+        {
+          name: "offset",
+          options: {
+            offset: [0, 8],
+          },
+        },
+      ],
     })
 
     return () => {
@@ -29,14 +38,16 @@ export function PopoverItem(props: PopoverItemProps) {
     }
   })
 
-  useWindowEvent("click", event => {
-    if (
-      !ref.current?.contains(event.target as Node) &&
-      !popover.anchor.contains(event.target as Node)
-    ) {
-      manager.dismiss(popover.name)
-    }
-  })
-
-  return <PopoverContainer ref={ref}>{popover.render()}</PopoverContainer>
+  return (
+    <PopoverProvider value={popover}>
+      <FocusOn
+        ref={ref}
+        shards={popover.shards}
+        onClickOutside={() => manager.dismiss(popover.name)}
+        onEscapeKey={() => manager.dismiss(popover.name)}
+      >
+        {popover.render()}
+      </FocusOn>
+    </PopoverProvider>
+  )
 }

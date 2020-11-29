@@ -1,6 +1,6 @@
 import { action } from "mobx"
 import type { ReactNode } from "react"
-import { getUniqueId } from "../uid"
+import { getUniqueId } from "../state/uid"
 import type { ModalManager } from "./ModalManager"
 
 export type ModalOptions = {

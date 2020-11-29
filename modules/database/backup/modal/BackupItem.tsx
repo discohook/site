@@ -2,26 +2,30 @@ import { useObserver } from "mobx-react-lite"
 import { ellipsis } from "polished"
 import React from "react"
 import styled from "styled-components"
-import { Button } from "../../../../common/input/Button"
+import { Button } from "../../../../common/input/button/Button"
+import { ActionButtons } from "../../../../common/layout/ActionButtons"
 import { ModalManagerContext } from "../../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../../common/state/useRequiredContext"
+import { copy } from "../../../../icons/copy"
+import { save } from "../../../../icons/save"
+import { trash } from "../../../../icons/trash"
+import { upload } from "../../../../icons/upload"
 import { BackupManagerContext } from "../BackupManagerContext"
 import type { BackupData } from "../types/BackupData"
 import { DeletionConfirmationModal } from "./DeletionConfirmationModal"
 
 const Container = styled.li`
-  height: 40px;
+  height: 48px;
 
   display: flex;
   align-items: center;
 
   list-style: none;
 
-  border: solid ${({ theme }) => theme.backgroundModifier.accent};
-  border-width: 0;
+  border: 0 solid ${({ theme }) => theme.backgroundModifier.accent};
 
   & + & {
-    border-width: 1px 0 0;
+    border-top-width: 1px;
   }
 
   & > ${Button} {
@@ -32,10 +36,8 @@ const Container = styled.li`
 const BackupName = styled.div`
   ${ellipsis()};
 
-  font-weight: 500;
-  color: ${({ theme }) => theme.interactive.normal};
-
   flex: 1;
+  font-weight: 500;
 `
 
 export type BackupItemProps = {
@@ -51,37 +53,41 @@ export function BackupItem(props: BackupItemProps) {
   return useObserver(() => (
     <Container>
       <BackupName>{backup.name}</BackupName>
-      <Button
-        variant="borderless"
-        onClick={async () => {
-          await backupManager.exportBackup(backup.name)
-        }}
-      >
-        Export
-      </Button>
-      <Button
-        variant="borderless"
-        onClick={async () => {
-          await backupManager.loadBackup(backup.name)
-        }}
-      >
-        Load
-      </Button>
-      <Button
-        variant="borderless"
-        onClick={() => {
-          modalManager.spawn({
-            render: () => (
-              <DeletionConfirmationModal
-                backupManager={backupManager}
-                backup={backup}
-              />
-            ),
-          })
-        }}
-      >
-        Delete
-      </Button>
+      <ActionButtons
+        actions={[
+          {
+            icon: upload,
+            label: "Load",
+            handler: async () => backupManager.loadBackup(backup.name),
+          },
+          {
+            icon: save,
+            label: "Export",
+            handler: async () => backupManager.exportBackup(backup.name),
+            overflow: true,
+          },
+          {
+            icon: copy,
+            label: "Overwrite",
+            handler: async () => backupManager.saveBackup(backup.name),
+            overflow: true,
+          },
+          {
+            icon: trash,
+            label: "Delete",
+            handler: () =>
+              modalManager.spawn({
+                render: () => (
+                  <DeletionConfirmationModal
+                    backupManager={backupManager}
+                    backup={backup}
+                  />
+                ),
+              }),
+            overflow: true,
+          },
+        ]}
+      />
     </Container>
   ))
 }

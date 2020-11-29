@@ -14,6 +14,7 @@ export const SERIALISED_EMOJI_DATA = `
 🙃 upside_down upside_down_face
 😉 wink
 😌 relieved
+🥲 smiling_face_with_tear
 😍 heart_eyes
 🥰 smiling_face_with_3_hearts
 😘 kissing_heart
@@ -89,6 +90,7 @@ export const SERIALISED_EMOJI_DATA = `
 🤕 head_bandage face_with_head_bandage
 🤑 money_mouth money_mouth_face
 🤠 cowboy face_with_cowboy_hat
+🥸 disguised_face
 😈 smiling_imp
 👿 imp
 👹 japanese_ogre
@@ -128,6 +130,7 @@ export const SERIALISED_EMOJI_DATA = `
 🤘/+ metal/# sign_of_the_horns/#
 👌/+ ok_hand/#
 🤏/+ pinching_hand/#!
+🤌/+ pinched_fingers/#!
 👈/+ point_left/#
 👉/+ point_right/#
 👆/+ point_up_2/#
@@ -160,9 +163,12 @@ export const SERIALISED_EMOJI_DATA = `
 👁️ eye
 👀 eyes
 🧠 brain
+🫀 anatomical_heart
+🫁 lungs
 🗣️ speaking_head speaking_head_in_silhouette
 👤 bust_in_silhouette
 👥 busts_in_silhouette
+🫂 people_hugging
 👶/+ baby/#
 👧/+ girl/#
 🧒/+ child/#!
@@ -170,15 +176,19 @@ export const SERIALISED_EMOJI_DATA = `
 👩/+ woman/#
 🧑/+ adult/#!
 👨/+ man/#
+🧑‍🦱/+ person_curly_hair
 👩‍🦱/+ woman_curly_haired/#!
 👨‍🦱/+ man_curly_haired/#!
+🧑‍🦰/+ person_red_hair
 👩‍🦰/+ woman_red_haired/#!
 👨‍🦰/+ man_red_haired/#!
 👱‍♀️/+ blond_haired_woman/#!
 👱/+ blond_haired_person/# person_with_blond_hair/#
 👱‍♂️/+ blond_haired_man/#!
+🧑‍🦳/+ person_white_hair
 👩‍🦳/+ woman_white_haired/#!
 👨‍🦳/+ man_white_haired/#!
+🧑‍🦲/+ person_bald
 👩‍🦲/+ woman_bald/#!
 👨‍🦲/+ man_bald/#!
 🧔/+ bearded_person/#!
@@ -202,40 +212,60 @@ export const SERIALISED_EMOJI_DATA = `
 🕵️/+ detective/# spy/# sleuth_or_spy/#
 🕵️‍♀️/+ woman_detective/#!
 🕵️‍♂️/+ man_detective/#!
+🧑‍⚕️/+ health_worker/#!
 👩‍⚕️/+ woman_health_worker/#!
 👨‍⚕️/+ man_health_worker/#!
+🧑‍🌾/+ farmer/#!
 👩‍🌾/+ woman_farmer/#!
 👨‍🌾/+ man_farmer/#!
+🧑‍🍳/+ cook/#!
 👩‍🍳/+ woman_cook/#!
 👨‍🍳/+ man_cook/#!
+🧑‍🎓/+ student/#!
 👩‍🎓/+ woman_student/#!
 👨‍🎓/+ man_student/#!
+🧑‍🎤/+ singer/#!
 👩‍🎤/+ woman_singer/#!
 👨‍🎤/+ man_singer/#!
+🧑‍🏫/+ teacher/#!
 👩‍🏫/+ woman_teacher/#!
 👨‍🏫/+ man_teacher/#!
+🧑‍🏭/+ factory_worker/#!
 👩‍🏭/+ woman_factory_worker/#!
 👨‍🏭/+ man_factory_worker/#!
+🧑‍💻/+ technologist/#!
 👩‍💻/+ woman_technologist/#!
 👨‍💻/+ man_technologist/#!
+🧑‍💼/+ office_worker/#!
 👩‍💼/+ woman_office_worker/#!
 👨‍💼/+ man_office_worker/#!
+🧑‍🔧/+ mechanic/#!
 👩‍🔧/+ woman_mechanic/#!
 👨‍🔧/+ man_mechanic/#!
+🧑‍🔬/+ scientist/#!
 👩‍🔬/+ woman_scientist/#!
 👨‍🔬/+ man_scientist/#!
+🧑‍🎨/+ artist/#!
 👩‍🎨/+ woman_artist/#!
 👨‍🎨/+ man_artist/#!
+🧑‍🚒/+ firefighter/#!
 👩‍🚒/+ woman_firefighter/#!
 👨‍🚒/+ man_firefighter/#!
+🧑‍✈️/+ pilot/#!
 👩‍✈️/+ woman_pilot/#!
 👨‍✈️/+ man_pilot/#!
+🧑‍🚀/+ astronaut/#!
 👩‍🚀/+ woman_astronaut/#!
 👨‍🚀/+ man_astronaut/#!
+🧑‍⚖️/+ judge/#!
 👩‍⚖️/+ woman_judge/#!
 👨‍⚖️/+ man_judge/#!
-👰/+ bride_with_veil/#
-🤵/+ man_in_tuxedo/# tuxedo/#*
+👰/+ person_with_veil/#
+👰‍♀️/+ woman_with_veil/#! bride_with_veil
+👰‍♂️/+ man_with_veil/#!
+🤵/+ person_in_tuxedo/# tuxedo/#*
+🤵‍♀️/+ woman_in_tuxedo/#!
+🤵‍♂️/+ man_in_tuxedo/#!
 👸/+ princess/#
 🤴/+ prince/#
 🦸/+ superhero/#!
@@ -244,6 +274,8 @@ export const SERIALISED_EMOJI_DATA = `
 🦹/+ supervillain/#!
 🦹‍♀️/+ woman_supervillain/#!
 🦹‍♂️/+ man_supervillain/#!
+🥷/+ ninja/#!
+🧑‍🎄/+ mx_claus/#!
 🤶/+ mrs_claus/# mother_christmas/#
 🎅/+ santa/#
 🧙/+ mage/#!
@@ -270,6 +302,9 @@ export const SERIALISED_EMOJI_DATA = `
 👼/+ angel/#
 🤰/+ pregnant_woman/# expecting_woman/#
 🤱/+ breast_feeding/#!
+🧑‍🍼/+ person_feeding_baby/#!
+👩‍🍼/+ woman_feeding_baby/#!
+👨‍🍼/+ man_feeding_baby/#!
 🙇/+ person_bowing/# bow/#
 🙇‍♀️/+ woman_bowing/#!
 🙇‍♂️/+ man_bowing/#!
@@ -317,24 +352,27 @@ export const SERIALISED_EMOJI_DATA = `
 👯‍♀️ women_with_bunny_ears_partying
 👯‍♂️ men_with_bunny_ears_partying
 🕴️/+ levitate/# man_in_business_suit_levitating/#!
+🧑‍🦽/+ person_in_manual_wheelchair/#!
+👩‍🦽/+ woman_in_manual_wheelchair/#!
+👨‍🦽/+ man_in_manual_wheelchair/#!
+🧑‍🦼/+ person_in_motorized_wheelchair/#!
+👩‍🦼/+ woman_in_motorized_wheelchair/#!
+👨‍🦼/+ man_in_motorized_wheelchair/#!
 🚶/+ person_walking/# walking/#
 🚶‍♀️/+ woman_walking/#!
 🚶‍♂️/+ man_walking/#!
+🧑‍🦯/+ person_with_probing_cane/#!
+👩‍🦯/+ woman_with_probing_cane/#!
+👨‍🦯/+ man_with_probing_cane/#!
+🧎/+ person_kneeling/#!
+🧎‍♀️/+ woman_kneeling/#!
+🧎‍♂️/+ man_kneeling/#!
 🏃/+ person_running/# runner/#
 🏃‍♀️/+ woman_running/#!
 🏃‍♂️/+ man_running/#!
 🧍/+ person_standing/#!
 🧍‍♀️/+ woman_standing/#!
 🧍‍♂️/+ man_standing/#!
-🧎/+ person_kneeling/#!
-🧎‍♀️/+ woman_kneeling/#!
-🧎‍♂️/+ man_kneeling/#!
-👩‍🦯/+ woman_with_probing_cane/#!
-👨‍🦯/+ man_with_probing_cane/#!
-👩‍🦼/+ woman_in_motorized_wheelchair/#!
-👨‍🦼/+ man_in_motorized_wheelchair/#!
-👩‍🦽/+ woman_in_manual_wheelchair/#!
-👨‍🦽/+ man_in_manual_wheelchair/#!
 🧑‍🤝‍🧑 people_holding_hands
 👫 couple
 👭 two_women_holding_hands
@@ -381,6 +419,7 @@ export const SERIALISED_EMOJI_DATA = `
 👚 womans_clothes
 👕 shirt
 👖 jeans
+🩲 briefs
 🩳 shorts
 👔 necktie
 👗 dress
@@ -392,11 +431,10 @@ export const SERIALISED_EMOJI_DATA = `
 👠 high_heel
 👡 sandal
 👢 boot
-🩰 ballet_shoes
 👞 mans_shoe
 👟 athletic_shoe
 🥾 hiking_boot
-🩲 briefs
+🩴 thong_sandal
 🧦 socks
 🧤 gloves
 🧣 scarf
@@ -405,6 +443,7 @@ export const SERIALISED_EMOJI_DATA = `
 👒 womans_hat
 🎓 mortar_board
 ⛑️ helmet_with_cross helmet_with_white_cross
+🪖 military_helmet
 👑 crown
 💍 ring
 👝 pouch
@@ -416,7 +455,6 @@ export const SERIALISED_EMOJI_DATA = `
 👓 eyeglasses
 🕶️ dark_sunglasses
 🥽 goggles
-🤿 diving_mask
 🌂 closed_umbrella
 🐶 dog
 🐱 cat
@@ -426,6 +464,7 @@ export const SERIALISED_EMOJI_DATA = `
 🦊 fox fox_face
 🐻 bear
 🐼 panda_face
+🐻‍❄️ polar_bear
 🐨 koala
 🐯 tiger
 🦁 lion_face lion
@@ -445,6 +484,7 @@ export const SERIALISED_EMOJI_DATA = `
 🐣 hatching_chick
 🐥 hatched_chick
 🦆 duck
+🦤 dodo
 🦅 eagle
 🦉 owl
 🦇 bat
@@ -456,10 +496,13 @@ export const SERIALISED_EMOJI_DATA = `
 🐛 bug
 🦋 butterfly
 🐌 snail
-🐚 shell
-🐞 beetle
+🪱 worm
+🐞 lady_beetle
 🐜 ant
+🪰 fly
 🦟 mosquito
+🪳 cockroach
+🪲 beetle
 🦗 cricket
 🕷️ spider
 🕸️ spider_web
@@ -473,11 +516,11 @@ export const SERIALISED_EMOJI_DATA = `
 🦑 squid
 🦐 shrimp
 🦞 lobster
-🦪 oyster
 🦀 crab
 🐡 blowfish
 🐠 tropical_fish
 🐟 fish
+🦭 seal
 🐬 dolphin
 🐳 whale
 🐋 whale2
@@ -489,6 +532,8 @@ export const SERIALISED_EMOJI_DATA = `
 🦍 gorilla
 🦧 orangutan
 🐘 elephant
+🦣 mammoth
+🦬 bison
 🦛 hippopotamus
 🦏 rhino rhinoceros
 🐪 dromedary_camel
@@ -501,15 +546,16 @@ export const SERIALISED_EMOJI_DATA = `
 🐎 racehorse
 🐖 pig2
 🐏 ram
-🦙 llama
 🐑 sheep
+🦙 llama
 🐐 goat
 🦌 deer
 🐕 dog2
+🐩 poodle
 🦮 guide_dog
 🐕‍🦺 service_dog
-🐩 poodle
 🐈 cat2
+🐈‍⬛ black_cat
 🐓 rooster
 🦃 turkey
 🦚 peacock
@@ -518,11 +564,12 @@ export const SERIALISED_EMOJI_DATA = `
 🦩 flamingo
 🕊️ dove dove_of_peace
 🐇 rabbit2
-🦥 sloth
-🦦 otter
-🦨 skunk
 🦝 raccoon
+🦨 skunk
 🦡 badger
+🦫 beaver
+🦦 otter
+🦥 sloth
 🐁 mouse2
 🐀 rat
 🐿️ chipmunk
@@ -544,8 +591,13 @@ export const SERIALISED_EMOJI_DATA = `
 🍃 leaves
 🍂 fallen_leaf
 🍁 maple_leaf
+🪶 feather
 🍄 mushroom
+🐚 shell
+🪨 rock
+🪵 wood
 🌾 ear_of_rice
+🪴 potted_plant
 💐 bouquet
 🌷 tulip
 🌹 rose
@@ -611,6 +663,7 @@ export const SERIALISED_EMOJI_DATA = `
 🍌 banana
 🍉 watermelon
 🍇 grapes
+🫐 blueberries
 🍓 strawberry
 🍈 melon
 🍒 cherries
@@ -622,24 +675,28 @@ export const SERIALISED_EMOJI_DATA = `
 🍅 tomato
 🍆 eggplant
 🥑 avocado
+🫒 olive
 🥦 broccoli
 🥬 leafy_green
+🫑 bell_pepper
 🥒 cucumber
 🌶️ hot_pepper
 🌽 corn
 🥕 carrot
-🧅 onion
 🧄 garlic
+🧅 onion
 🥔 potato
 🍠 sweet_potato
 🥐 croissant
 🥯 bagel
 🍞 bread
 🥖 french_bread baguette_bread
+🫓 flatbread
 🥨 pretzel
 🧀 cheese cheese_wedge
 🥚 egg
 🍳 cooking
+🧈 butter
 🥞 pancakes
 🧇 waffle
 🥓 bacon
@@ -651,12 +708,14 @@ export const SERIALISED_EMOJI_DATA = `
 🍟 fries
 🍕 pizza
 🥪 sandwich
-🧆 falafel
 🥙 stuffed_flatbread stuffed_pita
+🧆 falafel
 🌮 taco
 🌯 burrito
+🫔 tamale
 🥗 salad green_salad
 🥘 shallow_pan_of_food paella
+🫕 fondue
 🥫 canned_food
 🍝 spaghetti
 🍜 ramen
@@ -665,6 +724,7 @@ export const SERIALISED_EMOJI_DATA = `
 🍣 sushi
 🍱 bento
 🥟 dumpling
+🦪 oyster
 🍤 fried_shrimp
 🍙 rice_ball
 🍚 rice
@@ -691,15 +751,15 @@ export const SERIALISED_EMOJI_DATA = `
 🌰 chestnut
 🥜 peanuts shelled_peanut
 🍯 honey_pot
-🧈 butter
 🥛 milk glass_of_milk
 🍼 baby_bottle
 ☕ coffee
 🍵 tea
+🫖 teapot
 🧉 mate
-🥤 cup_with_straw
+🧋 bubble_tea
 🧃 beverage_box
-🧊 ice_cube
+🥤 cup_with_straw
 🍶 sake
 🍺 beer
 🍻 beers
@@ -709,6 +769,7 @@ export const SERIALISED_EMOJI_DATA = `
 🍸 cocktail
 🍹 tropical_drink
 🍾 champagne bottle_with_popping_cork
+🧊 ice_cube
 🥄 spoon
 🍴 fork_and_knife
 🍽️ fork_knife_plate fork_and_knife_with_plate
@@ -725,7 +786,9 @@ export const SERIALISED_EMOJI_DATA = `
 🏐 volleyball
 🏉 rugby_football
 🥏 flying_disc
+🪃 boomerang
 🎱 8ball
+🪀 yo_yo
 🏓 ping_pong table_tennis
 🏸 badminton
 🏒 hockey
@@ -734,19 +797,22 @@ export const SERIALISED_EMOJI_DATA = `
 🏏 cricket_game cricket_bat_ball
 🥅 goal goal_net
 ⛳ golf
+🪁 kite
 🏹 bow_and_arrow archery
 🎣 fishing_pole_and_fish
+🤿 diving_mask
 🥊 boxing_glove boxing_gloves
 🥋 martial_arts_uniform karate_uniform
 🎽 running_shirt_with_sash
 🛹 skateboard
+🛼 roller_skate
 🛷 sled
-🪂 parachute
 ⛸️ ice_skate
 🥌 curling_stone
 🎿 ski
 ⛷️ skier
 🏂/+ snowboarder/#!
+🪂 parachute
 🏋️/+ person_lifting_weights/# lifter/# weight_lifter/#
 🏋️‍♀️/+ woman_lifting_weights/#!
 🏋️‍♂️/+ man_lifting_weights/#!
@@ -806,6 +872,7 @@ export const SERIALISED_EMOJI_DATA = `
 🤹‍♀️/+ woman_juggling/#!
 🤹‍♂️/+ man_juggling/#!
 🎭 performing_arts
+🩰 ballet_shoes
 🎨 art
 🎬 clapper
 🎤 microphone
@@ -813,16 +880,16 @@ export const SERIALISED_EMOJI_DATA = `
 🎼 musical_score
 🎹 musical_keyboard
 🥁 drum drum_with_drumsticks
+🪘 long_drum
 🎷 saxophone
 🎺 trumpet
-🪕 banjo
 🎸 guitar
+🪕 banjo
 🎻 violin
+🪗 accordion
 🎲 game_die
 ♟️ chess_pawn
 🎯 dart
-🪁 kite
-🪀 yo_yo
 🎳 bowling
 🎮 video_game
 🎰 slot_machine
@@ -830,6 +897,7 @@ export const SERIALISED_EMOJI_DATA = `
 🚗 red_car
 🚕 taxi
 🚙 blue_car
+🛻 pickup_truck
 🚌 bus
 🚎 trolleybus
 🏎️ race_car racing_car
@@ -840,13 +908,14 @@ export const SERIALISED_EMOJI_DATA = `
 🚚 truck
 🚛 articulated_lorry
 🚜 tractor
-🛺 auto_rickshaw
-🛵 motor_scooter motorbike
-🏍️ motorcycle racing_motorcycle
+🦯 probing_cane
+🦽 manual_wheelchair
+🦼 motorized_wheelchair
 🛴 scooter
 🚲 bike
-🦼 motorized_wheelchair
-🦽 manual_wheelchair
+🛵 motor_scooter motorbike
+🏍️ motorcycle racing_motorcycle
+🛺 auto_rickshaw
 🚨 rotating_light
 🚔 oncoming_police_car
 🚍 oncoming_bus
@@ -914,6 +983,7 @@ export const SERIALISED_EMOJI_DATA = `
 🏡 house_with_garden
 🏘️ homes house_buildings
 🏚️ house_abandoned derelict_house_building
+🛖 hut
 🏗️ construction_site building_construction
 🏭 factory
 🏢 office
@@ -930,8 +1000,8 @@ export const SERIALISED_EMOJI_DATA = `
 🏛️ classical_building
 ⛪ church
 🕌 mosque
-🛕 hindu_temple
 🕍 synagogue
+🛕 hindu_temple
 🕋 kaaba
 ⛩️ shinto_shrine
 🛤️ railway_track railroad_track
@@ -952,7 +1022,7 @@ export const SERIALISED_EMOJI_DATA = `
 🌉 bridge_at_night
 🌁 foggy
 ⌚ watch
-📱 iphone
+📱 mobile_phone iphone
 📲 calling
 💻 computer
 ⌨️ keyboard
@@ -995,6 +1065,7 @@ export const SERIALISED_EMOJI_DATA = `
 💡 bulb
 🔦 flashlight
 🕯️ candle
+🪔 diya_lamp
 🧯 fire_extinguisher
 🛢️ oil oil_drum
 💸 money_with_wings
@@ -1002,11 +1073,14 @@ export const SERIALISED_EMOJI_DATA = `
 💴 yen
 💶 euro
 💷 pound
+🪙 coin
 💰 moneybag
 💳 credit_card
 💎 gem
 ⚖️ scales
+🪜 ladder
 🧰 toolbox
+🪛 screwdriver
 🔧 wrench
 🔨 hammer
 ⚒️ hammer_pick hammer_and_pick
@@ -1016,21 +1090,24 @@ export const SERIALISED_EMOJI_DATA = `
 ⚙️ gear
 🧱 bricks
 ⛓️ chains
+🪝 hook
+🪢 knot
 🧲 magnet
 🔫 gun
 💣 bomb
 🧨 firecracker
 🪓 axe
-🪒 razor
+🪚 carpentry_saw
 🔪 knife
 🗡️ dagger dagger_knife
 ⚔️ crossed_swords
 🛡️ shield
 🚬 smoking
 ⚰️ coffin
+🪦 headstone
 ⚱️ urn funeral_urn
 🏺 amphora
-🪔 diya_lamp
+🪄 magic_wand
 🔮 crystal_ball
 📿 prayer_beads
 🧿 nazar_amulet
@@ -1039,9 +1116,9 @@ export const SERIALISED_EMOJI_DATA = `
 🔭 telescope
 🔬 microscope
 🕳️ hole
-🦯 probing_cane
-🩺 stethoscope
+🪟 window
 🩹 adhesive_bandage
+🩺 stethoscope
 💊 pill
 💉 syringe
 🩸 drop_of_blood
@@ -1050,22 +1127,29 @@ export const SERIALISED_EMOJI_DATA = `
 🧫 petri_dish
 🧪 test_tube
 🌡️ thermometer
-🪑 chair
+🪤 mouse_trap
 🧹 broom
 🧺 basket
+🪡 sewing_needle
 🧻 roll_of_paper
 🚽 toilet
+🪠 plunger
+🪣 bucket
 🚰 potable_water
 🚿 shower
 🛁 bathtub
 🛀/+ bath/#
+🪥 toothbrush
 🧼 soap
+🪒 razor
 🧽 sponge
 🧴 squeeze_bottle
 🛎️ bellhop bellhop_bell
 🔑 key
 🗝️ key2 old_key
 🚪 door
+🪑 chair
+🪞 mirror
 🛋️ couch couch_and_lamp
 🛏️ bed
 🛌/+ sleeping_accommodation person_in_bed/#!*
@@ -1079,6 +1163,8 @@ export const SERIALISED_EMOJI_DATA = `
 🎀 ribbon
 🎊 confetti_ball
 🎉 tada
+🪅 piñata
+🪆 nesting_dolls
 🎎 dolls
 🏮 izakaya_lantern
 🎐 wind_chime
@@ -1098,6 +1184,7 @@ export const SERIALISED_EMOJI_DATA = `
 📭 mailbox_with_no_mail
 📮 postbox
 📯 postal_horn
+🪧 placard
 📜 scroll
 📃 page_with_curl
 📄 page_facing_up
@@ -1277,6 +1364,7 @@ export const SERIALISED_EMOJI_DATA = `
 🛃 customs
 🛄 baggage_claim
 🛅 left_luggage
+🛗 elevator
 🚹 mens
 🚺 womens
 🚼 baby_symbol
@@ -1445,6 +1533,7 @@ export const SERIALISED_EMOJI_DATA = `
 🕧 clock1230
 ♀️ female_sign
 ♂️ male_sign
+⚧ transgender_symbol
 ⚕️ medical_symbol
 🇿 regional_indicator_z
 🇾 regional_indicator_y
@@ -1477,6 +1566,7 @@ export const SERIALISED_EMOJI_DATA = `
 🏁 checkered_flag
 🚩 triangular_flag_on_post
 🏳️‍🌈 rainbow_flag gay_pride_flag
+🏳️‍⚧️ transgender_flag
 🏴‍☠️ pirate_flag
 🇦🇫 flag_af
 🇦🇽 flag_ax

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 import { rem, size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import type { Embed } from "../Embed"
+import type { EmbedLike } from "../state/models/EmbedModel"
 import type { EmbedTimestampProps } from "./EmbedTimestamp"
 
 const EmbedTimestamp = dynamic<EmbedTimestampProps>(
@@ -27,7 +27,7 @@ const Container = styled.div<{ hasThumbnail?: boolean }>`
     hasThumbnail &&
     css`
       grid-column: 1 / 3;
-    `}
+    `};
 `
 
 const FooterImage = styled.img`
@@ -45,13 +45,16 @@ const FooterText = styled.span`
   color: ${({ theme }) => theme.text.normal};
   line-height: ${rem(16)};
 
+  white-space: pre-wrap;
+  white-space: break-spaces;
+
   ${({ theme }) =>
     theme.appearance.color === "light" &&
     css`
       @media (max-resolution: 1dppx) {
         font-weight: 500;
       }
-    `}
+    `};
 `
 
 const FooterSeparator = styled.span`
@@ -60,7 +63,7 @@ const FooterSeparator = styled.span`
 `
 
 export type EmbedFooterProps = {
-  embed: Embed
+  embed: EmbedLike
 }
 
 export function EmbedFooter(props: EmbedFooterProps) {

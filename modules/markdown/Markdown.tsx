@@ -3,16 +3,21 @@ import { PARSERS } from "./parsers/parsers"
 import { MarkdownContainer } from "./styles/MarkdownContainer"
 
 export type MarkdownProps = {
+  className?: string
   content: string
-  type: "message-content" | "embed-content" | "embed-header"
+  type?: keyof typeof PARSERS
 }
 
 function MarkdownRenderer(props: MarkdownProps) {
-  const { content, type } = props
+  const { className, content, type = "default" } = props
 
   const parse = PARSERS[type]
 
-  return <MarkdownContainer>{parse(content.trim())}</MarkdownContainer>
+  return (
+    <MarkdownContainer className={className}>
+      {parse(content.trim())}
+    </MarkdownContainer>
+  )
 }
 
 export const Markdown = memo(MarkdownRenderer)

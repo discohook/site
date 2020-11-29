@@ -14,10 +14,10 @@ export const useDragArea = (
     const handleDrag = (event: MouseEvent) => {
       const { left, top, width, height } = element.getBoundingClientRect()
 
-      fn(
-        clamp((event.clientX - left) / width, 0, 1),
-        clamp((event.clientY - top) / height, 0, 1),
-      )
+      const x = clamp((event.clientX - left) / width, 0, 1)
+      const y = clamp((event.clientY - top) / height, 0, 1)
+
+      fn(x, y)
     }
 
     const handleDragStart = (event: MouseEvent) => {

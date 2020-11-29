@@ -1,24 +1,26 @@
 import { useObserver } from "mobx-react-lite"
 import dynamic from "next/dynamic"
+import { transparentize } from "polished"
 import React from "react"
-import styled, { useTheme } from "styled-components"
+import styled from "styled-components"
+import { useWindowEvent } from "../../common/dom/useWindowEvent"
+import { SecondaryButton } from "../../common/input/button/SecondaryButton"
+import { Separator } from "../../common/layout/Separator"
+import { Stack } from "../../common/layout/Stack"
 import { ModalManagerContext } from "../../common/modal/ModalManagerContext"
+import { Footer } from "../../common/page/Footer"
+import { usePreference } from "../../common/settings/usePreference"
+import { useLazyValue } from "../../common/state/useLazyValue"
 import { useRequiredContext } from "../../common/state/useRequiredContext"
-import { DARK_THEME } from "../../common/style/themes/darkTheme"
 import type { BackupsModalProps } from "../database/backup/modal/BackupsModal"
-import { Actions } from "./Actions"
+import { Markdown } from "../markdown/Markdown"
+import { createEditorForm } from "../message/state/editorForm"
+import type { DataEditorModalProps } from "./data/DataEditorModal"
 import { EditorManagerContext } from "./EditorManagerContext"
-import { JsonInput } from "./JsonInput"
 import { ClearAllConfirmationModal } from "./message/ClearAllConfirmationModal"
 import { MessageEditor } from "./message/MessageEditor"
-import { FlexContainer } from "./styles/FlexContainer"
+import { ShareModal } from "./share/ShareModal"
 import { WebhookControls } from "./webhook/WebhookControls"
-
-const AppearanceModal = dynamic<Record<never, unknown>>(async () =>
-  import("../../common/style/AppearanceModal").then(
-    module => module.AppearanceModal,
-  ),
-)
 
 const BackupsModal = dynamic<BackupsModalProps>(async () =>
   import("../database/backup/modal/BackupsModal").then(
@@ -26,78 +28,111 @@ const BackupsModal = dynamic<BackupsModalProps>(async () =>
   ),
 )
 
-const EditorContainer = styled.div`
-  position: relative;
+const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
+  import("./data/DataEditorModal").then(module => module.DataEditorModal),
+)
+
+const EditorContainer = styled(Stack)`
+  padding: 16px;
 `
 
-const EditorInnerContainer = styled(FlexContainer)`
-  display: block;
-  height: 100%;
-  padding: 8px;
+const Actions = styled.div`
+  display: flex;
+  flex-flow: wrap;
 
-  & > *:not(button) {
-    flex-grow: 0;
+  margin-bottom: -8px;
+
+  & > * {
+    margin-right: 16px;
+    margin-bottom: 8px;
   }
 `
 
 const JavaScriptWarning = styled.noscript`
   display: block;
 
-  margin: -8px -8px 16px;
+  margin-bottom: 16px;
   padding: 16px;
-  background: ${({ theme }) => theme.accent.danger};
-  color: ${DARK_THEME.header.primary};
+  border-radius: 4px;
+
+  border: 2px solid ${({ theme }) => theme.accent.danger};
+  background: ${({ theme }) => transparentize(0.75, theme.accent.danger)};
+
+  color: ${({ theme }) => theme.header.primary};
+  font-weight: 500;
+  line-height: 1.375;
 `
 
 export function Editor() {
   const editorManager = useRequiredContext(EditorManagerContext)
+  const form = useLazyValue(() => createEditorForm(editorManager))
+
   const modalManager = useRequiredContext(ModalManagerContext)
 
-  const theme = useTheme()
+  const spawnBackupsModal = () =>
+    modalManager.spawn({
+      render: () => <BackupsModal editorManager={editorManager} />,
+    })
+
+  const spawnClearAllModal = () =>
+    modalManager.spawn({
+      render: () => <ClearAllConfirmationModal editorManager={editorManager} />,
+    })
+
+  const spawnShareModal = () =>
+    modalManager.spawn({
+      render: () => <ShareModal editorManager={editorManager} />,
+    })
+
+  const spawnDataEditorModal = () =>
+    modalManager.spawn({
+      render: () => <DataEditorModal message={editorManager.messages[0]} />,
+    })
+
+  const confirmExit = usePreference("confirmExit")
+  useWindowEvent("beforeunload", event => {
+    if (!confirmExit) return
+
+    event.preventDefault()
+    event.returnValue = ""
+    return ""
+  })
 
   return useObserver(() => (
-    <EditorContainer>
-      <EditorInnerContainer>
-        <JavaScriptWarning>
-          Discohook requires JavaScript to be enabled, please turn it on in your
-          browser settings to use this app.
-        </JavaScriptWarning>
-        <Actions
-          title={theme.appearance.mobile ? undefined : "Message editor"}
-          actions={[
-            {
-              name: "Support server",
-              action: () => open("/discord", "_blank", "noopener"),
-            },
-            {
-              name: "Backups",
-              action: () =>
-                modalManager.spawn({
-                  render: () => <BackupsModal editorManager={editorManager} />,
-                }),
-            },
-            {
-              name: "Appearance",
-              action: () =>
-                modalManager.spawn({
-                  render: () => <AppearanceModal />,
-                }),
-            },
-            {
-              name: "Clear all",
-              action: () =>
-                modalManager.spawn({
-                  render: () => (
-                    <ClearAllConfirmationModal editorManager={editorManager} />
-                  ),
-                }),
-            },
-          ]}
+    <EditorContainer gap={16}>
+      <JavaScriptWarning>
+        <Markdown
+          content={
+            "It appears your web browser has prevented this page from " +
+            "executing JavaScript.\nTo use Discohook, please allow this page " +
+            "to run JavaScript from your browser's settings."
+          }
         />
-        <WebhookControls />
-        <MessageEditor />
-        <JsonInput />
-      </EditorInnerContainer>
+      </JavaScriptWarning>
+      <Actions>
+        <SecondaryButton onClick={() => spawnBackupsModal()}>
+          Backups
+        </SecondaryButton>
+        <SecondaryButton onClick={() => spawnClearAllModal()}>
+          Clear All
+        </SecondaryButton>
+        <SecondaryButton onClick={() => spawnShareModal()}>
+          Share Message
+        </SecondaryButton>
+        <SecondaryButton onClick={() => spawnDataEditorModal()}>
+          JSON Editor
+        </SecondaryButton>
+      </Actions>
+      <WebhookControls form={form} />
+      <Separator />
+      {editorManager.messages.map((message, index) => (
+        <MessageEditor
+          key={message.id}
+          message={message}
+          form={form.repeatingForm("messages").index(index)}
+        />
+      ))}
+      <Footer />
     </EditorContainer>
   ))
 }

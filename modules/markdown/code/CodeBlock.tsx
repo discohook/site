@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/newline-after-import */
-
+import hljs from "highlight.js/lib/core"
 import React, { useEffect, useState } from "react"
 import { CodeBlockContainer } from "../styles/CodeBlockContainer"
 import { getLanguageFromAlias } from "./getLanguageFromAlias"
 import { highlightCode } from "./highlightCode"
-const hljs = require("highlight.js/lib/highlight") as typeof import("highlight.js")
 
 export type CodeBlockProps = {
   content: string

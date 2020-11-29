@@ -15,7 +15,7 @@ export const Emoji = styled.img.attrs({ draggable: false })<{ big?: boolean }>`
       ${size(rem(48))};
 
       min-height: ${rem(48)};
-    `}
+    `};
 
   ${RichEmbedContainer} & {
     ${size(18)};

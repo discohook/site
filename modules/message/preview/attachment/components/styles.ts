@@ -1,6 +1,6 @@
 import { ellipsis, em } from "polished"
 import styled from "styled-components"
-import { DARK_THEME } from "../../../../../common/style/themes/darkTheme"
+import { DARK_THEME } from "../../../../../common/theming/darkTheme"
 
 export const AttachmentContainer = styled.div`
   width: 100%;

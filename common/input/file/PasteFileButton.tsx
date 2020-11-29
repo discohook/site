@@ -1,58 +1,57 @@
-import React, { ClipboardEvent, useRef } from "react"
-import { Button } from "../Button"
+import React, { ClipboardEvent, useRef, useState } from "react"
+import styled from "styled-components"
+import { SecondaryButton } from "../button/SecondaryButton"
+
+const Button = styled(SecondaryButton)`
+  input:focus + & {
+    background: ${({ theme }) => theme.background.tertiary};
+    border-color: ${({ theme }) => theme.background.tertiary};
+  }
+`
 
 export type PasteFileButtonProps = {
+  className?: string
   onChange: (files: File[]) => void
 }
 
 export function PasteFileButton(props: PasteFileButtonProps) {
-  const { onChange: handleChange } = props
+  const { className, onChange: handleChange } = props
 
-  const pasteButtonRef = useRef<HTMLButtonElement>(null)
+  const [active, setActive] = useState(false)
+
   const pasteInputRef = useRef<HTMLInputElement>(null)
-
-  const handleFocus = () => {
-    const { current: pasteButton } = pasteButtonRef
-    if (!pasteButton) return
-
-    pasteButton.textContent = /mac/i.test(navigator.platform)
-      ? "Press \u2318V"
-      : "Press Ctrl+V"
-  }
-
-  const handleBlur = () => {
-    const { current: pasteButton } = pasteButtonRef
-    if (!pasteButton) return
-
-    pasteButton.textContent = "Paste clipboard"
-  }
 
   const handlePaste = (event: ClipboardEvent<HTMLInputElement>) => {
     handleChange(Array.from(event.clipboardData.files))
-
     pasteInputRef.current?.blur()
   }
 
   return (
     <>
       <input
+        ref={pasteInputRef}
+        tabIndex={-1}
+        placeholder="Paste your clipboard"
         style={{
           position: "absolute",
           opacity: 0,
           pointerEvents: "none",
         }}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        onFocus={() => setActive(true)}
+        onBlur={() => setActive(false)}
         onPaste={handlePaste}
-        ref={pasteInputRef}
       />
       <Button
+        className={className}
         onClick={() => {
           pasteInputRef.current?.focus()
         }}
-        ref={pasteButtonRef}
       >
-        Paste clipboard
+        {active
+          ? /mac/i.test(navigator.platform)
+            ? "Press \u2318V"
+            : "Press Ctrl+V"
+          : "Clipboard"}
       </Button>
     </>
   )

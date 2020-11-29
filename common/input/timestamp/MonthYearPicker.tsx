@@ -1,34 +1,24 @@
 import { addMonths, getMonth, getYear, isValid, subMonths } from "date-fns"
-import { size } from "polished"
 import React from "react"
 import styled, { css } from "styled-components"
-import { chevronLeft } from "./icons/chevronLeft"
-import { chevronRight } from "./icons/chevronRight"
+import { chevronLeft, chevronRight } from "../../../icons/chevron"
+import { Icon } from "../../layout/Icon"
 
 const Container = styled.div`
-  margin: 8px 0;
-
   width: 100%;
-  height: 24px;
+  margin-bottom: 8px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
-const CycleMonthButton = styled.div<{ disabled?: boolean }>`
-  ${size(24)};
-
-  cursor: pointer;
-
-  color: ${({ theme }) => theme.interactive.normal};
-
+const CycleMonthButton = styled(Icon)<{ disabled?: boolean }>`
   ${({ disabled }) =>
     disabled &&
     css`
-      cursor: default;
       color: ${({ theme }) => theme.interactive.muted};
-    `}
+    `};
 `
 
 const MonthYearDisplay = styled.div`

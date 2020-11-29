@@ -58,4 +58,40 @@ export const upgradeDatabase = async (
       cursor = await cursor.continue()
     }
   }
+
+  if (oldVersion < 5 && oldVersion >= 1) {
+    const backupStore = transaction.objectStore("backup")
+
+    let cursor = await backupStore.openCursor()
+
+    while (cursor) {
+      const { message, ...rest } = cursor.value
+
+      await backupStore.put({
+        ...rest,
+        messages: [message],
+      })
+
+      cursor = await cursor.continue()
+    }
+  }
+
+  if (oldVersion < 6 && oldVersion >= 1) {
+    const backupStore = transaction.objectStore("backup")
+
+    let cursor = await backupStore.openCursor()
+
+    while (cursor) {
+      const { webhookUrl, ...rest } = cursor.value
+
+      await backupStore.put({
+        ...rest,
+        target: {
+          url: webhookUrl,
+        },
+      })
+
+      cursor = await cursor.continue()
+    }
+  }
 }

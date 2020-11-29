@@ -11,5 +11,5 @@ export const MarkdownContainer = styled.div`
       @media (max-resolution: 1dppx) {
         font-weight: 500;
       }
-    `}
+    `};
 `

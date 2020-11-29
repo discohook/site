@@ -3,9 +3,9 @@
 import { observable, runInAction } from "mobx"
 import { downloadBlob } from "../../../common/dom/downloadBlob"
 import { toSnakeCase } from "../../../common/object/toSnakeCase"
-import type { EditorManager } from "../../editor/EditorManager"
-import type { MessageData } from "../../message/data/MessageData"
-import { Message } from "../../message/Message"
+import type { EditorManagerLike } from "../../editor/EditorManager"
+import { messageOf } from "../../message/helpers/messageOf"
+import type { MessageData } from "../../message/state/data/MessageData"
 import type { DatabaseManager } from "../DatabaseManager"
 import type { Backup } from "./types/Backup"
 import type { BackupData } from "./types/BackupData"
@@ -13,11 +13,14 @@ import type { ExportData } from "./types/ExportData"
 
 export class BackupManager {
   private readonly databaseManager: DatabaseManager
-  private readonly editorManager: EditorManager
+  private readonly editorManager: EditorManagerLike
 
   @observable backups: BackupData[] = []
 
-  constructor(databaseManager: DatabaseManager, editorManager: EditorManager) {
+  constructor(
+    databaseManager: DatabaseManager,
+    editorManager: EditorManagerLike,
+  ) {
     this.databaseManager = databaseManager
     this.editorManager = editorManager
 
@@ -68,8 +71,13 @@ export class BackupManager {
 
     if (!backup) return
 
-    this.editorManager.message = Message.of(backup.message)
-    this.editorManager.webhook.url = backup.webhookUrl ?? ""
+    this.editorManager.set(
+      "messages",
+      backup.messages.map(messageData => messageOf(messageData)),
+    )
+    this.editorManager.target.set("url", backup.target.url ?? "")
+    this.editorManager.target.set("message", backup.target.message ?? "")
+    this.editorManager.target.fetch().catch(() => {})
   }
 
   async saveBackup(backup: string | Backup) {
@@ -79,14 +87,20 @@ export class BackupManager {
       backup = {
         id,
         name: backup,
-        webhookUrl: this.editorManager.webhook.url || undefined,
-        message: {
-          ...this.editorManager.message.getMessageData(),
+        messages: this.editorManager.messages.map(message => ({
+          ...message.data,
           files: undefined,
+        })),
+        target: {
+          url: this.editorManager.target.url || undefined,
+          message: this.editorManager.target.message || undefined,
         },
       }
     } else {
-      backup = { ...backup, id: await this.getId(backup.name) }
+      backup = {
+        ...backup,
+        id: await this.getId(backup.name),
+      }
     }
 
     if (!backup.id) delete backup.id
@@ -121,8 +135,9 @@ export class BackupManager {
     if (!backup) return
 
     const backupData: ExportData = {
-      version: 3,
-      backups: [{ ...backup, id: undefined }],
+      version: 5,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      backups: [backup].map(({ id, ...backup }) => backup),
     }
 
     const blob = new Blob([JSON.stringify(backupData, undefined, 2), "\n"], {
@@ -150,7 +165,7 @@ export class BackupManager {
     }
 
     const backupData: ExportData = {
-      version: 3,
+      version: 5,
       backups,
     }
 
@@ -176,28 +191,51 @@ export class BackupManager {
   }
 
   async importBackups(blob: Blob) {
-    const json = await blob.text()
-    const exportData = JSON.parse(json) as ExportData
+    let exportData = JSON.parse(await blob.text()) as ExportData
 
     switch (exportData.version) {
       case 1:
       case 2: {
-        const name = await this.getSafeBackupName(exportData.name)
-        await this.saveBackup({
-          name,
-          message: toSnakeCase(exportData.message) as MessageData,
-        })
-        break
+        exportData = {
+          version: 3,
+          backups: [
+            {
+              name: exportData.name,
+              message: toSnakeCase(exportData.message) as MessageData,
+            },
+          ],
+        }
       }
+      // falls through
       case 3: {
+        exportData = {
+          version: 4,
+          backups: exportData.backups.map(({ message, ...backup }) => ({
+            ...backup,
+            messages: [message],
+          })),
+        }
+      }
+      // falls through
+      case 4:
+        exportData = {
+          version: 5,
+          backups: exportData.backups.map(({ webhookUrl, ...backup }) => ({
+            ...backup,
+            target: {
+              url: webhookUrl,
+            },
+          })),
+        }
+      // falls through
+      case 5:
         for (const backup of exportData.backups) {
           await this.saveBackup({
             ...backup,
             name: await this.getSafeBackupName(backup.name),
+            id: undefined,
           })
         }
-        break
-      }
     }
   }
 }

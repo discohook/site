@@ -1,7 +1,10 @@
 import { createContext } from "react"
-import type { EditorManager } from "./EditorManager"
+import type { EditorManagerLike } from "./EditorManager"
 
-export const EditorManagerContext = createContext<EditorManager | null>(null)
+export const EditorManagerContext = createContext<EditorManagerLike | null>(
+  null,
+)
+
 EditorManagerContext.displayName = "EditorManagerContext"
 
 export const EditorManagerProvider = EditorManagerContext.Provider

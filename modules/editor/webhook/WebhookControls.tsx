@@ -1,39 +1,36 @@
 import { useObserver } from "mobx-react-lite"
-import React, { useState } from "react"
-import styled from "styled-components"
-import { Button } from "../../../common/input/Button"
-import { InputField } from "../../../common/input/InputField"
+import React, { useEffect, useRef, useState } from "react"
+import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
+import { InputField } from "../../../common/input/text/InputField"
+import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
-import { getTotalCharacterCount } from "../../message/helpers/getTotalCharacterCount"
-import { WEBHOOK_URL_RE } from "../../webhook/constants"
-import { executeWebhook } from "../../webhook/executeWebhook"
+import type { EditorFormState } from "../../message/state/editorForm"
 import { EditorManagerContext } from "../EditorManagerContext"
-import { FlexContainer } from "../styles/FlexContainer"
 import { NetworkErrorModal } from "./NetworkErrorModal"
 
-const DisabledReason = styled.div`
-  margin: 0 8px 16px;
+export type WebhookControlsProps = {
+  form: EditorFormState
+}
 
-  color: ${({ theme }) => theme.accent.danger};
-  font-size: 14px;
+export function WebhookControls(props: WebhookControlsProps) {
+  const { form } = props
 
-  text-align: end;
-`
-
-export function WebhookControls() {
   const editorManager = useRequiredContext(EditorManagerContext)
-  const message = useObserver(() => editorManager.message)
 
   const modalManager = useRequiredContext(ModalManagerContext)
 
   const [sending, setSending] = useState(false)
-  const sendMessage = async () => {
+  const handleSend = async () => {
     if (sending) return
+
+    form.validate()
+    if (!form.isValid) return
+
     setSending(true)
 
     try {
-      await executeWebhook(editorManager)
+      await form.save()
     } catch {
       modalManager.spawn({
         render: () => <NetworkErrorModal />,
@@ -43,41 +40,52 @@ export function WebhookControls() {
     setSending(false)
   }
 
-  return useObserver(() => {
-    const isOverDiscordCharacterLimit =
-      getTotalCharacterCount(message.getMessageData()) > 6000
+  const inputRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    const { current: input } = inputRef
+    if (!input) return
 
-    let isDisabled: boolean
-    if (sending) isDisabled = true
-    else if (!WEBHOOK_URL_RE.test(editorManager.webhook.url)) isDisabled = true
-    else if (isOverDiscordCharacterLimit) isDisabled = true
-    else if (typeof message.content === "string") isDisabled = false
-    else if (message.embeds.length > 0) isDisabled = false
-    else if (message.files.length > 0) isDisabled = false
-    else isDisabled = true
+    const onFocus = () => {
+      input.type = "text"
+    }
+    const onBlur = () => {
+      input.type = "password"
+    }
 
-    return (
-      <>
-        <FlexContainer flow="row">
-          <InputField
-            id="webhook-url"
-            value={editorManager.webhook.url}
-            onChange={url => {
-              editorManager.webhook.url = url
-            }}
-            label="Webhook URL"
-            placeholder="https://discord.com/api/webhooks/..."
-          />
-          <Button disabled={isDisabled} onClick={sendMessage}>
-            Send
-          </Button>
-        </FlexContainer>
-        {isOverDiscordCharacterLimit && (
-          <DisabledReason>
-            The message body is over Discord&apos;s 6000 character limit
-          </DisabledReason>
-        )}
-      </>
-    )
-  })
+    input.addEventListener("focus", onFocus)
+    input.addEventListener("blur", onBlur)
+
+    return () => {
+      input.removeEventListener("focus", onFocus)
+      input.removeEventListener("blur", onBlur)
+    }
+  }, [])
+
+  return useObserver(() => (
+    <Stack gap={12}>
+      <InputField
+        ref={inputRef}
+        id="webhook"
+        type="password"
+        label="Webhook URL"
+        placeholder="https://discord.com/api/webhooks/..."
+        error={form.subForm("target").field("url").error}
+        {...form.subForm("target").field("url").inputProps}
+      >
+        <PrimaryButton
+          disabled={!editorManager.target.exists}
+          onClick={handleSend}
+        >
+          {editorManager.target.message ? "Edit" : "Send"}
+        </PrimaryButton>
+      </InputField>
+      <InputField
+        id="message"
+        label="Message Link"
+        placeholder="https://discord.com/channels/..."
+        error={form.subForm("target").field("message").error}
+        {...form.subForm("target").field("message").inputProps}
+      />
+    </Stack>
+  ))
 }

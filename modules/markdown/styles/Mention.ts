@@ -1,6 +1,6 @@
 import { tint, transparentize } from "polished"
 import styled from "styled-components"
-import { DARK_THEME } from "../../../common/style/themes/darkTheme"
+import { DARK_THEME } from "../../../common/theming/darkTheme"
 
 export const Mention = styled.span`
   border-radius: 3px;
@@ -10,17 +10,17 @@ export const Mention = styled.span`
 
   background: ${({ theme }) =>
     theme.appearance.color === "dark"
-      ? transparentize(0.9, theme.accent.primary)
-      : tint(0.9, theme.accent.primary)};
+      ? transparentize(0.9, theme.discord.primary)
+      : tint(0.9, theme.discord.primary)};
 
-  color: ${({ theme }) => theme.accent.primary};
+  color: ${({ theme }) => theme.discord.primary};
   font-weight: 500;
 
   &:hover {
     background: ${({ theme }) =>
       theme.appearance.color === "dark"
-        ? transparentize(0.3, theme.accent.primary)
-        : theme.accent.primary};
+        ? transparentize(0.3, theme.discord.primary)
+        : theme.discord.primary};
 
     color: ${DARK_THEME.header.primary};
   }

@@ -4,7 +4,8 @@ import React from "react"
 import styled from "styled-components"
 import { Markdown } from "../../markdown/Markdown"
 import { MarkdownContainer } from "../../markdown/styles/MarkdownContainer"
-import type { Field } from "../Field"
+import { getFieldGridColumn } from "../helpers/getFieldGridColumn"
+import type { FieldLike } from "../state/models/FieldModel"
 
 const Container = styled.div`
   min-width: 0;
@@ -35,14 +36,14 @@ const FieldValue = styled.div`
 `
 
 export type EmbedFieldProps = {
-  field: Field
+  field: FieldLike
 }
 
 export function EmbedField(props: EmbedFieldProps) {
   const { field } = props
 
   return useObserver(() => (
-    <Container style={{ gridColumn: field.width }}>
+    <Container style={{ gridColumn: getFieldGridColumn(field) }}>
       <FieldName>
         <Markdown content={field.name} type="embed-header" />
       </FieldName>
