@@ -1,13 +1,20 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useEffect, useRef, useState } from "react"
+import styled from "styled-components"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { InputField } from "../../../common/input/text/InputField"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
+import { Markdown } from "../../markdown/Markdown"
 import type { EditorFormState } from "../../message/state/editorForm"
 import { EditorManagerContext } from "../EditorManagerContext"
 import { NetworkErrorModal } from "./NetworkErrorModal"
+
+const Message = styled(Markdown)`
+  margin-top: -8px;
+  font-size: 15px;
+`
 
 export type WebhookControlsProps = {
   form: EditorFormState
@@ -85,6 +92,12 @@ export function WebhookControls(props: WebhookControlsProps) {
         placeholder="https://discord.com/channels/..."
         error={form.subForm("target").field("message").error}
         {...form.subForm("target").field("message").inputProps}
+      />
+      <Message
+        content={
+          "*When a message link is set, it allows you to edit previously " +
+          "sent messages.*"
+        }
       />
     </Stack>
   ))
