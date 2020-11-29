@@ -10,7 +10,7 @@ export const DEFAULT_EDITOR_MANAGER_STATE: SnapshotIn<typeof EditorManager> = {
         {
           title: "What's this?",
           description:
-            'Discohook is a free tool that sends messages with embeds to your Discord server. To do that it uses [webhooks](https://support.discord.com/hc/en-us/articles/228383668), a Discord feature that lets any application send messages to a channel.\n\nTo send messages, you need a webhook URL, you can get one via the "Integrations" tab in your server\'s settings.\n\nNote that Discohook cannot respond to user interations, it only sends messages when you tell it to. As such creating an automatic feed or custom commands is not possible with Discohook.',
+            'Discohook is a free tool that sends messages with embeds to your Discord server. To do that it uses [webhooks](https://support.discord.com/hc/en-us/articles/228383668), a Discord feature that lets any application send messages to a channel.\n\nTo send messages, you need a webhook URL, you can get one via the "Integrations" tab in your server\'s settings.\n\nNote that Discohook cannot respond to user interactions, it only sends messages when you tell it to. As such creating an automatic feed or custom commands is not possible with Discohook.',
           color: {
             hue: 205.14970059880238,
             saturation: 0.6549019607843137,
