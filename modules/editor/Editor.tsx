@@ -15,7 +15,6 @@ import { useRequiredContext } from "../../common/state/useRequiredContext"
 import type { BackupsModalProps } from "../database/backup/modal/BackupsModal"
 import { Markdown } from "../markdown/Markdown"
 import { createEditorForm } from "../message/state/editorForm"
-import type { DataEditorModalProps } from "./data/DataEditorModal"
 import { EditorManagerContext } from "./EditorManagerContext"
 import { ClearAllConfirmationModal } from "./message/ClearAllConfirmationModal"
 import { MessageEditor } from "./message/MessageEditor"
@@ -26,10 +25,6 @@ const BackupsModal = dynamic<BackupsModalProps>(async () =>
   import("../database/backup/modal/BackupsModal").then(
     module => module.BackupsModal,
   ),
-)
-
-const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
-  import("./data/DataEditorModal").then(module => module.DataEditorModal),
 )
 
 const EditorContainer = styled(Stack)`
@@ -43,7 +38,7 @@ const Actions = styled.div`
   margin-bottom: -8px;
 
   & > * {
-    margin-right: 16px;
+    margin-right: 12px;
     margin-bottom: 8px;
   }
 `
@@ -84,11 +79,6 @@ export function Editor() {
       render: () => <ShareModal editorManager={editorManager} />,
     })
 
-  const spawnDataEditorModal = () =>
-    modalManager.spawn({
-      render: () => <DataEditorModal message={editorManager.messages[0]} />,
-    })
-
   const confirmExit = usePreference("confirmExit")
   useWindowEvent("beforeunload", event => {
     if (!confirmExit) return
@@ -118,9 +108,6 @@ export function Editor() {
         </SecondaryButton>
         <SecondaryButton onClick={() => spawnShareModal()}>
           Share Message
-        </SecondaryButton>
-        <SecondaryButton onClick={() => spawnDataEditorModal()}>
-          JSON Editor
         </SecondaryButton>
       </Actions>
       <WebhookControls form={form} />

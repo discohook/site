@@ -1,12 +1,21 @@
 import { useObserver } from "mobx-react-lite"
+import dynamic from "next/dynamic"
 import React from "react"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
+import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
 import { Stack } from "../../../common/layout/Stack"
+import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
+import { useRequiredContext } from "../../../common/state/useRequiredContext"
 import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { EmbedLike } from "../../message/state/models/EmbedModel"
 import type { MessageLike } from "../../message/state/models/MessageModel"
+import type { DataEditorModalProps } from "../data/DataEditorModal"
 import { EmbedEditor } from "./EmbedEditor"
 import { PrimaryContentEditor } from "./PrimaryContentEditor"
+
+const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
+  import("../data/DataEditorModal").then(module => module.DataEditorModal),
+)
 
 export type MessageEditorProps = {
   message: MessageLike
@@ -15,6 +24,13 @@ export type MessageEditorProps = {
 
 export function MessageEditor(props: MessageEditorProps) {
   const { message, form } = props
+
+  const modalManager = useRequiredContext(ModalManagerContext)
+
+  const spawnDataEditorModal = () =>
+    modalManager.spawn({
+      render: () => <DataEditorModal message={message} />,
+    })
 
   return useObserver(() => (
     <Stack gap={16}>
@@ -35,6 +51,11 @@ export function MessageEditor(props: MessageEditorProps) {
         >
           Add Embed
         </PrimaryButton>
+      </div>
+      <div>
+        <SecondaryButton onClick={() => spawnDataEditorModal()}>
+          JSON Data Editor
+        </SecondaryButton>
       </div>
     </Stack>
   ))
