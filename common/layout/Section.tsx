@@ -112,6 +112,7 @@ const Title = styled.h2<{ variant: SectionVariant }>`
 
 const ValidationError = styled(animated.div)`
   color: ${({ theme }) => theme.accent.danger};
+  margin-right: 8px;
 `
 
 const Content = styled.div<{ variant: SectionVariant }>`
