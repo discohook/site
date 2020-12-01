@@ -1,5 +1,11 @@
-import { animated, useTransition } from "@react-spring/web"
-import React, { ChangeEvent, FocusEvent, forwardRef, ReactNode } from "react"
+import { animated, useSpring } from "@react-spring/web"
+import React, {
+  ChangeEvent,
+  FocusEvent,
+  forwardRef,
+  ReactNode,
+  useState,
+} from "react"
 import styled from "styled-components"
 import { error } from "../../../icons/error"
 import { FlexContainer } from "../../layout/FlexContainer"
@@ -65,12 +71,13 @@ function InputFieldRenderer(
     children,
   } = props
 
-  const transition = useTransition(validationError, {
-    key: validationError,
+  const hasError = Boolean(validationError)
+  const [shouldRenderError, setShouldRenderError] = useState(hasError)
+  const errorStyle = useSpring({
     config: { tension: 300, clamp: true },
-    from: { opacity: (0 as unknown) as undefined, height: 0 },
-    enter: { opacity: (1 as unknown) as undefined, height: 24 },
-    leave: { opacity: (0 as unknown) as undefined, height: 0 },
+    opacity: (Number(hasError) as unknown) as undefined,
+    height: validationError ? 24 : 0,
+    onRest: () => setShouldRenderError(hasError),
   })
 
   const input = (
@@ -113,16 +120,13 @@ function InputFieldRenderer(
       ) : (
         input
       )}
-      {transition(
-        (style, item) =>
-          item && (
-            <animated.div style={style}>
-              <InputValidationError>
-                <Icon>{error}</Icon>
-                {item}
-              </InputValidationError>
-            </animated.div>
-          ),
+      {(validationError || shouldRenderError) && (
+        <animated.div style={errorStyle}>
+          <InputValidationError>
+            <Icon>{error}</Icon>
+            {validationError}
+          </InputValidationError>
+        </animated.div>
       )}
     </InputContainer>
   )
