@@ -8,12 +8,10 @@ const getTimestampFormat = (date: Date, base?: Date) => {
 
   const difference = (givenDate - now) / ONE_DAY
 
-  if (difference < -6) return "full"
-  if (difference < -1) return "last-week"
+  if (difference < -1) return "full"
   if (difference < 0) return "yesterday"
   if (difference < 1) return "today"
   if (difference < 2) return "tomorrow"
-  if (difference < 7) return "this-week"
   return "full"
 }
 
@@ -24,7 +22,6 @@ export const formatTimestamp = (date: Date, base?: Date) => {
   const month = String(getMonth(date) + 1).padStart(2, "0")
   const year = getYear(date)
 
-  const weekday = date.toLocaleString("en-US", { weekday: "long" })
   const time = date.toLocaleString("en-US", {
     hour: "2-digit",
     minute: "numeric",
@@ -32,9 +29,6 @@ export const formatTimestamp = (date: Date, base?: Date) => {
   })
 
   switch (getTimestampFormat(date, base)) {
-    case "last-week": {
-      return `Last ${weekday} at ${time}`
-    }
     case "yesterday": {
       return `Yesterday at ${time}`
     }
@@ -43,9 +37,6 @@ export const formatTimestamp = (date: Date, base?: Date) => {
     }
     case "tomorrow": {
       return `Tomorrow at ${time}`
-    }
-    case "this-week": {
-      return `${weekday} at ${time}`
     }
     default: {
       return `${day}/${month}/${year}`
