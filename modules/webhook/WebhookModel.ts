@@ -132,13 +132,6 @@ export const WebhookModel = types
         const data = await response.json()
 
         console.log("Target executed", data)
-
-        if (response.ok && !self.message) {
-          this.set(
-            "message",
-            `https://discord.com/channels/${self.guildId}/${self.channelId}/${data.id}`,
-          )
-        }
       }
 
       return null
