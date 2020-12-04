@@ -21,14 +21,6 @@ describe("formatTimestamp", () => {
         date: new Date("2019-04-23T18:23:03.000Z"),
         formatted: "Tomorrow at 06:23 PM",
       },
-      {
-        date: new Date("2019-04-26T11:02:34.000Z"),
-        formatted: "Friday at 11:02 AM",
-      },
-      {
-        date: new Date("2019-04-19T00:08:15.000Z"),
-        formatted: "Last Friday at 12:08 AM",
-      },
 
       // AM/PM
       {
@@ -64,7 +56,7 @@ describe("formatTimestamp", () => {
         formatted: "Today at 01:00 PM",
       },
 
-      // Edge cases
+      // Edges
       {
         date: new Date("2019-04-29T11:02:04.000Z"),
         formatted: "29/04/2019",
