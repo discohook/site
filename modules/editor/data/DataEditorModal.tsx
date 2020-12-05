@@ -47,6 +47,8 @@ const CodeInput = styled(Input)`
   font-family: ${({ theme }) => theme.font.mono};
   font-size: 14px;
   line-height: 1.375;
+
+  overflow-y: auto;
 `
 
 const ErrorContainer = styled.div`
