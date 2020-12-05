@@ -1,6 +1,7 @@
 import { useObserver } from "mobx-react-lite"
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
+import { InputField } from "../../../../common/input/text/InputField"
 import { useRequiredContext } from "../../../../common/state/useRequiredContext"
 import { Markdown } from "../../../markdown/Markdown"
 import { BackupManagerContext } from "../BackupManagerContext"
@@ -17,12 +18,26 @@ const Container = styled.ul`
 export function BackupList() {
   const backupManager = useRequiredContext(BackupManagerContext)
 
+  const [search, setSearch] = useState("")
+
   return useObserver(() =>
     backupManager.backups.length > 0 ? (
       <Container>
-        {backupManager.backups.map(backup => (
-          <BackupItem key={backup.id} backup={backup} />
-        ))}
+        <InputField
+          id="backups-search"
+          label="Search Backups"
+          value={search}
+          onChange={setSearch}
+        />
+        {backupManager.backups
+          .filter(backup =>
+            backup.name
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase()),
+          )
+          .map(backup => (
+            <BackupItem key={backup.id} backup={backup} />
+          ))}
       </Container>
     ) : (
       <Markdown
