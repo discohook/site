@@ -22,23 +22,25 @@ export function BackupList() {
 
   return useObserver(() =>
     backupManager.backups.length > 0 ? (
-      <Container>
+      <>
         <InputField
           id="backups-search"
           label="Search Backups"
           value={search}
           onChange={setSearch}
         />
-        {backupManager.backups
-          .filter(backup =>
-            backup.name
-              .toLocaleLowerCase()
-              .includes(search.toLocaleLowerCase()),
-          )
-          .map(backup => (
-            <BackupItem key={backup.id} backup={backup} />
-          ))}
-      </Container>
+        <Container>
+          {backupManager.backups
+            .filter(backup =>
+              backup.name
+                .toLocaleLowerCase()
+                .includes(search.toLocaleLowerCase()),
+            )
+            .map(backup => (
+              <BackupItem key={backup.id} backup={backup} />
+            ))}
+        </Container>
+      </>
     ) : (
       <Markdown
         content={
