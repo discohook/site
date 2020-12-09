@@ -1,16 +1,13 @@
-import { animated, useTransition } from "@react-spring/web"
 import React, { Fragment } from "react"
 import styled from "styled-components"
 import { chevron, chevronDown } from "../../../icons/chevron"
-import { error } from "../../../icons/error"
 import { Action, ActionButtons } from "../../layout/ActionButtons"
-import { Icon } from "../../layout/Icon"
 import { Button } from "../button/Button"
+import { InputError } from "../error/InputError"
 import { Input } from "../layout/Input"
 import { InputConstraint } from "../layout/InputConstraint"
 import { InputContainer } from "../layout/InputContainer"
 import { InputLabel } from "../layout/InputLabel"
-import { InputValidationError } from "../layout/InputValidationError"
 
 const Grid = styled.div<{ hasActions: boolean }>`
   display: grid;
@@ -43,7 +40,7 @@ export function ListInputField(props: ListInputFieldProps) {
     onChange: handleChange,
     label,
     limit,
-    error: validationError,
+    error,
   } = props
 
   const moveUp = (index: number) => {
@@ -118,14 +115,6 @@ export function ListInputField(props: ListInputFieldProps) {
     )
   }
 
-  const transition = useTransition(validationError, {
-    key: validationError,
-    config: { tension: 300, clamp: true },
-    from: { opacity: (0 as unknown) as undefined, height: 0 },
-    enter: { opacity: (1 as unknown) as undefined, height: 24 },
-    leave: { opacity: (0 as unknown) as undefined, height: 0 },
-  })
-
   return (
     <InputContainer>
       <InputLabel>
@@ -137,17 +126,7 @@ export function ListInputField(props: ListInputFieldProps) {
         )}
       </InputLabel>
       <Grid hasActions={inputs.length - Number(canAdd) > 1}>{inputs}</Grid>
-      {transition(
-        (style, item) =>
-          item && (
-            <animated.div style={style}>
-              <InputValidationError>
-                <Icon>{error}</Icon>
-                {item}
-              </InputValidationError>
-            </animated.div>
-          ),
-      )}
+      <InputError error={error} />
     </InputContainer>
   )
 }

@@ -1,22 +1,13 @@
-import { animated, useSpring } from "@react-spring/web"
-import React, {
-  ChangeEvent,
-  FocusEvent,
-  forwardRef,
-  ReactNode,
-  useState,
-} from "react"
+import React, { ChangeEvent, FocusEvent, forwardRef, ReactNode } from "react"
 import styled from "styled-components"
-import { error } from "../../../icons/error"
 import { FlexContainer } from "../../layout/FlexContainer"
-import { Icon } from "../../layout/Icon"
 import type { ReactRef } from "../../state/ReactRef"
+import { InputError } from "../error/InputError"
 import { getLengthConstraintColor } from "../getLengthConstraintColor"
 import { Input } from "../layout/Input"
 import { InputConstraint } from "../layout/InputConstraint"
 import { InputContainer } from "../layout/InputContainer"
 import { InputLabel } from "../layout/InputLabel"
-import { InputValidationError } from "../layout/InputValidationError"
 
 const TextInput = styled(Input)`
   ${FlexContainer} > & {
@@ -63,22 +54,13 @@ function InputFieldRenderer(
     required,
     disabled,
     readOnly,
-    error: validationError,
+    error,
     className,
     onClick: handleClick,
     onFocus: handleFocus,
     onBlur: handleBlur,
     children,
   } = props
-
-  const hasError = Boolean(validationError)
-  const [shouldRenderError, setShouldRenderError] = useState(hasError)
-  const errorStyle = useSpring({
-    config: { tension: 300, clamp: true },
-    opacity: (Number(hasError) as unknown) as undefined,
-    height: validationError ? 24 : 0,
-    onRest: () => setShouldRenderError(hasError),
-  })
 
   const input = (
     <TextInput
@@ -120,14 +102,7 @@ function InputFieldRenderer(
       ) : (
         input
       )}
-      {(validationError || shouldRenderError) && (
-        <animated.div style={errorStyle}>
-          <InputValidationError>
-            <Icon>{error}</Icon>
-            {validationError}
-          </InputValidationError>
-        </animated.div>
-      )}
+      <InputError error={error} />
     </InputContainer>
   )
 }
