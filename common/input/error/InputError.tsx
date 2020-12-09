@@ -36,12 +36,14 @@ export function InputError(props: InputErrorProps) {
     onRest: () => setShouldRenderError(hasError),
   })
 
-  return errorMessage || shouldRenderError ? (
+  if (!shouldRenderError && !hasError) return null
+
+  return (
     <animated.div style={errorStyle}>
       <InputValidationError>
         <Icon>{error}</Icon>
         {errorMessage}
       </InputValidationError>
     </animated.div>
-  ) : null
+  )
 }

@@ -25,11 +25,8 @@ export const MessageModel = types
       return self.embeds.length > 0 || self.files.length > 0
     },
 
-    get length() {
-      return (
-        self.content.length +
-        self.embeds.reduce((size, embed) => size + embed.length, 0)
-      )
+    get embedLength() {
+      return self.embeds.reduce((size, embed) => size + embed.length, 0)
     },
 
     get size() {

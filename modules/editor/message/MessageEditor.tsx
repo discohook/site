@@ -1,8 +1,10 @@
 import { useObserver } from "mobx-react-lite"
 import dynamic from "next/dynamic"
 import React from "react"
+import styled from "styled-components"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
+import { InputError } from "../../../common/input/error/InputError"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
@@ -16,6 +18,10 @@ import { PrimaryContentEditor } from "./PrimaryContentEditor"
 const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
   import("../data/DataEditorModal").then(module => module.DataEditorModal),
 )
+
+const ErrorWrapper = styled.div`
+  margin: 8px 0 0;
+`
 
 export type MessageEditorProps = {
   message: MessageLike
@@ -34,7 +40,18 @@ export function MessageEditor(props: MessageEditorProps) {
 
   return useObserver(() => (
     <Stack gap={16}>
-      <PrimaryContentEditor message={message} form={form} />
+      <div>
+        <PrimaryContentEditor message={message} form={form} />
+        <ErrorWrapper>
+          <InputError
+            error={
+              message.embedLength > 6000
+                ? "Embeds exceed 6000 character limit"
+                : undefined
+            }
+          />
+        </ErrorWrapper>
+      </div>
       {message.embeds.map((embed, index) => (
         <EmbedEditor
           key={embed.id}
