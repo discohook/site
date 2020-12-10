@@ -81,7 +81,8 @@ export function Footer() {
         <BrandName>Discohook</BrandName>
       </BrandContainer>
       <Tagline>
-        The easiest way to build and send Discord messages using webhooks.
+        The easiest way to build and send Discord messages with embeds using
+        webhooks.
       </Tagline>
       <Info>Email: &quot;hello&quot; at discohook.app</Info>
       <NavigationList>

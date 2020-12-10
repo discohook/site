@@ -76,7 +76,7 @@ export default function Main(props: MainProps) {
     <EditorManagerProvider value={editorManager}>
       <PageHead
         title="Discohook"
-        description="The easiest way to build and send Discord messages using webhooks."
+        description="The easiest way to build and send Discord messages with embeds using webhooks."
       >
         <meta key="referrer" name="referrer" content="strict-origin" />
       </PageHead>
