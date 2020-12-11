@@ -1,7 +1,7 @@
 import { useObserver } from "mobx-react-lite"
 import dynamic from "next/dynamic"
 import { transparentize } from "polished"
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import { useWindowEvent } from "../../common/dom/useWindowEvent"
 import { SecondaryButton } from "../../common/input/button/SecondaryButton"
@@ -60,7 +60,9 @@ const JavaScriptWarning = styled.noscript`
 
 export function Editor() {
   const editorManager = useRequiredContext(EditorManagerContext)
+
   const form = useLazyValue(() => createEditorForm(editorManager))
+  useEffect(() => () => form.dispose(), [form])
 
   const modalManager = useRequiredContext(ModalManagerContext)
 
