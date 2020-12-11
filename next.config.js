@@ -21,12 +21,9 @@ const config = {
     ]),
 }
 
-try {
-  const withBundleAnalyzer = require("@next/bundle-analyzer")({
-    enabled: process.env.ANALYZE === "true",
-  })
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+})
+const withSourceMaps = require("@zeit/next-source-maps")
 
-  module.exports = withBundleAnalyzer(config)
-} catch {
-  module.exports = config
-}
+module.exports = withSourceMaps(withBundleAnalyzer(config))
