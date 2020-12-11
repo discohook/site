@@ -1,7 +1,7 @@
 import { useObserver } from "mobx-react-lite"
-import { getSnapshot, SnapshotOut } from "mobx-state-tree"
+import { destroy, getSnapshot, SnapshotOut } from "mobx-state-tree"
 import type { GetServerSidePropsContext } from "next"
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
 import { ModalManagerContext } from "../common/modal/ModalManagerContext"
@@ -50,6 +50,7 @@ export default function Main(props: MainProps) {
   const { state, mobile } = props
 
   const editorManager = useLazyValue(() => EditorManager.create(state))
+  useEffect(() => () => destroy(editorManager), [editorManager])
 
   const cancelRef = useRef<() => void>()
   useAutorun(() => {
