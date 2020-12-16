@@ -5,7 +5,7 @@ import { DARK_THEME } from "../../theming/darkTheme"
 import { InputField } from "./InputField"
 
 describe("InputField", () => {
-  it("listens for changes", async () => {
+  it("listens for changes", () => {
     const handleChange = jest.fn()
 
     const { getByLabelText } = render(
@@ -19,7 +19,7 @@ describe("InputField", () => {
 
     const input = getByLabelText("Message")
 
-    await userEvent.type(input, "!")
+    userEvent.type(input, "!")
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith("Hello!")

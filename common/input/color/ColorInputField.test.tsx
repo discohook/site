@@ -20,7 +20,7 @@ describe("ColorInput", () => {
     expect(input).toHaveValue("#ff00ff")
   })
 
-  it("handles input changes", async () => {
+  it("handles input changes", () => {
     const color = ColorModel.create()
 
     const handleChange = jest.fn()
@@ -35,11 +35,11 @@ describe("ColorInput", () => {
 
     const input = getByLabelText("Color")
 
-    await userEvent.type(input, "#ff000")
+    userEvent.type(input, "#ff000")
 
     expect(handleChange).toHaveBeenCalledTimes(0)
 
-    await userEvent.type(input, "0")
+    userEvent.type(input, "0")
 
     expect(handleChange).toHaveBeenCalledTimes(1)
     expect(handleChange).toHaveBeenCalledWith(0xff0000)
