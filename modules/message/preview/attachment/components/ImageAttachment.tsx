@@ -36,5 +36,7 @@ export function ImageAttachment(props: ImageAttachmentProps) {
     return <DefaultAttachment file={file} type="image" />
   }
 
-  return <Image src={objectUrl} alt={name} onError={() => setErrored(true)} />
+  return (
+    <Image src={objectUrl} alt={file.name} onError={() => setErrored(true)} />
+  )
 }
