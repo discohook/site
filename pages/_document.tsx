@@ -1,5 +1,6 @@
 import "highlight.js"
 import { useStaticRendering } from "mobx-react-lite"
+import { Form, FormState } from "mstform"
 import Document, {
   DocumentContext,
   Head,
@@ -12,6 +13,10 @@ import { ServerStyleSheet } from "styled-components"
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 useStaticRendering(true)
+
+Form.prototype.state = function state(node, options) {
+  return new FormState(this, node, options)
+}
 
 export default class MyDocument extends Document {
   static async getInitialProps(context: DocumentContext) {
