@@ -1,21 +1,19 @@
-# Discohook
+# discohook fork
 
-An easy-to-use tool for building and sending Discord messages and embeds using webhooks.
+an easy-to-use tool for building discord embeds
 
-Live instance is available at <https://discohook.org/>.
+you can find it [here](https://embed.kaogurai.xyz)
 
-## Setup
-
-Requires Node.js 12 and the Yarn package manager installed
+## setup
 
 ```sh
-# Install dependencies
+# install dependencies
 yarn install
 
-# Run a development server
+# run a development server
 yarn run dev
 
-# Run a production server
+# run a production server
 yarn run build
 yarn run start
 ```
