@@ -106,7 +106,7 @@ export function Editor() {
           Backups
         </SecondaryButton>
         <SecondaryButton onClick={() => spawnClearAllModal()}>
-          Clear All
+          Clear Embed
         </SecondaryButton>
         <SecondaryButton onClick={() => spawnShareModal()}>
           Share Message

@@ -78,21 +78,16 @@ export function Footer() {
     <Container>
       <BrandContainer>
         {monochromeLogo}
-        <BrandName>Discohook</BrandName>
+        <BrandName>Discord Embed Builder</BrandName>
       </BrandContainer>
       <Tagline>
-        The easiest way to build and send Discord messages with embeds using
-        webhooks.
+      The best and most intutitive Discord Embed creator.
       </Tagline>
-      <Info>Email: &quot;hello&quot; at discohook.app</Info>
       <NavigationList>
-        <NavigationItem href="/discord" target="_blank">
-          Discord Support Server
+        <NavigationItem href="https://discord.gg/p6ehU9qhg8" target="_blank">
+          Support Server
         </NavigationItem>
-        <NavigationItem href="/bot" target="_blank">
-          Discord Bot
-        </NavigationItem>
-        <NavigationItem href="https://git.io/discohook" target="_blank">
+        <NavigationItem href="https://github.com/kaogurai/embed" target="_blank">
           Source Code
         </NavigationItem>
         <NavigationItem href="https://patreon.com/discohook" target="_blank">
@@ -100,8 +95,10 @@ export function Footer() {
         </NavigationItem>
       </NavigationList>
       <LegalInfo>
-        &copy; 2020 The Discohook Authors. Discohook is not affiliated with
-        Discord.
+        &copy; 2020 The Discohook Authors & 2021 aleclol
+      </LegalInfo>
+      <LegalInfo>
+        This is an edited fork of the original Discohook Source Code.
       </LegalInfo>
       <LegalInfo>
         This website is made available under the terms of the GNU AGPL v3

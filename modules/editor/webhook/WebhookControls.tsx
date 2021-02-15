@@ -69,36 +69,6 @@ export function WebhookControls(props: WebhookControlsProps) {
   }, [])
 
   return useObserver(() => (
-    <Stack gap={12}>
-      <InputField
-        ref={inputRef}
-        id="webhook"
-        type="password"
-        label="Webhook URL"
-        placeholder="https://discord.com/api/webhooks/..."
-        error={form.subForm("target").field("url").error}
-        {...form.subForm("target").field("url").inputProps}
-      >
-        <PrimaryButton
-          disabled={!editorManager.target.exists}
-          onClick={handleSend}
-        >
-          {editorManager.target.message ? "Edit" : "Send"}
-        </PrimaryButton>
-      </InputField>
-      <InputField
-        id="message"
-        label="Message Link"
-        placeholder="https://discord.com/channels/..."
-        error={form.subForm("target").field("message").error}
-        {...form.subForm("target").field("message").inputProps}
-      />
-      <Message
-        content={
-          "*When a message link is set, it allows you to edit previously " +
-          "sent messages.*"
-        }
-      />
-    </Stack>
+    <Stack gap={12} />
   ))
 }

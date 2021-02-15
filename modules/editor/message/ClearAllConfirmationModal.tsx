@@ -37,8 +37,8 @@ export function ClearAllConfirmationModal(
       <ModalBody>
         <Markdown
           content={
-            "This action removes all content from the message. Are you sure" +
-            " you want to continue? This action cannot be reverted."
+            "This action removes all content from your embed. Proceed with caution." +
+            " Are you sure you want to continue?"
           }
         />
       </ModalBody>
@@ -52,7 +52,7 @@ export function ClearAllConfirmationModal(
             modal.dismiss()
           }}
         >
-          Clear all
+          Clear Embed
         </PrimaryButton>
       </ModalFooter>
     </ModalContainer>

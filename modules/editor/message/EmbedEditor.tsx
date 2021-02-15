@@ -31,7 +31,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
   const { embed, form } = props
 
   const name = useObserver(() => {
-    let name = `Embed ${form.index + 1}`
+    let name = "Your Embed"
     if (embed.displayName) {
       name += ` — ${embed.displayName}`
     }
@@ -88,37 +88,6 @@ export function EmbedEditor(props: EmbedEditorProps) {
                 accessor.setRawFromValue()
               }
             }
-          },
-        },
-        {
-          icon: copy,
-          label: "Duplicate",
-          handler: () => {
-            applyPatch(form.state.value, [
-              {
-                op: "add",
-                path: `${form.parent?.path}/${form.index + 1}`,
-                value: { ...getSnapshot(embed), id: undefined },
-              },
-            ])
-            const parent = form.parent as RepeatingEmbedItemFormState
-            for (const accessor of parent.index(form.index + 1).flatAccessors) {
-              if (accessor instanceof FieldAccessor) {
-                accessor.setRawFromValue()
-              }
-            }
-          },
-        },
-        {
-          icon: remove,
-          label: "Remove",
-          handler: () => {
-            applyPatch(form.state.value, [
-              {
-                op: "remove",
-                path: form.path,
-              },
-            ])
           },
         },
       ].filter((item): item is Action => typeof item === "object")}

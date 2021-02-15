@@ -61,7 +61,7 @@ export function MessageEditor(props: MessageEditorProps) {
       ))}
       <div>
         <PrimaryButton
-          disabled={message.size >= 10}
+          disabled={message.size >= 1}
           onClick={() => {
             form.repeatingForm("embeds").push({} as EmbedLike, ["timestamp"])
           }}
