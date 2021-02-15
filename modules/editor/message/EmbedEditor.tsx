@@ -32,9 +32,6 @@ export function EmbedEditor(props: EmbedEditorProps) {
 
   const name = useObserver(() => {
     let name = "Your Embed"
-    if (embed.displayName) {
-      name += ` — ${embed.displayName}`
-    }
     return name
   })
 
