@@ -79,8 +79,7 @@ export function DataEditorModal(props: DataEditorModalProps) {
 
   const modal = useRequiredContext(ModalContext)
 
-  const [value, setValue] = useState(() => stringifyMessage(message.data))
-
+  const [value, setValue] = useState(() => stringifyMessage(message.data.embeds[0]))
   const { value: data, error } = parseJson(value)
   const errors = error ? [error] : isMessage(data, "$")
 

@@ -91,7 +91,7 @@ export function Footer() {
           Source Code
         </NavigationItem>
         <NavigationItem href="https://patreon.com/discohook" target="_blank">
-          Support Discohook
+          Support Original Author
         </NavigationItem>
       </NavigationList>
       <LegalInfo>

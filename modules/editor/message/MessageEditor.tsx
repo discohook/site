@@ -70,7 +70,9 @@ export function MessageEditor(props: MessageEditorProps) {
         </PrimaryButton>
       </div>
       <div>
-        <SecondaryButton onClick={() => spawnDataEditorModal()}>
+        <SecondaryButton onClick={() => spawnDataEditorModal()}
+          disabled={message.size <= 0}
+          >
           JSON Data Editor
         </SecondaryButton>
       </div>
