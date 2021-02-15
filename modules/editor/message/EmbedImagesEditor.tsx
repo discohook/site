@@ -29,15 +29,9 @@ export function EmbedImagesEditor(props: EmbedImagesEditorProps) {
         <ListInputField
           id={`_${embed.id}_gallery`}
           label={{ singular: "Image", plural: "Image URLs" }}
-          limit={embed.url ? 4 : 1}
+          limit={1}
           error={form.field("gallery").error}
           {...form.field("gallery").inputProps}
-        />
-        <Message
-          content={
-            "*Adding up to 4 images is possible when the URL in the Body " +
-            "section is set.*"
-          }
         />
         <RowContainer>
           <InputField
