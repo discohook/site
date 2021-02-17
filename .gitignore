@@ -11,3 +11,5 @@ coverage
 
 yarn-debug.log*
 yarn-error.log*
+*private.key*
+.env
