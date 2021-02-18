@@ -1,4 +1,5 @@
 import { useObserver } from "mobx-react-lite"
+import { applyPatch } from "mobx-state-tree"
 import dynamic from "next/dynamic"
 import React from "react"
 import styled from "styled-components"
@@ -9,6 +10,7 @@ import { InputField } from "../../../common/input/text/InputField"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
+import { Markdown } from "../../markdown/Markdown"
 import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { EmbedLike } from "../../message/state/models/EmbedModel"
 import type { MessageLike } from "../../message/state/models/MessageModel"
@@ -21,18 +23,13 @@ const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
   import("../data/DataEditorModal").then(module => module.DataEditorModal),
 )
 
-const ErrorWrapper = styled.div`
-  margin: 8px 0 0;
+const Message = styled(Markdown)`
+  margin-top: -8px;
+  font-size: 15px;
 `
 
-const MessageActions = styled.div`
-  display: flex;
-  flex-flow: wrap;
-
-  & > * {
-    margin-right: 12px;
-    margin-bottom: 8px;
-  }
+const ErrorWrapper = styled.div`
+  margin: 8px 0 0;
 `
 
 export type MessageEditorProps = {
@@ -44,7 +41,6 @@ export function MessageEditor(props: MessageEditorProps) {
   const { message, form } = props
 
   const modalManager = useRequiredContext(ModalManagerContext)
-  const editorManager = useRequiredContext(EditorManagerContext)
 
   const spawnDataEditorModal = () =>
     modalManager.spawn({
@@ -72,7 +68,7 @@ export function MessageEditor(props: MessageEditorProps) {
           form={form.repeatingForm("embeds").index(index)}
         />
       ))}
-      <MessageActions>
+      <div>
         <PrimaryButton
           disabled={message.size >= 10}
           onClick={() => {
@@ -81,21 +77,38 @@ export function MessageEditor(props: MessageEditorProps) {
         >
           Add Embed
         </PrimaryButton>
-        <SecondaryButton onClick={() => spawnDataEditorModal()}>
-          JSON Data Editor
-        </SecondaryButton>
-      </MessageActions>
+      </div>
       <InputField
         id={`_${message.id}_url`}
         label="Message Link"
         placeholder="https://discord.com/channels/..."
-        error={form.field("url").error}
-        {...form.field("url").inputProps}
+        error={form.field("reference").error}
+        {...form.field("reference").inputProps}
       >
-        <PrimaryButton onClick={() => editorManager.delete(message)}>
-          {message.url ? "Delete" : "Remove"}
+        <PrimaryButton
+          onClick={() => {
+            applyPatch(form.state.value, [
+              {
+                op: "remove",
+                path: form.path,
+              },
+            ])
+          }}
+        >
+          Remove
         </PrimaryButton>
       </InputField>
+      <Message
+        content={
+          "*When a message link is set, it allows you to edit previously " +
+          "sent messages.*"
+        }
+      />
+      <div>
+        <SecondaryButton onClick={() => spawnDataEditorModal()}>
+          JSON Data Editor
+        </SecondaryButton>
+      </div>
     </Stack>
   ))
 }

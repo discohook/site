@@ -23,7 +23,7 @@ export const MessageModel = types
     username: "",
     avatar: "",
     embeds: types.array(types.late(() => EmbedModel)),
-    url: "",
+    reference: "",
   })
   .volatile(() => ({
     files: [] as readonly File[],
@@ -59,7 +59,7 @@ export const MessageModel = types
     get body() {
       const json = stringifyMessage(this.data, false)
 
-      if (self.files.length > 0) {
+      if (self.files.length > 0 && !self.reference) {
         const formData = new FormData()
 
         if (json !== "{}") formData.append("payload_json", json)
@@ -82,21 +82,21 @@ export const MessageModel = types
       self[key] = value
     },
 
-    delete() {
-      const editor: EditorManagerLike = getParentOfType(self, EditorManager)
+    // delete() {
+    //   const editor: EditorManagerLike = getParentOfType(self, EditorManager)
 
-      const match = MESSAGE_REF_RE.exec(self.url)
-      if (match) {
-        const [, messageId] = match
+    //   const match = MESSAGE_REF_RE.exec(self.reference)
+    //   if (match) {
+    //     const [, messageId] = match
 
-        const route = `${DISCORD_API_BASE_URL}/webhooks/${editor.target.id}/${editor.target.token}/messages/${messageId}`
+    //     const route = `${DISCORD_API_BASE_URL}/webhooks/${editor.target.id}/${editor.target.token}/messages/${messageId}`
 
-        // eslint-disable-next-line no-void
-        void fetch(route, { method: "DELETE" }).then(res =>
-          console.log("Message deleted", res.status),
-        )
-      }
-    },
+    //     // eslint-disable-next-line no-void
+    //     void fetch(route, { method: "DELETE" }).then(res =>
+    //       console.log("Message deleted", res.status),
+    //     )
+    //   }
+    // },
   }))
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/consistent-type-definitions

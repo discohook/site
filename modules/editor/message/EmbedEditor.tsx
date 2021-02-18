@@ -90,7 +90,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
             }
           },
         },
-        {
+        embed.message.size < 10 && {
           icon: copy,
           label: "Duplicate",
           handler: () => {

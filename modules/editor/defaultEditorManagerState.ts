@@ -17,11 +17,6 @@ export const DEFAULT_EDITOR_MANAGER_STATE: SnapshotIn<typeof EditorManager> = {
             value: 1,
           },
         },
-      ],
-    },
-    {
-      content: "Now with multimessage support\n_ _",
-      embeds: [
         {
           title: "Discord bot",
           description:

@@ -12,11 +12,6 @@ export const EditorManager = types
       {},
     ),
   })
-  .views(self => ({
-    get hasSentMessages() {
-      return self.messages.some(m => m.url)
-    },
-  }))
   .actions(self => ({
     set<K extends keyof typeof self>(
       key: K,
@@ -27,20 +22,32 @@ export const EditorManager = types
 
     clear() {
       self.messages.clear()
-      this.add()
-    },
-
-    add() {
       self.messages.push(MessageModel.create())
     },
 
-    delete(message: MessageLike) {
-      message.delete()
-      destroy(message)
-    },
-
     async save() {
-      return self.target.save()
+      for (const message of self.messages) {
+        const headers: Record<string, string> = {
+          "Accept": "application/json",
+          "Accept-Language": "en",
+        }
+
+        const [method, url] = self.target.getRoute(message.reference)
+
+        const body = message.body
+        if (typeof body === "string") {
+          headers["Content-Type"] = "application/json"
+        }
+
+        /* eslint-disable no-await-in-loop */
+        const response = await fetch(url, { method, headers, body })
+        const data = await response.json()
+        /* eslint-enable no-await-in-loop */
+
+        console.log("Target executed", data)
+      }
+
+      return null
     },
 
     async process(path: string) {
