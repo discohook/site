@@ -92,9 +92,6 @@ export function MessageEditor(props: MessageEditorProps) {
         error={form.field("url").error}
         {...form.field("url").inputProps}
       >
-        <PrimaryButton onClick={() => editorManager.delete(message)}>
-          {message.url ? "Delete" : "Remove"}
-        </PrimaryButton>
       </InputField>
     </Stack>
   ))
