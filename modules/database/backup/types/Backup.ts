@@ -6,6 +6,5 @@ export type Backup = {
   messages: MessageData[]
   target: {
     url?: string
-    message?: string
   }
 }

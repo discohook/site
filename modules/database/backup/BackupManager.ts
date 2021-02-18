@@ -76,7 +76,6 @@ export class BackupManager {
       backup.messages.map(messageData => messageOf(messageData)),
     )
     this.editorManager.target.set("url", backup.target.url ?? "")
-    this.editorManager.target.set("message", backup.target.message ?? "")
     this.editorManager.target.fetch().catch(() => {})
   }
 
@@ -93,7 +92,6 @@ export class BackupManager {
         })),
         target: {
           url: this.editorManager.target.url || undefined,
-          message: this.editorManager.target.message || undefined,
         },
       }
     } else {

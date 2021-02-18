@@ -1,7 +1,7 @@
 import { useObserver } from "mobx-react-lite"
 import dynamic from "next/dynamic"
 import { transparentize } from "polished"
-import React, { useEffect } from "react"
+import React, { Fragment, useEffect } from "react"
 import styled from "styled-components"
 import { useWindowEvent } from "../../common/dom/useWindowEvent"
 import { SecondaryButton } from "../../common/input/button/SecondaryButton"
@@ -113,14 +113,13 @@ export function Editor() {
         </SecondaryButton>
       </Actions>
       <WebhookControls form={form} />
-      <Separator />
-      {editorManager.messages.map((message, index) => (
+      {editorManager.messages.map((message, index) => <Fragment key={message.id}>
+        <Separator />
         <MessageEditor
-          key={message.id}
           message={message}
           form={form.repeatingForm("messages").index(index)}
         />
-      ))}
+      </Fragment>)}
       <Footer />
     </EditorContainer>
   ))

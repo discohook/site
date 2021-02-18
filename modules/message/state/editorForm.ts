@@ -110,15 +110,15 @@ export const editorForm = new Form(EditorManager, {
         images: new Group({ include: ["gallery", "thumbnail"] }),
       },
     ),
+    url: new Field(converters.string, {
+      controlled: controlled.object,
+      validators: [matchesRegex(MESSAGE_REF_RE, "Invalid message link")],
+    }),
   }),
   target: new SubForm({
     url: new Field(converters.string, {
       controlled: controlled.object,
       validators: [matchesRegex(WEBHOOK_URL_RE, "Invalid webhook URL")],
-    }),
-    message: new Field(converters.string, {
-      controlled: controlled.object,
-      validators: [matchesRegex(MESSAGE_REF_RE, "Invalid message link")],
     }),
   }),
 })

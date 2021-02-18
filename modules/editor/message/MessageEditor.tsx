@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
 import { InputError } from "../../../common/input/error/InputError"
+import { InputField } from "../../../common/input/text/InputField"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
@@ -21,6 +22,16 @@ const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
 
 const ErrorWrapper = styled.div`
   margin: 8px 0 0;
+`
+
+const MessageActions = styled.div`
+  display: flex;
+  flex-flow: wrap;
+
+  & > * {
+    margin-right: 12px;
+    margin-bottom: 8px;
+  }
 `
 
 export type MessageEditorProps = {
@@ -59,7 +70,7 @@ export function MessageEditor(props: MessageEditorProps) {
           form={form.repeatingForm("embeds").index(index)}
         />
       ))}
-      <div>
+      <MessageActions>
         <PrimaryButton
           disabled={message.size >= 10}
           onClick={() => {
@@ -68,12 +79,17 @@ export function MessageEditor(props: MessageEditorProps) {
         >
           Add Embed
         </PrimaryButton>
-      </div>
-      <div>
         <SecondaryButton onClick={() => spawnDataEditorModal()}>
           JSON Data Editor
         </SecondaryButton>
-      </div>
+      </MessageActions>
+      <InputField
+        id={`_${message.id}_url`}
+        label="Message Link"
+        placeholder="https://discord.com/channels/..."
+        error={form.field("url").error}
+        {...form.field("url").inputProps}
+      />
     </Stack>
   ))
 }

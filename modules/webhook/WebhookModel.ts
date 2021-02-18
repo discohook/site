@@ -22,10 +22,10 @@ import type { WebhookData } from "./WebhookData"
 export const WebhookModel = types
   .model("WebhookModel", {
     url: "",
-    message: "",
+    // message: "",
   })
   .volatile(() => ({
-    fetchedUrl: undefined as string | undefined,
+    fetchedUrl: undefined as string | undefined, // used nowhere
     exists: undefined as boolean | undefined,
     id: undefined as string | undefined,
     name: undefined as string | undefined,
@@ -51,8 +51,8 @@ export const WebhookModel = types
       )
     },
 
-    get route() {
-      const match = MESSAGE_REF_RE.exec(self.message)
+    routeFor(messageUrl: string) {
+      const match = MESSAGE_REF_RE.exec(messageUrl)
       if (match) {
         const [, messageId] = match
 
@@ -115,9 +115,9 @@ export const WebhookModel = types
     async save() {
       const editor: EditorManagerLike = getParentOfType(self, EditorManager)
 
-      const [method, url] = self.route
-
       for (const message of editor.messages) {
+        const [method, url] = self.routeFor(message.url)
+
         const headers: Record<string, string> = {
           "Accept": "application/json",
           "Accept-Language": "en",
@@ -132,6 +132,8 @@ export const WebhookModel = types
         const data = await response.json()
 
         console.log("Target executed", data)
+
+        message.set("url", `https://discord.com/channels/${self.guildId}/${self.channelId}/${data.id}`)
       }
 
       return null
