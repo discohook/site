@@ -133,7 +133,10 @@ export const WebhookModel = types
 
         console.log("Target executed", data)
 
-        message.set("url", `https://discord.com/channels/${self.guildId}/${self.channelId}/${data.id}`)
+        message.set(
+          "url",
+          `https://discord.com/channels/${self.guildId}/${self.channelId}/${data.id}`,
+        )
       }
 
       return null

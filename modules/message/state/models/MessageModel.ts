@@ -13,7 +13,7 @@ export const MessageModel = types
     username: "",
     avatar: "",
     embeds: types.array(types.late(() => EmbedModel)),
-    url: ""
+    url: "",
   })
   .volatile(() => ({
     files: [] as readonly File[],

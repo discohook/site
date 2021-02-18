@@ -113,13 +113,15 @@ export function Editor() {
         </SecondaryButton>
       </Actions>
       <WebhookControls form={form} />
-      {editorManager.messages.map((message, index) => <Fragment key={message.id}>
-        <Separator />
-        <MessageEditor
-          message={message}
-          form={form.repeatingForm("messages").index(index)}
-        />
-      </Fragment>)}
+      {editorManager.messages.map((message, index) => (
+        <Fragment key={message.id}>
+          <Separator />
+          <MessageEditor
+            message={message}
+            form={form.repeatingForm("messages").index(index)}
+          />
+        </Fragment>
+      ))}
       <Footer />
     </EditorContainer>
   ))
