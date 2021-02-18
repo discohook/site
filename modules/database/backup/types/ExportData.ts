@@ -35,6 +35,7 @@ export type ExportData =
         messages: MessageData[]
         target: {
           url?: string
+          message?: string
         }
       }[]
     }
