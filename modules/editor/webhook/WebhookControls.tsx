@@ -1,10 +1,12 @@
 import { useObserver } from "mobx-react-lite"
 import React, { useEffect, useRef, useState } from "react"
+import styled from "styled-components"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { InputField } from "../../../common/input/text/InputField"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
+import { Markdown } from "../../markdown/Markdown"
 import type { EditorFormState } from "../../message/state/editorForm"
 import { EditorManagerContext } from "../EditorManagerContext"
 import { NetworkErrorModal } from "./NetworkErrorModal"
@@ -62,8 +64,8 @@ export function WebhookControls(props: WebhookControlsProps) {
   }, [])
 
   const saveLabel = () => {
-    if (editorManager.messages.every(m => !m.url)) return "Send"
-    if (editorManager.messages.every(m => m.url)) return "Edit"
+    if (editorManager.messages.every(m => !m.reference)) return "Send"
+    if (editorManager.messages.every(m => m.reference)) return "Edit"
     return "Submit"
   }
 
@@ -86,7 +88,7 @@ export function WebhookControls(props: WebhookControlsProps) {
         >
           {saveLabel()}
         </PrimaryButton>
-      </InputField>
+      </InputField>    
     </Stack>
   ))
 }

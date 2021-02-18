@@ -1,11 +1,17 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
+import styled from "styled-components"
 import { FileInputField } from "../../../common/input/file/FileInputField"
 import { InputField } from "../../../common/input/text/InputField"
 import { RowContainer } from "../../../common/layout/RowContainer"
 import { Stack } from "../../../common/layout/Stack"
+import { Markdown } from "../../markdown/Markdown"
 import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { MessageLike } from "../../message/state/models/MessageModel"
+
+const Message = styled(Markdown)`
+  margin-bottom: -10px;
+`
 
 export type PrimaryContentEditorProps = {
   message: MessageLike
@@ -25,7 +31,9 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
         error={form.field("content").error}
         {...form.field("content").inputProps}
       />
-      {!message.url && ( // hide these fields since it isn't editable anymore
+      {message.reference ? (
+        <Message content="*You cannot edit username, avatar and files for previously sent messages.*" />
+      ) : (
         <>
           <RowContainer>
             <InputField

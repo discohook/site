@@ -1,14 +1,6 @@
 /* eslint-disable import/no-cycle */
-/* eslint-disable no-await-in-loop */
 
-import {
-  flow,
-  getParentOfType,
-  Instance,
-  SnapshotOrInstance,
-  types,
-} from "mobx-state-tree"
-import { EditorManager, EditorManagerLike } from "../editor/EditorManager"
+import { flow, Instance, SnapshotOrInstance, types } from "mobx-state-tree"
 import {
   BRANDED_DEFAULT_AVATAR_URL,
   DEFAULT_AVATAR_URL,
@@ -22,10 +14,8 @@ import type { WebhookData } from "./WebhookData"
 export const WebhookModel = types
   .model("WebhookModel", {
     url: "",
-    // message: "",
   })
   .volatile(() => ({
-    fetchedUrl: undefined as string | undefined, // used nowhere
     exists: undefined as boolean | undefined,
     id: undefined as string | undefined,
     name: undefined as string | undefined,
@@ -51,8 +41,8 @@ export const WebhookModel = types
       )
     },
 
-    routeFor(messageUrl: string) {
-      const match = MESSAGE_REF_RE.exec(messageUrl)
+    getRoute(reference?: string) {
+      const match = reference && MESSAGE_REF_RE.exec(reference)
       if (match) {
         const [, messageId] = match
 
@@ -77,7 +67,6 @@ export const WebhookModel = types
     },
 
     fetch: flow(function* () {
-      self.fetchedUrl = undefined
       self.exists = undefined
       self.id = undefined
       self.name = undefined
@@ -111,36 +100,6 @@ export const WebhookModel = types
         // do nothing
       }
     }),
-
-    async save() {
-      const editor: EditorManagerLike = getParentOfType(self, EditorManager)
-
-      for (const message of editor.messages) {
-        const [method, url] = self.routeFor(message.url)
-
-        const headers: Record<string, string> = {
-          "Accept": "application/json",
-          "Accept-Language": "en",
-        }
-
-        const body = message.body
-        if (typeof body === "string") {
-          headers["Content-Type"] = "application/json"
-        }
-
-        const response = await fetch(url, { method, headers, body })
-        const data = await response.json()
-
-        console.log("Target executed", data)
-
-        message.set(
-          "url",
-          `https://discord.com/channels/${self.guildId}/${self.channelId}/${data.id}`,
-        )
-      }
-
-      return null
-    },
   }))
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/consistent-type-definitions

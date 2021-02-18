@@ -87,7 +87,7 @@ export function EmbedFieldEditor(props: EmbedFieldEditorProps) {
             }
           },
         },
-        {
+        field.embed.fields.length < 25 && {
           icon: copy,
           label: "Duplicate",
           handler: () => {

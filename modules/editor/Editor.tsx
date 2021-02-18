@@ -16,6 +16,7 @@ import { useRequiredContext } from "../../common/state/useRequiredContext"
 import type { BackupsModalProps } from "../database/backup/modal/BackupsModal"
 import { Markdown } from "../markdown/Markdown"
 import { createEditorForm } from "../message/state/editorForm"
+import type { MessageLike } from "../message/state/models/MessageModel"
 import { EditorManagerContext } from "./EditorManagerContext"
 import { ClearAllConfirmationModal } from "./message/ClearAllConfirmationModal"
 import { MessageEditor } from "./message/MessageEditor"
@@ -123,14 +124,16 @@ export function Editor() {
           />
         </Fragment>
       ))}
-      <Actions>
+      <Separator />
+      <div>
         <PrimaryButton
-          disabled={editorManager.hasSentMessages}
-          onClick={() => editorManager.add()}
+          onClick={() => {
+            form.repeatingForm("messages").push({} as MessageLike, ["content"])
+          }}
         >
           Add Message
         </PrimaryButton>
-      </Actions>
+      </div>
       <Footer />
     </EditorContainer>
   ))
