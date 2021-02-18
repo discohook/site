@@ -6,7 +6,7 @@ import { WebhookModel } from "../webhook/WebhookModel"
 
 export const EditorManager = types
   .model("EditorManager", {
-    messages: types.array(MessageModel),
+    messages: types.late(() => types.array(MessageModel)),
     target: types.optional(
       types.late(() => WebhookModel),
       {},
