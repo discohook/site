@@ -83,15 +83,16 @@ export function WebhookControls(props: WebhookControlsProps) {
           disabled={!editorManager.target.exists}
           onClick={handleSend}
         >
-          {editorManager.target.message ? "Edit" : "Send"}
+          {editorManager.messages[0].reference ? "Edit" : "Send"}
         </PrimaryButton>
       </InputField>
       <InputField
         id="message"
         label="Message Link"
         placeholder="https://discord.com/channels/..."
-        error={form.subForm("target").field("message").error}
-        {...form.subForm("target").field("message").inputProps}
+        error={form.repeatingForm("messages").index(0).field("reference").error}
+        {...form.repeatingForm("messages").index(0).field("reference")
+          .inputProps}
       />
       <Message
         content={

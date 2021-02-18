@@ -6,7 +6,7 @@ import { WebhookModel } from "../webhook/WebhookModel"
 
 export const EditorManager = types
   .model("EditorManager", {
-    messages: types.array(MessageModel),
+    messages: types.late(() => types.array(MessageModel)),
     target: types.optional(
       types.late(() => WebhookModel),
       {},
@@ -26,7 +26,28 @@ export const EditorManager = types
     },
 
     async save() {
-      return self.target.save()
+      for (const message of self.messages) {
+        const headers: Record<string, string> = {
+          "Accept": "application/json",
+          "Accept-Language": "en",
+        }
+
+        const [method, url] = self.target.getRoute(message.reference)
+
+        const body = message.body
+        if (typeof body === "string") {
+          headers["Content-Type"] = "application/json"
+        }
+
+        /* eslint-disable no-await-in-loop */
+        const response = await fetch(url, { method, headers, body })
+        const data = await response.json()
+        /* eslint-enable no-await-in-loop */
+
+        console.log("Target executed", data)
+      }
+
+      return null
     },
 
     async process(path: string) {

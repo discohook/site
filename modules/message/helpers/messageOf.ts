@@ -57,5 +57,7 @@ export const messageOf = (data: MessageData) => {
     }
   }
 
-  return snapshot as SnapshotIn<typeof MessageModel>
+  return {
+    data: snapshot as SnapshotIn<typeof MessageModel>,
+  }
 }

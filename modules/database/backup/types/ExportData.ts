@@ -39,3 +39,16 @@ export type ExportData =
         }
       }[]
     }
+  | {
+      version: 6
+      backups: {
+        name: string
+        messages: {
+          data: MessageData
+          reference?: string
+        }[]
+        target: {
+          url?: string
+        }
+      }[]
+    }
