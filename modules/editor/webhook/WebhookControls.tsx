@@ -64,7 +64,7 @@ export function WebhookControls(props: WebhookControlsProps) {
   const saveLabel = () => {
     if (editorManager.messages.every(m => !m.url)) return "Send"
     if (editorManager.messages.every(m => m.url)) return "Edit"
-    return "Send/Edit"
+    return "Submit"
   }
 
   return useObserver(() => (
