@@ -4,6 +4,7 @@ import { transparentize } from "polished"
 import React, { Fragment, useEffect } from "react"
 import styled from "styled-components"
 import { useWindowEvent } from "../../common/dom/useWindowEvent"
+import { PrimaryButton } from "../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../common/input/button/SecondaryButton"
 import { Separator } from "../../common/layout/Separator"
 import { Stack } from "../../common/layout/Stack"
@@ -122,6 +123,14 @@ export function Editor() {
           />
         </Fragment>
       ))}
+      <Actions>
+        <PrimaryButton
+          disabled={editorManager.hasSentMessages}
+          onClick={() => editorManager.add()}
+        >
+          Add Message
+        </PrimaryButton>
+      </Actions>
       <Footer />
     </EditorContainer>
   ))

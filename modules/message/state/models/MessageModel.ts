@@ -1,7 +1,17 @@
 /* eslint-disable import/no-cycle */
 
-import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
+import {
+  getParentOfType,
+  Instance,
+  SnapshotOrInstance,
+  types,
+} from "mobx-state-tree"
 import { getUniqueId } from "../../../../common/state/uid"
+import { EditorManagerLike, EditorManager } from "../../../editor/EditorManager"
+import {
+  MESSAGE_REF_RE,
+  DISCORD_API_BASE_URL,
+} from "../../../webhook/constants"
 import { stringifyMessage } from "../../helpers/stringifyMessage"
 import type { MessageData } from "../data/MessageData"
 import { EmbedModel } from "./EmbedModel"
@@ -70,6 +80,22 @@ export const MessageModel = types
       value: SnapshotOrInstance<typeof self[K]>,
     ): void {
       self[key] = value
+    },
+
+    delete() {
+      const editor: EditorManagerLike = getParentOfType(self, EditorManager)
+
+      const match = MESSAGE_REF_RE.exec(self.url)
+      if (match) {
+        const [, messageId] = match
+
+        const route = `${DISCORD_API_BASE_URL}/webhooks/${editor.target.id}/${editor.target.token}/messages/${messageId}`
+
+        // eslint-disable-next-line no-void
+        void fetch(route, { method: "DELETE" }).then(res =>
+          console.log("Message deleted", res.status),
+        )
+      }
     },
   }))
 

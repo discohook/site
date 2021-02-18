@@ -62,8 +62,8 @@ export function WebhookControls(props: WebhookControlsProps) {
   }, [])
 
   const saveLabel = () => {
-    if (editorManager.messages.every(m => Boolean(m.url))) return "Edit"
     if (editorManager.messages.every(m => !m.url)) return "Send"
+    if (editorManager.messages.every(m => m.url)) return "Edit"
     return "Send/Edit"
   }
 
@@ -79,7 +79,9 @@ export function WebhookControls(props: WebhookControlsProps) {
         {...form.subForm("target").field("url").inputProps}
       >
         <PrimaryButton
-          disabled={!editorManager.target.exists}
+          disabled={
+            !editorManager.target.exists || editorManager.messages.length === 0
+          }
           onClick={handleSend}
         >
           {saveLabel()}

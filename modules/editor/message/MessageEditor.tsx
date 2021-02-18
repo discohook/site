@@ -13,6 +13,7 @@ import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { EmbedLike } from "../../message/state/models/EmbedModel"
 import type { MessageLike } from "../../message/state/models/MessageModel"
 import type { DataEditorModalProps } from "../data/DataEditorModal"
+import { EditorManagerContext } from "../EditorManagerContext"
 import { EmbedEditor } from "./EmbedEditor"
 import { PrimaryContentEditor } from "./PrimaryContentEditor"
 
@@ -43,6 +44,7 @@ export function MessageEditor(props: MessageEditorProps) {
   const { message, form } = props
 
   const modalManager = useRequiredContext(ModalManagerContext)
+  const editorManager = useRequiredContext(EditorManagerContext)
 
   const spawnDataEditorModal = () =>
     modalManager.spawn({
@@ -89,7 +91,11 @@ export function MessageEditor(props: MessageEditorProps) {
         placeholder="https://discord.com/channels/..."
         error={form.field("url").error}
         {...form.field("url").inputProps}
-      />
+      >
+        <PrimaryButton onClick={() => editorManager.delete(message)}>
+          {message.url ? "Delete" : "Remove"}
+        </PrimaryButton>
+      </InputField>
     </Stack>
   ))
 }

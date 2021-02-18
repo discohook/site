@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 
-import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
-import { MessageModel } from "../message/state/models/MessageModel"
+import { destroy, Instance, SnapshotOrInstance, types } from "mobx-state-tree"
+import { MessageLike, MessageModel } from "../message/state/models/MessageModel"
 import { WebhookModel } from "../webhook/WebhookModel"
 
 export const EditorManager = types
@@ -12,6 +12,11 @@ export const EditorManager = types
       {},
     ),
   })
+  .views(self => ({
+    get hasSentMessages() {
+      return self.messages.some(m => m.url)
+    },
+  }))
   .actions(self => ({
     set<K extends keyof typeof self>(
       key: K,
@@ -22,7 +27,16 @@ export const EditorManager = types
 
     clear() {
       self.messages.clear()
+      this.add()
+    },
+
+    add() {
       self.messages.push(MessageModel.create())
+    },
+
+    delete(message: MessageLike) {
+      message.delete()
+      destroy(message)
     },
 
     async save() {
