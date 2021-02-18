@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 
-import { destroy, Instance, SnapshotOrInstance, types } from "mobx-state-tree"
-import { MessageLike, MessageModel } from "../message/state/models/MessageModel"
+import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
+import { MessageModel } from "../message/state/models/MessageModel"
 import { WebhookModel } from "../webhook/WebhookModel"
 
 export const EditorManager = types

@@ -1,17 +1,7 @@
 /* eslint-disable import/no-cycle */
 
-import {
-  getParentOfType,
-  Instance,
-  SnapshotOrInstance,
-  types,
-} from "mobx-state-tree"
+import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
 import { getUniqueId } from "../../../../common/state/uid"
-import { EditorManagerLike, EditorManager } from "../../../editor/EditorManager"
-import {
-  MESSAGE_REF_RE,
-  DISCORD_API_BASE_URL,
-} from "../../../webhook/constants"
 import { stringifyMessage } from "../../helpers/stringifyMessage"
 import type { MessageData } from "../data/MessageData"
 import { EmbedModel } from "./EmbedModel"

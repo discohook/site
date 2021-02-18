@@ -15,7 +15,6 @@ import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { EmbedLike } from "../../message/state/models/EmbedModel"
 import type { MessageLike } from "../../message/state/models/MessageModel"
 import type { DataEditorModalProps } from "../data/DataEditorModal"
-import { EditorManagerContext } from "../EditorManagerContext"
 import { EmbedEditor } from "./EmbedEditor"
 import { PrimaryContentEditor } from "./PrimaryContentEditor"
 
