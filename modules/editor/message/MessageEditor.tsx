@@ -28,7 +28,7 @@ const Message = styled(Markdown)`
 `
 
 const ErrorWrapper = styled.div`
-  margin: 8px 0 0;
+  /* margin: 8px 0 0; */
 `
 
 export type MessageEditorProps = {
@@ -48,18 +48,7 @@ export function MessageEditor(props: MessageEditorProps) {
 
   return useObserver(() => (
     <Stack gap={16}>
-      <div>
-        <PrimaryContentEditor message={message} form={form} />
-        <ErrorWrapper>
-          <InputError
-            error={
-              message.embedLength > 6000
-                ? "Embeds exceed 6000 character limit"
-                : undefined
-            }
-          />
-        </ErrorWrapper>
-      </div>
+      <PrimaryContentEditor message={message} form={form} />
       {message.embeds.map((embed, index) => (
         <EmbedEditor
           key={embed.id}
@@ -67,6 +56,16 @@ export function MessageEditor(props: MessageEditorProps) {
           form={form.repeatingForm("embeds").index(index)}
         />
       ))}
+      <ErrorWrapper>
+        {/* all errors placed under corresponding field but not this one */}
+        <InputError
+          error={
+            message.embedLength > 6000
+              ? "Embeds exceed 6000 character limit"
+              : undefined
+          }
+        />
+      </ErrorWrapper>
       <div>
         <PrimaryButton
           disabled={message.size >= 10}

@@ -1,16 +1,18 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
 import styled from "styled-components"
+import { ColorModel } from "../../../common/input/color/ColorModel"
+import { InputError } from "../../../common/input/error/InputError"
 import { FileInputField } from "../../../common/input/file/FileInputField"
 import { InputField } from "../../../common/input/text/InputField"
 import { RowContainer } from "../../../common/layout/RowContainer"
+import { Section } from "../../../common/layout/Section"
 import { Stack } from "../../../common/layout/Stack"
-import { Markdown } from "../../markdown/Markdown"
 import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { MessageLike } from "../../message/state/models/MessageModel"
 
-const Message = styled(Markdown)`
-  margin-bottom: -10px;
+const ErrorWrapper = styled.div`
+  margin: -4px 0 8px;
 `
 
 export type PrimaryContentEditorProps = {
@@ -18,8 +20,12 @@ export type PrimaryContentEditorProps = {
   form: MessageItemFormState
 }
 
+const black = ColorModel.create({ value: 0 })
+
 export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
   const { message, form } = props
+
+  const isSent = Boolean(message.reference)
 
   return useObserver(() => (
     <Stack gap={12}>
@@ -31,10 +37,8 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
         error={form.field("content").error}
         {...form.field("content").inputProps}
       />
-      {message.reference ? (
-        <Message content="*You cannot edit username, avatar and files for previously sent messages.*" />
-      ) : (
-        <>
+      <Section variant="large" color={black} hasError={false} name="Extras">
+        <Stack gap={8}>
           <RowContainer>
             <InputField
               id={`_${message.id}_username`}
@@ -42,12 +46,14 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
               maxLength={80}
               error={form.field("username").error}
               {...form.field("username").inputProps}
+              disabled={isSent}
             />
             <InputField
               id={`_${message.id}_avatar`}
               label="Avatar URL"
               error={form.field("avatar").error}
               {...form.field("avatar").inputProps}
+              disabled={isSent}
             />
           </RowContainer>
           <FileInputField
@@ -56,9 +62,19 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
             maxSize={8 * 1024 ** 2}
             value={message.files}
             onChange={files => message.set("files", files)}
+            disabled={isSent}
           />
-        </>
-      )}
+        </Stack>
+      </Section>
+      <ErrorWrapper>
+        <InputError
+          error={
+            isSent
+              ? "You cannot edit username, avatar and files for previously sent messages."
+              : undefined
+          }
+        />
+      </ErrorWrapper>
     </Stack>
   ))
 }
