@@ -30,7 +30,7 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
         {...form.field("content").inputProps}
       />
       <Section name="Extras">
-        <Stack gap={8}>
+        <Stack gap={12}>
           <RowContainer>
             <InputField
               id={`_${message.id}_username`}
