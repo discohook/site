@@ -1,6 +1,5 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
-import styled from "styled-components"
 import { ColorModel } from "../../../common/input/color/ColorModel"
 import { InputError } from "../../../common/input/error/InputError"
 import { FileInputField } from "../../../common/input/file/FileInputField"
@@ -10,10 +9,6 @@ import { Section } from "../../../common/layout/Section"
 import { Stack } from "../../../common/layout/Stack"
 import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { MessageLike } from "../../message/state/models/MessageModel"
-
-const ErrorWrapper = styled.div`
-  margin: -4px 0 8px;
-`
 
 export type PrimaryContentEditorProps = {
   message: MessageLike
@@ -64,17 +59,16 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
             onChange={files => message.set("files", files)}
             disabled={isSent}
           />
+          <InputError
+            variant="warning"
+            error={
+              isSent
+                ? "You cannot edit username, avatar and files for previously sent messages."
+                : undefined
+            }
+          />
         </Stack>
       </Section>
-      <ErrorWrapper>
-        <InputError
-          error={
-            isSent
-              ? "You cannot edit username, avatar and files for previously sent messages."
-              : undefined
-          }
-        />
-      </ErrorWrapper>
     </Stack>
   ))
 }

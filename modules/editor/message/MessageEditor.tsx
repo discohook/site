@@ -27,13 +27,48 @@ const Message = styled(Markdown)`
   font-size: 15px;
 `
 
-const ErrorWrapper = styled.div`
-  /* margin: 8px 0 0; */
+const EmbedInputWrapper = styled.div`
+  padding-bottom: 16px;
 `
 
 export type MessageEditorProps = {
   message: MessageLike
   form: MessageItemFormState
+}
+
+export function EmbedGroup(props: MessageEditorProps) {
+  const { message, form } = props
+
+  return useObserver(() => (
+    <div>
+      <EmbedInputWrapper>
+        <Stack gap={16}>
+          {message.embeds.map((embed, index) => (
+            <EmbedEditor
+              key={embed.id}
+              embed={embed}
+              form={form.repeatingForm("embeds").index(index)}
+            />
+          ))}
+        </Stack>
+        <InputError
+          error={
+            message.embedLength > 6000
+              ? "Embeds exceed 6000 character limit"
+              : undefined
+          }
+        />
+      </EmbedInputWrapper>
+      <PrimaryButton
+        disabled={message.size >= 10}
+        onClick={() => {
+          form.repeatingForm("embeds").push({} as EmbedLike, ["timestamp"])
+        }}
+      >
+        Add Embed
+      </PrimaryButton>
+    </div>
+  ))
 }
 
 export function MessageEditor(props: MessageEditorProps) {
@@ -49,33 +84,7 @@ export function MessageEditor(props: MessageEditorProps) {
   return useObserver(() => (
     <Stack gap={16}>
       <PrimaryContentEditor message={message} form={form} />
-      {message.embeds.map((embed, index) => (
-        <EmbedEditor
-          key={embed.id}
-          embed={embed}
-          form={form.repeatingForm("embeds").index(index)}
-        />
-      ))}
-      <ErrorWrapper>
-        {/* all errors placed under corresponding field but not this one */}
-        <InputError
-          error={
-            message.embedLength > 6000
-              ? "Embeds exceed 6000 character limit"
-              : undefined
-          }
-        />
-      </ErrorWrapper>
-      <div>
-        <PrimaryButton
-          disabled={message.size >= 10}
-          onClick={() => {
-            form.repeatingForm("embeds").push({} as EmbedLike, ["timestamp"])
-          }}
-        >
-          Add Embed
-        </PrimaryButton>
-      </div>
+      <EmbedGroup message={message} form={form} />
       <InputField
         id={`_${message.id}_url`}
         label="Message Link"
