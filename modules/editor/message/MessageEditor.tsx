@@ -86,7 +86,7 @@ export function MessageEditor(props: MessageEditorProps) {
       <PrimaryContentEditor message={message} form={form} />
       <EmbedGroup message={message} form={form} />
       <InputField
-        id={`_${message.id}_url`}
+        id={`_${message.id}_reference`}
         label="Message Link"
         placeholder="https://discord.com/channels/..."
         error={form.field("reference").error}
