@@ -22,7 +22,7 @@ export function EmbedFooterEditor(props: EmbedFooterEditorProps) {
         <InputField
           id={`_${embed.id}_footer`}
           label="Footer"
-          maxLength={256}
+          maxLength={2048}
           rows={1}
           error={form.field("footer").error}
           {...form.field("footer").inputProps}

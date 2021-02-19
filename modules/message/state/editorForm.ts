@@ -49,10 +49,12 @@ export const editorForm = new Form(EditorManager, {
         fields: new RepeatingForm({
           name: new Field(converters.string, {
             controlled: controlled.object,
+            validators: [maxLength(256)],
             required: true,
           }),
           value: new Field(converters.string, {
             controlled: controlled.object,
+            validators: [maxLength(256)],
             required: true,
           }),
           inline: new Field(converters.boolean, {
@@ -73,7 +75,7 @@ export const editorForm = new Form(EditorManager, {
         }),
         footer: new Field(converters.string, {
           controlled: controlled.object,
-          validators: [maxLength(256)],
+          validators: [maxLength(2048)],
         }),
         footerIcon: new Field(converters.string, {
           controlled: controlled.object,
