@@ -1,6 +1,5 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
-import { ColorModel } from "../../../common/input/color/ColorModel"
 import { InputError } from "../../../common/input/error/InputError"
 import { FileInputField } from "../../../common/input/file/FileInputField"
 import { InputField } from "../../../common/input/text/InputField"
@@ -14,8 +13,6 @@ export type PrimaryContentEditorProps = {
   message: MessageLike
   form: MessageItemFormState
 }
-
-const black = ColorModel.create({ value: 0 })
 
 export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
   const { message, form } = props
@@ -32,7 +29,7 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
         error={form.field("content").error}
         {...form.field("content").inputProps}
       />
-      <Section color={black} variant="large" hasError={false} name="Extras">
+      <Section hasError={false} name="Extras">
         <Stack gap={8}>
           <RowContainer>
             <InputField
