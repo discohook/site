@@ -63,7 +63,7 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
             variant="warning"
             error={
               isSent
-                ? "You cannot edit username, avatar and files for previously sent messages."
+                ? "You cannot edit username, avatar and files for previously sent messages"
                 : undefined
             }
           />
