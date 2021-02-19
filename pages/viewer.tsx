@@ -36,8 +36,8 @@ export default function Viewer(props: ViewerProps) {
   return useObserver(() => (
     <EditorManagerProvider value={editorManager}>
       <PageHead
-        title="Discohook"
-        description="The easiest way to build and send Discord messages with embeds using webhooks."
+        title="Message Viewer"
+        description="Discohook's standalone message viewer."
       >
         <meta key="referrer" name="referrer" content="strict-origin" />
       </PageHead>
