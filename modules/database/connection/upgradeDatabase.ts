@@ -101,9 +101,10 @@ export const upgradeDatabase = async (
     let cursor = await backupStore.openCursor()
 
     while (cursor) {
-      const { target, messages } = cursor.value
+      const { target, messages, ...rest } = cursor.value
 
       await backupStore.put({
+        ...rest,
         messages: messages.map((data: unknown) => ({
           data,
           reference: target.message,
