@@ -128,7 +128,7 @@ export function Editor() {
       <div>
         <PrimaryButton
           onClick={() => {
-            form.repeatingForm("messages").push({} as MessageLike, ["content"])
+            form.repeatingForm("messages").push({} as MessageLike)
           }}
         >
           Add Message

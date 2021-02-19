@@ -20,7 +20,7 @@ const black = ColorModel.create({ value: 0 })
 export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
   const { message, form } = props
 
-  const isSent = Boolean(message.reference)
+  const isEditing = Boolean(message.reference)
 
   return useObserver(() => (
     <Stack gap={12}>
@@ -32,7 +32,7 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
         error={form.field("content").error}
         {...form.field("content").inputProps}
       />
-      <Section variant="large" color={black} hasError={false} name="Extras">
+      <Section color={black} variant="large" hasError={false} name="Extras">
         <Stack gap={8}>
           <RowContainer>
             <InputField
@@ -41,14 +41,14 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
               maxLength={80}
               error={form.field("username").error}
               {...form.field("username").inputProps}
-              disabled={isSent}
+              disabled={isEditing}
             />
             <InputField
               id={`_${message.id}_avatar`}
               label="Avatar URL"
               error={form.field("avatar").error}
               {...form.field("avatar").inputProps}
-              disabled={isSent}
+              disabled={isEditing}
             />
           </RowContainer>
           <FileInputField
@@ -57,12 +57,12 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
             maxSize={8 * 1024 ** 2}
             value={message.files}
             onChange={files => message.set("files", files)}
-            disabled={isSent}
+            disabled={isEditing}
           />
           <InputError
             variant="warning"
             error={
-              isSent
+              isEditing
                 ? "You cannot edit username, avatar and files for previously sent messages"
                 : undefined
             }

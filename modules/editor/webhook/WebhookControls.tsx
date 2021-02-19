@@ -61,32 +61,34 @@ export function WebhookControls(props: WebhookControlsProps) {
     }
   }, [])
 
-  const saveLabel = () => {
-    if (editorManager.messages.every(m => !m.reference)) return "Send"
-    if (editorManager.messages.every(m => m.reference)) return "Edit"
-    return "Submit"
-  }
+  return useObserver(() => {
+    let saveLabel: string
+    if (editorManager.messages.every(m => !m.reference)) saveLabel = "Send"
+    else if (editorManager.messages.every(m => m.reference)) saveLabel = "Edit"
+    else saveLabel = "Submit"
 
-  return useObserver(() => (
-    <Stack gap={12}>
-      <InputField
-        ref={inputRef}
-        id="webhook"
-        type="password"
-        label="Webhook URL"
-        placeholder="https://discord.com/api/webhooks/..."
-        error={form.subForm("target").field("url").error}
-        {...form.subForm("target").field("url").inputProps}
-      >
-        <PrimaryButton
-          disabled={
-            !editorManager.target.exists || editorManager.messages.length === 0
-          }
-          onClick={handleSend}
+    return (
+      <Stack gap={12}>
+        <InputField
+          ref={inputRef}
+          id="webhook"
+          type="password"
+          label="Webhook URL"
+          placeholder="https://discord.com/api/webhooks/..."
+          error={form.subForm("target").field("url").error}
+          {...form.subForm("target").field("url").inputProps}
         >
-          {saveLabel()}
-        </PrimaryButton>
-      </InputField>
-    </Stack>
-  ))
+          <PrimaryButton
+            disabled={
+              !editorManager.target.exists ||
+              editorManager.messages.length === 0
+            }
+            onClick={handleSend}
+          >
+            {saveLabel}
+          </PrimaryButton>
+        </InputField>
+      </Stack>
+    )
+  })
 }

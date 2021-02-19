@@ -71,22 +71,6 @@ export const MessageModel = types
     ): void {
       self[key] = value
     },
-
-    // delete() {
-    //   const editor: EditorManagerLike = getParentOfType(self, EditorManager)
-
-    //   const match = MESSAGE_REF_RE.exec(self.reference)
-    //   if (match) {
-    //     const [, messageId] = match
-
-    //     const route = `${DISCORD_API_BASE_URL}/webhooks/${editor.target.id}/${editor.target.token}/messages/${messageId}`
-
-    //     // eslint-disable-next-line no-void
-    //     void fetch(route, { method: "DELETE" }).then(res =>
-    //       console.log("Message deleted", res.status),
-    //     )
-    //   }
-    // },
   }))
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/consistent-type-definitions
