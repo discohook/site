@@ -142,7 +142,14 @@ export type SectionProps = {
 }
 
 export function Section(props: SectionProps) {
-  const { children, name, variant = "normal", actions, color, hasError } = props
+  const {
+    children,
+    name,
+    variant = "normal",
+    actions,
+    color,
+    hasError = false,
+  } = props
 
   const expandSections = usePreference("expandSections")
 

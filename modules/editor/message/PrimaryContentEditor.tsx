@@ -29,7 +29,7 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
         error={form.field("content").error}
         {...form.field("content").inputProps}
       />
-      <Section hasError={false} name="Extras">
+      <Section name="Extras">
         <Stack gap={8}>
           <RowContainer>
             <InputField
