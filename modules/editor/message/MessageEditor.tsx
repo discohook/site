@@ -81,7 +81,7 @@ export function MessageEditor(props: MessageEditorProps) {
         <PrimaryButton
           disabled={message.size >= 10}
           onClick={() => {
-            form.repeatingForm("embeds").push({} as EmbedLike, ["content"])
+            form.repeatingForm("embeds").push({} as EmbedLike, ["timestamp"])
           }}
         >
           Add Embed
