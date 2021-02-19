@@ -13,8 +13,11 @@ const InputValidationError = styled.div<{ variant: "error" | "warning" }>`
   font-size: 16px;
   font-weight: 500;
 
+  padding-top: 8px;
+  height: 24px;
+
   & > ${Icon} {
-    margin: 0;
+    margin-left: -8px;
     color: currentColor;
   }
 
@@ -38,7 +41,7 @@ export function InputError(props: InputErrorProps) {
   const errorStyle = useSpring({
     config: { tension: 300, clamp: true },
     opacity: (Number(hasError) as unknown) as undefined,
-    height: errorMessage ? 32 : 0,
+    height: errorMessage ? 24 : 0,
     onRest: () => setShouldRenderError(hasError),
   })
 
