@@ -1,4 +1,5 @@
 import { animated, useSpring } from "@react-spring/web"
+import Link from "next/link"
 import { size } from "polished"
 import React, { useState } from "react"
 import styled, { useTheme } from "styled-components"
@@ -146,7 +147,9 @@ export function Header<T extends string>(props: HeaderProps<T>) {
 
   return (
     <Container>
-      <Logo>{theme.appearance.color === "dark" ? darkLogo : lightLogo}</Logo>
+      <Link href="/">
+        <Logo>{theme.appearance.color === "dark" ? darkLogo : lightLogo}</Logo>
+      </Link>
       {tabs && <HeaderTabs {...tabs} />}
       <Dim style={dimStyle} onClick={() => setExpanded(false)} />
       <Navigation style={navigationStyle} onClick={() => setExpanded(false)}>
