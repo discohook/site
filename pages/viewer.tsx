@@ -1,6 +1,7 @@
 import { useObserver } from "mobx-react-lite"
 import { destroy, getSnapshot, SnapshotOut } from "mobx-state-tree"
 import type { GetServerSidePropsContext } from "next"
+import { useRouter } from "next/router"
 import React, { useEffect } from "react"
 import styled from "styled-components"
 import { ModalManagerContext } from "../common/modal/ModalManagerContext"
@@ -33,6 +34,8 @@ export default function Viewer(props: ViewerProps) {
   const spawnSettingsModal = () =>
     modalManager.spawn({ render: () => <PreferencesModal /> })
 
+  const router = useRouter()
+
   return useObserver(() => (
     <EditorManagerProvider value={editorManager}>
       <PageHead
@@ -44,7 +47,10 @@ export default function Viewer(props: ViewerProps) {
       <Container>
         <Header
           items={[
-            { name: "Editor", to: "/" },
+            {
+              name: "Editor",
+              to: `/?data=${encodeURIComponent(String(router.query.data))}`,
+            },
             { name: "Settings", handler: spawnSettingsModal },
           ]}
         />
