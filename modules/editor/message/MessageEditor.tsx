@@ -29,6 +29,13 @@ const Message = styled(Markdown)`
   font-size: 15px;
 `
 
+const LeadingErrorWrapper = styled.div`
+  margin-bottom: 8px;
+  &:empty {
+    margin: 0;
+  }
+`
+
 export type MessageEditorProps = {
   message: MessageLike
   form: MessageItemFormState
@@ -50,13 +57,15 @@ export function MessageEditor(props: MessageEditorProps) {
       <PrimaryContentEditor message={message} form={form} />
       {message.embeds.length > 0 && (
         <div>
-          <InputError
-            error={
-              message.embedLength > 6000
-                ? "Embeds exceed 6000 character limit"
-                : undefined
-            }
-          />
+          <LeadingErrorWrapper>
+            <InputError
+              error={
+                message.embedLength > 6000
+                  ? "Embeds exceed 6000 character limit"
+                  : undefined
+              }
+            />
+          </LeadingErrorWrapper>
           <Stack gap={16}>
             {message.embeds.map((embed, index) => (
               <EmbedEditor
