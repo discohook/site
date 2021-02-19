@@ -62,10 +62,9 @@ export function WebhookControls(props: WebhookControlsProps) {
   }, [])
 
   return useObserver(() => {
-    let saveLabel: string
+    let saveLabel = "Submit"
     if (editorManager.messages.every(m => !m.reference)) saveLabel = "Send"
     else if (editorManager.messages.every(m => m.reference)) saveLabel = "Edit"
-    else saveLabel = "Submit"
 
     return (
       <Stack gap={12}>
