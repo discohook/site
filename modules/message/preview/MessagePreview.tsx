@@ -89,7 +89,11 @@ export function MessagePreview(props: MessagePreviewProps) {
 
   return useObserver(() => (
     <Container>
-      <MessageHeader username={message.username} avatarUrl={message.avatar} />
+      <MessageHeader
+        username={message.username}
+        avatarUrl={message.avatar}
+        badge={message.badge}
+      />
       {message.hasContent && (
         <Observer>
           {() => (

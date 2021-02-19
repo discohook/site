@@ -118,14 +118,18 @@ const BotTag = styled.span`
   font-weight: 500;
   line-height: 1.3;
   vertical-align: baseline;
+
+  text-transform: uppercase;
 `
 
 export type MessageHeaderProps = {
   username?: string
   avatarUrl?: string
+  badge?: string | null
 }
 
 export function MessageHeader(props: MessageHeaderProps) {
+  const { badge } = props
   let { username, avatarUrl } = props
 
   const theme = useTheme()
@@ -140,7 +144,7 @@ export function MessageHeader(props: MessageHeaderProps) {
 
     let info = [
       <Username key="username">{username}</Username>,
-      <BotTag key="bot-tag">BOT</BotTag>,
+      badge !== null && <BotTag key="badge">{badge ?? "Bot"}</BotTag>,
       <Clock key="clock" />,
     ]
 

@@ -4,6 +4,7 @@ import { parseJson } from "../../common/object/parseJson"
 import { toSnakeCase } from "../../common/object/toSnakeCase"
 import { messageOf } from "../message/helpers/messageOf"
 import type { MessageData } from "../message/state/data/MessageData"
+import { MESSAGE_REF_RE } from "../webhook/constants"
 import { DEFAULT_EDITOR_MANAGER_STATE } from "./defaultEditorManagerState"
 import { EditorManager } from "./EditorManager"
 
@@ -32,7 +33,19 @@ export const getEditorManagerFromQuery = (query: ParsedUrlQuery) => {
         return {}
       }
 
-      return messageOf(message.data as MessageData)
+      return {
+        ...messageOf(message.data as MessageData),
+        reference:
+          (message.reference &&
+            MESSAGE_REF_RE.exec(String(message.reference))?.[0]) ||
+          undefined,
+        badge:
+          "badge" in message
+            ? message.badge === null
+              ? null
+              : String(message.badge)
+            : undefined,
+      }
     }),
   })
 }

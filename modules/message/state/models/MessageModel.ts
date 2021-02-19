@@ -14,6 +14,7 @@ export const MessageModel = types
     avatar: "",
     embeds: types.array(types.late(() => EmbedModel)),
     reference: "",
+    badge: types.optional(types.maybeNull(types.string), "Bot"),
   })
   .volatile(() => ({
     files: [] as readonly File[],
