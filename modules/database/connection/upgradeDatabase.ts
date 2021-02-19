@@ -127,11 +127,9 @@ export const upgradeDatabase = async (
       const { id, name, messages, target } = cursor.value
 
       if (name) {
-        await backupStore.delete(id)
-      } else {
         await backupStore.put({
           id,
-          name: `Recovered backup #${id}`,
+          name,
           messages: messages.map((data: unknown) => ({
             data,
             reference: target.message,
@@ -140,6 +138,8 @@ export const upgradeDatabase = async (
             url: target.url,
           },
         })
+      } else {
+        await backupStore.delete(id)
       }
 
       cursor = await cursor.continue()
