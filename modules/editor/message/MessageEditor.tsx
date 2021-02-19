@@ -27,48 +27,21 @@ const Message = styled(Markdown)`
   font-size: 15px;
 `
 
-const EmbedInputWrapper = styled.div`
-  padding-bottom: 16px;
+const BottomActions = styled.div`
+  display: flex;
+  flex-flow: wrap;
+
+  margin-bottom: -8px;
+
+  & > * {
+    margin-right: 12px;
+    margin-bottom: 8px;
+  }
 `
 
 export type MessageEditorProps = {
   message: MessageLike
   form: MessageItemFormState
-}
-
-export function EmbedGroup(props: MessageEditorProps) {
-  const { message, form } = props
-
-  return useObserver(() => (
-    <div>
-      <EmbedInputWrapper>
-        <Stack gap={16}>
-          {message.embeds.map((embed, index) => (
-            <EmbedEditor
-              key={embed.id}
-              embed={embed}
-              form={form.repeatingForm("embeds").index(index)}
-            />
-          ))}
-        </Stack>
-        <InputError
-          error={
-            message.embedLength > 6000
-              ? "Embeds exceed 6000 character limit"
-              : undefined
-          }
-        />
-      </EmbedInputWrapper>
-      <PrimaryButton
-        disabled={message.size >= 10}
-        onClick={() => {
-          form.repeatingForm("embeds").push({} as EmbedLike, ["timestamp"])
-        }}
-      >
-        Add Embed
-      </PrimaryButton>
-    </div>
-  ))
 }
 
 export function MessageEditor(props: MessageEditorProps) {
@@ -84,15 +57,51 @@ export function MessageEditor(props: MessageEditorProps) {
   return useObserver(() => (
     <Stack gap={16}>
       <PrimaryContentEditor message={message} form={form} />
-      <EmbedGroup message={message} form={form} />
+      {message.embeds.length > 0 && (
+        <div>
+          <InputError
+            error={
+              message.embedLength > 6000
+                ? "Embeds exceed 6000 character limit"
+                : undefined
+            }
+          />
+          <Stack gap={16}>
+            {message.embeds.map((embed, index) => (
+              <EmbedEditor
+                key={embed.id}
+                embed={embed}
+                form={form.repeatingForm("embeds").index(index)}
+              />
+            ))}
+          </Stack>
+        </div>
+      )}
+      <div>
+        <PrimaryButton
+          disabled={message.size >= 10}
+          onClick={() => {
+            form.repeatingForm("embeds").push({} as EmbedLike, ["content"])
+          }}
+        >
+          Add Embed
+        </PrimaryButton>
+      </div>
       <InputField
         id={`_${message.id}_reference`}
         label="Message Link"
         placeholder="https://discord.com/channels/..."
         error={form.field("reference").error}
         {...form.field("reference").inputProps}
-      >
-        <PrimaryButton
+      />
+      <Message
+        content={
+          "*When a message link is set, it allows you to edit previously " +
+          "sent messages.*"
+        }
+      />
+      <BottomActions>
+        <SecondaryButton
           onClick={() => {
             applyPatch(form.state.value, [
               {
@@ -103,19 +112,11 @@ export function MessageEditor(props: MessageEditorProps) {
           }}
         >
           Remove
-        </PrimaryButton>
-      </InputField>
-      <Message
-        content={
-          "*When a message link is set, it allows you to edit previously " +
-          "sent messages.*"
-        }
-      />
-      <div>
+        </SecondaryButton>
         <SecondaryButton onClick={() => spawnDataEditorModal()}>
           JSON Data Editor
         </SecondaryButton>
-      </div>
+      </BottomActions>
     </Stack>
   ))
 }
