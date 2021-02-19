@@ -15,6 +15,7 @@ import { getEditorManagerFromQuery } from "../modules/editor/getEditorManagerFro
 import { Preview } from "../modules/message/preview/Preview"
 
 const Container = styled.div`
+  height: 100%;
   overflow-y: auto;
 `
 
