@@ -31,6 +31,7 @@ const Message = styled(Markdown)`
 
 const LeadingErrorWrapper = styled.div`
   margin-bottom: 8px;
+
   &:empty {
     margin: 0;
   }
