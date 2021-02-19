@@ -12,10 +12,11 @@ const Button = styled(SecondaryButton)`
 export type PasteFileButtonProps = {
   className?: string
   onChange: (files: File[]) => void
+  disabled?: boolean
 }
 
 export function PasteFileButton(props: PasteFileButtonProps) {
-  const { className, onChange: handleChange } = props
+  const { className, onChange: handleChange, disabled = false } = props
 
   const [active, setActive] = useState(false)
 
@@ -32,6 +33,7 @@ export function PasteFileButton(props: PasteFileButtonProps) {
         ref={pasteInputRef}
         tabIndex={-1}
         placeholder="Paste your clipboard"
+        disabled={disabled}
         style={{
           position: "absolute",
           opacity: 0,
@@ -43,6 +45,7 @@ export function PasteFileButton(props: PasteFileButtonProps) {
       />
       <Button
         className={className}
+        disabled={disabled}
         onClick={() => {
           pasteInputRef.current?.focus()
         }}

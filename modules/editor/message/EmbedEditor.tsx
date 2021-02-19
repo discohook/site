@@ -86,7 +86,7 @@ export function EmbedEditor(props: EmbedEditorProps) {
               }
             }
           },
-        },
+        }
       ].filter((item): item is Action => typeof item === "object")}
       hasError={!form.isValid}
     >

@@ -49,10 +49,12 @@ export const editorForm = new Form(EditorManager, {
         fields: new RepeatingForm({
           name: new Field(converters.string, {
             controlled: controlled.object,
+            validators: [maxLength(256)],
             required: true,
           }),
           value: new Field(converters.string, {
             controlled: controlled.object,
+            validators: [maxLength(1024)],
             required: true,
           }),
           inline: new Field(converters.boolean, {
@@ -73,7 +75,7 @@ export const editorForm = new Form(EditorManager, {
         }),
         footer: new Field(converters.string, {
           controlled: controlled.object,
-          validators: [maxLength(256)],
+          validators: [maxLength(2048)],
         }),
         footerIcon: new Field(converters.string, {
           controlled: controlled.object,
@@ -110,15 +112,15 @@ export const editorForm = new Form(EditorManager, {
         images: new Group({ include: ["gallery", "thumbnail"] }),
       },
     ),
+    reference: new Field(converters.string, {
+      controlled: controlled.object,
+      validators: [matchesRegex(MESSAGE_REF_RE, "Invalid message link")],
+    }),
   }),
   target: new SubForm({
     url: new Field(converters.string, {
       controlled: controlled.object,
       validators: [matchesRegex(WEBHOOK_URL_RE, "Invalid webhook URL")],
-    }),
-    message: new Field(converters.string, {
-      controlled: controlled.object,
-      validators: [matchesRegex(MESSAGE_REF_RE, "Invalid message link")],
     }),
   }),
 })

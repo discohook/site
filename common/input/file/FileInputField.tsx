@@ -29,11 +29,19 @@ export type FileInputProps = {
   value: readonly File[]
   onChange: (value: File[]) => void
   label: string
+  disabled?: boolean
   maxSize?: number
 }
 
 export function FileInputField(props: FileInputProps) {
-  const { id, value, onChange: handleChange, label, maxSize } = props
+  const {
+    id,
+    value,
+    onChange: handleChange,
+    label,
+    disabled = false,
+    maxSize,
+  } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -57,9 +65,10 @@ export function FileInputField(props: FileInputProps) {
       <FlexContainer>
         <input
           ref={inputRef}
+          id={id}
           type="file"
           multiple
-          id={id}
+          disabled={disabled}
           style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}
           onChange={event => {
             handleChange(Array.from(event.target.files ?? []))
@@ -68,14 +77,17 @@ export function FileInputField(props: FileInputProps) {
         <FakeInput
           value={value.map(file => file.name).join(", ")}
           readOnly
+          disabled={disabled}
           tabIndex={-1}
           style={{ cursor: "default" }}
           onClick={() => {
             inputRef.current?.click()
           }}
         />
-        <ClipboardButton onChange={handleChange} />
-        <PrimaryButton onClick={handleRemoveFiles}>Clear</PrimaryButton>
+        <ClipboardButton onChange={handleChange} disabled={disabled} />
+        <PrimaryButton onClick={handleRemoveFiles} disabled={disabled}>
+          Clear
+        </PrimaryButton>
       </FlexContainer>
     </InputContainer>
   )

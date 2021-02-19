@@ -94,4 +94,32 @@ export const upgradeDatabase = async (
       cursor = await cursor.continue()
     }
   }
+
+  if (oldVersion < 9 && oldVersion >= 1) {
+    const backupStore = transaction.objectStore("backup")
+
+    let cursor = await backupStore.openCursor()
+
+    while (cursor) {
+      const { id, name, messages, target } = cursor.value
+
+      if (name) {
+        await backupStore.put({
+          id,
+          name,
+          messages: messages.map((data: Record<string, unknown>) => ({
+            data: "data" in data ? data.data : data,
+            reference: "reference" in data ? data.reference : target.message,
+          })),
+          target: {
+            url: target.url,
+          },
+        })
+      } else {
+        await backupStore.delete(id)
+      }
+
+      cursor = await cursor.continue()
+    }
+  }
 }
