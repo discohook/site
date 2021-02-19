@@ -95,30 +95,7 @@ export const upgradeDatabase = async (
     }
   }
 
-  if (oldVersion < 7 && oldVersion >= 1) {
-    const backupStore = transaction.objectStore("backup")
-
-    let cursor = await backupStore.openCursor()
-
-    while (cursor) {
-      const { target, messages, ...rest } = cursor.value
-
-      await backupStore.put({
-        ...rest,
-        messages: messages.map((data: unknown) => ({
-          data,
-          reference: target.message,
-        })),
-        target: {
-          url: target.url,
-        },
-      })
-
-      cursor = await cursor.continue()
-    }
-  }
-
-  if (oldVersion < 8 && oldVersion >= 7) {
+  if (oldVersion < 9 && oldVersion >= 1) {
     const backupStore = transaction.objectStore("backup")
 
     let cursor = await backupStore.openCursor()
@@ -130,9 +107,9 @@ export const upgradeDatabase = async (
         await backupStore.put({
           id,
           name,
-          messages: messages.map((data: unknown) => ({
-            data,
-            reference: target.message,
+          messages: messages.map((data: Record<string, unknown>) => ({
+            data: "data" in data ? data.data : data,
+            reference: "reference" in data ? data.reference : target.message,
           })),
           target: {
             url: target.url,
