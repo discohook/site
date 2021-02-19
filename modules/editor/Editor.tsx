@@ -6,6 +6,7 @@ import styled from "styled-components"
 import { useWindowEvent } from "../../common/dom/useWindowEvent"
 import { PrimaryButton } from "../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../common/input/button/SecondaryButton"
+import { ButtonList } from "../../common/layout/ButtonList"
 import { Separator } from "../../common/layout/Separator"
 import { Stack } from "../../common/layout/Stack"
 import { ModalManagerContext } from "../../common/modal/ModalManagerContext"
@@ -32,19 +33,6 @@ const BackupsModal = dynamic<BackupsModalProps>(async () =>
 const EditorContainer = styled(Stack)`
   padding: 16px;
 `
-
-const Actions = styled.div`
-  display: flex;
-  flex-flow: wrap;
-
-  margin-bottom: -8px;
-
-  & > * {
-    margin-right: 12px;
-    margin-bottom: 8px;
-  }
-`
-
 const JavaScriptWarning = styled.noscript`
   display: block;
 
@@ -103,7 +91,7 @@ export function Editor() {
           }
         />
       </JavaScriptWarning>
-      <Actions>
+      <ButtonList>
         <SecondaryButton onClick={() => spawnBackupsModal()}>
           Backups
         </SecondaryButton>
@@ -113,7 +101,7 @@ export function Editor() {
         <SecondaryButton onClick={() => spawnShareModal()}>
           Share Message
         </SecondaryButton>
-      </Actions>
+      </ButtonList>
       <WebhookControls form={form} />
       {editorManager.messages.map((message, index) => (
         <Fragment key={message.id}>

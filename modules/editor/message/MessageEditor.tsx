@@ -7,6 +7,7 @@ import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
 import { InputError } from "../../../common/input/error/InputError"
 import { InputField } from "../../../common/input/text/InputField"
+import { ButtonList } from "../../../common/layout/ButtonList"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
@@ -15,6 +16,7 @@ import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { EmbedLike } from "../../message/state/models/EmbedModel"
 import type { MessageLike } from "../../message/state/models/MessageModel"
 import type { DataEditorModalProps } from "../data/DataEditorModal"
+import { EditorManagerContext } from "../EditorManagerContext"
 import { EmbedEditor } from "./EmbedEditor"
 import { PrimaryContentEditor } from "./PrimaryContentEditor"
 
@@ -27,18 +29,6 @@ const Message = styled(Markdown)`
   font-size: 15px;
 `
 
-const BottomActions = styled.div`
-  display: flex;
-  flex-flow: wrap;
-
-  margin-bottom: -8px;
-
-  & > * {
-    margin-right: 12px;
-    margin-bottom: 8px;
-  }
-`
-
 export type MessageEditorProps = {
   message: MessageLike
   form: MessageItemFormState
@@ -48,6 +38,7 @@ export function MessageEditor(props: MessageEditorProps) {
   const { message, form } = props
 
   const modalManager = useRequiredContext(ModalManagerContext)
+  const editorManager = useRequiredContext(EditorManagerContext)
 
   const spawnDataEditorModal = () =>
     modalManager.spawn({
@@ -100,23 +91,25 @@ export function MessageEditor(props: MessageEditorProps) {
           "sent messages.*"
         }
       />
-      <BottomActions>
-        <SecondaryButton
-          onClick={() => {
-            applyPatch(form.state.value, [
-              {
-                op: "remove",
-                path: form.path,
-              },
-            ])
-          }}
-        >
-          Remove
-        </SecondaryButton>
+      <ButtonList>
+        {editorManager.messages.length > 1 && (
+          <SecondaryButton
+            onClick={() => {
+              applyPatch(form.state.value, [
+                {
+                  op: "remove",
+                  path: form.path,
+                },
+              ])
+            }}
+          >
+            Remove Message
+          </SecondaryButton>
+        )}
         <SecondaryButton onClick={() => spawnDataEditorModal()}>
           JSON Data Editor
         </SecondaryButton>
-      </BottomActions>
+      </ButtonList>
     </Stack>
   ))
 }
