@@ -54,7 +54,7 @@ export const editorForm = new Form(EditorManager, {
           }),
           value: new Field(converters.string, {
             controlled: controlled.object,
-            validators: [maxLength(256)],
+            validators: [maxLength(1024)],
             required: true,
           }),
           inline: new Field(converters.boolean, {
