@@ -29,7 +29,7 @@ const Message = styled(Markdown)`
   font-size: 15px;
 `
 
-const LeadingErrorWrapper = styled.div`
+const EmbedValidationErrorContainer = styled.div`
   margin-bottom: 8px;
 
   &:empty {
@@ -58,7 +58,7 @@ export function MessageEditor(props: MessageEditorProps) {
       <PrimaryContentEditor message={message} form={form} />
       {message.embeds.length > 0 && (
         <div>
-          <LeadingErrorWrapper>
+          <EmbedValidationErrorContainer>
             <InputError
               error={
                 message.embedLength > 6000
@@ -66,7 +66,7 @@ export function MessageEditor(props: MessageEditorProps) {
                   : undefined
               }
             />
-          </LeadingErrorWrapper>
+          </EmbedValidationErrorContainer>
           <Stack gap={16}>
             {message.embeds.map((embed, index) => (
               <EmbedEditor

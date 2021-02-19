@@ -20,14 +20,14 @@ export function WebhookControls(props: WebhookControlsProps) {
 
   const modalManager = useRequiredContext(ModalManagerContext)
 
-  const [sending, setSending] = useState(false)
-  const handleSend = async () => {
-    if (sending) return
+  const [submitting, setSubmitting] = useState(false)
+  const handleSubmit = async () => {
+    if (submitting) return
 
     form.validate()
     if (!form.isValid) return
 
-    setSending(true)
+    setSubmitting(true)
 
     try {
       await form.save()
@@ -37,7 +37,7 @@ export function WebhookControls(props: WebhookControlsProps) {
       })
     }
 
-    setSending(false)
+    setSubmitting(false)
   }
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -62,9 +62,10 @@ export function WebhookControls(props: WebhookControlsProps) {
   }, [])
 
   return useObserver(() => {
-    let saveLabel = "Submit"
-    if (editorManager.messages.every(m => !m.reference)) saveLabel = "Send"
-    else if (editorManager.messages.every(m => m.reference)) saveLabel = "Edit"
+    let submitLabel = "Submit"
+    if (editorManager.messages.every(m => !m.reference)) submitLabel = "Send"
+    else if (editorManager.messages.every(m => m.reference))
+      submitLabel = "Edit"
 
     return (
       <Stack gap={12}>
@@ -82,9 +83,9 @@ export function WebhookControls(props: WebhookControlsProps) {
               !editorManager.target.exists ||
               editorManager.messages.length === 0
             }
-            onClick={handleSend}
+            onClick={handleSubmit}
           >
-            {saveLabel}
+            {submitLabel}
           </PrimaryButton>
         </InputField>
       </Stack>
