@@ -63,7 +63,9 @@ export function PageHead(props: PageHeadProps) {
         name="viewport"
         content="width=device-width, initial-scale=1.0"
       />
-      <title key="title">{title}</title>
+      <title key="title">
+        {title === "Discohook" ? title : `${title} • Discohook`}
+      </title>
       <meta key="description" name="description" content={description} />
       <meta key="og:title" property="og:title" content={title} />
       <meta key="og:type" property="og:type" content="website" />
