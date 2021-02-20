@@ -1,8 +1,10 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
+import { InputError } from "../../../common/input/error/InputError"
 import { FileInputField } from "../../../common/input/file/FileInputField"
 import { InputField } from "../../../common/input/text/InputField"
 import { RowContainer } from "../../../common/layout/RowContainer"
+import { Section } from "../../../common/layout/Section"
 import { Stack } from "../../../common/layout/Stack"
 import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { MessageLike } from "../../message/state/models/MessageModel"
@@ -15,6 +17,8 @@ export type PrimaryContentEditorProps = {
 export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
   const { message, form } = props
 
+  const isEditing = Boolean(message.reference)
+
   return useObserver(() => (
     <Stack gap={12}>
       <InputField
@@ -25,28 +29,43 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
         error={form.field("content").error}
         {...form.field("content").inputProps}
       />
-      <RowContainer>
-        <InputField
-          id={`_${message.id}_username`}
-          label="Username"
-          maxLength={80}
-          error={form.field("username").error}
-          {...form.field("username").inputProps}
-        />
-        <InputField
-          id={`_${message.id}_avatar`}
-          label="Avatar URL"
-          error={form.field("avatar").error}
-          {...form.field("avatar").inputProps}
-        />
-      </RowContainer>
-      <FileInputField
-        id={`_${message.id}_files`}
-        label="Files"
-        maxSize={8 * 1024 ** 2}
-        value={message.files}
-        onChange={files => message.set("files", files)}
-      />
+      <Section name="Extras">
+        <Stack gap={12}>
+          <RowContainer>
+            <InputField
+              id={`_${message.id}_username`}
+              label="Username"
+              maxLength={80}
+              error={form.field("username").error}
+              {...form.field("username").inputProps}
+              disabled={isEditing}
+            />
+            <InputField
+              id={`_${message.id}_avatar`}
+              label="Avatar URL"
+              error={form.field("avatar").error}
+              {...form.field("avatar").inputProps}
+              disabled={isEditing}
+            />
+          </RowContainer>
+          <FileInputField
+            id={`_${message.id}_files`}
+            label="Files"
+            maxSize={8 * 1024 ** 2}
+            value={message.files}
+            onChange={files => message.set("files", files)}
+            disabled={isEditing}
+          />
+          <InputError
+            variant="warning"
+            error={
+              isEditing
+                ? "You cannot edit username, avatar and files for previously sent messages"
+                : undefined
+            }
+          />
+        </Stack>
+      </Section>
     </Stack>
   ))
 }

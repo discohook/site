@@ -1,10 +1,12 @@
 import { useObserver } from "mobx-react-lite"
 import dynamic from "next/dynamic"
 import { transparentize } from "polished"
-import React, { useEffect } from "react"
+import React, { Fragment, useEffect } from "react"
 import styled from "styled-components"
 import { useWindowEvent } from "../../common/dom/useWindowEvent"
+import { PrimaryButton } from "../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../common/input/button/SecondaryButton"
+import { ButtonList } from "../../common/layout/ButtonList"
 import { Separator } from "../../common/layout/Separator"
 import { Stack } from "../../common/layout/Stack"
 import { ModalManagerContext } from "../../common/modal/ModalManagerContext"
@@ -15,6 +17,7 @@ import { useRequiredContext } from "../../common/state/useRequiredContext"
 import type { BackupsModalProps } from "../database/backup/modal/BackupsModal"
 import { Markdown } from "../markdown/Markdown"
 import { createEditorForm } from "../message/state/editorForm"
+import type { MessageLike } from "../message/state/models/MessageModel"
 import { EditorManagerContext } from "./EditorManagerContext"
 import { ClearAllConfirmationModal } from "./message/ClearAllConfirmationModal"
 import { MessageEditor } from "./message/MessageEditor"
@@ -30,19 +33,6 @@ const BackupsModal = dynamic<BackupsModalProps>(async () =>
 const EditorContainer = styled(Stack)`
   padding: 16px;
 `
-
-const Actions = styled.div`
-  display: flex;
-  flex-flow: wrap;
-
-  margin-bottom: -8px;
-
-  & > * {
-    margin-right: 12px;
-    margin-bottom: 8px;
-  }
-`
-
 const JavaScriptWarning = styled.noscript`
   display: block;
 
@@ -101,7 +91,7 @@ export function Editor() {
           }
         />
       </JavaScriptWarning>
-      <Actions>
+      <ButtonList>
         <SecondaryButton onClick={() => spawnBackupsModal()}>
           Backups
         </SecondaryButton>
@@ -111,16 +101,27 @@ export function Editor() {
         <SecondaryButton onClick={() => spawnShareModal()}>
           Share Message
         </SecondaryButton>
-      </Actions>
+      </ButtonList>
       <WebhookControls form={form} />
-      <Separator />
       {editorManager.messages.map((message, index) => (
-        <MessageEditor
-          key={message.id}
-          message={message}
-          form={form.repeatingForm("messages").index(index)}
-        />
+        <Fragment key={message.id}>
+          <Separator />
+          <MessageEditor
+            message={message}
+            form={form.repeatingForm("messages").index(index)}
+          />
+        </Fragment>
       ))}
+      <Separator />
+      <div>
+        <PrimaryButton
+          onClick={() => {
+            form.repeatingForm("messages").push({} as MessageLike)
+          }}
+        >
+          Add Message
+        </PrimaryButton>
+      </div>
       <Footer />
     </EditorContainer>
   ))

@@ -14,6 +14,7 @@ const InputValidationError = styled.div<{ variant: "error" | "warning" }>`
   font-weight: 500;
 
   padding-top: 8px;
+  height: 24px;
 
   & > ${Icon} {
     margin-left: -8px;
