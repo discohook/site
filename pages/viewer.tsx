@@ -19,6 +19,12 @@ import { Preview } from "../modules/message/preview/Preview"
 const Container = styled.div`
   height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-flow: column;
+`
+
+const Content = styled.div`
+  flex: 1;
 `
 
 export type ViewerProps = {
@@ -55,7 +61,9 @@ export default function Viewer(props: ViewerProps) {
             { name: "Settings", handler: spawnSettingsModal },
           ]}
         />
-        <Preview />
+        <Content>
+          <Preview />
+        </Content>
         <Footer />
       </Container>
     </EditorManagerProvider>
