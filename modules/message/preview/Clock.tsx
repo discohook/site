@@ -1,6 +1,7 @@
 import { rem } from "polished"
 import React, { useEffect, useState } from "react"
-import styled, { css } from "styled-components"
+import styled, { css, useTheme } from "styled-components"
+import { formatTimestamp } from "./formatTimestamp"
 
 const Display = styled.span`
   display: inline-block;
@@ -17,10 +18,6 @@ const Display = styled.span`
       font-weight: 500;
       line-height: ${rem(22)};
       vertical-align: baseline;
-
-      &::before {
-        content: "Today at ";
-      }
     `};
 
   ${({ theme }) =>
@@ -33,19 +30,8 @@ const Display = styled.span`
       line-height: ${rem(22)};
       text-align: right;
       text-indent: 0;
-
-      &::before {
-        content: "";
-      }
     `};
 `
-
-const getTime = (timestamp: Date = new Date()) =>
-  timestamp.toLocaleString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  })
 
 export type ClockProps = {
   timestamp?: Date
@@ -54,17 +40,31 @@ export type ClockProps = {
 export function Clock(props: ClockProps) {
   const { timestamp } = props
 
-  const [displayedTime, setDisplayedTime] = useState(() => getTime(timestamp))
+  const theme = useTheme()
+
+  const [displayedTime, setDisplayedTime] = useState("")
   useEffect(() => {
-    if (Number.isNaN(timestamp)) {
-      const interval = setInterval(() => {
-        setDisplayedTime(getTime())
-      }, 1000)
+    const update = (timestamp: Date = new Date()) => {
+      if (theme.appearance.display === "cozy") {
+        setDisplayedTime(formatTimestamp(timestamp))
+      } else {
+        setDisplayedTime(
+          timestamp.toLocaleString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }),
+        )
+      }
+    }
+
+    if (!timestamp || Number.isNaN(timestamp.getTime())) {
+      const interval = setInterval(update, 1000)
       return () => clearInterval(interval)
     }
 
-    setDisplayedTime(getTime(timestamp))
-  }, [timestamp])
+    update(timestamp)
+  }, [theme.appearance.display, timestamp])
 
   return <Display>{displayedTime}</Display>
 }
