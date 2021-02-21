@@ -1,3 +1,4 @@
+import { isValid } from "date-fns"
 import { rem } from "polished"
 import React, { useCallback, useEffect, useState } from "react"
 import styled, { css, useTheme } from "styled-components"
@@ -38,7 +39,8 @@ export type ClockProps = {
 }
 
 export function Clock(props: ClockProps) {
-  const { timestamp } = props
+  let { timestamp } = props
+  if (timestamp && !isValid(timestamp)) timestamp = undefined
 
   const theme = useTheme()
 
@@ -60,7 +62,7 @@ export function Clock(props: ClockProps) {
   const [displayedTime, setDisplayedTime] = useState(() => format(timestamp))
 
   useEffect(() => {
-    if (!timestamp || Number.isNaN(timestamp.getTime())) {
+    if (!timestamp) {
       const interval = setInterval(() => setDisplayedTime(format()), 1000)
       return () => clearInterval(interval)
     }
