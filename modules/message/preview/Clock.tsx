@@ -59,6 +59,7 @@ export function Clock(props: ClockProps) {
     }
 
     if (!timestamp || Number.isNaN(timestamp.getTime())) {
+      update()
       const interval = setInterval(update, 1000)
       return () => clearInterval(interval)
     }
