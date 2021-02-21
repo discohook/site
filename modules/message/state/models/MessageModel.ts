@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 
 import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
+import { nullableDate } from "../../../../common/state/nullableDate"
 import { getUniqueId } from "../../../../common/state/uid"
 import { stringifyMessage } from "../../helpers/stringifyMessage"
 import type { MessageData } from "../data/MessageData"
@@ -14,6 +15,7 @@ export const MessageModel = types
     avatar: "",
     embeds: types.array(types.late(() => EmbedModel)),
     reference: "",
+    timestamp: types.optional(nullableDate, null),
     badge: types.optional(types.maybeNull(types.string), "Bot"),
   })
   .volatile(() => ({

@@ -39,6 +39,10 @@ export const getEditorManagerFromQuery = (query: ParsedUrlQuery) => {
           (message.reference &&
             MESSAGE_REF_RE.exec(String(message.reference))?.[0]) ||
           undefined,
+        timestamp:
+          "timestamp" in message
+            ? new Date(String(message.timestamp))
+            : undefined,
         badge:
           "badge" in message
             ? message.badge === null

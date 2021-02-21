@@ -6,8 +6,9 @@ import styled, { css, useTheme } from "styled-components"
 import { SCREEN_SMALL } from "../../../common/layout/breakpoints"
 import { DARK_THEME } from "../../../common/theming/darkTheme"
 import { EditorManagerContext } from "../../editor/EditorManagerContext"
+import type { ClockProps } from "./Clock"
 
-const Clock = dynamic<Record<never, unknown>>(
+const Clock = dynamic<ClockProps>(
   async () => import("./Clock").then(module => module.Clock),
   { ssr: false },
 )
@@ -125,11 +126,12 @@ const BotTag = styled.span`
 export type MessageHeaderProps = {
   username?: string
   avatarUrl?: string
+  timestamp?: Date
   badge?: string | null
 }
 
 export function MessageHeader(props: MessageHeaderProps) {
-  const { badge } = props
+  const { timestamp, badge } = props
   let { username, avatarUrl } = props
 
   const theme = useTheme()
@@ -145,7 +147,7 @@ export function MessageHeader(props: MessageHeaderProps) {
     let info = [
       <Username key="username">{username}</Username>,
       badge !== null && <BotTag key="badge">{badge ?? "Bot"}</BotTag>,
-      <Clock key="clock" />,
+      <Clock key="clock" timestamp={timestamp} />,
     ]
 
     if (theme.appearance.display === "compact") info = info.reverse()

@@ -8,6 +8,7 @@ import {
   types,
 } from "mobx-state-tree"
 import { ColorModel } from "../../../../common/input/color/ColorModel"
+import { nullableDate } from "../../../../common/state/nullableDate"
 import { getUniqueId } from "../../../../common/state/uid"
 import type { AuthorData } from "../data/AuthorData"
 import type { EmbedData } from "../data/EmbedData"
@@ -15,27 +16,6 @@ import type { FieldData } from "../data/FieldData"
 import type { FooterData } from "../data/FooterData"
 import { FieldModel } from "./FieldModel"
 import { MessageLike, MessageModel } from "./MessageModel"
-
-const nullableDate = types.custom<Date | number | null, Date>({
-  name: "NullableDate",
-  fromSnapshot(value) {
-    return new Date(value ?? Number.NaN)
-  },
-  toSnapshot(value) {
-    const time = value.getTime()
-    return Number.isNaN(time) ? null : time
-  },
-  isTargetType(value) {
-    return value instanceof Date
-  },
-  getValidationMessage(value: unknown) {
-    if (value instanceof Date) return ""
-    if (typeof value === "number") return ""
-    if (value === null) return ""
-
-    return "Value is not a Date, a unix milliseconds timestamp, or null"
-  },
-})
 
 export const EmbedModel = types
   .model("EmbedModel", {

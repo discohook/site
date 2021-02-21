@@ -92,6 +92,7 @@ export function MessagePreview(props: MessagePreviewProps) {
       <MessageHeader
         username={message.username}
         avatarUrl={message.avatar}
+        timestamp={message.timestamp}
         badge={message.badge}
       />
       {message.hasContent && (

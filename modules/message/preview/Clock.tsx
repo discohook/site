@@ -2,7 +2,7 @@ import { rem } from "polished"
 import React, { useEffect, useState } from "react"
 import styled, { css } from "styled-components"
 
-const Timestamp = styled.span`
+const Display = styled.span`
   display: inline-block;
   height: ${rem(20)};
 
@@ -40,19 +40,31 @@ const Timestamp = styled.span`
     `};
 `
 
-const getTime = () =>
-  new Date().toLocaleString("en-US", {
+const getTime = (timestamp: Date = new Date()) =>
+  timestamp.toLocaleString("en-US", {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
   })
 
-export function Clock() {
-  const [time, setTime] = useState(getTime)
-  useEffect(() => {
-    const interval = setInterval(() => setTime(getTime()), 1000)
-    return () => clearInterval(interval)
-  }, [])
+export type ClockProps = {
+  timestamp?: Date
+}
 
-  return <Timestamp>{time}</Timestamp>
+export function Clock(props: ClockProps) {
+  const { timestamp } = props
+
+  const [displayedTime, setDisplayedTime] = useState(() => getTime(timestamp))
+  useEffect(() => {
+    if (Number.isNaN(timestamp)) {
+      const interval = setInterval(() => {
+        setDisplayedTime(getTime())
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+
+    setDisplayedTime(getTime(timestamp))
+  }, [timestamp])
+
+  return <Display>{displayedTime}</Display>
 }
