@@ -1,5 +1,5 @@
 import { rem } from "polished"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import styled, { css, useTheme } from "styled-components"
 import { formatTimestamp } from "./formatTimestamp"
 
@@ -42,30 +42,31 @@ export function Clock(props: ClockProps) {
 
   const theme = useTheme()
 
-  const [displayedTime, setDisplayedTime] = useState("")
-  useEffect(() => {
-    const update = (timestamp: Date = new Date()) => {
-      if (theme.appearance.display === "cozy") {
-        setDisplayedTime(formatTimestamp(timestamp))
-      } else {
-        setDisplayedTime(
-          timestamp.toLocaleString("en-US", {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          }),
-        )
+  const format = useCallback(
+    (timestamp: Date = new Date()) => {
+      if (theme.appearance.display === "compact") {
+        return timestamp.toLocaleString("en-US", {
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        })
       }
-    }
 
+      return formatTimestamp(timestamp)
+    },
+    [theme.appearance.display],
+  )
+
+  const [displayedTime, setDisplayedTime] = useState(() => format(timestamp))
+
+  useEffect(() => {
     if (!timestamp || Number.isNaN(timestamp.getTime())) {
-      update()
-      const interval = setInterval(update, 1000)
+      const interval = setInterval(() => setDisplayedTime(format()), 1000)
       return () => clearInterval(interval)
     }
 
-    update(timestamp)
-  }, [theme.appearance.display, timestamp])
+    setDisplayedTime(format(timestamp))
+  }, [format, timestamp])
 
   return <Display>{displayedTime}</Display>
 }
