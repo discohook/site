@@ -10,7 +10,6 @@ import { ButtonList } from "../../common/layout/ButtonList"
 import { Separator } from "../../common/layout/Separator"
 import { Stack } from "../../common/layout/Stack"
 import { ModalManagerContext } from "../../common/modal/ModalManagerContext"
-import { Footer } from "../../common/page/Footer"
 import { usePreference } from "../../common/settings/usePreference"
 import { useLazyValue } from "../../common/state/useLazyValue"
 import { useRequiredContext } from "../../common/state/useRequiredContext"
@@ -31,8 +30,9 @@ const BackupsModal = dynamic<BackupsModalProps>(async () =>
 )
 
 const EditorContainer = styled(Stack)`
-  padding: 16px;
+  padding: 16px 16px 0;
 `
+
 const JavaScriptWarning = styled.noscript`
   display: block;
 
@@ -122,7 +122,6 @@ export function Editor() {
           Add Message
         </PrimaryButton>
       </div>
-      <Footer />
     </EditorContainer>
   ))
 }

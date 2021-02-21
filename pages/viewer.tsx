@@ -5,6 +5,7 @@ import { useRouter } from "next/router"
 import React, { useEffect } from "react"
 import styled from "styled-components"
 import { ModalManagerContext } from "../common/modal/ModalManagerContext"
+import { Footer } from "../common/page/Footer"
 import { Header } from "../common/page/Header"
 import { PageHead } from "../common/page/PageHead"
 import { PreferencesModal } from "../common/settings/PreferencesModal"
@@ -55,6 +56,7 @@ export default function Viewer(props: ViewerProps) {
           ]}
         />
         <Preview />
+        <Footer />
       </Container>
     </EditorManagerProvider>
   ))

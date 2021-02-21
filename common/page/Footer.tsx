@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { monochromeLogo } from "../../icons/logo"
 
 const Container = styled.footer`
+  margin: 16px;
   padding: 96px 0;
 
   border-top: 1px solid ${({ theme }) => theme.backgroundModifier.accent};

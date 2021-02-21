@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
 import { ModalManagerContext } from "../common/modal/ModalManagerContext"
+import { Footer } from "../common/page/Footer"
 import { Header } from "../common/page/Header"
 import { PageHead } from "../common/page/PageHead"
 import { PreferencesModal } from "../common/settings/PreferencesModal"
@@ -107,6 +108,7 @@ export default function Main(props: MainProps) {
           {(!mobile || activeTab === "Editor") && (
             <div>
               <Editor />
+              <Footer />
             </div>
           )}
         </View>
