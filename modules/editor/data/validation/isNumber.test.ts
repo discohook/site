@@ -4,8 +4,8 @@ describe("isNumber", () => {
   it("can validate if a value is a number", () => {
     expect(isNumber(0, "$")).toHaveLength(0)
     expect(isNumber(2, "$")).toHaveLength(0)
-    expect(isNumber(Infinity, "$")).toHaveLength(0)
-    expect(isNumber(-Infinity, "$")).toHaveLength(0)
+    expect(isNumber(Number.POSITIVE_INFINITY, "$")).toHaveLength(0)
+    expect(isNumber(Number.NEGATIVE_INFINITY, "$")).toHaveLength(0)
     expect(isNumber(Number.NaN, "$")).toHaveLength(0)
   })
 

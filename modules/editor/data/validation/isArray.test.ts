@@ -13,7 +13,7 @@ describe("isArray", () => {
   it("can validate if a value is not an object", () => {
     expect(isArray("still a string", "$")).not.toHaveLength(0)
     expect(isArray(1, "$")).not.toHaveLength(0)
-    expect(isArray(Infinity, "$")).not.toHaveLength(0)
+    expect(isArray(Number.POSITIVE_INFINITY, "$")).not.toHaveLength(0)
     expect(isArray(Number.NaN, "$")).not.toHaveLength(0)
     expect(isArray(false, "$")).not.toHaveLength(0)
     expect(isArray({}, "$")).not.toHaveLength(0)

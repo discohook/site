@@ -53,7 +53,7 @@ export const EmbedModel = types
     },
 
     get size() {
-      return self.gallery.length || 1
+      return Math.max(self.gallery.length, 1)
     },
 
     get hasTitle() {
