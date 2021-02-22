@@ -10,7 +10,7 @@ export const openDatabase = async () => {
       // schema looks at that time
       upgradeDatabase(
         database as IDBPDatabase,
-        transaction as IDBPTransaction,
+        transaction as IDBPTransaction<unknown, string[], "versionchange">,
         oldVersion,
       )
         .then(() => {
