@@ -5,7 +5,7 @@ import { toSnakeCase } from "../../../common/object/toSnakeCase"
 
 export const upgradeDatabase = async (
   database: IDBPDatabase,
-  transaction: IDBPTransaction,
+  transaction: IDBPTransaction<unknown, string[], "versionchange">,
   oldVersion: number,
 ) => {
   if (oldVersion < 2 && oldVersion >= 1) {
