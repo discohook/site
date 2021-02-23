@@ -1,34 +1,99 @@
 name: ci
 
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  install:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14, 12]
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: "12.x"
-      - run: yarn install
-      - run: yarn run build
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+          node-version: ${{ matrix.node }}
+          check-latest: true
+      - uses: actions/cache@v2
         with:
-          node-version: "12.x"
+          path: |
+            node_modules
+            .yarn/cache
+          key: ${{ matrix.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ matrix.os }}-${{ matrix.node }}-
+
       - run: yarn install
-      - run: yarn run test:verbose
+
   lint:
-    runs-on: ubuntu-latest
+    needs: [install]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14, 12]
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          node-version: "12.x"
-      - run: yarn install
+          node-version: ${{ matrix.node }}
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            .yarn/cache
+          key: ${{ matrix.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+
       - run: yarn run lint:error
-      - run: yarn run typecheck
       - run: yarn run format:check
+      - run: yarn run typecheck
+
+  test:
+    needs: [install]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14, 12]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            .yarn/cache
+          key: ${{ matrix.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+
+      - run: yarn run test:verbose
+
+  build:
+    needs: [install]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14, 12]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            .yarn/cache
+          key: ${{ matrix.os }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+
+      - run: yarn build
