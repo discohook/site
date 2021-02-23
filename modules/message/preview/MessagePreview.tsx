@@ -47,6 +47,7 @@ const Container = styled.div`
       text-indent: calc(${rem(16)} - 80px);
 
       & > ${MarkdownContainer} {
+        text-indent: 0;
         display: inline;
       }
     `};
