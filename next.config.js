@@ -5,6 +5,7 @@ const config = {
   poweredByHeader: false,
   distDir: "build",
   reactStrictMode: true,
+  productionBrowserSourceMaps: true,
   redirects: async () =>
     Promise.resolve([
       {
@@ -24,6 +25,5 @@ const config = {
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 })
-const withSourceMaps = require("@zeit/next-source-maps")
 
-module.exports = withSourceMaps(withBundleAnalyzer(config))
+module.exports = withBundleAnalyzer(config)
