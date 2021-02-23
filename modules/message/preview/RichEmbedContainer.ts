@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+import { Code } from "../../markdown/styles/Code"
 
 export const RichEmbedContainer = styled.div`
   max-width: 520px;
@@ -8,6 +9,10 @@ export const RichEmbedContainer = styled.div`
 
   border-radius: 4px;
   border-left: 4px solid ${({ theme }) => theme.background.tertiary};
+
+  & ${Code} {
+    background: ${({ theme }) => theme.background.tertiary};
+  }
 
   &,
   & * {

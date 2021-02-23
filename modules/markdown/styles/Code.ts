@@ -1,6 +1,5 @@
 import { em, rem } from "polished"
 import styled from "styled-components"
-import { RichEmbedContainer } from "../../message/preview/RichEmbedContainer"
 
 export const Code = styled.code`
   padding: ${em(3.2)};
@@ -13,8 +12,4 @@ export const Code = styled.code`
   line-height: ${rem(18)};
 
   white-space: pre-wrap;
-
-  ${RichEmbedContainer} & {
-    background: ${({ theme }) => theme.background.tertiary};
-  }
 `
