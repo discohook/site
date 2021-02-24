@@ -17,7 +17,7 @@ export const CodeBlockContainer = styled.pre`
 
   white-space: pre-wrap;
 
-  ${RichEmbedContainer} & {
+  ${RichEmbedContainer} && {
     max-width: 100%;
 
     background: ${({ theme }) => theme.background.tertiary};
