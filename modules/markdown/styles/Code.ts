@@ -14,7 +14,7 @@ export const Code = styled.code`
 
   white-space: pre-wrap;
 
-  ${RichEmbedContainer} & {
+  ${RichEmbedContainer} && {
     background: ${({ theme }) => theme.background.tertiary};
   }
 `

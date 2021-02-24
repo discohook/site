@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { SecondaryButton } from "../button/SecondaryButton"
 
 const Button = styled(SecondaryButton)`
-  input:focus + & {
+  input:focus + && {
     background: ${({ theme }) => theme.background.tertiary};
     border-color: ${({ theme }) => theme.background.tertiary};
   }

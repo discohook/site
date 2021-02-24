@@ -13,7 +13,7 @@ import { PasteFileButton } from "./PasteFileButton"
 export const FakeInput = styled(Input)`
   flex: 1;
 
-  input:focus + & {
+  input:focus + && {
     border-color: ${({ theme }) => theme.accent.primary};
   }
 `

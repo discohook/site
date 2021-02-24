@@ -14,16 +14,16 @@ export const CheckableButton = styled.div`
   transition: 150ms;
   transition-property: background-color, border-color, color;
 
-  input:hover + & {
+  input:hover + && {
     background: ${({ theme }) => theme.interactive.muted};
     border-color: ${({ theme }) => theme.interactive.muted};
   }
 
-  input:focus + & {
+  input:focus + && {
     border-color: ${({ theme }) => theme.accent.primary};
   }
 
-  input:disabled + & {
+  input:disabled + && {
     background: transparent;
     border-color: ${({ theme }) => theme.interactive.muted};
     color: ${({ theme }) => theme.interactive.muted};
