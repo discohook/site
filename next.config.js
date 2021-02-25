@@ -13,7 +13,7 @@ const config = {
     if (process.env.BUILD_ID) return process.env.BUILD_ID
 
     return new Promise((resolve, reject) => {
-      cp.execFile("git", ["rev-parse", "--short", "HEAD"], (error, stdout) => {
+      cp.execFile("git", ["rev-parse", "HEAD"], (error, stdout) => {
         if (error) reject(error)
         resolve(stdout)
       })
