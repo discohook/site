@@ -99,7 +99,7 @@ export function MessageEditor(props: MessageEditorProps) {
         content={
           "*When a message link is set, pressing submit or edit will edit the" +
           " message sent inside of Discord. To load a message sent in Discord, use" +
-          " the bot's 'link' command.*"
+          " the bot's 'restore' command.*"
         }
       />
       <ButtonList>
