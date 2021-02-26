@@ -1,5 +1,6 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
+import styled from "styled-components"
 import { remove } from "../../icons/remove"
 import { bindToInput } from "../input/bindToInput"
 import { PrimaryButton } from "../input/button/PrimaryButton"
@@ -19,6 +20,14 @@ import { useRequiredContext } from "../state/useRequiredContext"
 import { FONT_SIZES } from "../theming/constants"
 import { PreferenceManagerContext } from "./PreferenceManagerContext"
 
+const PreferenceSection = styled.h5`
+  margin: 8px 0 4px;
+
+  color: ${({ theme }) => theme.header.primary};
+  font-weight: 600;
+  font-size: 14px;
+`
+
 export function PreferencesModal() {
   const modal = useRequiredContext(ModalContext)
 
@@ -36,6 +45,7 @@ export function PreferencesModal() {
       </ModalHeader>
       <ModalBody>
         <Stack gap={8}>
+          <PreferenceSection>Appearance</PreferenceSection>
           <RadioGroup
             id="settings_color"
             label="Color Theme"
@@ -67,6 +77,7 @@ export function PreferencesModal() {
               settingsManager.settings.fontSize = FONT_SIZES[index]
             }}
           />
+          <PreferenceSection>Editor</PreferenceSection>
           <Checkbox
             id="settings_confirmExit"
             label="Confirm on Exit"
