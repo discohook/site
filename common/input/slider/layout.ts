@@ -2,8 +2,8 @@ import {
   SliderHandle,
   SliderInput,
   SliderMarker,
+  SliderRange,
   SliderTrack,
-  SliderTrackHighlight,
 } from "@reach/slider"
 import { size } from "polished"
 import styled, { css } from "styled-components"
@@ -14,7 +14,7 @@ export const Input = styled(omitProp(SliderInput, "hasMarkers"))<{
 }>`
   &[data-reach-slider-input] {
     height: 8px;
-    padding: 4px 4px 12px;
+    padding: 4px 0 12px;
 
     width: 320px;
     max-width: 100%;
@@ -36,8 +36,8 @@ export const Track = styled(SliderTrack)`
   }
 `
 
-export const TrackHighlight = styled(SliderTrackHighlight)`
-  &[data-reach-slider-track-highlight] {
+export const Range = styled(SliderRange)`
+  &[data-reach-slider-range] {
     background: inherit;
   }
 `

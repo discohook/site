@@ -1,14 +1,7 @@
 import React from "react"
 import { InputContainer } from "../layout/InputContainer"
 import { InputLabel } from "../layout/InputLabel"
-import {
-  Handle,
-  Input,
-  Marker,
-  MarkerLabel,
-  Track,
-  TrackHighlight,
-} from "./layout"
+import { Handle, Input, Marker, MarkerLabel, Range, Track } from "./layout"
 
 export type SliderProps = {
   id: string
@@ -51,7 +44,7 @@ export function Slider(props: SliderProps) {
       >
         {({ hasFocus }) => (
           <Track>
-            <TrackHighlight />
+            <Range />
             {markers?.map(marker => (
               <Marker key={marker.value} value={marker.value}>
                 <MarkerLabel>{marker.label}</MarkerLabel>
