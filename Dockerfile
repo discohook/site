@@ -22,7 +22,8 @@ COPY --from=builder /app/build ./build
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.js ./
 
-ENV NODE_ENV production
+ENV NODE_ENV=production \
+    NODE_OPTIONS=--max-http-header-size=81920
 
 USER node
 
