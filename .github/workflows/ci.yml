@@ -83,7 +83,6 @@ jobs:
         run: yarn run test:verbose
 
   build:
-    needs: [install]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
