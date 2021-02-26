@@ -33,6 +33,26 @@ const config = {
         permanent: false,
       },
     ]),
+  headers: async () =>
+    Promise.resolve([
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "upgrade-insecure-requests; frame-ancestors 'none';",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+        ],
+      },
+    ]),
 }
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
