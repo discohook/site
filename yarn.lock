@@ -757,8 +757,9 @@ __metadata:
     "@types/caniuse-lite": ^1
     "@types/jest": ^26
     "@types/node": ^14
-    "@types/react": ^16
-    "@types/react-dom": ^16
+    "@types/react": ^17
+    "@types/react-dom": ^17
+    "@types/react-is": ^17
     "@types/styled-components": ^5
     "@types/testing-library__jest-dom": ^5
     "@typescript-eslint/eslint-plugin": ^4.15.1
@@ -787,10 +788,10 @@ __metadata:
     polished: ^4.1.1
     prettier: ^2.2.1
     punycode: ^2.1.1
-    react: ^16.14.0
-    react-dom: ^16.14.0
+    react: ^17.0.1
+    react-dom: ^17.0.1
     react-focus-on: ^3.5.1
-    react-is: ^16.13.1
+    react-is: ^17.0.1
     regenerator-runtime: ^0.13.7
     resize-observer-polyfill: ^1.5.1
     simple-markdown: ^0.7.3
@@ -1604,12 +1605,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^16":
-  version: 16.9.11
-  resolution: "@types/react-dom@npm:16.9.11"
+"@types/react-dom@npm:^17":
+  version: 17.0.1
+  resolution: "@types/react-dom@npm:17.0.1"
   dependencies:
-    "@types/react": ^16
-  checksum: b22a7ac54aa140a96ad87194df51d3241042e5c68a5c8e17f62f0c97a5857b1cd5d1317902acb65bf7079af3c9baaec356a185b9d97cd257e44f97cc1ca16c46
+    "@types/react": "*"
+  checksum: 695dd4bbef4fabdc726359e4031b2887b913d65fb2ff59e5a9e81f9ae20ca4dd8f2b6fe1f39fa5c1197babdb86f6b81b385f5d4438536f2ceeb5ff136102f45b
+  languageName: node
+  linkType: hard
+
+"@types/react-is@npm:^17":
+  version: 17.0.0
+  resolution: "@types/react-is@npm:17.0.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: d0734c30ba645c42626ea580addb24f1d23bd35b3f52a3a78ff876ceadfb0ada4b6a4bb55b8730ab17ca240019aa2c5ea67302308f3a8e95ee8b9b20812a76a8
   languageName: node
   linkType: hard
 
@@ -1623,13 +1633,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^16":
-  version: 16.14.4
-  resolution: "@types/react@npm:16.14.4"
+"@types/react@npm:^17":
+  version: 17.0.2
+  resolution: "@types/react@npm:17.0.2"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
-  checksum: f994d97aa05233e4f62cd42940ea4290ef1f9a8f3eb0ebda1ea39ed7ae20a16fff7ae1948952dce215b580c2a439fbf451556601be97ebe53a22dbce8a4e31a4
+  checksum: de1cd27ce57a961379978f83676d60d88bf729337683d1d4cb22dd8f285ed4200db19f7243052dc67c80133fe6798da1497456fe6f67a5bba5f5e30ce2544bfa
   languageName: node
   linkType: hard
 
@@ -7465,17 +7475,16 @@ mstform@1.27.0:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react-dom@npm:16.14.0"
+"react-dom@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-dom@npm:17.0.1"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    scheduler: ^0.19.1
+    scheduler: ^0.20.1
   peerDependencies:
-    react: ^16.14.0
-  checksum: a13558f0e7c6d1a98684214460bcd4b9005500015b5048fb1b0d2856786b8764dbc713e6b078a5b1a56e17866400e1d862183c7a0a513ae8351de11f6f6749d2
+    react: 17.0.1
+  checksum: 6a70028fbe3c95e0056c5e8ce065b4a9b8d4ff3bffde9b016454072bde5e4b012af7668ca45b7235ace428267d5be5237b68ea87ce8c296e54e81a8d678a4355
   languageName: node
   linkType: hard
 
@@ -7515,7 +7524,7 @@ mstform@1.27.0:
   languageName: node
   linkType: hard
 
-"react-is@npm:16.13.1, react-is@npm:^16.12.0, react-is@npm:^16.13.1, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
+"react-is@npm:16.13.1, react-is@npm:^16.12.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
@@ -7597,14 +7606,13 @@ mstform@1.27.0:
   languageName: node
   linkType: hard
 
-"react@npm:^16.14.0":
-  version: 16.14.0
-  resolution: "react@npm:16.14.0"
+"react@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react@npm:17.0.1"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-  checksum: 2769580b22952a52de3b5b2ea0f09cb904030b762d759739f49ab4da0b1f550e5c087ce3728c4be90f423d09481e0c075483c0c30b1ea9c549445c8b12020fd3
+  checksum: a76d86ec973eb4b25a46071ac7f974adfd66ed89ad1db63043be1d976ec25417520a210e6d724b0ad937422b706afcf9962cedda9e92125992a8c0e8a95f2051
   languageName: node
   linkType: hard
 
@@ -8046,13 +8054,13 @@ mstform@1.27.0:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.19.1":
-  version: 0.19.1
-  resolution: "scheduler@npm:0.19.1"
+"scheduler@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "scheduler@npm:0.20.1"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: 804f990b9f370cca6d42b65f3cba2cc2bfed4973ee5623bed1ea36a6627842db8c891e2e5ac003f06f9ee892d1d3396921e27fa077346caf0213af05776e8dee
+  checksum: 377b4ad0d8313c4548bac7374bc38409e9d142799979ce396787efa04d1bcabf2591540f243f2131e3df8e56e7f5b29c5415248523e88ecb60f13a32db2e076f
   languageName: node
   linkType: hard
 
