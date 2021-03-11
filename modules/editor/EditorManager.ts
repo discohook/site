@@ -32,16 +32,18 @@ export const EditorManager = types
           "Accept-Language": "en",
         }
 
-        const [method, url] = self.target.getRoute(message.reference)
-
         const body = message.body
         if (typeof body === "string") {
           headers["Content-Type"] = "application/json"
         }
 
         /* eslint-disable no-await-in-loop */
+
+        const [method, url] = await self.target.getRoute(message.reference)
+
         const response = await fetch(url, { method, headers, body })
         const data = await response.json()
+
         /* eslint-enable no-await-in-loop */
 
         console.log("Target executed", data)
