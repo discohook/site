@@ -73,8 +73,9 @@ export class BackupManager {
 
     this.editorManager.set(
       "messages",
-      backup.messages.map(message => ({
-        ...messageOf(message.data),
+      backup.messages.map(({ data, ...message }) => ({
+        ...messageOf(data),
+        ...message,
       })),
     )
     this.editorManager.target.set("url", backup.target.url ?? "")
