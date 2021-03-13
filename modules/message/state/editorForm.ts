@@ -117,7 +117,7 @@ export const editorForm = new Form(EditorManager, {
       validators: [matchesRegex(MESSAGE_REF_RE, "Invalid message link")],
     }),
   }),
-  target: new SubForm({
+  targets: new RepeatingForm({
     url: new Field(converters.string, {
       controlled: controlled.object,
       validators: [matchesRegex(WEBHOOK_URL_RE, "Invalid webhook URL")],
@@ -164,3 +164,12 @@ export type RepeatingFieldItemFormState = ReturnType<
 const fieldItemFormState = (state: RepeatingFieldItemFormState) =>
   state.index(0)
 export type FieldItemFormState = ReturnType<typeof fieldItemFormState>
+
+const repeatingTargetFormState = (state: EditorFormState) =>
+  state.repeatingForm("messages")
+export type RepeatingTargetFormState = ReturnType<
+  typeof repeatingTargetFormState
+>
+
+const targetFormState = (state: RepeatingTargetFormState) => state.index(0)
+export type TargetFormState = ReturnType<typeof targetFormState>

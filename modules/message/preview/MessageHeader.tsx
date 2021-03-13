@@ -139,9 +139,9 @@ export function MessageHeader(props: MessageHeaderProps) {
   const editorManager = useContext(EditorManagerContext)
 
   return useObserver(() => {
-    if (editorManager) {
-      if (!username) username = editorManager.target.displayName
-      if (!avatarUrl) avatarUrl = editorManager.target.displayAvatarUrl
+    if (editorManager && editorManager.targets.length > 0) {
+      if (!username) username = editorManager.targets[0].displayName
+      if (!avatarUrl) avatarUrl = editorManager.targets[0].displayAvatarUrl
     }
 
     let info = [

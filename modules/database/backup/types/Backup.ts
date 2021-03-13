@@ -7,7 +7,7 @@ export type Backup = {
     data: MessageData
     reference?: string
   }[]
-  target: {
-    url?: string
-  }
+  targets: {
+    url: string
+  }[]
 }

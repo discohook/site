@@ -792,6 +792,7 @@ __metadata:
     react-dom: ^17.0.1
     react-focus-on: ^3.5.1
     react-is: ^17.0.1
+    react-merge-refs: ^1.1.0
     regenerator-runtime: ^0.13.7
     resize-observer-polyfill: ^1.5.1
     simple-markdown: ^0.7.3
@@ -7544,6 +7545,13 @@ mstform@1.27.0:
   peerDependencies:
     react: ">=16.8"
   checksum: b67917326729f20eaef093f994e4f31e203adacd0c1c95a5e85a27c2956cd908596ebc60bc7575806ff9887d78f095e6dcf8fdcf5f1d735bd73cbd3e67b86b9f
+  languageName: node
+  linkType: hard
+
+"react-merge-refs@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "react-merge-refs@npm:1.1.0"
+  checksum: 20819f9fb3dd9cbf6eeccb49ac9cc6db139a4084e458d3df36cf3b6a7b9464b8abc244137c40b5c32dd7ca37929f0c411e8cec3ff3d4ba40203394f58416b656
   languageName: node
   linkType: hard
 

@@ -122,4 +122,21 @@ export const upgradeDatabase = async (
       cursor = await cursor.continue()
     }
   }
+
+  if (oldVersion < 10 && oldVersion >= 1) {
+    const backupStore = transaction.objectStore("backup")
+
+    let cursor = await backupStore.openCursor()
+
+    while (cursor) {
+      const { target, ...backup } = cursor.value
+
+      await backupStore.put({
+        ...backup,
+        targets: [{ url: target.url ?? "" }],
+      })
+
+      cursor = await cursor.continue()
+    }
+  }
 }

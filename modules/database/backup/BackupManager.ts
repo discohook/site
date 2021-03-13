@@ -78,8 +78,10 @@ export class BackupManager {
         ...message,
       })),
     )
-    this.editorManager.target.set("url", backup.target.url ?? "")
-    this.editorManager.target.fetch().catch(() => {})
+    this.editorManager.set("targets", backup.targets)
+    for (const target of this.editorManager.targets) {
+      target.fetch().catch(() => {})
+    }
   }
 
   async saveBackup(backup: string | Backup) {
@@ -96,9 +98,9 @@ export class BackupManager {
           },
           reference: message.reference,
         })),
-        target: {
-          url: this.editorManager.target.url || undefined,
-        },
+        targets: this.editorManager.targets.map(target => ({
+          url: target.url,
+        })),
       }
     } else {
       backup = {
@@ -139,7 +141,7 @@ export class BackupManager {
     if (!backup) return
 
     const backupData: ExportData = {
-      version: 6,
+      version: 7,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       backups: [backup].map(({ id, ...backup }) => backup),
     }
@@ -169,7 +171,7 @@ export class BackupManager {
     }
 
     const backupData: ExportData = {
-      version: 6,
+      version: 7,
       backups,
     }
 
@@ -250,6 +252,15 @@ export class BackupManager {
         }
       // falls through
       case 6:
+        exportData = {
+          version: 7,
+          backups: exportData.backups.map(({ target, ...backup }) => ({
+            ...backup,
+            targets: [{ url: target.url ?? "" }],
+          })),
+        }
+      // falls through
+      case 7:
         for (const backup of exportData.backups) {
           await this.saveBackup({
             ...backup,

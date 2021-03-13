@@ -51,5 +51,6 @@ export const getEditorManagerFromQuery = (query: ParsedUrlQuery) => {
             : undefined,
       }
     }),
+    targets: [{}],
   })
 }

@@ -5,5 +5,7 @@ export const InputLabel = styled.div`
   font-size: 16px;
   font-weight: 500;
 
-  margin-bottom: 4px;
+  &:not(:empty) {
+    margin-bottom: 4px;
+  }
 `

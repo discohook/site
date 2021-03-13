@@ -1,13 +1,22 @@
 import { useObserver } from "mobx-react-lite"
-import React, { useEffect, useRef, useState } from "react"
+import { applyPatch } from "mobx-state-tree"
+import React, { useEffect, useState } from "react"
+import styled from "styled-components"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
-import { InputField } from "../../../common/input/text/InputField"
+import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
+import { HiddenInputField } from "../../../common/input/text/HiddenInputField"
+import { IconButton } from "../../../common/layout/IconButton"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
+import { remove } from "../../../icons/remove"
 import type { EditorFormState } from "../../message/state/editorForm"
 import { EditorManagerContext } from "../EditorManagerContext"
 import { NetworkErrorModal } from "./NetworkErrorModal"
+
+const InputAction = styled(IconButton)`
+  margin-left: 8px;
+`
 
 export type WebhookControlsProps = {
   form: EditorFormState
@@ -40,56 +49,83 @@ export function WebhookControls(props: WebhookControlsProps) {
     setSubmitting(false)
   }
 
-  const inputRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    const { current: input } = inputRef
-    if (!input) return
+    if (editorManager.targets.length > 0) return
 
-    const onFocus = () => {
-      input.type = "text"
-    }
-    const onBlur = () => {
-      input.type = "password"
-    }
-
-    input.addEventListener("focus", onFocus)
-    input.addEventListener("blur", onBlur)
-
-    return () => {
-      input.removeEventListener("focus", onFocus)
-      input.removeEventListener("blur", onBlur)
-    }
-  }, [])
+    applyPatch(form.state.value, [
+      {
+        op: "add",
+        path: "/targets/0",
+        value: {},
+      },
+    ])
+  })
 
   return useObserver(() => {
     let submitLabel = "Submit"
-    if (editorManager.messages.every(m => !m.reference)) {
+    if (editorManager.messages.every(message => !message.reference)) {
       submitLabel = "Send"
-    } else if (editorManager.messages.every(m => m.reference)) {
+    } else if (editorManager.messages.every(message => message.reference)) {
       submitLabel = "Edit"
     }
 
     return (
-      <Stack gap={12}>
-        <InputField
-          ref={inputRef}
-          id="webhook"
-          type="password"
-          label="Webhook URL"
-          placeholder="https://discord.com/api/webhooks/..."
-          error={form.subForm("target").field("url").error}
-          {...form.subForm("target").field("url").inputProps}
-        >
-          <PrimaryButton
-            disabled={
-              !editorManager.target.exists ||
-              editorManager.messages.length === 0
-            }
-            onClick={handleSubmit}
+      <Stack gap={8}>
+        {editorManager.targets.map((target, index) => {
+          const targetForm = form.repeatingForm("targets").index(index)
+
+          return (
+            <HiddenInputField
+              key={target.id}
+              id={`_${target.id}_url`}
+              label="Webhook URL"
+              hideLabel={index > 0}
+              placeholder="https://discord.com/api/webhooks/..."
+              error={targetForm.field("url").error}
+              {...targetForm.field("url").inputProps}
+            >
+              {index === 0 ? (
+                <PrimaryButton
+                  disabled={
+                    editorManager.targets.some(target => !target.exists) ||
+                    editorManager.messages.length === 0
+                  }
+                  onClick={handleSubmit}
+                >
+                  {submitLabel}
+                </PrimaryButton>
+              ) : (
+                <InputAction
+                  icon={remove}
+                  label="Remove"
+                  onClick={() => {
+                    applyPatch(targetForm.state.value, [
+                      {
+                        op: "remove",
+                        path: targetForm.path,
+                      },
+                    ])
+                  }}
+                />
+              )}
+            </HiddenInputField>
+          )
+        })}
+        <div>
+          <SecondaryButton
+            onClick={() => {
+              applyPatch(form.state.value, [
+                {
+                  op: "add",
+                  path: `/targets/${editorManager.targets.length}`,
+                  value: {},
+                },
+              ])
+            }}
           >
-            {submitLabel}
-          </PrimaryButton>
-        </InputField>
+            Add Webhook
+          </SecondaryButton>
+        </div>
       </Stack>
     )
   })
