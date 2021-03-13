@@ -30,7 +30,7 @@ function HiddenInputFieldRenderer(
       input.removeEventListener("focus", onFocus)
       input.removeEventListener("blur", onBlur)
     }
-  }, [])
+  }, [type])
 
   return (
     <InputField
