@@ -44,9 +44,9 @@ export const EditorManager = types
           const data = await response.json()
 
           if (response.headers.get("X-RateLimit-Remaining") === "0") {
-            // const retryAfter =
-            //   Number(response.headers.get("X-RateLimit-Reset-After")) * 1000
-            const retryAfter = 2000
+            const retryAfter =
+              Number(response.headers.get("X-RateLimit-Reset-After") ?? 2) *
+              1000
 
             console.log(
               "Rate limited: delaying next request by",
