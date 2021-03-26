@@ -52,7 +52,7 @@ export const MessageModel = types
     get body() {
       const json = stringifyMessage(this.data, false)
 
-      if (self.files.length > 0 && !self.reference) {
+      if (self.files.length > 0) {
         const formData = new FormData()
 
         if (json !== "{}") formData.append("payload_json", json)
