@@ -11,7 +11,7 @@ const Container = styled.ul`
   padding: 0;
   margin: 0;
 
-  max-height: 420px;
+  max-height: 50vh;
   overflow-x: hidden;
 `
 
