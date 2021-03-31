@@ -4,7 +4,7 @@
 
 An easy-to-use tool for building and sending Discord messages and embeds using webhooks.
 
-Live instance is available at <https://discohook.org/>.
+Live instance is available at <https://discohook.app/>.
 
 ## Setup
 
