@@ -14,6 +14,7 @@ import { HeaderTabs, HeaderTabsProps } from "./HeaderTabs"
 
 const Container = styled.header`
   height: 48px;
+  min-height: 48px;
   padding: 0 4px;
 
   position: sticky;
