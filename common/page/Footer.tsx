@@ -101,7 +101,7 @@ export function Footer() {
         </NavigationItem>
       </NavigationList>
       <LegalInfo>
-        &copy; 2020 The Discohook Authors. Discohook is not affiliated with
+        &copy; 2021 The Discohook Authors. Discohook is not affiliated with
         Discord.
       </LegalInfo>
       <LegalInfo>
