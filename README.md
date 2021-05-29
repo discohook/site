@@ -6,6 +6,48 @@ An easy-to-use tool for building and sending Discord messages and embeds using w
 
 Live instance is available at <https://discohook.app/>.
 
+
+## Check if node is installed
+
+```
+node --version
+```
+
+If
+
+> -bash: node: command not found
+
+appears, yarn is not installed! Then do the following:
+
+```
+apt update
+
+apt install nodejs -y
+```
+
+Now let's install NPM:
+
+```
+apt install npm -y
+```
+
+## Check if yarn is installed
+
+```
+yarn --version
+```
+
+If
+
+> -bash: yarn: command not found
+
+appears, yarn is not installed! Then do the following:
+
+```
+npm install --global yarn
+```
+
+
 ## Setup
 
 Requires Node.js 12 and the Yarn package manager installed
