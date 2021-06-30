@@ -10,10 +10,8 @@ export const PrimaryButton = styled(Button)<{ accent?: keyof Theme["accent"] }>`
   color: ${DARK_THEME.header.primary};
 
   &:hover {
-    background: ${({ theme, accent = "primary" }) =>
-      rgb(71, 82, 196)};
-    border-color: ${({ theme, accent = "primary" }) =>
-      rgb(71, 82, 196)};
+    background: ${({ theme, accent = "primary" }) => rgb(71, 82, 196)};
+    border-color: ${({ theme, accent = "primary" }) => rgb(71, 82, 196)};
   }
 
   &:focus {
@@ -21,10 +19,8 @@ export const PrimaryButton = styled(Button)<{ accent?: keyof Theme["accent"] }>`
   }
 
   &:active {
-    background: ${({ theme, accent = "primary" }) =>
-      rgb(60, 69, 165)};
-    border-color: ${({ theme, accent = "primary" }) =>
-      rgb(60, 69, 165)};
+    background: ${({ theme, accent = "primary" }) => rgb(60, 69, 165)};
+    border-color: ${({ theme, accent = "primary" }) => rgb(60, 69, 165)};
   }
 
   &:disabled {
