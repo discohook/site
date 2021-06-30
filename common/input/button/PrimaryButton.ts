@@ -1,4 +1,4 @@
-import { shade, tint } from "polished"
+import { rgb } from "polished"
 import styled from "styled-components"
 import { DARK_THEME } from "../../theming/darkTheme"
 import type { Theme } from "../../theming/Theme"
@@ -11,9 +11,9 @@ export const PrimaryButton = styled(Button)<{ accent?: keyof Theme["accent"] }>`
 
   &:hover {
     background: ${({ theme, accent = "primary" }) =>
-      tint(0.2, theme.accent[accent])};
+      rgb(71, 82, 196)};
     border-color: ${({ theme, accent = "primary" }) =>
-      tint(0.2, theme.accent[accent])};
+      rgb(71, 82, 196)};
   }
 
   &:focus {
@@ -22,15 +22,9 @@ export const PrimaryButton = styled(Button)<{ accent?: keyof Theme["accent"] }>`
 
   &:active {
     background: ${({ theme, accent = "primary" }) =>
-      shade(
-        theme.appearance.color === "dark" ? 0.3 : 0.1,
-        theme.accent[accent],
-      )};
+      rgb(60, 69, 165)};
     border-color: ${({ theme, accent = "primary" }) =>
-      shade(
-        theme.appearance.color === "dark" ? 0.3 : 0.1,
-        theme.accent[accent],
-      )};
+      rgb(60, 69, 165)};
   }
 
   &:disabled {
