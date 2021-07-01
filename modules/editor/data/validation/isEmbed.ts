@@ -42,7 +42,7 @@ export const isEmbed: Validator = first(
   ),
   isShape({
     title: optional(first(isString, length(1, 256))),
-    description: optional(first(isString, length(1, 2048))),
+    description: optional(first(isString, length(1, 4096))),
     url: optional(isUrl),
     timestamp: optional(isDate),
     color: optional(nullable(between(0, 0xffffff))),
