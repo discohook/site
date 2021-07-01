@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node: [14, 15]
+        node: [14, 15, 16]
 
     steps:
       - name: Checkout code
@@ -45,7 +45,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14, 15]
+        node: [14, 15, 16]
 
     steps:
       - name: Checkout code
@@ -80,7 +80,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node: [14, 15]
+        node: [14, 15, 16]
 
     steps:
       - name: Checkout code
@@ -110,7 +110,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14, 15]
+        node: [14, 15, 16]
 
     steps:
       - name: Checkout code
