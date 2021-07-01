@@ -3,7 +3,7 @@ import type { Theme } from "./Theme"
 
 export const COMMON_THEME: Pick<Theme, "discord" | "font"> = {
   discord: {
-    primary: rgb(114, 137, 218),
+    primary: rgb(88, 101, 242),
     success: rgb(67, 181, 129),
     warning: rgb(250, 166, 26),
     danger: rgb(240, 71, 71),
