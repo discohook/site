@@ -35,7 +35,7 @@ export const editorForm = new Form(EditorManager, {
         }),
         description: new Field(converters.string, {
           controlled: controlled.object,
-          validators: [maxLength(2048)],
+          validators: [maxLength(4096)],
         }),
         url: new Field(converters.string, {
           controlled: controlled.object,
