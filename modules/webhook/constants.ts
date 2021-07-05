@@ -10,7 +10,7 @@ const getDiscordApiHost = async () => {
   for (const url of DISCORD_API_BASE_URLS) {
     try {
       // eslint-disable-next-line no-await-in-loop
-      await fetch(url)
+      await fetch(`${url}/invites/discord-developers`)
       return new URL(url).host
     } catch (error) {
       firstError = error
