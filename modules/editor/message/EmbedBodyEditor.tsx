@@ -30,7 +30,7 @@ export function EmbedBodyEditor(props: EmbedBodyEditorProps) {
         <InputField
           id={`_${embed.id}_description`}
           label="Description"
-          maxLength={2048}
+          maxLength={4096}
           rows={4}
           error={form.field("description").error}
           {...form.field("description").inputProps}
