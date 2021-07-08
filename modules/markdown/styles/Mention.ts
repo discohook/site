@@ -11,9 +11,7 @@ export const Mention = styled.span`
   background: ${({ theme }) =>
     theme.appearance.color === "dark"
       ? transparentize(0.7, theme.discord.primary)
-      : theme.appearance.color === "light"
-      ? transparentize(0.85, theme.discord.primary)
-      : tint(0.9, theme.discord.primary)};
+      : transparentize(0.85, theme.discord.primary)};
 
   color: ${({ theme }) =>
     theme.appearance.color === "dark"
