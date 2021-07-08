@@ -14,11 +14,11 @@ const Display = styled.span`
     theme.appearance.display === "cozy" &&
     css`
       margin-left: ${rem(4)};
-
       font-size: ${rem(12)};
       font-weight: 500;
       line-height: ${rem(22)};
       vertical-align: baseline;
+      cursor: default;
     `};
 
   ${({ theme }) =>
@@ -26,11 +26,11 @@ const Display = styled.span`
     css`
       width: ${rem(48)};
       margin-right: ${rem(8)};
-
       font-size: ${rem(11)};
       line-height: ${rem(22)};
       text-align: right;
       text-indent: 0;
+      cursor: default;
     `};
 `
 
