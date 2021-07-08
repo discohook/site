@@ -1,4 +1,4 @@
-import { tint, transparentize, rgb } from "polished"
+import { transparentize, rgb } from "polished"
 import styled from "styled-components"
 import { DARK_THEME } from "../../../common/theming/darkTheme"
 
