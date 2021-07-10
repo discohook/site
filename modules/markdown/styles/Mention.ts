@@ -15,15 +15,15 @@ export const Mention = styled.span`
 
   color: ${({ theme }) =>
     theme.appearance.color === "dark"
-      ? rgb(255, 255, 255)
+      ? rgb(222, 224, 252)
       : theme.discord.primary};
 
   font-weight: 500;
-  transition: background 50ms ease-out;
+  transition: background 50ms ease-out, color 50ms ease-out;
 
   &:hover {
     background: ${DARK_THEME.discord.primary};
-    color: ${rgb(255, 255, 255)};
-    transition: background 50ms ease-out;
+    color: ${rgb(222, 224, 252)};
+    transition: background 50ms ease-out, color 50ms ease-out;
   }
 `
