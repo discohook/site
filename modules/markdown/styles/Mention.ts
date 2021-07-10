@@ -19,11 +19,11 @@ export const Mention = styled.span`
       : theme.discord.primary};
 
   font-weight: 500;
-  transition: background 50ms ease-out, color 50ms ease-out;
+  transition: 50ms ease-out;
+  transition-property: background-color, color;
 
   &:hover {
     background: ${DARK_THEME.discord.primary};
     color: ${DARK_THEME.header.primary};
-    transition: background 50ms ease-out, color 50ms ease-out;
   }
 `
