@@ -1,4 +1,4 @@
-import { transparentize, rgb } from "polished"
+import { rgb, transparentize } from "polished"
 import styled from "styled-components"
 import { DARK_THEME } from "../../../common/theming/darkTheme"
 
@@ -23,7 +23,7 @@ export const Mention = styled.span`
 
   &:hover {
     background: ${DARK_THEME.discord.primary};
-    color: ${rgb(222, 224, 252)};
+    color: ${DARK_THEME.header.primary};
     transition: background 50ms ease-out, color 50ms ease-out;
   }
 `
