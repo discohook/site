@@ -2,6 +2,8 @@
 
 import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
 import { delay } from "../../common/state/delay"
+import type { AttachmentData } from "../message/state/data/AttachmentData"
+import { AttachmentModel } from "../message/state/models/AttachmentModel"
 import { MessageModel } from "../message/state/models/MessageModel"
 import { WebhookModel } from "../webhook/WebhookModel"
 
@@ -59,6 +61,22 @@ export const EditorManager = types
 
           /* eslint-enable no-await-in-loop */
 
+          message.set(
+            "reference",
+            `https://discord.com/channels/${self.targets[0].guildId}/${data.channel_id}/${data.id}`,
+          )
+          message.set("attachments", data.attachments.map(
+            (attachment: AttachmentData) =>
+              AttachmentModel.create({
+                id: attachment.id,
+                contentType: attachment.content_type,
+                filename: attachment.filename,
+                local: false,
+                url: attachment.url,
+                size: attachment.size
+              })
+          ))
+
           console.log("Target executed", data)
         }
       }
@@ -91,4 +109,4 @@ export const EditorManager = types
   }))
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/consistent-type-definitions
-export interface EditorManagerLike extends Instance<typeof EditorManager> {}
+export interface EditorManagerLike extends Instance<typeof EditorManager> { }
