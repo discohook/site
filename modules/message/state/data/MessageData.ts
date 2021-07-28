@@ -1,3 +1,4 @@
+import type { AttachmentData } from "./AttachmentData"
 import type { EmbedData } from "./EmbedData"
 
 export type MessageData = {
@@ -5,5 +6,5 @@ export type MessageData = {
   readonly embeds?: readonly EmbedData[] | null
   readonly username?: string
   readonly avatar_url?: string
-  readonly files?: readonly File[]
+  readonly attachments?: readonly AttachmentData[]
 }
