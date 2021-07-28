@@ -1,9 +1,12 @@
 import React, { useRef } from "react"
 import styled from "styled-components"
 import { getHumanReadableSize } from "../../../modules/message/preview/attachment/helpers/getHumanReadableSize"
+import type { AttachmentLike } from "../../../modules/message/state/models/AttachmentModel"
 import { SCREEN_SMALL } from "../../layout/breakpoints"
 import { FlexContainer } from "../../layout/FlexContainer"
 import { PrimaryButton } from "../button/PrimaryButton"
+import { InputError } from "../error/InputError"
+import { getLengthConstraintColor } from "../getLengthConstraintColor"
 import { Input } from "../layout/Input"
 import { InputConstraint } from "../layout/InputConstraint"
 import { InputContainer } from "../layout/InputContainer"
@@ -26,11 +29,11 @@ const ClipboardButton = styled(PasteFileButton)`
 
 export type FileInputProps = {
   id: string
-  value: readonly File[]
+  value: AttachmentLike[]
   onChange: (value: File[]) => void
   label: string
   disabled?: boolean
-  maxSize?: number
+  maxSize?: number,
 }
 
 export function FileInputField(props: FileInputProps) {
@@ -40,7 +43,7 @@ export function FileInputField(props: FileInputProps) {
     onChange: handleChange,
     label,
     disabled = false,
-    maxSize,
+    maxSize = 0,
   } = props
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -52,13 +55,19 @@ export function FileInputField(props: FileInputProps) {
     handleChange([])
   }
 
+  const currentSize = value.reduce((acc, v) => acc + v.size, 0)
+  const maxReadableSize = getHumanReadableSize(maxSize)
+  const currentReadableSize = getHumanReadableSize(currentSize)
+
   return (
     <InputContainer>
       <InputLabel>
         <label htmlFor={id}>{label}</label>
         {maxSize && (
-          <InputConstraint>
-            {getHumanReadableSize(maxSize)} max.
+          <InputConstraint
+            state={getLengthConstraintColor(currentSize, maxSize)}
+          >
+            {currentReadableSize}/{maxReadableSize}
           </InputConstraint>
         )}
       </InputLabel>
@@ -75,7 +84,7 @@ export function FileInputField(props: FileInputProps) {
           }}
         />
         <FakeInput
-          value={value.map(file => file.name).join(", ")}
+          value={value.map(attachment => attachment.filename).join(", ")}
           readOnly
           disabled={disabled}
           tabIndex={-1}
@@ -89,6 +98,7 @@ export function FileInputField(props: FileInputProps) {
           Clear
         </PrimaryButton>
       </FlexContainer>
+      {currentSize > maxSize && <InputError error={`Exceeds maximum size of ${getHumanReadableSize(maxSize)}`} />}
     </InputContainer>
   )
 }
