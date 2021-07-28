@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import type { AttachmentLike } from "../../../state/models/AttachmentModel"
 import { getAttachmentIcon } from "../helpers/getAttachmentIcon"
 import { getHumanReadableSize } from "../helpers/getHumanReadableSize"
 import { download } from "../icons/download"
@@ -83,18 +84,18 @@ const AudioDownloadButton = styled(AttachmentDownloadButton)`
 `
 
 export type AudioAttachmentProps = {
-  file: File
+  file: AttachmentLike
 }
 
 export function AudioAttachment(props: AudioAttachmentProps) {
-  const { name, size } = props.file
+  const { filename, size } = props.file
 
   return (
     <AudioContainer>
       <AudioMetadata>
         <AudioIconContainer>{getAttachmentIcon("audio")}</AudioIconContainer>
         <AudioAttachmentInfo>
-          <AudioFileName>{name}</AudioFileName>
+          <AudioFileName>{filename}</AudioFileName>
           <AudioFileSize>{getHumanReadableSize(size)}</AudioFileSize>
         </AudioAttachmentInfo>
         <AudioDownloadButton>{download}</AudioDownloadButton>

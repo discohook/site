@@ -53,7 +53,7 @@ const Container = styled.div`
     `};
 `
 
-const Content = styled(Markdown)<{ direction: "neutral" | "ltr" | "rtl" }>`
+const Content = styled(Markdown) <{ direction: "neutral" | "ltr" | "rtl" }>`
   ${({ theme, direction }) =>
     theme.appearance.display === "cozy" &&
     direction === "rtl" &&
@@ -110,10 +110,10 @@ export function MessagePreview(props: MessagePreviewProps) {
       {message.hasExtras && (
         <ExtrasContainer>
           {[
-            ...message.files.map(file => (
+            ...message.attachments.map(attachment => (
               <Attachment
-                key={`Attachment ${JSON.stringify(file.name)}`}
-                file={file}
+                key={`Attachment ${attachment.id} ${attachment.filename}`}
+                file={attachment}
               />
             )),
             ...message.embeds.map(embed => (
