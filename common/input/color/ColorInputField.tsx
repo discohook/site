@@ -73,7 +73,10 @@ export function ColorInputField(props: ColorInputProps) {
 
         if (/^#?[\da-f]{6}$/i.test(value)) {
           color.setHex(value)
-        } else if (!value) {
+        }else if(value == 'transparent'){
+          color.setHex('#2f3136')
+        } 
+        else if (!value) {
           color.invalidate()
         } else {
           const match = RGB_STRING_RE.exec(value)
@@ -88,7 +91,7 @@ export function ColorInputField(props: ColorInputProps) {
         setValue(color.hex ?? "")
       }}
       label={label}
-      placeholder="#rrggbb"
+      placeholder="#rrggbb or transparent"
       onClick={() => {
         popover.spawn()
       }}
