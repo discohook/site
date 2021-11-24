@@ -7,6 +7,7 @@ import { formatTimestamp } from "./formatTimestamp"
 const Display = styled.span`
   display: inline-block;
   height: ${rem(20)};
+  cursor: default;
 
   color: ${({ theme }) => theme.text.muted};
 
