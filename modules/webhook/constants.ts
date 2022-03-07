@@ -1,7 +1,7 @@
 export const DISCORD_API_BASE_URLS = [
-  "https://discord.com/api/v8",
-  "https://ptb.discord.com/api/v8",
-  "https://canary.discord.com/api/v8",
+  "https://discord.com/api/v10",
+  "https://ptb.discord.com/api/v10",
+  "https://canary.discord.com/api/v10",
 ]
 
 const getDiscordApiHost = async () => {
