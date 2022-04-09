@@ -6,5 +6,5 @@ export type MessageData = {
   readonly username?: string
   readonly avatar_url?: string
   readonly files?: readonly File[]
-  readonly attachments?: readonly []
+  readonly attachments?: readonly unknown[]
 }
