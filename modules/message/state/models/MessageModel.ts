@@ -46,6 +46,7 @@ export const MessageModel = types
         username: self.username || undefined,
         avatar_url: self.avatar || undefined,
         files: self.files.length > 0 ? Array.from(self.files) : undefined,
+        attachments: self.files.length < 1 ? [] : undefined,
       }
     },
 
