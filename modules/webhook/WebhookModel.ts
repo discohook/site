@@ -53,13 +53,13 @@ export const WebhookModel = types
 
         return [
           "PATCH",
-          `https://${host}/api/v8/webhooks/${self.snowflake}/${self.token}/messages/${messageId}`,
+          `https://${host}/api/v10/webhooks/${self.snowflake}/${self.token}/messages/${messageId}`,
         ]
       }
 
       return [
         "POST",
-        `https://${host}/api/v8/webhooks/${self.snowflake}/${self.token}?wait=true`,
+        `https://${host}/api/v10/webhooks/${self.snowflake}/${self.token}?wait=true`,
       ]
     },
   }))
