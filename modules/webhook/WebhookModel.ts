@@ -48,19 +48,29 @@ export const WebhookModel = types
 
       const match = reference && MESSAGE_REF_RE.exec(reference)
 
+      const threadParam = new URL(self.url).searchParams.get("thread_id")
+
       if (match) {
         const [, messageId] = match
 
-        return [
-          "PATCH",
+        const routeUrl = new URL(
           `https://${host}/api/v10/webhooks/${self.snowflake}/${self.token}/messages/${messageId}`,
-        ]
+        )
+        if (threadParam) {
+          routeUrl.searchParams.set("thread_id", threadParam)
+        }
+
+        return ["PATCH", String(routeUrl)]
       }
 
-      return [
-        "POST",
+      const routeUrl = new URL(
         `https://${host}/api/v10/webhooks/${self.snowflake}/${self.token}?wait=true`,
-      ]
+      )
+      if (threadParam) {
+        routeUrl.searchParams.set("thread_id", threadParam)
+      }
+
+      return ["POST", String(routeUrl)]
     },
   }))
   .actions(self => ({
