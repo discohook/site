@@ -33,6 +33,6 @@ export const DEFAULT_AVATAR_URL =
 export const BRANDED_DEFAULT_AVATAR_URL = "/static/discord-avatar.png"
 export const DEFAULT_DISPLAY_NAME = "Discohook"
 
-export const WEBHOOK_URL_RE = /^https?:\/\/(?:www\.|ptb\.|canary\.)?discord(?:app)?\.com\/api(?:\/v\d+)?\/webhooks\/\d+\/[\w-]+$/
+export const WEBHOOK_URL_RE = /^https?:\/\/(?:www\.|ptb\.|canary\.)?discord(?:app)?\.com\/api(?:\/v\d+)?\/webhooks\/\d+\/[\w-]+(?:\?thread_id=\d+)?$/
 
 export const MESSAGE_REF_RE = /^(?:https:\/\/(?:www\.|ptb\.|canary\.)?discord(?:app)?\.com\/channels\/\d+\/\d+\/)?(\d+)$/
