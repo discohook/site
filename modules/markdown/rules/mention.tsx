@@ -3,7 +3,7 @@ import { defaultRules, inlineRegex } from "simple-markdown"
 import type { MarkdownRule } from "../parsers/MarkdownRule"
 import { Mention } from "../styles/Mention"
 
-const MENTION_RE = /^<(@!?|@&|#)\d+>|^<(\/[-_ A-Za-z]{1,32}):\d+>|^(@(?:everyone|here))/
+const MENTION_RE = /^<(@!?|@&|#)\d+>|^<(\/[\w ]{1,32}):\d+>|^(@(?:everyone|here))/
 
 const MENTION_TYPES = new Map(
   Object.entries({
