@@ -3,7 +3,7 @@ import { defaultRules, inlineRegex } from "simple-markdown"
 import type { MarkdownRule } from "../parsers/MarkdownRule"
 import { Mention } from "../styles/Mention"
 
-const MENTION_RE = /^<(@!?|@&|#)\d+>|^(@(?:everyone|here))/
+const MENTION_RE = /^<(@!?|@&|#)\d+>|^<(\/(?! )[\w -]+(?<! )):\d+>|^(@(?:everyone|here))/
 
 const MENTION_TYPES = new Map(
   Object.entries({
@@ -18,7 +18,13 @@ export const mention: MarkdownRule = {
   order: defaultRules.text.order,
   match: inlineRegex(MENTION_RE),
   parse: capture => {
-    const [, type, everyoneOrHere] = capture
+    const [, type, command, everyoneOrHere] = capture
+
+    if (command) {
+      return {
+        content: command,
+      }
+    }
 
     if (everyoneOrHere) {
       return {
