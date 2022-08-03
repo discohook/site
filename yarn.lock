@@ -766,7 +766,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.15.1
     babel-plugin-styled-components: ^1.12.0
     browserslist: ^4.16.3
-    caniuse-lite: ^1.0.30001191
+    caniuse-lite: ^1.0.30001373
     core-js: ^3.9.0
     core-js-bundle: ^3.9.0
     date-fns: ^2.17.0
@@ -2631,7 +2631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001173, caniuse-lite@npm:^1.0.30001179, caniuse-lite@npm:^1.0.30001191":
+"caniuse-lite@npm:^1.0.30001173, caniuse-lite@npm:^1.0.30001179":
   version: 1.0.30001191
   resolution: "caniuse-lite@npm:1.0.30001191"
   checksum: 7b9e1d0c16d285800f32bf1f5a2028987b434502f56d4f6549f0648bb240e5528452d0212c49e56ce8f44719ccf43073456291b58fc763f72ff954aa2fb107e8
@@ -2642,6 +2642,13 @@ __metadata:
   version: 1.0.30001187
   resolution: "caniuse-lite@npm:1.0.30001187"
   checksum: 788d977269dd3330d00b04d0d64846d480cda7dc6d78fdbc9bd71021268ba58f6544def556fd738da0dc3b09fb53e13b53703a856cc5406472f1aacb62f36b79
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001373":
+  version: 1.0.30001373
+  resolution: "caniuse-lite@npm:1.0.30001373"
+  checksum: abfdb5f3188eaf5d4547f71dde413d00df71bf8b8f19ce79fb5261659a30926bec3513e238b110705ccb38411453df0188a82d621bb0cfa74c5ec63b99ce3603
   languageName: node
   linkType: hard
 
