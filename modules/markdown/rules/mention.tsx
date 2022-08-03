@@ -1,9 +1,8 @@
-import React from "react"
 import { defaultRules, inlineRegex } from "simple-markdown"
 import type { MarkdownRule } from "../parsers/MarkdownRule"
 import { Mention } from "../styles/Mention"
 
-const MENTION_RE = /^<(@!?|@&|#)\d+>|^<(\/(?! )[\w -]+(?<! )):\d+>|^(@(?:everyone|here))/
+const MENTION_RE = /^<(@!?|@&|#)\d+>|^<(\/(?! )[\w -]*[\w-]):\d+>|^(@(?:everyone|here))/
 
 const MENTION_TYPES = new Map(
   Object.entries({
