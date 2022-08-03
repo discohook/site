@@ -1,3 +1,4 @@
+import React from "react"
 import { defaultRules, inlineRegex } from "simple-markdown"
 import type { MarkdownRule } from "../parsers/MarkdownRule"
 import { Mention } from "../styles/Mention"
