@@ -1,6 +1,7 @@
 import { useObserver } from "mobx-react-lite"
 import { applyPatch } from "mobx-state-tree"
 import dynamic from "next/dynamic"
+import React from "react"
 import styled from "styled-components"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
