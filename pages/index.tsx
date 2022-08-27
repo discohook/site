@@ -1,7 +1,7 @@
 import { useObserver } from "mobx-react-lite"
 import { destroy, getSnapshot, SnapshotOut } from "mobx-state-tree"
 import type { GetServerSidePropsContext } from "next"
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { base64UrlEncode } from "../common/base64/base64UrlEncode"
 import { ModalManagerContext } from "../common/modal/ModalManagerContext"
@@ -78,7 +78,7 @@ export default function Main(props: MainProps) {
     <EditorManagerProvider value={editorManager}>
       <PageHead
         title="Discohook"
-        description="The easiest way to build and send Discord messages with embeds using webhooks."
+        description="The easiest way to personalise your Discord server."
       >
         <meta key="referrer" name="referrer" content="strict-origin" />
       </PageHead>

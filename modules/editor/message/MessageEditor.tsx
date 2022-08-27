@@ -1,7 +1,6 @@
 import { useObserver } from "mobx-react-lite"
 import { applyPatch } from "mobx-state-tree"
 import dynamic from "next/dynamic"
-import React from "react"
 import styled from "styled-components"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
@@ -99,7 +98,8 @@ export function MessageEditor(props: MessageEditorProps) {
         content={
           "*When a message link is set, pressing submit or edit will edit the" +
           " message sent inside of Discord. To load a message sent in Discord, use" +
-          " the bot's 'restore' command.*"
+          " the bot's 'restore' command found in the apps section of the right" +
+          " click menu on any message.*"
         }
       />
       <ButtonList>

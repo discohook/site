@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { monochromeLogo } from "../../icons/logo"
 
@@ -81,10 +80,7 @@ export function Footer() {
         {monochromeLogo}
         <BrandName>Discohook</BrandName>
       </BrandContainer>
-      <Tagline>
-        The easiest way to build and send Discord messages with embeds using
-        webhooks.
-      </Tagline>
+      <Tagline>The easiest way to personalise your Discord server.</Tagline>
       <Info>Email: &quot;hello&quot; at discohook.app</Info>
       <NavigationList>
         <NavigationItem href="/discord" target="_blank">
