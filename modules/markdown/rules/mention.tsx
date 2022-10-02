@@ -31,7 +31,7 @@ export const mention: MarkdownRule = {
 
     if (command) {
       return {
-        mentionType: 'command',
+        mentionType: "command",
         mentionId: commandId,
         content: command,
       }
@@ -39,7 +39,7 @@ export const mention: MarkdownRule = {
 
     if (everyoneOrHere) {
       return {
-        mentionType: 'everyone-here',
+        mentionType: "everyone-here",
         content: everyoneOrHere,
       }
     }
@@ -51,6 +51,12 @@ export const mention: MarkdownRule = {
     }
   },
   react: (node, output, state) => (
-    <Mention key={state.key} data-mention-type={node.mentionType} data-mention-id={node.mentionId}>{node.content}</Mention>
+    <Mention
+      key={state.key}
+      data-mention-type={node.mentionType}
+      data-mention-id={node.mentionId}
+    >
+      {node.content}
+    </Mention>
   ),
 }
