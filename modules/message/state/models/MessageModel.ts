@@ -14,7 +14,7 @@ export const MessageModel = types
     username: "",
     avatar: "",
     embeds: types.array(types.late(() => EmbedModel)),
-    thread_name: types.optional(types.string, ''),
+    thread_name: types.optional(types.string, ""),
     reference: "",
     timestamp: types.optional(nullableDate, null),
     badge: types.optional(types.maybeNull(types.string), "Bot"),
