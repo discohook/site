@@ -112,6 +112,10 @@ export const editorForm = new Form(EditorManager, {
         images: new Group({ include: ["gallery", "thumbnail"] }),
       },
     ),
+    thread_name: new Field(converters.string, {
+      controlled: controlled.object,
+      validators: [maxLength(100)],
+    }),
     reference: new Field(converters.string, {
       controlled: controlled.object,
       validators: [matchesRegex(MESSAGE_REF_RE, "Invalid message link")],

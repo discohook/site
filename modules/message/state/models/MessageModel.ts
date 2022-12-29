@@ -14,6 +14,7 @@ export const MessageModel = types
     username: "",
     avatar: "",
     embeds: types.array(types.late(() => EmbedModel)),
+    thread_name: types.optional(types.string, ""),
     reference: "",
     timestamp: types.optional(nullableDate, null),
     badge: types.optional(types.maybeNull(types.string), "Bot"),
@@ -47,6 +48,7 @@ export const MessageModel = types
         avatar_url: self.avatar || undefined,
         files: self.files.length > 0 ? Array.from(self.files) : undefined,
         attachments: self.files.length === 0 ? [] : undefined,
+        thread_name: self.thread_name || undefined,
       }
     },
 
