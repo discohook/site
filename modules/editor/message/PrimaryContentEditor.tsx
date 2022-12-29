@@ -55,6 +55,26 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
           />
         </Stack>
       </Section>
+      <Section name="Thread">
+        <Stack gap={12}>
+          <InputField
+            id={`_${message.id}_thread_name`}
+            label="Forum Thread Name"
+            maxLength={100}
+            error={form.field("thread_name").error}
+            {...form.field("thread_name").inputProps}
+            disabled={isEditing}
+          />
+          <InputError
+            variant="warning"
+            error={
+              isEditing
+                ? "You cannot change thread names using webhooks"
+                : undefined
+            }
+          />
+        </Stack>
+      </Section>
       <FileInputField
         id={`_${message.id}_files`}
         label="Files"
