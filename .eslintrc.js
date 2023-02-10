@@ -109,7 +109,7 @@ module.exports = {
     "new-cap": "warn",
     "no-alert": "error",
     "no-await-in-loop": "warn",
-    "no-bitwise": "warn",
+    "no-bitwise": ["warn", { allow: ["|=", "<<"] }],
     "no-caller": "warn",
     "no-case-declarations": "error",
     "no-compare-neg-zero": "error",
