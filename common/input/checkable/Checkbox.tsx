@@ -59,11 +59,10 @@ export function Checkbox(props: CheckboxProps) {
         />
         <Button>{check}</Button>
       </Positioner>
-        <CheckableLabel htmlFor={id}>
-          {label}
-          {description && <LabelDescription>{description}</LabelDescription>}
-        </CheckableLabel>
-      
+      <CheckableLabel htmlFor={id}>
+        {label}
+        {description && <LabelDescription>{description}</LabelDescription>}
+      </CheckableLabel>
     </CheckableContainer>
   )
 }
