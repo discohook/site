@@ -6,6 +6,7 @@ import { CheckableButton } from "./layout/CheckableButton"
 import { CheckableContainer } from "./layout/CheckableContainer"
 import { CheckableInput } from "./layout/CheckableInput"
 import { CheckableLabel } from "./layout/CheckableLabel"
+import { LabelDescription } from "./layout/LabelDescription"
 import { Positioner } from "./layout/Positioner"
 
 const Button = styled(CheckableButton)`
@@ -32,6 +33,7 @@ export type CheckboxProps = {
   onChange: (value: boolean) => void
   className?: string
   disabled?: boolean
+  description?: string
 }
 
 export function Checkbox(props: CheckboxProps) {
@@ -42,6 +44,7 @@ export function Checkbox(props: CheckboxProps) {
     onChange: handleChange,
     className,
     disabled,
+    description,
   } = props
 
   return (
@@ -56,7 +59,11 @@ export function Checkbox(props: CheckboxProps) {
         />
         <Button>{check}</Button>
       </Positioner>
-      <CheckableLabel htmlFor={id}>{label}</CheckableLabel>
+        <CheckableLabel htmlFor={id}>
+          {label}
+          {description && <LabelDescription>{description}</LabelDescription>}
+        </CheckableLabel>
+      
     </CheckableContainer>
   )
 }
