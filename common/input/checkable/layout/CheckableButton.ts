@@ -4,6 +4,7 @@ import styled from "styled-components"
 export const CheckableButton = styled.div`
   ${cover()};
   ${size("100%")};
+  min-width: 16px;
 
   background: ${({ theme }) => theme.background.secondaryAlt};
   border: 2px solid ${({ theme }) => theme.background.secondaryAlt};
