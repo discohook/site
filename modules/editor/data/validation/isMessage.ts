@@ -1,6 +1,7 @@
 import { contains } from "./contains"
 import { first } from "./first"
 import { isEmbed } from "./isEmbed"
+import { isNumber } from "./isNumber"
 import { isShape } from "./isShape"
 import { isString } from "./isString"
 import { isUrl } from "./isUrl"
@@ -19,6 +20,7 @@ export const isMessage: Validator = first(
     "avatar_url",
     "attachments",
     "thread_name",
+    "flags",
   ),
   requiresKey("content", "embeds"),
   isShape({
@@ -27,5 +29,6 @@ export const isMessage: Validator = first(
     username: optional(first(isString, length(1, 256))),
     avatar_url: optional(isUrl),
     thread_name: optional(first(isString, length(1, 100))),
+    flags: optional(isNumber),
   }),
 )

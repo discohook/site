@@ -1,5 +1,6 @@
 import { useObserver } from "mobx-react-lite"
 import React from "react"
+import { Checkbox } from "../../../common/input/checkable/Checkbox"
 import { InputError } from "../../../common/input/error/InputError"
 import { FileInputField } from "../../../common/input/file/FileInputField"
 import { InputField } from "../../../common/input/text/InputField"
@@ -72,6 +73,24 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
                 ? "You cannot change thread names using webhooks"
                 : undefined
             }
+          />
+        </Stack>
+      </Section>
+      <Section name="Flags">
+        <Stack gap={12}>
+          <Checkbox
+            id={`_${message.id}_suppress_embeds`}
+            label="Suppress Embeds"
+            description='Hides link embeds. This cannot be used in conjunction with rich embeds (created with "Add Embed").'
+            error={form.field("flags_suppress_embeds").error}
+            {...form.field("flags_suppress_embeds").inputProps}
+          />
+          <Checkbox
+            id={`_${message.id}_suppress_notifications`}
+            label="Suppress Notifications"
+            description='If the message contains mentions in its "Content" field, this prevents Discord from sending out notifications when it is sent.'
+            error={form.field("flags_suppress_notifications").error}
+            {...form.field("flags_suppress_notifications").inputProps}
           />
         </Stack>
       </Section>

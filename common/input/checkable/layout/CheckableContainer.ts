@@ -4,7 +4,8 @@ export const CheckableContainer = styled.div`
   display: flex;
   align-items: center;
 
-  height: 36px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 
   user-select: none;
 `
