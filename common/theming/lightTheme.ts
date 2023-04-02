@@ -14,9 +14,9 @@ export const LIGHT_THEME: ColorTheme = {
     secondary: rgb(79, 86, 96),
   },
   text: {
-    normal: rgb(46, 51, 56),
-    muted: rgb(116, 127, 141),
-    link: rgb(0, 103, 224),
+    normal: rgb(49, 51, 56),
+    muted: rgb(92, 94, 102),
+    link: rgb(0, 108, 231),
   },
   interactive: {
     normal: rgb(79, 86, 96),
