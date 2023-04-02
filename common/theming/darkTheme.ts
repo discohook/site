@@ -14,9 +14,9 @@ export const DARK_THEME: ColorTheme = {
     secondary: rgb(185, 187, 190),
   },
   text: {
-    normal: rgb(220, 221, 222),
-    muted: rgb(114, 118, 125),
-    link: rgb(0, 176, 244),
+    normal: rgb(219, 222, 225),
+    muted: rgb(148, 155, 164),
+    link: rgb(0, 168, 252),
   },
   interactive: {
     normal: rgb(185, 187, 190),
@@ -25,8 +25,8 @@ export const DARK_THEME: ColorTheme = {
     muted: rgb(79, 84, 92),
   },
   background: {
-    primary: rgb(54, 57, 63),
-    secondary: rgb(47, 49, 54),
+    primary: rgb(49, 51, 56),
+    secondary: rgb(43, 45, 49),
     secondaryAlt: rgb(41, 43, 47),
     tertiary: rgb(32, 34, 37),
     accent: rgb(79, 84, 92),
