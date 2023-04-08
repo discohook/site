@@ -1,4 +1,5 @@
 import { useObserver } from "mobx-react-lite"
+import React from "react"
 import { Checkbox } from "../../../common/input/checkable/Checkbox"
 import { InputError } from "../../../common/input/error/InputError"
 import { FileInputField } from "../../../common/input/file/FileInputField"
