@@ -1,5 +1,4 @@
 import { useObserver } from "mobx-react-lite"
-import React from "react"
 import { Checkbox } from "../../../common/input/checkable/Checkbox"
 import { InputError } from "../../../common/input/error/InputError"
 import { FileInputField } from "../../../common/input/file/FileInputField"
@@ -97,7 +96,7 @@ export function PrimaryContentEditor(props: PrimaryContentEditorProps) {
       <FileInputField
         id={`_${message.id}_files`}
         label="Files"
-        maxSize={8 * 1024 ** 2}
+        maxSize={25 * 1024 ** 2}
         value={message.files}
         onChange={files => message.set("files", files)}
       />
