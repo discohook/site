@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { PrimaryButton } from "../../../common/input/button/PrimaryButton"
 import { SecondaryButton } from "../../../common/input/button/SecondaryButton"
+import { InputError } from "../../../common/input/error/InputError"
 import { ModalAction } from "../../../common/modal/layout/ModalAction"
 import { ModalBody } from "../../../common/modal/layout/ModalBody"
 import { ModalContainer } from "../../../common/modal/layout/ModalContainer"
@@ -14,7 +15,6 @@ import { Markdown } from "../../markdown/Markdown"
 import { messageOf } from "../../message/helpers/messageOf"
 import type { MessageLike } from "../../message/state/models/MessageModel"
 import type { EditorManagerLike } from "../EditorManager"
-import { InputError } from "../../../common/input/error/InputError"
 
 export type LoadClearMessageConfirmationModalProps = {
   editorManager: EditorManagerLike
@@ -28,7 +28,7 @@ export function LoadClearMessageConfirmationModal(
 
   const modal = useRequiredContext(ModalContext)
 
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string>(undefined)
 
   return (
     <ModalContainer>
