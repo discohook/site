@@ -28,6 +28,8 @@ export function LoadClearMessageConfirmationModal(
 
   const modal = useRequiredContext(ModalContext)
 
+  const [error, setError] = useState<string | undefined>(undefined);
+
   return (
     <ModalContainer>
       <ModalHeader>
@@ -45,6 +47,7 @@ export function LoadClearMessageConfirmationModal(
             " Are you sure you want to continue? This action cannot be reverted."
           }
         />
+        <InputError error={error} />
       </ModalBody>
       <ModalFooter>
         <SecondaryButton onClick={() => modal.dismiss()}>
@@ -59,6 +62,9 @@ export function LoadClearMessageConfirmationModal(
               // Handle later
             }
             if (!data) {
+              setError(
+                "The message link could not be loaded. Make sure a correct webhook URL is provided.",
+              );
               return
             }
 
