@@ -28,7 +28,7 @@ export function LoadClearMessageConfirmationModal(
 
   const modal = useRequiredContext(ModalContext)
 
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | undefined>(undefined)
 
   return (
     <ModalContainer>
@@ -64,7 +64,7 @@ export function LoadClearMessageConfirmationModal(
             if (!data) {
               setError(
                 "The message link could not be loaded. Make sure a correct webhook URL is provided.",
-              );
+              )
               return
             }
 
