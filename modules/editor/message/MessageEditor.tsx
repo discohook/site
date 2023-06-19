@@ -18,6 +18,7 @@ import type { MessageLike } from "../../message/state/models/MessageModel"
 import type { DataEditorModalProps } from "../data/DataEditorModal"
 import { EditorManagerContext } from "../EditorManagerContext"
 import { EmbedEditor } from "./EmbedEditor"
+import { LoadClearMessageConfirmationModal } from "./LoadClearMessageConfirmationModal"
 import { PrimaryContentEditor } from "./PrimaryContentEditor"
 
 const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
@@ -51,6 +52,16 @@ export function MessageEditor(props: MessageEditorProps) {
   const spawnDataEditorModal = () =>
     modalManager.spawn({
       render: () => <DataEditorModal message={message} />,
+    })
+
+  const spawnLoadClearMessageModal = () =>
+    modalManager.spawn({
+      render: () => (
+        <LoadClearMessageConfirmationModal
+          editorManager={editorManager}
+          message={message}
+        />
+      ),
     })
 
   return useObserver(() => (
@@ -94,13 +105,24 @@ export function MessageEditor(props: MessageEditorProps) {
         placeholder="https://discord.com/channels/..."
         error={form.field("reference").error}
         {...form.field("reference").inputProps}
-      />
+      >
+        <PrimaryButton
+          disabled={
+            !form.field("reference").isValid || form.field("reference").isEmpty
+          }
+          onClick={() => {
+            spawnLoadClearMessageModal()
+          }}
+        >
+          Load
+        </PrimaryButton>
+      </InputField>
       <Message
         content={
           "*When a message link is set, pressing submit or edit will edit the" +
           " message sent inside of Discord. To load a message sent in Discord, use" +
-          " the bot's 'restore' command found in the apps section of the right" +
-          " click menu on any message.*"
+          " the 'Load' button or the bot's 'restore' command found in the apps" +
+          " section of the right click menu on any message.*"
         }
       />
       <ButtonList>
