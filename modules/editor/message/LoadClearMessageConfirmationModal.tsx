@@ -28,7 +28,7 @@ export function LoadClearMessageConfirmationModal(
 
   const modal = useRequiredContext(ModalContext)
 
-  const [error, setError] = useState<string>(undefined)
+  const [error, setError] = useState<string | undefined>()
 
   return (
     <ModalContainer>
