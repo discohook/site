@@ -20,6 +20,7 @@ import { EditorManagerContext } from "../EditorManagerContext"
 import { EmbedEditor } from "./EmbedEditor"
 import { LoadClearMessageConfirmationModal } from "./LoadClearMessageConfirmationModal"
 import { PrimaryContentEditor } from "./PrimaryContentEditor"
+import { joinWithAnd } from "../../../common/utilities/joinText"
 
 const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
   import("../data/DataEditorModal").then(module => module.DataEditorModal),
@@ -64,6 +65,10 @@ export function MessageEditor(props: MessageEditorProps) {
       ),
     })
 
+  const emptyEmbedNumbers = message.embeds
+    .map((embed, index) => (!embed.displayName ? index + 1 : -1))
+    .filter(index => index !== -1)
+
   return useObserver(() => (
     <Stack gap={16}>
       <PrimaryContentEditor message={message} form={form} />
@@ -74,6 +79,19 @@ export function MessageEditor(props: MessageEditorProps) {
               error={
                 message.embedLength > 6000
                   ? "Embeds exceed 6000 character limit"
+                  : undefined
+              }
+            />
+          </EmbedValidationErrorContainer>
+          <EmbedValidationErrorContainer>
+            <InputError
+              error={
+                emptyEmbedNumbers.length === 1
+                  ? `Embed ${emptyEmbedNumbers[0]} is empty`
+                  : emptyEmbedNumbers.length > 1
+                  ? `Embeds ${joinWithAnd(
+                      emptyEmbedNumbers.map(String),
+                    )} are empty`
                   : undefined
               }
             />
