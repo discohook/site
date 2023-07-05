@@ -11,6 +11,7 @@ import { ButtonList } from "../../../common/layout/ButtonList"
 import { Stack } from "../../../common/layout/Stack"
 import { ModalManagerContext } from "../../../common/modal/ModalManagerContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
+import { joinWithAnd } from "../../../common/utilities/joinText"
 import { Markdown } from "../../markdown/Markdown"
 import type { MessageItemFormState } from "../../message/state/editorForm"
 import type { EmbedLike } from "../../message/state/models/EmbedModel"
@@ -20,7 +21,6 @@ import { EditorManagerContext } from "../EditorManagerContext"
 import { EmbedEditor } from "./EmbedEditor"
 import { LoadClearMessageConfirmationModal } from "./LoadClearMessageConfirmationModal"
 import { PrimaryContentEditor } from "./PrimaryContentEditor"
-import { joinWithAnd } from "../../../common/utilities/joinText"
 
 const DataEditorModal = dynamic<DataEditorModalProps>(async () =>
   import("../data/DataEditorModal").then(module => module.DataEditorModal),
