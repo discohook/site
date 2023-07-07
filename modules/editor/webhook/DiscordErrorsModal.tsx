@@ -9,8 +9,8 @@ import { ModalTitle } from "../../../common/modal/layout/ModalTitle"
 import { ModalContext } from "../../../common/modal/ModalContext"
 import { useRequiredContext } from "../../../common/state/useRequiredContext"
 import { remove } from "../../../icons/remove"
-import { Markdown } from "../../markdown/Markdown"
 import type { CodedError, DiscordError } from "../../../types/DiscordError"
+import { Markdown } from "../../markdown/Markdown"
 
 export type DiscordErrorsModalProps = {
   errors: DiscordError[];
@@ -57,11 +57,7 @@ export function DiscordErrorsModal(props: DiscordErrorsModalProps) {
         />
       </ModalHeader>
       <ModalBody>
-        <Markdown
-          content={
-            flattened.join('\n')
-          }
-        />
+        <Markdown content={flattened.join("\n")} />
       </ModalBody>
       <ModalFooter>
         <SecondaryButton onClick={() => modal.dismiss()}>Close</SecondaryButton>

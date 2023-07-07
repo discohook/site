@@ -2,10 +2,10 @@
 
 import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
 import { delay } from "../../common/state/delay"
+import type { DiscordError } from "../../types/DiscordError"
 import type { MessageData } from "../message/state/data/MessageData"
 import { MessageModel } from "../message/state/models/MessageModel"
 import { WebhookModel } from "../webhook/WebhookModel"
-import type { DiscordError } from "../../types/DiscordError"
 
 export const EditorManager = types
   .model("EditorManager", {

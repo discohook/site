@@ -12,8 +12,8 @@ import { useRequiredContext } from "../../../common/state/useRequiredContext"
 import { remove } from "../../../icons/remove"
 import type { EditorFormState } from "../../message/state/editorForm"
 import { EditorManagerContext } from "../EditorManagerContext"
-import { NetworkErrorModal } from "./NetworkErrorModal"
 import { DiscordErrorsModal } from "./DiscordErrorsModal"
+import { NetworkErrorModal } from "./NetworkErrorModal"
 
 const InputAction = styled(IconButton)`
   margin-left: 8px;
