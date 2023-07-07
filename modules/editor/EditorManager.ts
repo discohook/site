@@ -2,6 +2,7 @@
 
 import { Instance, SnapshotOrInstance, types } from "mobx-state-tree"
 import { delay } from "../../common/state/delay"
+import type { DiscordError } from "../../types/DiscordError"
 import type { MessageData } from "../message/state/data/MessageData"
 import { MessageModel } from "../message/state/models/MessageModel"
 import { WebhookModel } from "../webhook/WebhookModel"
@@ -63,6 +64,7 @@ export const EditorManager = types
     },
 
     async save() {
+      const errors: DiscordError[] = []
       for (const target of self.targets) {
         for (const message of self.messages) {
           const headers: Record<string, string> = {
@@ -98,10 +100,17 @@ export const EditorManager = types
 
           /* eslint-enable no-await-in-loop */
 
+          if (!response.ok) {
+            errors.push(data as DiscordError)
+          }
+
           console.log("Target executed", data)
         }
       }
 
+      if (errors.length > 0) {
+        throw new Error(JSON.stringify(errors))
+      }
       return null
     },
 

@@ -12,6 +12,7 @@ import { useRequiredContext } from "../../../common/state/useRequiredContext"
 import { remove } from "../../../icons/remove"
 import type { EditorFormState } from "../../message/state/editorForm"
 import { EditorManagerContext } from "../EditorManagerContext"
+import { DiscordErrorsModal } from "./DiscordErrorsModal"
 import { NetworkErrorModal } from "./NetworkErrorModal"
 
 const InputAction = styled(IconButton)`
@@ -40,10 +41,18 @@ export function WebhookControls(props: WebhookControlsProps) {
 
     try {
       await form.save()
-    } catch {
-      modalManager.spawn({
-        render: () => <NetworkErrorModal />,
-      })
+    } catch (error) {
+      if (error instanceof TypeError) {
+        modalManager.spawn({
+          render: () => <NetworkErrorModal />,
+        })
+      } else {
+        modalManager.spawn({
+          render: () => (
+            <DiscordErrorsModal errors={JSON.parse((error as Error).message)} />
+          ),
+        })
+      }
     }
 
     setSubmitting(false)
