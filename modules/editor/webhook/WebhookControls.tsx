@@ -13,6 +13,7 @@ import { remove } from "../../../icons/remove"
 import type { EditorFormState } from "../../message/state/editorForm"
 import { EditorManagerContext } from "../EditorManagerContext"
 import { NetworkErrorModal } from "./NetworkErrorModal"
+import { DiscordErrorsModal } from "./DiscordErrorsModal"
 
 const InputAction = styled(IconButton)`
   margin-left: 8px;
@@ -39,11 +40,17 @@ export function WebhookControls(props: WebhookControlsProps) {
     setSubmitting(true)
 
     try {
-      await form.save()
-    } catch {
-      modalManager.spawn({
-        render: () => <NetworkErrorModal />,
-      })
+      await form.save();
+    } catch (error) {
+      if (error instanceof TypeError) {
+        modalManager.spawn({
+          render: () => <NetworkErrorModal />,
+        })
+      } else {
+        modalManager.spawn({
+          render: () => <DiscordErrorsModal errors={JSON.parse((error as Error).message)} />,
+        })
+      }
     }
 
     setSubmitting(false)
