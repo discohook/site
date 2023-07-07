@@ -59,7 +59,11 @@ export function DiscordErrorsModal(props: DiscordErrorsModalProps) {
         />
       </ModalHeader>
       <ModalBody>
-        <Markdown content={flattened.join("\n")} />
+        <Markdown
+          content={`Your message could not be submitted because it contains the following errors:\n\n${flattened.join(
+            "\n",
+          )}`}
+        />
       </ModalBody>
       <ModalFooter>
         <SecondaryButton onClick={() => modal.dismiss()}>Close</SecondaryButton>
