@@ -40,7 +40,7 @@ export function WebhookControls(props: WebhookControlsProps) {
     setSubmitting(true)
 
     try {
-      await form.save();
+      await form.save()
     } catch (error) {
       if (error instanceof TypeError) {
         modalManager.spawn({
@@ -48,7 +48,9 @@ export function WebhookControls(props: WebhookControlsProps) {
         })
       } else {
         modalManager.spawn({
-          render: () => <DiscordErrorsModal errors={JSON.parse((error as Error).message)} />,
+          render: () => (
+            <DiscordErrorsModal errors={JSON.parse((error as Error).message)} />
+          ),
         })
       }
     }

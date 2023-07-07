@@ -13,7 +13,7 @@ import type { CodedError, DiscordError } from "../../../types/DiscordError"
 import { Markdown } from "../../markdown/Markdown"
 
 export type DiscordErrorsModalProps = {
-  errors: DiscordError[];
+  errors: DiscordError[]
 }
 
 export function DiscordErrorsModal(props: DiscordErrorsModalProps) {
@@ -21,9 +21,9 @@ export function DiscordErrorsModal(props: DiscordErrorsModalProps) {
 
   const modal = useRequiredContext(ModalContext)
 
-  const flattened = errors.map((discordError) => {
+  const flattened = errors.map(discordError => {
     const flattenErrorObject = (d: DiscordError["errors"], key?: string) => {
-      const items: string[][] = [];
+      const items: string[][] = []
       for (const [k, v] of Object.entries(d)) {
         const newKey = key ? `${key}.${k}` : k
 
@@ -31,7 +31,9 @@ export function DiscordErrorsModal(props: DiscordErrorsModalProps) {
           // eslint-disable-next-line no-underscore-dangle
           const codedErrors = (v as { _errors?: CodedError[] })._errors
           if (!codedErrors) {
-            items.push(...flattenErrorObject(v as DiscordError["errors"], newKey))
+            items.push(
+              ...flattenErrorObject(v as DiscordError["errors"], newKey),
+            )
           } else {
             items.push([newKey, codedErrors.map(e => e.message).join(", ")])
           }

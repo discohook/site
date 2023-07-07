@@ -64,7 +64,7 @@ export const EditorManager = types
     },
 
     async save() {
-      const errors: DiscordError[] = [];
+      const errors: DiscordError[] = []
       for (const target of self.targets) {
         for (const message of self.messages) {
           const headers: Record<string, string> = {
@@ -101,7 +101,7 @@ export const EditorManager = types
           /* eslint-enable no-await-in-loop */
 
           if (!response.ok) {
-            errors.push(data as DiscordError);
+            errors.push(data as DiscordError)
           }
 
           console.log("Target executed", data)
