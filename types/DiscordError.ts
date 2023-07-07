@@ -2,7 +2,7 @@
 export type DiscordError = {
   code: number
   message: string
-  errors: Record<string, unknown>
+  errors?: Record<string, unknown>
 }
 
 export type CodedError = {

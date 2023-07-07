@@ -24,7 +24,7 @@ export function DiscordErrorsModal(props: DiscordErrorsModalProps) {
   const flattened = errors.map(discordError => {
     const flattenErrorObject = (d: DiscordError["errors"], key?: string) => {
       const items: string[][] = []
-      for (const [k, v] of Object.entries(d)) {
+      for (const [k, v] of Object.entries(d!)) {
         const newKey = key ? `${key}.${k}` : k
 
         if (typeof v === "object" && !Array.isArray(v) && v != null) {
@@ -44,8 +44,11 @@ export function DiscordErrorsModal(props: DiscordErrorsModalProps) {
 
       return items
     }
-    const items = flattenErrorObject(discordError.errors)
-    return items.map(([k, v]) => `In \`${k}\`: ${v}`)
+    if (discordError.errors) {
+      const items = flattenErrorObject(discordError.errors)
+      return items.map(([k, v]) => `In \`${k}\`: ${v}`)
+    }
+    return [discordError.message]
   })[0]
 
   return (
