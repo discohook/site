@@ -8,6 +8,7 @@ import {
   SubForm,
 } from "mstform"
 import { isUrl } from "../../../common/form/validators/isUrl"
+import { isUsername } from "../../../common/form/validators/isUsername"
 import { matchesRegex } from "../../../common/form/validators/matchesRegex"
 import { maxLength } from "../../../common/form/validators/maxLength"
 import { EditorManager, EditorManagerLike } from "../../editor/EditorManager"
@@ -21,7 +22,7 @@ export const editorForm = new Form(EditorManager, {
     }),
     username: new Field(converters.string, {
       controlled: controlled.object,
-      validators: [maxLength(80)],
+      validators: [isUsername(), maxLength(80)],
     }),
     avatar: new Field(converters.string, {
       controlled: controlled.object,
