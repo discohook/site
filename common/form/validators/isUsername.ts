@@ -1,6 +1,6 @@
 export const isUsername = () => {
   return (value: string): string | false => {
-    for (const forbidden of ["discord", "```", "system message"]) {
+    for (const forbidden of ["discord", "clyde", "```", "system message"]) {
       if (value.toLowerCase().includes(forbidden)) {
         return `Username cannot contain "${forbidden}"`
       }
