@@ -5,7 +5,7 @@ export const DEFAULT_EDITOR_MANAGER_STATE: SnapshotIn<typeof EditorManager> = {
   messages: [
     {
       content:
-        "Hey, welcome to <:discohook:736648398081622016> **Discohook**! The easiest way to personalise your Discord server.\n\nThere's more info below, but you don't have to read it. If you're ready press **Clear All** in the top of the editor to get started.\n\nDiscohook has a [support server](https://discohook.app/discord), if you need help feel free to join in and ask questions, suggest features, or just chat with the community.\n\nWe also have [complementary bot](https://discohook.app/bot) that may help out, featuring reaction roles and other utilities.\n_ _",
+        "Hey, welcome to <:discohook:736648398081622016> **Discohook**! The easiest way to pesonalize your Discord server.\n\nThere's more info below, but you don't have to read it. If you're ready press **Clear All** in the top of the editor to get started.\n\nDiscohook has a [support server](https://discohook.app/discord), if you need help feel free to join in and ask questions, suggest features, or just chat with the community.\n\nWe also have [complementary bot](https://discohook.app/bot) that may help out, featuring reaction roles and other utilities.\n_ _",
       embeds: [
         {
           title: "What's this about?",
