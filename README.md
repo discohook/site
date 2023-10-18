@@ -13,7 +13,7 @@ This application is setup to publish a container image to `ghcr.io/discohook/sit
 # Replace 'podman' with 'docker' if using that, the command is equivalent
 # Add --rm if you want the container to be removed automatically after being stopped
 # If necesary, change the second 3000 to change which port on the local computer the app is bound to
-podman run -dtp 3000:3000 ghcr.io/discohook/site:latest
+podman run -d -p 3000:3000 ghcr.io/discohook/site:latest
 ```
 
 ## Local build and run
