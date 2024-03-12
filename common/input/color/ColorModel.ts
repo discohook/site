@@ -89,7 +89,7 @@ export const ColorModel = types
       const [, red = 0, green = 0, blue = 0] =
         /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/
           .exec(hex)
-          ?.map(hex => Number.parseInt(hex, 16)) ?? []
+          ?.map(hex => Number.parseInt(hex.toLowerCase(), 16)) ?? []
 
       const max = Math.max(red, blue, green)
       const min = Math.min(red, blue, green)
