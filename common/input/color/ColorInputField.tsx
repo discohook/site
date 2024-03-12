@@ -68,11 +68,13 @@ export function ColorInputField(props: ColorInputProps) {
       id={id}
       value={value}
       onChange={value => {
+        const valueLowerCase = value?.toLowerCase()
+
         setTouched(true)
-        setValue(value.toLowerCase())
+        setValue(valueLowerCase)
 
         if (/^#?[\da-f]{6}$/i.test(value)) {
-          color.setHex(value)
+          color.setHex(valueLowerCase)
         } else if (!value) {
           color.invalidate()
         } else {
