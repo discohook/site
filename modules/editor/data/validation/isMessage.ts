@@ -22,6 +22,7 @@ export const isMessage: Validator = first(
     "attachments",
     "thread_name",
     "flags",
+    "allowed_mentions",
   ),
   requiresKey("content", "embeds"),
   isShape({
