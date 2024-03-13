@@ -1,4 +1,4 @@
-const EMOJI_CDN_BASE_URL = "https://twemoji.maxcdn.com/v/13.0.1/svg"
+const EMOJI_CDN_BASE_URL = "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg"
 
 export const getEmojiUrl = (emoji: string) => {
   const file = [...emoji]
