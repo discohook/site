@@ -146,7 +146,7 @@ export function MessageHeader(props: MessageHeaderProps) {
 
     let info = [
       <Username key="username">{username}</Username>,
-      badge !== null && <BotTag key="badge">{badge ?? "Bot"}</BotTag>,
+      badge !== null && <BotTag key="badge">{badge ?? "App"}</BotTag>,
       <Clock key="clock" timestamp={timestamp} />,
     ]
 
