@@ -1,4 +1,5 @@
 import hljs from "highlight.js/lib/core"
+import AnsiToHtml from "./ansiToHtml"
 import React, { useEffect, useState } from "react"
 import { CodeBlockContainer } from "../styles/CodeBlockContainer"
 import { getLanguageFromAlias } from "./getLanguageFromAlias"
@@ -25,7 +26,9 @@ export function CodeBlock(props: CodeBlockProps) {
     return (
       <CodeBlockContainer
         dangerouslySetInnerHTML={{
-          __html: hljs.highlight(safeLanguage, content).value,
+          __html: safeLanguage == "ansi" ? 
+          AnsiToHtml(content) : 
+            hljs.highlight(safeLanguage, content).value,
         }}
       />
     )
