@@ -113,9 +113,7 @@ export function Editor() {
           <a
             href="#"
             onClick={() => {
-              const search = new URLSearchParams(location.search)
-              const appUrl = `https://discohook.app/?${search.toString()}`
-              open(appUrl, "_blank")
+              open(`https://discohook.app/${location.search}`, "_blank")
             }}
           >
             by clicking here
