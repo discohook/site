@@ -48,6 +48,21 @@ const JavaScriptWarning = styled.noscript`
   line-height: 1.375;
 `
 
+const MigrateNotice = styled.div`
+  display: block;
+
+  margin-bottom: 16px;
+  padding: 0px 16px;
+  border-radius: 4px;
+
+  border: 2px solid ${({ theme }) => theme.accent.primary};
+  background: ${({ theme }) => transparentize(0.75, theme.accent.primary)};
+
+  color: ${({ theme }) => theme.header.primary};
+  font-weight: 500;
+  line-height: 1.375;
+`
+
 export function Editor() {
   const editorManager = useRequiredContext(EditorManagerContext)
 
@@ -91,6 +106,48 @@ export function Editor() {
           }
         />
       </JavaScriptWarning>
+      <MigrateNotice>
+        <p>
+          Hey! Discohook is moving to discohook.app. You can view the current
+          message on the new domain{" "}
+          <a
+            href="#"
+            onClick={() => {
+              const search = new URLSearchParams(location.search)
+              const appUrl = `https://discohook.app/?${search.toString()}`
+              open(appUrl, "_blank")
+            }}
+          >
+            by clicking here
+          </a>
+          . If you can&apos;t access it, please{" "}
+          <a
+            href="https://forms.gle/EFU23iYVkrqJa9vx8"
+            target="_blank"
+            rel="noopener noreferrer nofollow ugc"
+          >
+            let us know
+          </a>
+          !
+        </p>
+        <p>
+          <a
+            href="https://discohook.app/guide/deprecated/migrate-utils"
+            target="_blank"
+            rel="noopener noreferrer nofollow ugc"
+          >
+            Read More
+          </a>{" "}
+          &bull;{" "}
+          <a
+            href="https://discohook.app/me/import-org-backups"
+            target="_blank"
+            rel="noopener noreferrer nofollow ugc"
+          >
+            Migrate Backups
+          </a>
+        </p>
+      </MigrateNotice>
       <ButtonList>
         <SecondaryButton onClick={() => spawnBackupsModal()}>
           Backups
