@@ -109,7 +109,7 @@ export function Editor() {
       <MigrateNotice>
         <p>
           Hey! Discohook is moving to discohook.app. You can view the current
-          message on the new domain{" "}
+          message{" "}
           <a
             href="#"
             onClick={() => {
@@ -132,7 +132,7 @@ export function Editor() {
           <a
             href="https://discohook.app/guide/deprecated/migrate-utils"
             target="_blank"
-            rel="noopener noreferrer nofollow ugc"
+            rel="noopener noreferrer"
           >
             Read More
           </a>{" "}
@@ -140,7 +140,7 @@ export function Editor() {
           <a
             href="https://discohook.app/me/import-org-backups"
             target="_blank"
-            rel="noopener noreferrer nofollow ugc"
+            rel="noopener noreferrer"
           >
             Migrate Backups
           </a>
