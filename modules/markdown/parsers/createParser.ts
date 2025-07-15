@@ -5,7 +5,7 @@ export const createParser = (
   rules: Record<string, MarkdownRule>,
   transform?: (ast: SingleASTNode[]) => SingleASTNode[],
 ) => {
-  const parse = parserFor(rules, { inline: true })
+  const parse = parserFor(rules)
   const output = outputFor(rules, "react")
 
   return (content: string) => {

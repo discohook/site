@@ -7,9 +7,11 @@ import { emoji } from "../rules/emoji"
 import { emote } from "../rules/emote"
 import { emphasis } from "../rules/emphasis"
 import { escape } from "../rules/escape"
+import { heading } from "../rules/heading"
 import { inlineCode } from "../rules/inlineCode"
 import { lineBreak } from "../rules/lineBreak"
 import { link } from "../rules/link"
+import { list } from "../rules/list";
 import { mention } from "../rules/mention"
 import { newline } from "../rules/newline"
 import { paragraph } from "../rules/paragraph"
@@ -31,9 +33,11 @@ export const parseMessageContent = createParser(
     emote,
     emphasis,
     escape,
+    heading,
     inlineCode,
     lineBreak,
     link,
+    list,
     mention,
     newline,
     paragraph,
