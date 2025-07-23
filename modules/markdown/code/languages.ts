@@ -7,6 +7,7 @@ export const LANGUAGES: Language[] = [
   { name: "actionscript", aliases: ["as"] },
   { name: "ada" },
   { name: "angelscript", aliases: ["asc"] },
+  { name: "ansi" },
   { name: "apache", aliases: ["apacheconf"] },
   { name: "applescript", aliases: ["osascript"] },
   { name: "arcade" },
